@@ -4,13 +4,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <head>
 
   <!-- SITE TITTLE -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Calssimax</title>
+  <title>운동</title>
   
   <!-- PLUGINS CSS STYLE -->
   <link href="resources/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
@@ -48,7 +49,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg  navigation col-md-12">
-					<a class="navbar-brand" href="index.html">
+					<a class="navbar-brand" href="/">
 						<img src="resources/images/logo.png" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +66,7 @@
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="#">운동 칼로리</a>
+									<a class="dropdown-item" href="menu/admin/kcal.jsp">운동 칼로리</a>
 									<a class="dropdown-item" href="#">추천 운동</a>
 								</div>
 							</li>
@@ -87,13 +88,13 @@
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
 							<li class="nav-item">
-								<a class="nav-link login-button" href="index.html">Login</a>
+								<a class="nav-link login-button" href="loginForm">로그인</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link add-button" href="#"><i class="fa fa-plus-circle"></i> Add Listing</a>
+								<a class="nav-link add-button" href="joinForm"><i class="fa fa-plus-circle"></i> 회원가입</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link login-button" href="#">마이페이지</a>
+								<a class="nav-link login-button" href="myPage">마이페이지</a>
 							</li>
 						</ul>
 					</div>
