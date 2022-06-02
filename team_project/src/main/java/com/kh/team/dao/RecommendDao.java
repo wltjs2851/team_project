@@ -18,7 +18,7 @@ public interface RecommendDao {
 	public boolean deleteRecommend(int reno);
 	
 	// 상세 내용 조회
-	public RecommendVo selectByKno(int reno);
+	public RecommendVo selectByReno(int reno);
 	
 	// 글 목록
 	public List<RecommendVo> listRecommend();

@@ -35,11 +35,24 @@ public class RecommendVo {
 		this.re_regdate = re_regdate;
 	}
 
+	public RecommendVo(int reno, String re_content, String re_title) {
+		super();
+		this.reno = reno;
+		this.re_content = re_content;
+		this.re_title = re_title;
+	}
+
 	public RecommendVo(String re_content, String re_title, Date re_regdate) {
 		super();
 		this.re_content = re_content;
 		this.re_title = re_title;
 		this.re_regdate = re_regdate;
+	}
+
+	public RecommendVo(String re_content, String re_title) {
+		super();
+		this.re_content = re_content;
+		this.re_title = re_title;
 	}
 
 	public int getReno() {
