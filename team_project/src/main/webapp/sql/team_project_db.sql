@@ -11,6 +11,9 @@ create table tbl_user(
     u_pic varchar2(100)
 );
 
+ALTER TABLE TBL_USER 
+ADD (REGDATE DATE DEFAULT sysdate );
+
 create table tbl_point_code(
     pcode number primary key,
     pdesc varchar2(100) not null

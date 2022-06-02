@@ -14,23 +14,23 @@
   <title>운동</title>
   
   <!-- PLUGINS CSS STYLE -->
-  <link href="resources/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+  <link href="/resources/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
   <!-- Bootstrap -->
-  <link href="resources/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/resources/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
-  <link href="resources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/resources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- Owl Carousel -->
-  <link href="resources/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-  <link href="resources/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+  <link href="/resources/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+  <link href="/resources/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
   <!-- Fancy Box -->
-  <link href="resources/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-  <link href="resources/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-  <link href="resources/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
+  <link href="/resources/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+  <link href="/resources/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+  <link href="/resources/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
   <!-- CUSTOM CSS -->
-  <link href="resources/css/style.css" rel="stylesheet">
+  <link href="/resources/css/style.css" rel="stylesheet">
 
   <!-- FAVICON -->
-  <link href="resources/img/favicon.png" rel="shortcut icon">
+  <link href="/resources/img/favicon.png" rel="shortcut icon">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,7 +50,7 @@
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg  navigation col-md-12">
 					<a class="navbar-brand" href="/">
-						<img src="resources/images/logo.png" alt="">
+						<img src="/resources/images/logo.png" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -87,15 +87,24 @@
 							</li>
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
-							<li class="nav-item">
-								<a class="nav-link login-button" href="loginForm">로그인</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link add-button" href="joinForm"><i class="fa fa-plus-circle"></i> 회원가입</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link login-button" href="myPage">마이페이지</a>
-							</li>
+						<c:choose>
+							<c:when test="${empty loginVo}">
+								<li class="nav-item">
+									<a class="nav-link btn-success" href="loginForm">로그인</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link btn-primary" href="joinForm"><i class="fa fa-plus-circle"></i> 회원가입</a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item">
+									<a class="nav-link btn-danger" href="logout">로그아웃</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link btn-success" href="myPage">마이페이지</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
 						</ul>
 					</div>
 				</nav>
