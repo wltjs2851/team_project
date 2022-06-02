@@ -11,17 +11,18 @@ public class MemberVo {
 	private String address;
 	private String gender;
 	private String nickname;
-    private int age;
-    private int u_point;
-    private String u_pic;
-    private Date regDate;
+	private int age;
+	private int u_point;
+	private String u_pic;
+	private int gno;
+	private Date regdate;
 	
-    public MemberVo() {
+	public MemberVo() {
 		super();
 	}
 
 	public MemberVo(String userid, String userpw, String username, String email, String address, String gender,
-			String nickname, int age, int u_point, String u_pic, Date regDate) {
+			String nickname, int age, int u_point, String u_pic, int gno, Date regdate) {
 		super();
 		this.userid = userid;
 		this.userpw = userpw;
@@ -33,7 +34,21 @@ public class MemberVo {
 		this.age = age;
 		this.u_point = u_point;
 		this.u_pic = u_pic;
-		this.regDate = regDate;
+		this.gno = gno;
+		this.regdate = regdate;
+	}
+
+	public MemberVo(String userid, String userpw, String username, String email, String address, String gender,
+			String nickname, int age) {
+		super();
+		this.userid = userid;
+		this.userpw = userpw;
+		this.username = username;
+		this.email = email;
+		this.address = address;
+		this.gender = gender;
+		this.nickname = nickname;
+		this.age = age;
 	}
 
 	public String getUserid() {
@@ -116,19 +131,27 @@ public class MemberVo {
 		this.u_pic = u_pic;
 	}
 
-	public Date getRegDate() {
-		return regDate;
+	public int getGno() {
+		return gno;
 	}
 
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
+	public void setGno(int gno) {
+		this.gno = gno;
+	}
+
+	public Date getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
 
 	@Override
 	public String toString() {
 		return "MemberVo [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", email=" + email
 				+ ", address=" + address + ", gender=" + gender + ", nickname=" + nickname + ", age=" + age
-				+ ", u_point=" + u_point + ", u_pic=" + u_pic + ", regDate=" + regDate + "]";
+				+ ", u_point=" + u_point + ", u_pic=" + u_pic + ", gno=" + gno + ", regdate=" + regdate + "]";
 	}
-
+	
 }

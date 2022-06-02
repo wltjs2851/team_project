@@ -6,11 +6,11 @@
 <mapper namespace="com.kh.team.mappers.member">
 
 	<insert id="joinMember">
-		insert into tbl_user(userid, userpw, username, email, nickname, age, u_pic)
-		values(#{userid}, #{userpw}, #{username}, #{email}, #{nickname}, #{age}, #{u_pic, jdbcType=VARCHAR})
+		insert into tbl_user(userid, userpw, username, email, address, gender, nickname, age, u_point, u_pic)
+		values(#{userid}, #{userpw}, #{username}, #{email}, #{address}, #{gender}, #{nickname}, #{age}, 100, #{u_pic, jdbcType=VARCHAR})
 	</insert>
 	
-	<select id="login">
+	<select id="login" resultType="MemberVo">
 		select * from tbl_user
 		where userid = #{userid}
 		and userpw = #{userpw}
