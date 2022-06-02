@@ -90,7 +90,7 @@
 								<a class="nav-link login-button" href="index.html">Login</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link add-button" href="#"><i class="fa fa-plus-circle"></i> Add Listing</a>
+								<a class="nav-link add-button" href="/group/group_main"><i class="fa fa-plus-circle"></i>내 그룹</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link login-button" href="#">마이페이지</a>
