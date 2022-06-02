@@ -2,7 +2,7 @@ package com.kh.team.dao;
 
 import com.kh.team.vo.MemberVo;
 
-public interface MemberDao {
+public interface MemberDao  {
 
 	public void joinMember(MemberVo memberVo);
 	
