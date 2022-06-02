@@ -14,23 +14,23 @@
   <title>운동</title>
   
   <!-- PLUGINS CSS STYLE -->
-  <link href="resources/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+  <link href="/resources/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
   <!-- Bootstrap -->
-  <link href="resources/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/resources/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
-  <link href="resources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/resources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- Owl Carousel -->
-  <link href="resources/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-  <link href="resources/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+  <link href="/resources/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+  <link href="/resources/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
   <!-- Fancy Box -->
-  <link href="resources/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-  <link href="resources/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-  <link href="resources/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
+  <link href="/resources/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+  <link href="/resources/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+  <link href="/resources/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
   <!-- CUSTOM CSS -->
-  <link href="resources/css/style.css" rel="stylesheet">
+  <link href="/resources/css/style.css" rel="stylesheet">
 
   <!-- FAVICON -->
-  <link href="resources/img/favicon.png" rel="shortcut icon">
+  <link href="/resources/img/favicon.png" rel="shortcut icon">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
