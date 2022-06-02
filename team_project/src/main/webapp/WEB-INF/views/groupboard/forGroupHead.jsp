@@ -4,6 +4,7 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
+for group head
 <%-- ${ groupList } --%>
 <div class="container-fluid">
 	<div class="row">
@@ -12,10 +13,11 @@
 				<c:forEach items="${ groupList }" var="groupBoardVo">
 				
 					<div class="col-md-9">
-						<h2 style="background-color: aliceblue">제목: ${ groupBoardVo.gb_title }</h2>
+						<h2 style="background-color: aliceblue">제목${ groupBoardVo.gb_title }</h2>
 						<p>작성자: ${groupBoardVo.userid}, 작성일: ${ groupBoardVo.gb_regdate }</p>
-						<p>${ groupBoardVo.gb_content }</p>
-						<p><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a></p>
+						<p>내용${ groupVo.gb_content }</p>
+<!-- 						<p><a class="btn" href="#">더보기 »</a></p> -->
+						<p><a href="#">삭제</a></p>
 					</div>
 				
 				</c:forEach>
@@ -62,7 +64,7 @@
 										그룹원
 									</p>
 									<p>
-										<a class="btn btn-primary" href="#">쪽지보내기</a>
+										<a class="btn btn-primary" href="#">쪽지보내기</a> <a class="btn" href="#">내쫓기</a>
 									</p>
 								</div>
 							</div>
