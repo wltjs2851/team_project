@@ -42,7 +42,10 @@ public class GroupDaoImpl implements GroupDao{
 
 	@Override
 	public boolean deleteGroup(int gno) {
-		// TODO Auto-generated method stub
+		int count = sqlSession.delete(NAMESPACE + "deleteGroup", gno);
+		if(count > 0) {
+			return true;
+		}
 		return false;
 	}
 

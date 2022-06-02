@@ -4,8 +4,8 @@
   
 <mapper namespace="com.kh.team.mappers.group">
 	<insert id="insertGroup">
-		insert into tbl_group(gno, g_name, excercise_type, g_attend, g_intro, g_location, g_pic, g_present, users)
-			values(seq_group_gno.nextval, #{g_name}, #{excercise_type}, #{g_attend}, #{g_location},#{g_intro}, #{g_location}, #{g_pic, jdbcType=VARCHAR}, #{users})
+		insert into tbl_group(gno, g_name, excercise_type, g_attend, g_intro, g_location, g_pic, users)
+			values(seq_group_gno.nextval, #{g_name}, #{excercise_type}, #{g_attend},#{g_intro}, #{g_location}, #{g_pic, jdbcType=VARCHAR}, #{users})
 	</insert>
 	
 	<select id="selectGroup" resultType="GroupVo">
@@ -17,4 +17,10 @@
 				g_intro = #{g_intro}, g_location = #{g_location}, g_pic = #{g_pic, jdbcType=VARCHAR}, users = #{users}
 			where gno = #{gno}
 	</update>
+
+	
+	<delete id="deleteGroup">
+		delete from tbl_group where gno = #{gno}
+	</delete>
+
 </mapper>

@@ -18,6 +18,18 @@ public class GroupVo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public GroupVo(String g_name, String excercise_type, int g_attend, String g_intro, String g_location,
+			String g_pic, String users) {
+		super();
+		this.g_name = g_name;
+		this.excercise_type = excercise_type;
+		this.g_attend = g_attend;
+		this.g_intro = g_intro;
+		this.g_location = g_location;
+		this.g_pic = g_pic;
+		this.users = users;
+	}
 
 	public GroupVo(int gno, String g_name, String excercise_type, int g_attend, String g_intro, String g_location,
 			String g_pic, String users) {

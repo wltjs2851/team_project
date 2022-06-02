@@ -20,7 +20,7 @@ public class GroupDaoTest {
 	
 	@Test
 	public void testGroupInsert() {
-		GroupVo groupVo = new GroupVo(1, "축구모임", "축구", 11, "축구하는 모임입니다~", "울산", null, "user01");
+		GroupVo groupVo = new GroupVo("족구모임", "수영", 7, "족구하는 모임입니다~", "울산", null, "user08");
 		boolean result = groupDao.insertGroup(groupVo);
 		System.out.println("result: " + result);
 	}
@@ -35,6 +35,12 @@ public class GroupDaoTest {
 	public void testGroupUpdate() {
 		GroupVo groupVo = new GroupVo(1, "축구모임", "축구", 13, "축구하는 모임입니다~", "부산", null, "user01, user02");
 		boolean result = groupDao.updateGroup(groupVo);
+		System.out.println("result: " + result);
+	}
+	
+	@Test
+	public void testGroupDelete() {
+		boolean result = groupDao.deleteGroup(1);
 		System.out.println("result: " + result);
 	}
 }
