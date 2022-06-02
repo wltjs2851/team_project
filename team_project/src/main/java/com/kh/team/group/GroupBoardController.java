@@ -9,61 +9,65 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team.vo.GroupBoardVo;
+
 @Controller
 @RequestMapping("/group")
 public class GroupBoardController {
 	
 	@Autowired
-	private GroupBoardService groupService;
+	private GroupBoardService groupBoardService;
 	
-	@RequestMapping(value = "group_writeForm", method = RequestMethod.GET)
+	@RequestMapping(value = "groupWriteForm", method = RequestMethod.GET)
 	public String createForm() { // 글쓰기 양식
 		
-		return "group/group_writeForm";
+		return "group/groupWriteForm";
 	}
 	
-	@RequestMapping(value = "group_writeRun", method = RequestMethod.POST)
+	@RequestMapping(value = "groupWriteRun", method = RequestMethod.POST)
 	public String createRun(GroupBoardVo groupVo, RedirectAttributes rttr) {
-		boolean result = groupService.create(groupVo);
+		System.out.println("groupBoardController, writeRun");
+		boolean result = groupBoardService.create(groupVo);
 		rttr.addFlashAttribute("create_result", result);
 		
-		return "redirect:/group/group_main";
+		return "redirect:/group/groupMain";
 	}
 	
-	@RequestMapping(value = "group_read", method = RequestMethod.GET)
+	@RequestMapping(value = "groupRead", method = RequestMethod.GET)
 	public String read(int gbno, Model model) {
-		GroupBoardVo groupVo = groupService.read(gbno);
-		model.addAttribute("groupVo", groupVo);
+		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
+		model.addAttribute("groupBoardVo", groupBoardVo);
 		
-		return "group/group_read";
+		return "group/groupRead";
 	}
 	
-	@RequestMapping(value = "group_updateForm", method = RequestMethod.GET)
+	@RequestMapping(value = "groupUpdateForm", method = RequestMethod.GET)
 	public String updateForm() {
 		
-		return "group/group_updateForm";
+		return "group/groupUpdateForm";
 	}
 	
 	@RequestMapping(value = "group_updateRun", method = RequestMethod.POST)
-	public String updateRun(GroupBoardVo groupVo, RedirectAttributes rttr) {
-		boolean result = groupService.update(groupVo);
+	public String updateRun(GroupBoardVo groupBoardVo, RedirectAttributes rttr) {
+		boolean result = groupBoardService.update(groupBoardVo);
 		rttr.addFlashAttribute("update_result", result);
 		
-		return "redirect:/group/group_read";
+		return "redirect:/group/group_updateRun";
 	}
 
-	@RequestMapping(value = "group_delete", method = RequestMethod.POST)
+	@RequestMapping(value = "groupDelete", method = RequestMethod.POST)
 	public String delete(int gbno, RedirectAttributes rttr) {
-		boolean result = groupService.delete(gbno);
+		boolean result = groupBoardService.delete(gbno);
 		rttr.addFlashAttribute("delete_result", result);
 		
-		return "redirect:/group/group_main";
+		return "redirect:/group/groupDelete";
 	}
 	
+	@RequestMapping(value = "groupMain", method = RequestMethod.GET)
 	public String main(Model model) {
-		List<GroupBoardVo> groupList = groupService.list();
+		List<GroupBoardVo> groupList = groupBoardService.list();
 		model.addAttribute("groupList", groupList);
 		
-		return "group/group_main";
+		return "group/groupMain";
 	}
 }

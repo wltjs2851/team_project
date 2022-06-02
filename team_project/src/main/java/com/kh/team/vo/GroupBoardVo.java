@@ -1,4 +1,4 @@
-package com.kh.team.group;
+package com.kh.team.vo;
 
 import java.sql.Date;
 import java.util.Arrays;

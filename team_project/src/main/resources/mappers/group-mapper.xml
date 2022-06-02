@@ -16,7 +16,7 @@
  </insert>
  
  <!-- 글 조회 -->
- <select id="read" resultType="GroupVo">
+ <select id="read" resultType="GroupBoardVo">
  	select * from tbl_group_board
  	where gbno = #{gbno}
  </select>
@@ -36,7 +36,7 @@
  </delete>
  
  <!-- 글 목록 -->
- <select id="list" resultType="GroupVo">
+ <select id="list" resultType="GroupBoardVo">
  	select * from tbl_group_board
  	order by gbno
  </select>

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.team.vo.GroupBoardVo;
+
 @Service
 public class GroupBoardServiceImpl implements GroupBoardService {
 	
@@ -12,7 +14,7 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	private GroupBoardDao groupDao;
 
 	@Override
-	public boolean create(GroupBoardVo groupVo) {
+	public boolean create(GroupBoardVo groupBoardVo) {
 		
 		return false;
 	}
@@ -24,8 +26,8 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	}
 
 	@Override
-	public boolean update(GroupBoardVo groupVo) {
-		boolean result = groupDao.update(groupVo);
+	public boolean update(GroupBoardVo groupBoardVo) {
+		boolean result = groupDao.update(groupBoardVo);
 		return result;
 	}
 

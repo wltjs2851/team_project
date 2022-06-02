@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.vo.GroupBoardVo;
+
 @Repository
 public class GroupBoardDaoImpl implements GroupBoardDao {
 	
@@ -15,8 +17,8 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	private final String NAMESPACE = "com.kh.team.mappers.group.";
 
 	@Override
-	public boolean create(GroupBoardVo groupVo) {
-		int count = sqlSession.insert(NAMESPACE + "create", groupVo);
+	public boolean create(GroupBoardVo groupBoardVo) {
+		int count = sqlSession.insert(NAMESPACE + "create", groupBoardVo);
 		if(count > 0) {
 			return true;
 		}
@@ -30,8 +32,8 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public boolean update(GroupBoardVo groupVo) {
-		int count = sqlSession.update(NAMESPACE + "update", groupVo);
+	public boolean update(GroupBoardVo groupBoardVo) {
+		int count = sqlSession.update(NAMESPACE + "update", groupBoardVo);
 		if(count > 0) {
 			return true;
 		}
