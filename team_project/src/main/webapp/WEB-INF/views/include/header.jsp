@@ -4,13 +4,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <head>
 
   <!-- SITE TITTLE -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Calssimax</title>
+  <title>운동</title>
   
   <!-- PLUGINS CSS STYLE -->
   <link href="/resources/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
@@ -87,13 +88,17 @@
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
 							<li class="nav-item">
-								<a class="nav-link login-button" href="index.html">Login</a>
+								<a class="nav-link login-button" href="loginForm">로그인</a>
 							</li>
 							<li class="nav-item">
+<<<<<<< HEAD
 								<a class="nav-link add-button" href="/group/groupMain"><i class="fa fa-plus-circle"></i>내 그룹</a>
+=======
+								<a class="nav-link add-button" href="joinForm"><i class="fa fa-plus-circle"></i> 회원가입</a>
+>>>>>>> branch 'master' of https://github.com/wltjs2851/team_project.git
 							</li>
 							<li class="nav-item">
-								<a class="nav-link login-button" href="#">마이페이지</a>
+								<a class="nav-link login-button" href="myPage">마이페이지</a>
 							</li>
 						</ul>
 					</div>

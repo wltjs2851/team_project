@@ -3,6 +3,4 @@
 
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
-main.jsp
-
 <%@include file="/WEB-INF/views/include/footer.jsp" %>

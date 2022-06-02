@@ -9,10 +9,10 @@
  <!-- 글 등록 -->
  <insert id="create"> <!-- (String일 경우)null을 허용할 경우 다음과 같이 해야 함(sql 작성 시 널값을 허용한다고 했어도) -->
  	insert into tbl_group_board
- 		(gbno, gb_title, gb_content, userid, gb_notice, gb_like, gb_pic)
+ 		(gbno, gb_title, gb_content, userid, gb_notice, gb_pic)
  	values
- 		(seq_comment_gbno.nextval, #{gb_title}, #{gb_content}, #{userid},
- 		 #{gb_notice}, #{gb_like}, #{gb_pic, jdbcType=VARCHAR})
+ 		(seq_group_gbno.nextval, #{gb_title}, #{gb_content}, #{userid},
+ 		 #{gb_notice, jdbcType=VARCHAR}, #{gb_pic, jdbcType=VARCHAR})
  </insert>
  
  <!-- 글 조회 -->

@@ -7,7 +7,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<form role="form" action="/group/group_writeRun" method="post">
+			<form role="form" action="/group/groupWriteRun" method="post">
 				<div class="form-group">
 					 
 					<label for="title">제목</label>
