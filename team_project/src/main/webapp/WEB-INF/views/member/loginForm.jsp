@@ -40,13 +40,17 @@ $(function() {
 		<br><br>
 			<form role="form" action="loginRun" method="post" id="frmLogin">
 				<div class="form-group">
-					<input type="text" class="form-control" id="userid" name="userid" placeholder="아이디 입력"/>
+					<input type="text" class="form-control" id="userid" name="userid" placeholder="아이디 입력"
+						<c:if test="${not empty cookie.saveid}">value="${cookie.saveid.value}"</c:if>
+					/>
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control" id="userpw" name="userpw" placeholder="비밀번호 입력"/>
 				</div>
 				<div class="checkbox">
-					<label><input type="checkbox" /> 아이디 저장</label>
+					<label><input type="checkbox" name="saveid"
+						<c:if test="${not empty cookie.saveid}">checked</c:if>
+					/>아이디 저장</label>
 				</div>
 				<span id="none" style="color: red;"></span>
 				<button id="btnLogin" type="button" class="btn btn-block btn-primary">로그인</button>

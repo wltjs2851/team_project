@@ -14,6 +14,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>운동</title>
+  
+  <!-- PLUGINS CSS STYLE -->
+  <link href="/resources/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
 
   <!-- Bootstrap -->
   <link href="/resources/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -66,8 +69,8 @@
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="/admin/kcal">운동 칼로리</a>
-									<a class="dropdown-item" href="/admin/recommend">추천 운동</a>
+									<a class="dropdown-item" href="menu/admin/kcal.jsp">운동 칼로리</a>
+									<a class="dropdown-item" href="#">추천 운동</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
@@ -87,15 +90,24 @@
 							</li>
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
-							<li class="nav-item">
-								<a class="nav-link login-button" href="loginForm">로그인</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link add-button" href="joinForm"><i class="fa fa-plus-circle"></i> 회원가입</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link login-button" href="myPage">마이페이지</a>
-							</li>
+						<c:choose>
+							<c:when test="${empty loginVo}">
+								<li class="nav-item">
+									<a class="nav-link btn-success" href="loginForm">로그인</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link btn-primary" href="joinForm"><i class="fa fa-plus-circle"></i> 회원가입</a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item">
+									<a class="nav-link btn-danger" href="logout">로그아웃</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link btn-success" href="myPage">마이페이지</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
 						</ul>
 					</div>
 				</nav>
