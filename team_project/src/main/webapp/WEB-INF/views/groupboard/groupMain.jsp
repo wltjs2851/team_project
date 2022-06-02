@@ -40,7 +40,7 @@
 					<nav>
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item">
-								<a href="/group/groupWriteForm">글쓰기</a>
+								<a href="/groupboard/groupWriteForm">글쓰기</a>
 							</li>
 							<li class="breadcrumb-item">
 								<a href="#">활동 정보</a>

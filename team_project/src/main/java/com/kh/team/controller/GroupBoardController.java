@@ -13,7 +13,7 @@ import com.kh.team.group.GroupBoardService;
 import com.kh.team.vo.GroupBoardVo;
 
 @Controller
-@RequestMapping("/group")
+@RequestMapping("/groupboard")
 public class GroupBoardController {
 	
 	@Autowired
@@ -22,7 +22,7 @@ public class GroupBoardController {
 	@RequestMapping(value = "groupWriteForm", method = RequestMethod.GET)
 	public String createForm() { // 글쓰기 양식
 		
-		return "group/groupWriteForm";
+		return "groupboard/groupWriteForm";
 	}
 	
 	@RequestMapping(value = "groupWriteRun", method = RequestMethod.POST)
@@ -31,7 +31,7 @@ public class GroupBoardController {
 		boolean result = groupBoardService.create(groupVo);
 		rttr.addFlashAttribute("create_result", result);
 		
-		return "redirect:/group/groupMain";
+		return "redirect:/groupboard/groupMain";
 	}
 	
 	@RequestMapping(value = "groupRead", method = RequestMethod.GET)
@@ -39,13 +39,13 @@ public class GroupBoardController {
 		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
 		model.addAttribute("groupBoardVo", groupBoardVo);
 		
-		return "group/groupRead";
+		return "groupboard/groupRead";
 	}
 	
 	@RequestMapping(value = "groupUpdateForm", method = RequestMethod.GET)
 	public String updateForm() {
 		
-		return "group/groupUpdateForm";
+		return "groupboard/groupUpdateForm";
 	}
 	
 	@RequestMapping(value = "group_updateRun", method = RequestMethod.POST)
@@ -53,7 +53,7 @@ public class GroupBoardController {
 		boolean result = groupBoardService.update(groupBoardVo);
 		rttr.addFlashAttribute("update_result", result);
 		
-		return "redirect:/group/group_updateRun";
+		return "redirect:/groupboard/group_updateRun";
 	}
 
 	@RequestMapping(value = "groupDelete", method = RequestMethod.POST)
@@ -61,7 +61,7 @@ public class GroupBoardController {
 		boolean result = groupBoardService.delete(gbno);
 		rttr.addFlashAttribute("delete_result", result);
 		
-		return "redirect:/group/groupDelete";
+		return "redirect:/groupboard/groupDelete";
 	}
 	
 	@RequestMapping(value = "groupMain", method = RequestMethod.GET)
@@ -69,6 +69,6 @@ public class GroupBoardController {
 		List<GroupBoardVo> groupList = groupBoardService.list();
 		model.addAttribute("groupList", groupList);
 		
-		return "group/groupMain";
+		return "groupboard/groupMain";
 	}
 }
