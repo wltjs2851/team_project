@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.group">
+	<insert id="insertGroup">
+		insert into tbl_group(gno, g_name, excercise_type, g_attend, g_intro, g_location, g_pic, users)
+			values(seq_group_gno.nextval, #{g_name}, #{excercise_type}, #{g_attend},#{g_intro}, #{g_location}, #{g_pic, jdbcType=VARCHAR}, #{users})
+	</insert>
+	
+	<select id="selectGroup" resultType="GroupVo">
+		select * from tbl_group
+	</select>
+	
+	<update id="updateGroup">
+		update tbl_group set g_name = #{g_name}, excercise_type = #{excercise_type}, g_attend = #{g_attend},
+				g_intro = #{g_intro}, g_location = #{g_location}, g_pic = #{g_pic, jdbcType=VARCHAR}, users = #{users}
+			where gno = #{gno}
+	</update>
+
+	
+	<delete id="deleteGroup">
+		delete from tbl_group where gno = #{gno}
+	</delete>
+
+</mapper>

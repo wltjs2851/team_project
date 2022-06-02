@@ -151,3 +151,12 @@ create table tbl_calendar(
     calendar_content varchar2(500),
     userid references tbl_user(userid)
 );
+
+--그룹 번호 시퀀스 추가 -> 김지선
+create sequence seq_group_gno;
+
+--그룹 현재 참석 인원 컬럼 추가 -> 김지선
+alter table tbl_group add g_present number default 1;
+
+--유저 테이블에 그룹 번호 컬럼 추가-> 김지선
+alter table tbl_user add gno REFERENCES tbl_group(gno);

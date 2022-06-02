@@ -7,6 +7,8 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <head>
 
+<script src="https://kit.fontawesome.com/94cf0924f0.js" crossorigin="anonymous"></script>
+
   <!-- SITE TITTLE -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +17,7 @@
   
   <!-- PLUGINS CSS STYLE -->
   <link href="/resources/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+
   <!-- Bootstrap -->
   <link href="/resources/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
