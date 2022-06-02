@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-${ groupList }
+<%-- ${ groupList } --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -13,7 +13,7 @@ ${ groupList }
 					<div class="col-md-9">
 						<h2 style="background-color: aliceblue">제목${ groupBoardVo.gb_title }</h2>
 						<p>작성자: ${groupBoardVo.userid}, 작성일: ${ groupBoardVo.gb_regdate }</p>
-						<p>내용${ groupBoardVo.gb_content }</p>
+						<p>내용${ groupVo.gb_content }</p>
 <!-- 						<p><a class="btn" href="#">더보기 »</a></p> -->
 						<p><a href="#">삭제</a></p>
 					</div>

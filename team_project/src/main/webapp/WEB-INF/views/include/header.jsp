@@ -92,7 +92,7 @@
 							</li>
 							<li class="nav-item">
 								<a class="nav-link add-button" href="joinForm"><i class="fa fa-plus-circle"></i> 회원가입</a>
-								<a class="nav-link add-button" href="/group/groupMain"><i class="fa fa-plus-circle"></i> 회원가입</a>
+								<a class="nav-link add-button" href="/group/groupMain"><i class="fa fa-plus-circle"></i> 내 그룹</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link login-button" href="myPage">마이페이지</a>
