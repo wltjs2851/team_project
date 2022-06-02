@@ -26,7 +26,8 @@
  	update tbl_group_board set
  		gb_title = #{gb_title},
  		gb_content = #{gb_content},
- 		gb_pic = #{gb_pic}
+ 		gb_pic = #{gb_pic, jdbcType=VARCHAR}
+ 	where gbno = #{gbno}
  </update>
  
  <!-- 글 삭제 -->

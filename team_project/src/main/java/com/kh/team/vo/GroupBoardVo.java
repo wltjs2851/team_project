@@ -40,6 +40,70 @@ public class GroupBoardVo {
 		this.gb_pic = gb_pic;
 	}
 
+	public int getGbno() {
+		return gbno;
+	}
+
+	public void setGbno(int gbno) {
+		this.gbno = gbno;
+	}
+
+	public String getGb_title() {
+		return gb_title;
+	}
+
+	public void setGb_title(String gb_title) {
+		this.gb_title = gb_title;
+	}
+
+	public String getGb_content() {
+		return gb_content;
+	}
+
+	public void setGb_content(String gb_content) {
+		this.gb_content = gb_content;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getGb_notice() {
+		return gb_notice;
+	}
+
+	public void setGb_notice(String gb_notice) {
+		this.gb_notice = gb_notice;
+	}
+
+	public Date getGb_regdate() {
+		return gb_regdate;
+	}
+
+	public void setGb_regdate(Date gb_regdate) {
+		this.gb_regdate = gb_regdate;
+	}
+
+	public int getGb_like() {
+		return gb_like;
+	}
+
+	public void setGb_like(int gb_like) {
+		this.gb_like = gb_like;
+	}
+
+	public String[] getGb_pic() {
+		return gb_pic;
+	}
+
+	public void setGb_pic(String[] gb_pic) {
+		this.gb_pic = gb_pic;
+	}
+
 	@Override
 	public String toString() {
 		return "GroupBoardVo [gbno=" + gbno + ", gb_title=" + gb_title + ", gb_content=" + gb_content + ", userid="

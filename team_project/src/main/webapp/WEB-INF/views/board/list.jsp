@@ -4,7 +4,7 @@
 
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
-<div class="popular__product">
+<div class="popular__product" style="padding: 3% 10%">
 	<div class="row">
 		<c:forEach items="${ groupList }" var="groupVo">
 		<div class="col-lg-3 col-md-6 col-sm-6">
