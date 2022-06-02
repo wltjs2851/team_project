@@ -27,8 +27,9 @@ public class GroupBoardController {
 	
 	@RequestMapping(value = "groupWriteRun", method = RequestMethod.POST)
 	public String createRun(GroupBoardVo groupVo, RedirectAttributes rttr) {
-		System.out.println("groupBoardController, writeRun");
+		System.out.println("groupBoardController, writeRun, groupVo: " + groupVo);
 		boolean result = groupBoardService.create(groupVo);
+		System.out.println("groupBoardController, writeRun, result: " + result);
 		rttr.addFlashAttribute("create_result", result);
 		
 		return "redirect:/groupboard/groupMain";
@@ -61,7 +62,7 @@ public class GroupBoardController {
 		boolean result = groupBoardService.delete(gbno);
 		rttr.addFlashAttribute("delete_result", result);
 		
-		return "redirect:/groupboard/groupDelete";
+		return "redirect:/groupboard/groupMain";
 	}
 	
 	@RequestMapping(value = "groupMain", method = RequestMethod.GET)
@@ -71,4 +72,12 @@ public class GroupBoardController {
 		
 		return "groupboard/groupMain";
 	}
+	
+//	@RequestMapping(value = "forGroupHead", method = RequestMethod.GET)
+//	public String groupHead(Model model) {
+//		List<GroupBoardVo> groupList = groupBoardService.list();
+//		model.addAttribute("groupList", groupList);
+//		
+//		return "groupboard/forGroupHead";
+//	}
 }

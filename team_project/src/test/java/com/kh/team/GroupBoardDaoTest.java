@@ -18,8 +18,22 @@ public class GroupBoardDaoTest {
 	
 	@Test
 	public void testCreate() { // 지금 당장은 아이디 널 값 가능하도록
-		GroupBoardVo groupBoardVo = new GroupBoardVo("a", "b", null, null, null);
+		GroupBoardVo groupBoardVo = new GroupBoardVo("b", "c", null, null, null);
 		boolean result = groupBoardDao.create(groupBoardVo);
+		System.out.println("result: " + result);
+	}
+	
+	@Test
+	public void testDelete() {
+		boolean result = groupBoardDao.delete(3);
+		System.out.println("result: " + result);
+	}
+	
+	@Test
+	public void testUpdate() {
+		GroupBoardVo groupBoardVo = new GroupBoardVo("abc", "def", null, null, null);
+		groupBoardVo.setGbno(4);
+		boolean result = groupBoardDao.update(groupBoardVo);
 		System.out.println("result: " + result);
 	}
 

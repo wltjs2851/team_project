@@ -7,21 +7,21 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<form role="form" action="/group/groupWriteRun" method="post">
+			<form role="form" action="/groupboard/groupWriteRun" method="post">
 				<div class="form-group">
 					 
-					<label for="title">제목</label>
-					<input type="text" class="form-control" name="title" id="title" required />
+					<label for="gb_title">제목</label>
+					<input type="text" class="form-control" name="gb_title" id="gb_title" required />
 				</div>
 				<div class="form-group">
 					 
-					<label for="content">내용</label>
-					<input type="text" class="form-control" name="content" id="content" required />
+					<label for="gb_content">내용</label>
+					<input type="text" class="form-control" name="gb_content" id="gb_content" required />
 				</div>
 				<div class="form-group">
 					 
 					<label for="userid">아이디</label>
-					<input type="text" class="form-control" name="userid" id="userid" required />
+					<input type="text" class="form-control" name="userid" id="userid" />
 				</div>
 				<div class="form-group">
 					 
