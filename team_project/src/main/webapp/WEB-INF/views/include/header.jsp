@@ -91,11 +91,8 @@
 								<a class="nav-link login-button" href="loginForm">로그인</a>
 							</li>
 							<li class="nav-item">
-<<<<<<< HEAD
-								<a class="nav-link add-button" href="/group/groupMain"><i class="fa fa-plus-circle"></i>내 그룹</a>
-=======
 								<a class="nav-link add-button" href="joinForm"><i class="fa fa-plus-circle"></i> 회원가입</a>
->>>>>>> branch 'master' of https://github.com/wltjs2851/team_project.git
+								<a class="nav-link add-button" href="/group/groupMain"><i class="fa fa-plus-circle"></i> 회원가입</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link login-button" href="myPage">마이페이지</a>

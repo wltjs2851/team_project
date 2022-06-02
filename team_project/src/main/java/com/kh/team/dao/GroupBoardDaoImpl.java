@@ -14,7 +14,7 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private final String NAMESPACE = "com.kh.team.mappers.group.";
+	private final String NAMESPACE = "com.kh.team.mappers.groupboard.";
 
 	@Override
 	public boolean create(GroupBoardVo groupBoardVo) {

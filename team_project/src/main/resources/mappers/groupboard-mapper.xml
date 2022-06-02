@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.kh.team.mappers.groupboard">
+ 
+ <!-- 글 등록 -->
+ <insert id="create"> <!-- (String일 경우)null을 허용할 경우 다음과 같이 해야 함(sql 작성 시 널값을 허용한다고 했어도) -->
+ 	insert into tbl_group_board
+ 		(gbno, gb_title, gb_content, userid, gb_notice, gb_pic)
+ 	values
+ 		(seq_group_board_gbno.nextval, #{gb_title}, #{gb_content}, #{userid, jdbcType=VARCHAR},
+ 		 #{gb_notice, jdbcType=VARCHAR}, #{gb_pic, jdbcType=VARCHAR})
+ </insert>
+ 
+ <!-- 글 조회 -->
+ <select id="read" resultType="GroupBoardVo">
+ 	select * from tbl_group_board
+ 	where gbno = #{gbno}
+ </select>
+ 
+ <!-- 글 수정 -->
+ <update id="update">
+ 	update tbl_group_board set
+ 		gb_title = #{gb_title},
+ 		gb_content = #{gb_content},
+ 		gb_pic = #{gb_pic}
+ </update>
+ 
+ <!-- 글 삭제 -->
+ <delete id="delete">
+ 	delete from tbl_group_board
+ 	where gbno = #{gbno}
+ </delete>
+ 
+ <!-- 글 목록 -->
+ <select id="list" resultType="GroupBoardVo">
+ 	select * from tbl_group_board
+ 	order by gbno
+ </select>
+ 
+ </mapper>
