@@ -3,9 +3,9 @@
 <%@include file="/WEB-INF/views/include/header.jsp"%>
 <script>
 	$(document).ready(function() {
-		var listRecommend_result = "${listRecommend_result}";
+		var insertRecommend_result = "${insertRecommend_result}";
 
-		if (listRecommend_result == "true") {
+		if (insertRecommend_result == "true") {
 			alert("추천운동 추가 완료");
 		}
 	});
