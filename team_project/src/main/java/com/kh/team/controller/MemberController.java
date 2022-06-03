@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -108,5 +109,22 @@ public class MemberController {
 	@RequestMapping(value = "/modifyRun", method = RequestMethod.POST)
 	public String modifyRun(MemberVo memberVo, MultipartFile file, RedirectAttributes rttr) {
 		return "redirect:/member/myPage";
+	}
+	
+	@RequestMapping(value = "/deleteForm", method = RequestMethod.GET)
+	public String deleteForm() {
+		return "/member/deleteForm";
+	}
+	
+	@RequestMapping(value = "/deleteRun", method = RequestMethod.POST)
+	public String deleteRun(String userid, HttpSession session, HttpServletResponse response) {
+		System.out.println(userid);
+		memberService.deleteMember(userid);
+		session.invalidate();
+		Cookie cookie = new Cookie("saveid", userid);
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		return "redirect:/";
 	}
 }

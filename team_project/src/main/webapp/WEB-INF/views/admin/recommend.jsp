@@ -1,14 +1,33 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/header.jsp"%>
-<script>
-	$(document).ready(function() {
-		var listRecommend_result = "${listRecommend_result}";
+<style>
+tr.tr_list{
+	cursor: pointer;
+}
 
-		if (listRecommend_result == "true") {
-			alert("추천운동 추가 완료");
-		}
+tr.tr_list:hover{
+	background-color: #CEECF5;
+}
+</style>
+<script>
+$(document).ready(function() {
+	var insertRecommend_result = "${insertRecommend_result}";
+	var deleteRecommend_result = "${deleteRecommend_result}";
+	if (insertRecommend_result == "true") {
+		alert("추천운동 추가 완료");
+	}
+	if (deleteRecommend_result == "true"){
+		alert("추천운동 글 삭제");
+	}
+	
+	// 글 조회
+	$(".tr_list").click(function(){
+		console.log("추천게시글 클릭");
+		var reno = $(this).attr("data-reno");
+		location.href = "/admin/selectByReno?reno=" + reno;
 	});
+});
 </script>
 <%-- ${listRecommend} --%>
 <div class="container-fluid">
@@ -21,18 +40,10 @@
 				style="float: right; width: 110px; height:50px; padding: 1% 0">글 쓰기</a>
 			</div>
 			<table class="table table-responsive product-dashboard-table">
-<!-- 				<thead> -->
-<!-- 					<tr> -->
-<!-- 						<th>Image</th> -->
-<!-- 						<th>Product Title</th> -->
-<!-- 						<th class="text-center">Category</th> -->
-<!-- 						<th class="text-center">Action</th> -->
-<!-- 					</tr> -->
-<!-- 				</thead> -->
 				<tbody>
 				<c:forEach items="${listRecommend }" var="ReVo">
-					<tr>
-						<td class="product-thumb">
+					<tr class="tr_list" data-reno="${ReVo.reno}">
+						<td class="td_list">
 							<img width="80px" height="auto"
 							src="/resources/images/exercise.png" alt="운동이미지">
 						</td>
