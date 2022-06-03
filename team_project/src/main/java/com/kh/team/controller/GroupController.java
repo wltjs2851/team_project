@@ -1,13 +1,16 @@
 package com.kh.team.controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.kh.team.service.GroupService;
 import com.kh.team.util.FileUtil;
@@ -52,7 +55,19 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value = "/groupForm", method = RequestMethod.GET)
-	public String readGroupForm(Model model) {
+	public String readGroupForm(int gno, Model model) {
+		GroupVo groupVo = groupService.groupByGno(gno);
+		model.addAttribute("groupVo", groupVo);
 		return "board/groupForm";
+	}
+	
+	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)
+	@ResponseBody
+	public byte[] displayImage(String filename) throws Exception{
+		FileInputStream fis;
+		fis = new FileInputStream(filename);
+		byte[] data = IOUtils.toByteArray(fis);
+		fis.close();
+		return data;
 	}
 }

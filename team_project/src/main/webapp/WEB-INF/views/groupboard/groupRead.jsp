@@ -28,7 +28,8 @@ $(function() {
 	
 	function getCommentList() {
 		var gbno = "${groupBoardVo.gbno}";
-		var url = "/groupComment/groupCommentList/" + gbno;
+		console.log(gbno);
+		var url = "/groupcomment/groupCommentList/" + gbno;
 		$.get(url, function(rData) {
 			console.log(rData); 
 // 			$("#table_comment_list tr:gt(0)").remove();
@@ -46,8 +47,8 @@ $(function() {
 				
 // 				$("#table_comment_list").append(tr);
 // 			});
-// 		});
-// 	}
+		});
+	}
 });
 </script>
 

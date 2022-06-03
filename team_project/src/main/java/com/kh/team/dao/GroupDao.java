@@ -9,4 +9,5 @@ public interface GroupDao {
 	public List<GroupVo> selectGroup();
 	public boolean updateGroup(GroupVo groupVo);
 	public boolean deleteGroup(int gno);
+	public GroupVo groupByGno(int gno);
 }

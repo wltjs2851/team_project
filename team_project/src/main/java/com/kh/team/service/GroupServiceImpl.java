@@ -30,4 +30,9 @@ public class GroupServiceImpl implements GroupService{
 		return false;
 	}
 
+	@Override
+	public GroupVo groupByGno(int gno) {
+		return groupDao.groupByGno(gno);
+	}
+
 }
