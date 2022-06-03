@@ -28,6 +28,7 @@ $(function() {
 	
 	function getCommentList() {
 		var gbno = "${groupBoardVo.gbno}";
+		console.log(gbno);
 		var url = "/groupcomment/groupCommentList/" + gbno;
 		$.get(url, function(rData) {
 			console.log(rData); 

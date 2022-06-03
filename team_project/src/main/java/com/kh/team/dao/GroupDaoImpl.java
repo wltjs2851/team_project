@@ -49,4 +49,10 @@ public class GroupDaoImpl implements GroupDao{
 		return false;
 	}
 
+	@Override
+	public GroupVo groupByGno(int gno) {
+		GroupVo groupVo = sqlSession.selectOne(NAMESPACE + "groupByGno", gno);
+		return groupVo;
+	}
+
 }

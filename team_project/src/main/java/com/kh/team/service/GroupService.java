@@ -8,4 +8,5 @@ public interface GroupService {
 	public boolean addGroup(GroupVo groupVo);
 	public List<GroupVo> groupList();
 	public boolean moidfyGroup(GroupVo groupVo);
+	public GroupVo groupByGno(int gno);
 }
