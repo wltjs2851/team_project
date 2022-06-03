@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.team.group.GroupBoardService;
+import com.kh.team.service.GroupBoardService;
 import com.kh.team.vo.GroupBoardVo;
 
 @Controller
@@ -49,15 +49,15 @@ public class GroupBoardController {
 		return "groupboard/groupUpdateForm";
 	}
 	
-	@RequestMapping(value = "group_updateRun", method = RequestMethod.POST)
+	@RequestMapping(value = "groupUpdateRun", method = RequestMethod.POST)
 	public String updateRun(GroupBoardVo groupBoardVo, RedirectAttributes rttr) {
 		boolean result = groupBoardService.update(groupBoardVo);
 		rttr.addFlashAttribute("update_result", result);
 		
-		return "redirect:/groupboard/group_updateRun";
+		return "redirect:/groupboard/groupMain";
 	}
 
-	@RequestMapping(value = "groupDelete", method = RequestMethod.POST)
+	@RequestMapping(value = "groupDelete", method = RequestMethod.GET)
 	public String delete(int gbno, RedirectAttributes rttr) {
 		boolean result = groupBoardService.delete(gbno);
 		rttr.addFlashAttribute("delete_result", result);
