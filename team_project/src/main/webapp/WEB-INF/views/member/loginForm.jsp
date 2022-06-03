@@ -7,6 +7,7 @@
 <script>
 $(function() {
 	$("#btnLogin").click(function() {
+// 		아이디 비밀번호 유효값 검사
 		var id = $("#userid").val();
 		var pw = $("#userpw").val();
 		var pattern1 = /[0-9]/; // 숫자
@@ -30,11 +31,14 @@ $(function() {
 		
 	});
 	var joinResult = "${joinResult}";
-	console.log(joinResult);
+	var loginResult = "${loginResult}";
 	if (joinResult == "true") {
 		alert("가입 성공!\n가입한 아이디로 로그인 해주세요");
 	} else if (joinResult == "false") {
 		alert("알수없는 오류");
+	}
+	if (loginResult == "false") {
+		alert("아이디와 비밀번호를 확인해주세요.")
 	}
 });
 </script>

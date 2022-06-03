@@ -34,15 +34,16 @@ public class MemberController {
 	@RequestMapping(value = "/loginRun", method = RequestMethod.POST)
 	public String loginRun(String userid, String userpw, String saveid, HttpSession session, RedirectAttributes rttr, HttpServletResponse response) {
 		MemberVo memberVo = memberService.login(userid, userpw);
-		System.out.println(saveid);
 		if (memberVo != null) {
 			session.setAttribute("loginVo", memberVo);
+//			로그인했을때 아이디저장에 체크하였다면 아이디값을 쿠키에 저장
 			if (saveid != null && !saveid.equals("")) {
 				Cookie cookie = new Cookie("saveid", userid);
 				cookie.setPath("/");
 				cookie.setMaxAge(60 * 60 * 24 * 7);
 				response.addCookie(cookie);
 			} else {
+//			아이디저장에 체크해제하고 로그인하였다면 쿠키 삭제
 				Cookie cookie = new Cookie("saveid", userid);
 				cookie.setPath("/");
 				cookie.setMaxAge(0);
@@ -51,6 +52,7 @@ public class MemberController {
 			rttr.addFlashAttribute("loginResult", "true");
 		} else {
 			rttr.addFlashAttribute("loginResult", "false");
+			return "redirect:/member/loginForm";
 		}
 		return "redirect:/";
 	}
@@ -72,7 +74,6 @@ public class MemberController {
 		try {
 			String u_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
 			memberVo.setU_pic(u_pic);
-			System.out.println(memberVo);
 			boolean result = memberService.joinMember(memberVo);
 			rttr.addFlashAttribute("joinResult", result);
 		} catch (Exception e) {
@@ -108,21 +109,22 @@ public class MemberController {
 	@RequestMapping(value = "/modifyRun", method = RequestMethod.POST)
 	public String modifyRun(MemberVo memberVo, MultipartFile file, RedirectAttributes rttr, HttpSession session) {
 		String originalFilename = file.getOriginalFilename();
-		if (originalFilename != null || !originalFilename.equals("")) {
-			try {
+//		수정폼에서 프로필사진을 등록하였다면 프로필사진 변경
+		try {
+			if (originalFilename != null && !originalFilename.equals("")) {
 				String u_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
 				memberVo.setU_pic(u_pic);
-				System.out.println(memberVo);
 				boolean result = memberService.updateMember(memberVo);
 				rttr.addFlashAttribute("modifyResult", result);
+//			그렇지 않다면 프로필사진 삭제
+			} else {
+				memberVo.setU_pic(null);
+				boolean result = memberService.updateMember(memberVo);
+				rttr.addFlashAttribute("modifyResult", result);
+			}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else {
-			memberVo.setU_pic(null);
-			boolean result = memberService.updateMember(memberVo);
-			rttr.addFlashAttribute("modifyResult", result);
-		}
 		session.setAttribute("loginVo", memberVo);
 		return "redirect:/member/myPage";
 	}
@@ -134,7 +136,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/deleteRun", method = RequestMethod.POST)
 	public String deleteRun(String userid, HttpSession session, HttpServletResponse response) {
-		System.out.println(userid);
 		memberService.deleteMember(userid);
 		session.invalidate();
 		Cookie cookie = new Cookie("saveid", userid);
@@ -142,5 +143,12 @@ public class MemberController {
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/deleteFile", method = RequestMethod.GET)
+	@ResponseBody
+	public String deleteFile(String filename) {
+		boolean result = FileUtil.deleteFile(filename);
+		return String.valueOf(result);
 	}
 }

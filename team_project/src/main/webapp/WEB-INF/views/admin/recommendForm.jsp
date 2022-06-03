@@ -18,7 +18,7 @@
 					<a class="btn btn-primary btn-large" href="/admin/listRecommend">목록으로</a>
 				</p>
 			</div>
-			<form role="form" action="/admin/insertRecommend" method="post">
+			<form role="form" action="/admin/insertRecommend" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="re_title">
 						제목
@@ -32,10 +32,10 @@
 					<textarea rows="100" cols="100" class="form-control" id="re_content" name="re_content"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="exampleInputFile">
+					<label for="recoFile">
 						이미지
 					</label>
-					<input type="file" class="form-control-file" id="exampleInputFile" />
+					<input type="file" class="form-control-file" id="recoFile" name="recoFile"/>
 				</div>
 				<button type="submit" class="btn btn-primary" id="btnInsertKcal">
 					추가하기

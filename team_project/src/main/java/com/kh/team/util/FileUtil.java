@@ -19,4 +19,13 @@ public class FileUtil {
 		}
 		return saveFilename;
 	}
+	
+	public static boolean deleteFile(String filename) {
+		File f = new File(filename);
+		if (f.exists()) {
+			f.delete();
+			return true;
+		}
+		return false;
+	}
 }

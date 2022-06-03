@@ -39,10 +39,10 @@
 				<div class="image">
 					<c:choose>
 						<c:when test="${empty loginVo.u_pic}">
-							<img src="" class="rounded-circle z-depth-2" alt="User Image">
+							<img src="/resources/images/profile.png" class="rounded-circle z-depth-2" alt="User Image">
 						</c:when>
 						<c:otherwise>
-							<img height="100px" width="100px" src="/member/displayImage?filename=${loginVo.u_pic}" class="rounded-circle z-depth-2" alt="User Image">
+							<img height="100px" width="100px" src="/member/displayImage?filename=${loginVo.u_pic}" class="rounded-circle z-depth-2" alt="User Image2">
 						</c:otherwise>
 					</c:choose>
 				</div>

@@ -14,6 +14,7 @@ $(function() {
 		var age = $("#age").val();
 		var gender = $("#gender").val();
 		var nickname = $("#nickname").val();
+// 		입력한 값들의 유효값검사
 		var pattern1 = /[0-9]/; // 숫자
 		var pattern2 = /[a-zA-Z]/; // 문자
 		var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자

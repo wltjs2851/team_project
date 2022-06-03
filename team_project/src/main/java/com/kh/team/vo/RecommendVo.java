@@ -11,6 +11,28 @@ public class RecommendVo {
 
 	private int re_like;
 	private int re_viewcnt;
+	
+	private String re_pic;
+
+	public String getRe_pic() {
+		return re_pic;
+	}
+
+	public void setRe_pic(String re_pic) {
+		this.re_pic = re_pic;
+	}
+
+	public RecommendVo(int reno, String re_content, String re_title, Date re_regdate, int re_like, int re_viewcnt,
+			String re_pic) {
+		super();
+		this.reno = reno;
+		this.re_content = re_content;
+		this.re_title = re_title;
+		this.re_regdate = re_regdate;
+		this.re_like = re_like;
+		this.re_viewcnt = re_viewcnt;
+		this.re_pic = re_pic;
+	}
 
 	public RecommendVo() {
 		super();
@@ -106,7 +128,7 @@ public class RecommendVo {
 	@Override
 	public String toString() {
 		return "RecommendVo [reno=" + reno + ", re_content=" + re_content + ", re_title=" + re_title + ", re_regdate="
-				+ re_regdate + ", re_like=" + re_like + ", re_viewcnt=" + re_viewcnt + "]";
+				+ re_regdate + ", re_like=" + re_like + ", re_viewcnt=" + re_viewcnt + ", re_pic=" + re_pic + "]";
 	}
 
 }
