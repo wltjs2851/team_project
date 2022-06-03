@@ -27,7 +27,15 @@ $(function() {
 		} else {
 			$("#frmLogin").submit();
 		}
+		
 	});
+	var joinResult = "${joinResult}";
+	console.log(joinResult);
+	if (joinResult == "true") {
+		alert("가입 성공!\n가입한 아이디로 로그인 해주세요");
+	} else if (joinResult == "false") {
+		alert("알수없는 오류");
+	}
 });
 </script>
 <hr>
@@ -38,7 +46,7 @@ $(function() {
 		<span style="font-size: 40px; color: gray; text-align: center;">LOGIN</span><br>
 		<span style="color: gray;">회원가입 후 ??의 다양한 혜택과 서비스를 받아보세요.</span>
 		<br><br>
-			<form role="form" action="loginRun" method="post" id="frmLogin">
+			<form role="form" action="/member/loginRun" method="post" id="frmLogin">
 				<div class="form-group">
 					<input type="text" class="form-control" id="userid" name="userid" placeholder="아이디 입력"
 						<c:if test="${not empty cookie.saveid}">value="${cookie.saveid.value}"</c:if>
@@ -54,7 +62,7 @@ $(function() {
 				</div>
 				<span id="none" style="color: red;"></span>
 				<button id="btnLogin" type="button" class="btn btn-block btn-primary">로그인</button>
-				<a href="joinForm" class="btn btn-block btn-success">회원가입</a>
+				<a href="/member/joinForm" class="btn btn-block btn-success">회원가입</a>
 			</form>
 		</div>
 	<div class="col-md-4">

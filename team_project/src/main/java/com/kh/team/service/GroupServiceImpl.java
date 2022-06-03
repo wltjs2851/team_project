@@ -16,7 +16,7 @@ public class GroupServiceImpl implements GroupService{
 
 	@Override
 	public boolean addGroup(GroupVo groupVo) {
-		return false;
+		return groupDao.insertGroup(groupVo);
 	}
 
 	@Override
