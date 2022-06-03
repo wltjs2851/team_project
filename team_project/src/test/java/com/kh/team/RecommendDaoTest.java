@@ -30,8 +30,8 @@ public class RecommendDaoTest {
 	// 글 수정
 	@Test
 	public void testUpdateRe() {
-		int reno = 1;
-		RecommendVo recommendVo = new RecommendVo(reno, "수영 추천안함", "수영 x");
+		int reno = 3;
+		RecommendVo recommendVo = new RecommendVo(reno, "주짓수 추천 주짓수 추천 주짓수 추천 주짓수 추천 주짓수 추천 주짓수 추천 주짓수 추천 주짓수 추천 주짓수 추천 주짓수 추천 주짓수 추천 주짓수 추천 ", "주짓수");
 		recommendDao.updateRecommend(recommendVo);
 	}
 	
