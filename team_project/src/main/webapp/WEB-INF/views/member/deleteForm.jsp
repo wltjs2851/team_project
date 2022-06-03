@@ -9,6 +9,7 @@ $(function() {
 	var originalPw = "${loginVo.userpw}";
 	$("#btnDelete").click(function() {
 		var pw = $("#userpw").val();
+// 		알림으로 탈퇴 확인 취소 버튼누르면 작동
 		if (window.confirm("탈퇴하시면 ??가 제공하는 서비스를 이용하지 못합니다. 정말 탈퇴할까요?")) {
 			if (originalPw == pw) {
 				$("#userid").val("${loginVo.userid}")
@@ -33,6 +34,7 @@ $(function() {
 		<span style="color: gray;">본인확인을 위해 비밀번호를 입력해주세요.</span>
 		<br><br>
 			<form role="form" action="/member/deleteRun" method="post" id="frmDelete">
+<!-- 				tbl_user 테이블에서 삭제할때 userid를 받기위한 hidden타입 -->
 				<input type="hidden" id="userid" name="userid">
 				<div class="form-group">
 					<input type="password" class="form-control" id="userpw" name="userpw" placeholder="비밀번호 입력"/>

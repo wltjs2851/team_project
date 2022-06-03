@@ -7,6 +7,7 @@
 <script>
 $(function() {
 	$("#btnModify").click(function() {
+// 		비밀번호를 수정하려고 입력한다면 유효값 검사를 실행 아니라면 이전 비밀번호 그대로 저장
 		var pw = $("#userpw").val();
 		var pw2 = $("#userpw2").val();
 		var userpw = "${loginVo.userpw}";
@@ -33,6 +34,21 @@ $(function() {
 			}
 		}
 		
+	});
+// 	프로필사진 삭제
+	$("#delPic").click(function(e) {
+		e.preventDefault();
+		var filename = $(this).attr("data-filename");
+		var url = "/member/deleteFile";
+		var sData = {
+				"filename" : filename
+		};
+		$.get(url, sData, function(rData) {
+			console.log(rData);
+			if (rData == "true") {
+				$("#pic").attr("src", "/resources/images/profile.png")
+			}
+		});
 	});
 });
 </script>
@@ -66,10 +82,11 @@ $(function() {
 				<div class="image">
 					<c:choose>
 						<c:when test="${empty loginVo.u_pic}">
-							<img src="" class="rounded-circle z-depth-2" alt="User Image">
+							<img src="/resources/images/profile.png" class="rounded-circle z-depth-2" alt="User Image">
 						</c:when>
 						<c:otherwise>
-							<img height="100px" width="100px" src="/member/displayImage?filename=${loginVo.u_pic}" class="rounded-circle z-depth-2" alt="User Image">
+							<img id="pic" height="100px" width="100px" src="/member/displayImage?filename=${loginVo.u_pic}" class="rounded-circle z-depth-2" alt="User Image">
+							<a id="delPic" href="#" data-filename="${loginVo.u_pic}">&times;</a>
 							<input type="file" class="form-control-file" id="file" name="file"/>
 							<p class="help-block">수정할 사진을 등록해주세요</p>
 						</c:otherwise>

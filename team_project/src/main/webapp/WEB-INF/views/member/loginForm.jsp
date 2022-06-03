@@ -7,6 +7,7 @@
 <script>
 $(function() {
 	$("#btnLogin").click(function() {
+// 		아이디 비밀번호 유효값 검사
 		var id = $("#userid").val();
 		var pw = $("#userpw").val();
 		var pattern1 = /[0-9]/; // 숫자
