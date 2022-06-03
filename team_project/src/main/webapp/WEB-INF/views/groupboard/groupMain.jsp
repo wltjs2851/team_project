@@ -9,17 +9,24 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
-				<c:forEach items="${ groupList }" var="groupBoardVo">
+				<div class="col-md-9">
+					<c:forEach items="${ groupList }" var="groupBoardVo">
 				
-					<div class="col-md-9">
-						<h2 style="background-color: aliceblue">제목: ${ groupBoardVo.gb_title }</h2>
+						<h2 style="background-color: aliceblue">${groupBoardVo.gbno}. 제목: ${ groupBoardVo.gb_title }</h2>
 						<p>작성자: ${groupBoardVo.userid}, 작성일: ${ groupBoardVo.gb_regdate }</p>
 						<p>${ groupBoardVo.gb_content }</p>
-						<p><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a></p>
-					</div>
+						<p>
+							<a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a>
+							<a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a>
+						</p>
 				
-				</c:forEach>
+					</c:forEach>
+				</div>
+				
+				
 				<div class="col-md-3">
+				
+				<aside class="column dotcom__aside bottom-12">
 					<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
@@ -51,7 +58,7 @@
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-md-4">
+						<div>
 							<div class="card">
 								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" />
 								<div class="card-block">
@@ -68,7 +75,11 @@
 							</div>
 						</div>
 					</div>
+					</aside>
+					
 				</div>
+				
+				
 			</div>
 		</div>
 	</div>
