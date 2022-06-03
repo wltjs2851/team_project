@@ -5,7 +5,7 @@
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
 <div class="popular__product" style="padding: 3% 10%">
-	<a class="btn btn-warning" href="/group/addGroup" style="width: 110px; height:50px; padding: 1% 0">그룹 만들기</a><br><br>
+	<a class="btn btn-warning" href="/group/addGroupForm" style="width: 110px; height:50px; padding: 1% 0">그룹 만들기</a><br><br>
 	<div class="row">
 		<c:forEach items="${ groupList }" var="groupVo">
 		<div class="col-lg-3 col-md-6 col-sm-6" OnClick="location.href ='/group/groupForm'" style="cursor:pointer;">
