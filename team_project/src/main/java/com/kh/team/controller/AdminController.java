@@ -32,10 +32,10 @@ public class AdminController {
 	}
 	
 	// 운동칼로리 글 입력 양식 
-		@RequestMapping(value = "/insertKcalForm", method = RequestMethod.GET)
-		public String insertKcalForm() {
-			return "admin/kcalForm";
-		}
+	@RequestMapping(value = "/insertKcalForm", method = RequestMethod.GET)
+	public String insertKcalForm() {
+		return "admin/kcalForm";
+	}
 		
 	// 운동칼로리 글 쓰기 
 	@RequestMapping(value = "/insertKcal", method = RequestMethod.POST)
@@ -54,6 +54,31 @@ public class AdminController {
 		System.out.println("listKcal:" + listKcal);
 		model.addAttribute("listKcal", listKcal);
 		return "admin/kcal";// admin/kcal.jsp
+	}
+	
+	// 운동칼로리 글 조회
+	@RequestMapping(value = "/selectByKno", method = RequestMethod.GET)
+	public String selectByKno(int kno, Model model) {
+		System.out.println("AdminController, selectByKno, kno:" + kno);
+		KcalVo kcalVo = kcalService.selectByKno(kno);
+		model.addAttribute("kcalVo", kcalVo);
+		return "admin/kcalSelect";
+	}
+	
+	// 운동칼로리 글 수정
+	@RequestMapping(value = "/updateKcal", method = RequestMethod.POST)
+	public String updateKcal(KcalVo kcalVo, RedirectAttributes rttr) {
+		boolean result = kcalService.updateKcal(kcalVo);
+		rttr.addFlashAttribute("updateKcal_result", result);
+		return "redirect:/admin/selectByKno?kno=" + kcalVo.getKno();
+	}
+	
+	// 운동칼로리 글 삭제 
+	@RequestMapping(value = "/deleteKcal", method = RequestMethod.GET)
+	public String deleteKcal(int kno, RedirectAttributes rttr) {
+		boolean result = kcalService.deleteKcal(kno);
+		rttr.addFlashAttribute("deleteKcal_result", result);
+		return "redirect:/admin/listKcal";
 	}
 	
 	
@@ -78,6 +103,12 @@ public class AdminController {
 		List<RecommendVo> listRecommend = recommendService.listRecommend();
 		model.addAttribute("listRecommend", listRecommend);
 		return "admin/recommend";
+	}
+	
+	// 추천 운동 글 등록 양식
+	@RequestMapping(value = "insertRecommendForm", method = RequestMethod.GET)
+	public String insertRecommendForm() {
+		return "admin/recommendForm";
 	}
 	
 	

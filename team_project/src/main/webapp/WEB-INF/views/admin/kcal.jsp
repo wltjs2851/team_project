@@ -1,16 +1,40 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/header.jsp"%>
+<style>
+tr.tr_list{
+	cursor: pointer;
+}
+
+tr.tr_list:hover{
+	background-color: skyblue;
+}
+</style>
 <script>
 $(document).ready(function(){
 	var insertKcal_result = "${insertKcal_result}";
-	
+	var deleteKcal_result = "${deleteKcal_result}";
 	if(insertKcal_result == "true"){
 		alert("운동칼로리 추가 완료");
 	}
+	if(deleteKcal_result == "true"){
+		alert("운동칼로리 삭제 완료");
+	}
+	
+	// 운동 칼로리 제목 클릭 시 내용보기
+	$(".td_list").click(function(){
+		console.log("클릭 됨");
+		var kno = $(this).attr("data-kno");
+		location.href = "/admin/selectByKno?kno=" + kno;
+// 		e.preventDefault();
+// 		location.href = "/admin/selectByKno?kno=1";
+	});
 });
 </script>
 <%-- ${listKcal } --%>
+<form id="frmKcal">
+	<input type="hidden" name="kno" value="">
+</form>
 <div class="container-fluid">
 	<!-- 		칼로리사전 검색 -->
 	<div class="row">
@@ -39,9 +63,9 @@ $(document).ready(function(){
 				</thead>
 				<tbody>
 				<c:forEach items="${listKcal}" var="kcalVo">
-					<tr>
+					<tr class="tr_list">
 						<td>${kcalVo.kno}</td>
-						<td colspan="4">${kcalVo.k_name}</td>
+						<td colspan="4" data-kno="${kcalVo.kno}" class="td_list">${kcalVo.k_name}</td>
 						<td>${kcalVo.k_time}</td>
 						<td>${kcalVo.kcal}</td>
 						<td>${kcalVo.k_dgree}</td>
