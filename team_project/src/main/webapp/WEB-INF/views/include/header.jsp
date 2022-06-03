@@ -93,18 +93,18 @@
 						<c:choose>
 							<c:when test="${empty loginVo}">
 								<li class="nav-item">
-									<a class="nav-link btn-success" href="loginForm">로그인</a>
+									<a class="nav-link btn-success" href="/member/loginForm">로그인</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link btn-primary" href="joinForm"><i class="fa fa-plus-circle"></i> 회원가입</a>
+									<a class="nav-link btn-primary" href="/member/joinForm"><i class="fa fa-plus-circle"></i> 회원가입</a>
 								</li>
 							</c:when>
 							<c:otherwise>
 								<li class="nav-item">
-									<a class="nav-link btn-danger" href="logout">로그아웃</a>
+									<a class="nav-link btn-danger" href="/member/logout">로그아웃</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link btn-success" href="myPage">마이페이지</a>
+									<a class="nav-link btn-success" href="/member/myPage">마이페이지</a>
 								</li>
 							</c:otherwise>
 						</c:choose>

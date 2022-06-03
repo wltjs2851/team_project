@@ -4,7 +4,7 @@ import com.kh.team.vo.MemberVo;
 
 public interface MemberService {
 	
-	public void joinMember(MemberVo memberVo);
+	public boolean joinMember(MemberVo memberVo);
 	
 	public MemberVo login(String userid, String userpw);
 	

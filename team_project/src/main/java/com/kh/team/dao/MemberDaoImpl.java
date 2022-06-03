@@ -18,9 +18,12 @@ public class MemberDaoImpl implements MemberDao {
 	SqlSession sqlSession;
 	
 	@Override
-	public void joinMember(MemberVo memberVo) {
-		sqlSession.insert(NS + "joinMember", memberVo);
-		System.out.println("daoimp" + memberVo);
+	public boolean joinMember(MemberVo memberVo) {
+		int count = sqlSession.insert(NS + "joinMember", memberVo);
+		if (count > 0) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -34,11 +37,19 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public boolean updateMember(MemberVo memberVo) {
+		int count = sqlSession.update(NS + "updateMember", memberVo);
+		if (count > 0) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean deleteMember(String userid) {
+		int count = sqlSession.update(NS + "deleteMember", userid);
+		if (count > 0) {
+			return true;
+		}
 		return false;
 	}
 
