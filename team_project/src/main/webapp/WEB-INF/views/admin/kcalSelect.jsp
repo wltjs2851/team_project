@@ -7,7 +7,7 @@ $(document).ready(function(){
 	
 	var updateKcal_result = "${updateKcal_result}";
 	if (updateKcal_result == "true"){
-		alert ("운동 칼로리 사전 수정 성공")
+		alert ("운동 칼로리 사전 수정 성공");
 	}
 	
 	// 수정 버튼

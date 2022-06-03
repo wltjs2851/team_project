@@ -106,10 +106,32 @@ public class AdminController {
 	}
 	
 	// 추천 운동 글 등록 양식
-	@RequestMapping(value = "insertRecommendForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/insertRecommendForm", method = RequestMethod.GET)
 	public String insertRecommendForm() {
 		return "admin/recommendForm";
 	}
 	
+	// 추천 운동 글 조회
+	@RequestMapping(value = "/selectByReno", method = RequestMethod.GET)
+	public String selectByReno(int reno, Model model) {
+		RecommendVo recommendVo = recommendService.selectByReno(reno);
+		model.addAttribute("recommendVo", recommendVo);
+		return "admin/recommendSelect";
+	}
 	
+	// 추천 운동 글 수정
+	@RequestMapping(value = "/updateRecommend", method = RequestMethod.POST)
+	public String updateRecommend(RecommendVo recommendVo, RedirectAttributes rttr) {
+		boolean result = recommendService.updateRecommend(recommendVo);
+		rttr.addFlashAttribute("updateRecommend_result", result);
+		return "redirect:/admin/selectByReno?reno=" + recommendVo.getReno();
+	}
+	
+	// 추천 운동 글 삭제
+	@RequestMapping(value = "/deleteRecommend", method = RequestMethod.GET)
+	public String deleteRecommend(int reno, RedirectAttributes rttr) {
+		boolean result = recommendService.deleteRecommend(reno);
+		rttr.addFlashAttribute("deleteRecommend_result", result);
+		return "redirect:/admin/listRecommend";
+	}
 }
