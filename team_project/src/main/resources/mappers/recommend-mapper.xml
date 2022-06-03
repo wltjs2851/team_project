@@ -4,39 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kh.team.mappers.recommend">
-	<!-- 	운동 Kcal 사전 -->
+	<!-- 추천 운동 페이지 -->
 	<!-- 글 추가 -->
-	<insert id="insertKcal">
-		insert into tbl_kcal (kno, k_name, k_time, kcal, k_dgree)
-		values (seq_kcal_kno.nextval, #{k_name}, #{k_time}, #{kcal}, #{k_dgree})
+	<insert id="insertRecommend">
+		insert into tbl_recommend 
+				(reno, re_content, re_title)
+		values (seq_recommend_reno.nextval, #{re_content}, #{re_title})
 	</insert>
 	
 	<!-- 글 수정 -->
-	<update id="updateKcal">
-		update tbl_kcal set
-			k_name = #{k_name},
-			k_time = #{k_time},
-			kcal = #{kcal},
-			k_dgree = #{k_dgree}
-		where kno = #{kno}
+	<update id="updateRecommend">
+		update tbl_recommend set
+			re_content = #{re_content},
+			re_title = #{re_title}
+		where reno = #{reno}
 	</update>
 	
 	<!-- 글 삭제 -->
-	<delete id="deleteKcal">
-		delete from tbl_kcal
-		where kno = #{kno}
+	<delete id="deleteRecommend">
+		delete from tbl_recommend
+		where reno = #{reno}
 	</delete>
 	
 	<!-- 글 상세조회 -->
-	<select id="selectByKno" resultType="KcalVo">
-		select * from tbl_kcal
-		where kno = #{kno}
+	<select id="selectByReno" resultType="RecommendVo">
+		select * from tbl_recommend
+		where reno = #{reno}
 	</select>
 	
 	<!-- 글 목록조회 -->
-	<select id="listKcal" resultType="KcalVo">
-		select * from tbl_kcal
-		order by kno desc
+	<select id="listRecommend" resultType="RecommendVo">
+		select * from tbl_recommend
+		order by reno desc
 	</select>
 	
 	

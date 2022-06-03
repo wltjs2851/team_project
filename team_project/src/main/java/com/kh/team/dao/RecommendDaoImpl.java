@@ -18,32 +18,41 @@ public class RecommendDaoImpl implements RecommendDao{
 	
 	@Override
 	public boolean insertRecommend(RecommendVo recommendVo) {
-		
+		int count = sqlSession.insert(NAMESPACE + "insertRecommend", recommendVo);
+		if (count > 0) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean updateRecommend(RecommendVo recommendVo) {
-		
+		int count = sqlSession.update(NAMESPACE + "updateRecommend", recommendVo);
+		if (count > 0) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean deleteRecommend(int reno) {
-		
+		int count = sqlSession.delete(NAMESPACE + "deleteRecommend", reno);
+		if (count > 0) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
-	public RecommendVo selectByKno(int reno) {
-		
-		return null;
+	public RecommendVo selectByReno(int reno) {
+		RecommendVo recommendVo = sqlSession.selectOne(NAMESPACE + "selectByReno", reno);
+		return recommendVo;
 	}
 
 	@Override
 	public List<RecommendVo> listRecommend() {
-		
-		return null;
+		List<RecommendVo> listRecommend = sqlSession.selectList(NAMESPACE + "listRecommend");
+		return listRecommend;
 	}
 	
 }
