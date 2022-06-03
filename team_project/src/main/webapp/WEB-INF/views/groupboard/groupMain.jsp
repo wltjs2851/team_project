@@ -70,7 +70,7 @@
 									</p>
 									<p>
 										<a class="btn btn-primary" href="#">쪽지보내기</a>
-									</p>
+									</p> 
 								</div>
 							</div>
 						</div>
