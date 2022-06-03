@@ -10,65 +10,62 @@
 		}
 	});
 </script>
-${listRecommend}
+<%-- ${listRecommend} --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-md-4"> -->
-					<div class="card">
-						<img class="card-img-top" alt="Bootstrap Thumbnail First"
-							src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg"
-							style="width: 214px; height: 119px;" />
-<!-- 						<div class="card-block"> -->
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">Cras justo odio, dapibus ac facilisis
-								in, egestas eget quam. Donec id elit non mi porta gravida at
-								eget metus. Nullam id dolor id nibh ultricies vehicula ut id
-								elit.</p>
-							<p>
-								<a class="btn btn-primary" href="#">Action</a> <a class="btn"
-									href="#">Action</a>
-							</p>
-<!-- 						</div> -->
-					</div>
-				</div>
-<!-- 				<div class="col-md-4"> -->
-<!-- 					<div class="card"> -->
-<!-- 						<img class="card-img-top" alt="Bootstrap Thumbnail Second" -->
-<!-- 							src="https://www.layoutit.com/img/city-q-c-600-200-1.jpg" /> -->
-<!-- 						<div class="card-block"> -->
-<!-- 							<h5 class="card-title">Card title</h5> -->
-<!-- 							<p class="card-text">Cras justo odio, dapibus ac facilisis -->
-<!-- 								in, egestas eget quam. Donec id elit non mi porta gravida at -->
-<!-- 								eget metus. Nullam id dolor id nibh ultricies vehicula ut id -->
-<!-- 								elit.</p> -->
-<!-- 							<p> -->
-<!-- 								<a class="btn btn-primary" href="#">Action</a> <a class="btn" -->
-<!-- 									href="#">Action</a> -->
-<!-- 							</p> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-md-4"> -->
-<!-- 					<div class="card"> -->
-<!-- 						<img class="card-img-top" alt="Bootstrap Thumbnail Third" -->
-<!-- 							src="https://www.layoutit.com/img/sports-q-c-600-200-1.jpg" /> -->
-<!-- 						<div class="card-block"> -->
-<!-- 							<h5 class="card-title">Card title</h5> -->
-<!-- 							<p class="card-text">Cras justo odio, dapibus ac facilisis -->
-<!-- 								in, egestas eget quam. Donec id elit non mi porta gravida at -->
-<!-- 								eget metus. Nullam id dolor id nibh ultricies vehicula ut id -->
-<!-- 								elit.</p> -->
-<!-- 							<p> -->
-<!-- 								<a class="btn btn-primary" href="#">Action</a> <a class="btn" -->
-<!-- 									href="#">Action</a> -->
-<!-- 							</p> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<div>
+			<h3 class="widget-header" style="display: inline-block;">추천 운동법</h3>
+			<a class="btn btn-primary btn-sm" href="/admin/insertRecommendForm" 
+				style="float: right; width: 110px; height:50px; padding: 1% 0">글 쓰기</a>
+			</div>
+			<table class="table table-responsive product-dashboard-table">
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th>Image</th> -->
+<!-- 						<th>Product Title</th> -->
+<!-- 						<th class="text-center">Category</th> -->
+<!-- 						<th class="text-center">Action</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+				<tbody>
+				<c:forEach items="${listRecommend }" var="ReVo">
+					<tr>
+						<td class="product-thumb">
+							<img width="80px" height="auto"
+							src="/resources/images/exercise.png" alt="운동이미지">
+						</td>
+						<td class="product-details">
+							<h3 class="title">${ReVo.re_title}</h3> 
+							<span>${ReVo.re_content}</span>
+						</td>
+						<td class="action" data-title="Action">
+							<div class="">
+								<ul class="list-inline justify-content-center">
+									<li class="list-inline-item">
+										<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view"
+											href=""> 
+											<i class="fa fa-eye"></i> </a>
+									</li>
+									<li class="list-inline-item">
+										<a class="edit" href="">
+											<i class="fa fa-pencil"></i>
+										</a>
+									</li>
+									<li class="list-inline-item">
+										<a class="delete" href="">
+											<i class="fa fa-trash"></i>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+
 		</div>
 		<div class="col-md-2"></div>
 	</div>
