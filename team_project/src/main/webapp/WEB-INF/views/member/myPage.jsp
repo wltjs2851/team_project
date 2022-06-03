@@ -28,6 +28,9 @@
 			<li class="nav-item">
 				<a class="nav-link" href="#">나의 일정</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="deleteForm">회원탈퇴</a>
+			</li>
 		</ul>
 	</div>
 	<div class="col-md-8">
