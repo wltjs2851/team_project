@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.kh.team.mappers.groupcomment">
+ 
+ <!-- 댓글 등록 -->
+ <insert id="insertGroupComment">
+ 	insert into tbl_group_board_comment(gbcno, gbc_content, gbno, userid)
+ 	values(seq_group_board_comment_gbcno.nextval, #{gbc_content}, #{gbno},
+ 		   #{userid, jdbcType=VARCHAR})
+ </insert>
+ 
+ <!-- 댓글 목록 -->
+ <select id="groupCommentList" resultType="GroupBoardCommentVo">
+ 	select * from tbl_group_board_comment
+ 	where gbno = #{gbno}
+ 	order by gbcno desc
+ </select>
+ 
+ <!-- 댓글 수정 -->
+ <update id="updateGroupComment">
+ 	update tbl_group_board_comment set
+ 		gbc_content = #{gbc_content}
+ 	where gbcno = #{gbcno}
+ </update>
+ 
+ <!-- 댓글 삭제 -->
+ <delete id="deleteGroupComment">
+ 	delete from tbl_group_board_comment
+ 	where gbcno = #{gbcno}
+ </delete>
+ 
+ </mapper>

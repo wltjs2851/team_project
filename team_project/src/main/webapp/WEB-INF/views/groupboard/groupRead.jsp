@@ -3,8 +3,54 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
+<script>
+$(function() {
+	$("#btnCommentInsert").click(function() {
+		console.log("click");
+		var gbc_content = $("#c_content").val();
+		var userid = $("#c_userid").val();
+		var gbno = "${groupBoardVo.gbno}";
+		var sData = {
+				"gbc_content" : gbc_content,
+				"userid" : userid,
+				"gbno" : gbno
+		}
+		console.log("sData: ", sData);
+		
+		var url = "/groupcomment/insertGroupComment";
+		$.post(url, sData, function(rData) {
+			console.log(rData); // 여기까지는 확실히 잘 됐었음,,,,
+			if(rData == "true") {
+				getCommentList();
+			}
+		});
+	});
+	
+	function getCommentList() {
+		var gbno = "${groupBoardVo.gbno}";
+		var url = "/groupComment/groupCommentList/" + gbno;
+		$.get(url, function(rData) {
+			console.log(rData); 
+// 			$("#table_comment_list tr:gt(0)").remove();
+			
+// 			$.each(rData, function() {
+// 				var tr = ${"#table_clone tr"}.clone();
+// 				var tds = tr.find("td");
+				
+// 				tds.eq(0).text(this.gbcno);
+// 				tds.eq(1).text(this.gbc_content);
+// 				tds.eq(2).text(this.userid);
+// 				tds.eq(3).text(this.regdate);
+// 				tds.find(".btnCommentDelete").attr("data-gbcno", this.gbcno);
+// 				tds.find(".btnCommentModify").attr("data-gbcno", this.gbcno);
+				
+// 				$("#table_comment_list").append(tr);
+// 			});
+// 		});
+// 	}
+});
+</script>
 
-groupRead
 <%-- ${ groupBoardVo } --%>
 <div class="container-fluid">
 	<div class="row">
@@ -15,12 +61,17 @@ groupRead
 						${ groupBoardVo.gb_title }
 					</h2>
 					<p>
-						${ groupBoardVo.gb_content }
+						작성자: ${ groupBoardVo.userid }, 작성일: ${ groupBoardVo.gb_regdate }
 					</p>
-					<img alt="사진 있으면 보이게 없으면 안보이게" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+					<div>
+						${ groupBoardVo.gb_content }
+					</div>
+					<div><img alt="사진 있으면 보이게 없으면 안보이게" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /></div>
 				
 				
 				<!-- 좋아요 -->
+				<i class="fas fa-heart" style="margin: 30px; font-size: 30px; color: graytext; cursor: pointer;" data-gbno="${ groupBoardVo.gbno }"></i>
+				<span style="font-size: 30px;">${ boardVo.like_count }</span>
 				
 				<!-- 댓글 -->
 				<div class="row">
@@ -29,6 +80,37 @@ groupRead
 					</div>
 					<div>
 						<button type="button" id="btnCommentInsert" class="btn btn-sm btn-primary">완료</button>
+					</div>
+				</div>
+				
+				<div class="row" style="margin-top:30px;">
+					<div class="col-md-12">
+						<table style="display:none;" id="table_clone">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>
+									<button type="button"
+										class="btn btn-sm btn-warning btnCommentModify">수정</button>
+								</td>
+								<td>
+									<button type="button"
+										class="btn btn-sm btn-danger btnCommentDelete">삭제</button>
+								</td>
+							</tr>
+						</table>
+						<table class="table" id="table_comment_list">
+							<tr>
+								<td>#</td>
+								<td>내용</td>
+								<td>작성자</td>
+								<td>날짜</td>
+								<td>수정</td>
+								<td>삭제</td>
+							</tr>
+						</table>
 					</div>
 				</div>
 				

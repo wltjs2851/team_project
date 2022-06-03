@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.team.group.GroupBoardService;
+import com.kh.team.service.GroupBoardService;
 import com.kh.team.vo.GroupBoardVo;
 
 @Controller
