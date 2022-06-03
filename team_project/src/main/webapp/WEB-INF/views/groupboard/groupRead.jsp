@@ -3,54 +3,37 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-<script>
-$(function() {
-	var create_result = "${create_result}";
-	if(create_result == "true") {
-		alert("작성 완료");
-	}
-	
-	var update_result = "${update_result}";
-	if(update_result == "true") {
-		alert("수정 완료");
-	}
-	
-	var delete_result = "${delete_result}";
-	if(delete_result == "true") {
-		alert("삭제 완료");
-	}
-});
-</script>
 
-<%-- ${ groupList } --%>
+groupRead
+<%-- ${ groupBoardVo } --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-9">
-					<c:forEach items="${ groupList }" var="groupBoardVo">
+					<h2>
+						${ groupBoardVo.gb_title }
+					</h2>
+					<p>
+						${ groupBoardVo.gb_content }
+					</p>
+					<img alt="사진 있으면 보이게 없으면 안보이게" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
 				
-						<h2 style="background-color: aliceblue">${groupBoardVo.gbno}. 제목: ${ groupBoardVo.gb_title }		
-										<button class="btn dropdown-toggle" style="background-color: aliceblue" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-											...
-										</button>
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-											 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a>
-											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a>
-											 <a class="dropdown-item" href="#">회원 정보 보기</a>
-										</div></h2>
-						<p>작성자: ${groupBoardVo.userid}, 작성일: ${ groupBoardVo.gb_regdate }</p>
-						<p>${ groupBoardVo.gb_content }</p>
-						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">...더 보기</a>
-						<p>
-<%-- 							<a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a> --%>
-<%-- 							<a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a> --%>
-						</p>
 				
-					</c:forEach>
+				<!-- 좋아요 -->
+				
+				<!-- 댓글 -->
+				<div class="row">
+					<div class="col-md-9">
+						<input type="text" id="c_content" class="form-control" placeholder="댓글을 입력해주세요">
+					</div>
+					<div>
+						<button type="button" id="btnCommentInsert" class="btn btn-sm btn-primary">완료</button>
+					</div>
 				</div>
 				
 				
+				</div>
 				<div class="col-md-3">
 				
 				<aside class="column dotcom__aside bottom-12">
@@ -103,10 +86,8 @@ $(function() {
 						</div>
 					</div>
 					</aside>
-					
+				
 				</div>
-				
-				
 			</div>
 		</div>
 	</div>
