@@ -1,6 +1,8 @@
 package com.kh.team.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,30 @@ public class GroupDaoImpl implements GroupDao{
 	public GroupVo groupByGno(int gno) {
 		GroupVo groupVo = sqlSession.selectOne(NAMESPACE + "groupByGno", gno);
 		return groupVo;
+	}
+
+	@Override
+	public boolean updateMemberGno(int gno, String userid) {
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("gno", gno);
+		parameter.put("userid", userid);
+		int count = sqlSession.update(NAMESPACE + "updateMemberGno", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateGroupMember(GroupVo groupVo, String userid) {
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("groupVo", groupVo);
+		parameter.put("userid", userid);
+		int count = sqlSession.update(NAMESPACE + "updateGroupMember", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
 	}
 
 }

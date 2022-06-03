@@ -21,6 +21,16 @@
 				g_intro = #{g_intro}, g_location = #{g_location}, g_pic = #{g_pic, jdbcType=VARCHAR}, users = #{users}
 			where gno = #{gno}
 	</update>
+	
+	<update id="updateMemberGno">
+		update tbl_user set gno = #{gno}
+			where userid = #{userid}
+	</update>
+	
+	<update id="updateGroupMember">
+		update tbl_group set g_present = #{g_present} + 1, users = concat(#{users}, userid)
+			where gno = #{gno}
+	</update>
 
 	
 	<delete id="deleteGroup">

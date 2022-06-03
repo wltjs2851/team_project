@@ -17,19 +17,29 @@ $(function() {
 		$("#btnModifyRun").show();
 	});
 
-	$('#file').change(function(){
-	    setImageFromFile(this, '#groupImage');
+	$("#file").change(function(){
+	    setImageFromFile(this, "#groupImage");
 	});
 	
 	function setImageFromFile(input, expression) {
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
-	            $(expression).attr('src', e.target.result);
+	            $(expression).attr("src", e.target.result);
 	        }
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
+	
+// 	$("#btnModifyRun").click(function(e) {
+// 		e.preventDefault();
+// 		var file = $("#file").val();
+// 		if(file == "") {
+// 			file = $("#groupImage").attr("data-image");
+// 			console.log(file);
+// 		}
+// 		$("#frmModify").submit();
+// 	});
 });
 </script>
 
@@ -38,7 +48,8 @@ $(function() {
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
-			<form role="form" action="/group/addGroupRun" method="post" enctype="multipart/form-data">
+			<form role="form" action="/group/modifyGroupRun" method="post" enctype="multipart/form-data" id="frmModify">
+			<input type="hidden" name="gno" value="${ groupVo.gno }">
 				<div class="form-group">
 					<label for="g_location">
 						지역 &nbsp;
@@ -97,21 +108,21 @@ $(function() {
 					</p>
 					<c:choose>
 						<c:when test="${ empty groupVo.g_pic }">
-							<img id="groupImage" src="/resources/images/board/groupDefault.png"
-								class="img-thumbnail" alt="group image" style="height: 100px">
+							<img id="groupImage" src="/resources/images/board/groupDefault.png" data-image=""
+								class="img-thumbnail" alt="group image" style="height: 100px" name="groupImage">
 						</c:when>
 						<c:otherwise>
-							<img id="groupImage" src="/group/displayImage?filename=${ groupVo.g_pic }"
-								class="img-thumbnail" alt="group image" style="width: 100px;">
+							<img id="groupImage" src="/group/displayImage?filename=${ groupVo.g_pic }" data-image="${ groupVo.g_pic }"
+								class="img-thumbnail" alt="group image" style="width: 100px;" name="groupImage">
 						</c:otherwise>
 					</c:choose>
 					<br>
 					<br>
 				</div>
 				
-				<a class="btn btn-primary" id="btnJoin">가입</a>
+				<a href="/group/joinGroup?g_present=${ groupVo.g_present }&g_users=${ groupVo.users }&gno=${ groupVo.gno }" class="btn btn-primary" id="btnJoin">가입</a>
 				<button type="button" class="btn btn-warning" id="btnModify">수정</button>
-				<button type="button" class="btn btn-success" id="btnModifyRun" style="display: none">수정완료</button>
+				<button type="submit" class="btn btn-success" id="btnModifyRun" style="display: none">수정완료</button>
 				<br>
 				<br>
 			</form>

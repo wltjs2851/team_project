@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.dao.GroupDao;
 import com.kh.team.vo.GroupVo;
@@ -26,13 +27,23 @@ public class GroupServiceImpl implements GroupService{
 
 	@Override
 	public boolean moidfyGroup(GroupVo groupVo) {
-		// TODO Auto-generated method stub
-		return false;
+		return groupDao.updateGroup(groupVo);
 	}
 
 	@Override
 	public GroupVo groupByGno(int gno) {
 		return groupDao.groupByGno(gno);
+	}
+
+	@Override
+	@Transactional
+	public boolean joinGroup(GroupVo groupVo, String userid) {
+		boolean groupResult = groupDao.updateGroupMember(groupVo, userid);
+		boolean memberResult = groupDao.updateMemberGno(groupVo.getGno(), userid);
+		if(groupResult && memberResult) {
+			return true;
+		}
+		return false;
 	}
 
 }
