@@ -28,13 +28,14 @@ $(function() {
 			$("#frmLogin").submit();
 		}
 		
-		var joinResult = "${joinResult}";
-		if (joinResult == "true") {
-			alert("가입 성공!\n가입한 아이디로 로그인 해주세요");
-		} else if (joinResult == "false") {
-			alert("알수없는 오류");
-		}
 	});
+	var joinResult = "${joinResult}";
+	console.log(joinResult);
+	if (joinResult == "true") {
+		alert("가입 성공!\n가입한 아이디로 로그인 해주세요");
+	} else if (joinResult == "false") {
+		alert("알수없는 오류");
+	}
 });
 </script>
 <hr>

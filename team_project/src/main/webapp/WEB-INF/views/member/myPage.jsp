@@ -4,6 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@include file="/WEB-INF/views/include/header.jsp" %>
+<script>
+	var modifyResult = "${modifyResult}";
+	if (modifyResult == "true") {
+		alert("회원정보 수정 완료");
+	}
+</script>
 <div class="row">
 	<div class="col-md-2">
 		<ul class="nav flex-column nav-pills">
@@ -33,12 +39,12 @@
 							<img src="" class="rounded-circle z-depth-2" alt="User Image">
 						</c:when>
 						<c:otherwise>
-							<img src="/member/displayImage?filename=${loginVo.u_pic}" class="rounded-circle z-depth-2" alt="User Image">
+							<img height="100px" width="100px" src="/member/displayImage?filename=${loginVo.u_pic}" class="rounded-circle z-depth-2" alt="User Image">
 						</c:otherwise>
 					</c:choose>
 				</div>
 				<div class="info">
-					<span style="font-size: 50px; align-content: center;">${loginVo.nickname}(${loginVo.userid})</span>
+					<span style="font-size: 35px; align-content: center;">${loginVo.nickname}(${loginVo.userid})</span>
 				</div>
 			</div>
 		</c:if>

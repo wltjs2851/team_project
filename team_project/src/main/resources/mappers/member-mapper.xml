@@ -18,7 +18,7 @@
 	
 	<update id="updateMember">
 		update tbl_user set
-			userpw = #{userpw},
+			userpw = #{userpw, jdbcType=VARCHAR},
 			username = #{username},
 			email = #{email},
 			nickname = #{nickname},

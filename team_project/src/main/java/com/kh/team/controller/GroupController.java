@@ -1,5 +1,6 @@
 package com.kh.team.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.multipart.MultipartFile;
 import com.kh.team.service.GroupService;
+import com.kh.team.util.FileUtil;
 import com.kh.team.vo.GroupVo;
 
 @Controller
@@ -25,9 +27,28 @@ public class GroupController {
 		return "board/list";
 	}
 	
-	@RequestMapping(value = "/addGroup", method = RequestMethod.GET)
-	public String addGroup(Model model) {
+	@RequestMapping(value = "/addGroupForm", method = RequestMethod.GET)
+	public String addGroupForm() {
 		return "board/addGroup";
+	}
+	
+	@RequestMapping(value = "/addGroupRun", method = RequestMethod.POST)
+	public String addGroupRun(GroupVo groupVo, MultipartFile file) {
+//		System.out.println("GroupController, addGroupRun, groupVo: " + groupVo);
+//		System.out.println("GroupController, addGroupRun, file: " + file);
+		String origianlFilename = file.getOriginalFilename();
+		long size = file.getSize();
+		System.out.println("name: " + origianlFilename + " size: " + size);
+		try {
+			String g_pic = FileUtil.uploadFile("C:/gpic", origianlFilename, file.getBytes());
+			groupVo.setG_pic(g_pic);
+			System.out.println("GroupController, addGroupRun, groupVo: " + groupVo);
+			groupService.addGroup(groupVo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/group/list";
 	}
 	
 	@RequestMapping(value = "/groupForm", method = RequestMethod.GET)
