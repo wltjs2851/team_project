@@ -28,30 +28,30 @@ $(function() {
 	
 	function getCommentList() {
 		var gbno = "${groupBoardVo.gbno}";
-		var url = "/groupComment/groupCommentList/" + gbno;
+		var url = "/groupcomment/groupCommentList/" + gbno;
 		$.get(url, function(rData) {
 			console.log(rData); 
-// 			$("#table_comment_list tr:gt(0)").remove();
+			$("#table_comment_list tr:gt(0)").remove();
 			
-// 			$.each(rData, function() {
-// 				var tr = ${"#table_clone tr"}.clone();
-// 				var tds = tr.find("td");
+			$.each(rData, function() {
+				var tr = $("#table_clone tr").clone();
+				var tds = tr.find("td");
 				
-// 				tds.eq(0).text(this.gbcno);
-// 				tds.eq(1).text(this.gbc_content);
-// 				tds.eq(2).text(this.userid);
-// 				tds.eq(3).text(this.regdate);
-// 				tds.find(".btnCommentDelete").attr("data-gbcno", this.gbcno);
-// 				tds.find(".btnCommentModify").attr("data-gbcno", this.gbcno);
+				tds.eq(0).text(this.gbcno);
+				tds.eq(1).text(this.gbc_content);
+				tds.eq(2).text(this.userid);
+				tds.eq(3).text(this.regdate);
+				tds.find(".btnCommentDelete").attr("data-gbcno", this.gbcno);
+				tds.find(".btnCommentModify").attr("data-gbcno", this.gbcno);
 				
-// 				$("#table_comment_list").append(tr);
-// 			});
-// 		});
-// 	}
+				$("#table_comment_list").append(tr);
+			});
+		});
+	}
 });
 </script>
 
-<%-- ${ groupBoardVo } --%>
+${ groupBoardVo }
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -66,10 +66,13 @@ $(function() {
 					<div>
 						${ groupBoardVo.gb_content }
 					</div>
-					<div><img alt="사진 있으면 보이게 없으면 안보이게" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /></div>
+<%-- 					<c:if test={not empty groupBoardVo.gb_pic}> --%>
+<!-- 						<div><img alt="사진 있으면 보이게 없으면 안보이게" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /></div> -->
+						
+<%-- 					</c:if> --%>
 				
 				
-				<!-- 좋아요 -->
+				<!-- 좋아요 --> 
 				<i class="fas fa-heart" style="margin: 30px; font-size: 30px; color: graytext; cursor: pointer;" data-gbno="${ groupBoardVo.gbno }"></i>
 				<span style="font-size: 30px;">${ boardVo.like_count }</span>
 				
@@ -96,7 +99,7 @@ $(function() {
 										class="btn btn-sm btn-warning btnCommentModify">수정</button>
 								</td>
 								<td>
-									<button type="button"
+									<button type="button" 
 										class="btn btn-sm btn-danger btnCommentDelete">삭제</button>
 								</td>
 							</tr>
