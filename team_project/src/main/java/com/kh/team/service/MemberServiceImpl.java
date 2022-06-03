@@ -13,9 +13,10 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao memberDao;
 	
 	@Override
-	public void joinMember(MemberVo memberVo) {
-		memberDao.joinMember(memberVo);
+	public boolean joinMember(MemberVo memberVo) {
+		boolean result = memberDao.joinMember(memberVo);
 		System.out.println("service" + memberVo);
+		return result;
 	}
 
 	@Override
@@ -26,12 +27,14 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean updateMember(MemberVo memberVo) {
-		return false;
+		boolean result = memberDao.updateMember(memberVo);
+		return result;
 	}
 
 	@Override
 	public boolean deleteMember(String userid) {
-		return false;
+		boolean result = memberDao.deleteMember(userid);
+		return result;
 	}
 
 }

@@ -25,7 +25,28 @@
 		</ul>
 	</div>
 	<div class="col-md-8">
+		<c:if test="${not empty loginVo}">
+			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+				<div class="image">
+					<c:choose>
+						<c:when test="${empty loginVo.u_pic}">
+							<img src="" class="rounded-circle z-depth-2" alt="User Image">
+						</c:when>
+						<c:otherwise>
+							<img src="/member/displayImage?filename=${loginVo.u_pic}" class="rounded-circle z-depth-2" alt="User Image">
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<div class="info">
+					<span style="font-size: 50px; align-content: center;">${loginVo.nickname}(${loginVo.userid})</span>
+				</div>
+			</div>
+		</c:if>
 		<table class="table">
+			<tr>
+				<th>이름</th>
+				<td>${loginVo.username}</td>
+			</tr>
 			<tr>
 				<th>성별</th>
 				<td>

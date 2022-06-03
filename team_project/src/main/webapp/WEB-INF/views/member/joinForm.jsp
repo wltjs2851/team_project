@@ -10,7 +10,7 @@
 		<span style="color: gray;">회원가입은 무료이며, 가입하시면 ???에서 제공하는 다양한 서비스를 이용하실 수 있습니다.</span>
 		<br><br>
 		<hr style="background-color: red;">
-			<form role="form" action="joinRun" method="post" id="frmJoin" enctype="multipart/form-data">
+			<form role="form" action="/member/joinRun" method="post" id="frmJoin" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="userid">아이디</label>
 					<input type="text" class="form-control" id="userid" name="userid"/>
