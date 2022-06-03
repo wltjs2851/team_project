@@ -78,7 +78,7 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/member/loginForm";
+		return "redirect:/member/loginForm";
 	}
 	
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
@@ -106,16 +106,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/modifyRun", method = RequestMethod.POST)
-	public String modifyRun(MemberVo memberVo, MultipartFile file) {
-		String originalFilename = file.getOriginalFilename();
-		try {
-			String u_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
-			memberVo.setU_pic(u_pic);
-			System.out.println(memberVo);
-			memberService.updateMember(memberVo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "/member/myPage";
+	public String modifyRun(MemberVo memberVo, MultipartFile file, RedirectAttributes rttr) {
+		return "redirect:/member/myPage";
 	}
 }
