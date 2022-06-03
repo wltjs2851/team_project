@@ -70,7 +70,7 @@
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
 									<a class="dropdown-item" href="/admin/listKcal">운동 칼로리</a>
-									<a class="dropdown-item" href="#">추천 운동</a>
+									<a class="dropdown-item" href="/admin/listRecommend ">추천 운동</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">

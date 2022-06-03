@@ -24,4 +24,14 @@ public class GroupController {
 		model.addAttribute("groupList", list);
 		return "board/list";
 	}
+	
+	@RequestMapping(value = "/addGroup", method = RequestMethod.GET)
+	public String addGroup(Model model) {
+		return "board/addGroup";
+	}
+	
+	@RequestMapping(value = "/groupForm", method = RequestMethod.GET)
+	public String readGroupForm(Model model) {
+		return "board/groupForm";
+	}
 }
