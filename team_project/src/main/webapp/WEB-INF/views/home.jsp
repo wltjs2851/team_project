@@ -1,6 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/header.jsp" %>
+<script>
+$(function() {
+	var loginResult = "${loginResult}";
+	if (loginResult == "true") {
+		alert("${loginVo.nickname}(${loginVo.userid})님 환영합니다.");
+	} 
+});
+</script>
 <section class="hero-area bg-1 text-center overly">
 	<!-- Container Start -->
 	<div class="container">
