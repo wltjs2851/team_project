@@ -43,10 +43,19 @@ $(document).ready(function() {
 				<tbody>
 				<c:forEach items="${listRecommend }" var="ReVo">
 					<tr class="tr_list" data-reno="${ReVo.reno}">
-						<td class="td_list">
-							<img width="80px" height="auto"
-							src="/resources/images/exercise.png" alt="운동이미지">
-						</td>
+							<td class="td_list">
+							<c:choose>
+								<c:when test="${empty ReVo.re_pic}">
+<!-- 									이미지 등록 안했을 때 기본 이미지 -->
+									<img width="80px" height="auto"
+									src="/resources/images/exercise.png" alt="운동이미지">
+								</c:when>
+								<c:otherwise>
+									<img width="80px" height="auto"
+									src="/member/displayImage?filename=${ReVo.re_pic}" alt="운동이미지">
+								</c:otherwise>
+							</c:choose>
+							</td>
 						<td class="product-details">
 							<h3 class="title">${ReVo.re_title}</h3> 
 							<span>${ReVo.re_content}</span>

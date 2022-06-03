@@ -1,15 +1,21 @@
 package com.kh.team.controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.GroupBoardService;
+import com.kh.team.util.FileUtil;
 import com.kh.team.vo.GroupBoardVo;
 
 @Controller
@@ -26,11 +32,24 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupWriteRun", method = RequestMethod.POST)
-	public String createRun(GroupBoardVo groupVo, RedirectAttributes rttr) {
-		System.out.println("groupBoardController, writeRun, groupVo: " + groupVo);
-		boolean result = groupBoardService.create(groupVo);
+	public String createRun(GroupBoardVo groupBoardVo, RedirectAttributes rttr, MultipartFile file){
+		System.out.println("groupBoardController, groupWriteRun, file:" + file);
+		String originalFilename = file.getOriginalFilename(); // 이게 왜 널이지,,,?
+		System.out.println("originalFilename: " + originalFilename);
+		long size = file.getSize();
+		System.out.println("size: " + size);
+		try {
+		String gb_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
+		groupBoardVo.setGb_pic(gb_pic);
+		
+		System.out.println("groupBoardController, writeRun, groupBoardVo: " + groupBoardVo);
+		boolean result = groupBoardService.create(groupBoardVo);
+		
 		System.out.println("groupBoardController, writeRun, result: " + result);
 		rttr.addFlashAttribute("create_result", result);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		return "redirect:/groupboard/groupMain";
 	}
@@ -80,4 +99,13 @@ public class GroupBoardController {
 //		
 //		return "groupboard/forGroupHead";
 //	}
+	
+	@RequestMapping(value = "displayImage", method = RequestMethod.GET)
+	@ResponseBody
+	public byte[] displayImage(String filename) throws Exception {
+		FileInputStream fis = new FileInputStream(filename);
+		byte[] data = IOUtils.toByteArray(fis);
+		fis.close();
+		return data;
+	}
 }

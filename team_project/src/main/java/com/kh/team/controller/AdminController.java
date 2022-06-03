@@ -1,5 +1,6 @@
 package com.kh.team.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.KcalService;
 import com.kh.team.service.RecommendService;
+import com.kh.team.util.FileUtil;
 import com.kh.team.vo.KcalVo;
 import com.kh.team.vo.RecommendVo;
 
@@ -40,10 +43,11 @@ public class AdminController {
 	// 운동칼로리 글 쓰기 
 	@RequestMapping(value = "/insertKcal", method = RequestMethod.POST)
 	public String insertKcal(KcalVo kcalVo, RedirectAttributes rttr) {
-		System.out.println("AdminController, insertKcal, KcalVo:" + kcalVo);
+		
 		boolean result = kcalService.insertKcal(kcalVo);
-		System.out.println("AdminController, insertKcal, result:" + result);
 		rttr.addFlashAttribute("insertKcal_result", result);
+		
+		
 		return "redirect:/admin/listKcal"; 
 	}
 	
@@ -91,9 +95,19 @@ public class AdminController {
 	
 	// 추천 운동 글쓰기 
 	@RequestMapping(value = "/insertRecommend", method = RequestMethod.POST)
-	public String insertRecommend(RecommendVo recommendVo, RedirectAttributes rttr) {
-		boolean result = recommendService.insertRecommend(recommendVo);
-		rttr.addFlashAttribute("insertRecommend_result", result);
+	public String insertRecommend(RecommendVo recommendVo, MultipartFile recoFile, RedirectAttributes rttr) {
+		String originalFilename = recoFile.getOriginalFilename();
+		try {
+			String re_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, recoFile.getBytes());
+			recommendVo.setRe_pic(re_pic);
+			System.out.println("recommendVo, re_pic:" + recommendVo);
+			
+			boolean result = recommendService.insertRecommend(recommendVo);
+			rttr.addFlashAttribute("insertRecommend_result", result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		return "redirect:/admin/listRecommend";
 	}
 	

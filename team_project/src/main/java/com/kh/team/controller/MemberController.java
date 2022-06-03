@@ -34,7 +34,6 @@ public class MemberController {
 	@RequestMapping(value = "/loginRun", method = RequestMethod.POST)
 	public String loginRun(String userid, String userpw, String saveid, HttpSession session, RedirectAttributes rttr, HttpServletResponse response) {
 		MemberVo memberVo = memberService.login(userid, userpw);
-		System.out.println(saveid);
 		if (memberVo != null) {
 			session.setAttribute("loginVo", memberVo);
 //			로그인했을때 아이디저장에 체크하였다면 아이디값을 쿠키에 저장
@@ -53,6 +52,7 @@ public class MemberController {
 			rttr.addFlashAttribute("loginResult", "true");
 		} else {
 			rttr.addFlashAttribute("loginResult", "false");
+			return "redirect:/member/loginForm";
 		}
 		return "redirect:/";
 	}
@@ -74,7 +74,6 @@ public class MemberController {
 		try {
 			String u_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
 			memberVo.setU_pic(u_pic);
-			System.out.println(memberVo);
 			boolean result = memberService.joinMember(memberVo);
 			rttr.addFlashAttribute("joinResult", result);
 		} catch (Exception e) {
@@ -107,23 +106,18 @@ public class MemberController {
 		return "/member/modifyForm";
 	}
 	
-	@SuppressWarnings("null")
 	@RequestMapping(value = "/modifyRun", method = RequestMethod.POST)
 	public String modifyRun(MemberVo memberVo, MultipartFile file, RedirectAttributes rttr, HttpSession session) {
 		String originalFilename = file.getOriginalFilename();
-		System.out.println(originalFilename);
 //		수정폼에서 프로필사진을 등록하였다면 프로필사진 변경
 		try {
 			if (originalFilename != null && !originalFilename.equals("")) {
-				System.out.println("if");
 				String u_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
 				memberVo.setU_pic(u_pic);
-				System.out.println(memberVo);
 				boolean result = memberService.updateMember(memberVo);
 				rttr.addFlashAttribute("modifyResult", result);
 //			그렇지 않다면 프로필사진 삭제
 			} else {
-				System.out.println("else");
 				memberVo.setU_pic(null);
 				boolean result = memberService.updateMember(memberVo);
 				rttr.addFlashAttribute("modifyResult", result);
@@ -142,7 +136,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/deleteRun", method = RequestMethod.POST)
 	public String deleteRun(String userid, HttpSession session, HttpServletResponse response) {
-		System.out.println(userid);
 		memberService.deleteMember(userid);
 		session.invalidate();
 		Cookie cookie = new Cookie("saveid", userid);
