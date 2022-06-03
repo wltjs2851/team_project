@@ -12,6 +12,10 @@
 		select * from tbl_group order by gno desc
 	</select>
 	
+	<select id="groupByGno" resultType="GroupVo">
+		select * from tbl_group where gno = #{gno}
+	</select>
+	
 	<update id="updateGroup">
 		update tbl_group set g_name = #{g_name}, excercise_type = #{excercise_type}, g_attend = #{g_attend},
 				g_intro = #{g_intro}, g_location = #{g_location}, g_pic = #{g_pic, jdbcType=VARCHAR}, users = #{users}

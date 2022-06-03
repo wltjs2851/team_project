@@ -4,12 +4,12 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-		
-			<form role="form" name="frmWrite" action="/groupboard/groupWriteRun" method="post">
+			<form role="form" action="/groupboard/groupUpdateRun" method="post">
+				<input type="hidden" name="gbno" value="${ param.gbno }">
+				
 				<div class="form-group">
 					 
 					<label for="gb_title">제목</label>
@@ -20,11 +20,11 @@
 					<label for="gb_content">내용</label>
 					<input type="text" class="form-control" name="gb_content" id="gb_content" required />
 				</div>
-				<div class="form-group">
+<!-- 				<div class="form-group"> -->
 					 
-					<label for="userid">아이디</label>
-					<input type="text" class="form-control" name="userid" id="userid" />
-				</div>
+<!-- 					<label for="userid">아이디</label> -->
+<!-- 					<input type="text" class="form-control" name="userid" id="userid" /> -->
+<!-- 				</div> -->
 				<div class="form-group">
 					 
 					<label for="exampleInputFile">사진 추가</label>
@@ -37,12 +37,12 @@
 				<div class="checkbox">
 					 
 					<label>
-						<input type="checkbox" name="notice" id="notice"/> 공지
+						<input type="checkbox" id="notice" /> 공지
 					</label>
 				</div> 
 				
 				<button type="submit" class="btn btn-primary">
-					글 등록하기
+					글 수정하기
 				</button>
 			</form>
 		</div>

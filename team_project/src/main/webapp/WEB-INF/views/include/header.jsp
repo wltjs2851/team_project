@@ -61,10 +61,10 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ml-auto main-nav ">
 							<li class="nav-item active">
-								<a class="nav-link" href="index.html">메인</a>
+								<a class="nav-link" href="/">메인</a>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<a class="nav-link dropdown-toggle" href="/admin/listKcal" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									관리자 게시판 <span><i class="fa fa-angle-down"></i></span>
 								</a>
 								<!-- Dropdown list -->
@@ -74,12 +74,12 @@
 								</div>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<a class="nav-link dropdown-toggle" href="/group/list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									사용자 게시판 <span><i class="fa fa-angle-down"></i></span>
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="#">지역별 운동 모임</a>
+									<a class="dropdown-item" href="/group/list">지역별 운동 모임</a>
 									<a class="dropdown-item" href="#">식단</a>
 									<a class="dropdown-item" href="#">나만의 루틴</a>
 									<a class="dropdown-item" href="#">자유게시판</a>

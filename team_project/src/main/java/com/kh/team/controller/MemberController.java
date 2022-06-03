@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -107,7 +106,24 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/modifyRun", method = RequestMethod.POST)
-	public String modifyRun(MemberVo memberVo, MultipartFile file, RedirectAttributes rttr) {
+	public String modifyRun(MemberVo memberVo, MultipartFile file, RedirectAttributes rttr, HttpSession session) {
+		String originalFilename = file.getOriginalFilename();
+		if (originalFilename != null || !originalFilename.equals("")) {
+			try {
+				String u_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
+				memberVo.setU_pic(u_pic);
+				System.out.println(memberVo);
+				boolean result = memberService.updateMember(memberVo);
+				rttr.addFlashAttribute("modifyResult", result);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			memberVo.setU_pic(null);
+			boolean result = memberService.updateMember(memberVo);
+			rttr.addFlashAttribute("modifyResult", result);
+		}
+		session.setAttribute("loginVo", memberVo);
 		return "redirect:/member/myPage";
 	}
 	
