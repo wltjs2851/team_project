@@ -44,10 +44,10 @@ $(function() {
 				<a class="nav-link" href="#" style="background-color: #fd9a9a">메뉴</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link active" href="modifyForm">회원정보 수정</a>
+				<a class="nav-link active" href="/member/modifyForm">회원정보 수정</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="myPoint">포인트 내역</a>
+				<a class="nav-link" href="/member/myPoint">포인트 내역</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#">나의 그룹</a>
@@ -58,7 +58,7 @@ $(function() {
 		</ul>
 	</div>
 	<div class="col-md-8">
-		<form method="post" action="modifyRun" id="frmModify" enctype="multipart/form-data">
+		<form method="post" action="/member/modifyRun" id="frmModify" enctype="multipart/form-data">
 		<input type="hidden" name="userid" value="${loginVo.userid}">
 		<input type="hidden" name="regdate" value="${loginVo.regdate}">
 		<c:if test="${not empty loginVo}">
