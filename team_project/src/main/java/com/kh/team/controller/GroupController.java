@@ -96,13 +96,15 @@ public class GroupController {
 		return "redirect:/group/groupForm?gno=" + groupVo.getGno();
 	}
 	
-	@RequestMapping(value = "/joinGroup", method = RequestMethod.GET)
+	@RequestMapping(value = "/joinGroup", method = RequestMethod.POST)
 	public String joinGroup(GroupVo groupVo, HttpSession session, RedirectAttributes rttr) {
 		MemberVo memberVo = (MemberVo) session.getAttribute("loginVo");
 		String userid = memberVo.getUserid();
+		System.out.println("userid: " + userid);
+		System.out.println("groupVo: " + groupVo);
 		boolean result = groupService.joinGroup(groupVo, userid);
 		rttr.addFlashAttribute("joinResult", result);
-		return "board/list";
+		return "redirect:/group/list";
 	}
 	
 	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)

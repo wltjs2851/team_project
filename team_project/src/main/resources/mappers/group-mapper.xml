@@ -28,7 +28,7 @@
 	</update>
 	
 	<update id="updateGroupMember">
-		update tbl_group set g_present = #{g_present} + 1, users = concat(#{users}, userid)
+		update tbl_group set g_present = #{g_present} + 1, users = concat(#{users}, #{userid})
 			where gno = #{gno}
 	</update>
 

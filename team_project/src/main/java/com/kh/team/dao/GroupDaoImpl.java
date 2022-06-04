@@ -72,7 +72,9 @@ public class GroupDaoImpl implements GroupDao{
 	@Override
 	public boolean updateGroupMember(GroupVo groupVo, String userid) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
-		parameter.put("groupVo", groupVo);
+		parameter.put("gno", groupVo.getGno());
+		parameter.put("g_present", groupVo.getG_present());
+		parameter.put("users", groupVo.getUsers());
 		parameter.put("userid", userid);
 		int count = sqlSession.update(NAMESPACE + "updateGroupMember", parameter);
 		if(count > 0) {

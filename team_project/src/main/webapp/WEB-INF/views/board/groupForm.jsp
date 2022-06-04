@@ -5,6 +5,12 @@
 <%@include file="/WEB-INF/views/include/header.jsp"%>
 <!-- 모달폼으로 해보기 -->
 
+<style>
+	button {
+		
+	}
+</style>
+
 <script>
 $(function() {
 	$("#btnModify").click(function() {
@@ -47,9 +53,8 @@ $(function() {
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-8">
-			<form role="form" action="/group/modifyGroupRun" method="post" enctype="multipart/form-data" id="frmModify">
-			<input type="hidden" name="gno" value="${ groupVo.gno }">
+		<div class="col-md-8" class="btn">
+			<form role="form" action="/group/modifyGroupRun" method="post" enctype="multipart/form-data" id="frmModify" style="display: inline;">
 				<div class="form-group">
 					<label for="g_location">
 						지역 &nbsp;
@@ -120,11 +125,15 @@ $(function() {
 					<br>
 				</div>
 				
-				<a href="/group/joinGroup?g_present=${ groupVo.g_present }&g_users=${ groupVo.users }&gno=${ groupVo.gno }" class="btn btn-primary" id="btnJoin">가입</a>
 				<button type="button" class="btn btn-warning" id="btnModify">수정</button>
 				<button type="submit" class="btn btn-success" id="btnModifyRun" style="display: none">수정완료</button>
-				<br>
-				<br>
+			</form>
+			<form role="form" action="/group/joinGroup" method="post" style="display: inline;">
+				<input type="hidden" name="gno" value="${ groupVo.gno }">
+				<input type="hidden" name="g_present" value="${ groupVo.g_present }">
+				<input type="hidden" name="users" value="${ groupVo.users }">
+				<button type="submit" class="btn btn-primary" id="btnJoin">가입</button>
+				<br><br>
 			</form>
 		</div>
 		<div class="col-md-2">
