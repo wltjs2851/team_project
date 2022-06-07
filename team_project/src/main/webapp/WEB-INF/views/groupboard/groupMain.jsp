@@ -92,6 +92,7 @@ $(function() {
 								<a href="/groupboard/groupWriteForm">글쓰기</a>
 							</li>
 							<li class="breadcrumb-item">
+								<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
 								<a href="#">활동 정보</a>
 							</li>
 							<li class="breadcrumb-item">
