@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/header.jsp"%>
 <style>
@@ -9,6 +10,18 @@ tr.tr_list{
 tr.tr_list:hover{
 	background-color: #CEECF5;
 }
+
+/* span{ */
+/* 		display: inline-block; */
+/* 		width: 500px; */
+/* 		text-overflow: ellipsis; */
+		
+/* 		line-height: 1.2; */
+/* 		height: 3.6em; */
+/* 		display: -webkit-box; */
+/* 		-webkit-line-clamp: 3; */
+/* 		-webkit-box-orient: vertical; */
+/* } */
 </style>
 <script>
 $(document).ready(function() {
@@ -58,7 +71,7 @@ $(document).ready(function() {
 							</td>
 						<td class="product-details">
 							<h3 class="title">${ReVo.re_title}</h3> 
-							<span>${ReVo.re_content}</span>
+							<span>${fn:substring(ReVo.re_content, 0, 200)}...</span>
 						</td>
 						<td class="action" data-title="Action">
 							<div class="">
