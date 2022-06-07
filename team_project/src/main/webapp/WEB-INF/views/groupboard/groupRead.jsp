@@ -50,39 +50,145 @@ $(function() {
 		});
 	}
 	
+	// 좋아요
+// 	$("i.fa-heart").click(function() {
+// 		var gbno = $(this).attr("data-gbno");
+// 		var url = "/groupboard/like";
+// 		var sData = {
+// 				"gbno" : gbno
+// 		};
+// 		var that = $(this);
+		
+// 		$.post(url, sData, function(rData) {
+// 			console.log("rData: ", rData);
+// 		});
+// 	});
+	
+	// 댓글 삭제
+	$("#table_comment_list").on("click", ".btnCommentDelete", function() {
+		console.log("댓글 삭제 버튼");
+		var gbcno = $(this).attr("data-gbcno");
+		var url = "/groupcomment/deleteGroupComment/" + gbcno;
+		$.get(url, function(rData) {
+			console.log(rData);
+			if (rData == "true") {
+				getCommentList();
+			}
+		});
+	});
+	
+	// 댓글 수정 버튼
+	$("#table_comment_list").on("click", ".btnCommentModify", function() {
+		$("#modal-402154").trigger("click");
+		var tr = $(this).parents("tr");
+		console.log(tr);
+		var gbc_content = tr.find("td").eq(1).text();
+		console.log(gbc_content);
+		$("#modalContent").val(gbc_content);
+		$("#btnModalSave").attr("data-gbcno", $(this).attr("data-gbcno"));
+	});
+	
+	// 모달창 저장 버튼
+	$("#btnModalSave").click(function() {
+		var gbc_content = $("#modalContent").val();
+		var gbcno = $(this).attr("data-gbcno");
+		var sData = {
+				"gbc_content" : gbc_content,
+				"gbcno"	  : gbcno
+		};
+		var url = "/groupcomment/updateGroupComment";
+		$.post(url, sData, function(rData) {
+			console.log(rData);
+			if (rData == "true") {
+				getCommentList();
+				$("#btnModalClose").trigger("click");
+			}
+		});
+	});
+	
 	getCommentList();
 });
 </script>
 
 ${ groupBoardVo }
+
+<!-- 모달 -->
+<div class="row">
+		<div class="col-md-12">
+			 <a id="modal-402154" href="#modal-container-402154" role="button" class="btn" data-toggle="modal" style="display:none;">Launch demo modal</a>
+			
+			<div class="modal fade" id="modal-container-402154" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myModalLabel">
+								댓글 수정
+							</h5> 
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<input type="text" class="form-control" id="modalContent">
+						</div>
+						<div class="modal-footer">
+							 
+							<button type="button" class="btn btn-primary" id="btnModalSave">
+								변경
+							</button> 
+							<button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">
+								닫기
+							</button>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+</div>
+
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-9">
-					<h2>
+					<h2 style="margin: 20px;">
 						${ groupBoardVo.gb_title }
 					</h2>
-					<p>
+					<hr style="margin: 20px;">
+					<p style="margin: 20px;">
 						작성자: ${ groupBoardVo.userid }, 작성일: ${ groupBoardVo.gb_regdate }
 					</p>
-					<div>
+					<div style="margin: 20px;">
 						${ groupBoardVo.gb_content }
 					</div>
 					
 					<c:choose>
-					<c:when test="{empty groupBoardVo.gb_pic}">
-						<div><img alt="사진 있으면 보이게 없으면 안보이게" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /></div>
-					</c:when>
+						<c:when test="${empty groupBoardVo.gb_pic}">
+							<div></div>
+						</c:when>
 					<c:otherwise>
-						<div><img src="/groupboard/displayImage?filename=${groupBoardVo.gb_pic}" alt="작성자가 올린 사진"></div>
+						<div style="margin: 20px;"><img src="/groupboard/displayImage?filename=${groupBoardVo.gb_pic}" alt="작성자가 올린 사진"></div>
 					</c:otherwise>
 					</c:choose>
 				
 				
 				<!-- 좋아요 --> 
-				<i class="fas fa-heart" style="margin: 30px; font-size: 30px; color: graytext; cursor: pointer;" data-gbno="${ groupBoardVo.gbno }"></i>
+				<i class="fas fa-heart" style="margin: 20px 50%; font-size: 30px; color: graytext; cursor: pointer;" data-gbno="${ groupBoardVo.gbno }"></i>
 				<span style="font-size: 30px;">${ boardVo.like_count }</span>
+				
+				<!-- 수정, 삭제 버튼 -->
+				<table>
+					<tr>
+						<td><a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn-success">수정</a></td>
+						<td><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn-danger">삭제</a></td>
+					</tr>
+				</table>
+<!-- 				<button style="margin: 20px 40%">수정</button> -->
+<!-- 				<button>삭제</button> -->
 				
 				<!-- 댓글 -->
 				<div class="row">
@@ -144,8 +250,11 @@ ${ groupBoardVo }
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
-							Help <span class="badge badge-secondary badge-pill">14</span>
-						</div> <a href="#" class="list-group-item list-group-item-action active justify-content-between">Home <span class="badge badge-light badge-pill">14</span></a>
+							<a href="/groupboard/groupInfo">그룹 정보 보기</a>
+						</div>
+							<a href="/groupboard/groupMain" class="list-group-item list-group-item-action active justify-content-between">
+								메인으로
+							</a>
 					</div>
 					<nav>
 						<ol class="breadcrumb">
