@@ -30,7 +30,7 @@
 					<label for="exampleInputFile">사진 추가</label>
 					<input type="file" class="form-control-file" id="exampleInputFile" />
 					<p class="help-block">
-						Example block-level help text here.
+						부적절한 사진을 게시할 경우 강퇴
 					</p>
 				</div>
 				

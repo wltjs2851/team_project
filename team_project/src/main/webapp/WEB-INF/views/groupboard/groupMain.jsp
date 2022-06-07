@@ -68,8 +68,11 @@ $(function() {
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
-							Help <span class="badge badge-secondary badge-pill">14</span>
-						</div> <a href="#" class="list-group-item list-group-item-action active justify-content-between">Home <span class="badge badge-light badge-pill">14</span></a>
+							<a href="/groupboard/groupInfo">그룹 정보 보기</a>
+						</div>
+							<a href="/groupboard/groupMain" class="list-group-item list-group-item-action active justify-content-between">
+								메인으로
+							</a>
 					</div>
 					<nav>
 						<ol class="breadcrumb">
@@ -97,6 +100,9 @@ $(function() {
 									</p>
 									<p>
 										<a class="btn btn-primary" href="#">쪽지보내기</a>
+<%-- 										<c:if test="그룹장일 경우"> --%>
+											<a class="btn" href="#">내쫓기</a>
+<%-- 										</c:if> --%>
 									</p> 
 								</div>
 							</div>

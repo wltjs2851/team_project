@@ -108,4 +108,10 @@ public class GroupBoardController {
 		fis.close();
 		return data;
 	}
+	
+	@RequestMapping(value = "groupInfo", method = RequestMethod.GET)
+	public String groupInfo() {
+		
+		return "groupboard/groupInfo";
+	}
 }
