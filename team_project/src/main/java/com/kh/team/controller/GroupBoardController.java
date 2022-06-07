@@ -34,21 +34,28 @@ public class GroupBoardController {
 	@RequestMapping(value = "groupWriteRun", method = RequestMethod.POST)
 	public String createRun(GroupBoardVo groupBoardVo, RedirectAttributes rttr, MultipartFile file){
 		System.out.println("groupBoardController, groupWriteRun, file:" + file);
-		String originalFilename = file.getOriginalFilename(); // 이게 왜 널이지,,,?
+		String originalFilename = file.getOriginalFilename();
 		System.out.println("originalFilename: " + originalFilename);
-		long size = file.getSize();
-		System.out.println("size: " + size);
-		try {
-		String gb_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
-		groupBoardVo.setGb_pic(gb_pic);
 		
-		System.out.println("groupBoardController, writeRun, groupBoardVo: " + groupBoardVo);
-		boolean result = groupBoardService.create(groupBoardVo);
-		
-		System.out.println("groupBoardController, writeRun, result: " + result);
-		rttr.addFlashAttribute("create_result", result);
-		} catch(Exception e) {
-			e.printStackTrace();
+		if(originalFilename == null || originalFilename == "") {
+			System.out.println("groupBoardController, writeRun, groupBoardVo: " + groupBoardVo);
+			boolean result = groupBoardService.create(groupBoardVo);
+			rttr.addFlashAttribute("create_result", result);
+		} else {
+			long size = file.getSize();
+			System.out.println("size: " + size);
+			try {
+			String gb_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
+			groupBoardVo.setGb_pic(gb_pic);
+			
+			System.out.println("groupBoardController, writeRun, groupBoardVo: " + groupBoardVo);
+			boolean result = groupBoardService.create(groupBoardVo);
+			
+			System.out.println("groupBoardController, writeRun, result: " + result);
+			rttr.addFlashAttribute("create_result", result);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return "redirect:/groupboard/groupMain";
@@ -63,17 +70,42 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupUpdateForm", method = RequestMethod.GET)
-	public String updateForm() {
+	public String updateForm(int gbno, Model model) {
+		GroupBoardVo data = groupBoardService.read(gbno);
+		model.addAttribute("data", data);
 		
 		return "groupboard/groupUpdateForm";
 	}
 	
 	@RequestMapping(value = "groupUpdateRun", method = RequestMethod.POST)
-	public String updateRun(GroupBoardVo groupBoardVo, RedirectAttributes rttr) {
-		boolean result = groupBoardService.update(groupBoardVo);
-		rttr.addFlashAttribute("update_result", result);
+	public String updateRun(GroupBoardVo groupBoardVo, RedirectAttributes rttr, MultipartFile file) {
+		String originalFilename = file.getOriginalFilename();
 		
-		return "redirect:/groupboard/groupMain";
+		if(originalFilename == null || originalFilename == "") {
+			System.out.println("groupBoardController, updateRun, groupBoardVo: " + groupBoardVo);
+			boolean result = groupBoardService.update(groupBoardVo);
+			
+			rttr.addAttribute("gbno", groupBoardVo.getGbno());
+			System.out.println("groupBoardController, updateRun, result: " + result);
+			rttr.addFlashAttribute("update_result", result);
+		} else {
+			long size = file.getSize();
+			try {
+				String gb_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
+				groupBoardVo.setGb_pic(gb_pic);
+				
+				System.out.println("groupBoardController, updateRun, groupBoardVo: " + groupBoardVo);
+				boolean result = groupBoardService.update(groupBoardVo);
+				
+				rttr.addAttribute("gbno", groupBoardVo.getGbno());
+				System.out.println("groupBoardController, updateRun, result: " + result);
+				rttr.addFlashAttribute("update_result", result);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+		}
+		
+		return "redirect:/groupboard/groupRead";
 	}
 
 	@RequestMapping(value = "groupDelete", method = RequestMethod.GET)
@@ -107,5 +139,17 @@ public class GroupBoardController {
 		byte[] data = IOUtils.toByteArray(fis);
 		fis.close();
 		return data;
+	}
+	
+	@RequestMapping(value = "groupInfo", method = RequestMethod.GET)
+	public String groupInfo() {
+		
+		return "groupboard/groupInfo";
+	}
+	
+	@RequestMapping(value = "like", method = RequestMethod.POST)
+	public String like() {
+		
+		return "groupboard/like";
 	}
 }

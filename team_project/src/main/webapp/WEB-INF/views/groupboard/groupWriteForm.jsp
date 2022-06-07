@@ -4,7 +4,6 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -36,8 +35,8 @@
 				
 				<div class="checkbox">
 					 
-					<label>
-						<input type="checkbox" name="notice" id="notice"/> 공지
+					<label for="gb_notice">
+						<input type="checkbox" name="gb_notice" id="gb_notice"/> 공지(그룹장만 보이게)
 					</label>
 				</div> 
 				
