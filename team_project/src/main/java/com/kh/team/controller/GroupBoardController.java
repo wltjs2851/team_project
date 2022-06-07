@@ -152,4 +152,16 @@ public class GroupBoardController {
 		
 		return "groupboard/like";
 	}
+	
+	@RequestMapping(value = "updateGroupInfoForm", method = RequestMethod.GET)
+	public String updateGroupInfoForm() {
+		
+		return "groupboard/updateGroupInfoForm";
+	}
+	
+	@RequestMapping(value = "updateGroupInfoRun", method = RequestMethod.POST)
+	public String updateGroupInfoRun() {
+		
+		return "redirect:/groupboard/groupInfo";
+	}
 }
