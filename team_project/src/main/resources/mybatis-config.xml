@@ -7,5 +7,6 @@
 	<typeAliases>
 		<package name="com.kh.team.vo"/>
 <!-- 		<typeAlias type="com.kh.ex01.vo.BoardVo" alias="BoardVo" /> -->
+<!-- 		<package name="com.kh.team.dao"/> -->
 	</typeAliases>
 </configuration>

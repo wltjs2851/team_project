@@ -26,7 +26,6 @@ public class CalendarController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private final String NAMESPACE = "com.kh.team.mappers.schedule.";
 
 	@RequestMapping(value = "/do", method = RequestMethod.GET)
 	public String calendar(Model model, HttpServletRequest request, DateData dateData) {
