@@ -13,7 +13,7 @@ import com.kh.team.vo.RecipeVo;
 @Repository
 public class RecipeDaoImpl implements RecipeDao{
 	
-	private final String NAMESPACE ="com.kh.team.mappers.recipe.";
+	private final String NAMESPACE ="com.kh.team.mappers.recipe.recipe";
 	
 	@Autowired
 	SqlSession sqlSession;

@@ -21,51 +21,49 @@ $(function() {
 		placeholder: '최대 2048자까지 쓸 수 있습니다.',
 			callbacks: {	//여기 부분이 이미지를 첨부하는 부분
 				onImageUpload : function(files) {
-					uploadSummernoteImageFile(files[0],this);
-				},
-				onPaste: function (e) {
-					var clipboardData = e.originalEvent.clipboardData;
-					if (clipboardData && clipboardData.items && clipboardData.items.length) {
-						var item = clipboardData.items[0];
-						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-							e.preventDefault();
-						}
-					}
+					uploadSummernoteImageFile(files[0]);
 				}
+// 				,onPaste: function (e) {
+// 					var clipboardData = e.originalEvent.clipboardData;
+// 					if (clipboardData && clipboardData.items && clipboardData.items.length) {
+// 						var item = clipboardData.items[0];
+// 						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+// 							e.preventDefault();
+// 						}
+// 					}
+// 				}
 			}
 });
     
     
 
-function uploadSummernoteImageFile(file, editor) {
+function uploadSummernoteImageFile(file) {
 	data = new FormData();
 	data.append("file", file);
 	$.ajax({
 		data : data,
 		type : "POST",
 		url : "/recipe/uploadSummernoteImageFile",
+		enctype : 'multipart/form-data',
+		cache : false,
 		contentType : false,
 		processData : false,
 		success : function(data) {
-			$(editor).summernote('insertImage', data.url);
+			console.log(data);
+			$("#summernote").summernote('insertImage', "/recipe/displayImage?filename=" + data);
+		},
+		error : function(e) {
+			console.log(e);
 		}
 	});
 };
-	$("#btn").click(function(e) {
-		e.preventDefault();
-		console.log(e);
-		var sn = $("#summernote").val();
-		console.log(sn)
-		var filename = $("#summernote").attr("data-filename");
-		console.log(filename);
-	});
 });
 </script>
 <script src="/resources/js/summernote/summernote-lite.js"></script>
 <script src="/resources/js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="/resources/css/summernote/summernote-lite.css">
 <body>
-	<form method="post" enctype="multipart/form-data">
+	<form method="post" action="summerRun" enctype="multipart/form-data">
 		<input type="hidden" id="filename">
 		<textarea id="summernote" name="editordata"></textarea>
 		<button id="btn">보내기</button>

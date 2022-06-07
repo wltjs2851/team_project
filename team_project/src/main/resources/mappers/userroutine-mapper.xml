@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.userroutine">
+	<insert id="insertRoutine">
+		insert into tbl_userroutine(uno, u_title, u_content, userid, u_pic)
+			values(seq_recipe_uno.nextval, #{u_title}, #{u_content}, #{userid}, #{u_pic, jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="selectRoutine" resultType="RoutineVo">
+		select * from tbl_userroutine order by uno desc
+	</select>
+	
+	<update id="updateRoutine">
+		update tbl_userroutine set u_title = #{u_title}, u_content = #{u_content}, u_pic = #{u_pic, jdbcType=VARCHAR}
+			where rno = #{uno}
+	</update>
+	
+	<delete id="deleteRoutine">
+		delete from tbl_userroutine where uno = #uno}
+	</delete>
+	
+	<select id="contentByUno" resultType="RoutineVo">
+		select * from tbl_userroutine where uno = #{uno}
+	</select>
+	
+	<update id="updateViewcnt">
+		update tbl_userroutine set u_viewcnt = #{u_viewcnt} + 1
+			where uno = #{uno}
+	</update>
+
+</mapper>
