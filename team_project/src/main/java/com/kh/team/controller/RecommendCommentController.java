@@ -45,8 +45,8 @@ public class RecommendCommentController {
 	// 댓글 수정
 		@RequestMapping(value = "/updateComment", method = RequestMethod.POST)
 		public String updateComment(RecommendCommentVo recommendCommentVo){
-			recommendCommentService.udpateRecommendComment(recommendCommentVo);
-//			return String.valueOf(result);
-			return "redirect:/reccomment/listComment";
+			boolean result = recommendCommentService.udpateRecommendComment(recommendCommentVo);
+			return String.valueOf(result);
+//			return "redirect:/reccomment/listComment";
 		}
 }
