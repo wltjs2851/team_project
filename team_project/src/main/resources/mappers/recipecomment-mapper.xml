@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.kh.team.mappers.recipecomment">
+ 
+ <!-- 댓글 등록 -->
+ <insert id="insertRecipeComment">
+ 	insert into tbl_rcomment (rcno, rno, rc_comment, userid, u_pic)
+ 	values(seq_rcomment_rcno.nextval, #{rno}, #{rc_comment}, #{userid}, #{u_pic, jdbcType=VARCHAR})
+ </insert>
+ 
+ <!-- 댓글 목록 -->
+ <select id="commentRecipeList" resultType="RecipeCommentVo">
+ 	select * from tbl_rcomment
+ 	where rno = #{rno}
+ 	order by rcno desc
+ </select>
+ 
+ <!-- 댓글 수정 -->
+ <update id="udpateRecipeComment">
+ 	update tbl_rcomment set
+ 		rc_comment = #{rc_comment}
+ 	where rcno = #{rcno}
+ </update>
+ 
+ <!-- 댓글 삭제 -->
+ <delete id="deleteRecipeCommnet">
+ 	delete from tbl_rcomment
+ 	where rcno = #{rcno}
+ </delete>
+ 
+ </mapper>

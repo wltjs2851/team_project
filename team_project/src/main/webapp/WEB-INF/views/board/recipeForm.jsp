@@ -18,60 +18,6 @@
 </style>
 
 <script>
-
-let oEditors = []
-
-smartEditor = function() {
-  console.log("Naver SmartEditor")
-  nhn.husky.EZCreator.createInIFrame({
-    oAppRef: oEditors,
-    elPlaceHolder: "editorTxt",
-    sSkinURI: "/resources/static/SmartEditor2Skin.html",
-    fCreator: "createSEditor2"
-  })
-}
-
-
-$(function() {
-	smartEditor();
-	
-	$("#savebutton").click(function() {
-		oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []); 
-		//textarea의 id를 적어줍니다.
-
-// 		var selcatd = $("#selcatd > option:selected").val();
-// 		var title = $("#title").val();
-		var content = document.getElementById("editorTxt").value;
-		
-		console.log(content);
-
-// 		if (selcatd == "") {
-// 			alert("카테고리를 선택해주세요.");
-// 			return;
-// 		}
-// 		if (title == null || title == "") {
-// 			alert("제목을 입력해주세요.");
-// 			$("#title").focus();
-// 			return;
-// 		}
-// 		if(content == "" || content == null || content == '&nbsp;' || 
-// 				content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>'){
-// 			alert("본문을 작성해주세요.");
-// 			oEditors.getById["smartEditor"].exec("FOCUS"); //포커싱
-// 			return;
-// 		} //이 부분은 스마트에디터 유효성 검사 부분이니 참고하시길 바랍니다.
-		
-// 		var result = confirm("발행 하시겠습니까?");
-		
-// 		if(result){
-// 			alert("발행 완료!");
-// 			$("#noticeWriteForm").submit();
-// 		}else{
-// 			return;
-// 		}
-	});
-});
-
 $(function() {
 	$("#btnModify").click(function() {
 		$("*[disabled]").attr("disabled", false);
@@ -111,6 +57,53 @@ $(function() {
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
+	
+	getCommentList();
+	
+	$("#btnComment").click(function() {
+		var rc_comment = $("#rc_comment").val();
+		var userid = $("#userid").val();
+		var rno = "${recipeVo.rno}";
+		var u_pic = "${loginVo.u_pic}";
+		var url = "/recipe/addRecipeComment";
+		sendData = {
+				"rc_comment" : rc_comment,
+				"userid" : userid,
+				"rno" : rno,
+				"u_pic" : u_pic
+		};
+		console.log(sendData);
+		$.post(url, sendData, function(receiveData) {
+			console.log(receiveData);
+			$("#r_content").val("");
+			getCommentList();
+		});
+	});
+	
+	function getCommentList() {
+		var rno = "${recipeVo.rno}";
+		var url = "/recipe/commentRecipeList/" + rno;
+		$.get(url, function(receivedData) {
+			console.log(receivedData);
+			$("#comment > div").empty();
+			$.each(receivedData, function() {
+				var cmt = "";
+				cmt += "<p><div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
+				if(this.u_pic == null) {
+					cmt += "<img src='/resources/images/board/personDefault.png' class='img-circle elevation-2' width=100>"
+				} else {
+					"<p><img src='/recipe/displayImage?filename='" + this.u_pic + 
+							"class='img-circle elevation-2'>";
+				}
+				cmt +=this.userid + "</p>"
+				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 100%'>" + this.rc_comment
+					+ "</textarea>"
+				cmt += "</div>";
+				cmt += "<hr><br><br>"
+				$("#comment").append(cmt);
+			})
+		});
+	}
 });
 </script>
 
@@ -127,10 +120,16 @@ $(function() {
 				</div>
 				
 				<div class="form-group">
-					<textarea name="editorTxt" id="editorTxt" rows="20" cols="10" style="width: 100%">
-						${ recipeVo.r_content }</textarea>
-					<div id="se2_sample" style="margin:10px 0;">
-						<input type="button" id="savebutton" value="본문 내용 가져오기">
+					<div contentEditable="false"
+						style="min-height: 100px; height: 100%; max-width: 100%;"
+						class="form-control" id="r_content">
+						<c:if test="${ not empty recipeVo.r_pic }">
+							<img id="recipeImage" src="/recipe/displayImage?filename=${ recipeVo.r_pic }" data-image="${ recipeVo.r_pic }"
+								style="width: 100px;" name="recipeImage">
+							<br>
+						</c:if>
+						<textarea onkeyup="adjustHeight();" style="border: none; width: 100%; background-color: #FFFFFF; resize: none;" 
+							name="r_content" disabled>${ recipeVo.r_content }</textarea>
 					</div>
 				</div>
 				
@@ -159,6 +158,23 @@ $(function() {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<hr>
+			<div class="row" style="margin-top: 40px">
+				<div class="col-md-9">
+					<input type="text" placeholder="댓글 입력" id="rc_comment" class="form-control">
+				</div>
+				<div class="col-md-2">
+					<input type="text" placeholder="userid" id="userid" class="form-control">
+				</div>
+				<div class="col-md-1">
+					<button type="button" id="btnComment" class="btn btn-primary"
+						style="width: 80px; height:50px; padding: 1% 0">댓글달기</button>
+				</div>
+
+				<div class="row" style="margin-top: 40px" id="comment">
+				</div>
+			</div>
+			<br>
+			<br>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
