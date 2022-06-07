@@ -114,4 +114,10 @@ public class GroupBoardController {
 		
 		return "groupboard/groupInfo";
 	}
+	
+	@RequestMapping(value = "like", method = RequestMethod.POST)
+	public String like() {
+		
+		return "groupboard/like";
+	}
 }

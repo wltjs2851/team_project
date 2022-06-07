@@ -41,6 +41,18 @@ $(function() {
 										</div></h2>
 						<p>작성자: ${groupBoardVo.userid}, 작성일: ${ groupBoardVo.gb_regdate }</p>
 						<p>${ groupBoardVo.gb_content }</p>
+						
+						<div>
+							<c:choose>
+								<c:when test="${ empty groupBoardVo.gb_pic }">
+									<div></div>
+								</c:when>
+								<c:otherwise>
+									<img alt="게시글 사진" src="/groupboard/displayImage?filename=${groupBoardVo.gb_pic}" width="100" height="100">
+								</c:otherwise>
+							</c:choose>
+						</div>
+						
 						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">...더 보기</a>
 						<p>
 <%-- 							<a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a> --%>
