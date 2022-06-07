@@ -32,6 +32,13 @@
 		where reno = #{reno}
 	</select>
 	
+	<select id="selectByViewCnt" resultType="RecommendVo">
+		select * from
+			(select * from tbl_recommend
+			order by re_viewcnt desc)
+		where rownum &lt;= 3
+	</select>
+	
 	<!-- 글 목록조회 -->
 	<select id="listRecommend" resultType="RecommendVo">
 		select * from tbl_recommend

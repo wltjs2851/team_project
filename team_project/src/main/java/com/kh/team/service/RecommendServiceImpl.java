@@ -43,4 +43,10 @@ public class RecommendServiceImpl implements RecommendService{
 		return listRecommend;
 	}
 
+	@Override
+	public List<RecommendVo> selectByViewCnt() {
+		List<RecommendVo> listRecommend = recommendDao.selectByViewCnt();
+		return listRecommend;
+	}
+
 }

@@ -21,4 +21,6 @@ public interface RecommendService {
 		
 		// 글 목록
 		public List<RecommendVo> listRecommend();
+		
+		public List<RecommendVo> selectByViewCnt();
 }
