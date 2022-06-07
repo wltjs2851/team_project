@@ -19,7 +19,7 @@ $(function() {
 		
 		var url = "/groupcomment/insertGroupComment";
 		$.post(url, sData, function(rData) {
-			console.log(rData); // 여기까지는 확실히 잘 됐었음,,,,
+			console.log(rData);
 			if(rData == "true") {
 				getCommentList();
 			}
@@ -41,7 +41,7 @@ $(function() {
 				tds.eq(0).text(this.gbcno);
 				tds.eq(1).text(this.gbc_content);
 				tds.eq(2).text(this.userid);
-				tds.eq(3).text(this.regdate);
+				tds.eq(3).text(this.gbc_regdate);
 				tds.find(".btnCommentDelete").attr("data-gbcno", this.gbcno);
 				tds.find(".btnCommentModify").attr("data-gbcno", this.gbcno);
 				
@@ -49,6 +49,8 @@ $(function() {
 			});
 		});
 	}
+	
+	getCommentList();
 });
 </script>
 
@@ -67,10 +69,15 @@ ${ groupBoardVo }
 					<div>
 						${ groupBoardVo.gb_content }
 					</div>
-<%-- 					<c:if test={not empty groupBoardVo.gb_pic}> --%>
-<!-- 						<div><img alt="사진 있으면 보이게 없으면 안보이게" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /></div> -->
-						
-<%-- 					</c:if> --%>
+					
+					<c:choose>
+					<c:when test="{empty groupBoardVo.gb_pic}">
+						<div><img alt="사진 있으면 보이게 없으면 안보이게" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /></div>
+					</c:when>
+					<c:otherwise>
+						<div><img src="/groupboard/displayImage?filename=${groupBoardVo.gb_pic}" alt="작성자가 올린 사진"></div>
+					</c:otherwise>
+					</c:choose>
 				
 				
 				<!-- 좋아요 --> 

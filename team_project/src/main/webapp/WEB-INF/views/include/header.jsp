@@ -79,8 +79,8 @@
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="/group/list">지역별 운동 모임</a>
-									<a class="dropdown-item" href="#">식단</a>
+									<a class="dropdown-item" href="/group/groupList">지역별 운동 모임</a>
+									<a class="dropdown-item" href="/recipe/recipeList">식단</a>
 									<a class="dropdown-item" href="#">나만의 루틴</a>
 									<a class="dropdown-item" href="#">자유게시판</a>
 								</div>

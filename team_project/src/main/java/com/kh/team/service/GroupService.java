@@ -9,4 +9,5 @@ public interface GroupService {
 	public List<GroupVo> groupList();
 	public boolean moidfyGroup(GroupVo groupVo);
 	public GroupVo groupByGno(int gno);
+	public boolean joinGroup(GroupVo groupVo, String userid);
 }

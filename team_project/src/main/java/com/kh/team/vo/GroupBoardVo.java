@@ -1,7 +1,6 @@
 package com.kh.team.vo;
 
 import java.sql.Date;
-import java.util.Arrays;
 
 public class GroupBoardVo {
 	
@@ -12,13 +11,13 @@ public class GroupBoardVo {
 	private String gb_notice;
 	private Date gb_regdate;
 	private int gb_like;
-	private String[] gb_pic;
+	private String gb_pic;
 	
 	public GroupBoardVo() {
 		super();
 	}
 
-	public GroupBoardVo(String gb_title, String gb_content, String userid, String gb_notice, String[] gb_pic) {
+	public GroupBoardVo(String gb_title, String gb_content, String userid, String gb_notice, String gb_pic) {
 		super();
 		this.gb_title = gb_title;
 		this.gb_content = gb_content;
@@ -28,7 +27,7 @@ public class GroupBoardVo {
 	}
 
 	public GroupBoardVo(int gbno, String gb_title, String gb_content, String userid, String gb_notice, Date gb_regdate,
-			int gb_like, String[] gb_pic) {
+			int gb_like, String gb_pic) {
 		super();
 		this.gbno = gbno;
 		this.gb_title = gb_title;
@@ -96,11 +95,11 @@ public class GroupBoardVo {
 		this.gb_like = gb_like;
 	}
 
-	public String[] getGb_pic() {
+	public String getGb_pic() {
 		return gb_pic;
 	}
 
-	public void setGb_pic(String[] gb_pic) {
+	public void setGb_pic(String gb_pic) {
 		this.gb_pic = gb_pic;
 	}
 
@@ -108,7 +107,7 @@ public class GroupBoardVo {
 	public String toString() {
 		return "GroupBoardVo [gbno=" + gbno + ", gb_title=" + gb_title + ", gb_content=" + gb_content + ", userid="
 				+ userid + ", gb_notice=" + gb_notice + ", gb_regdate=" + gb_regdate + ", gb_like=" + gb_like
-				+ ", gb_pic=" + Arrays.toString(gb_pic) + "]";
+				+ ", gb_pic=" + gb_pic + "]";
 	}
-	
+
 }

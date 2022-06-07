@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.recipe">
+	<insert id="insertRecipe">
+		insert into tbl_recipe(rno, r_title, r_content, userid, r_pic)
+			values(seq_recipe_rno.nextval, #{r_title}, #{r_content}, #{userid}, #{r_pic, jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="selectRecipe" resultType="RecipeVo">
+		select * from tbl_recipe order by rno desc
+	</select>
+	
+	<update id="updateRecipe">
+		update tbl_recipe set r_title = #{r_title}, r_content = #{r_content}, r_pic = #{r_pic, jdbcType=VARCHAR}
+			where rno = #{rno}
+	</update>
+	
+	<delete id="deleteRecipe">
+		delete from tbl_recipe where rno = #{rno}
+	</delete>
+	
+	<select id="contentByRno" resultType="RecipeVo">
+		select * from tbl_recipe where rno = #{rno}
+	</select>
+	
+	<update id="updateViewcnt">
+		update tbl_recipe set r_viewcnt = #{viewcnt} + 1
+			where rno = #{rno}
+	</update>
+
+</mapper>

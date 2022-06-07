@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="col-md-12">
 		
-			<form role="form" name="frmWrite" action="/groupboard/groupWriteRun" method="post">
+			<form role="form" name="frmWrite" action="/groupboard/groupWriteRun" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					 
 					<label for="gb_title">제목</label>
@@ -27,10 +27,10 @@
 				</div>
 				<div class="form-group">
 					 
-					<label for="exampleInputFile">사진 추가</label>
-					<input type="file" class="form-control-file" id="exampleInputFile" />
+					<label for="file">사진 추가</label>
+					<input type="file" class="form-control-file" name="file" id="file" />
 					<p class="help-block">
-						Example block-level help text here.
+						부적절한 사진을 게시할 경우 강퇴
 					</p>
 				</div>
 				
