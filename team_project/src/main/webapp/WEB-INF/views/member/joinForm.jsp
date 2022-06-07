@@ -51,7 +51,11 @@ $(function() {
 			$("#noAddress").html("");
 			$("#noAge").html("나이를 입력해주세요.");
 			$("#age").val("").focus();
-		} else if (address == null || address == "") {
+		} else if (!pattern1.test(age)) {
+			$("#noAge").html("나이는 숫자로 입력해주세요.");
+			$("#age").val("").focus();
+		}
+			else if (address == null || address == "") {
 			$("#noAge").html("");
 			$("#noGender").html("성별을 선택해주세요.");
 		} else if (address == null || address == "") {
@@ -104,13 +108,17 @@ $(function() {
 					<span id="noAddress"></span>
 				</div>
 				<div class="form-group">
+					<div>
 					<label for="age">나이</label>
 					<input type="text" class="form-control" id="age" name="age"/>
 					<span id="noAge"></span>
+					</div>
+					<div>
 					<label for="gender">성별</label>
 					<input type="radio" name="gender" value="M" checked="checked"/> 남
 					<input type="radio" name="gender" value="F"/> 여
 					<span id="noGender"></span>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="nickname">닉네임</label>
