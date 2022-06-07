@@ -15,7 +15,7 @@ $(document).ready(function(){
 		$("*[readonly]").attr("readonly", false);
 		$(this).fadeOut("slow");
 		$("#btnUpdateRunRecommend").fadeIn("slow");
-		$("#fileRecommend").fadein("slow");
+		$("#fileRecommend").fadeIn("slow");
 	});
 	
 	// 삭제버튼 
@@ -35,7 +35,7 @@ $(document).ready(function(){
 					<a class="btn btn-primary btn-large" href="/admin/listRecommend">목록으로</a>
 				</p>
 			</div>
-			<form role="form" action="/admin/updateRecommend" method="post">
+			<form role="form" action="/admin/updateRecommend" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="reno" value="${recommendVo.reno}"/>
 				<div class="form-group">
 					<label for="re_title">
