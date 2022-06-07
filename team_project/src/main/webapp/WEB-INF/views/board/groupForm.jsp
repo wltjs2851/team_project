@@ -7,7 +7,9 @@
 
 <style>
 	button {
-		
+		width: 110px; 
+		height:50px; 
+		padding: 1% 0"
 	}
 </style>
 
@@ -55,6 +57,7 @@ $(function() {
 		</div>
 		<div class="col-md-8" class="btn">
 			<form role="form" action="/group/modifyGroupRun" method="post" enctype="multipart/form-data" id="frmModify" style="display: inline;">
+				<input type="hidden" name="gno" value="${ groupVo.gno }">
 				<div class="form-group">
 					<label for="g_location">
 						지역 &nbsp;

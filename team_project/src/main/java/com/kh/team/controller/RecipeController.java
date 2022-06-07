@@ -61,8 +61,26 @@ public class RecipeController {
 	}
 	
 	@RequestMapping(value = "/recipeModifyRun", method = RequestMethod.POST)
-	public String recipeModifyRun(RecipeVo recipeVo) {
-		recipeService.moidfyRecipe(recipeVo);
+	public String recipeModifyRun( RecipeVo recipeVo, MultipartFile file) {
+		System.out.println("RecipeController, recipeModifyRun, recipeVo: " + recipeVo);
+		System.out.println("RecipeController, recipeModifyRun, file: " + file);
+		String originalFile = file.getOriginalFilename();
+		if(originalFile != null && !originalFile.equals("")) {
+			try {
+				String r_pic = FileUtil.uploadFile("//192.168.0.90/rpic", originalFile, file.getBytes());
+				recipeVo.setR_pic(r_pic);
+				System.out.println("RecipeController, recipeModifyRun, recipeVo: " + recipeVo);
+				recipeService.moidfyRecipe(recipeVo);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			RecipeVo recipeVo2 = recipeService.contentByRno(recipeVo.getRno());
+			String r_pic = recipeVo2.getR_pic();
+			recipeVo.setR_pic(r_pic);
+			recipeService.moidfyRecipe(recipeVo);
+		}
 		return "redirect:/recipe/recipeList";
 	}
 	
