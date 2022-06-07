@@ -47,11 +47,11 @@ $(document).ready(function() {
 							<c:choose>
 								<c:when test="${empty ReVo.re_pic}">
 <!-- 									이미지 등록 안했을 때 기본 이미지 -->
-									<img width="80px" height="auto"
+									<img width="100px" height="auto" style="align-items: center;"
 									src="/resources/images/exercise.png" alt="운동이미지">
 								</c:when>
 								<c:otherwise>
-									<img width="80px" height="auto"
+									<img width="200px" height="auto"
 									src="/member/displayImage?filename=${ReVo.re_pic}" alt="운동이미지">
 								</c:otherwise>
 							</c:choose>
