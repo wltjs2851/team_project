@@ -57,7 +57,7 @@ $(function() {
 	<div class="col-md-2">
 		<ul class="nav flex-column nav-pills">
 			<li class="nav-item">
-				<a class="nav-link" href="#" style="background-color: #fd9a9a">메뉴</a>
+				<a class="nav-link" style="background-color: #fd9a9a">메뉴</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link active" href="/member/modifyForm">회원정보 수정</a>
@@ -82,7 +82,9 @@ $(function() {
 				<div class="image">
 					<c:choose>
 						<c:when test="${empty loginVo.u_pic}">
-							<img src="/resources/images/profile.png" class="rounded-circle z-depth-2" alt="User Image">
+							<img src="/resources/images/profile.png" height="100px" width="100px" class="rounded-circle z-depth-2" alt="User Image">
+							<input type="file" class="form-control-file" id="file" name="file"/>
+							<p class="help-block">수정할 사진을 등록해주세요</p>
 						</c:when>
 						<c:otherwise>
 							<img id="pic" height="100px" width="100px" src="/member/displayImage?filename=${loginVo.u_pic}" class="rounded-circle z-depth-2" alt="User Image">
