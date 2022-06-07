@@ -1,18 +1,24 @@
 package com.kh.team.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.JsonObject;
 import com.kh.team.service.RecipeService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.RecipeVo;
@@ -97,5 +103,28 @@ public class RecipeController {
 	@RequestMapping(value = "/summernote", method = RequestMethod.GET)
 	public String summernote() {
 		return "/board/summernote";
+	}
+	
+	@RequestMapping(value = "/summernote", method = RequestMethod.POST)
+	public String summerRun() {
+		return "/board/summernote";
+	}
+	
+	
+	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json", method = RequestMethod.POST)
+	@ResponseBody
+	public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
+		
+		JsonObject jsonObject = new JsonObject();
+		
+		String uploadPath = "C:/summernote_image";
+		String originalFilename = multipartFile.getOriginalFilename();
+		
+		String file = FileUtil.uploadFile(uploadPath, originalFilename, multipartFile.getBytes());
+		System.out.println(file);
+		jsonObject.addProperty("file", file);
+		System.out.println(jsonObject);
+		
+		return jsonObject;
 	}
 } 
