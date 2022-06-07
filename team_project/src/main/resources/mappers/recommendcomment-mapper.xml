@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.kh.team.mappers.recommendcomment">
+ 
+ <!-- 댓글 등록 -->
+ <insert id="insertRecommendComment">
+ 	insert into tbl_reccomment (recno, reno, re_comment)
+ 	values(seq_reccomment_recno.nextval, #{reno}, #{re_comment})
+ </insert>
+ 
+ <!-- 댓글 목록 -->
+ <select id="recommendCommentList" resultType="RecommendCommentVo">
+ 	select * from tbl_reccomment
+ 	where reno = #{reno}
+ 	order by recno desc
+ </select>
+ 
+ <!-- 댓글 수정 -->
+ <update id="udpateRecommendComment">
+ 	update tbl_reccomment set
+ 		re_comment = #{re_comment}
+ 	where recno = #{recno}
+ </update>
+ 
+ <!-- 댓글 삭제 -->
+ <delete id="deleteRecommendCommnet">
+ 	delete from tbl_reccomment
+ 	where recno = #{recno}
+ </delete>
+ 
+ </mapper>
