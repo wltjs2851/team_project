@@ -22,4 +22,7 @@ public interface RecommendDao {
 	
 	// 글 목록
 	public List<RecommendVo> listRecommend();
+	
+	// 조회순 3개조회
+	public List<RecommendVo> selectByViewCnt();
 }

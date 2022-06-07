@@ -196,36 +196,23 @@ $(function() {
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
 							<h4 class="card-title">
-							<a href=""> 추천 운동 <img class="card-img-top img-fluid"
-								src="/resources/images/products/products-3.jpg" alt="Card image cap">
-							</a>
+							<a href=""> 추천 운동 </a>
 							</h4>
 						</div>
 						<div class="card-body">
-							<h4 class="card-title">
-								<a href="">11inch Macbook Air</a>
-							</h4>
-							<ul class="list-inline product-meta">
-								<li class="list-inline-item"><a href=""><i
-										class="fa fa-folder-open-o"></i>Electronics</a></li>
-								<li class="list-inline-item"><a href=""><i
-										class="fa fa-calendar"></i>26th December</a></li>
-							</ul>
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-								adipisicing elit. Explicabo, aliquam!</p>
-							<div class="product-ratings">
-								<ul class="list-inline">
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item"><i class="fa fa-star"></i></li>
-								</ul>
-							</div>
+							<c:forEach items="${listRecommend}" var="ReVo">
+							<c:choose>
+								<c:when test="${empty ReVo.re_pic}">
+									<img width="40px" height="auto" style="align-items: center;"
+									src="/resources/images/exercise.png" alt="운동이미지">
+								</c:when>
+								<c:otherwise>
+									<img width="60px" height="auto"
+									src="/member/displayImage?filename=${ReVo.re_pic}" alt="운동이미지">
+								</c:otherwise>
+							</c:choose>
+								<a href="/admin/selectByReno?reno=${ReVo.reno}">${ReVo.re_title}</a><br>
+							</c:forEach>
 						</div>
 					</div>
 				</div>

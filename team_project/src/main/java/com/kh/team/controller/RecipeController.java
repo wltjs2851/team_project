@@ -12,6 +12,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
+import com.kh.team.service.RecipeCommentService;
 import com.kh.team.service.RecipeService;
 import com.kh.team.util.FileUtil;
+import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
 
 @Controller
@@ -29,6 +32,9 @@ public class RecipeController {
 
 	@Autowired
 	private RecipeService recipeService;
+	
+	@Autowired
+	private RecipeCommentService recipeCommentService;
 	
 	@RequestMapping(value = "/recipeList", method = RequestMethod.GET)
 	public String recipeList(Model model) {
@@ -127,5 +133,20 @@ public class RecipeController {
 //		System.out.println(jsonObject);
 //		
 		return file;
+	}
+	
+	@RequestMapping(value="/addRecipeComment", method = RequestMethod.POST)
+	@ResponseBody
+	public String addRecipeComment(RecipeCommentVo recipeCommentVo) throws Exception {
+		System.out.println(recipeCommentVo);
+		boolean result = recipeCommentService.addRecipeComment(recipeCommentVo);
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value="/commentRecipeList/{rno}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<RecipeCommentVo> commentRecipeList(@PathVariable("rno") int rno) {
+		List<RecipeCommentVo> list = recipeCommentService.selectRecipeCommentList(rno);
+		return list;
 	}
 } 
