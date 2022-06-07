@@ -183,8 +183,8 @@ ${ groupBoardVo }
 				<!-- 수정, 삭제 버튼 -->
 				<table>
 					<tr>
-						<td><a href="/groupboard/groupUpdateForm?gbno=" class="btn btn-sm btn-success">수정</a></td>
-						<td><a href="/groupboard/groupDelete" class="btn btn-sm btn-danger">삭제</a></td>
+						<td><a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn-success">수정</a></td>
+						<td><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn-danger">삭제</a></td>
 					</tr>
 				</table>
 <!-- 				<button style="margin: 20px 40%">수정</button> -->
