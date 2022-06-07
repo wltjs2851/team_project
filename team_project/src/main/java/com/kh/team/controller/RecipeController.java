@@ -93,4 +93,9 @@ public class RecipeController {
 		fis.close();
 		return data;
 	}
+	
+	@RequestMapping(value = "/summernote", method = RequestMethod.GET)
+	public String summernote() {
+		return "/board/summernote";
+	}
 } 
