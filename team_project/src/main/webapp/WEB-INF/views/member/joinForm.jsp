@@ -83,9 +83,16 @@ $(function() {
 					<span id="wrongId"></span>
 				</div>
 				<div class="form-group">
-					<label for="username">이름</label>
-					<input type="text" class="form-control" id="username" name="username"/>
-					<span id="noName"></span>
+					<div style="display: inline-block; width: 49.6%;">
+						<label for="username">이름</label>
+						<input type="text" class="form-control" id="username" name="username"/>
+						<span id="noName"></span>
+					</div>
+					<div style="display: inline-block; width: 49.6%;">
+						<label for="nickname">닉네임</label>
+						<input type="text" class="form-control" id="nickname" name="nickname"/>
+						<span id="noNickname"></span>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="userpw">비밀번호</label>
@@ -108,22 +115,17 @@ $(function() {
 					<span id="noAddress"></span>
 				</div>
 				<div class="form-group">
-					<div>
+					<div style="display: inline-block; width: 49.6%;">
 					<label for="age">나이</label>
 					<input type="text" class="form-control" id="age" name="age"/>
 					<span id="noAge"></span>
 					</div>
-					<div>
-					<label for="gender">성별</label>
+					<div style="display: inline-block; width: 49.6%;">
+					<label for="gender" style="display: block;">성별</label>
 					<input type="radio" name="gender" value="M" checked="checked"/> 남
 					<input type="radio" name="gender" value="F"/> 여
 					<span id="noGender"></span>
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="nickname">닉네임</label>
-					<input type="text" class="form-control" id="nickname" name="nickname"/>
-					<span id="noNickname"></span>
 				</div>
 				<div class="form-group">
 					<label for="file">프로필 사진</label>

@@ -6,6 +6,8 @@
 <html lang="en">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <head>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="/resources/static/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 <script src="https://kit.fontawesome.com/94cf0924f0.js" crossorigin="anonymous"></script>
 
