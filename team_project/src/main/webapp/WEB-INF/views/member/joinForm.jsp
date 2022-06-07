@@ -51,7 +51,11 @@ $(function() {
 			$("#noAddress").html("");
 			$("#noAge").html("나이를 입력해주세요.");
 			$("#age").val("").focus();
-		} else if (address == null || address == "") {
+		} else if (!pattern1.test(age)) {
+			$("#noAge").html("나이는 숫자로 입력해주세요.");
+			$("#age").val("").focus();
+		}
+			else if (address == null || address == "") {
 			$("#noAge").html("");
 			$("#noGender").html("성별을 선택해주세요.");
 		} else if (address == null || address == "") {
@@ -79,9 +83,16 @@ $(function() {
 					<span id="wrongId"></span>
 				</div>
 				<div class="form-group">
-					<label for="username">이름</label>
-					<input type="text" class="form-control" id="username" name="username"/>
-					<span id="noName"></span>
+					<div style="display: inline-block; width: 49.6%;">
+						<label for="username">이름</label>
+						<input type="text" class="form-control" id="username" name="username"/>
+						<span id="noName"></span>
+					</div>
+					<div style="display: inline-block; width: 49.6%;">
+						<label for="nickname">닉네임</label>
+						<input type="text" class="form-control" id="nickname" name="nickname"/>
+						<span id="noNickname"></span>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="userpw">비밀번호</label>
@@ -104,18 +115,17 @@ $(function() {
 					<span id="noAddress"></span>
 				</div>
 				<div class="form-group">
+					<div style="display: inline-block; width: 49.6%;">
 					<label for="age">나이</label>
 					<input type="text" class="form-control" id="age" name="age"/>
 					<span id="noAge"></span>
-					<label for="gender">성별</label>
+					</div>
+					<div style="display: inline-block; width: 49.6%;">
+					<label for="gender" style="display: block;">성별</label>
 					<input type="radio" name="gender" value="M" checked="checked"/> 남
 					<input type="radio" name="gender" value="F"/> 여
 					<span id="noGender"></span>
-				</div>
-				<div class="form-group">
-					<label for="nickname">닉네임</label>
-					<input type="text" class="form-control" id="nickname" name="nickname"/>
-					<span id="noNickname"></span>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="file">프로필 사진</label>

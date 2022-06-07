@@ -15,7 +15,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean joinMember(MemberVo memberVo) {
 		boolean result = memberDao.joinMember(memberVo);
-		System.out.println("service" + memberVo);
 		return result;
 	}
 
