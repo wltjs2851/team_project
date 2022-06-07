@@ -54,5 +54,11 @@ public class RecommendDaoImpl implements RecommendDao{
 		List<RecommendVo> listRecommend = sqlSession.selectList(NAMESPACE + "listRecommend");
 		return listRecommend;
 	}
+
+	@Override
+	public List<RecommendVo> selectByViewCnt() {
+		List<RecommendVo> listRecommend = sqlSession.selectList(NAMESPACE + "selectByViewCnt");
+		return listRecommend;
+	}
 	
 }
