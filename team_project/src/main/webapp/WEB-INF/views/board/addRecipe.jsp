@@ -13,12 +13,13 @@
 					<label for="r_title"> 제목 </label>  
 					<input type="text" class="form-control" id="r_title" name="r_title" required/>
 				</div>
-				
+
 				<div class="form-group">
 					<label for="r_content"> 내용 </label>
-					<textarea class="form-control" id="r_content" name="r_content" style="height: 300px" required> </textarea>
+					<textarea class="form-control" id="r_content" name="r_content" style="height: 300px width=100%" required> </textarea>
 				</div>
-				
+
+
 				<div class="form-group">
 					<label for="userid"> 사용자 </label>  
 					<input type="text" class="form-control" id="userid" name="userid" required/>
