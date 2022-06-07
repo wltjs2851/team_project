@@ -105,26 +105,27 @@ public class RecipeController {
 		return "/board/summernote";
 	}
 	
-	@RequestMapping(value = "/summernote", method = RequestMethod.POST)
-	public String summerRun() {
+	@RequestMapping(value = "/summerRun", method = RequestMethod.POST)
+	public String summerRun(String editordata) {
+		System.out.println(editordata);
 		return "/board/summernote";
 	}
 	
 	
-	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json", method = RequestMethod.POST)
+	@RequestMapping(value="/uploadSummernoteImageFile", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
 		
-		JsonObject jsonObject = new JsonObject();
+//		JsonObject jsonObject = new JsonObject();
 		
-		String uploadPath = "C:/summernote_image";
+		String uploadPath = "//192.168.0.90/summernote_image";
 		String originalFilename = multipartFile.getOriginalFilename();
 		
 		String file = FileUtil.uploadFile(uploadPath, originalFilename, multipartFile.getBytes());
 		System.out.println(file);
-		jsonObject.addProperty("file", file);
-		System.out.println(jsonObject);
-		
-		return jsonObject;
+//		jsonObject.addProperty("file", file);
+//		System.out.println(jsonObject);
+//		
+		return file;
 	}
 } 
