@@ -203,11 +203,11 @@ $(function() {
 							<c:forEach items="${listRecommend}" var="ReVo">
 							<c:choose>
 								<c:when test="${empty ReVo.re_pic}">
-									<img width="10px" height="auto" style="align-items: center;"
+									<img width="40px" height="auto" style="align-items: center;"
 									src="/resources/images/exercise.png" alt="운동이미지">
 								</c:when>
 								<c:otherwise>
-									<img width="20px" height="auto"
+									<img width="60px" height="auto"
 									src="/member/displayImage?filename=${ReVo.re_pic}" alt="운동이미지">
 								</c:otherwise>
 							</c:choose>
