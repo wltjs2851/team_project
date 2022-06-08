@@ -26,7 +26,7 @@ public class RecipeCommentServiceImpl implements RecipeCommentService{
 
 	@Override
 	public boolean modifyRecipeComment(RecipeCommentVo commentVo) {
-		return recipeCommentDao.updateRecipeComment(commentVo);
+		return recipeCommentDao.udpateRecipeComment(commentVo);
 	}
 
 	@Override

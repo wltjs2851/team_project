@@ -7,13 +7,16 @@
 <script>
 $(function() {
 	$("#btnModify").click(function() {
+		var prevImg = $("#file").attr("data-filename");
+		if (prevImg != null && prevImg != "") {
+			var index = prevImg.lastIndexOf("_");
+			var originalFilename = prevImg.substring(index + 1);
+			$("#prevImg").val(originalFilename);
+		} 
 // 		비밀번호를 수정하려고 입력한다면 유효값 검사를 실행 아니라면 이전 비밀번호 그대로 저장
 		var pw = $("#userpw").val();
 		var pw2 = $("#userpw2").val();
 		var userpw = "${loginVo.userpw}";
-		console.log(pw);
-		console.log(pw2);
-		console.log(userpw);
 		var pattern1 = /[0-9]/; // 숫자
 		var pattern2 = /[a-zA-Z]/; // 문자
 		var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
@@ -46,7 +49,9 @@ $(function() {
 		$.get(url, sData, function(rData) {
 			console.log(rData);
 			if (rData == "true") {
-				$("#pic").attr("src", "/resources/images/profile.png")
+				$("#pic").attr("src", "/resources/images/profile.png");
+				$("#prevImg").val("");
+				$("#file").attr("data-filename", "");
 			}
 		});
 	});
@@ -77,19 +82,20 @@ $(function() {
 		<form method="post" action="/member/modifyRun" id="frmModify" enctype="multipart/form-data">
 		<input type="hidden" name="userid" value="${loginVo.userid}">
 		<input type="hidden" name="regdate" value="${loginVo.regdate}">
+		<input type="hidden" id="prevImg" name="prevImg">
 		<c:if test="${not empty loginVo}">
 			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 				<div class="image">
 					<c:choose>
 						<c:when test="${empty loginVo.u_pic}">
 							<img src="/resources/images/profile.png" height="100px" width="100px" class="rounded-circle z-depth-2" alt="User Image">
-							<input type="file" class="form-control-file" id="file" name="file"/>
+							<input type="file" class="form-control-file" name="file"/>
 							<p class="help-block">수정할 사진을 등록해주세요</p>
 						</c:when>
 						<c:otherwise>
 							<img id="pic" height="100px" width="100px" src="/member/displayImage?filename=${loginVo.u_pic}" class="rounded-circle z-depth-2" alt="User Image">
 							<a id="delPic" href="#" data-filename="${loginVo.u_pic}">&times;</a>
-							<input type="file" class="form-control-file" id="file" name="file"/>
+							<input type="file" class="form-control-file" id="file" name="file" data-filename="${loginVo.u_pic}"/>
 							<p class="help-block">수정할 사진을 등록해주세요</p>
 						</c:otherwise>
 					</c:choose>
@@ -107,8 +113,16 @@ $(function() {
 			<tr>
 				<th>성별</th>
 				<td class="form-group">
-					<input type="radio" name="gender" value="M"/> 남
-					<input type="radio" name="gender" value="F"/> 여
+					<input type="radio" name="gender" value="M"
+					<c:if test="${loginVo.gender == M}">
+					checked
+					</c:if>
+					/> 남
+					<input type="radio" name="gender" value="F"
+					<c:if test="${loginVo.gender == F}">
+					checked
+					</c:if>
+					/> 여
 				</td>
 			</tr>
 			<tr>

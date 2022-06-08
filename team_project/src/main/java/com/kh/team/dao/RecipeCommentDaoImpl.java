@@ -32,8 +32,8 @@ public class RecipeCommentDaoImpl implements RecipeCommentDao{
 	}
 
 	@Override
-	public boolean updateRecipeComment(RecipeCommentVo commentVo) {
-		int count = sqlSession.update(NAMESPACE + "updateRecipeComment", commentVo);
+	public boolean udpateRecipeComment(RecipeCommentVo commentVo) {
+		int count = sqlSession.update(NAMESPACE + "udpateRecipeComment", commentVo);
 		if(count > 0) {
 			return true;
 		}

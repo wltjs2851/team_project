@@ -53,5 +53,11 @@ public class MemberDaoImpl implements MemberDao {
 		return false;
 	}
 
+	@Override
+	public String getU_picById(String userid) {
+		String u_pic = sqlSession.selectOne(NS + "getU_picById", userid);
+		return u_pic;
+	}
+
 	
 }
