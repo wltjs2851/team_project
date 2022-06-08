@@ -23,16 +23,27 @@ $(function() {
 </script>
 
 <%-- ${ groupList } --%>
+<%-- ${ noticeList } --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-9">
+				
+				<c:forEach items="${ noticeList }" var="groupBoardVo" varStatus="status" begin="0" end="2">
+					<h3 style="background-color: yellowgreen;">
+						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">[공지] ${ groupBoardVo.gb_title }</a>
+					</h3>
+				</c:forEach>
+					<a href="/groupboard/notice">공지글 확인하기</a>
+				
 					<c:forEach items="${ groupList }" var="groupBoardVo">
 				
 						<h2 style="background-color: aliceblue">${groupBoardVo.gbno}. 제목: ${ groupBoardVo.gb_title }		
 										<button class="btn dropdown-toggle" style="background-color: aliceblue" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-											...
+										
+											<i class='fas fa-ellipsis-v'></i>
+										
 										</button>
 										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 											 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a>
@@ -51,6 +62,11 @@ $(function() {
 									<img alt="게시글 사진" src="/groupboard/displayImage?filename=${groupBoardVo.gb_pic}" width="100" height="100">
 								</c:otherwise>
 							</c:choose>
+						</div>
+						
+						<div>
+							<i class='far fa-comment-alt'></i> 5
+							<i class='far fa-heart'></i> 3
 						</div>
 						
 						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">...더 보기</a>
@@ -76,14 +92,14 @@ $(function() {
 								그룹 소개
 							</h4>
 							<p class="list-group-item-text">
-								...
+								...(달력을 넣어서 그룹 일정 표시하도록,,?)
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
-							<a href="/groupboard/groupInfo">그룹 정보 보기</a>
+							<a href="/groupboard/groupInfo">ㅇㅇ님 환영합니다</a>
 						</div>
-							<a href="/groupboard/groupMain" class="list-group-item list-group-item-action active justify-content-between">
-								메인으로
+							<a href="/groupboard/groupInfo" class="list-group-item list-group-item-action active justify-content-between">
+								그룹 정보 보기
 							</a>
 					</div>
 					<nav>

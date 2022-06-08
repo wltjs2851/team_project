@@ -117,20 +117,15 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupMain", method = RequestMethod.GET)
-	public String main(Model model) {
+	public String main(Model model, String gb_notice) {
 		List<GroupBoardVo> groupList = groupBoardService.list();
 		model.addAttribute("groupList", groupList);
 		
+		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);
+		model.addAttribute("noticeList", noticeList);
+		
 		return "groupboard/groupMain";
 	}
-	
-//	@RequestMapping(value = "forGroupHead", method = RequestMethod.GET)
-//	public String groupHead(Model model) {
-//		List<GroupBoardVo> groupList = groupBoardService.list();
-//		model.addAttribute("groupList", groupList);
-//		
-//		return "groupboard/forGroupHead";
-//	}
 	
 	@RequestMapping(value = "displayImage", method = RequestMethod.GET)
 	@ResponseBody
@@ -163,5 +158,16 @@ public class GroupBoardController {
 	public String updateGroupInfoRun() {
 		
 		return "redirect:/groupboard/groupInfo";
+	}
+	
+	@RequestMapping(value = "notice", method = RequestMethod.GET)
+	public String notice(String gb_notice, Model model/*, int gbno*/) {
+		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);
+//		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
+		
+		model.addAttribute("noticeList", noticeList);
+//		model.addAttribute("groupBoardVo", groupBoardVo);
+		
+		return "groupboard/notice";
 	}
 }

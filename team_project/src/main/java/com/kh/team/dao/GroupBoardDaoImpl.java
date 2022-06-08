@@ -55,4 +55,10 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		return groupList;
 	}
 
+	@Override
+	public List<GroupBoardVo> notice(String gb_notice) {
+		List<GroupBoardVo> noticeList = sqlSession.selectList(NAMESPACE + "notice", gb_notice);
+		return noticeList;
+	}
+
 }

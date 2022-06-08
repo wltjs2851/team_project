@@ -42,4 +42,11 @@
  	order by gbno desc
  </select>
  
+ <!-- 공지글만 뽑아내기 -->
+ <select id="notice" resultType="GroupBoardVo">
+ 	select * from tbl_group_board
+ 	where gb_notice = 'on'
+ 	order by gbno desc
+ </select>
+ 
  </mapper>
