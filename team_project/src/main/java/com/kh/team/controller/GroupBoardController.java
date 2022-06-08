@@ -163,7 +163,7 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "notice", method = RequestMethod.GET)
-	public String notice(String gb_notice, Model model/*, int gbno*/) {
+	public String notice(String gb_notice, Model model) {
 		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);
 //		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
 		

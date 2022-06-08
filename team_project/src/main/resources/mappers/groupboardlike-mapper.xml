@@ -7,6 +7,9 @@
  <mapper namespace="com.kh.team.mappers.groupboardlike">
  
  <!-- 좋아요 추가 -->
+ <insert id="addLike">
+ 	
+ </insert>
  
  <!-- 좋아요 삭제 -->
  

@@ -31,7 +31,7 @@ $(function() {
 				<div class="col-md-9">
 				
 				<c:forEach items="${ noticeList }" var="groupBoardVo" varStatus="status" begin="0" end="2">
-					<h3 style="background-color: yellowgreen;">
+					<h3 style="background-color: powderblue;">
 						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">[공지] ${ groupBoardVo.gb_title }</a>
 					</h3>
 				</c:forEach>
