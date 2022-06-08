@@ -149,4 +149,11 @@ public class RecipeController {
 		List<RecipeCommentVo> list = recipeCommentService.selectRecipeCommentList(rno);
 		return list;
 	}
+	
+	@RequestMapping(value="/modifyComment", method = RequestMethod.POST)
+	@ResponseBody
+	public String modifyComment(RecipeCommentVo recipeCommentVo) {
+		boolean result = recipeCommentService.modifyRecipeComment(recipeCommentVo);
+		return String.valueOf(result);
+	}
 } 

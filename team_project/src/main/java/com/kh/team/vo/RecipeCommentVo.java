@@ -14,6 +14,12 @@ public class RecipeCommentVo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public RecipeCommentVo(int rcno, String rc_comment) {
+		super();
+		this.rcno = rcno;
+		this.rc_comment = rc_comment;
+	}
 
 	public RecipeCommentVo(int rno, String rc_comment, String userid, String u_pic) {
 		super();
