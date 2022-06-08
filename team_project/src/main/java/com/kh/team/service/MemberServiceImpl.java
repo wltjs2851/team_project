@@ -36,4 +36,10 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+	@Override
+	public String getU_picById(String userid) {
+		String u_pic = memberDao.getU_picById(userid);
+		return u_pic;
+	}
+
 }
