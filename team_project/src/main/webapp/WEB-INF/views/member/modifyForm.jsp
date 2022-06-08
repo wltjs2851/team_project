@@ -114,13 +114,13 @@ $(function() {
 				<th>성별</th>
 				<td class="form-group">
 					<input type="radio" name="gender" value="M"
-					<c:if test="${loginVo.gender == M}">
-					checked
+					<c:if test="${loginVo.gender == 'M'}">
+					checked="checked"
 					</c:if>
 					/> 남
 					<input type="radio" name="gender" value="F"
-					<c:if test="${loginVo.gender == F}">
-					checked
+					<c:if test="${loginVo.gender == 'F'}">
+					checked="checked"
 					</c:if>
 					/> 여
 				</td>
