@@ -45,5 +45,11 @@
 		order by reno desc
 	</select>
 	
+	<!-- 조회수 증가 -->	
+	<update id="updateViewCnt">
+		update tbl_recommend set
+			re_viewcnt = re_viewcnt + 1
+		where reno = #{reno}
+	</update>
 	
 </mapper>

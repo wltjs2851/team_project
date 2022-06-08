@@ -23,6 +23,10 @@ public interface RecommendDao {
 	// 글 목록
 	public List<RecommendVo> listRecommend();
 	
-	// 조회순 3개조회
+	// 글 하나에 대한 조회수
+	public void updateViewCnt(int reno);
+	
+	// 조회수 3개조회
 	public List<RecommendVo> selectByViewCnt();
+	
 }
