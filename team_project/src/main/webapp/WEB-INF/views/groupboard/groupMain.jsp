@@ -35,7 +35,7 @@ $(function() {
 						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">[공지] ${ groupBoardVo.gb_title }</a>
 					</h3>
 				</c:forEach>
-					<a href="/groupboard/notice">공지글 확인하기</a>
+					<a href="/groupboard/notice">전체 공지글 확인하기</a>
 				
 					<c:forEach items="${ groupList }" var="groupBoardVo">
 				

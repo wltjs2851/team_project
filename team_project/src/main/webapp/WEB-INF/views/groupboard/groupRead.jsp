@@ -5,6 +5,12 @@
 
 <script>
 $(function() {
+	
+	var update_result = "${update_result}";
+	if(update_result == "true") {
+		alert("수정 완료");
+	}
+	
 	$("#btnCommentInsert").click(function() {
 		console.log("click");
 		var gbc_content = $("#c_content").val();

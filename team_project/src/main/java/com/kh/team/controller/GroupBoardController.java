@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,7 +64,7 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupRead", method = RequestMethod.GET)
-	public String read(int gbno, Model model) {
+	public String read(int gbno, Model model/*, HttpSession session 차후 그룹원들 받을 때 사용*/) {
 		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
 		model.addAttribute("groupBoardVo", groupBoardVo);
 		
