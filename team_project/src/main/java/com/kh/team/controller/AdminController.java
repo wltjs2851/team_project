@@ -3,18 +3,24 @@ package com.kh.team.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.KcalService;
+import com.kh.team.service.RecommendLikeService;
 import com.kh.team.service.RecommendService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.KcalVo;
+import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.RecommendLikeVo;
 import com.kh.team.vo.RecommendVo;
 
 @Controller
@@ -26,6 +32,9 @@ public class AdminController {
 	
 	@Autowired
 	private RecommendService recommendService;
+	
+	@Autowired
+	private RecommendLikeService recommendLikeService;
 	
 	// 운동칼로리 게시판
 	@RequestMapping(value = "/kcal", method = RequestMethod.GET)
@@ -127,10 +136,48 @@ public class AdminController {
 	
 	// 추천 운동 글 조회
 	@RequestMapping(value = "/selectByReno", method = RequestMethod.GET)
-	public String selectByReno(int reno, Model model) {
+	public String selectByReno(int reno, Model model, HttpServletRequest httpRequest) throws Exception {
 		RecommendVo recommendVo = recommendService.selectByReno(reno);
 		model.addAttribute("recommendVo", recommendVo);
+		
+		// 좋아요
+		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
+	
+		RecommendLikeVo reLikeVo = new RecommendLikeVo();
+		reLikeVo.setReno(reno);
+		reLikeVo.setUserid(userid);
+		
+		int recommendLike = recommendLikeService.getRecommendLike(reLikeVo);
+		System.out.println("recommendBoard, recommendLike:" + recommendLike);
+		
+		model.addAttribute("heart", recommendLike);
+		
 		return "admin/recommendSelect";
+	}
+	
+	// 추천 운동 좋아요
+	@ResponseBody
+	@RequestMapping(value = "/heart", method = RequestMethod.POST)
+	public int heart(HttpServletRequest httpRequest) throws Exception {
+		
+		int heart = Integer.parseInt(httpRequest.getParameter("heart"));
+		int reno = Integer.parseInt(httpRequest.getParameter("reno"));
+		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
+		
+		RecommendLikeVo reLikeVo = new RecommendLikeVo();
+		reLikeVo.setReno(reno);
+		reLikeVo.setUserid(userid);
+		
+		System.out.println("heart:" + heart);
+		
+		if (heart >= 1) {
+			recommendLikeService.deleteRecommendLike(reLikeVo);
+			heart = 0 ;
+		} else {
+			recommendLikeService.insertRecommendLike(reLikeVo);
+			heart = 1;
+		}
+		return heart;
 	}
 	
 	// 추천 운동 글 수정

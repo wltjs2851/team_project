@@ -77,14 +77,10 @@ $(document).ready(function() {
 							<div class="">
 								<ul class="list-inline justify-content-center">
 									<li class="list-inline-item">
-										<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view"
-											href=""> 
-											<i class="fa fa-eye"></i> </a>
+											<a><i class="fa fa-eye">${ReVo.re_viewcnt}</i></a>
 									</li>
 									<li class="list-inline-item">
-										<a class="edit" href="">
-											<i class="fa fa-pencil"></i>
-										</a>
+										<a><i class="fa fa-heart" style="color: red;"></i>${ReVo.re_like}</a>
 									</li>
 									<li class="list-inline-item">
 										<a class="delete" href="">
