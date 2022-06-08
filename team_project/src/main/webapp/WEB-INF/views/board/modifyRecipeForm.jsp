@@ -30,7 +30,11 @@ $(function() {
 // 					}
 // 				}
 			}
-});
+	});
+	var c = "${recipeVo.r_content}";
+	var content = c.replace(" \" ", "\'");
+	
+	$("#summernote").summernote("code",  content);
     
     
 
@@ -47,7 +51,7 @@ function uploadSummernoteImageFile(file) {
 		processData : false,
 		success : function(data) {
 			console.log(data);
-			$("#summernote").summernote('insertImage', '/recipe/displayImage?filename=' + data);
+			$("#summernote").summernote('insertImage', "/recipe/displayImage?filename=" + data);
 		},
 		error : function(e) {
 			console.log(e);
@@ -64,19 +68,20 @@ function uploadSummernoteImageFile(file) {
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form role="form" action="/recipe/addRecipeRun" method="post" enctype="multipart/form-data">
+			<form role="form" action="/recipe/recipeModifyRun" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="rno" value="${ recipeVo.rno }">
 				<div class="form-group">
-					<input type="text" class="form-control" id="r_title" name="r_title" required/>
+					<input type="text" class="form-control" value="${ recipeVo.r_title }" name="r_title" required/>
 				</div>
 				<div class="form-group">
 					<textarea id="summernote" name="r_content"></textarea>
 				</div>
 				<div class="form-group">
 					<label for="userid"> 사용자 </label>  
-					<input type="text" class="form-control" id="userid" name="userid" required/>
+					<input type="text" class="form-control" id="userid" name="userid" value="${ recipeVo.userid }" required/>
 				</div>
-				<button type="submit" class="btn btn-primary" 
-					style='width: 80px; height:50px; padding: 1% 0'>글쓰기</button>
+				<button type="submit" class="btn btn-success" 
+					style='width: 80px; height:50px; padding: 1% 0'>수정완료</button>
 				<br>
 				<br>
 			</form>
