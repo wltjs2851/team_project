@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team.service.GroupBoardLikeService;
 import com.kh.team.service.GroupBoardService;
 import com.kh.team.util.FileUtil;
+import com.kh.team.vo.GroupBoardLikeVo;
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.MemberVo;
 
 @Controller
 @RequestMapping("/groupboard")
@@ -26,6 +30,9 @@ public class GroupBoardController {
 	
 	@Autowired
 	private GroupBoardService groupBoardService;
+	
+	@Autowired
+	private GroupBoardLikeService groupboardLikeService;
 	
 	@RequestMapping(value = "groupWriteForm", method = RequestMethod.GET)
 	public String createForm() { // 글쓰기 양식
@@ -64,11 +71,44 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupRead", method = RequestMethod.GET)
-	public String read(int gbno, Model model/*, HttpSession session 차후 그룹원들 받을 때 사용*/) {
+	public String read(int gbno, Model model, HttpServletRequest httpRequest) throws Exception {
 		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
 		model.addAttribute("groupBoardVo", groupBoardVo);
 		
+		// 좋아요
+		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
+		GroupBoardLikeVo groupBoardLikeVo = new GroupBoardLikeVo();
+		groupBoardLikeVo.setGbno(gbno);
+		groupBoardLikeVo.setUserid(userid);
+		
+		int groupBoardLike = groupboardLikeService.countLike(groupBoardLikeVo);
+		System.out.println("groupBoardLike: " + groupBoardLike);
+		
+		model.addAttribute("heart", groupBoardLike);
+		
 		return "groupboard/groupRead";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "heart", method = RequestMethod.POST)
+	public int heart(HttpServletRequest httpRequest) {
+		int heart = Integer.parseInt(httpRequest.getParameter("heart"));
+		int gbno = Integer.parseInt(httpRequest.getParameter("gbno"));
+		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
+		
+		GroupBoardLikeVo groupBoardLikeVo = new GroupBoardLikeVo();
+		groupBoardLikeVo.setGbno(gbno);
+		groupBoardLikeVo.setUserid(userid);
+		
+		if(heart >= 1) {
+			groupboardLikeService.deleteLike(groupBoardLikeVo);
+			heart = 0;
+		} else {
+			groupboardLikeService.addLike(groupBoardLikeVo);
+			heart = 1;
+		}
+		
+		return heart;
 	}
 	
 	@RequestMapping(value = "groupUpdateForm", method = RequestMethod.GET)

@@ -57,18 +57,47 @@ $(function() {
 	}
 	
 	// 좋아요
-// 	$("i.fa-heart").click(function() {
-// 		var gbno = $(this).attr("data-gbno");
-// 		var url = "/groupboard/like";
-// 		var sData = {
-// 				"gbno" : gbno
-// 		};
-// 		var that = $(this);
+	var heart = ${heart};
+	var span = $("i.fa-heart").next();
+	
+	if(likeCount > 0) {
+		console.log(heart);
+		$("i.fa-heart").css("color", "red");
+		$("i.fa-heart").prop("name", heart);
+	} else {
+		// 좋아요가 하나도 없는 경우 
+		console.log(heartval);
+		$("i.fa-heart").css("color", "black");
+		$("i.fa-heart").prop("name", heart);
+	}
+
+	$("i.fa-heart").click(function(){
+		console.log("클릭");
 		
-// 		$.post(url, sData, function(rData) {
-// 			console.log("rData: ", rData);
-// 		});
-// 	});
+		var that = $("i.fa-heart");
+		var gbno = that.attr("data-gbno");
+		console.log(gbno);
+		
+		var heart = that.prop("name");
+		console.log(heart);
+		
+		var url = "/groupboard/heart";
+		var sData = {
+				"gbno" : gbno,
+				"heart" : that.prop('name')
+		};
+		
+		$.post(url, sData, function(rData){
+			console.log("rData:", rData);
+			that.prop('name', rData);
+			
+			if(rData == 1){
+				$("i.fa-heart").css("color", "red");
+			} else {
+				$("i.fa-heart").css("color", "black");
+			}
+		});
+	});
 	
 	// 댓글 삭제
 	$("#table_comment_list").on("click", ".btnCommentDelete", function() {
@@ -116,7 +145,8 @@ $(function() {
 });
 </script>
 
-${ groupBoardVo }
+<%-- ${ groupBoardVo } --%>
+${ heart }
 
 <!-- 모달 -->
 <div class="row">
@@ -183,8 +213,8 @@ ${ groupBoardVo }
 				
 				
 				<!-- 좋아요 --> 
-				<i class="fas fa-heart" style="margin: 20px 50%; font-size: 30px; color: graytext; cursor: pointer;" data-gbno="${ groupBoardVo.gbno }"></i>
-				<span style="font-size: 30px;">${ boardVo.like_count }</span>
+					<i class="fas fa-heart" style=" font-size: 30px; color: graytext; cursor: pointer;" data-gbno="${ groupBoardVo.gbno }"></i>
+					<span style="font-size: 30px;">${ groupBoardVo.gb_like }</span>
 				
 				<!-- 수정, 삭제 버튼 -->
 				<table>
