@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.recommendlike">
+<!-- 	좋아요 -->
+	<insert id="insertRecommendLike">
+		insert into tbl_recommend_like (re_lno, userid, reno)
+		values (seq_reclike_re_lno.nextval, #{userid}, #{reno})
+	</insert>
+	
+<!-- 	좋아요 취소 -->
+	<delete id="deleteRecommendLike">
+		delete from tbl_recommend_like
+		where userid = #{userid} and reno = #{reno}
+	</delete>
+	
+<!-- 	좋아요 업데이트  -->
+	<select id="updateRecommendLike">
+		update tbl_recommend set
+			re_like = (select count(*) 
+					from tbl_recommend_like
+					where reno = #{reno})
+		where reno = #{reno}
+	</select>
+	
+<!-- 	좋아요 조회 -->
+	<select id="getRecommendLike" resultType="int">
+		select count(re_lno) from tbl_recommend_like
+		where userid = #{userid} and reno = #{reno}
+	</select>
+</mapper>
