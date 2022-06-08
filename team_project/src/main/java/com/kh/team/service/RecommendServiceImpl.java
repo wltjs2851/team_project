@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.dao.RecommendDao;
 import com.kh.team.vo.RecommendVo;
@@ -37,6 +38,7 @@ public class RecommendServiceImpl implements RecommendService{
 
 	// 글 조회
 	@Override
+	@Transactional
 	public RecommendVo selectByReno(int reno) {
 		// 조회수
 		recommendDao.updateViewCnt(reno);

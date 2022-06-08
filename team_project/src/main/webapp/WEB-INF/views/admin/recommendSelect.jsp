@@ -192,8 +192,8 @@ $(document).ready(function() {
 	getCommentList();
 });
 </script>
-<%-- ${recommendVo} --%>
-${heart}
+${recommendVo}
+<%-- ${heart} --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
