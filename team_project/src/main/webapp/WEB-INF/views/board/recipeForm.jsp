@@ -15,6 +15,10 @@
 		height:50px; 
 		padding: 0% 1%";
 	}
+	
+	p:{
+		color: black;
+	}
 </style>
 
 <script>
@@ -75,7 +79,8 @@ $(function() {
 		console.log(sendData);
 		$.post(url, sendData, function(receiveData) {
 			console.log(receiveData);
-			$("#r_content").val("");
+			$("#rc_comment").val("");
+			$("#btnComment").css("color", "white");
 			getCommentList();
 		});
 	});
@@ -87,15 +92,15 @@ $(function() {
 			console.log(receivedData);
 			$("#comment > div").empty();
 			$.each(receivedData, function() {
-				var div = $("#commnet > div").clone();
+				console.log(this.u_pic);
 				var cmt = "";
 				cmt += "<div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
-				cmt += "<p>";
+				cmt += "<p style='font-size: large; font-weight: bold;'>";
 				if(this.u_pic == null) {
-					cmt += "<img src='/resources/images/board/personDefault.png' class='img-circle elevation-2' width=100>";
+					cmt += "<img src='/resources/images/board/personDefault.png' class='rounded-circle z-depth-2' width=40px>";
 				} else {
-					cmt += "<img src='/recipe/displayImage?filename='" + this.u_pic + 
-							"class='img-circle elevation-2'>";
+					cmt += "<img src='/recipe/displayImage?filename=" + this.u_pic + 
+							"' class='rounded-circle z-depth-2' width=40px>";
 				}
 				cmt +=this.userid + "</p>";
 				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 100%'>" + this.rc_comment
@@ -148,46 +153,22 @@ $(function() {
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form role="form" action="/recipe/recipeModifyRun" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="rno" value="${ recipeVo.rno }">
-				<div class="form-group">
-					<label for="r_title"> 제목 </label>  
-					<input type="text" class="form-control" id="r_title" name="r_title" value="${ recipeVo.r_title }" required disabled
-						style="background-color: #FFFFFF;"/>
-				</div>
-				
-				<div class="form-group">
-					<div contentEditable="false"
-						style="min-height: 100px; height: 100%; max-width: 100%;"
-						class="form-control" id="r_content">
-						<c:if test="${ not empty recipeVo.r_pic }">
-							<img id="recipeImage" src="/recipe/displayImage?filename=${ recipeVo.r_pic }" data-image="${ recipeVo.r_pic }"
-								style="width: 100px;" name="recipeImage">
-							<br>
-						</c:if>
-						<textarea onkeyup="adjustHeight();" style="border: none; width: 100%; background-color: #FFFFFF; resize: none;" 
-							name="r_content" disabled>${ recipeVo.r_content }</textarea>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label for="userid"> 사용자 </label>  
-					<input type="text" class="form-control" id="userid" name="userid" required disabled value="${ recipeVo.userid }"
-						style="background-color: #FFFFFF"/>
-				</div>
-				
-				<div class="form-group">
-					<label for="file"> File input </label> 
-					<input type="file" class="form-control-file" id="file" name="file" disabled/>
-					<p class="help-block">Example block-level help text here.</p>
-				</div>
-				<button type="button" class="btn btn-warning" id="btnModify"
-					style="width: 80px; height:50px; padding: 1% 0">수정하기</button>
-				<button type="submit" class="btn btn-success" id="btnModifyRun" 
-					style="display: none; width: 80px; height:50px; padding: 1% 0">수정완료</button>
-				<br>
-				<br>
-			</form>
+			<div>
+				<h2>${ recipeVo.r_title }</h2>
+				<p style="color: #888;">${ recipeVo.userid } &nbsp; ${ recipeVo.r_regdate }</p>
+				<hr>
+			</div>
+			<div>
+				${ recipeVo.r_content }
+				<hr>
+			</div>
+			<div>
+				<i class="fa-solid fa-heart" style="color: red; font-size: 25px;" >좋아요</i>
+				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }" class="btn btn-warning"
+					style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
+				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }" class="btn btn-danger"
+					style="width: 60px; height:40px; padding: 0.7% 0">삭제</a>
+			</div>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
@@ -195,7 +176,7 @@ $(function() {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<hr>
-			<div class="row" style="margin-top: 40px">
+			<div class="row" style="margin-top: 20px;">
 				<div class="col-md-9">
 					<input type="text" placeholder="댓글 입력" id="rc_comment" class="form-control">
 				</div>
@@ -207,7 +188,7 @@ $(function() {
 						style="width: 80px; height:50px; padding: 1% 0">댓글달기</button>
 				</div>
 
-				<div class="row" style="margin-top: 40px" id="comment">
+				<div class="row" style="margin-top: 20px; margin-left: 20px;" id="comment">
 					<div style="display: none;">
 						<button type="button" class="btn btn-sm btn-outline-warning btnCommentModify"
 							style="width: 10%; height:50px; padding: 1% 0">수정</button>

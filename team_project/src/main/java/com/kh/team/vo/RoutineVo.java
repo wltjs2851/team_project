@@ -4,59 +4,59 @@ import java.sql.Date;
 
 public class RoutineVo {
 	private int uno;
-	private String u_title;
-	private String u_content;
+	private String ur_title;
+	private String ur_content;
 	private String userid;
-	private Date u_regdate;
-	private String u_pic;
-	private int u_viewcnt;
-	private int u_like;
+	private Date ur_regdate;
+	private String ur_pic;
+	private int ur_viewcnt;
+	private int ur_like;
 	
 	public RoutineVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public RoutineVo(String u_title, String u_content, String userid, String u_pic) {
+	public RoutineVo(String ur_title, String ur_content, String userid, String ur_pic) {
 		super();
-		this.u_title = u_title;
-		this.u_content = u_content;
+		this.ur_title = ur_title;
+		this.ur_content = ur_content;
 		this.userid = userid;
-		this.u_pic = u_pic;
+		this.ur_pic = ur_pic;
 	}
 
-	public RoutineVo(int uno, String u_title, String u_content, String userid, String u_pic) {
+	public RoutineVo(int uno, String ur_title, String ur_content, String userid, String ur_pic) {
 		super();
 		this.uno = uno;
-		this.u_title = u_title;
-		this.u_content = u_content;
+		this.ur_title = ur_title;
+		this.ur_content = ur_content;
 		this.userid = userid;
-		this.u_pic = u_pic;
+		this.ur_pic = ur_pic;
 	}
 
-	public RoutineVo(int uno, String u_title, String u_content, String userid, String u_pic, int u_viewcnt,
-			int u_like) {
+	public RoutineVo(int uno, String ur_title, String ur_content, String userid, String ur_pic, int ur_viewcnt,
+			int ur_like) {
 		super();
 		this.uno = uno;
-		this.u_title = u_title;
-		this.u_content = u_content;
+		this.ur_title = ur_title;
+		this.ur_content = ur_content;
 		this.userid = userid;
-		this.u_pic = u_pic;
-		this.u_viewcnt = u_viewcnt;
-		this.u_like = u_like;
+		this.ur_pic = ur_pic;
+		this.ur_viewcnt = ur_viewcnt;
+		this.ur_like = ur_like;
 	}
 
-	public RoutineVo(int uno, String u_title, String u_content, String userid, Date u_regdate, String u_pic,
-			int u_viewcnt, int u_like) {
+	public RoutineVo(int uno, String ur_title, String ur_content, String userid, Date ur_regdate, String ur_pic,
+			int ur_viewcnt, int ur_like) {
 		super();
 		this.uno = uno;
-		this.u_title = u_title;
-		this.u_content = u_content;
+		this.ur_title = ur_title;
+		this.ur_content = ur_content;
 		this.userid = userid;
-		this.u_regdate = u_regdate;
-		this.u_pic = u_pic;
-		this.u_viewcnt = u_viewcnt;
-		this.u_like = u_like;
+		this.ur_regdate = ur_regdate;
+		this.ur_pic = ur_pic;
+		this.ur_viewcnt = ur_viewcnt;
+		this.ur_like = ur_like;
 	}
 
 	public int getUno() {
@@ -67,20 +67,20 @@ public class RoutineVo {
 		this.uno = uno;
 	}
 
-	public String getU_title() {
-		return u_title;
+	public String getUr_title() {
+		return ur_title;
 	}
 
-	public void setU_title(String u_title) {
-		this.u_title = u_title;
+	public void setUr_title(String ur_title) {
+		this.ur_title = ur_title;
 	}
 
-	public String getU_content() {
-		return u_content;
+	public String getUr_content() {
+		return ur_content;
 	}
 
-	public void setU_content(String u_content) {
-		this.u_content = u_content;
+	public void setUr_content(String ur_content) {
+		this.ur_content = ur_content;
 	}
 
 	public String getUserid() {
@@ -91,43 +91,42 @@ public class RoutineVo {
 		this.userid = userid;
 	}
 
-	public Date getU_regdate() {
-		return u_regdate;
+	public Date getUr_regdate() {
+		return ur_regdate;
 	}
 
-	public void setU_regdate(Date u_regdate) {
-		this.u_regdate = u_regdate;
+	public void setUr_regdate(Date ur_regdate) {
+		this.ur_regdate = ur_regdate;
 	}
 
-	public String getU_pic() {
-		return u_pic;
+	public String getUr_pic() {
+		return ur_pic;
 	}
 
-	public void setU_pic(String u_pic) {
-		this.u_pic = u_pic;
+	public void setUr_pic(String ur_pic) {
+		this.ur_pic = ur_pic;
 	}
 
-	public int getU_viewcnt() {
-		return u_viewcnt;
+	public int getUr_viewcnt() {
+		return ur_viewcnt;
 	}
 
-	public void setU_viewcnt(int u_viewcnt) {
-		this.u_viewcnt = u_viewcnt;
+	public void setUr_viewcnt(int ur_viewcnt) {
+		this.ur_viewcnt = ur_viewcnt;
 	}
 
-	public int getU_like() {
-		return u_like;
+	public int getUr_like() {
+		return ur_like;
 	}
 
-	public void setU_like(int u_like) {
-		this.u_like = u_like;
+	public void setUr_like(int ur_like) {
+		this.ur_like = ur_like;
 	}
 
 	@Override
 	public String toString() {
-		return "UserRoutineVo [uno=" + uno + ", u_title=" + u_title + ", u_content=" + u_content + ", userid=" + userid
-				+ ", u_regdate=" + u_regdate + ", u_pic=" + u_pic + ", u_viewcnt=" + u_viewcnt + ", u_like=" + u_like
-				+ "]";
+		return "RoutineVo [uno=" + uno + ", ur_title=" + ur_title + ", ur_content=" + ur_content + ", userid=" + userid
+				+ ", ur_regdate=" + ur_regdate + ", ur_pic=" + ur_pic + ", ur_viewcnt=" + ur_viewcnt + ", ur_like="
+				+ ur_like + "]";
 	}
-	
 }

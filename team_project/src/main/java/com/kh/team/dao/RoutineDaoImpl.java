@@ -1,6 +1,8 @@
 package com.kh.team.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,14 +54,15 @@ public class RoutineDaoImpl implements RoutineDao{
 
 	@Override
 	public RoutineVo contentByUno(int uno) {
-		
-		return null;
+		RoutineVo routineVo = sqlSession.selectOne(NAMESPACE + "contentByUno", uno);
+		return routineVo;
 	}
 
 	@Override
 	public void updateViewcnt(int uno, int u_viewcnt) {
-		// TODO Auto-generated method stub
-		
+		Map<String, Integer> parameter = new HashMap<String, Integer>();
+		parameter.put("uno", uno);
+		parameter.put("u_viewcnt", u_viewcnt);
+		sqlSession.update(NAMESPACE + "updateRecipe", parameter);
 	}
-
 }

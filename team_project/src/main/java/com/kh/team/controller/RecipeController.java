@@ -32,70 +32,61 @@ public class RecipeController {
 
 	@Autowired
 	private RecipeService recipeService;
-	
+
 	@Autowired
 	private RecipeCommentService recipeCommentService;
-	
+
 	@RequestMapping(value = "/recipeList", method = RequestMethod.GET)
 	public String recipeList(Model model) {
 		List<RecipeVo> recipeList = recipeService.recipeList();
 		model.addAttribute("recipeList", recipeList);
 		return "board/recipeList";
 	}
-	
+
 	@RequestMapping(value = "/addRecipeForm", method = RequestMethod.GET)
 	public String addRecipeForm() {
 		return "board/addRecipe";
 	}
-	
+
 	@RequestMapping(value = "/addRecipeRun", method = RequestMethod.POST)
-	public String addRecipeRun(RecipeVo recipeVo, MultipartFile file) {
+	public String addRecipeRun(RecipeVo recipeVo) {
 		System.out.println("RecipeController, addRecipeRun, recipeVo: " + recipeVo);
-		System.out.println("RecipeController, addRecipeRun, file: " + file);
-		String originalFile = file.getOriginalFilename();
-		try {
-			String r_pic = FileUtil.uploadFile("//192.168.0.90/rpic", originalFile, file.getBytes());
-			recipeVo.setR_pic(r_pic);
-			recipeService.addRecipe(recipeVo);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String content = recipeVo.getR_content();
+		recipeVo.setR_content(content.replaceAll("\"", "\'"));
+		String target = "filename";
+		int num = content.indexOf(target);
+		String r_pic = content.substring(num);
+		int col = r_pic.indexOf("\"");
+		r_pic = r_pic.substring(9, col);
+		System.out.println(r_pic);
+		recipeVo.setR_pic(r_pic);
 		recipeService.addRecipe(recipeVo);
 		return "redirect:/recipe/recipeList";
 	}
-	
+
 	@RequestMapping(value = "/recipeForm", method = RequestMethod.GET)
 	public String recipeForm(Model model, int rno) {
 		RecipeVo recipeVo = recipeService.contentByRno(rno);
 		model.addAttribute("recipeVo", recipeVo);
 		return "board/recipeForm";
 	}
-	
-	@RequestMapping(value = "/recipeModifyRun", method = RequestMethod.POST)
-	public String recipeModifyRun( RecipeVo recipeVo, MultipartFile file) {
-		System.out.println("RecipeController, recipeModifyRun, recipeVo: " + recipeVo);
-		System.out.println("RecipeController, recipeModifyRun, file: " + file);
-		String originalFile = file.getOriginalFilename();
-		if(originalFile != null && !originalFile.equals("")) {
-			try {
-				String r_pic = FileUtil.uploadFile("//192.168.0.90/rpic", originalFile, file.getBytes());
-				recipeVo.setR_pic(r_pic);
-				System.out.println("RecipeController, recipeModifyRun, recipeVo: " + recipeVo);
-				recipeService.moidfyRecipe(recipeVo);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else {
-			RecipeVo recipeVo2 = recipeService.contentByRno(recipeVo.getRno());
-			String r_pic = recipeVo2.getR_pic();
-			recipeVo.setR_pic(r_pic);
-			recipeService.moidfyRecipe(recipeVo);
-		}
-		return "redirect:/recipe/recipeList";
+
+	@RequestMapping(value = "/modifyRecipeForm", method = RequestMethod.GET)
+	public String modifyRecipeForm(Model model, int rno) {
+		RecipeVo recipeVo = recipeService.contentByRno(rno);
+		model.addAttribute("recipeVo", recipeVo);
+		return "board/modifyRecipeForm";
 	}
-	
+
+	@RequestMapping(value = "/recipeModifyRun", method = RequestMethod.POST)
+	public String recipeModifyRun(RecipeVo recipeVo) {
+		System.out.println("RecipeController, recipeModifyRun, recipeVo: " + recipeVo);
+		String content = recipeVo.getR_content();
+		recipeVo.setR_content(content.replaceAll("\"", "\'"));
+		recipeService.moidfyRecipe(recipeVo);
+		return "redirect:/recipe/recipeForm?rno=" + recipeVo.getRno();
+	}
+
 	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)
 	@ResponseBody
 	public byte[] displayImage(String filename) throws Exception {
@@ -105,55 +96,51 @@ public class RecipeController {
 		fis.close();
 		return data;
 	}
-	
-	@RequestMapping(value = "/summernote", method = RequestMethod.GET)
-	public String summernote() {
-		return "/board/summernote";
-	}
-	
-	@RequestMapping(value = "/summerRun", method = RequestMethod.POST)
-	public String summerRun(String editordata) {
-		System.out.println(editordata);
-		return "/board/summernote";
-	}
-	
-	
-	@RequestMapping(value="/uploadSummernoteImageFile", method = RequestMethod.POST)
-	@ResponseBody
-	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
-		
-//		JsonObject jsonObject = new JsonObject();
-		
-		String uploadPath = "//192.168.0.90/summernote_image";
-		String originalFilename = multipartFile.getOriginalFilename();
-		
-		String file = FileUtil.uploadFile(uploadPath, originalFilename, multipartFile.getBytes());
-		System.out.println(file);
-//		jsonObject.addProperty("file", file);
-//		System.out.println(jsonObject);
-//		
-		return file;
-	}
-	
-	@RequestMapping(value="/addRecipeComment", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/addRecipeComment", method = RequestMethod.POST)
 	@ResponseBody
 	public String addRecipeComment(RecipeCommentVo recipeCommentVo) throws Exception {
 		System.out.println(recipeCommentVo);
 		boolean result = recipeCommentService.addRecipeComment(recipeCommentVo);
 		return String.valueOf(result);
 	}
-	
-	@RequestMapping(value="/commentRecipeList/{rno}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/commentRecipeList/{rno}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<RecipeCommentVo> commentRecipeList(@PathVariable("rno") int rno) {
 		List<RecipeCommentVo> list = recipeCommentService.selectRecipeCommentList(rno);
 		return list;
 	}
-	
-	@RequestMapping(value="/modifyComment", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/modifyComment", method = RequestMethod.POST)
 	@ResponseBody
 	public String modifyComment(RecipeCommentVo recipeCommentVo) {
 		boolean result = recipeCommentService.modifyRecipeComment(recipeCommentVo);
 		return String.valueOf(result);
 	}
-} 
+	
+
+
+	@RequestMapping(value = "/summernote", method = RequestMethod.GET)
+	public String summernote() {
+		return "/board/summernote";
+	}
+
+	@RequestMapping(value = "/summerRun", method = RequestMethod.POST)
+	public String summerRun(String editordata) {
+		System.out.println(editordata);
+		return "/board/summernote";
+	}
+
+	@RequestMapping(value = "/uploadSummernoteImageFile", method = RequestMethod.POST)
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
+
+		String uploadPath = "//192.168.0.90/rpic";
+		String originalFilename = multipartFile.getOriginalFilename();
+
+		String file = FileUtil.uploadFile(uploadPath, originalFilename, multipartFile.getBytes());
+		System.out.println(file);
+		return file;
+	}
+}
