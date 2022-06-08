@@ -25,7 +25,7 @@ public class RoutineServieImpl implements RoutineService{
 	}
 
 	@Override
-	public boolean moidfyRoutine(RoutineVo routineVo) {
+	public boolean modifyRoutine(RoutineVo routineVo) {
 		return routineDao.updateRoutine(routineVo);
 	}
 
@@ -40,8 +40,8 @@ public class RoutineServieImpl implements RoutineService{
 	}
 
 	@Override
-	public void updateViewcnt(int uno, int u_viewcnt) {
-		routineDao.updateViewcnt(uno, u_viewcnt);
+	public void updateViewcnt(int uno, int ur_viewcnt) {
+		routineDao.updateViewcnt(uno, ur_viewcnt);
 	}
 
 }
