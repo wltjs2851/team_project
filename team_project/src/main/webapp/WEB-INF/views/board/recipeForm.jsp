@@ -79,7 +79,8 @@ $(function() {
 		console.log(sendData);
 		$.post(url, sendData, function(receiveData) {
 			console.log(receiveData);
-			$("#r_content").val("");
+			$("#rc_comment").val("");
+			$("#btnComment").css("color", "white");
 			getCommentList();
 		});
 	});
@@ -91,15 +92,15 @@ $(function() {
 			console.log(receivedData);
 			$("#comment > div").empty();
 			$.each(receivedData, function() {
-				var div = $("#commnet > div").clone();
+				console.log(this.u_pic);
 				var cmt = "";
 				cmt += "<div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
 				cmt += "<p style='font-size: large; font-weight: bold;'>";
 				if(this.u_pic == null) {
-					cmt += "<img src='/resources/images/board/personDefault.png' class='rounded-circle z-depth-2' width=40>";
+					cmt += "<img src='/resources/images/board/personDefault.png' class='rounded-circle z-depth-2' width=40px>";
 				} else {
-					cmt += "<img src='/recipe/displayImage?filename='" + this.u_pic + 
-							"class='rounded-circle z-depth-2'>";
+					cmt += "<img src='/recipe/displayImage?filename=" + this.u_pic + 
+							"' class='rounded-circle z-depth-2' width=40px>";
 				}
 				cmt +=this.userid + "</p>";
 				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 100%'>" + this.rc_comment
