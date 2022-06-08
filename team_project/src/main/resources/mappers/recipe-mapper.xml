@@ -29,5 +29,12 @@
 		update tbl_recipe set r_viewcnt = #{viewcnt} + 1
 			where rno = #{rno}
 	</update>
+	
+	<select id="selectByViewCnt" resultType="RecipeVo">
+		select * from
+			(select * from tbl_recipe
+			order by r_viewcnt desc)
+		where rownum &lt;= 3
+	</select>
 
 </mapper>

@@ -87,23 +87,60 @@ $(function() {
 			console.log(receivedData);
 			$("#comment > div").empty();
 			$.each(receivedData, function() {
+				var div = $("#commnet > div").clone();
 				var cmt = "";
-				cmt += "<p><div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
+				cmt += "<div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
+				cmt += "<p>";
 				if(this.u_pic == null) {
-					cmt += "<img src='/resources/images/board/personDefault.png' class='img-circle elevation-2' width=100>"
+					cmt += "<img src='/resources/images/board/personDefault.png' class='img-circle elevation-2' width=100>";
 				} else {
-					"<p><img src='/recipe/displayImage?filename='" + this.u_pic + 
+					cmt += "<img src='/recipe/displayImage?filename='" + this.u_pic + 
 							"class='img-circle elevation-2'>";
 				}
-				cmt +=this.userid + "</p>"
+				cmt +=this.userid + "</p>";
 				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 100%'>" + this.rc_comment
-					+ "</textarea>"
+					+ "</textarea>";
+				cmt += "<button type='button' class='btnModify btn btn-outline-warning' data-rcno=" + this.rcno +
+					 " style='width: 80px; height:50px; padding: 1% 0'>수정</button>";
+				cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-rcno=" + this.rcno + 
+						 " style='display: none; width: 80px; height:50px; padding: 1% 0'>수정완료</button>";
+						 cmt += "<button type='button' class='btnDelete btn btn-outline-danger' data-rcno=" + this.rcno +
+						 " style='width: 80px; height:50px; padding: 1% 0'>삭제</button>";
+				cmt += "<hr>";
 				cmt += "</div>";
-				cmt += "<hr><br><br>"
 				$("#comment").append(cmt);
 			})
 		});
 	}
+	
+	$("#comment").on("click", ".btnModify", function() {
+		var rcno = $(this).attr("data-rcno");
+		var btnModifyRun = $(this).next();
+		console.log(rcno);
+		var comment = $(this).prev();
+		$(this).hide();
+		btnModifyRun.show();
+		console.log(comment);
+		comment.removeAttr("disabled");
+		btnModifyRun.click(function() {
+			var rcno = btnModifyRun.attr("data-rcno");
+			var rc_comment = comment.val();
+			var sendData = {
+					"rcno" : rcno,
+					"rc_comment" : rc_comment
+			};
+			var url = "/recipe/modifyComment"
+			$.post(url, sendData, function(receivedData) {
+				console.log(receivedData);
+				if(receivedData == "true") {
+					comment.attr("disabled", true);
+					$(".btnModify").show();
+					$(".btnModifyRun").hide();
+					getCommentList();
+				}
+			});
+		});
+	});
 });
 </script>
 
@@ -171,6 +208,12 @@ $(function() {
 				</div>
 
 				<div class="row" style="margin-top: 40px" id="comment">
+					<div style="display: none;">
+						<button type="button" class="btn btn-sm btn-outline-warning btnCommentModify"
+							style="width: 10%; height:50px; padding: 1% 0">수정</button>
+						<button type="submit" class="btn btn-sm btn-outline-success btnCommentModifyRun" 
+							style="display: none; width: 10%; height:50px; padding: 1% 0">수정완료</button>
+					</div>
 				</div>
 			</div>
 			<br>
