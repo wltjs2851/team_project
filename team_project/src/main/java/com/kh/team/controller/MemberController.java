@@ -76,13 +76,11 @@ public class MemberController {
 			if (originalFilename != null && !originalFilename.equals("")) {
 				String u_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
 				memberVo.setU_pic(u_pic);
-				boolean result = memberService.joinMember(memberVo);
-				rttr.addFlashAttribute("joinResult", result);
 			} else {
 				memberVo.setU_pic(null);
-				boolean result = memberService.joinMember(memberVo);
-				rttr.addFlashAttribute("joinResult", result);
 			}
+			boolean result = memberService.joinMember(memberVo);
+			rttr.addFlashAttribute("joinResult", result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

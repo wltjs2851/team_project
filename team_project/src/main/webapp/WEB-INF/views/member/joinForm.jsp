@@ -12,7 +12,7 @@ $(function() {
 		var email = $("#email").val();
 		var address = $("#address").val();
 		var age = $("#age").val();
-		var gender = $("#gender").val();
+		var gender = $('input[name="gender"]:checked').val();
 		var nickname = $("#nickname").val();
 // 		입력한 값들의 유효값검사
 		var pattern1 = /[0-9]/; // 숫자
@@ -54,11 +54,10 @@ $(function() {
 		} else if (!pattern1.test(age)) {
 			$("#noAge").html("나이는 숫자로 입력해주세요.");
 			$("#age").val("").focus();
-		}
-			else if (address == null || address == "") {
+		} else if ((gender == null || gender == "") || (gender == null || gender == "")) {
 			$("#noAge").html("");
 			$("#noGender").html("성별을 선택해주세요.");
-		} else if (address == null || address == "") {
+		} else if (nickname == null || nickname == "") {
 			$("#noGender").html("");
 			$("#noNickname").html("닉네임을 입력해주세요.");
 			$("#nickname").val("").focus();
@@ -122,8 +121,8 @@ $(function() {
 					</div>
 					<div style="display: inline-block; width: 49.6%;">
 					<label for="gender" style="display: block;">성별</label>
-					<input type="radio" name="gender" value="M" checked="checked"/> 남
-					<input type="radio" name="gender" value="F"/> 여
+					<label for="M"> <input type="radio" name="gender" id="M" value="M"/> 남</label>
+					<label for="F"> <input type="radio" name="gender" id="F" value="F"/> 여</label>
 					<span id="noGender"></span>
 					</div>
 				</div>

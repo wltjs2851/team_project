@@ -53,6 +53,13 @@ public class RecipeController {
 		System.out.println("RecipeController, addRecipeRun, recipeVo: " + recipeVo);
 		String content = recipeVo.getR_content();
 		recipeVo.setR_content(content.replaceAll("\"", "\'"));
+		String target = "filename";
+		int num = content.indexOf(target);
+		String r_pic = content.substring(num);
+		int col = r_pic.indexOf("\"");
+		r_pic = r_pic.substring(9, col);
+		System.out.println(r_pic);
+		recipeVo.setR_pic(r_pic);
 		recipeService.addRecipe(recipeVo);
 		return "redirect:/recipe/recipeList";
 	}
@@ -90,34 +97,6 @@ public class RecipeController {
 		return data;
 	}
 
-	@RequestMapping(value = "/summernote", method = RequestMethod.GET)
-	public String summernote() {
-		return "/board/summernote";
-	}
-
-	@RequestMapping(value = "/summerRun", method = RequestMethod.POST)
-	public String summerRun(String editordata) {
-		System.out.println(editordata);
-		return "/board/summernote";
-	}
-
-	@RequestMapping(value = "/uploadSummernoteImageFile", method = RequestMethod.POST)
-	@ResponseBody
-	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
-
-//		JsonObject jsonObject = new JsonObject();
-
-		String uploadPath = "//192.168.0.90/summernote_image";
-		String originalFilename = multipartFile.getOriginalFilename();
-
-		String file = FileUtil.uploadFile(uploadPath, originalFilename, multipartFile.getBytes());
-		System.out.println(file);
-//		jsonObject.addProperty("file", file);
-//		System.out.println(jsonObject);
-//		
-		return file;
-	}
-
 	@RequestMapping(value = "/addRecipeComment", method = RequestMethod.POST)
 	@ResponseBody
 	public String addRecipeComment(RecipeCommentVo recipeCommentVo) throws Exception {
@@ -138,5 +117,30 @@ public class RecipeController {
 	public String modifyComment(RecipeCommentVo recipeCommentVo) {
 		boolean result = recipeCommentService.modifyRecipeComment(recipeCommentVo);
 		return String.valueOf(result);
+	}
+	
+
+
+	@RequestMapping(value = "/summernote", method = RequestMethod.GET)
+	public String summernote() {
+		return "/board/summernote";
+	}
+
+	@RequestMapping(value = "/summerRun", method = RequestMethod.POST)
+	public String summerRun(String editordata) {
+		System.out.println(editordata);
+		return "/board/summernote";
+	}
+
+	@RequestMapping(value = "/uploadSummernoteImageFile", method = RequestMethod.POST)
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
+
+		String uploadPath = "//192.168.0.90/rpic";
+		String originalFilename = multipartFile.getOriginalFilename();
+
+		String file = FileUtil.uploadFile(uploadPath, originalFilename, multipartFile.getBytes());
+		System.out.println(file);
+		return file;
 	}
 }

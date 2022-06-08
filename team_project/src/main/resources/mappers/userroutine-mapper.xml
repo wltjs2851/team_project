@@ -4,8 +4,8 @@
   
 <mapper namespace="com.kh.team.mappers.userroutine">
 	<insert id="insertRoutine">
-		insert into tbl_userroutine(uno, u_title, u_content, userid, u_pic)
-			values(seq_recipe_uno.nextval, #{u_title}, #{u_content}, #{userid}, #{u_pic, jdbcType=VARCHAR})
+		insert into tbl_userroutine(uno, ur_title, ur_content, userid, ur_pic)
+			values(seq_routine_uno.nextval, #{ur_title}, #{ur_content}, #{userid}, #{ur_pic, jdbcType=VARCHAR})
 	</insert>
 	
 	<select id="selectRoutine" resultType="RoutineVo">
@@ -13,8 +13,8 @@
 	</select>
 	
 	<update id="updateRoutine">
-		update tbl_userroutine set u_title = #{u_title}, u_content = #{u_content}, u_pic = #{u_pic, jdbcType=VARCHAR}
-			where rno = #{uno}
+		update tbl_userroutine set ur_title = #{ur_title}, ur_content = #{ur_content}, ur_pic = #{ur_pic, jdbcType=VARCHAR}
+			where uno = #{uno}
 	</update>
 	
 	<delete id="deleteRoutine">
@@ -26,7 +26,7 @@
 	</select>
 	
 	<update id="updateViewcnt">
-		update tbl_userroutine set u_viewcnt = #{u_viewcnt} + 1
+		update tbl_userroutine set ur_viewcnt = #{ur_viewcnt} + 1
 			where uno = #{uno}
 	</update>
 
