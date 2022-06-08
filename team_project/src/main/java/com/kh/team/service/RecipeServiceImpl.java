@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.team.dao.RecipeDao;
-import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.RecipeVo;
 
 @Service
@@ -38,6 +37,11 @@ public class RecipeServiceImpl implements RecipeService{
 	@Override
 	public RecipeVo contentByRno(int rno) {
 		return recipeDao.contentByRno(rno);
+	}
+
+	@Override
+	public List<RecipeVo> selectByViewCnt() {
+		return recipeDao.selectByViewCnt();
 	}
 
 }

@@ -67,37 +67,24 @@ $(function() {
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
 							<h4 class="card-title">
-							<a href="">횐님들의 식단<img class="card-img-top img-fluid"
-								src="/resources/images/products/products-1.jpg" alt="Card image cap">
-							</a>
+							<a href="">횐님들의 식단</a>
 							</h4>
 						</div>
-						<div class="card-body">
-							<h4 class="card-title">
-								<a href="">11inch Macbook Air</a>
-							</h4>
-							<ul class="list-inline product-meta">
-								<li class="list-inline-item"><a href=""><i
-										class="fa fa-folder-open-o"></i>Electronics</a></li>
-								<li class="list-inline-item"><a href=""><i
-										class="fa fa-calendar"></i>26th December</a></li>
-							</ul>
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-								adipisicing elit. Explicabo, aliquam!</p>
-							<div class="product-ratings">
-								<ul class="list-inline">
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item"><i class="fa fa-star"></i></li>
-								</ul>
+						<div>
+						<c:forEach items="${listRecipe}" var="recipeVo">
+							<c:choose>
+								<c:when test="${empty recipeVo.r_pic}">
+									<img width="40px" height="auto" style="align-items: center;"
+									src="" alt="식단이미지">
+								</c:when>
+								<c:otherwise>
+									<img width="60px" height="auto"
+									src="/member/displayImage?filename=${recipeVo.r_pic}" alt="식단이미지">
+								</c:otherwise>
+							</c:choose>
+								<a href="/recipe/recipeForm?rno=${recipeVo.rno}">${recipeVo.r_title}</a><br>
+							</c:forEach>
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -152,36 +139,11 @@ $(function() {
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
 							<h4 class="card-title">
-							<a href=""> 자유게시판 <img class="card-img-top img-fluid"
-								src="/resources/images/products/products-3.jpg" alt="Card image cap">
-							</a>
+							<a href=""> 자유게시판 </a>
 							</h4>
 						</div>
 						<div class="card-body">
-							<h4 class="card-title">
-								<a href="">11inch Macbook Air</a>
-							</h4>
-							<ul class="list-inline product-meta">
-								<li class="list-inline-item"><a href=""><i
-										class="fa fa-folder-open-o"></i>Electronics</a></li>
-								<li class="list-inline-item"><a href=""><i
-										class="fa fa-calendar"></i>26th December</a></li>
-							</ul>
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-								adipisicing elit. Explicabo, aliquam!</p>
-							<div class="product-ratings">
-								<ul class="list-inline">
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item"><i class="fa fa-star"></i></li>
-								</ul>
-							</div>
+							
 						</div>
 					</div>
 				</div>

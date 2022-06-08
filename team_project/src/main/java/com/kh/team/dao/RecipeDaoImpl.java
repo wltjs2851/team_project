@@ -65,4 +65,10 @@ public class RecipeDaoImpl implements RecipeDao{
 		sqlSession.update(NAMESPACE + "updateRecipe", parameter);
 	}
 
+	@Override
+	public List<RecipeVo> selectByViewCnt() {
+		List<RecipeVo> list = sqlSession.selectList(NAMESPACE + "selectByViewCnt");
+		return list;
+	}
+
 }
