@@ -11,4 +11,6 @@ public interface MemberService {
 	public boolean updateMember(MemberVo memberVo);
 	
 	public boolean deleteMember(String userid);
+	
+	public String getU_picById(String userid);
 }

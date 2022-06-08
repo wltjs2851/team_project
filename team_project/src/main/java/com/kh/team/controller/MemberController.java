@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -113,24 +114,34 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/modifyRun", method = RequestMethod.POST)
-	public String modifyRun(MemberVo memberVo, MultipartFile file, RedirectAttributes rttr, HttpSession session) {
+	@Transactional
+	public String modifyRun(MemberVo memberVo, MultipartFile file, RedirectAttributes rttr, HttpSession session, String prevImg) {
 		String originalFilename = file.getOriginalFilename();
+		System.out.println(prevImg);
 //		수정폼에서 프로필사진을 등록하였다면 프로필사진 변경
 		try {
 			if (originalFilename != null && !originalFilename.equals("")) {
+				System.out.println("originalFilename이 null이 아니고 빈문자열이 아닐때");
 				String u_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
 				memberVo.setU_pic(u_pic);
-				boolean result = memberService.updateMember(memberVo);
-				rttr.addFlashAttribute("modifyResult", result);
 //			그렇지 않다면 프로필사진 삭제
 			} else {
-				memberVo.setU_pic(null);
-				boolean result = memberService.updateMember(memberVo);
-				rttr.addFlashAttribute("modifyResult", result);
+				System.out.println("originalFilename이 null이고 빈문자열일때");
+				if (prevImg != null && !prevImg.equals("")) {
+					System.out.println("prevImg가 null이 아니고 빈문자열이 아닐때");
+					String userid = memberVo.getUserid();
+					String u_pic = memberService.getU_picById(userid);
+					memberVo.setU_pic(u_pic);
+				} else if (prevImg == null || prevImg.equals("")) {
+					System.out.println("prevImg가 null이 null이고 빈문자열일때");
+					memberVo.setU_pic(null);
+				}
 			}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		boolean result = memberService.updateMember(memberVo);
+		rttr.addFlashAttribute("modifyResult", result);
 		session.setAttribute("loginVo", memberVo);
 		return "redirect:/member/myPage";
 	}
