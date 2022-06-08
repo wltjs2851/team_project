@@ -119,19 +119,15 @@ public class MemberController {
 //		수정폼에서 프로필사진을 등록하였다면 프로필사진 변경
 		try {
 			if (originalFilename != null && !originalFilename.equals("")) {
-				System.out.println("originalFilename이 null이 아니고 빈문자열이 아닐때");
 				String u_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
 				memberVo.setU_pic(u_pic);
 //			그렇지 않다면 프로필사진 삭제
 			} else {
-				System.out.println("originalFilename이 null이고 빈문자열일때");
 				if (prevImg != null && !prevImg.equals("")) {
-					System.out.println("prevImg가 null이 아니고 빈문자열이 아닐때");
 					String userid = memberVo.getUserid();
 					String u_pic = memberService.getU_picById(userid);
 					memberVo.setU_pic(u_pic);
 				} else if (prevImg == null || prevImg.equals("")) {
-					System.out.println("prevImg가 null이 null이고 빈문자열일때");
 					memberVo.setU_pic(null);
 				}
 			}
