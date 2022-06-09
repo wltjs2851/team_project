@@ -33,7 +33,6 @@ $(function() {
 });
     
     
-
 function uploadSummernoteImageFile(file) {
 	data = new FormData();
 	data.append("file", file);

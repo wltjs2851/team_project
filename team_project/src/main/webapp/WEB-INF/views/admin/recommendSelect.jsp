@@ -55,6 +55,7 @@ $(document).ready(function() {
 			
 			if(rData == 1){
 				$("i.fa-heart").css("color", "red");
+				
 			} else {
 				$("i.fa-heart").css("color", "black");
 			}
@@ -82,6 +83,7 @@ $(document).ready(function() {
 		$.post(url, sData, function(rData) {
 			console.log(rData);
 			if (rData == "true") {
+				$("#btnComment").css("color", "white");
 				getCommentList();
 			}
 		});
@@ -192,7 +194,7 @@ $(document).ready(function() {
 	getCommentList();
 });
 </script>
-${recommendVo}
+<%-- ${recommendVo} --%>
 <%-- ${heart} --%>
 <div class="container-fluid">
 	<div class="row">
@@ -247,7 +249,7 @@ ${recommendVo}
 				</div>
 				<div class="col-md-1">
 					<button type="button" id="btnComment"
-						class="btn btn-sm btn-primary">완료</button>
+						class="btn btn-sm btn-primary" style="width: 60px; height:50px; padding: 1% 0">완료</button>
 				</div>
 			</div>
 
