@@ -60,13 +60,13 @@ $(function() {
 	var heart = ${heart};
 	var span = $("i.fa-heart").next();
 	
-	if(likeCount > 0) {
+	if(heart > 0) {
 		console.log(heart);
 		$("i.fa-heart").css("color", "red");
 		$("i.fa-heart").prop("name", heart);
 	} else {
 		// 좋아요가 하나도 없는 경우 
-		console.log(heartval);
+		console.log(heart);
 		$("i.fa-heart").css("color", "black");
 		$("i.fa-heart").prop("name", heart);
 	}
@@ -84,7 +84,7 @@ $(function() {
 		var url = "/groupboard/heart";
 		var sData = {
 				"gbno" : gbno,
-				"heart" : that.prop('name')
+				"heart" : that.prop("name")
 		};
 		
 		$.post(url, sData, function(rData){
@@ -145,8 +145,8 @@ $(function() {
 });
 </script>
 
-<%-- ${ groupBoardVo } --%>
-${ heart }
+${ groupBoardVo }
+<%-- ${ heart } --%>
 
 <!-- 모달 -->
 <div class="row">

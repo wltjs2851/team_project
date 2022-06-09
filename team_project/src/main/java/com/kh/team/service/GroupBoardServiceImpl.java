@@ -50,4 +50,9 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		return noticeList;
 	}
 
+	@Override
+	public void countComment(int gbno) {
+		groupBoardDao.countComment(gbno);
+	}
+
 }

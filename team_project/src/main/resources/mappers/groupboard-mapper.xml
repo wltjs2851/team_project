@@ -49,4 +49,13 @@
  	order by gbno desc
  </select>
  
+ <!-- 댓글 갯수 가져오기 -->
+ <update id="countComment">
+ 	update tbl_group_board gb
+	set gb.gb_comment = (select count(*)
+                     from tbl_group_board_comment
+                     where gbno = #{gbno})
+	where gb.gbno = #{gbno}
+ </update>
+ 
  </mapper>

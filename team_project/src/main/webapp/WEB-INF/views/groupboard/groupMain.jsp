@@ -65,8 +65,8 @@ $(function() {
 						</div>
 						
 						<div>
-							<i class='far fa-comment-alt'></i> 5
-							<i class='far fa-heart'></i> 3
+							<i class='far fa-comment-alt'></i> ${ groupBoardVo.gb_comment }
+							<i class='far fa-heart'></i> ${ groupBoardVo.gb_like }
 						</div>
 						
 						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">...더 보기</a>

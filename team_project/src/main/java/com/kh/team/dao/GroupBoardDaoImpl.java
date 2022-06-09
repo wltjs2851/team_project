@@ -27,8 +27,8 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 
 	@Override
 	public GroupBoardVo read(int gbno) {
-		GroupBoardVo groupVo = sqlSession.selectOne(NAMESPACE + "read", gbno);
-		return groupVo;
+		GroupBoardVo groupBoardVo = sqlSession.selectOne(NAMESPACE + "read", gbno);
+		return groupBoardVo;
 	}
 
 	@Override
@@ -59,6 +59,11 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	public List<GroupBoardVo> notice(String gb_notice) {
 		List<GroupBoardVo> noticeList = sqlSession.selectList(NAMESPACE + "notice", gb_notice);
 		return noticeList;
+	}
+
+	@Override
+	public void countComment(int gbno) {
+		sqlSession.update(NAMESPACE + "countComment", gbno);
 	}
 
 }

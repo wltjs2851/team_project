@@ -75,6 +75,10 @@ public class GroupBoardController {
 		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
 		model.addAttribute("groupBoardVo", groupBoardVo);
 		
+		// 댓글 갯수
+//		groupBoardService.countComment(gbno);
+//		model.addAttribute("groupBoardVo", groupBoardService.read(groupBoardVo.getGb_comment()));
+		
 		// 좋아요
 		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
 		GroupBoardLikeVo groupBoardLikeVo = new GroupBoardLikeVo();
