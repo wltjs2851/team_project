@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.kh.team.mappers.routinecomment">
+ 
+ <!-- 댓글 등록 -->
+ <insert id="insertRoutineComment">
+ 	insert into tbl_ucomment (urcno, uno, urc_comment, userid, u_pic)
+ 	values(seq_ucomment_urcno.nextval, #{uno}, #{urc_comment}, #{userid}, #{u_pic, jdbcType=VARCHAR})
+ </insert>
+ 
+ <!-- 댓글 목록 -->
+ <select id="commentRoutineList" resultType="RoutineCommentVo">
+ 	select * from tbl_ucomment
+ 	where uno = #{uno}
+ 	order by urcno desc
+ </select>
+ 
+ <!-- 댓글 수정 -->
+ <update id="udpateRoutineComment">
+ 	update tbl_ucomment set
+ 		urc_comment = #{urc_comment}
+ 	where urcno = #{urcno}
+ </update>
+ 
+ <!-- 댓글 삭제 -->
+ <delete id="deleteRoutineComment">
+ 	delete from tbl_ucomment
+ 	where urcno = #{urcno}
+ </delete>
+ 
+ </mapper>

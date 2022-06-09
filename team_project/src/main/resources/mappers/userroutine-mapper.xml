@@ -12,6 +12,13 @@
 		select * from tbl_userroutine order by uno desc
 	</select>
 	
+	<select id="selectByViewCnt" resultType="RoutineVo">
+		select * from
+			(select * from tbl_userroutine
+			order by ur_viewcnt desc)
+		where rownum &lt;= 3
+	</select>
+	
 	<update id="updateRoutine">
 		update tbl_userroutine set ur_title = #{ur_title}, ur_content = #{ur_content}, ur_pic = #{ur_pic, jdbcType=VARCHAR}
 			where uno = #{uno}

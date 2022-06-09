@@ -20,33 +20,27 @@ $(function() {
 				onImageUpload : function(files) {
 					uploadSummernoteImageFile(files[0]);
 				}
-// 				,onPaste: function (e) {
-// 					var clipboardData = e.originalEvent.clipboardData;
-// 					if (clipboardData && clipboardData.items && clipboardData.items.length) {
-// 						var item = clipboardData.items[0];
-// 						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-// 							e.preventDefault();
-// 						}
-// 					}
-// 				}
 			}
-});
+	});
+	
+	$("#summernote").summernote("code",  "${routineVo.ur_content}");
     
     
+
 function uploadSummernoteImageFile(file) {
 	data = new FormData();
 	data.append("file", file);
 	$.ajax({
 		data : data,
 		type : "POST",
-		url : "/recipe/uploadSummernoteImageFile",
+		url : "/routine/uploadSummernoteImageFile",
 		enctype : 'multipart/form-data',
 		cache : false,
 		contentType : false,
 		processData : false,
 		success : function(data) {
 			console.log(data);
-			$("#summernote").summernote('insertImage', '/recipe/displayImage?filename=' + data);
+			$("#summernote").summernote('insertImage', "/routine/displayImage?filename=" + data);
 		},
 		error : function(e) {
 			console.log(e);
@@ -63,19 +57,20 @@ function uploadSummernoteImageFile(file) {
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form role="form" action="/recipe/addRecipeRun" method="post" enctype="multipart/form-data">
+			<form role="form" action="/routine/modifyRoutineRun" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="uno" value="${ routineVo.uno }">
 				<div class="form-group">
-					<input type="text" class="form-control" id="r_title" name="r_title" required/>
+					<input type="text" class="form-control" value="${ routineVo.ur_title }" name="ur_title" required/>
 				</div>
 				<div class="form-group">
-					<textarea id="summernote" name="r_content"></textarea>
+					<textarea id="summernote" name="ur_content"></textarea>
 				</div>
 				<div class="form-group">
 					<label for="userid"> 사용자 </label>  
-					<input type="text" class="form-control" id="userid" name="userid" required/>
+					<input type="text" class="form-control" id="userid" name="userid" value="${ routineVo.userid }" required/>
 				</div>
-				<button type="submit" class="btn btn-primary" 
-					style='width: 80px; height:50px; padding: 1% 0'>글쓰기</button>
+				<button type="submit" class="btn btn-success" 
+					style='width: 80px; height:50px; padding: 1% 0'>수정완료</button>
 				<br>
 				<br>
 			</form>
