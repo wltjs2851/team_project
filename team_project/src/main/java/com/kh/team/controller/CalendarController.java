@@ -10,7 +10,7 @@ public class CalendarController {
 
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String schedule() {
-		return "admin/calendarMain";
+		return "admin/schedule";
 	}
 	
 	@RequestMapping(value = "/schedulePopup", method = RequestMethod.GET)
