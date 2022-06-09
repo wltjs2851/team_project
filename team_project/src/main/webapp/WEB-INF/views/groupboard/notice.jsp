@@ -4,24 +4,25 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-for group head
-<%-- ${ groupList } --%>
+<%-- ${ noticeList } --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
-				<c:forEach items="${ groupList }" var="groupBoardVo">
+				<div class="col-md-9">
 				
-					<div class="col-md-9">
-						<h2 style="background-color: aliceblue">제목${ groupBoardVo.gb_title }</h2>
-						<p>작성자: ${groupBoardVo.userid}, 작성일: ${ groupBoardVo.gb_regdate }</p>
-						<p>내용${ groupVo.gb_content }</p>
-<!-- 						<p><a class="btn" href="#">더보기 »</a></p> -->
-						<p><a href="#">삭제</a></p>
-					</div>
+				<h2>공지글 전체 보기</h2>
 				
+				<c:forEach items="${ noticeList }" var="groupBoardVo">
+					<h3 style="background-color: yellowgreen;">
+						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">[공지] ${ groupBoardVo.gb_title }</a>
+					</h3>
 				</c:forEach>
+				
+				</div>
 				<div class="col-md-3">
+				
+<!-- 				<aside class="column dotcom__aside bottom-12" style="position: fixed;"> -->
 					<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
@@ -36,8 +37,11 @@ for group head
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
-							Help <span class="badge badge-secondary badge-pill">14</span>
-						</div> <a href="#" class="list-group-item list-group-item-action active justify-content-between">Home <span class="badge badge-light badge-pill">14</span></a>
+							<a href="/groupboard/groupMain">그룹 메인으로</a>
+						</div>
+							<a href="/groupboard/groupInfo" class="list-group-item list-group-item-action active justify-content-between">
+								그룹 정보 보기
+							</a>
 					</div>
 					<nav>
 						<ol class="breadcrumb">
@@ -53,7 +57,7 @@ for group head
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-md-4">
+						<div>
 							<div class="card">
 								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" />
 								<div class="card-block">
@@ -64,12 +68,14 @@ for group head
 										그룹원
 									</p>
 									<p>
-										<a class="btn btn-primary" href="#">쪽지보내기</a> <a class="btn" href="#">내쫓기</a>
-									</p>
+										<a class="btn btn-primary" href="#">쪽지보내기</a>
+									</p> 
 								</div>
 							</div>
 						</div>
 					</div>
+<!-- 					</aside> -->
+				
 				</div>
 			</div>
 		</div>

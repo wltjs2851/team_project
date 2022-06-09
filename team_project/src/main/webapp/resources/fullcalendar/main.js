@@ -9458,7 +9458,7 @@ var FullCalendar = (function (exports) {
         return (createElement("div", { className: "fc-event-main-frame" },
             innerProps.timeText && (createElement("div", { className: "fc-event-time" }, innerProps.timeText)),
             createElement("div", { className: "fc-event-title-container" },
-                createElement("div", { className: "fc-event-title fc-sticky" }, innerProps.event.title || createElement(Fragment, null, "\u00A0")))));
+                createElement("div", { className: "fc-event-title fc-sticky" },  innerProps.event.title || createElement(Fragment, null, "\u00A0")))));
     }
 
     var NowIndicatorRoot = function (props) { return (createElement(ViewContextType.Consumer, null, function (context) {

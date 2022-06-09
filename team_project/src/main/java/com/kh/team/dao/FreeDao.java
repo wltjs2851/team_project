@@ -12,4 +12,5 @@ public interface FreeDao {
 	public FreeVo contentByFno(int fno);
 	public void updateViewcnt(int fno, int f_viewcnt);
 	public List<FreeVo> categoryList();
+	public List<FreeVo> selectByViewCnt();
 }

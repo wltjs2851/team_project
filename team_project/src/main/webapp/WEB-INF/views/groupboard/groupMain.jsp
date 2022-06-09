@@ -23,16 +23,27 @@ $(function() {
 </script>
 
 <%-- ${ groupList } --%>
+<%-- ${ noticeList } --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-9">
+				
+				<c:forEach items="${ noticeList }" var="groupBoardVo" varStatus="status" begin="0" end="2">
+					<h3 style="background-color: powderblue;">
+						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">[공지] ${ groupBoardVo.gb_title }</a>
+					</h3>
+				</c:forEach>
+					<a href="/groupboard/notice">전체 공지글 확인하기</a>
+				
 					<c:forEach items="${ groupList }" var="groupBoardVo">
 				
 						<h2 style="background-color: aliceblue">${groupBoardVo.gbno}. 제목: ${ groupBoardVo.gb_title }		
 										<button class="btn dropdown-toggle" style="background-color: aliceblue" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-											...
+										
+											<i class='fas fa-ellipsis-v'></i>
+										
 										</button>
 										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 											 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a>
@@ -53,6 +64,11 @@ $(function() {
 							</c:choose>
 						</div>
 						
+						<div>
+							<i class='far fa-comment-alt'></i> ${ count }1
+							<i class='far fa-heart'></i> ${ groupBoardVo.gb_like }
+						</div>
+						
 						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">...더 보기</a>
 						<p>
 <%-- 							<a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a> --%>
@@ -65,7 +81,7 @@ $(function() {
 				
 				<div class="col-md-3">
 				
-				<aside class="column dotcom__aside bottom-12">
+				<aside class="column dotcom__aside bottom-12" style="position: fixed;">
 					<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
@@ -76,14 +92,14 @@ $(function() {
 								그룹 소개
 							</h4>
 							<p class="list-group-item-text">
-								...
+								...(달력을 넣어서 그룹 일정 표시하도록,,?)
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
-							<a href="/groupboard/groupInfo">그룹 정보 보기</a>
+							<a href="/groupboard/groupInfo">ㅇㅇ님 환영합니다</a>
 						</div>
-							<a href="/groupboard/groupMain" class="list-group-item list-group-item-action active justify-content-between">
-								메인으로
+							<a href="/groupboard/groupInfo" class="list-group-item list-group-item-action active justify-content-between">
+								그룹 정보 보기
 							</a>
 					</div>
 					<nav>
@@ -92,6 +108,7 @@ $(function() {
 								<a href="/groupboard/groupWriteForm">글쓰기</a>
 							</li>
 							<li class="breadcrumb-item">
+								<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
 								<a href="#">활동 정보</a>
 							</li>
 							<li class="breadcrumb-item">

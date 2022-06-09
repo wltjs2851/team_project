@@ -5,6 +5,12 @@
 
 <script>
 $(function() {
+	
+	var update_result = "${update_result}";
+	if(update_result == "true") {
+		alert("수정 완료");
+	}
+	
 	$("#btnCommentInsert").click(function() {
 		console.log("click");
 		var gbc_content = $("#c_content").val();
@@ -51,18 +57,47 @@ $(function() {
 	}
 	
 	// 좋아요
-// 	$("i.fa-heart").click(function() {
-// 		var gbno = $(this).attr("data-gbno");
-// 		var url = "/groupboard/like";
-// 		var sData = {
-// 				"gbno" : gbno
-// 		};
-// 		var that = $(this);
+	var heart = ${heart};
+	var span = $("i.fa-heart").next();
+	
+	if(heart > 0) {
+		console.log(heart);
+		$("i.fa-heart").css("color", "red");
+		$("i.fa-heart").prop("name", heart);
+	} else {
+		// 좋아요가 하나도 없는 경우 
+		console.log(heart);
+		$("i.fa-heart").css("color", "black");
+		$("i.fa-heart").prop("name", heart);
+	}
+
+	$("i.fa-heart").click(function(){
+		console.log("클릭");
 		
-// 		$.post(url, sData, function(rData) {
-// 			console.log("rData: ", rData);
-// 		});
-// 	});
+		var that = $("i.fa-heart");
+		var gbno = that.attr("data-gbno");
+		console.log(gbno);
+		
+		var heart = that.prop("name");
+		console.log(heart);
+		
+		var url = "/groupboard/heart";
+		var sData = {
+				"gbno" : gbno,
+				"heart" : that.prop("name")
+		};
+		
+		$.post(url, sData, function(rData){
+			console.log("rData:", rData);
+			that.prop('name', rData);
+			
+			if(rData == 1){
+				$("i.fa-heart").css("color", "red");
+			} else {
+				$("i.fa-heart").css("color", "black");
+			}
+		});
+	});
 	
 	// 댓글 삭제
 	$("#table_comment_list").on("click", ".btnCommentDelete", function() {
@@ -110,7 +145,9 @@ $(function() {
 });
 </script>
 
-${ groupBoardVo }
+<%-- ${ groupBoardVo } --%>
+<%-- ${ heart } --%>
+<%-- ${ count } --%>
 
 <!-- 모달 -->
 <div class="row">
@@ -177,8 +214,8 @@ ${ groupBoardVo }
 				
 				
 				<!-- 좋아요 --> 
-				<i class="fas fa-heart" style="margin: 20px 50%; font-size: 30px; color: graytext; cursor: pointer;" data-gbno="${ groupBoardVo.gbno }"></i>
-				<span style="font-size: 30px;">${ boardVo.like_count }</span>
+					<i class="fas fa-heart" style=" font-size: 30px; color: graytext; cursor: pointer;" data-gbno="${ groupBoardVo.gbno }"></i>
+					<span style="font-size: 30px;">${ groupBoardVo.gb_like }</span>
 				
 				<!-- 수정, 삭제 버튼 -->
 				<table>
@@ -191,6 +228,7 @@ ${ groupBoardVo }
 <!-- 				<button>삭제</button> -->
 				
 				<!-- 댓글 -->
+				댓글[${ count }]
 				<div class="row">
 					<div class="col-md-9">
 						<input type="text" id="c_content" class="form-control" placeholder="댓글을 입력해주세요">
@@ -235,7 +273,7 @@ ${ groupBoardVo }
 				</div>
 				<div class="col-md-3">
 				
-				<aside class="column dotcom__aside bottom-12">
+<!-- 				<aside class="main-sidebar sidebar-dark-primary elevation-4"> -->
 					<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
@@ -250,10 +288,10 @@ ${ groupBoardVo }
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
-							<a href="/groupboard/groupInfo">그룹 정보 보기</a>
+							<a href="/groupboard/groupMain">그룹 메인으로</a>
 						</div>
-							<a href="/groupboard/groupMain" class="list-group-item list-group-item-action active justify-content-between">
-								메인으로
+							<a href="/groupboard/groupInfo" class="list-group-item list-group-item-action active justify-content-between">
+								그룹 정보 보기
 							</a>
 					</div>
 					<nav>
@@ -287,7 +325,7 @@ ${ groupBoardVo }
 							</div>
 						</div>
 					</div>
-					</aside>
+<!-- 					</aside> -->
 				
 				</div>
 			</div>
