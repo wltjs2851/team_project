@@ -51,7 +51,7 @@
  
  <!-- 댓글 갯수 넣기 -->
  <update id="updateComment">
- 	update tbl_group_board
+ 	update tbl_group_board_comment
 	set gb_comment = (select count(gbcno)
                      from tbl_group_board_comment
                      where gbno = #{gbno})
@@ -66,7 +66,7 @@
 
 <!-- 댓글 갯수 -->
 <select id="countComment" resultType="int">
-	select count(*) from tbl_group_board
+	select count(*) from tbl_group_board_comment
 	where gbno = #{gbno}
 </select>
  

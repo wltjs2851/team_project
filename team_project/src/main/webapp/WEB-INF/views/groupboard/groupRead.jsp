@@ -145,9 +145,9 @@ $(function() {
 });
 </script>
 
-${ groupBoardVo }
+<%-- ${ groupBoardVo } --%>
 <%-- ${ heart } --%>
-<%-- ${ count } --%>
+${ count }
 
 <!-- 모달 -->
 <div class="row">
