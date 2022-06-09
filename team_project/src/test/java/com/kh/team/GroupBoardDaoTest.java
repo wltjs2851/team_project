@@ -36,5 +36,16 @@ public class GroupBoardDaoTest {
 		boolean result = groupBoardDao.update(groupBoardVo);
 		System.out.println("result: " + result);
 	}
+	
+	@Test
+	public void testUpdateComment() {
+		boolean result = groupBoardDao.updateComment(11);
+		System.out.println("result: " + result);
+	}
 
+	@Test
+	public void testCountComment() {
+		int count = groupBoardDao.countComment(11);
+		System.out.println("count: " + count);
+	}
 }

@@ -12,4 +12,5 @@ public interface RecipeDao {
 	public RecipeVo contentByRno(int gno);
 	public void updateViewcnt(int rno, int r_viewcnt);
 	public List<RecipeVo> selectByViewCnt();
+	public int countComment(int rno);
 }

@@ -44,4 +44,22 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		return groupList;
 	}
 
+	@Override
+	public List<GroupBoardVo> notice(String gb_notice) {
+		List<GroupBoardVo> noticeList = groupBoardDao.notice(gb_notice);
+		return noticeList;
+	}
+
+	@Override
+	public boolean updateComment(int gbno) {
+		boolean result = groupBoardDao.updateComment(gbno);
+		return result;
+	}
+
+	@Override
+	public int countComment(int gbno) {
+		
+		return groupBoardDao.countComment(gbno);
+	}
+
 }

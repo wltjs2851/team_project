@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.team.dao.FreeCommentDao;
+import com.kh.team.service.FreeCommentService;
 import com.kh.team.service.FreeService;
 import com.kh.team.service.RoutineCommentService;
 import com.kh.team.service.RoutineService;
 import com.kh.team.util.FileUtil;
+import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.FreeVo;
 import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
@@ -31,6 +34,9 @@ public class FreeController {
 	
 	@Autowired
 	FreeService freeService;
+	
+	@Autowired
+	FreeCommentService freeCommentService;
 	
 	@RequestMapping(value = "/freeList", method = RequestMethod.GET)
 	public String FreeList(Model model) {
@@ -70,7 +76,9 @@ public class FreeController {
 	@RequestMapping(value = "/modifyFreeForm", method = RequestMethod.GET)
 	public String modifyFreeForm(Model model, int fno) {
 		FreeVo freeVo = freeService.contentByFno(fno);
+		List<FreeVo> categoryList = freeService.categoryList();
 		model.addAttribute("freeVo", freeVo);
+		model.addAttribute("categoryList", categoryList);
 		return "board/modifyFreeForm";
 	}
 
@@ -83,34 +91,34 @@ public class FreeController {
 		return "redirect:/free/freeContent?fno=" + freeVo.getFno();
 	}
 	
-//	@RequestMapping(value = "/addFreeComment", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String addRecipeComment(RoutineCommentVo routineCommentVo) throws Exception {
-//		System.out.println(routineCommentVo);
-//		boolean result = routineCommentService.addRoutineComment(routineCommentVo);
-//		return String.valueOf(result);
-//	}
-//
-//	@RequestMapping(value = "/commentRoutineList/{uno}", method = RequestMethod.GET)
-//	@ResponseBody
-//	public List<RoutineCommentVo> commentRecipeList(@PathVariable("uno") int uno) {
-//		List<RoutineCommentVo> list = routineCommentService.selectRoutineCommentList(uno);
-//		return list;
-//	}
-//
-//	@RequestMapping(value = "/modifyRoutineComment", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String modifyComment(RoutineCommentVo routineCommentVo) {
-//		boolean result = routineCommentService.modifyRoutineComment(routineCommentVo);
-//		return String.valueOf(result);
-//	}
-//	
-//	@RequestMapping(value = "/removeRoutineComment/{urcno}", method = RequestMethod.GET)
-//	@ResponseBody
-//	public String removeRoutineComment(@PathVariable("urcno") int urcno) {
-//		boolean result = routineCommentService.removeRoutineComment(urcno);
-//		return String.valueOf(result);
-//	}
+	@RequestMapping(value = "/addFreeComment", method = RequestMethod.POST)
+	@ResponseBody
+	public String addFreeComment(FreeCommentVo freeCommentVo) throws Exception {
+		System.out.println(freeCommentVo);
+		boolean result = freeCommentService.addFreeComment(freeCommentVo);
+		return String.valueOf(result);
+	}
+
+	@RequestMapping(value = "/commentFreeList/{fno}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<FreeCommentVo> commentFreeList(@PathVariable("fno") int fno) {
+		List<FreeCommentVo> list = freeCommentService.commentFreeList(fno);
+		return list;
+	}
+
+	@RequestMapping(value = "/modifyFreeComment", method = RequestMethod.POST)
+	@ResponseBody
+	public String modifyFreeComment(FreeCommentVo freeCommentVo) {
+		boolean result = freeCommentService.modifyFreeComment(freeCommentVo);
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value = "/removeFreeComment/{fcno}", method = RequestMethod.GET)
+	@ResponseBody
+	public String removeFreeComment(@PathVariable("fcno") int fcno) {
+		boolean result = freeCommentService.removeFreeComment(fcno);
+		return String.valueOf(result);
+	}
 
 	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)
 	@ResponseBody

@@ -71,4 +71,10 @@ public class RecipeDaoImpl implements RecipeDao{
 		return list;
 	}
 
+	@Override
+	public int countComment(int rno) {
+		int count = sqlSession.selectOne(NAMESPACE + "countComment", rno);
+		return count;
+	}
+
 }

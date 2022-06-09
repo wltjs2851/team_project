@@ -33,4 +33,10 @@
  	where gbcno = #{gbcno}
  </delete>
  
+ <!-- 댓글 갯수 -->
+ <select id="countGroupComment" resultType="GroupBoardCommentVo">
+ 	select count(*) from tbl_group_board_comment
+ 	where gbno = #{gbno}
+ </select>
+ 
  </mapper>

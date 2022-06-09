@@ -80,13 +80,13 @@
 							<c:forEach items="${listRecipe}" var="recipeVo">
 								<c:choose>
 									<c:when test="${empty recipeVo.r_pic}">
-										<img width="60px" height="40px" style="align-items: center;"
+										<img width="60px" height="40px" style="align-items: center; border-radius: 30%; overflow: hidden;"
 											src="/resources/images/recipe.png" alt="식단이미지">
 									</c:when>
 									<c:otherwise>
 										<img width="60px" height="40px"
 											src="/member/displayImage?filename=${recipeVo.r_pic}"
-											alt="식단이미지">
+											alt="식단이미지" style="border-radius: 30%; overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
 								<a href="/recipe/recipeForm?rno=${recipeVo.rno}">${fn:substring(recipeVo.r_title, 0, 7)}...</a>
@@ -143,7 +143,25 @@
 								<a href=""> 자유게시판 </a>
 							</h4>
 						</div>
-						<div class="card-body"></div>
+						<div class="card-body">
+							<c:forEach items="${listFree}" var="freeVo">
+								<c:choose>
+									<c:when test="${empty freeVo.f_pic}">
+										<img width="60px" height="40px" style="align-items: center; border-radius: 30%; overflow: hidden;"
+											src="/resources/images/routine.png" alt="루틴이미지">
+									</c:when>
+									<c:otherwise>
+										<img width="60px" height="40px"
+											src="/member/displayImage?filename=${freeVo.f_pic}"
+											alt="루틴이미지" style="border-radius: 30%; overflow: hidden;">
+									</c:otherwise>
+								</c:choose>
+								<a href="/routine/routineContent?uno=${freeVo.fno}">${fn:substring(freeVo.f_title, 0, 7)}...</a>
+								<br>
+								<br>
+								<br>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 
