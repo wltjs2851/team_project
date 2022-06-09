@@ -71,4 +71,10 @@ public class FreeDaoImpl implements FreeDao{
 		return list;
 	}
 
+	@Override
+	public List<FreeVo> selectByViewCnt() {
+		List<FreeVo> list = sqlSession.selectList(NAMESPACE + "selectByViewCnt");
+		return list;
+	}
+
 }

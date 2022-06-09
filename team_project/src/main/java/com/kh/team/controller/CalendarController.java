@@ -15,16 +15,9 @@ public class CalendarController {
 		return "admin/schedule";
 	}
 	
-//	@RequestMapping(value = "/data", method = RequestMethod.GET)
-//	public String data(Model model) {
-//		model.addAttribute("list", service.schList());
-//		return "pageJsonReport";
-//	}
-//	
-//	@RequestMapping(value = "/schedulePopup", method = RequestMethod.GET)
-//	public String schedulePopup() {
-//		return "admin/schedulePopup";
-//	}
-	
+	@RequestMapping(value = "/cal", method = RequestMethod.GET)
+	public String calendar() {
+		return "admin/calendar";
+	}
 	
 }

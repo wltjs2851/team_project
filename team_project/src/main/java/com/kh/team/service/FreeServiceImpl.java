@@ -49,4 +49,9 @@ public class FreeServiceImpl implements FreeService{
 		return freeDao.categoryList();
 	}
 
+	@Override
+	public List<FreeVo> selectByViewCnt() {
+		return freeDao.selectByViewCnt();
+	}
+	
 }

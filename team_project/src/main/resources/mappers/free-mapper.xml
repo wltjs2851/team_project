@@ -17,6 +17,13 @@
 		select * from tbl_free order by fno desc
 	</select>
 	
+	<select id="selectByViewCnt" resultType="FreeVo">
+		select * from
+			(select * from tbl_free
+			order by f_viewcnt desc)
+		where rownum &lt;= 3
+	</select>
+	
 	<update id="updateFreeArticle">
 		update tbl_free set f_title = #{f_title}, f_content = #{f_content}, 
 				f_pic = #{f_pic, jdbcType=VARCHAR}, fcode = #{fcode}
