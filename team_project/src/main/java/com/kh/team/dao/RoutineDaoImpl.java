@@ -65,4 +65,10 @@ public class RoutineDaoImpl implements RoutineDao{
 		parameter.put("u_viewcnt", u_viewcnt);
 		sqlSession.update(NAMESPACE + "updateRecipe", parameter);
 	}
+
+	@Override
+	public List<RoutineVo> selectByViewCnt() {
+		List<RoutineVo> list = sqlSession.selectList(NAMESPACE + "selectByViewCnt");
+		return list;
+	}
 }

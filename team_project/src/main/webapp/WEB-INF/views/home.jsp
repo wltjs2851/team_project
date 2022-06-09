@@ -103,37 +103,25 @@
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
 							<h4 class="card-title">
-								<a href="">횐님들의 루틴 <img class="card-img-top img-fluid"
-									src="/resources/images/products/products-2.jpg"
-									alt="Card image cap">
-								</a>
+								<a href="">횐님들의 루틴</a>
 							</h4>
 						</div>
 						<div class="card-body">
-							<h4 class="card-title">
-								<a href="">Full Study Table Combo</a>
-							</h4>
-							<ul class="list-inline product-meta">
-								<li class="list-inline-item"><a href=""><i
-										class="fa fa-folder-open-o"></i>Furnitures</a></li>
-								<li class="list-inline-item"><a href=""><i
-										class="fa fa-calendar"></i>26th December</a></li>
-							</ul>
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-								adipisicing elit. Explicabo, aliquam!</p>
-							<div class="product-ratings">
-								<ul class="list-inline">
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item selected"><i
-										class="fa fa-star"></i></li>
-									<li class="list-inline-item"><i class="fa fa-star"></i></li>
-								</ul>
-							</div>
+							<c:forEach items="${listRoutine}" var="routineVo">
+								<c:choose>
+									<c:when test="${empty routineVo.ur_pic}">
+										<img width="40px" height="auto" style="align-items: center;"
+											src="" alt="루틴이미지">
+									</c:when>
+									<c:otherwise>
+										<img width="60px" height="auto"
+											src="/member/displayImage?filename=${routineVo.ur_pic}"
+											alt="루틴이미지">
+									</c:otherwise>
+								</c:choose>
+								<a href="/admin/selectByReno?reno=${routineVo.uno}">${fn:substring(routineVo.ur_title, 0, 7)}...</a>
+								<br>
+							</c:forEach>
 						</div>
 					</div>
 				</div>

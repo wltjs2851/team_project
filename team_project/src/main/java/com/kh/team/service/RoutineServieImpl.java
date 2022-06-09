@@ -44,4 +44,9 @@ public class RoutineServieImpl implements RoutineService{
 		routineDao.updateViewcnt(uno, ur_viewcnt);
 	}
 
+	@Override
+	public List<RoutineVo> selectByViewCnt() {
+		return routineDao.selectByViewCnt();
+	}
+
 }

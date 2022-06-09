@@ -12,4 +12,5 @@ public interface RoutineDao {
 	public boolean deleteRoutine(int uno);
 	public RoutineVo contentByUno(int uno);
 	public void updateViewcnt(int uno, int u_viewcnt);
+	public List<RoutineVo> selectByViewCnt();
 }

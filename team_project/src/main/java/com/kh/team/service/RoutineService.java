@@ -11,4 +11,5 @@ public interface RoutineService {
 	public boolean removeRoutine(int uno);
 	public RoutineVo contentByUno(int uno);
 	public void updateViewcnt(int uno, int ur_viewcnt);
+	public List<RoutineVo> selectByViewCnt();
 }
