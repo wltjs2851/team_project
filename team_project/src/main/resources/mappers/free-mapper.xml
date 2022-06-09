@@ -1,0 +1,39 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.free">
+	<select id="categoryList">
+		select fno, fname from tbl_fcategory_code
+	</select>
+
+	<insert id="insertFreeArticle">
+		insert into tbl_free(fno, f_title, f_content, userid, f_pic, f_code)
+			values(seq_free_fno.nextval, #{f_title}, #{f_content}, #{userid}, 
+				#{f_pic, jdbcType=VARCHAR}, #{f_code})
+	</insert>
+	
+	<select id="selectFreeArticle" resultType="FreeVo">
+		select * from tbl_free order by fno desc
+	</select>
+	
+	<update id="updateFreeArticle">
+		update tbl_free set f_title = #{f_title}, f_content = #{f_content}, 
+				f_pic = #{f_pic, jdbcType=VARCHAR}, f_code = #{f_code}
+			where uno = #{fno}
+	</update>
+	
+	<delete id="deleteFreeArticle">
+		delete from tbl_free where uno = #{fno}
+	</delete>
+	
+	<select id="contentByFno" resultType="FreeVo">
+		select * from tbl_free where fno = #{fno}
+	</select>
+	
+	<update id="updateViewcnt">
+		update tbl_free set f_viewcnt = #{f_viewcnt} + 1
+			where fno = #{fno}
+	</update>
+
+</mapper>

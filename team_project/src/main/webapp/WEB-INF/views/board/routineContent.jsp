@@ -127,7 +127,7 @@ $(function() {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div>
-				<h2>${ recipeVo.r_title }</h2>
+				<h2>${ routineVo.ur_title }</h2>
 				<p style="color: #888;">${ routineVo.userid } &nbsp; ${ routineVo.ur_regdate }</p>
 				<hr>
 			</div>
