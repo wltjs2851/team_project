@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.kh.team.mappers.freecomment">
+ 
+ <!-- 댓글 등록 -->
+ <insert id="insertFreeComment">
+ 	insert into tbl_fcomment (fcno, fno, fc_comment, userid, u_pic)
+ 	values(seq_fcomment_fcno.nextval, #{fno}, #{fc_comment}, #{userid}, #{u_pic, jdbcType=VARCHAR})
+ </insert>
+ 
+ <!-- 댓글 목록 -->
+ <select id="commentFreeList" resultType="FreeCommentVo">
+ 	select * from tbl_fcomment
+ 	where fno = #{fno}
+ 	order by fcno desc
+ </select>
+ 
+ <!-- 댓글 수정 -->
+ <update id="udpateFreeComment">
+ 	update tbl_fcomment set
+ 		fc_comment = #{fc_comment}
+ 	where fcno = #{fcno}
+ </update>
+ 
+ <!-- 댓글 삭제 -->
+ <delete id="deleteFreeComment">
+ 	delete from tbl_fcomment
+ 	where fcno = #{fcno}
+ </delete>
+ 
+ </mapper>

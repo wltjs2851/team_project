@@ -86,7 +86,7 @@
 									<a class="dropdown-item" href="/group/groupList">지역별 운동 모임</a>
 									<a class="dropdown-item" href="/recipe/recipeList">식단</a>
 									<a class="dropdown-item" href="/routine/routineList">나만의 루틴</a>
-									<a class="dropdown-item" href="#">자유게시판</a>
+									<a class="dropdown-item" href="/free/freeList">자유게시판</a>
 								</div>
 							</li>
 							<li class="nav-item">
