@@ -61,10 +61,10 @@
 								</p>
 							</div>
 							<div class="list-group-item justify-content-between">
-								<a href="#">그룹 정보 수정(그룹장만)</a>
+								<a href="/groupboard/updateGroupInfoForm">그룹 정보 수정(그룹장만)</a>
 							</div>
 								<a href="/groupboard/groupMain" class="list-group-item list-group-item-action active justify-content-between">
-									메인으로
+									그룹 메인으로
 								</a>
 						</div>
 						<nav>
