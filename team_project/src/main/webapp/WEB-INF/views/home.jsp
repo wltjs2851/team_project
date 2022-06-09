@@ -80,8 +80,8 @@
 							<c:forEach items="${listRecipe}" var="recipeVo">
 								<c:choose>
 									<c:when test="${empty recipeVo.r_pic}">
-										<img width="40px" height="20px" style="align-items: center;"
-											src="" alt="식단이미지">
+										<img width="60px" height="40px" style="align-items: center;"
+											src="/resources/images/recipe.png" alt="식단이미지">
 									</c:when>
 									<c:otherwise>
 										<img width="60px" height="40px"
@@ -112,8 +112,8 @@
 							<c:forEach items="${listRoutine}" var="routineVo">
 								<c:choose>
 									<c:when test="${empty routineVo.ur_pic}">
-										<img width="40px" height="20px" style="align-items: center; border-radius: 30%; overflow: hidden;"
-											src="" alt="루틴이미지">
+										<img width="60px" height="40px" style="align-items: center; border-radius: 30%; overflow: hidden;"
+											src="/resources/images/routine.png" alt="루틴이미지">
 									</c:when>
 									<c:otherwise>
 										<img width="60px" height="40px"
