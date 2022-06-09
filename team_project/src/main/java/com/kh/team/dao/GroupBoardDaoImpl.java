@@ -62,8 +62,19 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public void countComment(int gbno) {
-		sqlSession.update(NAMESPACE + "countComment", gbno);
+	public boolean updateComment(int gbno) {
+		System.out.println("gorupBoardDaoImpl, gbno: " + gbno);
+		int count = sqlSession.update(NAMESPACE + "countComment", gbno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int countComment(int gbno) {
+		
+		return sqlSession.selectOne(NAMESPACE + "countComment", gbno);
 	}
 
 }

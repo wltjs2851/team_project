@@ -76,11 +76,16 @@ public class GroupBoardController {
 		model.addAttribute("groupBoardVo", groupBoardVo);
 		
 		// 댓글 갯수
-//		groupBoardService.countComment(gbno);
-//		model.addAttribute("groupBoardVo", groupBoardService.read(groupBoardVo.getGb_comment()));
+		boolean result = groupBoardService.updateComment(gbno);
+		System.out.println("groupRead, result: " + result);
+		int count = groupBoardService.countComment(gbno);
+		System.out.println("count: " + count);
+		model.addAttribute("count", count);
+
+		// 로그인 한 경우에만 접근 가능
+		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
 		
 		// 좋아요
-		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
 		GroupBoardLikeVo groupBoardLikeVo = new GroupBoardLikeVo();
 		groupBoardLikeVo.setGbno(gbno);
 		groupBoardLikeVo.setUserid(userid);

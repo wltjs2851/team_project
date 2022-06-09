@@ -51,8 +51,15 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	}
 
 	@Override
-	public void countComment(int gbno) {
-		groupBoardDao.countComment(gbno);
+	public boolean updateComment(int gbno) {
+		boolean result = groupBoardDao.updateComment(gbno);
+		return result;
+	}
+
+	@Override
+	public int countComment(int gbno) {
+		
+		return groupBoardDao.countComment(gbno);
 	}
 
 }
