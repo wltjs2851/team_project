@@ -36,5 +36,10 @@
 			order by r_viewcnt desc)
 		where rownum &lt;= 3
 	</select>
+	
+	 
+ 	<select id="countComment" resultType="int">
+ 		select count(*) from tbl_rcomment where rno = #{rno}
+	</select>
 
 </mapper>

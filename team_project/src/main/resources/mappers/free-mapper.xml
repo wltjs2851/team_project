@@ -3,14 +3,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kh.team.mappers.free">
-	<select id="categoryList">
-		select fno, fname from tbl_fcategory_code
+	<select id="categoryList" resultType="FreeVo">
+		select fcode, fname from tbl_fcategory_code
 	</select>
 
 	<insert id="insertFreeArticle">
-		insert into tbl_free(fno, f_title, f_content, userid, f_pic, f_code)
+		insert into tbl_free(fno, f_title, f_content, userid, f_pic, fcode)
 			values(seq_free_fno.nextval, #{f_title}, #{f_content}, #{userid}, 
-				#{f_pic, jdbcType=VARCHAR}, #{f_code})
+				#{f_pic, jdbcType=VARCHAR}, #{fcode})
 	</insert>
 	
 	<select id="selectFreeArticle" resultType="FreeVo">
@@ -19,8 +19,8 @@
 	
 	<update id="updateFreeArticle">
 		update tbl_free set f_title = #{f_title}, f_content = #{f_content}, 
-				f_pic = #{f_pic, jdbcType=VARCHAR}, f_code = #{f_code}
-			where uno = #{fno}
+				f_pic = #{f_pic, jdbcType=VARCHAR}, fcode = #{fcode}
+			where fno = #{fno}
 	</update>
 	
 	<delete id="deleteFreeArticle">
@@ -28,7 +28,7 @@
 	</delete>
 	
 	<select id="contentByFno" resultType="FreeVo">
-		select * from tbl_free where fno = #{fno}
+		select f.*, c.fname from tbl_free f, tbl_fcategory_code c where fno = #{fno} and f.fcode = c.fcode
 	</select>
 	
 	<update id="updateViewcnt">

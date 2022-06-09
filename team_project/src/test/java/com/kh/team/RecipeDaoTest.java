@@ -20,7 +20,7 @@ public class RecipeDaoTest {
 	
 	@Test
 	public void testRecipeInsert() {
-		RecipeVo recipeVo = new RecipeVo("·¹½ÃÇÇ2", "³»¿ë2", "hong2", null);
+		RecipeVo recipeVo = new RecipeVo("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2", "ï¿½ï¿½ï¿½ï¿½2", "hong2", null);
 		boolean result = recipeDao.insertRecipe(recipeVo);
 		System.out.println("result: " + result);
 	}
@@ -33,7 +33,7 @@ public class RecipeDaoTest {
 	
 	@Test
 	public void testRecipeUpdate() {
-		RecipeVo recipeVo = new RecipeVo(1, "·¹½ÃÇÇ1", "´Ü¹éÁú", "user01", null);
+		RecipeVo recipeVo = new RecipeVo(1, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1", "ï¿½Ü¹ï¿½ï¿½ï¿½", "user01", null);
 		boolean result = recipeDao.updateRecipe(recipeVo);
 		System.out.println("result: " + result);
 	}
@@ -41,6 +41,12 @@ public class RecipeDaoTest {
 	@Test
 	public void testRecipeDelete() {
 		boolean result = recipeDao.deleteRecipe(1);
+		System.out.println("result: " + result);
+	}
+	
+	@Test
+	public void testCommentCount() {
+		int result = recipeDao.countComment(7);
 		System.out.println("result: " + result);
 	}
 
