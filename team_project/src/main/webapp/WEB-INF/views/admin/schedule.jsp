@@ -10,8 +10,7 @@
 <!-- Full Calendar 한글 표기 설정 -->
 <script src='/resources/fullcalendar/locales/ko.js'></script>
 <script>
-
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -25,6 +24,12 @@
       selectable: true,
       selectMirror: true,
       select: function(arg) {
+    	  console.log("start:" + arg.start);
+    	  var y = arg.start.getFullYear();
+    	  var m = arg.start.getMonth();
+    	  var d = arg.start.getDate();
+    	  console.log(y + "/" + m + "/" + d);
+    	  console.log("arg.allDay" , arg.allDay);
         var title = prompt('Event Title:');
         if (title) {
           calendar.addEvent({
@@ -33,7 +38,6 @@
             end: arg.end,
             allDay: arg.allDay
           })
-          
         }
         calendar.unselect()
       },
@@ -45,64 +49,20 @@
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
       events: [
-        {
-          title: 'All Day Event',
-          start: '2020-09-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2020-09-07',
-          end: '2020-09-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2020-09-11',
-          end: '2020-09-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T10:30:00',
-          end: '2020-09-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2020-09-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2020-09-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2020-09-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2020-09-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2020-09-28'
-        }
+       
       ]
     });
+    
+    calendar.addEvent({
+        title: '테스트',
+        start: new Date("2022-06-01"),
+        end: new Date("2022-06-10"),
+        allDay: true
+      });
 
     calendar.render();
+    
+    
   });
 
 </script>
@@ -129,12 +89,6 @@
 			<div class="col-md-8">
 				<!-- 				달력 본체 -->
 				<div id='calendar'></div>
-				<!-- 				일정 추가 -->
-				<!-- 				<div> -->
-				<!-- 					<button class="add-button" type="button" onclick="click_add();"> -->
-				<!-- 					일정 추가 -->
-				<!-- 					</button> -->
-				<!-- 				</div> -->
 			</div>
 			<div class="col-md-2"></div>
 		</div>
