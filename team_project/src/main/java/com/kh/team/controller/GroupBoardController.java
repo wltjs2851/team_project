@@ -76,8 +76,8 @@ public class GroupBoardController {
 		model.addAttribute("groupBoardVo", groupBoardVo);
 		
 		// 댓글 갯수
-		boolean result = groupBoardService.updateComment(gbno);
-		System.out.println("groupRead, result: " + result);
+//		boolean result = groupBoardService.updateComment(gbno);
+//		System.out.println("groupRead, result: " + result);
 		int count = groupBoardService.countComment(gbno);
 		System.out.println("count: " + count);
 		model.addAttribute("count", count);

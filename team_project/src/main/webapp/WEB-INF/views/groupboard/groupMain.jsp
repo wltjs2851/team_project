@@ -65,7 +65,7 @@ $(function() {
 						</div>
 						
 						<div>
-							<i class='far fa-comment-alt'></i> ${ groupBoardVo.gb_comment }
+							<i class='far fa-comment-alt'></i> ${ count }1
 							<i class='far fa-heart'></i> ${ groupBoardVo.gb_like }
 						</div>
 						

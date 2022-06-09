@@ -147,7 +147,7 @@ $(function() {
 
 <%-- ${ groupBoardVo } --%>
 <%-- ${ heart } --%>
-${ count }
+<%-- ${ count } --%>
 
 <!-- 모달 -->
 <div class="row">
@@ -228,6 +228,7 @@ ${ count }
 <!-- 				<button>삭제</button> -->
 				
 				<!-- 댓글 -->
+				댓글[${ count }]
 				<div class="row">
 					<div class="col-md-9">
 						<input type="text" id="c_content" class="form-control" placeholder="댓글을 입력해주세요">
@@ -272,7 +273,7 @@ ${ count }
 				</div>
 				<div class="col-md-3">
 				
-				<aside class="column dotcom__aside bottom-12" style="position: fixed;">
+<!-- 				<aside class="main-sidebar sidebar-dark-primary elevation-4"> -->
 					<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
@@ -324,7 +325,7 @@ ${ count }
 							</div>
 						</div>
 					</div>
-					</aside>
+<!-- 					</aside> -->
 				
 				</div>
 			</div>

@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-${ noticeList }
+<%-- ${ noticeList } --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -22,7 +22,7 @@ ${ noticeList }
 				</div>
 				<div class="col-md-3">
 				
-				<aside class="column dotcom__aside bottom-12" style="position: fixed;">
+<!-- 				<aside class="column dotcom__aside bottom-12" style="position: fixed;"> -->
 					<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
@@ -74,7 +74,7 @@ ${ noticeList }
 							</div>
 						</div>
 					</div>
-					</aside>
+<!-- 					</aside> -->
 				
 				</div>
 			</div>
