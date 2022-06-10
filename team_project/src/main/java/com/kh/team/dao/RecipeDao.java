@@ -13,4 +13,8 @@ public interface RecipeDao {
 	public void updateViewcnt(int rno, int r_viewcnt);
 	public List<RecipeVo> selectByViewCnt();
 	public int countComment(int rno);
+	public boolean insertLike(int rno, String userid);
+	public boolean deleteLike(int rno, String userid);
+	public int countLike(int rno, String userid);
+	public boolean updateLikecnt(int rno, int r_like);
 }

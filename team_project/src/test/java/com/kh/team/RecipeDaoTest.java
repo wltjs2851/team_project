@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team.dao.RecipeDao;
+import com.kh.team.service.RecipeService;
 import com.kh.team.vo.RecipeVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -17,6 +18,9 @@ public class RecipeDaoTest {
 	
 	@Autowired
 	RecipeDao recipeDao;
+	
+	@Autowired 
+	RecipeService recipeService;
 	
 	@Test
 	public void testRecipeInsert() {
@@ -49,5 +53,18 @@ public class RecipeDaoTest {
 		int result = recipeDao.countComment(7);
 		System.out.println("result: " + result);
 	}
-
+	
+	@Test
+	public void testlike() {
+		int like = recipeService.isLike(41, "hong1234");
+		boolean result;
+		if(like > 0) {
+			recipeService.decreaseLike(41, 2, "hong1234");
+			result = false;
+		} else {
+			recipeService.increaseLike(41, 1, "hong1234");
+			result = true;
+		}
+		System.out.println("result: " + result);
+	}
 }

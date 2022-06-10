@@ -37,9 +37,25 @@
 		where rownum &lt;= 3
 	</select>
 	
-	 
  	<select id="countComment" resultType="int">
  		select count(*) from tbl_rcomment where rno = #{rno}
 	</select>
+	
+	<insert id="insertLike">
+		insert into tbl_recipe_like(rlno, rno, userid)
+			values(seq_recipe_rlno.nextval, #{rno}, #{userid})
+	</insert>
+	
+	<delete id="deleteLike">
+		delete from tbl_recipe_like where rno = #{rno} and userid = #{userid}
+	</delete>
+	
+	<select id="countLike" resultType="int">
+		select count(*) from tbl_recipe_like where rno = #{rno} and userid = #{userid}
+	</select>
+	
+	<update id="updateLikecnt">
+		update tbl_recipe set r_like = #{r_like} where rno = #{rno}
+	</update>
 
 </mapper>

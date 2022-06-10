@@ -1,16 +1,15 @@
 package com.kh.team.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import java.util.UUID;
 
-import org.apache.commons.io.FileUtils;
+import java.io.FileInputStream;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.gson.JsonObject;
 import com.kh.team.service.RecipeCommentService;
 import com.kh.team.service.RecipeService;
 import com.kh.team.util.FileUtil;
+import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
 
@@ -53,21 +53,27 @@ public class RecipeController {
 		System.out.println("RecipeController, addRecipeRun, recipeVo: " + recipeVo);
 		String content = recipeVo.getR_content();
 		recipeVo.setR_content(content.replaceAll("\"", "\'"));
-		String target = "filename";
-		int num = content.indexOf(target);
-		String r_pic = content.substring(num);
-		int col = r_pic.indexOf("\"");
-		r_pic = r_pic.substring(9, col);
-		System.out.println(r_pic);
-		recipeVo.setR_pic(r_pic);
+		if(content.indexOf("filename") != -1) {
+			String r_pic = content.substring(content.indexOf("filename"));
+			r_pic = r_pic.substring(9, r_pic.indexOf("\""));
+			recipeVo.setR_pic(r_pic);
+		}
 		recipeService.addRecipe(recipeVo);
 		return "redirect:/recipe/recipeList";
 	}
 
 	@RequestMapping(value = "/recipeForm", method = RequestMethod.GET)
-	public String recipeForm(Model model, int rno) {
+	public String recipeForm(Model model, int rno, HttpSession session) {
 		RecipeVo recipeVo = recipeService.contentByRno(rno);
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		int like_cnt;
+		if(recipeService.isLike(rno, memberVo.getUserid()) == 0) {
+			like_cnt = 0;
+		} else {
+			like_cnt = recipeService.isLike(rno, memberVo.getUserid());
+		}
 		model.addAttribute("recipeVo", recipeVo);
+		model.addAttribute("like_cnt", like_cnt);
 		return "board/recipeForm";
 	}
 
@@ -119,6 +125,22 @@ public class RecipeController {
 		return String.valueOf(result);
 	}
 	
+	@RequestMapping(value = "/updateLike", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateLike(RecipeVo recipeVo, @RequestParam("like_cnt") int like_cnt) {
+		System.out.println(recipeVo);
+		int rno = recipeVo.getRno();
+		String userid = recipeVo.getUserid();
+		int r_like = recipeVo.getR_like();
+		
+		boolean result;
+		if(like_cnt > 0) {
+			result = recipeService.decreaseLike(rno, r_like, userid);
+		} else {
+			result = recipeService.increaseLike(rno, r_like, userid);
+		}
+		return String.valueOf(result);
+	}
 
 
 	@RequestMapping(value = "/summernote", method = RequestMethod.GET)
