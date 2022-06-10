@@ -11,12 +11,6 @@
 </head>
 <script>
 $(function() {
-	var thisYear = new Date().getFullYear();
-	var thisMonth = new Date().getMonth() + 1;
-	var thisDate = new Date().getDate();
-	var thisToday = thisYear + '_' + thisMonth + '_' + thisDate;
-	var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
-	divToday.attr("style", "background: RED;");
 	$(".dateBoard").on("click",".divDate", function() {
 	 	var insertContent = prompt("일정을 입력해주세요.");
 		var selectDate = $(this).attr("data-today");
@@ -24,6 +18,7 @@ $(function() {
 		console.log(selectDate);
 	 	console.log(insertContent);
 	 	console.log(userid);
+	 	
 	 	var url = "/calendar/save";
 	 	var sData = {
 		 		'userid' : userid,
@@ -35,8 +30,11 @@ $(function() {
 	 			console.log(rData);
 	 		});
 	 	}
+	 	
+	 	
 	});
 });
+
 </script>
 <body>
 ${calList}
