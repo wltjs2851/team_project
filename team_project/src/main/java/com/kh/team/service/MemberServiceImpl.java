@@ -48,4 +48,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberVo;
 	}
 
+	@Override
+	public boolean isExist(String userid) {
+		return memberDao.isExist(userid);
+	}
+
 }

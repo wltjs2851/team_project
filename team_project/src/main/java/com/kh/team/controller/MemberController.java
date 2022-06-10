@@ -162,4 +162,11 @@ public class MemberController {
 		boolean result = FileUtil.deleteFile(filename);
 		return String.valueOf(result);
 	}
+	
+	@RequestMapping(value = "/isExist", method = RequestMethod.GET)
+	@ResponseBody
+	public String isExist(String userid) {
+		boolean result = memberService.isExist(userid);
+		return String.valueOf(result);
+	}
 }
