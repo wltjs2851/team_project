@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.schedule">
+	<!-- 나의 일정 -->
+	<!-- 일정 추가 -->
+	<insert id="insertSchedule">
+		insert into tbl_schedule (idx, userid, title, startdate, enddate)
+		values (seq_schedule_idx.nextval, #{userid}, #{title}, #{startdate}, #{enddate})
+	</insert>
+	
+	<!-- 글 수정 -->
+	<update id="updateKcal">
+		update tbl_kcal set
+			k_name = #{k_name},
+			k_time = #{k_time},
+			kcal = #{kcal},
+			k_dgree = #{k_dgree}
+		where kno = #{kno}
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteKcal">
+		delete from tbl_kcal
+		where kno = #{kno}
+	</delete>
+	
+	<!-- 글 상세조회 -->
+	<select id="selectByKno" resultType="KcalVo">
+		select * from tbl_kcal
+		where kno = #{kno}
+	</select>
+	
+	<!-- 달력 목록조회 -->
+	<select id="scheduleList" resultType="ScheduleVo">
+		select * from tbl_schedule
+	</select>
+	
+	
+</mapper>
