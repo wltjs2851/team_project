@@ -10,6 +10,8 @@
 		</div>
 		<div class="col-md-8">
 			<form role="form" action="/group/addGroupRun" method="post" enctype="multipart/form-data">
+			${ loginVo }
+			<input type="hidden" name="g_leader" id="g_leader" value="${ loginVo.userid }">
 				<div class="form-group">
 					<label for="g_location">
 						지역 
@@ -49,13 +51,6 @@
 						참가 인원
 					</label>
 					<input type="number" class="form-control" id="g_attend" name="g_attend"/>
-				</div>
-				
-				<div class="form-group">
-					<label for="users">
-						참가자 이름
-					</label>
-					<input type="text" class="form-control" id="users" name="users"/>
 				</div>
 				
 				<div>

@@ -12,4 +12,5 @@ public interface GroupDao {
 	public GroupVo groupByGno(int gno);
 	public boolean updateMemberGno(int gno, String userid);
 	public boolean updateGroupMember(GroupVo groupVo, String userid);
+	public int getNextGno();
 }
