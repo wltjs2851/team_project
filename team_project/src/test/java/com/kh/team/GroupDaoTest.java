@@ -20,7 +20,7 @@ public class GroupDaoTest {
 	
 	@Test
 	public void testGroupInsert() {
-		GroupVo groupVo = new GroupVo("Á·±¸¸ğÀÓ", "¼ö¿µ", 7, "Á·±¸ÇÏ´Â ¸ğÀÓÀÔ´Ï´Ù~", "¿ï»ê", null, "user08");
+		GroupVo groupVo = new GroupVo("ë°°êµ¬ëª¨ì„", "ë°°êµ¬", 11, "ë°°êµ¬ê°€ ì§±", "ì„œìš¸", null, "hong1234");
 		boolean result = groupDao.insertGroup(groupVo);
 		System.out.println("result: " + result);
 	}
@@ -33,7 +33,7 @@ public class GroupDaoTest {
 	
 	@Test
 	public void testGroupUpdate() {
-		GroupVo groupVo = new GroupVo(1, "Ãà±¸¸ğÀÓ", "Ãà±¸", 13, "Ãà±¸ÇÏ´Â ¸ğÀÓÀÔ´Ï´Ù~", "ºÎ»ê", null, "user01, user02");
+		GroupVo groupVo = new GroupVo(1, "í’‹ì‚´ë¡œê°€ì", "í’‹ì‚´", 5, "í’‹ì‚´ì„ ã…‹", "ìš¸ì‚°", null);
 		boolean result = groupDao.updateGroup(groupVo);
 		System.out.println("result: " + result);
 	}

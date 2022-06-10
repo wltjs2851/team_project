@@ -25,11 +25,14 @@ document.addEventListener('DOMContentLoaded', function() {
       selectMirror: true,
       select: function(arg) {
     	  console.log("start:" + arg.start);
+    	  console.log("end:" + arg.end);
     	  var y = arg.start.getFullYear();
     	  var m = arg.start.getMonth();
     	  var d = arg.start.getDate();
-    	  console.log(y + "/" + m + "/" + d);
-    	  console.log("arg.allDay" , arg.allDay);
+    	  var startDate = y + "/" + m + "/" + d;
+    	  console.log("startDate:" + startDate);
+//     	  console.log(y + "/" + m + "/" + d);
+//     	  console.log("arg.allDay" , arg.allDay);
         var title = prompt('Event Title:');
         if (title) {
           calendar.addEvent({
@@ -48,9 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: [
+      events: []
        
-      ]
+      
     });
     
     calendar.addEvent({
@@ -59,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         end: new Date("2022-06-10"),
         allDay: true
       });
+    alert("aa");
 
     calendar.render();
     

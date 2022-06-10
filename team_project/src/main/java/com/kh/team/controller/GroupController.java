@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.GroupService;
+import com.kh.team.service.MemberService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
@@ -27,6 +28,9 @@ public class GroupController {
 
 	@Autowired
 	private GroupService groupService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	@RequestMapping(value = "/groupList", method = RequestMethod.GET)
 	public String getGroupList(Model model) {
@@ -41,11 +45,12 @@ public class GroupController {
 	}
 
 	@RequestMapping(value = "/addGroupRun", method = RequestMethod.POST)
-	public String addGroupRun(GroupVo groupVo, MultipartFile file) {
-//		System.out.println("GroupController, addGroupRun, groupVo: " + groupVo);
+	public String addGroupRun(GroupVo groupVo, MultipartFile file, HttpSession session) {
+		System.out.println("GroupController, addGroupRun, groupVo: " + groupVo);
 		System.out.println("GroupController, addGroupRun, file: " + file);
 		String originalFilename = file.getOriginalFilename();
 		System.out.println("originalFilename: " + originalFilename);
+		
 		String g_pic;
 		if (originalFilename != null && !originalFilename.equals("")) {
 			try {
@@ -60,6 +65,9 @@ public class GroupController {
 			groupVo.setG_pic(null);
 			groupService.addGroup(groupVo);
 		}
+		session.removeAttribute("loginVo");
+		MemberVo memberVo = memberService.memberByUserid(groupVo.getG_leader());
+		session.setAttribute("loginVo", memberVo);
 		return "redirect:/group/groupList";
 	}
 
@@ -94,6 +102,13 @@ public class GroupController {
 		}
 
 		return "redirect:/group/groupForm?gno=" + groupVo.getGno();
+	}
+	
+	@RequestMapping(value = "/removeGroup", method = RequestMethod.GET)
+	public String readGroupForm(int gno) {
+		groupService.removeGroup(gno);
+		//user table gno값도 삭제
+		return "board/groupList";
 	}
 
 	@RequestMapping(value = "/joinGroup", method = RequestMethod.POST)

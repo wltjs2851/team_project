@@ -42,4 +42,10 @@ public class MemberServiceImpl implements MemberService {
 		return u_pic;
 	}
 
+	@Override
+	public MemberVo memberByUserid(String userid) {
+		MemberVo memberVo = memberDao.memberByUserid(userid);
+		return memberVo;
+	}
+
 }

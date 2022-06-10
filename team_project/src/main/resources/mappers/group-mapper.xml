@@ -3,9 +3,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kh.team.mappers.group">
+	<select id="getNextGno" resultType="int">
+		select seq_group_gno.nextval from dual 
+	</select>
+
 	<insert id="insertGroup">
-		insert into tbl_group(gno, g_name, excercise_type, g_attend, g_intro, g_location, g_pic, users)
-			values(seq_group_gno.nextval, #{g_name}, #{excercise_type}, #{g_attend},#{g_intro}, #{g_location}, #{g_pic, jdbcType=VARCHAR}, #{users})
+		insert into tbl_group(gno, g_name, excercise_type, g_attend, g_intro, g_location, g_pic, g_leader)
+			values(#{gno}, #{g_name}, #{excercise_type}, #{g_attend},#{g_intro}, #{g_location}, #{g_pic, jdbcType=VARCHAR}, #{g_leader})
 	</insert>
 	
 	<select id="selectGroup" resultType="GroupVo">
@@ -18,7 +22,7 @@
 	
 	<update id="updateGroup">
 		update tbl_group set g_name = #{g_name}, excercise_type = #{excercise_type}, g_attend = #{g_attend},
-				g_intro = #{g_intro}, g_location = #{g_location}, g_pic = #{g_pic, jdbcType=VARCHAR}, users = #{users}
+				g_intro = #{g_intro}, g_location = #{g_location}, g_pic = #{g_pic, jdbcType=VARCHAR}
 			where gno = #{gno}
 	</update>
 	
