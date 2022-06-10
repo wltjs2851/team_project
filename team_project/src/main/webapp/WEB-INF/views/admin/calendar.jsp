@@ -14,9 +14,8 @@ $(function() {
 	var thisMonth = new Date().getMonth() + 1;
 	var thisDate = new Date().getDate();
 	var thisToday = thisYear + '_' + thisMonth + '_' + thisDate;
-	console.log(thisToday);
 	var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
-	console.log(divToday);
+	divToday.attr("style", "background: RED;");
 	$(".dateBoard").on("click",".divDate", function() {
 	 	var insertContent = prompt("일정을 입력해주세요.");
 		var selectDate = $(this).attr("data-today");
