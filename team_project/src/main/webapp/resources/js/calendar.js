@@ -1,6 +1,9 @@
 /**
  * 
  */
+
+	
+//    한달짜리만 할때는 이렇게 하면됨
 // Date 포맷 
 const dateFormat = (date) => {
     return date.toLocaleDateString().replace(/\./g, "").split(" ");
@@ -8,6 +11,13 @@ const dateFormat = (date) => {
   
   // 달력 생성
   const makeCalendar = (date) => {
+	  
+//	  const date = new Date();
+	    var currentYear = date.getFullYear();
+	    var currentMonth = date.getMonth() + 1;
+	    var thisday = currentYear + '/' + currentMonth + '/';
+	    
+	    
     
     // 현재의 년도와 월 받아오기
     const [nowYear, nowMonth] = dateFormat(date);
@@ -19,7 +29,7 @@ const dateFormat = (date) => {
     const lastDay = dateFormat(new Date(nowYear, nowMonth, 0)).pop() * 1;
     
     const today = new Date().getDate();
-
+    
     let htmlDummy = '';
 
     // 전달 날짜 표시하기
@@ -30,11 +40,13 @@ const dateFormat = (date) => {
     // 현재 날짜 표시하기
     for (let i = 1; i <= lastDay; i++) {
       if (today != i) {
-    	  htmlDummy += `<div>${i}</div>`;
+    	  htmlDummy += `<div class='divDate' data-today='${currentYear + "/" + currentMonth + "/" + i}'>${i}</div>`;
       } else {
-    	  htmlDummy += `<div style="background: #FFEBEE;">${i}</div>`;
+    	  htmlDummy += `<div class='divDate' data-today='${currentYear + "/" + currentMonth + "/" + i}' style="background: #FFEBEE;">${i}</div>`;
       }
     }
+    
+    
 
     // 지금까지 추가한 날짜 박스
     const maxDay = prevDay + lastDay;
@@ -49,21 +61,24 @@ const dateFormat = (date) => {
 
     document.querySelector(`.dateBoard`).innerHTML = htmlDummy;
     document.querySelector(`.dateTitle`).innerText = `${nowYear}년 ${nowMonth}월`;
-  }
     
-  const date = new Date();
+  }
+  
+  var date = new Date();
+  var currentYear = date.getFullYear();
+  var currentMonth = date.getMonth() + 1;
+  var thisday = currentYear + '/' + currentMonth + '/';
   
   // Date 객체를 보내서 달력 생성
   makeCalendar(date);
   
-  date.setMonth(date.getMonth() - 1);
   
   // 이전달 이동
-  document.querySelector(`.prevDay`).onclick = () => {
+  document.querySelector("#prevMonth").onclick = () => {
     makeCalendar(new Date(date.setMonth(date.getMonth() - 1)));
   }
   
   // 다음달 이동
-  document.querySelector(`.nextDay`).onclick = () => {
+  document.querySelector("#nextMonth").onclick = () => {
     makeCalendar(new Date(date.setMonth(date.getMonth() + 1)));
   }
