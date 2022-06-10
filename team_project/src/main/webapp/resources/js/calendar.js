@@ -15,7 +15,7 @@ const dateFormat = (date) => {
 //	  const date = new Date();
 	var currentYear = date.getFullYear();
 	var currentMonth = date.getMonth() + 1;
-	var thisday = currentYear + '/' + currentMonth + '/';
+	var thisday = currentYear + '_' + currentMonth;
 	    
 //	var realToday = new Date.getFullYear() + '/' + new Date.getMonth() + 1 + '/' + new Date.getDate();
     
@@ -63,18 +63,34 @@ const dateFormat = (date) => {
   var date = new Date();
   var currentYear = date.getFullYear();
   var currentMonth = date.getMonth() + 1;
-  var thisday = currentYear + '/' + currentMonth + '/';
+  var thisday = currentYear + '_' + currentMonth;
   
   // Date 객체를 보내서 달력 생성
   makeCalendar(date);
   
   
   // 이전달 이동
-  document.querySelector("#prevMonth").onclick = () => {
-    makeCalendar(new Date(date.setMonth(date.getMonth() - 1)));
-  }
+//  document.querySelector("#prevMonth").onclick = () => {
+//	  var prevDay = new Date(date.setMonth(date.getMonth() - 1))
+//	  var prevYear = prevDay.getFullYear();
+//	  var prevMonth = prevDay.getMonth() + 1;
+//	  var sData = {
+//			'month' : prevYear + '_' + prevMonth,
+//			'userid' : 'admin01'
+//	  }
+//	  console.log(sData);
+//	  $.get('/calendar/cal3', sData, function(rdata) {
+//	  });
+//    makeCalendar(prevDay);
+//  }
   
   // 다음달 이동
-  document.querySelector("#nextMonth").onclick = () => {
-    makeCalendar(new Date(date.setMonth(date.getMonth() + 1)));
-  }
+//  document.querySelector("#nextMonth").onclick = () => {
+//	  var nextDay = new Date(date.setMonth(date.getMonth() + 1))
+//	  var nextYear = nextDay.getFullYear();
+//	  var nextMonth = nextDay.getMonth() + 1;
+//	  $.get('/calendar/cal3', function(a) {
+//		  console.log(nextYear + '_' + nextMonth);
+//	  });
+//    makeCalendar(nextDay);
+//  }

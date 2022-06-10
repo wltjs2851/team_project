@@ -1,6 +1,8 @@
 package com.kh.team.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,11 @@ public class CalendarDaoImpl implements CalendarDao {
 	SqlSession sqlSession;
 
 	@Override
-	public List<CalendarVo> getCal(String userid) {
-		return sqlSession.selectList(NAMESPACE + "selectById", userid);
+	public List<CalendarVo> getCal(String month, String userid) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("month", month);
+		map.put("userid", userid);
+		return sqlSession.selectList(NAMESPACE + "selectById", map);
 	}
 
 	@Override

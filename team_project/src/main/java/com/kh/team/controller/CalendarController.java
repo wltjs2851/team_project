@@ -1,5 +1,7 @@
 package com.kh.team.controller;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.service.ScheduleService;
 import com.kh.team.vo.ScheduleVo;
@@ -37,11 +40,18 @@ public class CalendarController {
 	public String calendar(Model model, HttpSession session, HttpServletRequest httpRequest) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = loginVo.getUserid();
-		
-//		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
-		List<CalendarVo> calList = calendarService.getCal(userid);
+		String thisYear = String.valueOf(LocalDate.now().getYear());
+		String thisMonth = String.valueOf(LocalDate.now().getMonthValue());
+		String month = thisYear + "_" + thisMonth;
+		List<CalendarVo> calList = calendarService.getCal(month, userid);
 		model.addAttribute("calList", calList);
 		return "admin/calendar";
+	}
+	
+	@RequestMapping(value = "/cal3", method = RequestMethod.GET)
+	@ResponseBody
+	public List<CalendarVo> calendar3(String month, String userid) {
+		return calendarService.getCal(month, userid);
 	}
 	
 	// 시영
@@ -51,8 +61,8 @@ public class CalendarController {
 		String userid = loginVo.getUserid();
 		
 //		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
-		List<CalendarVo> calList = calendarService.getCal(userid);
-		model.addAttribute("calList", calList);
+//		List<CalendarVo> calList = calendarService.getCal(userid);
+//		model.addAttribute("calList", calList);
 		return "admin/calendar2";
 	}
 	
