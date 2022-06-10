@@ -49,7 +49,7 @@ public class GroupController {
 		String g_pic;
 		if (originalFilename != null && !originalFilename.equals("")) {
 			try {
-				g_pic = FileUtil.uploadFile("C:/gpic", originalFilename, file.getBytes());
+				g_pic = FileUtil.uploadFile("//192.168.0.90/gpic", originalFilename, file.getBytes());
 				groupVo.setG_pic(g_pic);
 				groupService.addGroup(groupVo);
 			} catch (IOException e) {
@@ -94,6 +94,13 @@ public class GroupController {
 		}
 
 		return "redirect:/group/groupForm?gno=" + groupVo.getGno();
+	}
+	
+	@RequestMapping(value = "/removeGroup", method = RequestMethod.GET)
+	public String readGroupForm(int gno) {
+		groupService.removeGroup(gno);
+		//user table gno값도 삭제
+		return "board/groupList";
 	}
 
 	@RequestMapping(value = "/joinGroup", method = RequestMethod.POST)

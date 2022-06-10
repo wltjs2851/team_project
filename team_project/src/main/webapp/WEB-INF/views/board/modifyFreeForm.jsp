@@ -62,13 +62,17 @@ function uploadSummernoteImageFile(file) {
 				<div class="form-group row">
 					<div class="col-md-1">
 						<select name="fcode">
-						<c:forEach items="${ categoryList }" var="categoryList">					
-							<option value="${ categoryList.fcode }">${ categoryList.fname }</option>
+						<c:forEach items="${ categoryList }" var="categoryList">
+							<option value="${ categoryList.fcode }"
+								<c:if test="${ categoryList.fcode == freeVo.fcode }">
+									selected
+								</c:if>					
+							>${ categoryList.fname }</option>
 						</c:forEach>
 						</select>
 					</div>
 					<div class="col-md-11" >
-						<input type="text" class="form-control" id="f_title" name="f_title" required style="width: 100%"/>
+						<input type="text" class="form-control" value="${ freeVo.f_title }" name="f_title" required style="width: 100%"/>
 					</div>
 				</div>
 				<div class="form-group">

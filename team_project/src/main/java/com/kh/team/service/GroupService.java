@@ -8,6 +8,7 @@ public interface GroupService {
 	public boolean addGroup(GroupVo groupVo);
 	public List<GroupVo> groupList();
 	public boolean moidfyGroup(GroupVo groupVo);
+	public boolean removeGroup(int gno);
 	public GroupVo groupByGno(int gno);
 	public boolean joinGroup(GroupVo groupVo, String userid);
 }

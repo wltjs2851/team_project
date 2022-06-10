@@ -36,6 +36,11 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
+	public boolean removeGroup(int gno) {
+		return groupDao.deleteGroup(gno);
+	}
+	
+	@Override
 	@Transactional
 	public boolean joinGroup(GroupVo groupVo, String userid) {
 		boolean groupResult = groupDao.updateGroupMember(groupVo, userid);
@@ -45,5 +50,6 @@ public class GroupServiceImpl implements GroupService{
 		}
 		return false;
 	}
+
 
 }
