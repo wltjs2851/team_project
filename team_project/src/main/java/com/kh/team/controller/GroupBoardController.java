@@ -227,4 +227,10 @@ public class GroupBoardController {
 		
 		return "groupboard/notice";
 	}
+	
+	@RequestMapping(value = "activityInfo", method = RequestMethod.GET)
+	public String activityInfo() {
+		
+		return "groupboard/activityInfo";
+	}
 }

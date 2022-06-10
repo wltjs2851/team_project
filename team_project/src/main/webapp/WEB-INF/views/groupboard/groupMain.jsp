@@ -106,11 +106,11 @@ ${ groupVo }
 					<nav>
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item">
-								<a href="/groupboard/groupWriteForm">글쓰기</a>
+								<a href="/groupboard/groupWriteForm?bno=${ groupBoardVo.gno }">글쓰기</a>
 							</li>
 							<li class="breadcrumb-item">
 								<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
-								<a href="#">활동 정보</a>
+								<a href="/groupboard/activityInfo">활동 정보</a>
 							</li>
 							<li class="breadcrumb-item">
 								<a href="">그룹 탈퇴</a>
