@@ -50,8 +50,8 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public List<GroupBoardVo> list() {
-		List<GroupBoardVo> groupList = sqlSession.selectList(NAMESPACE + "list");
+	public List<GroupBoardVo> list(int gno) {
+		List<GroupBoardVo> groupList = sqlSession.selectList(NAMESPACE + "list", gno);
 		return groupList;
 	}
 

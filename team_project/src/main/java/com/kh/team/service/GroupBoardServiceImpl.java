@@ -39,8 +39,8 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	}
 
 	@Override
-	public List<GroupBoardVo> list() {
-		List<GroupBoardVo> groupList = groupBoardDao.list();
+	public List<GroupBoardVo> list(int gno) {
+		List<GroupBoardVo> groupList = groupBoardDao.list(gno);
 		return groupList;
 	}
 

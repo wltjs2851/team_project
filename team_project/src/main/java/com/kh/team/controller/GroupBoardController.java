@@ -11,6 +11,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,7 @@ import com.kh.team.service.GroupBoardService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.GroupBoardLikeVo;
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
 
 @Controller
@@ -141,6 +143,7 @@ public class GroupBoardController {
 			rttr.addFlashAttribute("update_result", result);
 		} else {
 			long size = file.getSize();
+			System.out.println("size: " + size);
 			try {
 				String gb_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
 				groupBoardVo.setGb_pic(gb_pic);
@@ -167,9 +170,12 @@ public class GroupBoardController {
 		return "redirect:/groupboard/groupMain";
 	}
 	
-	@RequestMapping(value = "groupMain", method = RequestMethod.GET)
-	public String main(Model model, String gb_notice) {
-		List<GroupBoardVo> groupList = groupBoardService.list();
+	@RequestMapping(value = "groupMain/{gno}", method = RequestMethod.GET)
+	public String main(Model model, String gb_notice, @PathVariable("gno") int gno) {
+//		GroupVo groupVo = 
+//		model.addAttribute("groupVo", groupVo);
+		
+		List<GroupBoardVo> groupList = groupBoardService.list(gno);
 		model.addAttribute("groupList", groupList);
 		
 		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);

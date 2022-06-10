@@ -24,6 +24,7 @@ $(function() {
 
 <%-- ${ groupList } --%>
 <%-- ${ noticeList } --%>
+${ groupVo }
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -81,7 +82,7 @@ $(function() {
 				
 				<div class="col-md-3">
 				
-				<aside class="column dotcom__aside bottom-12" style="position: fixed;">
+<!-- 				<aside class="column dotcom__aside bottom-12" style="position: fixed;"> -->
 					<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
@@ -137,7 +138,7 @@ $(function() {
 							</div>
 						</div>
 					</div>
-					</aside>
+<!-- 					</aside> -->
 					
 				</div>
 				

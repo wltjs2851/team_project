@@ -10,7 +10,7 @@ public interface GroupBoardDao {
 	public GroupBoardVo read(int gbno);
 	public boolean update(GroupBoardVo groupBoardVo);
 	public boolean delete(int gbno);
-	public List<GroupBoardVo> list();
+	public List<GroupBoardVo> list(int gno);
 	public List<GroupBoardVo> notice(String gb_notice);
 	public boolean updateComment(int gbno);
 	public int countComment(int gbno);
