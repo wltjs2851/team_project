@@ -18,6 +18,7 @@ $(function() {
 		console.log(selectDate);
 	 	console.log(insertContent);
 	 	console.log(userid);
+	 	
 	 	var url = "/calendar/save";
 	 	var sData = {
 		 		'userid' : userid,
@@ -29,6 +30,8 @@ $(function() {
 	 			console.log(rData);
 	 		});
 	 	}
+	 	
+	 	
 	});
 });
 

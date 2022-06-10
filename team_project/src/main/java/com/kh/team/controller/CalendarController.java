@@ -2,6 +2,7 @@ package com.kh.team.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class CalendarController {
 	
 	@Autowired
 	private ScheduleService service;
+	
+	@Autowired
 	private CalendarServcie calendarService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -31,12 +34,26 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value = "/cal", method = RequestMethod.GET)
-	public String calendar(Model model, HttpSession session) {
+	public String calendar(Model model, HttpSession session, HttpServletRequest httpRequest) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = loginVo.getUserid();
+		
+//		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
 		List<CalendarVo> calList = calendarService.getCal(userid);
 		model.addAttribute("calList", calList);
 		return "admin/calendar";
+	}
+	
+	// 시영
+	@RequestMapping(value = "/cal2", method = RequestMethod.GET)
+	public String calendar2(Model model, HttpSession session, HttpServletRequest httpRequest) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
+		
+//		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
+		List<CalendarVo> calList = calendarService.getCal(userid);
+		model.addAttribute("calList", calList);
+		return "admin/calendar2";
 	}
 	
 	// 달력 일정 추가 
