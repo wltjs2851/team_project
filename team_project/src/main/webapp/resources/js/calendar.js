@@ -70,14 +70,27 @@ const dateFormat = (date) => {
   
   
   // 이전달 이동
-  document.querySelector("#prevMonth").onclick = () => {
-	  $.get('/calendar/cal3', function(a) {
-		  console.log();
-	  });
-    makeCalendar(new Date(date.setMonth(date.getMonth() - 1)));
-  }
+//  document.querySelector("#prevMonth").onclick = () => {
+//	  var prevDay = new Date(date.setMonth(date.getMonth() - 1))
+//	  var prevYear = prevDay.getFullYear();
+//	  var prevMonth = prevDay.getMonth() + 1;
+//	  var sData = {
+//			'month' : prevYear + '_' + prevMonth,
+//			'userid' : 'admin01'
+//	  }
+//	  console.log(sData);
+//	  $.get('/calendar/cal3', sData, function(rdata) {
+//	  });
+//    makeCalendar(prevDay);
+//  }
   
   // 다음달 이동
-  document.querySelector("#nextMonth").onclick = () => {
-    makeCalendar(new Date(date.setMonth(date.getMonth() + 1)));
-  }
+//  document.querySelector("#nextMonth").onclick = () => {
+//	  var nextDay = new Date(date.setMonth(date.getMonth() + 1))
+//	  var nextYear = nextDay.getFullYear();
+//	  var nextMonth = nextDay.getMonth() + 1;
+//	  $.get('/calendar/cal3', function(a) {
+//		  console.log(nextYear + '_' + nextMonth);
+//	  });
+//    makeCalendar(nextDay);
+//  }

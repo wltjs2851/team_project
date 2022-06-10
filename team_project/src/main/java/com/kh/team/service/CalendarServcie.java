@@ -6,7 +6,7 @@ import com.kh.team.vo.CalendarVo;
 
 public interface CalendarServcie {
 
-	public List<CalendarVo> getCal(String userid);
+	public List<CalendarVo> getCal(String month, String userid);
 	
 	public boolean insertCal(CalendarVo calendarVo);
 }

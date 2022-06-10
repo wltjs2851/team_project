@@ -36,6 +36,34 @@ $(function() {
 	 		});
 	 	}
 	});
+	$("#prevMonth").click(function() {
+		var prevDay = new Date(date.setMonth(date.getMonth() - 1))
+		  var prevYear = prevDay.getFullYear();
+		  var prevMonth = prevDay.getMonth() + 1;
+		  var sData = {
+				'month' : prevYear + '_' + prevMonth,
+				'userid' : '${loginVo.userid}'
+		  };
+		  console.log(sData);
+		  $.get('/calendar/cal3', sData, function(rdata) {
+			  console.log(rdata);
+		  });
+	    makeCalendar(prevDay);
+	});
+	$("#nextMonth").click(function() {
+		var nextDay = new Date(date.setMonth(date.getMonth() + 1))
+		  var nextYear = nextDay.getFullYear();
+		  var nextMonth = nextDay.getMonth() + 1;
+		  var sData = {
+					'month' : nextYear + '_' + nextMonth,
+					'userid' : '${loginVo.userid}'
+			  };
+		  console.log(sData);
+		  $.get('/calendar/cal3', sData, function(rdata) {
+			  console.log(rdata);
+		  });
+	    makeCalendar(nextDay);
+	});
 });
 </script>
 <body>
