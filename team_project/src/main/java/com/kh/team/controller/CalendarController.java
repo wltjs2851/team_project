@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.service.ScheduleService;
 import com.kh.team.vo.ScheduleVo;
@@ -42,6 +43,17 @@ public class CalendarController {
 		List<CalendarVo> calList = calendarService.getCal(userid);
 		model.addAttribute("calList", calList);
 		return "admin/calendar";
+	}
+	
+	@RequestMapping(value = "/cal3", method = RequestMethod.GET)
+	@ResponseBody
+	public List<CalendarVo> calendar3(Model model, HttpSession session, HttpServletRequest httpRequest) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
+		
+//		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
+		List<CalendarVo> calList = calendarService.getCal(userid);
+		return calList;
 	}
 	
 	// 시영

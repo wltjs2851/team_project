@@ -16,7 +16,7 @@ $(function() {
 	var thisDate = new Date().getDate();
 	var thisToday = thisYear + '_' + thisMonth + '_' + thisDate;
 	var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
-	divToday.attr("style", "background: RED;");
+	divToday.attr("style", "background: #FFEBEE;");
 	$(".dateBoard").on("click",".divDate", function() {
 	 	var insertContent = prompt("일정을 입력해주세요.");
 		var selectDate = $(this).attr("data-today");
@@ -59,6 +59,7 @@ ${calList}
 
 		<div class="grid dateBoard"></div>
 	</div>
+	<div><input type="checkbox"><span>등, 이두 조지기</span></div>
 </body>
 <script type="text/javascript" src="/resources/js/calendar.js"></script>
 </html>

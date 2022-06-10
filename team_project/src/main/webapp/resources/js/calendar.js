@@ -15,7 +15,7 @@ const dateFormat = (date) => {
 //	  const date = new Date();
 	var currentYear = date.getFullYear();
 	var currentMonth = date.getMonth() + 1;
-	var thisday = currentYear + '/' + currentMonth + '/';
+	var thisday = currentYear + '_' + currentMonth;
 	    
 //	var realToday = new Date.getFullYear() + '/' + new Date.getMonth() + 1 + '/' + new Date.getDate();
     
@@ -39,7 +39,7 @@ const dateFormat = (date) => {
 
     // 현재 날짜 표시하기
     for (let i = 1; i <= lastDay; i++) {
-    	  htmlDummy += `<div class='divDate' data-today='${currentYear + "/" + currentMonth + "/" + i}'>${i}</div>`;
+    	  htmlDummy += `<div class='divDate' data-today='${currentYear + "_" + currentMonth + "_" + i}'>${i}</div>`;
     }
     
     
@@ -63,7 +63,7 @@ const dateFormat = (date) => {
   var date = new Date();
   var currentYear = date.getFullYear();
   var currentMonth = date.getMonth() + 1;
-  var thisday = currentYear + '/' + currentMonth + '/';
+  var thisday = currentYear + '_' + currentMonth;
   
   // Date 객체를 보내서 달력 생성
   makeCalendar(date);
@@ -71,6 +71,9 @@ const dateFormat = (date) => {
   
   // 이전달 이동
   document.querySelector("#prevMonth").onclick = () => {
+	  $.get('/calendar/cal3', function(a) {
+		  console.log();
+	  });
     makeCalendar(new Date(date.setMonth(date.getMonth() - 1)));
   }
   
