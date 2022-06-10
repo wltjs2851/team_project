@@ -59,5 +59,11 @@ public class MemberDaoImpl implements MemberDao {
 		return u_pic;
 	}
 
+	@Override
+	public MemberVo memberByUserid(String userid) {
+		MemberVo memberVo = sqlSession.selectOne(NS + "memberByUserid", userid);
+		return memberVo;
+	}
+
 	
 }

@@ -92,6 +92,9 @@
 							<li class="nav-item">
 								<a class="nav-link" href="#">나의 일정</a>
 							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/groupboard/groupMain/${ loginVo.gno }">그룹</a>
+							</li>
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
 						<c:choose>
