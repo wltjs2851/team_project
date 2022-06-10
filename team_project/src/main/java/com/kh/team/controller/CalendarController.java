@@ -1,7 +1,6 @@
 package com.kh.team.controller;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,8 +56,8 @@ public class CalendarController {
 	// 시영
 	@RequestMapping(value = "/cal2", method = RequestMethod.GET)
 	public String calendar2(Model model, HttpSession session, HttpServletRequest httpRequest) {
-		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
-		String userid = loginVo.getUserid();
+//		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+//		String userid = loginVo.getUserid();
 		
 //		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
 //		List<CalendarVo> calList = calendarService.getCal(userid);
