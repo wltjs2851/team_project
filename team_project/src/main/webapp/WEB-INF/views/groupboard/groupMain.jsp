@@ -19,12 +19,21 @@ $(function() {
 	if(delete_result == "true") {
 		alert("삭제 완료");
 	}
+	
+	// 검색 버튼
+	$("#btnSearch").click(function() {
+		var searchType = $("#searchType").val();
+		var keyword = $("#keyword").val();
+		console.log("searchType: ", searchType);
+		console.log("keyword: ", keyword);
+		
+	});
 });
 </script>
 
 <%-- ${ groupList } --%>
 <%-- ${ noticeList } --%>
-${ groupVo }
+<%-- ${ groupVo } --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -98,7 +107,29 @@ ${ groupVo }
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
-							<a href="/groupboard/groupInfo">ㅇㅇ님 환영합니다</a>
+						
+							<div>
+							<select id="searchType">
+								<option value="t"
+									<c:if test="${ searchDto.searchType == 't' }">
+										selected
+									</c:if>
+								>제목</option>
+								<option value="c"
+									<c:if test="${ searchDto.searchType == 'c' }">
+										selected
+									</c:if>
+								>내용</option>
+								<option value="w"
+									<c:if test="${ searchDto.searchType == 'w' }">
+										selected
+									</c:if>
+								>작성자</option>
+							</select>
+							</div>
+							
+							<input type="text" id="keyword" value="${searchDto.keyword}">
+							<button id="btnSearch" style="width: 50px; height:30px; padding: 1% 0" class="btn btn-success">검색</button>
 						</div>
 							<a href="/groupboard/groupInfo?gno=${ loginVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기

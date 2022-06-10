@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.team.dao.GroupBoardDao;
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.SearchDto;
 
 @Service
 public class GroupBoardServiceImpl implements GroupBoardService {
@@ -67,5 +68,11 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		String gb_pic = groupBoardDao.getGb_picdById(gbno);
 		return gb_pic;
 	}
+
+//	@Override
+//	public List<GroupBoardVo> list(SearchDto searchDto) {
+//		List<GroupBoardVo> groupListSearch = groupBoardDao.list(searchDto);
+//		return groupListSearch;
+//	}
 
 }

@@ -28,6 +28,7 @@ import com.kh.team.vo.GroupBoardLikeVo;
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.SearchDto;
 
 @Controller
 @RequestMapping("/groupboard")
@@ -202,12 +203,16 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupMain/{gno}", method = RequestMethod.GET)
-	public String main(/*int gbno, */Model model, String gb_notice, @PathVariable("gno") int gno) {
+	public String main(/*int gbno, */Model model, String gb_notice, @PathVariable("gno") int gno, SearchDto searchDto) {
 		List<GroupBoardVo> groupList = groupBoardService.list(gno);
 		model.addAttribute("groupList", groupList);
 		
 		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);
 		model.addAttribute("noticeList", noticeList);
+		
+		// 검색어 하려고 했는데 잘 안됨
+//		List<GroupBoardVo> groupListSearch = groupBoardService.list(searchDto);
+//		model.addAttribute("searchDto", groupListSearch);
 		
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.SearchDto;
 
 @Repository
 public class GroupBoardDaoImpl implements GroupBoardDao {
@@ -83,5 +84,11 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		String gb_pic = sqlSession.selectOne(NAMESPACE + "getGb_picById", gbno);
 		return gb_pic;
 	}
+
+//	@Override
+//	public List<GroupBoardVo> list(SearchDto searchDto) {
+//		List<GroupBoardVo> groupListSearch = sqlSession.selectList(NAMESPACE + "list", searchDto);
+//		return groupListSearch;
+//	}
 
 }
