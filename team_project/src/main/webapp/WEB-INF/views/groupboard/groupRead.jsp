@@ -13,6 +13,8 @@ $(function() {
 	
 	$("#btnCommentInsert").click(function() {
 		console.log("click");
+		var count = $("#count").val();
+		console.log("count: ", count);
 		var gbc_content = $("#c_content").val();
 		var userid = $("#c_userid").val();
 		var gbno = "${groupBoardVo.gbno}";
@@ -27,6 +29,8 @@ $(function() {
 		$.post(url, sData, function(rData) {
 			console.log(rData);
 			if(rData == "true") {
+				$(".count").text(${count + 1});
+// 				$(".count").val(text(${count + 1}));
 				getCommentList();
 			}
 		});
@@ -107,6 +111,8 @@ $(function() {
 		$.get(url, function(rData) {
 			console.log(rData);
 			if (rData == "true") {
+				$(".count").text("${count - 1}");
+// 				$(".count").val(text(${count - 1}));
 				getCommentList();
 			}
 		});
@@ -203,14 +209,16 @@ $(function() {
 						${ groupBoardVo.gb_content }
 					</div>
 					
-					<c:choose>
-						<c:when test="${empty groupBoardVo.gb_pic}">
-							<div></div>
-						</c:when>
-					<c:otherwise>
-						<div style="margin: 20px;"><img src="/groupboard/displayImage?filename=${groupBoardVo.gb_pic}" alt="작성자가 올린 사진"></div>
-					</c:otherwise>
-					</c:choose>
+					<div class="image">
+						<c:choose>
+							<c:when test="${empty groupBoardVo.gb_pic}">
+								<div></div>
+							</c:when>
+						<c:otherwise>
+							<div style="margin: 20px;"><img src="/groupboard/displayImage?filename=${groupBoardVo.gb_pic}" alt="작성자가 올린 사진"></div>
+						</c:otherwise>
+						</c:choose>
+					</div>
 				
 				
 				<!-- 좋아요 --> 
@@ -228,7 +236,7 @@ $(function() {
 <!-- 				<button>삭제</button> -->
 				
 				<!-- 댓글 -->
-				댓글[${ count }]
+				댓글[<span class="count">${ count }</span>]
 				<div class="row">
 					<div class="col-md-9">
 						<input type="text" id="c_content" class="form-control" placeholder="댓글을 입력해주세요">
@@ -288,9 +296,9 @@ $(function() {
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
-							<a href="/groupboard/groupMain">그룹 메인으로</a>
+							<a href="/groupboard/groupMain/${ groupBoardVo.gno }">그룹 메인으로</a>
 						</div>
-							<a href="/groupboard/groupInfo" class="list-group-item list-group-item-action active justify-content-between">
+							<a href="/groupboard/groupInfo?gno=${ groupBoardVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>

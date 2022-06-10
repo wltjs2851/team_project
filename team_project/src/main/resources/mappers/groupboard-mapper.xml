@@ -11,8 +11,8 @@
  	insert into tbl_group_board
  		(gbno, gb_title, gb_content, userid, gb_notice, gb_pic, gno)
  	values
- 		(seq_group_board_gbno.nextval, #{gb_title}, #{gb_content}, #{userid, jdbcType=VARCHAR},
- 		 #{gb_notice, jdbcType=VARCHAR}, #{gb_pic, jdbcType=VARCHAR}, gno)
+ 		(seq_group_board_gbno.nextval, #{gb_title}, #{gb_content}, #{userid},
+ 		 #{gb_notice, jdbcType=VARCHAR}, #{gb_pic, jdbcType=VARCHAR}, #{gno})
  </insert>
  
  <!-- 글 조회 -->
@@ -68,6 +68,12 @@
 <!-- 댓글 갯수 -->
 <select id="countComment" resultType="int">
 	select count(*) from tbl_group_board_comment
+	where gbno = #{gbno}
+</select>
+
+<!-- 기존 사진 가져오기 -->
+<select id="getGb_picById" resultType="String">
+	select gb_pic from tbl_group_board
 	where gbno = #{gbno}
 </select>
  

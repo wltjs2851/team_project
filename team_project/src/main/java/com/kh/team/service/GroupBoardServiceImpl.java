@@ -50,16 +50,22 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		return noticeList;
 	}
 
-	@Override
-	public boolean updateComment(int gbno) {
-		boolean result = groupBoardDao.updateComment(gbno);
-		return result;
-	}
+//	@Override
+//	public boolean updateComment(int gbno) {
+//		boolean result = groupBoardDao.updateComment(gbno);
+//		return result;
+//	}
 
 	@Override
 	public int countComment(int gbno) {
 		
 		return groupBoardDao.countComment(gbno);
+	}
+
+	@Override
+	public String getGb_picById(int gbno) {
+		String gb_pic = groupBoardDao.getGb_picdById(gbno);
+		return gb_pic;
 	}
 
 }

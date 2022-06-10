@@ -37,11 +37,11 @@ public class GroupBoardDaoTest {
 		System.out.println("result: " + result);
 	}
 	
-	@Test
-	public void testUpdateComment() {
-		boolean result = groupBoardDao.updateComment(11);
-		System.out.println("result: " + result);
-	}
+//	@Test
+//	public void testUpdateComment() {
+//		boolean result = groupBoardDao.updateComment(11);
+//		System.out.println("result: " + result);
+//	}
 
 	@Test
 	public void testCountComment() {

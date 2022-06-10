@@ -36,7 +36,7 @@ ${ groupVo }
 						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">[공지] ${ groupBoardVo.gb_title }</a>
 					</h3>
 				</c:forEach>
-					<a href="/groupboard/notice">전체 공지글 확인하기</a>
+					<a href="/groupboard/notice?gno=${ loginVo.gno }">전체 공지글 확인하기</a>
 				
 					<c:forEach items="${ groupList }" var="groupBoardVo">
 				
@@ -66,7 +66,7 @@ ${ groupVo }
 						</div>
 						
 						<div>
-							<i class='far fa-comment-alt'></i> ${ count }1
+							<i class='far fa-comment-alt'></i> ${ groupBoardVo.gb_comment }
 							<i class='far fa-heart'></i> ${ groupBoardVo.gb_like }
 						</div>
 						
@@ -86,27 +86,28 @@ ${ groupVo }
 					<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
-							그룹 명
+							<h2>${ groupVo.g_name }</h2>
 						</div>
 						<div class="list-group-item">
 							<h4 class="list-group-item-heading">
 								그룹 소개
 							</h4>
 							<p class="list-group-item-text">
+								${ groupVo.g_intro }
 								...(달력을 넣어서 그룹 일정 표시하도록,,?)
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
 							<a href="/groupboard/groupInfo">ㅇㅇ님 환영합니다</a>
 						</div>
-							<a href="/groupboard/groupInfo" class="list-group-item list-group-item-action active justify-content-between">
+							<a href="/groupboard/groupInfo?gno=${ loginVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>
 					<nav>
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item">
-								<a href="/groupboard/groupWriteForm?bno=${ groupBoardVo.gno }">글쓰기</a>
+								<a href="/groupboard/groupWriteForm?bno=${ loginVo.gno }">글쓰기</a>
 							</li>
 							<li class="breadcrumb-item">
 								<!-- 차후 그룹의 일정을 확인할 수 있도록 -->

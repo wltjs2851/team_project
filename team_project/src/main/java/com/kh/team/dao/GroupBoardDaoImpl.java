@@ -18,6 +18,7 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 
 	@Override
 	public boolean create(GroupBoardVo groupBoardVo) {
+		System.out.println("groupBoardVo: " + groupBoardVo);
 		int count = sqlSession.insert(NAMESPACE + "create", groupBoardVo);
 		if(count > 0) {
 			return true;
@@ -61,20 +62,26 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		return noticeList;
 	}
 
-	@Override
-	public boolean updateComment(int gbno) {
-		System.out.println("gorupBoardDaoImpl, gbno: " + gbno);
-		int count = sqlSession.update(NAMESPACE + "countComment", gbno);
-		if(count > 0) {
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean updateComment(int gbno) {
+//		System.out.println("gorupBoardDaoImpl, gbno: " + gbno);
+//		int count = sqlSession.update(NAMESPACE + "countComment", gbno);
+//		if(count > 0) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 	@Override
 	public int countComment(int gbno) {
 		
 		return sqlSession.selectOne(NAMESPACE + "countComment", gbno);
+	}
+
+	@Override
+	public String getGb_picdById(int gbno) {
+		String gb_pic = sqlSession.selectOne(NAMESPACE + "getGb_picById", gbno);
+		return gb_pic;
 	}
 
 }
