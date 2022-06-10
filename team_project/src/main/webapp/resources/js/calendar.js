@@ -39,11 +39,7 @@ const dateFormat = (date) => {
 
     // 현재 날짜 표시하기
     for (let i = 1; i <= lastDay; i++) {
-      if (today != i) {
     	  htmlDummy += `<div class='divDate' data-today='${currentYear + "/" + currentMonth + "/" + i}'>${i}</div>`;
-      } else {
-    	  htmlDummy += `<div class='divDate' data-today='${currentYear + "/" + currentMonth + "/" + i}' style="background: #FFEBEE;">${i}</div>`;
-      }
     }
     
     
