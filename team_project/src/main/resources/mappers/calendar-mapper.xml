@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.calendar">
+
+	<select id="selectById" resultType="CalendarVo">
+		select * from calendar
+		where userid = #{userid}
+		and start1 like '%' || #{month} || '%'
+<!-- 		where start1 =  -->
+	</select>
+	
+	<insert id="insertCal">
+		insert into calendar(indx, userid, content, start1)
+		values(cal_index.nextval, #{userid}, #{content}, #{start1})
+	</insert>	
+</mapper>

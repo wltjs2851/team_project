@@ -9,17 +9,32 @@
 
 <link href='/resources/css/calendar.css' rel='stylesheet'/>
 </head>
+
 <script>
 $(function() {
-	var thisYear = new Date().getFullYear();
-	var thisMonth = new Date().getMonth() + 1;
-	var thisDate = new Date().getDate();
-	var thisToday = thisYear + '_' + thisMonth + '_' + thisDate;
-	var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
-	divToday.attr("style", "background: #FFEBEE;");
+// 	var thisYear = new Date().getFullYear();
+// 	var thisMonth = new Date().getMonth() + 1;
+// 	var thisDate = new Date().getDate();
+// 	var thisToday = thisYear + '_' + thisMonth + '_' + thisDate;
+// 	var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
+// 	divToday.attr("style", "background: #FFEBEE;");
+// 	$('<div style="width:80px; height:60px;"></div>').appendTo(divToday);
+// 	$('<div class="wrapper"><img src="/resources/images/smile.png"/></div>').appendTo(divToday);
+// 	divToday.prepend("<img src='/resources/imgaes/smile.png'/>");
+	
 	$(".dateBoard").on("click",".divDate", function() {
+		
+		var thisYear = new Date().getFullYear();
+		var thisMonth = new Date().getMonth() + 1;
+		var thisDate = new Date().getDate();
+		var thisToday = thisYear + '_' + thisMonth + '_' + thisDate;
+		console.log("thisToday:" + thisToday);
+		var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
+// 		divToday.attr("style", "background: #FFEBEE;");
+		
 	 	var insertContent = prompt("일정을 입력해주세요.");
 		var selectDate = $(this).attr("data-today");
+		var divSelectday = $(".dateBoard .divDate[data-today=" + selectDate + "]");
 		var userid = "${loginVo.userid}";
 		console.log(selectDate);
 	 	console.log(insertContent);
@@ -34,35 +49,10 @@ $(function() {
 	 		$.post(url, sData, function(rData) {
 	 			console.log(rData);
 	 		});
+	 	// 클릭 하고 일정 입력 하면
+ 			divSelectday.attr("style", "background: #FFEBEE;");
+ 			$('<div style="width:80%;"><span"><img src="/resources/images/smile.png"/></span></div>').appendTo(divSelectday);
 	 	}
-	});
-	$("#prevMonth").click(function() {
-		var prevDay = new Date(date.setMonth(date.getMonth() - 1))
-		  var prevYear = prevDay.getFullYear();
-		  var prevMonth = prevDay.getMonth() + 1;
-		  var sData = {
-				'month' : prevYear + '_' + prevMonth,
-				'userid' : '${loginVo.userid}'
-		  };
-		  console.log(sData);
-		  $.get('/calendar/cal3', sData, function(rdata) {
-			  console.log(rdata);
-		  });
-	    makeCalendar(prevDay);
-	});
-	$("#nextMonth").click(function() {
-		var nextDay = new Date(date.setMonth(date.getMonth() + 1))
-		  var nextYear = nextDay.getFullYear();
-		  var nextMonth = nextDay.getMonth() + 1;
-		  var sData = {
-					'month' : nextYear + '_' + nextMonth,
-					'userid' : '${loginVo.userid}'
-			  };
-		  console.log(sData);
-		  $.get('/calendar/cal3', sData, function(rdata) {
-			  console.log(rdata);
-		  });
-	    makeCalendar(nextDay);
 	});
 });
 </script>
@@ -87,7 +77,6 @@ ${calList}
 
 		<div class="grid dateBoard"></div>
 	</div>
-	<div><input type="checkbox"><span>등, 이두 조지기</span></div>
 </body>
 <script type="text/javascript" src="/resources/js/calendar.js"></script>
 </html>

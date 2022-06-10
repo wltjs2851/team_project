@@ -1,48 +1,32 @@
 package com.kh.team.vo;
 
-import java.sql.Date;
-
 public class ScheduleVo {
-	private Date sch_date;
-	private int schno;
-	private String sch_content;
+	private int idx;
 	private String userid;
+	private String title;
+	private String startdate;
+	private String enddate;
 
 	public ScheduleVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ScheduleVo(Date sch_date, int schno, String sch_content, String userid) {
+	public ScheduleVo(int idx, String userid, String title, String startdate, String enddate) {
 		super();
-		this.sch_date = sch_date;
-		this.schno = schno;
-		this.sch_content = sch_content;
+		this.idx = idx;
 		this.userid = userid;
+		this.title = title;
+		this.startdate = startdate;
+		this.enddate = enddate;
 	}
 
-	public Date getSch_date() {
-		return sch_date;
+	public int getIdx() {
+		return idx;
 	}
 
-	public void setSch_date(Date sch_date) {
-		this.sch_date = sch_date;
-	}
-
-	public int getSchno() {
-		return schno;
-	}
-
-	public void setSchno(int schno) {
-		this.schno = schno;
-	}
-
-	public String getSch_content() {
-		return sch_content;
-	}
-
-	public void setSch_content(String sch_content) {
-		this.sch_content = sch_content;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 
 	public String getUserid() {
@@ -53,10 +37,34 @@ public class ScheduleVo {
 		this.userid = userid;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getStartdate() {
+		return startdate;
+	}
+
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+
+	public String getEnddate() {
+		return enddate;
+	}
+
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+
 	@Override
 	public String toString() {
-		return "Schedule [sch_date=" + sch_date + ", schno=" + schno + ", sch_content=" + sch_content + ", userid="
-				+ userid + "]";
+		return "ScheduleVo [idx=" + idx + ", userid=" + userid + ", title=" + title + ", startdate=" + startdate
+				+ ", enddate=" + enddate + "]";
 	}
 
 }
