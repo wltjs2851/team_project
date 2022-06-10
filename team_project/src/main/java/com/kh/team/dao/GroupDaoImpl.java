@@ -83,4 +83,10 @@ public class GroupDaoImpl implements GroupDao{
 		return false;
 	}
 
+	@Override
+	public int getNextGno() {
+		int gno = sqlSession.selectOne(NAMESPACE + "getNextGno");
+		return gno;
+	}
+
 }

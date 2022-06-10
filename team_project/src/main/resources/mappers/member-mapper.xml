@@ -16,6 +16,11 @@
 		and userpw = #{userpw}
 	</select>
 	
+	<select id="memberByUserid" resultType="MemberVo">
+		select * from tbl_user
+		where userid = #{userid}
+	</select>
+	
 	<select id="getU_picById" resultType="String">
 		select u_pic from tbl_user
 		where userid = #{userid}

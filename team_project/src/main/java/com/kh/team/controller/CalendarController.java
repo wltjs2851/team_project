@@ -2,6 +2,8 @@ package com.kh.team.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.team.service.ScheduleService;
 import com.kh.team.vo.ScheduleVo;
+import com.kh.team.service.CalendarServcie;
+import com.kh.team.vo.CalendarVo;
+import com.kh.team.vo.MemberVo;
 
 
 @Controller
@@ -18,6 +23,7 @@ public class CalendarController {
 	
 	@Autowired
 	private ScheduleService service;
+	private CalendarServcie calendarService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String schedule() {
@@ -25,7 +31,11 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value = "/cal", method = RequestMethod.GET)
-	public String calendar() {
+	public String calendar(Model model, HttpSession session) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
+		List<CalendarVo> calList = calendarService.getCal(userid);
+		model.addAttribute("calList", calList);
 		return "admin/calendar";
 	}
 	
@@ -45,5 +55,11 @@ public class CalendarController {
 		return "admin/schedule";
 	}
 	
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String save(String userid, String content, String start1) {
+		CalendarVo vo = new CalendarVo(userid, content, start1); 
+		calendarService.insertCal(vo);
+		return "/calendar/cal";
+	}
 	
 }

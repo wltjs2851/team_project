@@ -1,0 +1,12 @@
+package com.kh.team.service;
+
+import java.util.List;
+
+import com.kh.team.vo.CalendarVo;
+
+public interface CalendarServcie {
+
+	public List<CalendarVo> getCal(String userid);
+	
+	public boolean insertCal(CalendarVo calendarVo);
+}

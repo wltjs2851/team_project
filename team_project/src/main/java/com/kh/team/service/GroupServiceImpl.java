@@ -16,7 +16,15 @@ public class GroupServiceImpl implements GroupService{
 	private GroupDao groupDao;
 
 	@Override
+	@Transactional
 	public boolean addGroup(GroupVo groupVo) {
+		int gno = groupDao.getNextGno();
+		groupVo.setGno(gno);
+		boolean groupResult = groupDao.insertGroup(groupVo);
+		boolean memberResult = groupDao.updateMemberGno(groupVo.getGno(), groupVo.getG_leader());
+		if(groupResult && memberResult) {
+			return true;
+		}
 		return groupDao.insertGroup(groupVo);
 	}
 
@@ -34,12 +42,12 @@ public class GroupServiceImpl implements GroupService{
 	public GroupVo groupByGno(int gno) {
 		return groupDao.groupByGno(gno);
 	}
-
+	
 	@Override
 	public boolean removeGroup(int gno) {
 		return groupDao.deleteGroup(gno);
 	}
-	
+
 	@Override
 	@Transactional
 	public boolean joinGroup(GroupVo groupVo, String userid) {
@@ -50,6 +58,5 @@ public class GroupServiceImpl implements GroupService{
 		}
 		return false;
 	}
-
 
 }

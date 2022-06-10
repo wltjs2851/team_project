@@ -13,4 +13,6 @@ public interface MemberDao  {
 	public boolean deleteMember(String userid);
 	
 	public String getU_picById(String userid);
+	
+	public MemberVo memberByUserid(String userid);
 }

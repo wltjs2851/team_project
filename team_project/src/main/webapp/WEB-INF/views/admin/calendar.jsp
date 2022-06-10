@@ -5,14 +5,40 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <link href='/resources/css/calendar.css' rel='stylesheet'/>
 </head>
+<script>
+$(function() {
+	$(".dateBoard").on("click",".divDate", function() {
+	 	var insertContent = prompt("일정을 입력해주세요.");
+		var selectDate = $(this).attr("data-today");
+		var userid = "${loginVo.userid}";
+		console.log(selectDate);
+	 	console.log(insertContent);
+	 	console.log(userid);
+	 	var url = "/calendar/save";
+	 	var sData = {
+		 		'userid' : userid,
+		 		'content' : insertContent,
+		 		'start1' : selectDate
+		 	};
+	 	if (insertContent != null && insertContent != "") {
+	 		$.post(url, sData, function(rData) {
+	 			console.log(rData);
+	 		});
+	 	}
+	});
+});
+
+</script>
 <body>
+${calList}
 	<div class='rap'>
 		<div class="header">
-			<div class="btn prevDay"></div>
+			<div class="btn prevDay" id="prevMonth"></div>
 			<h2 class='dateTitle'></h2>
-			<div class="btn nextDay"></div>
+			<div class="btn nextDay" id="nextMonth"></div>
 		</div>
 
 		<div class="grid dateHead">
