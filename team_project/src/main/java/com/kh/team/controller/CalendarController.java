@@ -23,6 +23,8 @@ public class CalendarController {
 	
 	@Autowired
 	private ScheduleService service;
+	
+	@Autowired
 	private CalendarServcie calendarService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)

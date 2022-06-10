@@ -13,11 +13,11 @@ const dateFormat = (date) => {
   const makeCalendar = (date) => {
 	  
 //	  const date = new Date();
-	    var currentYear = date.getFullYear();
-	    var currentMonth = date.getMonth() + 1;
-	    var thisday = currentYear + '/' + currentMonth + '/';
+	var currentYear = date.getFullYear();
+	var currentMonth = date.getMonth() + 1;
+	var thisday = currentYear + '/' + currentMonth + '/';
 	    
-	    
+//	var realToday = new Date.getFullYear() + '/' + new Date.getMonth() + 1 + '/' + new Date.getDate();
     
     // 현재의 년도와 월 받아오기
     const [nowYear, nowMonth] = dateFormat(date);
@@ -39,11 +39,7 @@ const dateFormat = (date) => {
 
     // 현재 날짜 표시하기
     for (let i = 1; i <= lastDay; i++) {
-      if (today != i) {
-    	  htmlDummy += `<div class='divDate' data-today='${currentYear + "/" + currentMonth + "/" + i}'>${i}</div>`;
-      } else {
-    	  htmlDummy += `<div class='divDate' data-today='${currentYear + "/" + currentMonth + "/" + i}' style="background: #FFEBEE;">${i}</div>`;
-      }
+    	htmlDummy += `<div class='divDate' data-today='${currentYear + "_" + currentMonth + "_" + i}'>${i}</div>`;
     }
     
     
