@@ -11,6 +11,7 @@ public interface RecipeService {
 	public boolean removeRecipe(int rno);
 	public RecipeVo contentByRno(int rno);
 	public List<RecipeVo> selectByViewCnt();
+	public void updateViewcnt(int rno, int r_viewcnt);
 	public int isLike(int rno, String userid);
 	public boolean decreaseLike(int rno, int r_like, String userid);
 	public boolean increaseLike(int rno, int r_like, String userid);

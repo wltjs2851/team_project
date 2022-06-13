@@ -62,7 +62,7 @@ public class RecipeDaoImpl implements RecipeDao{
 		Map<String, Integer> parameter = new HashMap<String, Integer>();
 		parameter.put("rno", rno);
 		parameter.put("r_viewcnt", r_viewcnt);
-		sqlSession.update(NAMESPACE + "updateRecipe", parameter);
+		sqlSession.update(NAMESPACE + "updateViewcnt", parameter);
 	}
 
 	@Override
@@ -72,8 +72,11 @@ public class RecipeDaoImpl implements RecipeDao{
 	}
 
 	@Override
-	public int countComment(int rno) {
-		int count = sqlSession.selectOne(NAMESPACE + "countComment", rno);
+	public int countComment(int rno, String userid) {
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("rno", rno);
+		parameter.put("userid", userid);
+		int count = sqlSession.selectOne(NAMESPACE + "countComment", parameter);
 		return count;
 	}
 

@@ -4,6 +4,9 @@ package com.kh.team.controller;
 import java.io.FileInputStream;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
@@ -63,17 +66,38 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "/recipeForm", method = RequestMethod.GET)
-	public String recipeForm(Model model, int rno, HttpSession session) {
+	public String recipeForm(Model model, int rno, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		RecipeVo recipeVo = recipeService.contentByRno(rno);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
-		int like_cnt;
-		if(recipeService.isLike(rno, memberVo.getUserid()) == 0) {
-			like_cnt = 0;
-		} else {
-			like_cnt = recipeService.isLike(rno, memberVo.getUserid());
-		}
+		int like_cnt = recipeService.isLike(rno, memberVo.getUserid());
 		model.addAttribute("recipeVo", recipeVo);
 		model.addAttribute("like_cnt", like_cnt);
+		
+		Cookie oldCookie = null;
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("postView")) {
+	                oldCookie = cookie;
+	            }
+	        }
+	    }
+	    
+	    if (oldCookie != null) {
+	        if (!oldCookie.getValue().contains("[" + rno + "]")) {
+	        	recipeService.updateViewcnt(rno, recipeVo.getR_viewcnt());
+	            oldCookie.setValue(oldCookie.getValue() + "_[" + rno + "]");
+	            oldCookie.setPath("/");
+	            oldCookie.setMaxAge(60 * 60 * 12);
+	            response.addCookie(oldCookie);
+	        }
+	    } else {
+	    	recipeService.updateViewcnt(rno, recipeVo.getR_viewcnt());
+	        Cookie newCookie = new Cookie("postView","[" + rno + "]");
+	        newCookie.setPath("/");
+	        newCookie.setMaxAge(60 * 60 * 24);
+	        response.addCookie(newCookie);
+	    }
 		return "board/recipeForm";
 	}
 
@@ -91,6 +115,24 @@ public class RecipeController {
 		recipeVo.setR_content(content.replaceAll("\"", "\'"));
 		recipeService.moidfyRecipe(recipeVo);
 		return "redirect:/recipe/recipeForm?rno=" + recipeVo.getRno();
+	}
+	
+	@RequestMapping(value = "/updateLike", method = RequestMethod.POST)
+	@ResponseBody
+	public int updateLike(RecipeVo recipeVo, @RequestParam("like_cnt") int like_cnt, Model model) {
+		System.out.println(recipeVo);
+		int rno = recipeVo.getRno();
+		String userid = recipeVo.getUserid();
+		int r_like = recipeVo.getR_like();
+		
+		if(like_cnt > 0) {
+			recipeService.decreaseLike(rno, r_like, userid);
+			like_cnt = 0;
+		} else {
+			recipeService.increaseLike(rno, r_like, userid);
+			like_cnt = 1;
+		}
+		return like_cnt;
 	}
 
 	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)
@@ -124,24 +166,6 @@ public class RecipeController {
 		boolean result = recipeCommentService.modifyRecipeComment(recipeCommentVo);
 		return String.valueOf(result);
 	}
-	
-	@RequestMapping(value = "/updateLike", method = RequestMethod.POST)
-	@ResponseBody
-	public String updateLike(RecipeVo recipeVo, @RequestParam("like_cnt") int like_cnt) {
-		System.out.println(recipeVo);
-		int rno = recipeVo.getRno();
-		String userid = recipeVo.getUserid();
-		int r_like = recipeVo.getR_like();
-		
-		boolean result;
-		if(like_cnt > 0) {
-			result = recipeService.decreaseLike(rno, r_like, userid);
-		} else {
-			result = recipeService.increaseLike(rno, r_like, userid);
-		}
-		return String.valueOf(result);
-	}
-
 
 	@RequestMapping(value = "/summernote", method = RequestMethod.GET)
 	public String summernote() {

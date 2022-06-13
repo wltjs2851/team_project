@@ -26,7 +26,7 @@
 	</select>
 	
 	<update id="updateViewcnt">
-		update tbl_recipe set r_viewcnt = #{viewcnt} + 1
+		update tbl_recipe set r_viewcnt = #{r_viewcnt, jdbcType=INTEGER} + 1
 			where rno = #{rno}
 	</update>
 	
@@ -38,7 +38,7 @@
 	</select>
 	
  	<select id="countComment" resultType="int">
- 		select count(*) from tbl_rcomment where rno = #{rno}
+ 		select count(rlno) from tbl_rcomment where userid = #{userid} and rno = #{rno}
 	</select>
 	
 	<insert id="insertLike">
