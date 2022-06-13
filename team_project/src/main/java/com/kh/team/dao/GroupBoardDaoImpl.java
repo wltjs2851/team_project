@@ -85,10 +85,10 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		return gb_pic;
 	}
 
-//	@Override
-//	public List<GroupBoardVo> list(SearchDto searchDto) {
-//		List<GroupBoardVo> groupListSearch = sqlSession.selectList(NAMESPACE + "list", searchDto);
-//		return groupListSearch;
-//	}
+	@Override
+	public List<GroupBoardVo> list(SearchDto searchDto) {
+		List<GroupBoardVo> groupListSearch = sqlSession.selectList(NAMESPACE + "list", searchDto);
+		return groupListSearch;
+	}
 
 }

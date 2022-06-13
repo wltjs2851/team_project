@@ -69,10 +69,10 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		return gb_pic;
 	}
 
-//	@Override
-//	public List<GroupBoardVo> list(SearchDto searchDto) {
-//		List<GroupBoardVo> groupListSearch = groupBoardDao.list(searchDto);
-//		return groupListSearch;
-//	}
+	@Override
+	public List<GroupBoardVo> list(SearchDto searchDto) {
+		List<GroupBoardVo> groupListSearch = groupBoardDao.list(searchDto);
+		return groupListSearch;
+	}
 
 }

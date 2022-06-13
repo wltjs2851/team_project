@@ -211,8 +211,8 @@ public class GroupBoardController {
 		model.addAttribute("noticeList", noticeList);
 		
 		// 검색어 하려고 했는데 잘 안됨
-//		List<GroupBoardVo> groupListSearch = groupBoardService.list(searchDto);
-//		model.addAttribute("searchDto", groupListSearch);
+		List<GroupBoardVo> groupListSearch = groupBoardService.list(searchDto);
+		model.addAttribute("searchDto", groupListSearch);
 		
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);

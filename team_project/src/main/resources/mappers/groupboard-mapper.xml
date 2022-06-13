@@ -38,10 +38,22 @@
  
  <!-- 글 목록 -->
  <select id="list" resultType="GroupBoardVo">
- 	select * from tbl_group_board
+<!--  	select * from tbl_group_board -->
+<!--  	where gno = #{gno} -->
+<!--  	order by gbno desc -->
+ 	select * from (select rownum rnum, a.* from
+ 		(select * from tbl_group_board
+ 		 <include refid="search"></include>) a)
  	where gno = #{gno}
  	order by gbno desc
  </select>
+ 
+<!--  select * from  -->
+<!-- 	(select rownum rnum, a.* from 특정 개수의 행만 조회 -->
+<!--          (select * from tbl_board -->
+<!--           <include refid="search"></include> -->
+<!--           order by re_group desc, re_seq asc) a) -->
+<!-- where rnum between #{startRow} and #{endRow} -->
  
  <!-- 공지글만 뽑아내기 -->
  <select id="notice" resultType="GroupBoardVo">
@@ -76,5 +88,16 @@
 	select gb_pic from tbl_group_board
 	where gbno = #{gbno}
 </select>
+
+<!-- 검색 조건(참조용) -->
+ <sql id="search">
+ 	<if test="searchType != null and keyword != null">
+    	<choose>
+    		<when test='searchType == "t"'>where title like '%' || #{keyword} || '%'</when>
+    		<when test='searchType == "c"'>where content like '%' || #{keyword} || '%'</when>
+    		<when test='searchType == "w"'>where writer like '%' || #{keyword} || '%'</when>
+    	</choose>
+    </if>
+ </sql>
  
  </mapper>
