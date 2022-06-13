@@ -100,9 +100,9 @@
 <body>
 	<div class='rap'>
 		<div class="header">
-			<div class="btn prevDay" id="prevMonth"></div>
+			<div id="prevMonth"><img class="arrows" src="/resources/images/prev.png"></div>
 			<h2 class='dateTitle'></h2>
-			<div class="btn nextDay" id="nextMonth"></div>
+			<div id="nextMonth"><img class="arrows" src="/resources/images/next.png"></div>
 		</div>
 
 		<div class="grid dateHead">
@@ -116,9 +116,6 @@
 		</div>
 
 		<div class="grid dateBoard"></div>
-	</div>
-	<div>
-		<input type="checkbox"><span>등, 이두 조지기</span>
 	</div>
 </body>
 <script type="text/javascript" src="/resources/js/calendar.js"></script>
