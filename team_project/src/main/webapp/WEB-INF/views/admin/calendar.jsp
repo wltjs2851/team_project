@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/views/include/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,7 @@
 		var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
 		divToday.attr("style", "background: #FFEBEE;");
 		$(".dateBoard").on("click", ".divDate", function() {
+			var that = $(this);
 			var insertContent = prompt("일정을 입력해주세요.");
 			var selectDate = $(this).attr("data-today");
 			var userid = "${loginVo.userid}";
@@ -34,8 +36,12 @@
 			if (insertContent != null && insertContent != "") {
 				$.post(url, sData, function(rData) {
 					console.log(rData);
+					if(rData == "true"){
+						that.append("<br><span>" + insertContent + "</span>");
+// 						getCalendarList();
+					}
 				});
-				getCalendarList();
+// 				getCalendarList();
 			}
 		});
 		function getCalendarList() {
@@ -44,6 +50,7 @@
 				var data = this.dataset.today;
 				var thisDiv = this;
 				$.each(jsonCal, function() {
+					console.log("this:", this);
 					if (this.start1 == data) {
 						$(thisDiv).append("<br><span>" + this.content + "</span>");
 					}
@@ -63,9 +70,11 @@
 				console.log(rdata, "rData");
 				jsonCal = rdata;
 				console.log(jsonCal, "jsonCal");
+				makeCalendar(prevDay);
+				getCalendarList();
 			});
-			makeCalendar(prevDay);
-			getCalendarList();
+			console.log("get after");
+			
 		});
 		$("#nextMonth").click(function() {
 			var nextDay = new Date(date.setMonth(date.getMonth() + 1));
@@ -80,9 +89,10 @@
 				console.log(rdata, "rData");
 				jsonCal = rdata;
 				console.log(jsonCal, "jsonCal");
+				makeCalendar(nextDay);
+				getCalendarList();
 			});
-			makeCalendar(nextDay);
-			getCalendarList();
+			
 		});
 		getCalendarList();
 	});
@@ -113,3 +123,4 @@
 </body>
 <script type="text/javascript" src="/resources/js/calendar.js"></script>
 </html>
+<%@include file="/WEB-INF/views/include/footer.jsp" %>
