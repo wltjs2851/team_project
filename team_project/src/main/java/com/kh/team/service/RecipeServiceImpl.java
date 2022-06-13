@@ -44,6 +44,11 @@ public class RecipeServiceImpl implements RecipeService{
 	public List<RecipeVo> selectByViewCnt() {
 		return recipeDao.selectByViewCnt();
 	}
+	
+	@Override
+	public void updateViewcnt(int rno, int r_viewcnt) {
+		recipeDao.updateViewcnt(rno, r_viewcnt);
+	}
 
 	@Override
 	public int isLike(int rno, String userid) {

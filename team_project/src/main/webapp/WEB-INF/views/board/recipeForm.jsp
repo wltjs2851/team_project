@@ -148,7 +148,8 @@ $(function() {
 	});
 	
 	var like_cnt = ${like_cnt};
-	var span = $("span");
+	console.log(like_cnt);
+	var span = $("#span_like");
 	
 	if (like_cnt > 0){
 		// 좋아요 1 이상인 경우
@@ -166,17 +167,19 @@ $(function() {
 				"rno" : "${ recipeVo.rno }",
 				"userid" : "${ loginVo.userid }",
 				"rlno" : "${ recipeVo.rlno }",
-				"r_like" : "${ recipeVo.r_like }",
+				"r_like" : parseInt(span.text()),
 				"like_cnt" : like_cnt
 		}
 		$.post(url, sendData, function(receivedData) {
 			console.log("receivedData: ", receivedData);
-			if(receivedData == "true") {
-				like.css("color", "graytext");
-			 	span.text(parseInt(span.text().trim()) - 1);
-			} else {					
+			if(receivedData == 1) {
 				like.css("color", "red");
 		 		span.text(parseInt(span.text().trim()) + 1);
+		 		like_cnt = receivedData;
+			} else {					
+				like.css("color", "graytext");
+			 	span.text(parseInt(span.text().trim()) - 1);
+			 	like_cnt = receivedData;
 			}
 		});
 	});
@@ -197,7 +200,7 @@ $(function() {
 				<hr>
 			</div>
 			<div class="row">
-				<i class="fa-solid fa-heart" style="font-size: 25px;" ></i><p style="font-size: 25px"><span>${ recipeVo.r_like }</span> &nbsp;
+				<i class="fa-solid fa-heart" style="font-size: 25px;" ></i><p style="font-size: 25px"><span id="span_like">${ recipeVo.r_like }</span> &nbsp;
 				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }" class="btn btn-warning"
 					style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
 				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }" class="btn btn-danger"

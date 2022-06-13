@@ -50,7 +50,7 @@ public class RecipeDaoTest {
 	
 	@Test
 	public void testCommentCount() {
-		int result = recipeDao.countComment(7);
+		int result = recipeDao.countComment(7, "hong1234");
 		System.out.println("result: " + result);
 	}
 	
