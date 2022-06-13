@@ -1,6 +1,8 @@
 package com.kh.team.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,11 +53,16 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		return noticeList;
 	}
 
-	@Override
-	public boolean updateComment(int gbno) {
-		boolean result = groupBoardDao.updateComment(gbno);
-		return result;
-	}
+//	@Override
+//	public void updateComment(int gbno) {
+////		boolean result = groupBoardDao.updateComment(gbno);
+////		return result;
+//		Map<String, Integer> map = new HashMap<String, Integer>();
+//		map.put("gbno", gbno);
+//		map.put("cnt", 1);
+//		System.out.println("gorupBoardServiceImpl, gbno: " + gbno);
+//		groupBoardDao.updateComment(gbno);
+//	}
 
 	@Override
 	public int countComment(int gbno) {

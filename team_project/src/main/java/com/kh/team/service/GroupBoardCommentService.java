@@ -10,5 +10,7 @@ public interface GroupBoardCommentService {
 	public List<GroupBoardCommentVo> groupCommentList(int gbno);
 	public boolean updateGroupComment(GroupBoardCommentVo groupBoardCommentVo);
 	public boolean deleteGroupComment(int gbcno);
+	public void updateComment(int gbno);
+	public void updateCommentDelete(int gbno);
 
 }

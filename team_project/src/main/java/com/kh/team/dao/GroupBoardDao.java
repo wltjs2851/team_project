@@ -14,7 +14,7 @@ public interface GroupBoardDao {
 	public List<GroupBoardVo> list(int gno);
 //	public List<GroupBoardVo> list(SearchDto searchDto);
 	public List<GroupBoardVo> notice(String gb_notice);
-	public boolean updateComment(int gbno);
+//	public void updateComment(int gbno);
 	public int countComment(int gbno);
 	public String getGb_picdById(int gbno);
 

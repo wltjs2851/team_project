@@ -37,11 +37,12 @@ public class GroupBoardDaoTest {
 		System.out.println("result: " + result);
 	}
 	
-	@Test
-	public void testUpdateComment() { // 왜 false가 나온는 것인지???
-		boolean result = groupBoardDao.updateComment(1);
-		System.out.println("result: " + result);
-	}
+//	@Test
+//	public void testUpdateComment() { // 왜 false가 나온는 것인지???
+////		boolean result = groupBoardDao.updateComment(1);
+////		System.out.println("result: " + result);
+//		groupBoardDao.updateComment(1);
+//	}
 
 	@Test
 	public void testCountComment() {

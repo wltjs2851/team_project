@@ -24,8 +24,9 @@ public class GroupBoardCommentController {
 	private GroupBoardService groupBoardService;
 	
 	@RequestMapping(value = "/insertGroupComment", method = RequestMethod.POST)
-	public String insertGroupComment(GroupBoardCommentVo groupBoardCommentVo) {
+	public String insertGroupComment(GroupBoardCommentVo groupBoardCommentVo, int gbno) {
 		boolean result = groupBoardCommentService.insertGroupComment(groupBoardCommentVo);
+		groupBoardCommentService.updateComment(gbno);
 		return String.valueOf(result);
 	}
 	
@@ -43,8 +44,9 @@ public class GroupBoardCommentController {
 	}
 	
 	@RequestMapping(value = "/deleteGroupComment/{gbcno}", method = RequestMethod.GET)
-	public String deleteGroupComment(@PathVariable("gbcno") int gbcno) {
+	public String deleteGroupComment(@PathVariable("gbcno") int gbcno, Integer gbno) {
 		boolean result = groupBoardCommentService.deleteGroupComment(gbcno);
+		groupBoardCommentService.updateCommentDelete(gbno);
 		return String.valueOf(result);
 	}
 

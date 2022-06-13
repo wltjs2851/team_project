@@ -31,7 +31,7 @@ $(function() {
 });
 </script>
 
-<%-- ${ groupList } --%>
+${ groupList }
 <%-- ${ noticeList } --%>
 <%-- ${ groupVo } --%>
 <%-- ${ result } --%>
@@ -77,7 +77,9 @@ $(function() {
 						</div>
 						
 						<div>
-							<i class='far fa-comment-alt'></i> ${ groupBoardVo.gb_comment }
+<%-- 							<c:if test="${ groupBoardVo.gb_comment ne 0 }"> --%>
+						   		<i class='far fa-comment-alt'></i> ${ groupBoardVo.gb_comment }
+<%-- 						    </c:if> --%>
 							<i class='far fa-heart'></i> ${ groupBoardVo.gb_like }
 						</div>
 						

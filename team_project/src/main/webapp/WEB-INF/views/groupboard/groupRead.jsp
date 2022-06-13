@@ -13,7 +13,7 @@ $(function() {
 	
 	$("#btnCommentInsert").click(function() {
 		console.log("click");
-		var count = $("#count").val();
+		var count = $(".count").val();
 		console.log("count: ", count);
 		var gbc_content = $("#c_content").val();
 		var userid = $("#c_userid").val();
@@ -113,7 +113,13 @@ $(function() {
 		console.log("댓글 삭제 버튼");
 		var gbcno = $(this).attr("data-gbcno");
 		var url = "/groupcomment/deleteGroupComment/" + gbcno;
-		$.get(url, function(rData) {
+		var gbno = "${groupBoardVo.gbno}";
+		
+		var sData = {
+				"gbno" : gbno
+		}
+		
+		$.get(url, sData, function(rData) {
 			console.log(rData);
 			if (rData == "true") {
 				$(".count").text("${count}");

@@ -1,6 +1,8 @@
 package com.kh.team.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +56,7 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	@Override
 	public List<GroupBoardVo> list(int gno) {
 		List<GroupBoardVo> groupList = sqlSession.selectList(NAMESPACE + "list", gno);
+		System.out.println("Dao, groupList," + groupList);
 		return groupList;
 	}
 
@@ -63,15 +66,19 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		return noticeList;
 	}
 
-	@Override
-	public boolean updateComment(int gbno) {
-		System.out.println("gorupBoardDaoImpl, gbno: " + gbno);
-		int count = sqlSession.update(NAMESPACE + "countComment", gbno);
-		if(count > 0) {
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public void updateComment(int gbno) {
+//		Map<String, Integer> map = new HashMap<String, Integer>();
+//		map.put("gbno", gbno);
+//		map.put("cnt", 1);
+//		System.out.println("gorupBoardDaoImpl, gbno: " + gbno);
+//		sqlSession.update(NAMESPACE + "updateComment", map);
+//		int count = sqlSession.update(NAMESPACE + "countComment", gbno);
+//		if(count > 0) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 	@Override
 	public int countComment(int gbno) {

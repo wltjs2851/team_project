@@ -38,4 +38,14 @@ public class GroupBoardCommentServiceImpl implements GroupBoardCommentService {
 		return groupBoardCommentDao.deleteGroupComment(gbcno);
 	}
 
+	@Override
+	public void updateComment(int gbno) {
+		groupBoardCommentDao.updateComment(gbno);
+	}
+
+	@Override
+	public void updateCommentDelete(int gbno) {
+		groupBoardCommentDao.updateCommentDelete(gbno);
+	}
+
 }

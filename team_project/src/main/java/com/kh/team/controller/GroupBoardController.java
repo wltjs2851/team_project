@@ -87,6 +87,7 @@ public class GroupBoardController {
 		// 댓글 갯수 업데이트
 //		boolean result = groupBoardService.updateComment(gbno);
 //		System.out.println("groupRead, result: " + result);
+//		groupBoardService.updateComment(gbno);
 		
 		int count = groupBoardService.countComment(gbno);
 		System.out.println("count: " + count);
@@ -204,7 +205,7 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupMain/{gno}", method = RequestMethod.GET)
-	public String main(/*int gbno, */Model model, String gb_notice, @PathVariable("gno") int gno, SearchDto searchDto) {
+	public String main(Model model, String gb_notice, @PathVariable("gno") int gno, SearchDto searchDto) {
 		List<GroupBoardVo> groupList = groupBoardService.list(gno);
 		model.addAttribute("groupList", groupList);
 		
