@@ -64,6 +64,20 @@ $(function() {
 		  });
 	    makeCalendar(nextDay);
 	});
+// 	var jsonCal = JSON.stringify(${jsonCal});
+	var jsonCal = ${jsonCal};
+	var divDate = $(".dateBoard .divDate[data-today]");
+	$.each(divDate, function() {
+		console.log(this.dataset.today, "날짜");
+		var data = this.dataset.today;
+		$.each(jsonCal, function() {
+			if (this.start1 == data) {
+// 				divDate["data-today=" + this.start1].append(this.content);
+				console.log(divDate["data-today=" + this.start1]);
+				console.log(this.content);
+			}
+		});
+	});
 });
 </script>
 <body>

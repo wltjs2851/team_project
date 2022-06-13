@@ -17,4 +17,6 @@ public interface MemberService {
 	public MemberVo memberByUserid(String userid);
 	
 	public boolean isExist(String userid);
+	
+	public MemberVo findId(String username, String email);
 }

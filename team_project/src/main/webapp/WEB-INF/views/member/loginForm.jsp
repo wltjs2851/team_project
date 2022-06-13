@@ -40,6 +40,19 @@ $(function() {
 	if (loginResult == "false") {
 		alert("아이디와 비밀번호를 확인해주세요.")
 	}
+	
+	$("#findId").click(function(e) {
+		e.preventDefault();
+		var url = "/member/findIdPop";
+		var option = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
+		window.open(url,"아이디 찾기",option);
+	});
+	$("#findPw").click(function(e) {
+		e.preventDefault();
+		var url = "/member/findPwPop";
+		var option = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
+		window.open(url,"비밀번호 찾기",option);
+	});
 });
 </script>
 <hr>
@@ -64,6 +77,7 @@ $(function() {
 						<c:if test="${not empty cookie.saveid}">checked</c:if>
 					/>아이디 저장</label>
 				</div>
+				<label><a href="#" id="findId">아이디찾기</a></label> / <label><a href="#" id="findPw">비밀번호 찾기</a></label>
 				<span id="none" style="color: red;"></span>
 				<button id="btnLogin" type="button" class="btn btn-block btn-primary">로그인</button>
 				<a href="/member/joinForm" class="btn btn-block btn-success">회원가입</a>

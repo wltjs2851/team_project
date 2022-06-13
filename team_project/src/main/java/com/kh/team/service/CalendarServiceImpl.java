@@ -24,5 +24,10 @@ public class CalendarServiceImpl implements CalendarServcie {
 		return calendarDao.getCal(month, userid);
 	}
 
+	@Override
+	public List<CalendarVo> getCalList(String userid) {
+		return calendarDao.getCalList(userid);
+	}
+
 	
 }

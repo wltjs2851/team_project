@@ -36,5 +36,11 @@ public class CalendarDaoImpl implements CalendarDao {
 		return false;
 	}
 
+	@Override
+	public List<CalendarVo> getCalList(String userid) {
+		List<CalendarVo> calList = sqlSession.selectList(NAMESPACE + "getCalList", userid);
+		return calList;
+	}
+
 	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,18 +10,21 @@
 
 <link href='/resources/css/calendar.css' rel='stylesheet'/>
 </head>
-
 <script>
 $(function() {
-// 	var thisYear = new Date().getFullYear();
-// 	var thisMonth = new Date().getMonth() + 1;
-// 	var thisDate = new Date().getDate();
-// 	var thisToday = thisYear + '_' + thisMonth + '_' + thisDate;
-// 	var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
+	var thisYear = new Date().getFullYear();
+	var thisMonth = new Date().getMonth() + 1;
+	var thisDate = new Date().getDate();
+	var thisToday = thisYear + '_' + thisMonth + '_' + thisDate;
+	var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
 // 	divToday.attr("style", "background: #FFEBEE;");
 // 	$('<div style="width:80px; height:60px;"></div>').appendTo(divToday);
-// 	$('<div class="wrapper"><img src="/resources/images/smile.png"/></div>').appendTo(divToday);
+	$('<div><span>Today</span></div>').appendTo(divToday);
 // 	divToday.prepend("<img src='/resources/imgaes/smile.png'/>");
+
+// 	var selectDate = $(".dateBoard").attr("data-today");
+// 	var divSelectday = $(".dateBoard .divDate[data-today=" + selectDate + "]");
+	
 	
 	$(".dateBoard").on("click",".divDate", function() {
 		
@@ -30,7 +34,7 @@ $(function() {
 		var thisToday = thisYear + '_' + thisMonth + '_' + thisDate;
 		console.log("thisToday:" + thisToday);
 		var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
-// 		divToday.attr("style", "background: #FFEBEE;");
+// 		divToday.attr("style", "background: skyblue;");
 		
 	 	var insertContent = prompt("일정을 입력해주세요.");
 		var selectDate = $(this).attr("data-today");
@@ -48,16 +52,31 @@ $(function() {
 	 	if (insertContent != null && insertContent != "") {
 	 		$.post(url, sData, function(rData) {
 	 			console.log(rData);
+	 			if (rData == "true"){
+// 	 				getCalList();
+	 				divSelectday.attr("style", "background: #FFEBEE;");
+	 	 			$('<div style="width:80%;"><span><img src="/resources/images/smile.png"/></span></div>').appendTo(divSelectday);
+	 			}
 	 		});
-	 	// 클릭 하고 일정 입력 하면
- 			divSelectday.attr("style", "background: #FFEBEE;");
- 			$('<div style="width:80%;"><span"><img src="/resources/images/smile.png"/></span></div>').appendTo(divSelectday);
 	 	}
 	});
+	
+	// 일정 목록 
+// 	function getCalList(){
+// 		var userid = "${loginVo.userid}";
+// 		var url = "/calendar/list/" + userid;
+// 		$.get(url, function(rData){
+// 			console.log("getCalList:" + rData);
+			
+// 			});
+// 		});
 });
 </script>
 <body>
 ${calList}
+<c:forEach items="${calList }" var="cal">
+	<div>${cal.content }</div>
+</c:forEach>
 	<div class='rap'>
 		<div class="header">
 			<div class="btn prevDay" id="prevMonth"></div>
