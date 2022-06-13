@@ -23,16 +23,37 @@ $(document).ready(function(){
 // 		e.preventDefault();
 // 		console.log("삭제버튼누름");
 // 	});
+	
+	// 칼로리 계산기
+	$("#time").on("input", function(){
+		var kcal = "${kcalVo.kcal}";
+		var time = "${kcalVo.k_time}";
+		
+		// 해당 운동에 대한 수식 변수 구하기
+		var num = kcal / time ;
+		console.log(num);
+		
+		$("#td_kcal").html($(this).val() * num);
+	});
 });
 </script>
 <style>
-td{
-	padding-left: 30px;
+table {
+	border-collapse: collapse;
+	 border-top: 1px solid #444444;
+/* 	 margin-left: auto; */
+/*     margin-right: auto; */
+	 width: 600px;
 }
+ th, td {
+    border-bottom: 1px solid #444444;
+     border-left: 1px solid #444444;
+    padding: 10px;
+  }
 
-tr{
-	padding: 10%;
-}
+th:first-child, td:first-child {
+    border-left: none;
+  }
 </style>
 <%-- ${kcalVo } --%>
 <div class="container-fluid">
@@ -42,7 +63,7 @@ tr{
 		<div class="col-md-8">
 			<form role="form" action="/admin/updateKcal" method="post">
 			<input type="hidden" name="kno" value="${kcalVo.kno}"/>
-			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+			<div>
 			<h2>운동 칼로리 사전</h2>
 				<article class="single-post">
 					<h3>Donec id dolor in erat imperdiet.</h3>
@@ -60,11 +81,11 @@ tr{
 						</tr>
 						<tr>
 							<th>소요시간</th>
-							<td>${kcalVo.k_time}</td>
+							<td><input type="number" id="time" value="${kcalVo.k_time}">분</td>
 						</tr>
 						<tr>
 							<th>칼로리</th>
-							<td>${kcalVo.kcal}</td>
+							<td><span id="td_kcal">${kcalVo.kcal}</span>kcal</td>
 						</tr>
 						<tr>
 							<th>난이도</th>
