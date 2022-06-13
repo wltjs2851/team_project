@@ -29,7 +29,7 @@ $(function() {
 		$.post(url, sData, function(rData) {
 			console.log(rData);
 			if(rData == "true") {
-				$(".count").text(${count + 1});
+				$(".count").text("${count + 1}");
 // 				$(".count").val(text(${count + 1}));
 				getCommentList();
 			}
@@ -71,10 +71,11 @@ $(function() {
 	} else {
 		// 좋아요가 하나도 없는 경우 
 		console.log(heart);
-		$("i.fa-heart").css("color", "black");
+		$("i.fa-heart").css("color", "graytext");
 		$("i.fa-heart").prop("name", heart);
 	}
-
+	
+	// 하트 클릭
 	$("i.fa-heart").click(function(){
 		console.log("클릭");
 		
@@ -88,17 +89,21 @@ $(function() {
 		var url = "/groupboard/heart";
 		var sData = {
 				"gbno" : gbno,
-				"heart" : that.prop("name")
+				"heart" : heart
 		};
 		
 		$.post(url, sData, function(rData){
 			console.log("rData:", rData);
-			that.prop('name', rData);
+			that.prop("name", rData);
 			
 			if(rData == 1){
 				$("i.fa-heart").css("color", "red");
+				$("#like").text(${groupBoardVo.gb_like} + 1);
+// 				span.text(parseInt(span.text().trim()) + 1);
 			} else {
-				$("i.fa-heart").css("color", "black");
+				$("i.fa-heart").css("color", "graytext");
+				$("#like").text("${groupBoardVo.gb_like}");
+// 				span.text(parseInt(span.text().trim()) - 1);
 			}
 		});
 	});
@@ -111,7 +116,7 @@ $(function() {
 		$.get(url, function(rData) {
 			console.log(rData);
 			if (rData == "true") {
-				$(".count").text("${count - 1}");
+				$(".count").text("${count}");
 // 				$(".count").val(text(${count - 1}));
 				getCommentList();
 			}
@@ -153,7 +158,7 @@ $(function() {
 
 <%-- ${ groupBoardVo } --%>
 <%-- ${ heart } --%>
-<%-- ${ count } --%>
+${ count }
 
 <!-- 모달 -->
 <div class="row">
@@ -223,7 +228,7 @@ $(function() {
 				
 				<!-- 좋아요 --> 
 					<i class="fas fa-heart" style=" font-size: 30px; color: graytext; cursor: pointer;" data-gbno="${ groupBoardVo.gbno }"></i>
-					<span style="font-size: 30px;">${ groupBoardVo.gb_like }</span>
+					<span id="like" style="font-size: 30px;">${ groupBoardVo.gb_like }</span>
 				
 				<!-- 수정, 삭제 버튼 -->
 				<table>
@@ -236,7 +241,9 @@ $(function() {
 <!-- 				<button>삭제</button> -->
 				
 				<!-- 댓글 -->
+				<div class="comments">
 				댓글[<span class="count">${ count }</span>]
+				</div>
 				<div class="row">
 					<div class="col-md-9">
 						<input type="text" id="c_content" class="form-control" placeholder="댓글을 입력해주세요">

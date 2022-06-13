@@ -63,15 +63,15 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		return noticeList;
 	}
 
-//	@Override
-//	public boolean updateComment(int gbno) {
-//		System.out.println("gorupBoardDaoImpl, gbno: " + gbno);
-//		int count = sqlSession.update(NAMESPACE + "countComment", gbno);
-//		if(count > 0) {
-//			return true;
-//		}
-//		return false;
-//	}
+	@Override
+	public boolean updateComment(int gbno) {
+		System.out.println("gorupBoardDaoImpl, gbno: " + gbno);
+		int count = sqlSession.update(NAMESPACE + "countComment", gbno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public int countComment(int gbno) {
@@ -85,10 +85,10 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		return gb_pic;
 	}
 
-	@Override
-	public List<GroupBoardVo> list(SearchDto searchDto) {
-		List<GroupBoardVo> groupListSearch = sqlSession.selectList(NAMESPACE + "list", searchDto);
-		return groupListSearch;
-	}
+//	@Override
+//	public List<GroupBoardVo> list(SearchDto searchDto) {
+//		List<GroupBoardVo> groupListSearch = sqlSession.selectList(NAMESPACE + "list", searchDto);
+//		return groupListSearch;
+//	}
 
 }

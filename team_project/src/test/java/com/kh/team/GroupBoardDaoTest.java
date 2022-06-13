@@ -37,15 +37,15 @@ public class GroupBoardDaoTest {
 		System.out.println("result: " + result);
 	}
 	
-//	@Test
-//	public void testUpdateComment() {
-//		boolean result = groupBoardDao.updateComment(11);
-//		System.out.println("result: " + result);
-//	}
+	@Test
+	public void testUpdateComment() { // 왜 false가 나온는 것인지???
+		boolean result = groupBoardDao.updateComment(1);
+		System.out.println("result: " + result);
+	}
 
 	@Test
 	public void testCountComment() {
-		int count = groupBoardDao.countComment(11);
+		int count = groupBoardDao.countComment(1);
 		System.out.println("count: " + count);
 	}
 }

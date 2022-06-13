@@ -84,9 +84,10 @@ public class GroupBoardController {
 		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
 		model.addAttribute("groupBoardVo", groupBoardVo);
 		
-		// 댓글 갯수
+		// 댓글 갯수 업데이트
 //		boolean result = groupBoardService.updateComment(gbno);
 //		System.out.println("groupRead, result: " + result);
+		
 		int count = groupBoardService.countComment(gbno);
 		System.out.println("count: " + count);
 		model.addAttribute("count", count);
@@ -211,12 +212,14 @@ public class GroupBoardController {
 		model.addAttribute("noticeList", noticeList);
 		
 		// 검색어 하려고 했는데 잘 안됨
-		List<GroupBoardVo> groupListSearch = groupBoardService.list(searchDto);
-		model.addAttribute("searchDto", groupListSearch);
+//		List<GroupBoardVo> groupListSearch = groupBoardService.list(searchDto);
+//		model.addAttribute("searchDto", groupListSearch);
 		
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);
 		
+//		boolean result = groupBoardService.updateComment(1);
+//		model.addAttribute("result", result);
 //		int count = groupBoardService.countComment(gbno);
 //		model.addAttribute("count", count);
 		
