@@ -88,10 +88,11 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@ResponseBody
 	public String save(String userid, String content, String start1) {
 		CalendarVo vo = new CalendarVo(userid, content, start1); 
-		calendarService.insertCal(vo);
-		return "/calendar/cal";
+		boolean result = calendarService.insertCal(vo);
+		return String.valueOf(result);
 	}
 	
 }
