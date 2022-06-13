@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.service.ScheduleService;
 import com.kh.team.vo.ScheduleVo;
+
+import net.sf.json.JSONArray;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.kh.team.service.CalendarServcie;
 import com.kh.team.vo.CalendarVo;
 import com.kh.team.vo.MemberVo;
@@ -44,7 +49,8 @@ public class CalendarController {
 		String thisMonth = String.valueOf(LocalDate.now().getMonthValue());
 		String month = thisYear + "_" + thisMonth;
 		List<CalendarVo> calList = calendarService.getCal(month, userid);
-		model.addAttribute("calList", calList);
+		JSONArray jsonArray = new JSONArray();
+		model.addAttribute("jsonCal", jsonArray.fromObject(calList));
 		return "admin/calendar";
 	}
 	

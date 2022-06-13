@@ -169,4 +169,20 @@ public class MemberController {
 		boolean result = memberService.isExist(userid);
 		return String.valueOf(result);
 	}
+	
+	@RequestMapping(value = "/findIdPop", method = RequestMethod.GET)
+	public String findIdPop() {
+		return "/member/findId";
+	}
+	
+	@RequestMapping(value = "/findId", method = RequestMethod.POST)
+	@ResponseBody
+	public String findId(String username, String email) {
+		MemberVo memberVo = memberService.findId(username, email);
+		if (memberVo != null && !memberVo.equals("")) {
+			String userid = memberVo.getUserid();
+			return userid;
+		} 
+		return null;
+	}
 }

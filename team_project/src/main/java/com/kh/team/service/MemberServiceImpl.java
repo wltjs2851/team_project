@@ -53,4 +53,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.isExist(userid);
 	}
 
+	@Override
+	public MemberVo findId(String username, String email) {
+		return memberDao.findId(username, email);
+	}
+
 }

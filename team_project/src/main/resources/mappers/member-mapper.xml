@@ -31,6 +31,12 @@
 		where userid = #{userid}
 	</select>
 	
+	<select id="findId" resultType="MemberVo">
+		select * from tbl_user
+		where username = #{username}
+		and email = #{email}
+	</select>
+	
 	<update id="updateMember">
 		update tbl_user set
 			userpw = #{userpw, jdbcType=VARCHAR},
