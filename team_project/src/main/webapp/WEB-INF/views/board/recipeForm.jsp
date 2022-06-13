@@ -146,6 +146,40 @@ $(function() {
 			});
 		});
 	});
+	
+	var like_cnt = ${like_cnt};
+	var span = $("span");
+	
+	if (like_cnt > 0){
+		// 좋아요 1 이상인 경우
+		$("i.fa-heart").css("color", "red");
+	} else {
+		$("i.fa-heart").css("color", "graytext");
+	}
+	
+	var is_like;
+	
+	$("i.fa-heart").click(function() {
+		var like = $(this);
+		var url = "/recipe/updateLike";
+		var sendData = {
+				"rno" : "${ recipeVo.rno }",
+				"userid" : "${ loginVo.userid }",
+				"rlno" : "${ recipeVo.rlno }",
+				"r_like" : "${ recipeVo.r_like }",
+				"like_cnt" : like_cnt
+		}
+		$.post(url, sendData, function(receivedData) {
+			console.log("receivedData: ", receivedData);
+			if(receivedData == "true") {
+				like.css("color", "graytext");
+			 	span.text(parseInt(span.text().trim()) - 1);
+			} else {					
+				like.css("color", "red");
+		 		span.text(parseInt(span.text().trim()) + 1);
+			}
+		});
+	});
 });
 </script>
 
@@ -162,8 +196,8 @@ $(function() {
 				${ recipeVo.r_content }
 				<hr>
 			</div>
-			<div>
-				<i class="fa-solid fa-heart" style="color: red; font-size: 25px;" >좋아요</i>
+			<div class="row">
+				<i class="fa-solid fa-heart" style="font-size: 25px;" ></i><p style="font-size: 25px"><span>${ recipeVo.r_like }</span> &nbsp;
 				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }" class="btn btn-warning"
 					style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
 				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }" class="btn btn-danger"

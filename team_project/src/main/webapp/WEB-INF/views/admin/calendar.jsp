@@ -67,7 +67,6 @@ $(function() {
 });
 </script>
 <body>
-${calList}
 	<div class='rap'>
 		<div class="header">
 			<div class="btn prevDay" id="prevMonth"></div>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.dao.RecipeDao;
 import com.kh.team.vo.RecipeVo;
@@ -42,6 +43,33 @@ public class RecipeServiceImpl implements RecipeService{
 	@Override
 	public List<RecipeVo> selectByViewCnt() {
 		return recipeDao.selectByViewCnt();
+	}
+
+	@Override
+	public int isLike(int rno, String userid) {
+		return recipeDao.countLike(rno, userid);
+	}
+
+	@Override
+	@Transactional
+	public boolean decreaseLike(int rno, int r_like, String userid) {
+		boolean resultDelete = recipeDao.deleteLike(rno, userid);
+		boolean resultUpdate = recipeDao.updateLikecnt(rno, r_like - 1);
+		if(resultDelete && resultUpdate) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	@Transactional
+	public boolean increaseLike(int rno, int r_like, String userid) {
+		boolean resultInsert = recipeDao.insertLike(rno, userid);
+		boolean resultUpdate = recipeDao.updateLikecnt(rno, r_like + 1);
+		if(resultInsert && resultUpdate) {
+			return false;
+		}
+		return true;
 	}
 
 }

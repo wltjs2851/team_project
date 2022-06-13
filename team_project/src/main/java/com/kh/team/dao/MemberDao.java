@@ -15,4 +15,6 @@ public interface MemberDao  {
 	public String getU_picById(String userid);
 	
 	public MemberVo memberByUserid(String userid);
+	
+	public boolean isExist(String userid);
 }

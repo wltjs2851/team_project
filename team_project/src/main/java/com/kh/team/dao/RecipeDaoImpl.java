@@ -77,4 +77,51 @@ public class RecipeDaoImpl implements RecipeDao{
 		return count;
 	}
 
+	@Override
+	public boolean insertLike(int rno, String userid) {
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("rno", rno);
+		parameter.put("userid", userid);
+		int count = sqlSession.insert(NAMESPACE + "insertLike", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteLike(int rno, String userid) {
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("rno", rno);
+		parameter.put("userid", userid);
+		int count = sqlSession.delete(NAMESPACE + "deleteLike", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	// 키보드가 정말 별로인데요!
+
+	@Override
+	public int countLike(int rno, String userid) {
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("rno", rno);
+		parameter.put("userid", userid);
+		int count = sqlSession.selectOne(NAMESPACE + "countLike", parameter);
+		return count;
+	}
+
+	@Override
+	public boolean updateLikecnt(int rno, int r_like) {
+		Map<String, Integer> parameter = new HashMap<>();
+		parameter.put("rno", rno);
+		parameter.put("r_like", r_like);
+		int count = sqlSession.update(NAMESPACE + "updateLikecnt", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

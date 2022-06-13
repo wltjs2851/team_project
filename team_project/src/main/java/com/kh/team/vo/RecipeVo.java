@@ -11,12 +11,26 @@ public class RecipeVo {
 	private String r_pic;
 	private int r_viewcnt;
 	private int r_like;
+	private int rlno;
 	
 	public RecipeVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
+	public RecipeVo(int rno, String userid) {
+		super();
+		this.rno = rno;
+		this.userid = userid;
+	}
+	
+	public RecipeVo(int rno, int rlno, String userid) {
+		super();
+		this.rno = rno;
+		this.userid = userid;
+		this.rlno = rlno;
+	}
+
 	public RecipeVo(String r_title, String r_content, String userid, String r_pic) {
 		super();
 		this.r_title = r_title;
@@ -56,6 +70,20 @@ public class RecipeVo {
 		this.r_pic = r_pic;
 		this.r_viewcnt = r_viewcnt;
 		this.r_like = r_like;
+	}
+
+	public RecipeVo(int rno, String r_title, String r_content, String userid, Date r_regdate, String r_pic,
+			int r_viewcnt, int r_like, int rlno) {
+		super();
+		this.rno = rno;
+		this.r_title = r_title;
+		this.r_content = r_content;
+		this.userid = userid;
+		this.r_regdate = r_regdate;
+		this.r_pic = r_pic;
+		this.r_viewcnt = r_viewcnt;
+		this.r_like = r_like;
+		this.rlno = rlno;
 	}
 
 	public int getRno() {
@@ -122,10 +150,18 @@ public class RecipeVo {
 		this.r_like = r_like;
 	}
 
+	public int getRlno() {
+		return rlno;
+	}
+
+	public void setRlno(int rlno) {
+		this.rlno = rlno;
+	}
+
 	@Override
 	public String toString() {
 		return "RecipeVo [rno=" + rno + ", r_title=" + r_title + ", r_content=" + r_content + ", userid=" + userid
-				+ ", r_regdate=" + r_regdate + ", r_pic=" + r_pic + ", r_viewcnt=" + r_viewcnt + ", r_like=" + r_like
-				+ "]";
+				+ ", r_regdate=" + r_regdate + ", r_pic=" + r_pic + ", r_viewcnt=" + r_viewcnt + ", r_like="
+				+ r_like + ", rlno=" + rlno + "]";
 	}
 }

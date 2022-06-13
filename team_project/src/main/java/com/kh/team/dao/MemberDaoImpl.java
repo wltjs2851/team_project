@@ -65,5 +65,14 @@ public class MemberDaoImpl implements MemberDao {
 		return memberVo;
 	}
 
+	@Override
+	public boolean isExist(String userid) {
+		MemberVo memberVo = sqlSession.selectOne(NS + "isExist", userid);
+		if (memberVo != null && !memberVo.equals("")) {
+			return true;
+		}
+		return false;
+	}
+
 	
 }
