@@ -74,5 +74,14 @@ public class MemberDaoImpl implements MemberDao {
 		return false;
 	}
 
+	@Override
+	public MemberVo findId(String username, String email) {
+		Map<String, String> map = new HashMap<>();
+		map.put("username", username);
+		map.put("email", email);
+		MemberVo memberVo = sqlSession.selectOne(NS + "findId", map);
+		return memberVo;
+	}
+
 	
 }
