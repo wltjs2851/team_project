@@ -11,8 +11,15 @@
 <!-- 		where start1 =  -->
 	</select>
 	
+<!-- 	일정 추가  -->
 	<insert id="insertCal">
 		insert into calendar(indx, userid, content, start1)
 		values(cal_index.nextval, #{userid}, #{content}, #{start1})
 	</insert>	
+	
+<!-- 	일정 목록 -->
+	<select id="getCalList" resultType="CalendarVo">
+		select * from calendar
+		where userid = #{userid}
+	</select>
 </mapper>
