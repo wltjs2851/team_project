@@ -3,6 +3,7 @@ package com.kh.team.dao;
 import java.util.List;
 
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.SearchDto;
 
 public interface GroupBoardDao {
 	
@@ -10,9 +11,11 @@ public interface GroupBoardDao {
 	public GroupBoardVo read(int gbno);
 	public boolean update(GroupBoardVo groupBoardVo);
 	public boolean delete(int gbno);
-	public List<GroupBoardVo> list();
+	public List<GroupBoardVo> list(SearchDto searchDto);
+//	public List<GroupBoardVo> list(SearchDto searchDto);
 	public List<GroupBoardVo> notice(String gb_notice);
-	public boolean updateComment(int gbno);
+//	public void updateComment(int gbno);
 	public int countComment(int gbno);
+	public String getGb_picdById(int gbno);
 
 }

@@ -4,20 +4,35 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
+${ groupVo }
+
+<script>
+$(function() {
+	$(".tab-content > div").hide();
+	$(".nav-tabs a").click(function() {
+		$(".tab-content > div").hide().filter(this.hash).fadeIn();
+		$(".nav-tabs a").removeClass("active");
+		$(this).addClass("active");
+		return false;
+	}).filter(":eq(0)").click();
+	
+});
+</script>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-9">
 					<h2>
-						그룹 이름
+						그룹 이름: ${ groupVo.g_name }
 					</h2>
 					
 					<h3>
 						그룹 소개
 					</h3>
 					<p>
-						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+						${ groupVo.g_intro }
 					</p>
 					
 					<div class="tabbable" id="tabs-367776">
@@ -30,8 +45,12 @@
 							</li>
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane active" id="panel-323928">
+							<div class="active" id="tab1">
 								<p>
+									위치: ${ groupVo.g_location }<br>
+									운동: ${ groupVo.excercise_type }<br>
+									최대 인원수: ${ groupVo.g_attend }<br>
+									개설 날짜: ${ groupVo.g_regdate }<br>
 									그룹 정보(개설 날짜, 위치, 모임 목적, 최대 인원수)
 								</p>
 							</div>
@@ -50,20 +69,28 @@
 						<div class="list-group">
 							 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 							<div class="list-group-item">
-								그룹 명
+								<h2>${ groupVo.g_name }</h2>
 							</div>
 							<div class="list-group-item">
 								<h4 class="list-group-item-heading">
 									그룹 소개
 								</h4>
 								<p class="list-group-item-text">
+									${ groupVo.g_intro }
 									...
 								</p>
 							</div>
 							<div class="list-group-item justify-content-between">
-								<a href="/groupboard/updateGroupInfoForm">그룹 정보 수정(그룹장만)</a>
+								<c:choose>
+									<c:when test="${ groupVo.g_leader == loginVo.userid }">
+										<a href="/groupboard/updateGroupInfoForm">그룹 정보 수정(그룹장만)</a>
+									</c:when>
+									<c:otherwise>
+										
+									</c:otherwise>
+								</c:choose>
 							</div>
-								<a href="/groupboard/groupMain" class="list-group-item list-group-item-action active justify-content-between">
+								<a href="/groupboard/groupMain/${ loginVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 									그룹 메인으로
 								</a>
 						</div>

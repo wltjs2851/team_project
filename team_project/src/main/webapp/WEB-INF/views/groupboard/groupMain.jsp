@@ -19,11 +19,32 @@ $(function() {
 	if(delete_result == "true") {
 		alert("삭제 완료");
 	}
+	
+	var frmPaging = $("#frmPaging");
+	
+	// 검색 버튼
+	$("#btnSearch").click(function() {
+		var searchType = $("#searchType").val();
+		var keyword = $("#keyword").val();
+		console.log("searchType: ", searchType);
+		console.log("keyword: ", keyword);
+		
+		frmPaging.find("input[name=searchType]").val(searchType);
+		frmPaging.find("input[name=keyword]").val(keyword);
+		frmPaging.attr("action", "/groupboard/groupMain/${gno}");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 </script>
 
 <%-- ${ groupList } --%>
 <%-- ${ noticeList } --%>
+<%-- ${ groupVo } --%>
+<%-- ${ result } --%>
+
+<%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -35,7 +56,7 @@ $(function() {
 						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">[공지] ${ groupBoardVo.gb_title }</a>
 					</h3>
 				</c:forEach>
-					<a href="/groupboard/notice">전체 공지글 확인하기</a>
+					<a href="/groupboard/notice?gno=${ loginVo.gno }">전체 공지글 확인하기</a>
 				
 					<c:forEach items="${ groupList }" var="groupBoardVo">
 				
@@ -46,9 +67,13 @@ $(function() {
 										
 										</button>
 										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										
+										<c:if test="${ groupVo.g_leader == loginVo.userid }">
 											 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a>
 											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a>
+										</c:if>
 											 <a class="dropdown-item" href="#">회원 정보 보기</a>
+											 
 										</div></h2>
 						<p>작성자: ${groupBoardVo.userid}, 작성일: ${ groupBoardVo.gb_regdate }</p>
 						<p>${ groupBoardVo.gb_content }</p>
@@ -65,7 +90,7 @@ $(function() {
 						</div>
 						
 						<div>
-							<i class='far fa-comment-alt'></i> ${ count }1
+						   		<i class='far fa-comment-alt'></i> ${ groupBoardVo.gb_comment }
 							<i class='far fa-heart'></i> ${ groupBoardVo.gb_like }
 						</div>
 						
@@ -81,35 +106,63 @@ $(function() {
 				
 				<div class="col-md-3">
 				
-				<aside class="column dotcom__aside bottom-12" style="position: fixed;">
+<!-- 				<aside class="column dotcom__aside bottom-12" style="position: fixed;"> -->
 					<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
-							그룹 명
+							<h2>${ groupVo.g_name }</h2>
 						</div>
 						<div class="list-group-item">
 							<h4 class="list-group-item-heading">
 								그룹 소개
 							</h4>
 							<p class="list-group-item-text">
+								${ groupVo.g_intro }
 								...(달력을 넣어서 그룹 일정 표시하도록,,?)
 							</p>
 						</div>
+						
 						<div class="list-group-item justify-content-between">
-							<a href="/groupboard/groupInfo">ㅇㅇ님 환영합니다</a>
-						</div>
-							<a href="/groupboard/groupInfo" class="list-group-item list-group-item-action active justify-content-between">
+						
+							<div>
+							<select id="searchType">
+								<option value="t"
+									<c:if test="${ searchDto.searchType == 't' }">
+										selected
+									</c:if>
+								>제목</option>
+								<option value="c"
+									<c:if test="${ searchDto.searchType == 'c' }">
+										selected
+									</c:if>
+								>내용</option>
+								<option value="w"
+									<c:if test="${ searchDto.searchType == 'w' }">
+										selected
+									</c:if>
+								>작성자</option>
+							</select>
+							<a href="/groupboard/groupMain/${ loginVo.gno }" class="btn-primary" style="width: 50px; height:50px; padding: 2% 0">검색 초기화</a>
+							</div>
+							
+							<input type="text" id="keyword" value="${searchDto.keyword}">
+							<button id="btnSearch" style="width: 50px; height:30px; padding: 1% 0" class="btn btn-success">검색</button>
+							
+						</div>	
+						
+						
+							<a href="/groupboard/groupInfo?gno=${ loginVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>
 					<nav>
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item">
-								<a href="/groupboard/groupWriteForm">글쓰기</a>
+								<a href="/groupboard/groupWriteForm?bno=${ loginVo.gno }">글쓰기</a>
 							</li>
 							<li class="breadcrumb-item">
 								<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
-								<a href="#">활동 정보</a>
+								<a href="/groupboard/activityInfo/${ loginVo.gno }">활동 정보</a>
 							</li>
 							<li class="breadcrumb-item">
 								<a href="">그룹 탈퇴</a>
@@ -137,7 +190,7 @@ $(function() {
 							</div>
 						</div>
 					</div>
-					</aside>
+<!-- 					</aside> -->
 					
 				</div>
 				

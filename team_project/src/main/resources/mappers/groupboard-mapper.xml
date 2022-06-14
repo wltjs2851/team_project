@@ -9,10 +9,10 @@
  <!-- 글 등록 -->
  <insert id="create"> <!-- (String일 경우)null을 허용할 경우 다음과 같이 해야 함(sql 작성 시 널값을 허용한다고 했어도) -->
  	insert into tbl_group_board
- 		(gbno, gb_title, gb_content, userid, gb_notice, gb_pic)
+ 		(gbno, gb_title, gb_content, userid, gb_notice, gb_pic, gno)
  	values
- 		(seq_group_board_gbno.nextval, #{gb_title}, #{gb_content}, #{userid, jdbcType=VARCHAR},
- 		 #{gb_notice, jdbcType=VARCHAR}, #{gb_pic, jdbcType=VARCHAR})
+ 		(seq_group_board_gbno.nextval, #{gb_title}, #{gb_content}, #{userid},
+ 		 #{gb_notice, jdbcType=VARCHAR}, #{gb_pic, jdbcType=VARCHAR}, #{gno})
  </insert>
  
  <!-- 글 조회 -->
@@ -38,9 +38,22 @@
  
  <!-- 글 목록 -->
  <select id="list" resultType="GroupBoardVo">
- 	select * from tbl_group_board
+<!--  	select * from tbl_group_board -->
+<!--  	where gno = #{gno} -->
+<!--  	order by gbno desc -->
+ 	select * from (select rownum rnum, a.* from
+ 		(select * from tbl_group_board
+ 		 <include refid="search"></include>) a)
+ 	where gno = #{gno}
  	order by gbno desc
  </select>
+ 
+<!--  select * from  -->
+<!-- 	(select rownum rnum, a.* from 특정 개수의 행만 조회 -->
+<!--          (select * from tbl_board -->
+<!--           <include refid="search"></include> -->
+<!--           order by re_group desc, re_seq asc) a) -->
+<!-- where rnum between #{startRow} and #{endRow} -->
  
  <!-- 공지글만 뽑아내기 -->
  <select id="notice" resultType="GroupBoardVo">
@@ -51,23 +64,32 @@
  
  <!-- 댓글 갯수 넣기 -->
  <update id="updateComment">
- 	update tbl_group_board_comment
-	set gb_comment = (select count(gbcno)
-                     from tbl_group_board_comment
-                     where gbno = #{gbno})
+	update tbl_group_board
+	set gb_comment = gb_comment + #{cnt}
 	where gbno = #{gbno}
  </update>
  
-<!--  <update id="updateComment"> -->
-<!--    	update tbl_group_board -->
-<!--    	set gb_comment = gb_comment + #{amount}  -->
-<!--    	where gbno = #{gbno} -->
-<!--  </update> -->
-
 <!-- 댓글 갯수 -->
 <select id="countComment" resultType="int">
 	select count(*) from tbl_group_board_comment
 	where gbno = #{gbno}
 </select>
+
+<!-- 기존 사진 가져오기 -->
+<select id="getGb_picById" resultType="String">
+	select gb_pic from tbl_group_board
+	where gbno = #{gbno}
+</select>
+
+<!-- 검색 조건(참조용) -->
+ <sql id="search">
+ 	<if test="searchType != null and keyword != null">
+    	<choose>
+    		<when test='searchType == "t"'>where gb_title like '%' || #{keyword} || '%'</when>
+    		<when test='searchType == "c"'>where gb_content like '%' || #{keyword} || '%'</when>
+    		<when test='searchType == "w"'>where userid like '%' || #{keyword} || '%'</when>
+    	</choose>
+    </if>
+ </sql>
  
  </mapper>

@@ -3,12 +3,14 @@ package com.kh.team.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.team.service.GroupBoardCommentService;
+import com.kh.team.service.GroupBoardService;
 import com.kh.team.vo.GroupBoardCommentVo;
 
 @RestController
@@ -18,9 +20,13 @@ public class GroupBoardCommentController {
 	@Autowired
 	private GroupBoardCommentService groupBoardCommentService;
 	
+	@Autowired
+	private GroupBoardService groupBoardService;
+	
 	@RequestMapping(value = "/insertGroupComment", method = RequestMethod.POST)
-	public String insertGroupComment(GroupBoardCommentVo groupBoardCommentVo) {
+	public String insertGroupComment(GroupBoardCommentVo groupBoardCommentVo, int gbno) {
 		boolean result = groupBoardCommentService.insertGroupComment(groupBoardCommentVo);
+		groupBoardCommentService.updateComment(gbno);
 		return String.valueOf(result);
 	}
 	
@@ -38,8 +44,9 @@ public class GroupBoardCommentController {
 	}
 	
 	@RequestMapping(value = "/deleteGroupComment/{gbcno}", method = RequestMethod.GET)
-	public String deleteGroupComment(@PathVariable("gbcno") int gbcno) {
+	public String deleteGroupComment(@PathVariable("gbcno") int gbcno, int gbno) {
 		boolean result = groupBoardCommentService.deleteGroupComment(gbcno);
+		groupBoardCommentService.updateCommentDelete(gbno);
 		return String.valueOf(result);
 	}
 

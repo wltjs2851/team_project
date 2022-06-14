@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.dao.RecipeDao;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeVo;
 
 @Service
@@ -21,8 +22,8 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public List<RecipeVo> recipeList() {
-		return recipeDao.selectRecipe();
+	public List<RecipeVo> recipeList(PagingDto pagingDto) {
+		return recipeDao.selectRecipe(pagingDto);
 	}
 
 	@Override
@@ -75,6 +76,11 @@ public class RecipeServiceImpl implements RecipeService{
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int getCount(PagingDto pagingDto) {
+		return recipeDao.getCount(pagingDto);
 	}
 
 }

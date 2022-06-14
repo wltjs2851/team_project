@@ -17,7 +17,8 @@ $(function() {
 	<a class="btn btn-warning" href="/group/addGroupForm" style="width: 110px; height:50px; padding: 1% 0">그룹 만들기</a><br><br>
 	<div class="row">
 		<c:forEach items="${ groupList }" var="groupVo">
-		<div class="col-lg-3 col-md-6 col-sm-6" OnClick="location.href ='/group/groupForm?gno=${groupVo.gno}'" style="cursor:pointer;">
+		<div class="col-lg-3 col-md-6 col-sm-6 group" onclick="location.href ='/group/groupForm?gno=${groupVo.gno}'" data-toggle="modal"
+			style="cursor:pointer;">
 			<div class="product__item">
 				<div style="text-align: center;">
 					<c:choose>

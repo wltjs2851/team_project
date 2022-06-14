@@ -4,11 +4,14 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
+${ loginVo.gno }
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 		
 			<form role="form" name="frmWrite" action="/groupboard/groupWriteRun" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="gno" value="${ loginVo.gno }">
+				
 				<div class="form-group">
 					 
 					<label for="gb_title">제목</label>

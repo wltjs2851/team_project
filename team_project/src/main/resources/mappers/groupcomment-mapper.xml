@@ -39,4 +39,18 @@
  	where gbno = #{gbno}
  </select>
  
+ <!-- 댓글 갯수 넣기 -->
+ <update id="updateComment">
+	update tbl_group_board
+	set gb_comment = gb_comment + #{cnt}
+	where gbno = #{gbno}
+ </update>
+ 
+ <!-- 댓글 갯수 빼기 -->
+ <update id="updateCommentDelete">
+	update tbl_group_board
+	set gb_comment = gb_comment - #{cnt}
+	where gbno = #{gbno}
+ </update>
+ 
  </mapper>

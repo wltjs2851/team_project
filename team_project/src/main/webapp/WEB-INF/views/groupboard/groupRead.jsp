@@ -13,6 +13,8 @@ $(function() {
 	
 	$("#btnCommentInsert").click(function() {
 		console.log("click");
+		var count = $(".count").val();
+		console.log("count: ", count);
 		var gbc_content = $("#c_content").val();
 		var userid = $("#c_userid").val();
 		var gbno = "${groupBoardVo.gbno}";
@@ -27,6 +29,8 @@ $(function() {
 		$.post(url, sData, function(rData) {
 			console.log(rData);
 			if(rData == "true") {
+				$(".count").text("${groupBoardVo.gb_comment + 1}");
+// 				$(".count").val(text(${count + 1}));
 				getCommentList();
 			}
 		});
@@ -67,10 +71,11 @@ $(function() {
 	} else {
 		// 좋아요가 하나도 없는 경우 
 		console.log(heart);
-		$("i.fa-heart").css("color", "black");
+		$("i.fa-heart").css("color", "graytext");
 		$("i.fa-heart").prop("name", heart);
 	}
-
+	
+	// 하트 클릭
 	$("i.fa-heart").click(function(){
 		console.log("클릭");
 		
@@ -84,17 +89,21 @@ $(function() {
 		var url = "/groupboard/heart";
 		var sData = {
 				"gbno" : gbno,
-				"heart" : that.prop("name")
+				"heart" : heart
 		};
 		
 		$.post(url, sData, function(rData){
 			console.log("rData:", rData);
-			that.prop('name', rData);
+			that.prop("name", rData);
 			
 			if(rData == 1){
 				$("i.fa-heart").css("color", "red");
+				$("#like").text(${groupBoardVo.gb_like} + 1);
+// 				span.text(parseInt(span.text().trim()) + 1);
 			} else {
-				$("i.fa-heart").css("color", "black");
+				$("i.fa-heart").css("color", "graytext");
+				$("#like").text("${groupBoardVo.gb_like}");
+// 				span.text(parseInt(span.text().trim()) - 1);
 			}
 		});
 	});
@@ -104,9 +113,17 @@ $(function() {
 		console.log("댓글 삭제 버튼");
 		var gbcno = $(this).attr("data-gbcno");
 		var url = "/groupcomment/deleteGroupComment/" + gbcno;
-		$.get(url, function(rData) {
+		var gbno = "${groupBoardVo.gbno}";
+		
+		var sData = {
+				"gbno" : gbno
+		}
+		
+		$.get(url, sData, function(rData) {
 			console.log(rData);
 			if (rData == "true") {
+// 				$(".count").text("${count}");
+// 				$(".count").val(text(${groupBoardVo.gb_comment - 1}));
 				getCommentList();
 			}
 		});
@@ -145,7 +162,7 @@ $(function() {
 });
 </script>
 
-<%-- ${ groupBoardVo } --%>
+${ groupBoardVo }
 <%-- ${ heart } --%>
 <%-- ${ count } --%>
 
@@ -203,19 +220,21 @@ $(function() {
 						${ groupBoardVo.gb_content }
 					</div>
 					
-					<c:choose>
-						<c:when test="${empty groupBoardVo.gb_pic}">
-							<div></div>
-						</c:when>
-					<c:otherwise>
-						<div style="margin: 20px;"><img src="/groupboard/displayImage?filename=${groupBoardVo.gb_pic}" alt="작성자가 올린 사진"></div>
-					</c:otherwise>
-					</c:choose>
+					<div class="image">
+						<c:choose>
+							<c:when test="${empty groupBoardVo.gb_pic}">
+								<div></div>
+							</c:when>
+						<c:otherwise>
+							<div style="margin: 20px;"><img src="/groupboard/displayImage?filename=${groupBoardVo.gb_pic}" alt="작성자가 올린 사진"></div>
+						</c:otherwise>
+						</c:choose>
+					</div>
 				
 				
 				<!-- 좋아요 --> 
 					<i class="fas fa-heart" style=" font-size: 30px; color: graytext; cursor: pointer;" data-gbno="${ groupBoardVo.gbno }"></i>
-					<span style="font-size: 30px;">${ groupBoardVo.gb_like }</span>
+					<span id="like" style="font-size: 30px;">${ groupBoardVo.gb_like }</span>
 				
 				<!-- 수정, 삭제 버튼 -->
 				<table>
@@ -228,7 +247,9 @@ $(function() {
 <!-- 				<button>삭제</button> -->
 				
 				<!-- 댓글 -->
-				댓글[${ count }]
+				<div class="comments">
+				댓글[<span class="count">${ groupBoardVo.gb_comment }</span>]
+				</div>
 				<div class="row">
 					<div class="col-md-9">
 						<input type="text" id="c_content" class="form-control" placeholder="댓글을 입력해주세요">
@@ -288,9 +309,9 @@ $(function() {
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
-							<a href="/groupboard/groupMain">그룹 메인으로</a>
+							<a href="/groupboard/groupMain/${ groupBoardVo.gno }">그룹 메인으로</a>
 						</div>
-							<a href="/groupboard/groupInfo" class="list-group-item list-group-item-action active justify-content-between">
+							<a href="/groupboard/groupInfo?gno=${ groupBoardVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>

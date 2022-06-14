@@ -9,7 +9,11 @@
 	</insert>
 	
 	<select id="selectRecipe" resultType="RecipeVo">
-		select * from tbl_recipe order by rno desc
+		select * from (select rownum rnum, a.* from 
+			(select * from tbl_recipe
+			<include refid="search"/>
+			order by rno desc) a) 
+		where rnum between #{startRow} and #{endRow}
 	</select>
 	
 	<update id="updateRecipe">
@@ -37,6 +41,10 @@
 		where rownum &lt;= 3
 	</select>
 	
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_recipe<include refid="search"/>
+	</select>
+	
  	<select id="countComment" resultType="int">
  		select count(rlno) from tbl_rcomment where userid = #{userid} and rno = #{rno}
 	</select>
@@ -57,5 +65,23 @@
 	<update id="updateLikecnt">
 		update tbl_recipe set r_like = #{r_like} where rno = #{rno}
 	</update>
+	
+	<sql id="search">
+		<if test="searchType != null and keyword != null">
+				<choose>
+					<when test='searchType == "t"'>where r_title like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "c"'>where r_content like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "w"'>where userid like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "tc"'>
+					where r_title like '%' || #{keyword} || '%'
+					or r_content like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "tcw"'>
+					where r_title like '%' || #{keyword} || '%'
+					or r_content like '%' || #{keyword} || '%'
+					or userid like '%' || #{keyword} || '%'
+					</when>
+				</choose>
+			</if>
+	</sql>
 
 </mapper>

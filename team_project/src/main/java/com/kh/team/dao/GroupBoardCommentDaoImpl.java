@@ -1,6 +1,8 @@
 package com.kh.team.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,24 @@ public class GroupBoardCommentDaoImpl implements GroupBoardCommentDao {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void updateComment(int gbno) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("gbno", gbno);
+		map.put("cnt", 1);
+		System.out.println("gorupBoardCommentDaoImpl, gbno: " + gbno);
+		sqlSession.update(NAMESPACE + "updateComment", map);
+	}
+
+	@Override
+	public void updateCommentDelete(int gbno) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("gbno", gbno);
+		map.put("cnt", 1);
+		System.out.println("gorupBoardCommentDaoImpl, gbno: " + gbno);
+		sqlSession.update(NAMESPACE + "updateCommentDelete", map);
 	}
 
 }

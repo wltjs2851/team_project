@@ -1,5 +1,7 @@
 package com.kh.team;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team.dao.GroupBoardDao;
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.SearchDto;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/**/*.xml")
@@ -37,15 +40,25 @@ public class GroupBoardDaoTest {
 		System.out.println("result: " + result);
 	}
 	
-	@Test
-	public void testUpdateComment() {
-		boolean result = groupBoardDao.updateComment(11);
-		System.out.println("result: " + result);
-	}
+//	@Test
+//	public void testUpdateComment() { // 왜 false가 나온는 것인지???
+////		boolean result = groupBoardDao.updateComment(1);
+////		System.out.println("result: " + result);
+//		groupBoardDao.updateComment(1);
+//	}
 
 	@Test
 	public void testCountComment() {
-		int count = groupBoardDao.countComment(11);
+		int count = groupBoardDao.countComment(1);
 		System.out.println("count: " + count);
+	}
+	
+	@Test
+	public void testList() {
+		SearchDto searchDto = new SearchDto("t", "11");
+		searchDto.setGno(11);
+		List<GroupBoardVo> list = groupBoardDao.list(searchDto);
+		
+		System.out.println("list: " + list);
 	}
 }

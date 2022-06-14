@@ -37,9 +37,9 @@
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
-							<a href="/groupboard/groupMain">그룹 메인으로</a>
+							<a href="/groupboard/groupMain/${ loginVo.gno }">그룹 메인으로</a>
 						</div>
-							<a href="/groupboard/groupInfo" class="list-group-item list-group-item-action active justify-content-between">
+							<a href="/groupboard/groupInfo?gno=${ loginVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>

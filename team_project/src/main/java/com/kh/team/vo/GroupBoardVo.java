@@ -13,6 +13,7 @@ public class GroupBoardVo {
 	private int gb_like;
 	private String gb_pic;
 	private int gb_comment;
+	private int gno;
 	
 	public GroupBoardVo() {
 		super();
@@ -52,6 +53,21 @@ public class GroupBoardVo {
 		this.gb_like = gb_like;
 		this.gb_pic = gb_pic;
 		this.gb_comment = gb_comment;
+	}
+
+	public GroupBoardVo(int gbno, String gb_title, String gb_content, String userid, String gb_notice, Date gb_regdate,
+			int gb_like, String gb_pic, int gb_comment, int gno) {
+		super();
+		this.gbno = gbno;
+		this.gb_title = gb_title;
+		this.gb_content = gb_content;
+		this.userid = userid;
+		this.gb_notice = gb_notice;
+		this.gb_regdate = gb_regdate;
+		this.gb_like = gb_like;
+		this.gb_pic = gb_pic;
+		this.gb_comment = gb_comment;
+		this.gno = gno;
 	}
 
 	public int getGbno() {
@@ -126,11 +142,19 @@ public class GroupBoardVo {
 		this.gb_comment = gb_comment;
 	}
 
+	public int getGno() {
+		return gno;
+	}
+
+	public void setGno(int gno) {
+		this.gno = gno;
+	}
+
 	@Override
 	public String toString() {
 		return "GroupBoardVo [gbno=" + gbno + ", gb_title=" + gb_title + ", gb_content=" + gb_content + ", userid="
 				+ userid + ", gb_notice=" + gb_notice + ", gb_regdate=" + gb_regdate + ", gb_like=" + gb_like
-				+ ", gb_pic=" + gb_pic + ", gb_comment=" + gb_comment + "]";
+				+ ", gb_pic=" + gb_pic + ", gb_comment=" + gb_comment + ", gno=" + gno + "]";
 	}
 
 }
