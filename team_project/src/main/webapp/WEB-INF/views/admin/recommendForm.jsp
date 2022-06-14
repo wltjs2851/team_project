@@ -5,6 +5,8 @@
 <script>
 
 </script>
+${loginVo }
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
@@ -19,6 +21,7 @@
 				</p>
 			</div>
 			<form role="form" action="/admin/insertRecommend" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="userid" value="${loginVo.userid}" />
 				<div class="form-group">
 					<label for="re_title">
 						제목

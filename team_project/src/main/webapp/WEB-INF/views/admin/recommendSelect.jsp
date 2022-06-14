@@ -201,29 +201,37 @@ $(document).ready(function() {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div>
-				<img width="745px;" height="auto"
-					src="/member/displayImage?filename=${recommendVo.re_pic}"
-					alt="운동이미지">
-
+			<h2>${recommendVo.re_title }</h2>
+			<hr>
 			</div>
-			<form role="form" action="/admin/updateRecommend" method="post"
-				enctype="multipart/form-data">
-				<input type="hidden" name="reno" value="${recommendVo.reno}" />
-				<div class="form-group">
-					<label for="re_title"> 제목 </label> <input type="text"
-						class="form-control" id="re_title" name="re_title"
-						value="${recommendVo.re_title}" readonly="readonly" />
-				</div>
-				<div class="form-group">
-					<label for="re_content"> 내용 </label>
-					<textarea rows="10" cols="85" id="re_content" name="re_content"
-						readonly="readonly">${recommendVo.re_content}</textarea>
-				</div>
-				<div class="form-group">
-					<label for="exampleInputFile" id="fileLabel" style="display: none;">
-						이미지 </label> <input type="file" class="form-control-file"
-						id="fileRecommend" style="display: none;" />
-				</div>
+			<div>
+				${recommendVo.re_content }
+				<hr>
+			</div>
+<!-- 			<div> -->
+<!-- 				<img width="745px;" height="auto" -->
+<%-- 					src="/member/displayImage?filename=${recommendVo.re_pic}" --%>
+<!-- 					alt="운동이미지"> -->
+
+<!-- 			</div> -->
+<!-- 			<form role="form" action="/admin/updateRecommend" method="post" -->
+<!-- 				enctype="multipart/form-data"> -->
+<%-- 				<input type="hidden" name="reno" value="${recommendVo.reno}" /> --%>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label for="re_title"> 제목 </label> <input type="text" -->
+<!-- 						class="form-control" id="re_title" name="re_title" -->
+<%-- 						value="${recommendVo.re_title}" readonly="readonly" /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label for="re_content"> 내용 </label> -->
+<!-- 					<textarea rows="10" cols="85" id="re_content" name="re_content" -->
+<%-- 						readonly="readonly">${recommendVo.re_content}</textarea> --%>
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label for="exampleInputFile" id="fileLabel" style="display: none;"> -->
+<!-- 						이미지 </label> <input type="file" class="form-control-file" -->
+<!-- 						id="fileRecommend" style="display: none;" /> -->
+<!-- 				</div> -->
 
 				<div>
 					<i class="fas fa-heart"

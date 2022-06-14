@@ -8,8 +8,8 @@
 	<!-- 글 추가 -->
 	<insert id="insertRecommend">
 		insert into tbl_recommend 
-				(reno, re_content, re_title, re_pic)
-		values (seq_recommend_reno.nextval, #{re_content}, #{re_title}, #{re_pic, jdbcType=VARCHAR})
+				(reno, re_content, re_title, re_pic, userid)
+		values (seq_recommend_reno.nextval, #{re_content}, #{re_title}, #{re_pic, jdbcType=VARCHAR}, #{userid})
 	</insert>
 	
 	<!-- 글 수정 -->
