@@ -29,7 +29,7 @@ $(function() {
 		$.post(url, sData, function(rData) {
 			console.log(rData);
 			if(rData == "true") {
-				$(".count").text("${count + 1}");
+				$(".count").text("${groupBoardVo.gb_comment + 1}");
 // 				$(".count").val(text(${count + 1}));
 				getCommentList();
 			}
@@ -122,8 +122,8 @@ $(function() {
 		$.get(url, sData, function(rData) {
 			console.log(rData);
 			if (rData == "true") {
-				$(".count").text("${count}");
-// 				$(".count").val(text(${count - 1}));
+// 				$(".count").text("${count}");
+// 				$(".count").val(text(${groupBoardVo.gb_comment - 1}));
 				getCommentList();
 			}
 		});
@@ -162,9 +162,9 @@ $(function() {
 });
 </script>
 
-<%-- ${ groupBoardVo } --%>
+${ groupBoardVo }
 <%-- ${ heart } --%>
-${ count }
+<%-- ${ count } --%>
 
 <!-- 모달 -->
 <div class="row">
@@ -248,7 +248,7 @@ ${ count }
 				
 				<!-- 댓글 -->
 				<div class="comments">
-				댓글[<span class="count">${ count }</span>]
+				댓글[<span class="count">${ groupBoardVo.gb_comment }</span>]
 				</div>
 				<div class="row">
 					<div class="col-md-9">

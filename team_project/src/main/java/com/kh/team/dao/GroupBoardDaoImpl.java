@@ -54,8 +54,11 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public List<GroupBoardVo> list(int gno) {
-		List<GroupBoardVo> groupList = sqlSession.selectList(NAMESPACE + "list", gno);
+	public List<GroupBoardVo> list(int gno, SearchDto searchDto) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("gno", gno);
+		map.put("searchDto", searchDto);
+		List<GroupBoardVo> groupList = sqlSession.selectList(NAMESPACE + "list", map);
 		System.out.println("Dao, groupList," + groupList);
 		return groupList;
 	}
@@ -65,20 +68,6 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		List<GroupBoardVo> noticeList = sqlSession.selectList(NAMESPACE + "notice", gb_notice);
 		return noticeList;
 	}
-
-//	@Override
-//	public void updateComment(int gbno) {
-//		Map<String, Integer> map = new HashMap<String, Integer>();
-//		map.put("gbno", gbno);
-//		map.put("cnt", 1);
-//		System.out.println("gorupBoardDaoImpl, gbno: " + gbno);
-//		sqlSession.update(NAMESPACE + "updateComment", map);
-//		int count = sqlSession.update(NAMESPACE + "countComment", gbno);
-//		if(count > 0) {
-//			return true;
-//		}
-//		return false;
-//	}
 
 	@Override
 	public int countComment(int gbno) {

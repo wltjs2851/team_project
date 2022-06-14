@@ -27,15 +27,22 @@ $(function() {
 		console.log("searchType: ", searchType);
 		console.log("keyword: ", keyword);
 		
+		frmPaging.find("input[name=searchType]").val(searchType);
+		frmPaging.find("input[name=keyword]").val(keyword);
+		frmPaging.attr("action", "/groupboard/groupMain");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
 	});
 });
 </script>
 
-${ groupList }
+<%-- ${ groupList } --%>
 <%-- ${ noticeList } --%>
 <%-- ${ groupVo } --%>
 <%-- ${ result } --%>
-<%-- ${ count } --%>
+
+<%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -110,6 +117,7 @@ ${ groupList }
 								...(달력을 넣어서 그룹 일정 표시하도록,,?)
 							</p>
 						</div>
+						
 						<div class="list-group-item justify-content-between">
 						
 							<div>
@@ -134,7 +142,9 @@ ${ groupList }
 							
 							<input type="text" id="keyword" value="${searchDto.keyword}">
 							<button id="btnSearch" style="width: 50px; height:30px; padding: 1% 0" class="btn btn-success">검색</button>
-						</div>
+						</div>	
+						
+						
 							<a href="/groupboard/groupInfo?gno=${ loginVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>

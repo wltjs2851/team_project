@@ -206,7 +206,7 @@ public class GroupBoardController {
 	
 	@RequestMapping(value = "groupMain/{gno}", method = RequestMethod.GET)
 	public String main(Model model, String gb_notice, @PathVariable("gno") int gno, SearchDto searchDto) {
-		List<GroupBoardVo> groupList = groupBoardService.list(gno);
+		List<GroupBoardVo> groupList = groupBoardService.list(gno, searchDto);
 		model.addAttribute("groupList", groupList);
 		
 		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);
@@ -219,10 +219,6 @@ public class GroupBoardController {
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);
 		
-//		boolean result = groupBoardService.updateComment(1);
-//		model.addAttribute("result", result);
-//		int count = groupBoardService.countComment(gbno);
-//		model.addAttribute("count", count);
 		
 		return "groupboard/groupMain";
 	}

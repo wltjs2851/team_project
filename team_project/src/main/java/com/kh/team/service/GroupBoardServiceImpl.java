@@ -42,8 +42,8 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	}
 
 	@Override
-	public List<GroupBoardVo> list(int gno) {
-		List<GroupBoardVo> groupList = groupBoardDao.list(gno);
+	public List<GroupBoardVo> list(int gno, SearchDto searchDto) {
+		List<GroupBoardVo> groupList = groupBoardDao.list(gno, searchDto);
 		return groupList;
 	}
 
@@ -52,17 +52,6 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		List<GroupBoardVo> noticeList = groupBoardDao.notice(gb_notice);
 		return noticeList;
 	}
-
-//	@Override
-//	public void updateComment(int gbno) {
-////		boolean result = groupBoardDao.updateComment(gbno);
-////		return result;
-//		Map<String, Integer> map = new HashMap<String, Integer>();
-//		map.put("gbno", gbno);
-//		map.put("cnt", 1);
-//		System.out.println("gorupBoardServiceImpl, gbno: " + gbno);
-//		groupBoardDao.updateComment(gbno);
-//	}
 
 	@Override
 	public int countComment(int gbno) {

@@ -44,7 +44,7 @@ public class GroupBoardCommentController {
 	}
 	
 	@RequestMapping(value = "/deleteGroupComment/{gbcno}", method = RequestMethod.GET)
-	public String deleteGroupComment(@PathVariable("gbcno") int gbcno, Integer gbno) {
+	public String deleteGroupComment(@PathVariable("gbcno") int gbcno, int gbno) {
 		boolean result = groupBoardCommentService.deleteGroupComment(gbcno);
 		groupBoardCommentService.updateCommentDelete(gbno);
 		return String.valueOf(result);
