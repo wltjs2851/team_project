@@ -11,20 +11,15 @@ tr.tr_list:hover{
 	background-color: #CEECF5;
 }
 
-/* span{ */
-/* 		display: inline-block; */
-/* 		width: 500px; */
-/* 		text-overflow: ellipsis; */
-		
-/* 		line-height: 1.2; */
-/* 		height: 3.6em; */
-/* 		display: -webkit-box; */
-/* 		-webkit-line-clamp: 3; */
-/* 		-webkit-box-orient: vertical; */
+/* p > img { */
+/* 	display: none; */
 /* } */
 </style>
 <script>
 $(document).ready(function() {
+	$("p:has(img)").css("display", "none");
+	$("p:has(iframe)").css("display", "none");
+	
 	var insertRecommend_result = "${insertRecommend_result}";
 	var deleteRecommend_result = "${deleteRecommend_result}";
 	if (insertRecommend_result == "true") {

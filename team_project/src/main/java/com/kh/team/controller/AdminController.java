@@ -1,15 +1,19 @@
 package com.kh.team.controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -145,19 +149,18 @@ public class AdminController {
 	
 	// 추천 운동 글쓰기 
 	@RequestMapping(value = "/insertRecommend", method = RequestMethod.POST)
-	public String insertRecommend(RecommendVo recommendVo, MultipartFile recoFile, RedirectAttributes rttr) {
-		String originalFilename = recoFile.getOriginalFilename();
-		try {
-			String re_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, recoFile.getBytes());
-			recommendVo.setRe_pic(re_pic);
-			System.out.println("recommendVo, re_pic:" + recommendVo);
-			
-			boolean result = recommendService.insertRecommend(recommendVo);
-			rttr.addFlashAttribute("insertRecommend_result", result);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public String insertRecommend(RecommendVo recommendVo) {
+		System.out.println("AdminController, insertRecommend, recommendVo:" + recommendVo);
+		String content = recommendVo.getRe_content();
+		System.out.println("insertRecommend, content:" + content);
 		
+		recommendVo.setRe_content(content.replaceAll("\"", "\'"));
+		if(content.indexOf("filename") != -1) {
+			String re_pic = content.substring(content.indexOf("filename"));
+			re_pic = re_pic.substring(9, re_pic.indexOf("\""));
+			recommendVo.setRe_pic(re_pic);
+		}
+		recommendService.insertRecommend(recommendVo);
 		return "redirect:/admin/listRecommend";
 	}
 	
@@ -166,13 +169,15 @@ public class AdminController {
 	public String listRecommend(RecommendVo recommendVo, Model model) {
 		List<RecommendVo> listRecommend = recommendService.listRecommend();
 		model.addAttribute("listRecommend", listRecommend);
+		String content = recommendVo.getRe_content();
+		System.out.println("listRecommend, content:" + content);
 		return "admin/recommend";
 	}
 	
 	// 추천 운동 글 등록 양식
 	@RequestMapping(value = "/insertRecommendForm", method = RequestMethod.GET)
 	public String insertRecommendForm() {
-		return "admin/recommendForm";
+		return "admin/recommendInsert";
 	}
 	
 	// 추천 운동 글 조회
@@ -235,5 +240,27 @@ public class AdminController {
 		boolean result = recommendService.deleteRecommend(reno);
 		rttr.addFlashAttribute("deleteRecommend_result", result);
 		return "redirect:/admin/listRecommend";
+	}
+	
+	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)
+	@ResponseBody
+	public byte[] displayImage(String filename) throws Exception {
+		FileInputStream fis;
+		fis = new FileInputStream(filename);
+		byte[] data = IOUtils.toByteArray(fis);
+		fis.close();
+		return data;
+	}
+	
+	@RequestMapping(value = "/uploadSummernoteImageFile", method = RequestMethod.POST)
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
+
+		String uploadPath = "//192.168.0.90/upic";
+		String originalFilename = multipartFile.getOriginalFilename();
+
+		String file = FileUtil.uploadFile(uploadPath, originalFilename, multipartFile.getBytes());
+		System.out.println(file);
+		return file;
 	}
 }
