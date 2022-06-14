@@ -205,6 +205,8 @@ $(function() {
 					style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
 				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }" class="btn btn-danger"
 					style="width: 60px; height:40px; padding: 0.7% 0">삭제</a>
+				<a href="/recipe/recipeList" class="btn btn-outline-primary"
+					style="width: 60px; height:40px; padding: 0.7% 0">목록</a>
 			</div>
 		</div>
 		<div class="col-md-2"></div>
