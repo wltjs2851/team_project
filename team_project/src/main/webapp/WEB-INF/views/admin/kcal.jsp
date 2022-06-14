@@ -66,8 +66,8 @@ $(document).ready(function(){
 					<tr class="tr_list">
 						<td>${kcalVo.kno}</td>
 						<td colspan="4" data-kno="${kcalVo.kno}" class="td_list">${kcalVo.k_name}</td>
-						<td>${kcalVo.k_time}</td>
-						<td>${kcalVo.kcal}</td>
+						<td>${kcalVo.k_time}분</td>
+						<td>${kcalVo.kcal}kcal</td>
 						<td>${kcalVo.k_dgree}</td>
 					</tr>
 				</c:forEach>
