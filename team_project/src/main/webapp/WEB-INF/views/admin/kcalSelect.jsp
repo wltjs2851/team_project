@@ -97,12 +97,24 @@ th:first-child, td:first-child {
 						<div class="search">
 							<input class="form-control" type="text" placeholder="검색어 입력"
 								id="keyword">
-							<button type="button">
-								<img src="/resources/images/magnifier.png" id="searchImg">
-							</button>
+							<input type="image" src="/resources/images/magnifier.png" id="searchImg">
+<!-- 								<img src="/resources/images/magnifier.png" id="searchImg"/> -->
+							
 						</div>
+						<br>
 						<!-- 					</form> -->
-						<img src="images/blog/post-4.jpg" alt="article-01">
+						<div>
+							<c:choose>
+							<c:when test="${ empty kcalVo.k_pic }">
+								<img src="/resources/images/kcaldefault.png"
+									class="img-thumbnail" alt="kcal image" style="width : 400px; height :auto;">
+							</c:when>
+							<c:otherwise>
+							<img src="/member/displayImage?filename=${ kcalVo.k_pic }"
+								class="img-thumbnail" alt="kcal image" style="width : 400px; height :auto; align-content: center;">
+						</c:otherwise>
+					</c:choose>
+						</div>
 						<table>
 							<colgroup></colgroup>
 							<tbody>
@@ -114,11 +126,14 @@ th:first-child, td:first-child {
 									<th>소요시간</th>
 									<td><input type="number" id="time"
 										style="width: 100px; text-align: center;"
-										value="${kcalVo.k_time}"> 분</td>
+										value="${kcalVo.k_time}"> 분
+										<span style="color: grey; font-style: oblique; font-size: 13px;">* 운동시간을 입력해보세요 *</span>
+										</td>
 								</tr>
 								<tr>
 									<th>칼로리</th>
-									<td><span id="td_kcal">${kcalVo.kcal}</span>kcal</td>
+									<td><span id="td_kcal">${kcalVo.kcal}</span>kcal
+									</td>
 								</tr>
 								<tr>
 									<th>난이도</th>
@@ -129,14 +144,15 @@ th:first-child, td:first-child {
 						<br>
 						<div>
 							<h6>효과 및 참고 사항</h6>
-							<p>: 효과 및 참고사항 자리</p>
+							<p>: ${kcalVo.k_notes}</p>
 						</div>
 					</article>
 				</div>
-				<button type="button" class="btn btn-primary" id="btnUpdateKcal">
-					수정</button>
-				<button type="submit" class="btn btn-success" id="btnUpdateRunKcal"
-					style="display: none;">수정완료</button>
+<!-- 				<button type="button" class="btn btn-primary" id="btnUpdateKcal"> -->
+<!-- 					수정</button> -->
+<!-- 				<button type="submit" class="btn btn-success" id="btnUpdateRunKcal" -->
+<!-- 					style="display: none;">수정완료</button> -->
+				<a class="btn btn-sm btn-success" href="/admin/kcalUpdateForm?kno=${kcalVo.kno }">수정</a>
 				<a class="btn btn-danger" href="/admin/deleteKcal?kno=${kcalVo.kno}"
 					id="btnDeleteKcal">삭제</a>
 			</form>
