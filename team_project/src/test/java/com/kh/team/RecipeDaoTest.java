@@ -24,15 +24,11 @@ public class RecipeDaoTest {
 	
 	@Test
 	public void testRecipeInsert() {
-		RecipeVo recipeVo = new RecipeVo("������2", "����2", "hong2", null);
-		boolean result = recipeDao.insertRecipe(recipeVo);
-		System.out.println("result: " + result);
-	}
-	
-	@Test
-	public void testRecipeList() {
-		List<RecipeVo> list = recipeDao.selectRecipe();
-		System.out.println("result: " + list);
+		for(int i = 0; i < 51; i++) {			
+			RecipeVo recipeVo = new RecipeVo("식단" + i, "내용" + i, "tuna11", null);
+			boolean result = recipeDao.insertRecipe(recipeVo);
+			System.out.println("result: " + result);
+		}
 	}
 	
 	@Test

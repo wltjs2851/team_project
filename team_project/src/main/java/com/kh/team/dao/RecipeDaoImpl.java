@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeVo;
 
 @Repository
@@ -28,8 +29,8 @@ public class RecipeDaoImpl implements RecipeDao{
 	}
 
 	@Override
-	public List<RecipeVo> selectRecipe() {
-		List<RecipeVo> list = sqlSession.selectList(NAMESPACE + "selectRecipe");
+	public List<RecipeVo> selectRecipe(PagingDto pagingDto) {
+		List<RecipeVo> list = sqlSession.selectList(NAMESPACE + "selectRecipe", pagingDto);
 		return list;
 	}
 
@@ -125,6 +126,12 @@ public class RecipeDaoImpl implements RecipeDao{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int getCount(PagingDto pagingDto) {
+		int count = sqlSession.selectOne(NAMESPACE + "getCount", pagingDto);
+		return count;
 	}
 
 }

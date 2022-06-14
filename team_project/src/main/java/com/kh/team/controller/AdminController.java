@@ -51,11 +51,29 @@ public class AdminController {
 		
 	// 운동칼로리 글 쓰기 
 	@RequestMapping(value = "/insertKcal", method = RequestMethod.POST)
-	public String insertKcal(KcalVo kcalVo, RedirectAttributes rttr) {
+	public String insertKcal(KcalVo kcalVo, RedirectAttributes rttr, MultipartFile file) {
+		// 첨부 파일 확인
+		System.out.println("AdminController, insertKcal, file:" + file);
+		String originalFilename = file.getOriginalFilename();
+		System.out.println("AdminController, insertKcal, originalFilename:" + originalFilename);
 		
-		boolean result = kcalService.insertKcal(kcalVo);
-		rttr.addFlashAttribute("insertKcal_result", result);
-		
+		if(originalFilename == null || originalFilename == "") {
+			// 파일이 비어있을 경우 
+			boolean result = kcalService.insertKcal(kcalVo);
+			rttr.addFlashAttribute("insertKcal_result", result);
+		} else {
+			// 파일이 첨부되었을 경우 
+			long size = file.getSize();
+			try {
+				String k_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
+				kcalVo.setK_pic(k_pic);
+				
+				boolean result = kcalService.insertKcal(kcalVo);
+				rttr.addFlashAttribute("insertKcal_result", result);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return "redirect:/admin/listKcal"; 
 	}
@@ -78,11 +96,34 @@ public class AdminController {
 		return "admin/kcalSelect";
 	}
 	
+	// 운동칼로리 글 수정 양식
+	@RequestMapping(value = "/kcalUpdateForm", method = RequestMethod.GET)
+	public String updateFormKcal(int kno, Model model) {
+		KcalVo kcalVo = kcalService.selectByKno(kno);
+		model.addAttribute("kcalVo", kcalVo);
+		
+		return "admin/kcalUpdateForm";
+	}
 	// 운동칼로리 글 수정
 	@RequestMapping(value = "/updateKcal", method = RequestMethod.POST)
-	public String updateKcal(KcalVo kcalVo, RedirectAttributes rttr) {
-		boolean result = kcalService.updateKcal(kcalVo);
-		rttr.addFlashAttribute("updateKcal_result", result);
+	public String updateKcal(KcalVo kcalVo, RedirectAttributes rttr, MultipartFile file) {
+		String originalFilename = file.getOriginalFilename();
+		
+		if(originalFilename == null || originalFilename == "") {
+			boolean result = kcalService.updateKcal(kcalVo);
+			rttr.addFlashAttribute("updateKcal_result", result);
+		} else {
+			try {
+				String k_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
+				kcalVo.setK_pic(k_pic);
+				boolean result = kcalService.updateKcal(kcalVo);
+				rttr.addFlashAttribute("updateKcal_result", result);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
 		return "redirect:/admin/selectByKno?kno=" + kcalVo.getKno();
 	}
 	

@@ -7,8 +7,8 @@
 	<!-- 	운동 Kcal 사전 -->
 	<!-- 글 추가 -->
 	<insert id="insertKcal">
-		insert into tbl_kcal (kno, k_name, k_time, kcal, k_dgree)
-		values (seq_kcal_kno.nextval, #{k_name}, #{k_time}, #{kcal}, #{k_dgree})
+		insert into tbl_kcal (kno, k_name, k_time, kcal, k_dgree, k_notes, k_pic)
+		values (seq_kcal_kno.nextval, #{k_name}, #{k_time}, #{kcal}, #{k_dgree}, #{k_notes}, #{k_pic, jdbcType=VARCHAR})
 	</insert>
 	
 	<!-- 글 수정 -->
@@ -17,7 +17,9 @@
 			k_name = #{k_name},
 			k_time = #{k_time},
 			kcal = #{kcal},
-			k_dgree = #{k_dgree}
+			k_dgree = #{k_dgree},
+			k_notes = #{k_notes},
+			k_pic = #{k_pic, jdbcType=VARCHAR}
 		where kno = #{kno}
 	</update>
 	

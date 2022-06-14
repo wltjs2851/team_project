@@ -18,7 +18,7 @@
 					<a class="btn btn-primary btn-large" href="#">목록으로</a>
 				</p>
 			</div>
-			<form role="form" action="/admin/insertKcal" method="post">
+			<form role="form" action="/admin/insertKcal" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="k_name">
 						운동 종목
@@ -44,10 +44,16 @@
 					<input type="text" class="form-control" id="k_dgree" name="k_dgree"/>
 				</div>
 				<div class="form-group">
-					<label for="exampleInputFile">
+					<label for="k_notes">
+						효과 및 참고사항 
+					</label>
+					<textarea rows="5" cols="100" class="form-control" id="k_notes" name="k_notes"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="file">
 						이미지
 					</label>
-					<input type="file" class="form-control-file" id="exampleInputFile" />
+					<input type="file" class="form-control-file" id="file" name="file"/>
 				</div>
 				<button type="submit" class="btn btn-primary" id="btnInsertKcal">
 					추가하기

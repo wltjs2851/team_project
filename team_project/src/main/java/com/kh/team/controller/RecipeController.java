@@ -26,6 +26,7 @@ import com.kh.team.service.RecipeCommentService;
 import com.kh.team.service.RecipeService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
 
@@ -40,9 +41,13 @@ public class RecipeController {
 	private RecipeCommentService recipeCommentService;
 
 	@RequestMapping(value = "/recipeList", method = RequestMethod.GET)
-	public String recipeList(Model model) {
-		List<RecipeVo> recipeList = recipeService.recipeList();
+	public String recipeList(Model model, PagingDto pagingDto) {
+		System.out.println("pagingDto: " + pagingDto);
+		pagingDto.setCount(recipeService.getCount(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
+		List<RecipeVo> recipeList = recipeService.recipeList(pagingDto);
 		model.addAttribute("recipeList", recipeList);
+		model.addAttribute("pagingDto", pagingDto);
 		return "board/recipeList";
 	}
 
@@ -84,16 +89,16 @@ public class RecipeController {
 	    }
 	    
 	    if (oldCookie != null) {
-	        if (!oldCookie.getValue().contains("[" + rno + "]")) {
+	        if (!oldCookie.getValue().contains("[" + rno +"/" + memberVo.getUserid() + "]")) {
 	        	recipeService.updateViewcnt(rno, recipeVo.getR_viewcnt());
-	            oldCookie.setValue(oldCookie.getValue() + "_[" + rno + "]");
+	            oldCookie.setValue(oldCookie.getValue() + "_[" + rno +"/" + memberVo.getUserid() + "]");
 	            oldCookie.setPath("/");
 	            oldCookie.setMaxAge(60 * 60 * 12);
 	            response.addCookie(oldCookie);
 	        }
 	    } else {
 	    	recipeService.updateViewcnt(rno, recipeVo.getR_viewcnt());
-	        Cookie newCookie = new Cookie("postView","[" + rno + "]");
+	        Cookie newCookie = new Cookie("postView","[" + rno +"/" + memberVo.getUserid() + "]");
 	        newCookie.setPath("/");
 	        newCookie.setMaxAge(60 * 60 * 24);
 	        response.addCookie(newCookie);
@@ -188,5 +193,10 @@ public class RecipeController {
 		String file = FileUtil.uploadFile(uploadPath, originalFilename, multipartFile.getBytes());
 		System.out.println(file);
 		return file;
+	}
+	
+	@RequestMapping(value = "/map", method = RequestMethod.GET)
+	public String map() {
+		return "/board/map";
 	}
 }
