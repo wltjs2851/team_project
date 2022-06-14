@@ -20,6 +20,8 @@ $(function() {
 		alert("삭제 완료");
 	}
 	
+	var frmPaging = $("#frmPaging");
+	
 	// 검색 버튼
 	$("#btnSearch").click(function() {
 		var searchType = $("#searchType").val();
@@ -29,7 +31,7 @@ $(function() {
 		
 		frmPaging.find("input[name=searchType]").val(searchType);
 		frmPaging.find("input[name=keyword]").val(keyword);
-		frmPaging.attr("action", "/groupboard/groupMain");
+		frmPaging.attr("action", "/groupboard/groupMain/${gno}");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -84,9 +86,7 @@ $(function() {
 						</div>
 						
 						<div>
-<%-- 							<c:if test="${ groupBoardVo.gb_comment ne 0 }"> --%>
 						   		<i class='far fa-comment-alt'></i> ${ groupBoardVo.gb_comment }
-<%-- 						    </c:if> --%>
 							<i class='far fa-heart'></i> ${ groupBoardVo.gb_like }
 						</div>
 						

@@ -209,6 +209,9 @@ public class GroupBoardController {
 		List<GroupBoardVo> groupList = groupBoardService.list(gno, searchDto);
 		model.addAttribute("groupList", groupList);
 		
+		System.out.println("controller, groupList: " + groupList);
+		System.out.println("controller, searchDto: " + searchDto);
+		
 		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);
 		model.addAttribute("noticeList", noticeList);
 		

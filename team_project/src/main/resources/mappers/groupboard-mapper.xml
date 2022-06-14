@@ -38,14 +38,14 @@
  
  <!-- 글 목록 -->
  <select id="list" resultType="GroupBoardVo">
- 	select * from tbl_group_board
- 	where gno = #{gno}
- 	order by gbno desc
-<!--  	select * from (select rownum rnum, a.* from -->
-<!--  		(select * from tbl_group_board -->
-<!--  		 <include refid="search"></include>) a) -->
+<!--  	select * from tbl_group_board -->
 <!--  	where gno = #{gno} -->
 <!--  	order by gbno desc -->
+ 	select * from (select rownum rnum, a.* from
+ 		(select * from tbl_group_board
+ 		 <include refid="search"></include>) a)
+ 	where gno = #{gno}
+ 	order by gbno desc
  </select>
  
 <!--  select * from  -->
@@ -85,9 +85,9 @@
  <sql id="search">
  	<if test="searchType != null and keyword != null">
     	<choose>
-    		<when test='searchType == "t"'>where title like '%' || #{keyword} || '%'</when>
-    		<when test='searchType == "c"'>where content like '%' || #{keyword} || '%'</when>
-    		<when test='searchType == "w"'>where writer like '%' || #{keyword} || '%'</when>
+    		<when test='searchType == "t"'>where gb_title like '%' || #{keyword} || '%'</when>
+    		<when test='searchType == "c"'>where gb_content like '%' || #{keyword} || '%'</when>
+    		<when test='searchType == "w"'>where userid like '%' || #{keyword} || '%'</when>
     	</choose>
     </if>
  </sql>

@@ -59,6 +59,7 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		map.put("gno", gno);
 		map.put("searchDto", searchDto);
 		List<GroupBoardVo> groupList = sqlSession.selectList(NAMESPACE + "list", map);
+		System.out.println("map: " + map);
 		System.out.println("Dao, groupList," + groupList);
 		return groupList;
 	}
