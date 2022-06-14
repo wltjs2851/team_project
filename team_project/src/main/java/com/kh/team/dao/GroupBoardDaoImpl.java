@@ -54,13 +54,14 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public List<GroupBoardVo> list(int gno, SearchDto searchDto) {
+	public List<GroupBoardVo> list(SearchDto searchDto) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("gno", gno);
-		map.put("searchDto", searchDto);
-		List<GroupBoardVo> groupList = sqlSession.selectList(NAMESPACE + "list", map);
+//		map.put("gno", gno);
+//		map.put("searchDto", searchDto);
+		List<GroupBoardVo> groupList = sqlSession.selectList(NAMESPACE + "list", searchDto);
 		System.out.println("map: " + map);
 		System.out.println("Dao, groupList," + groupList);
+		System.out.println("Dao, groupList, count:" + groupList.size());
 		return groupList;
 	}
 

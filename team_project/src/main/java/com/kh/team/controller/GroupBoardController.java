@@ -3,6 +3,7 @@ package com.kh.team.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,15 +21,19 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team.service.CalendarServcie;
 import com.kh.team.service.GroupBoardLikeService;
 import com.kh.team.service.GroupBoardService;
 import com.kh.team.service.GroupService;
 import com.kh.team.util.FileUtil;
+import com.kh.team.vo.CalendarVo;
 import com.kh.team.vo.GroupBoardLikeVo;
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.SearchDto;
+
+import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping("/groupboard")
@@ -42,6 +47,9 @@ public class GroupBoardController {
 	
 	@Autowired
 	private GroupService groupService;
+	
+	@Autowired
+	private CalendarServcie calendarService;
 	
 	@RequestMapping(value = "groupWriteForm", method = RequestMethod.GET)
 	public String createForm() { // 글쓰기 양식
@@ -144,32 +152,6 @@ public class GroupBoardController {
 		String originalFilename = file.getOriginalFilename();
 		System.out.println("prevImg: " + prevImg);
 		
-//		if(originalFilename == null || originalFilename == "") {
-//			System.out.println("groupBoardController, updateRun, groupBoardVo: " + groupBoardVo);
-//			boolean result = groupBoardService.update(groupBoardVo);
-//			
-//			rttr.addAttribute("gbno", groupBoardVo.getGbno());
-//			System.out.println("groupBoardController, updateRun, result: " + result);
-//			rttr.addFlashAttribute("update_result", result);
-//		} else {
-//			long size = file.getSize();
-//			System.out.println("size: " + size);
-//			try {
-//				String gb_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
-//				groupBoardVo.setGb_pic(gb_pic);
-//				
-//				System.out.println("groupBoardController, updateRun, groupBoardVo: " + groupBoardVo);
-//				boolean result = groupBoardService.update(groupBoardVo);
-//				
-//				rttr.addAttribute("gbno", groupBoardVo.getGbno());
-//				System.out.println("groupBoardController, updateRun, result: " + result);
-//				rttr.addFlashAttribute("update_result", result);
-//				} catch(Exception e) {
-//					e.printStackTrace();
-//				}
-//		}
-		
-		
 //			수정폼에서 사진을 등록하였다면 사진 변경
 			try {
 				if(originalFilename != null && !originalFilename.equals("")) {
@@ -206,7 +188,8 @@ public class GroupBoardController {
 	
 	@RequestMapping(value = "groupMain/{gno}", method = RequestMethod.GET)
 	public String main(Model model, String gb_notice, @PathVariable("gno") int gno, SearchDto searchDto) {
-		List<GroupBoardVo> groupList = groupBoardService.list(gno, searchDto);
+		searchDto.setGno(gno);
+		List<GroupBoardVo> groupList = groupBoardService.list(searchDto);
 		model.addAttribute("groupList", groupList);
 		
 		System.out.println("controller, groupList: " + groupList);
@@ -214,10 +197,6 @@ public class GroupBoardController {
 		
 		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);
 		model.addAttribute("noticeList", noticeList);
-		
-		// 검색어 하려고 했는데 잘 안됨
-//		List<GroupBoardVo> groupListSearch = groupBoardService.list(searchDto);
-//		model.addAttribute("searchDto", groupListSearch);
 		
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);
@@ -272,8 +251,16 @@ public class GroupBoardController {
 		return "groupboard/notice";
 	}
 	
-	@RequestMapping(value = "activityInfo", method = RequestMethod.GET)
-	public String activityInfo() {
+	@RequestMapping(value = "activityInfo/{gno}", method = RequestMethod.GET)
+	public String activityInfo(Model model, HttpSession session, HttpServletRequest httpRequest, @PathVariable("gno") int gno) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
+		String thisYear = String.valueOf(LocalDate.now().getYear());
+		String thisMonth = String.valueOf(LocalDate.now().getMonthValue());
+		String month = thisYear + "_" + thisMonth;
+		List<CalendarVo> calList = calendarService.getCal(month, userid);
+		JSONArray jsonArray = new JSONArray();
+		model.addAttribute("jsonCal", jsonArray.fromObject(calList));
 		
 		return "groupboard/activityInfo";
 	}

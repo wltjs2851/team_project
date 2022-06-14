@@ -11,7 +11,7 @@ public interface GroupBoardDao {
 	public GroupBoardVo read(int gbno);
 	public boolean update(GroupBoardVo groupBoardVo);
 	public boolean delete(int gbno);
-	public List<GroupBoardVo> list(int gno, SearchDto searchDto);
+	public List<GroupBoardVo> list(SearchDto searchDto);
 //	public List<GroupBoardVo> list(SearchDto searchDto);
 	public List<GroupBoardVo> notice(String gb_notice);
 //	public void updateComment(int gbno);

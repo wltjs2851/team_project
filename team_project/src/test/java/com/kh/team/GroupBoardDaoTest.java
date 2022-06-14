@@ -55,8 +55,10 @@ public class GroupBoardDaoTest {
 	
 	@Test
 	public void testList() {
-		SearchDto searchDto = new SearchDto("t", "1");
-		List<GroupBoardVo> list = groupBoardDao.list(11, searchDto);
+		SearchDto searchDto = new SearchDto("t", "11");
+		searchDto.setGno(11);
+		List<GroupBoardVo> list = groupBoardDao.list(searchDto);
+		
 		System.out.println("list: " + list);
 	}
 }

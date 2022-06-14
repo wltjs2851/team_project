@@ -42,8 +42,8 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	}
 
 	@Override
-	public List<GroupBoardVo> list(int gno, SearchDto searchDto) {
-		List<GroupBoardVo> groupList = groupBoardDao.list(gno, searchDto);
+	public List<GroupBoardVo> list(SearchDto searchDto) {
+		List<GroupBoardVo> groupList = groupBoardDao.list(searchDto);
 		return groupList;
 	}
 

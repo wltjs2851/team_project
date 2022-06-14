@@ -67,9 +67,13 @@ $(function() {
 										
 										</button>
 										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										
+										<c:if test="${ groupVo.g_leader == loginVo.userid }">
 											 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a>
 											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a>
+										</c:if>
 											 <a class="dropdown-item" href="#">회원 정보 보기</a>
+											 
 										</div></h2>
 						<p>작성자: ${groupBoardVo.userid}, 작성일: ${ groupBoardVo.gb_regdate }</p>
 						<p>${ groupBoardVo.gb_content }</p>
@@ -138,10 +142,12 @@ $(function() {
 									</c:if>
 								>작성자</option>
 							</select>
+							<a href="/groupboard/groupMain/${ loginVo.gno }" class="btn-primary" style="width: 50px; height:50px; padding: 2% 0">검색 초기화</a>
 							</div>
 							
 							<input type="text" id="keyword" value="${searchDto.keyword}">
 							<button id="btnSearch" style="width: 50px; height:30px; padding: 1% 0" class="btn btn-success">검색</button>
+							
 						</div>	
 						
 						
@@ -156,7 +162,7 @@ $(function() {
 							</li>
 							<li class="breadcrumb-item">
 								<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
-								<a href="/groupboard/activityInfo">활동 정보</a>
+								<a href="/groupboard/activityInfo/${ loginVo.gno }">활동 정보</a>
 							</li>
 							<li class="breadcrumb-item">
 								<a href="">그룹 탈퇴</a>
