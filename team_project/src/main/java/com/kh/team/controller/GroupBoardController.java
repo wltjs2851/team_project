@@ -25,6 +25,7 @@ import com.kh.team.service.CalendarServcie;
 import com.kh.team.service.GroupBoardLikeService;
 import com.kh.team.service.GroupBoardService;
 import com.kh.team.service.GroupService;
+import com.kh.team.service.MemberService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.CalendarVo;
 import com.kh.team.vo.GroupBoardLikeVo;
@@ -50,6 +51,9 @@ public class GroupBoardController {
 	
 	@Autowired
 	private CalendarServcie calendarService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping(value = "groupWriteForm", method = RequestMethod.GET)
 	public String createForm() { // 글쓰기 양식
@@ -91,11 +95,6 @@ public class GroupBoardController {
 	public String read(int gbno, Model model, HttpServletRequest httpRequest) throws Exception {
 		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
 		model.addAttribute("groupBoardVo", groupBoardVo);
-		
-		// 댓글 갯수 업데이트
-//		boolean result = groupBoardService.updateComment(gbno);
-//		System.out.println("groupRead, result: " + result);
-//		groupBoardService.updateComment(gbno);
 		
 		int count = groupBoardService.countComment(gbno);
 		System.out.println("count: " + count);
@@ -173,15 +172,14 @@ public class GroupBoardController {
 			boolean result = groupBoardService.update(groupBoardVo);
 			rttr.addFlashAttribute("update_result", result);
 		
-		
-		
 		return "redirect:/groupboard/groupRead";
 	}
 
 	@RequestMapping(value = "groupDelete", method = RequestMethod.GET)
-	public String delete(int gbno, RedirectAttributes rttr) {
+	public String delete(int gbno, GroupBoardVo groupBoardVo, RedirectAttributes rttr) {
 		boolean result = groupBoardService.delete(gbno);
 		rttr.addFlashAttribute("delete_result", result);
+		System.out.println("delete, groupBoardVo: " + groupBoardVo);
 		
 		return "redirect:/groupboard/groupMain";
 	}
@@ -270,5 +268,13 @@ public class GroupBoardController {
 	public String deleteFile(String filename) {
 		boolean result = FileUtil.deleteFile(filename);
 		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value = "myGroupList", method = RequestMethod.GET)
+	public String myGroupList(GroupVo groupVo, Model model) { // 유저 아이디를 기준으로 가입한 그룹들 가져오는,,,
+		MemberVo memberVo = memberService.memberByUserid(groupVo.getUsers());
+		model.addAttribute("memberVo", memberVo);
+		
+		return "groupboard/myGroupList";
 	}
 }

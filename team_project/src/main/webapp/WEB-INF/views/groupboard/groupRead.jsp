@@ -98,7 +98,7 @@ $(function() {
 			
 			if(rData == 1){
 				$("i.fa-heart").css("color", "red");
-				$("#like").text(${groupBoardVo.gb_like} + 1);
+				$("#like").text("${groupBoardVo.gb_like + 1}");
 // 				span.text(parseInt(span.text().trim()) + 1);
 			} else {
 				$("i.fa-heart").css("color", "graytext");
@@ -321,7 +321,7 @@ ${ groupBoardVo }
 								<a href="/groupboard/groupWriteForm">글쓰기</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="#">활동 정보</a>
+								<a href="/groupboard/activityInfo/${ groupBoardVo.gno }">활동 정보</a>
 							</li>
 							<li class="breadcrumb-item">
 								<a href="">그룹 탈퇴</a>

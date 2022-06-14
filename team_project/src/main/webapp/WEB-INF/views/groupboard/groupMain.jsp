@@ -151,18 +151,18 @@ $(function() {
 						</div>	
 						
 						
-							<a href="/groupboard/groupInfo?gno=${ loginVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+							<a href="/groupboard/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>
 					<nav>
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item">
-								<a href="/groupboard/groupWriteForm?bno=${ loginVo.gno }">글쓰기</a>
+								<a href="/groupboard/groupWriteForm?bno=${ groupVo.gno }">글쓰기</a>
 							</li>
 							<li class="breadcrumb-item">
 								<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
-								<a href="/groupboard/activityInfo/${ loginVo.gno }">활동 정보</a>
+								<a href="/groupboard/activityInfo/${ groupVo.gno }">활동 정보</a>
 							</li>
 							<li class="breadcrumb-item">
 								<a href="">그룹 탈퇴</a>
@@ -181,6 +181,7 @@ $(function() {
 										그룹원
 									</p>
 									<p>
+										${ groupVo.users }
 										<a class="btn btn-primary" href="#">쪽지보내기</a>
 <%-- 										<c:if test="그룹장일 경우"> --%>
 											<a class="btn" href="#">내쫓기</a>
