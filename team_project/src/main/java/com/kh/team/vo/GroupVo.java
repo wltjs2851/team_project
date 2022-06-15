@@ -12,12 +12,18 @@ public class GroupVo {
 	private Date g_regdate;
 	private String g_pic;
 	private int g_present;
-	private String users;
 	private String g_leader;
+	private String userid;
 	
 	public GroupVo() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public GroupVo(int gno, int g_present) {
+		super();
+		this.gno = gno;
+		this.g_present = g_present;
 	}
 	
 	public GroupVo(int gno, int g_present, String g_leader) {
@@ -27,14 +33,13 @@ public class GroupVo {
 		this.g_leader = g_leader;
 	}
 
-	public GroupVo(String g_name, String excercise_type, int g_attend, String g_intro, String g_location, String users) {
+	public GroupVo(String g_name, String excercise_type, int g_attend, String g_intro, String g_location) {
 		super();
 		this.g_name = g_name;
 		this.excercise_type = excercise_type;
 		this.g_attend = g_attend;
 		this.g_intro = g_intro;
 		this.g_location = g_location;
-		this.users = users;
 	}
 	
 	public GroupVo(String g_name, String excercise_type, int g_attend, String g_intro, String g_location,
@@ -62,7 +67,7 @@ public class GroupVo {
 	}
 
 	public GroupVo(int gno, String g_name, String excercise_type, int g_attend, String g_intro, String g_location,
-			Date g_regdate, String g_pic, int g_present, String users) {
+			Date g_regdate, String g_pic, int g_present) {
 		super();
 		this.gno = gno;
 		this.g_name = g_name;
@@ -73,7 +78,6 @@ public class GroupVo {
 		this.g_regdate = g_regdate;
 		this.g_pic = g_pic;
 		this.g_present = g_present;
-		this.users = users;
 	}
 
 	public int getGno() {
@@ -148,14 +152,6 @@ public class GroupVo {
 		this.g_present = g_present;
 	}
 
-	public String getUsers() {
-		return users;
-	}
-
-	public void setUsers(String users) {
-		this.users = users;
-	}
-
 	public String getG_leader() {
 		return g_leader;
 	}
@@ -168,6 +164,6 @@ public class GroupVo {
 	public String toString() {
 		return "GroupVo [gno=" + gno + ", g_name=" + g_name + ", excercise_type=" + excercise_type + ", g_attend="
 				+ g_attend + ", g_intro=" + g_intro + ", g_location=" + g_location + ", g_regdate=" + g_regdate
-				+ ", g_pic=" + g_pic + ", g_present=" + g_present + ", users=" + users + ", g_leader=" + g_leader + "]";
+				+ ", g_pic=" + g_pic + ", g_present=" + g_present + ", g_leader=" + g_leader + "]";
 	}
 }

@@ -58,24 +58,10 @@ public class GroupDaoImpl implements GroupDao{
 	}
 
 	@Override
-	public boolean updateMemberGno(int gno, String userid) {
-		Map<String, Object> parameter = new HashMap<String, Object>();
-		parameter.put("gno", gno);
-		parameter.put("userid", userid);
-		int count = sqlSession.update(NAMESPACE + "updateMemberGno", parameter);
-		if(count > 0) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean updateGroupMember(GroupVo groupVo, String userid) {
+	public boolean updateGroupMember(GroupVo groupVo) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("gno", groupVo.getGno());
 		parameter.put("g_present", groupVo.getG_present());
-		parameter.put("users", groupVo.getUsers());
-		parameter.put("userid", userid);
 		int count = sqlSession.update(NAMESPACE + "updateGroupMember", parameter);
 		if(count > 0) {
 			return true;
@@ -87,6 +73,19 @@ public class GroupDaoImpl implements GroupDao{
 	public int getNextGno() {
 		int gno = sqlSession.selectOne(NAMESPACE + "getNextGno");
 		return gno;
+	}
+
+	@Override
+	public boolean insertJoinGroup(int gno, String userid) {
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("gno", gno);
+		parameter.put("userid", userid);
+		System.out.println(parameter);
+		int count = sqlSession.insert(NAMESPACE + "insertJoinGroup", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
 	}
 
 }

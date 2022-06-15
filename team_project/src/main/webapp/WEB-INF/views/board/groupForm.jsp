@@ -39,16 +39,6 @@ $(function() {
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
-	
-// 	$("#btnModifyRun").click(function(e) {
-// 		e.preventDefault();
-// 		var file = $("#file").val();
-// 		if(file == "") {
-// 			file = $("#groupImage").attr("data-image");
-// 			console.log(file);
-// 		}
-// 		$("#frmModify").submit();
-// 	});
 });
 </script>
 
@@ -59,6 +49,7 @@ $(function() {
 		<div class="col-md-8" class="btn">
 			<form role="form" action="/group/modifyGroupRun" method="post" enctype="multipart/form-data" id="frmModify" style="display: inline;">
 				<input type="hidden" name="gno" value="${ groupVo.gno }">
+				<input type="hidden" name="userid" value="${ loginVo.userid }">
 				<div class="form-group">
 					<label for="g_location">
 						지역 &nbsp;
@@ -100,13 +91,6 @@ $(function() {
 					<input type="number" class="form-control" id="g_attend" name="g_attend" value="${ groupVo.g_attend }" readonly/>
 				</div>
 				
-				<div class="form-group">
-					<label for="users">
-						참가자 이름
-					</label>
-					<input type="text" class="form-control" id="users" name="users" value="${ groupVo.users }" readonly/>
-				</div>
-				
 				<div>
 					<label for="file">
 						File input
@@ -133,13 +117,14 @@ $(function() {
 				<button type="submit" class="btn btn-success" id="btnModifyRun" style="display: none">수정완료</button>
 				<a href="/group/removeGroup?gno=${ groupVo.gno }" class="btn btn-danger" id="btnDelete">삭제</a>
 			</form>
-			<form role="form" action="/group/joinGroup" method="post" style="display: inline;">
-				<input type="hidden" name="gno" value="${ groupVo.gno }">
-				<input type="hidden" name="g_present" value="${ groupVo.g_present }">
-				<input type="hidden" name="users" value="${ groupVo.users }">
-				<button type="submit" class="btn btn-primary" id="btnJoin">가입</button>
-				<br><br>
-			</form>
+			<c:if test="${ groupVo.g_leader != loginVo.userid }">
+				<form role="form" action="/group/joinGroup" method="post" style="display: inline;">
+					<input type="hidden" name="gno" value="${ groupVo.gno }">
+					<input type="hidden" name="g_present" value="${ groupVo.g_present }">
+					<button type="submit" class="btn btn-primary" id="btnJoin">가입</button>
+					<br><br>
+				</form>
+			</c:if>
 		</div>
 		<div class="col-md-2">
 		</div>
