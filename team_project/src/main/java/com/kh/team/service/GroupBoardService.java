@@ -17,5 +17,6 @@ public interface GroupBoardService {
 //	public void updateComment(int gbno);
 	public int countComment(int gbno);
 	public String getGb_picById(int gbno);
+	public String getGroupById(String userid);
 
 }

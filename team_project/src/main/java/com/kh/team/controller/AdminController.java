@@ -24,6 +24,7 @@ import com.kh.team.service.RecommendService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.KcalVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecommendLikeVo;
 import com.kh.team.vo.RecommendVo;
 
@@ -84,19 +85,24 @@ public class AdminController {
 	
 	// 운동칼로리 글 목록 
 	@RequestMapping(value = "/listKcal", method = RequestMethod.GET)
-	public String listKcal(Model model) {
-		List<KcalVo> listKcal = kcalService.listKcal();
-		System.out.println("listKcal:" + listKcal);
+	public String listKcal(Model model, PagingDto pagingDto) {
+//		System.out.println("AdminController, listKcal, pagingDto:" + pagingDto);
+		pagingDto.setCount(kcalService.getCountKcal(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
+		List<KcalVo> listKcal = kcalService.listKcal(pagingDto);
+//		System.out.println("listKcal:" + listKcal);
 		model.addAttribute("listKcal", listKcal);
+		model.addAttribute("pagingDto", pagingDto);
 		return "admin/kcal";// admin/kcal.jsp
 	}
 	
 	// 운동칼로리 글 조회
 	@RequestMapping(value = "/selectByKno", method = RequestMethod.GET)
-	public String selectByKno(int kno, Model model) {
+	public String selectByKno(int kno, Model model, PagingDto pagingDto) {
 		System.out.println("AdminController, selectByKno, kno:" + kno);
 		KcalVo kcalVo = kcalService.selectByKno(kno);
 		model.addAttribute("kcalVo", kcalVo);
+		model.addAttribute("pagingDto", pagingDto);
 		return "admin/kcalSelect";
 	}
 	

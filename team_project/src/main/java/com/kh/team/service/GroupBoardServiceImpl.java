@@ -65,10 +65,10 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		return gb_pic;
 	}
 
-//	@Override
-//	public List<GroupBoardVo> list(SearchDto searchDto) {
-//		List<GroupBoardVo> groupListSearch = groupBoardDao.list(searchDto);
-//		return groupListSearch;
-//	}
+	@Override
+	public String getGroupById(String userid) {
+		
+		return groupBoardDao.getGroupById(userid);
+	}
 
 }
