@@ -95,6 +95,12 @@
 	where userid = #{userid})
 </select>
 
+<!-- 그룹별 멤버 가져오기 -->
+<select id="getGroupMember" resultType="GroupJoinVo">
+	select userid from tbl_group_join
+	where gno = #{gno}
+</select>
+
 <!-- 검색 조건(참조용) -->
  <sql id="search">
  	<if test="searchType != null and keyword != null">
