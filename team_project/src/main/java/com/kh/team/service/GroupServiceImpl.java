@@ -21,7 +21,7 @@ public class GroupServiceImpl implements GroupService{
 		int gno = groupDao.getNextGno();
 		groupVo.setGno(gno);
 		boolean groupResult = groupDao.insertGroup(groupVo);
-		boolean memberResult = groupDao.updateMemberGno(groupVo.getGno(), groupVo.getG_leader());
+		boolean memberResult = groupDao.insertJoinGroup(groupVo.getGno(), groupVo.getG_leader());
 		if(groupResult && memberResult) {
 			return true;
 		}
@@ -51,8 +51,8 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	@Transactional
 	public boolean joinGroup(GroupVo groupVo, String userid) {
-		boolean groupResult = groupDao.updateGroupMember(groupVo, userid);
-		boolean memberResult = groupDao.updateMemberGno(groupVo.getGno(), userid);
+		boolean groupResult = groupDao.updateGroupMember(groupVo);
+		boolean memberResult = groupDao.insertJoinGroup(groupVo.getGno(), userid);
 		if(groupResult && memberResult) {
 			return true;
 		}

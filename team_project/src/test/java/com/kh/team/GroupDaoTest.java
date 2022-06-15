@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team.dao.GroupDao;
+import com.kh.team.service.GroupService;
 import com.kh.team.vo.GroupVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -17,6 +18,9 @@ public class GroupDaoTest {
 	
 	@Autowired
 	private GroupDao groupDao;
+	
+	@Autowired
+	private GroupService groupService;
 	
 	@Test
 	public void testGroupInsert() {
@@ -43,4 +47,19 @@ public class GroupDaoTest {
 		boolean result = groupDao.deleteGroup(1);
 		System.out.println("result: " + result);
 	}
+	
+	@Test
+	public void testGroupInsertService() {
+		GroupVo groupVo = new GroupVo("족구모임", "족구", 11, "족구하쟈~~", "서울", null, "tuna11");
+		boolean result = groupService.addGroup(groupVo);
+		System.out.println("result: " + result);
+	}
+	
+	@Test
+	public void testGroupJoinService() {
+		GroupVo groupVo = new GroupVo(1, 1);
+		boolean result = groupService.joinGroup(groupVo, "hong1234");
+		System.out.println("result: " + result);
+	}
+	
 }

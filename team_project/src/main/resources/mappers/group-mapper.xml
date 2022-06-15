@@ -26,14 +26,13 @@
 			where gno = #{gno}
 	</update>
 	
-	<update id="updateMemberGno">
-		update tbl_user set gno = #{gno}
-			where userid = #{userid}
-	</update>
+	<insert id="insertJoinGroup">
+		insert into tbl_group_join(jno, gno, userid)
+			values(seq_group_jno.nextval, #{gno}, #{userid})
+	</insert>
 	
 	<update id="updateGroupMember">
-		update tbl_group set g_present = #{g_present} + 1, users = concat(#{users}, #{userid})
-			where gno = #{gno}
+		update tbl_group set g_present = #{g_present} + 1 where gno = #{gno}
 	</update>
 
 	
