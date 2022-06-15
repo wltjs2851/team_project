@@ -19,7 +19,7 @@ $(function() {
 			$("#none").html("이메일을 입력해주세요");
 		} else if ((username != null && username != "") && (email != null && email != "")) {
 			$("#none").html("");
-			var url = "/member/findId";
+			var url = "/member/sendEmail";
 			var sData = {
 					"username" : username,
 					"email" : email
