@@ -54,13 +54,15 @@ public class GroupBoardController {
 	private CalendarServcie calendarService;
 	
 	@RequestMapping(value = "groupWriteForm", method = RequestMethod.GET)
-	public String createForm() { // 글쓰기 양식
+	public String createForm(Model model, int gno) { // 글쓰기 양식
+		GroupVo groupVo = groupService.groupByGno(gno);
+		model.addAttribute("groupVo", groupVo);
 		
 		return "groupboard/groupWriteForm";
 	}
 	
 	@RequestMapping(value = "groupWriteRun", method = RequestMethod.POST)
-	public String createRun(GroupBoardVo groupBoardVo, RedirectAttributes rttr, MultipartFile file){
+	public String createRun(int gno, GroupBoardVo groupBoardVo, RedirectAttributes rttr, MultipartFile file){
 		System.out.println("groupBoardController, groupWriteRun, file:" + file);
 		String originalFilename = file.getOriginalFilename();
 		System.out.println("originalFilename: " + originalFilename);

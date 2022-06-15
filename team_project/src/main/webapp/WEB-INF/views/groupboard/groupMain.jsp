@@ -40,7 +40,7 @@ $(function() {
 
 <%-- ${ groupList } --%>
 <%-- ${ noticeList } --%>
-<%-- ${ groupVo } --%>
+${ groupVo }
 <%-- ${ result } --%>
 
 <%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %>
@@ -160,7 +160,7 @@ $(function() {
 					<nav>
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item">
-								<a href="/groupboard/groupWriteForm?bno=${ groupVo.gno }">글쓰기</a>
+								<a href="/groupboard/groupWriteForm?gno=${ groupVo.gno }">글쓰기</a>
 							</li>
 							<li class="breadcrumb-item">
 								<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
