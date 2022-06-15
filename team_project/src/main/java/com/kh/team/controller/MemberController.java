@@ -182,33 +182,35 @@ public class MemberController {
 		return "/member/findId";
 	}
 	
-	@RequestMapping(value = "/findIdResult", method = RequestMethod.GET)
-	public String findIdResult() {
-		return "/member/findIdResult";
-	}
-	
 	@RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
 	@ResponseBody
 	public String sendEmail(String username, String email) {
 		MemberVo memberVo = memberService.findId(username, email);
 		if (memberVo != null && !memberVo.equals("")) {
 			// id 찾기 이메일 보내기
-			System.out.println(Math.random());
+			String randNum = "";
+			for (int i = 1; i <= 6; i++) {
+				randNum += String.valueOf(((int)(Math.random() * 9 + 1)));
+			}
+			System.out.println(randNum);
 			EmailVo emailVo = new EmailVo();
 			emailVo.setSubject("??에서 보낸 인증번호입니다.");
-			emailVo.setMessage("인증번호는 0000 입니다.");
+			emailVo.setMessage("인증번호는 " + randNum +  " 입니다.");
 			emailVo.setReceiveMail(email);
 			emailService.sendMailById(emailVo);
 			System.out.println(emailVo);
-			return "true";
+			return randNum;
 		} else {
 			return "false";
 		}
 	}
 	
 	@RequestMapping(value = "/findIdRun", method = RequestMethod.POST)
-	public String findIdRun(String username, String email, RedirectAttributes rttr) {
-		return null;
+	public String findIdRun(String username, String email, RedirectAttributes rttr, Model model) {
+		MemberVo memberVo = memberService.findId(username, email);
+//		rttr.addFlashAttribute("userid", memberVo.getUserid());
+		model.addAttribute("userid", memberVo.getUserid());
+		return "/member/findIdResult";
 	}
 	
 }
