@@ -60,6 +60,9 @@
  	select * from tbl_group_board
  	where gb_notice = 'on'
  	order by gbno desc
+<!-- 	select * from (select * from tbl_group_board -->
+<!-- 					where gb_notice = 'on') -->
+<!-- 	where gno = #{gno} -->
  </select>
  
  <!-- 댓글 갯수 넣기 -->

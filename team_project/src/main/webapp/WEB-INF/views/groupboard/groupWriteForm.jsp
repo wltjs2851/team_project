@@ -4,7 +4,8 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-${ loginVo.gno }
+<%-- ${ loginVo.gno } --%>
+${ groupVo.gno }
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">

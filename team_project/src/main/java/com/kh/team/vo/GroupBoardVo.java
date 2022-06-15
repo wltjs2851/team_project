@@ -19,6 +19,11 @@ public class GroupBoardVo {
 		super();
 	}
 
+	public GroupBoardVo(int gno) {
+		super();
+		this.gno = gno;
+	}
+
 	public GroupBoardVo(String gb_title, String gb_content, String userid, String gb_notice, String gb_pic) {
 		super();
 		this.gb_title = gb_title;

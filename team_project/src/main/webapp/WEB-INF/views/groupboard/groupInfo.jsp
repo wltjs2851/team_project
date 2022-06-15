@@ -83,14 +83,14 @@ $(function() {
 							<div class="list-group-item justify-content-between">
 								<c:choose>
 									<c:when test="${ groupVo.g_leader == loginVo.userid }">
-										<a href="/groupboard/updateGroupInfoForm">그룹 정보 수정(그룹장만)</a>
+										<a href="/board/groupForm?gno=${ groupVo.gno }">그룹 정보 수정(그룹장만)</a>
 									</c:when>
 									<c:otherwise>
 										
 									</c:otherwise>
 								</c:choose>
 							</div>
-								<a href="/groupboard/groupMain/${ loginVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+								<a href="/groupboard/groupMain/${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 									그룹 메인으로
 								</a>
 						</div>
