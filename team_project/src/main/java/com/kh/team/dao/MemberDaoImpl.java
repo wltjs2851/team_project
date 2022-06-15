@@ -83,5 +83,4 @@ public class MemberDaoImpl implements MemberDao {
 		return memberVo;
 	}
 
-	
 }
