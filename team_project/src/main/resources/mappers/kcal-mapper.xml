@@ -37,8 +37,15 @@
 	
 	<!-- 글 목록조회 -->
 	<select id="listKcal" resultType="KcalVo">
-		select * from tbl_kcal
-		order by kno desc
+		select * from (select rownum rnum, a.* from
+			(select * from tbl_kcal
+			order by kno desc) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	
+<!-- 	전체 글 갯수 구하기  -->
+	<select id="getCountKcal" resultType="int">
+		select count(*) from tbl_kcal
 	</select>
 	
 	

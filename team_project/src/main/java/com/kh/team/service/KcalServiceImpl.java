@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.team.dao.KcalDao;
 import com.kh.team.vo.KcalVo;
+import com.kh.team.vo.PagingDto;
 
 @Service
 public class KcalServiceImpl implements KcalService{
@@ -38,10 +39,21 @@ public class KcalServiceImpl implements KcalService{
 		return kcalVo;
 	}
 
+//	@Override
+//	public List<KcalVo> listKcal() {
+//		List<KcalVo> listKcal= kcalDao.listKcal();
+//		return listKcal;
+//	}
+
 	@Override
-	public List<KcalVo> listKcal() {
-		List<KcalVo> listKcal= kcalDao.listKcal();
-		return listKcal;
+	public List<KcalVo> listKcal(PagingDto pagingDto) {
+		return kcalDao.listKcal(pagingDto);
+		
+	}
+
+	@Override
+	public int getCountKcal(PagingDto pagingDto) {
+		return kcalDao.getCountKcal(pagingDto);
 	}
 
 }
