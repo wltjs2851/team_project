@@ -236,12 +236,14 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "notice", method = RequestMethod.GET)
-	public String notice(String gb_notice, Model model) {
+	public String notice(String gb_notice, Model model, int gno) {
 		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);
 //		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
 		
 		model.addAttribute("noticeList", noticeList);
 //		model.addAttribute("groupBoardVo", groupBoardVo);
+		GroupVo groupVo = groupService.groupByGno(gno);
+		model.addAttribute("groupVo", groupVo);
 		
 		return "groupboard/notice";
 	}
@@ -273,6 +275,9 @@ public class GroupBoardController {
 		
 		String group = groupBoardService.getGroupById(userid);
 		model.addAttribute("group", group);
+		
+		groupVo = groupService.groupByGno(Integer.parseInt(group));
+		model.addAttribute("groupVo", groupVo);
 		
 		return "groupboard/myGroupList";
 	}
