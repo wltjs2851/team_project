@@ -71,7 +71,7 @@ ${ groupVo }
 										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										
 										<c:if test="${ groupVo.g_leader == loginVo.userid }">
-											 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a>
+											 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }">삭제</a>
 											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a>
 										</c:if>
 											 <a class="dropdown-item" href="#">회원 정보 보기</a>
@@ -160,7 +160,7 @@ ${ groupVo }
 					<nav>
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item">
-								<a href="/groupboard/groupWriteForm?bno=${ groupVo.gno }">글쓰기</a>
+								<a href="/groupboard/groupWriteForm?gno=${ groupVo.gno }">글쓰기</a>
 							</li>
 							<li class="breadcrumb-item">
 								<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
@@ -183,7 +183,7 @@ ${ groupVo }
 										그룹원
 									</p>
 									<p>
-										${ groupVo.users }
+<%-- 										${ groupVo.users } --%>
 										<a class="btn btn-primary" href="#">쪽지보내기</a>
 <%-- 										<c:if test="그룹장일 경우"> --%>
 											<a class="btn" href="#">내쫓기</a>

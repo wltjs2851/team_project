@@ -30,6 +30,7 @@ import com.kh.team.util.FileUtil;
 import com.kh.team.vo.CalendarVo;
 import com.kh.team.vo.GroupBoardLikeVo;
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.SearchDto;
@@ -53,13 +54,15 @@ public class GroupBoardController {
 	private CalendarServcie calendarService;
 	
 	@RequestMapping(value = "groupWriteForm", method = RequestMethod.GET)
-	public String createForm() { // 글쓰기 양식
+	public String createForm(Model model, int gno) { // 글쓰기 양식
+		GroupVo groupVo = groupService.groupByGno(gno);
+		model.addAttribute("groupVo", groupVo);
 		
 		return "groupboard/groupWriteForm";
 	}
 	
 	@RequestMapping(value = "groupWriteRun", method = RequestMethod.POST)
-	public String createRun(GroupBoardVo groupBoardVo, RedirectAttributes rttr, MultipartFile file){
+	public String createRun(int gno, GroupBoardVo groupBoardVo, RedirectAttributes rttr, MultipartFile file){
 		System.out.println("groupBoardController, groupWriteRun, file:" + file);
 		String originalFilename = file.getOriginalFilename();
 		System.out.println("originalFilename: " + originalFilename);
@@ -173,12 +176,11 @@ public class GroupBoardController {
 	}
 
 	@RequestMapping(value = "groupDelete", method = RequestMethod.GET)
-	public String delete(int gbno, GroupBoardVo groupBoardVo, RedirectAttributes rttr) {
+	public String delete(int gno, int gbno, SearchDto searchDto, RedirectAttributes rttr) {
 		boolean result = groupBoardService.delete(gbno);
 		rttr.addFlashAttribute("delete_result", result);
-		System.out.println("delete, groupBoardVo: " + groupBoardVo);
 		
-		return "redirect:/groupboard/groupMain";
+		return "redirect:/groupboard/groupMain/" + gno;
 	}
 	
 	@RequestMapping(value = "groupMain/{gno}", method = RequestMethod.GET)
@@ -270,14 +272,14 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "myGroupList", method = RequestMethod.GET)
-	public String myGroupList(GroupVo groupVo, Model model, String userid, HttpServletRequest httpRequest) { // 유저 아이디를 기준으로 가입한 그룹들 가져오는,,,
+	public String myGroupList(/*int gno, */GroupVo groupVo, Model model, String userid, HttpServletRequest httpRequest) { // 유저 아이디를 기준으로 가입한 그룹들 가져오는,,,
 		userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
 		
-		String group = groupBoardService.getGroupById(userid);
+		List<GroupJoinVo> group = groupBoardService.list(userid);
 		model.addAttribute("group", group);
 		
-		groupVo = groupService.groupByGno(Integer.parseInt(group));
-		model.addAttribute("groupVo", groupVo);
+//		groupVo = groupService.groupByGno(gno);
+//		model.addAttribute("groupVo", groupVo);
 		
 		return "groupboard/myGroupList";
 	}

@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team.dao.GroupBoardDao;
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.SearchDto;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -60,5 +61,11 @@ public class GroupBoardDaoTest {
 		List<GroupBoardVo> list = groupBoardDao.list(searchDto);
 		
 		System.out.println("list: " + list);
+	}
+	
+	@Test
+	public void testJoinList() {
+		List<GroupJoinVo> groupJoinVo = groupBoardDao.list("gogo11");
+		System.out.println("groupJoinVo: " + groupJoinVo);
 	}
 }

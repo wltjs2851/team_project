@@ -3,6 +3,7 @@ package com.kh.team.service;
 import java.util.List;
 
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.SearchDto;
 
 public interface GroupBoardService {
@@ -17,6 +18,7 @@ public interface GroupBoardService {
 //	public void updateComment(int gbno);
 	public int countComment(int gbno);
 	public String getGb_picById(int gbno);
-	public String getGroupById(String userid);
+//	public String getGroupById(String userid);
+	public List<GroupJoinVo> list(String userid);
 
 }

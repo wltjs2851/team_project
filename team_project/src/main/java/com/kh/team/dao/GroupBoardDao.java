@@ -3,6 +3,7 @@ package com.kh.team.dao;
 import java.util.List;
 
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.SearchDto;
 
 public interface GroupBoardDao {
@@ -17,6 +18,7 @@ public interface GroupBoardDao {
 //	public void updateComment(int gbno);
 	public int countComment(int gbno);
 	public String getGb_picdById(int gbno);
-	public String getGroupById(String userid);
+//	public String getGroupById(String userid);
+	public List<GroupJoinVo> list(String userid);
 
 }

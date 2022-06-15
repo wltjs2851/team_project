@@ -155,7 +155,6 @@ $('#btnDisconnect').click(function() {
 </script>
 <body>
 <h1>채팅화면</h1>
-<form>
 <div class="container">
 	<h1 class="page-header">Chat</h1>		
 	
@@ -176,6 +175,5 @@ $('#btnDisconnect').click(function() {
 	</table>
 	
 </div>
-</form>
 </body>
 </html>

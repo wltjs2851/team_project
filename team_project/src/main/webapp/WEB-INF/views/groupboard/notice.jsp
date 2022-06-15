@@ -4,9 +4,10 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-${ noticeList }
-<hr>
-${ groupVo }
+<%-- ${ noticeList } --%>
+<%-- ${ groupVo } --%>
+<%-- ${ groupVo.gno } --%>
+<%-- ${ noticeList.gno } --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -15,13 +16,13 @@ ${ groupVo }
 				
 				<h2>공지글 전체 보기</h2>
 				
-<%-- 				<c:if test="${ noticeList.gno == groupVo.gno }"> --%>
 				<c:forEach items="${ noticeList }" var="groupBoardVo">
+				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
 					<h3 style="background-color: yellowgreen;">
 						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">[공지] ${ groupBoardVo.gb_title }</a>
 					</h3>
+				</c:if>
 				</c:forEach>
-<%-- 				</c:if> --%>
 				
 				</div>
 				<div class="col-md-3">
