@@ -4,12 +4,9 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-${ noticeList }
-<hr>
-${ groupVo }
-<hr>
-${ groupVo.gno }
-<hr>
+<%-- ${ noticeList } --%>
+<%-- ${ groupVo } --%>
+<%-- ${ groupVo.gno } --%>
 <%-- ${ noticeList.gno } --%>
 <div class="container-fluid">
 	<div class="row">
