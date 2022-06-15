@@ -39,6 +39,9 @@
 	<select id="listKcal" resultType="KcalVo">
 		select * from (select rownum rnum, a.* from
 			(select * from tbl_kcal
+				<if test="keyword != null">
+				where k_name like '%' || #{keyword} || '%'
+				</if>
 			order by kno desc) a)
 		where rnum between #{startRow} and #{endRow}
 	</select>
