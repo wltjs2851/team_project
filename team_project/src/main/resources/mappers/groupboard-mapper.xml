@@ -84,6 +84,12 @@
 	where gbno = #{gbno}
 </select>
 
+<!-- 가입한 그룹 가져오기 -->
+<select id="getGroupById" resultType="String">
+	select gno from tbl_user
+	where userid = #{userid}
+</select>
+
 <!-- 검색 조건(참조용) -->
  <sql id="search">
  	<if test="searchType != null and keyword != null">

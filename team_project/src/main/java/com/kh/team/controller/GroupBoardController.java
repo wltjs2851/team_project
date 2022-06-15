@@ -52,9 +52,6 @@ public class GroupBoardController {
 	@Autowired
 	private CalendarServcie calendarService;
 	
-	@Autowired
-	private MemberService memberService;
-	
 	@RequestMapping(value = "groupWriteForm", method = RequestMethod.GET)
 	public String createForm() { // 글쓰기 양식
 		
@@ -239,12 +236,14 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "notice", method = RequestMethod.GET)
-	public String notice(String gb_notice, Model model) {
+	public String notice(String gb_notice, Model model, int gno) {
 		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);
 //		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
 		
 		model.addAttribute("noticeList", noticeList);
 //		model.addAttribute("groupBoardVo", groupBoardVo);
+		GroupVo groupVo = groupService.groupByGno(gno);
+		model.addAttribute("groupVo", groupVo);
 		
 		return "groupboard/notice";
 	}
@@ -271,9 +270,14 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "myGroupList", method = RequestMethod.GET)
-	public String myGroupList(GroupVo groupVo, Model model) { // 유저 아이디를 기준으로 가입한 그룹들 가져오는,,,
-		MemberVo memberVo = memberService.memberByUserid(groupVo.getUsers());
-		model.addAttribute("memberVo", memberVo);
+	public String myGroupList(GroupVo groupVo, Model model, String userid, HttpServletRequest httpRequest) { // 유저 아이디를 기준으로 가입한 그룹들 가져오는,,,
+		userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
+		
+		String group = groupBoardService.getGroupById(userid);
+		model.addAttribute("group", group);
+		
+		groupVo = groupService.groupByGno(Integer.parseInt(group));
+		model.addAttribute("groupVo", groupVo);
 		
 		return "groupboard/myGroupList";
 	}
