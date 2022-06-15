@@ -1,5 +1,6 @@
 package com.kh.team.dao;
 
+import com.kh.team.vo.EmailVo;
 import com.kh.team.vo.MemberVo;
 
 public interface MemberDao  {
