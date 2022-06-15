@@ -4,13 +4,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -85,12 +88,15 @@ public class AdminController {
 	
 	// 운동칼로리 글 목록 
 	@RequestMapping(value = "/listKcal", method = RequestMethod.GET)
-	public String listKcal(Model model, PagingDto pagingDto) {
+	public String listKcal(Model model, PagingDto pagingDto, HttpSession session, HttpServletResponse response) {
 //		System.out.println("AdminController, listKcal, pagingDto:" + pagingDto);
 		pagingDto.setCount(kcalService.getCountKcal(pagingDto));
 		pagingDto.setPage(pagingDto.getPage());
 		List<KcalVo> listKcal = kcalService.listKcal(pagingDto);
 //		System.out.println("listKcal:" + listKcal);
+		
+		
+		
 		model.addAttribute("listKcal", listKcal);
 		model.addAttribute("pagingDto", pagingDto);
 		return "admin/kcal";// admin/kcal.jsp
@@ -98,9 +104,12 @@ public class AdminController {
 	
 	// 운동칼로리 글 조회
 	@RequestMapping(value = "/selectByKno", method = RequestMethod.GET)
-	public String selectByKno(int kno, Model model, PagingDto pagingDto) {
+	public String selectByKno(int kno, Model model, PagingDto pagingDto, HttpSession session) {
 		System.out.println("AdminController, selectByKno, kno:" + kno);
 		KcalVo kcalVo = kcalService.selectByKno(kno);
+		
+		
+		
 		model.addAttribute("kcalVo", kcalVo);
 		model.addAttribute("pagingDto", pagingDto);
 		return "admin/kcalSelect";

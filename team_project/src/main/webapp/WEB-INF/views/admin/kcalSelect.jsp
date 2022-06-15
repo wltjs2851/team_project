@@ -103,7 +103,7 @@ th:first-child, td:first-child {
 	<input type="hidden" name="keyword" value="${ pagingDto.keyword }">
 </form>
 <%-- ${kcalVo } --%>
-${pagingDto }
+<%-- ${pagingDto } --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -169,15 +169,15 @@ ${pagingDto }
 							<h6>효과 및 참고 사항</h6>
 							<p>: ${kcalVo.k_notes}</p>
 						</div>
+						<a class="btn btn-sm btn-success" href="/admin/kcalUpdateForm?kno=${kcalVo.kno }">수정</a>
+						<a class="btn btn-danger" href="/admin/deleteKcal?kno=${kcalVo.kno}"
+						id="btnDeleteKcal">삭제</a>
+					</article>
+					<article>
+					검색 목록
+					${listKcal }
 					</article>
 				</div>
-<!-- 				<button type="button" class="btn btn-primary" id="btnUpdateKcal"> -->
-<!-- 					수정</button> -->
-<!-- 				<button type="submit" class="btn btn-success" id="btnUpdateRunKcal" -->
-<!-- 					style="display: none;">수정완료</button> -->
-				<a class="btn btn-sm btn-success" href="/admin/kcalUpdateForm?kno=${kcalVo.kno }">수정</a>
-				<a class="btn btn-danger" href="/admin/deleteKcal?kno=${kcalVo.kno}"
-					id="btnDeleteKcal">삭제</a>
 			</form>
 		</div>
 		<div class="col-md-2"></div>
