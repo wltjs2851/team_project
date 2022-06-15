@@ -68,4 +68,10 @@ public class GroupBoardDaoTest {
 		List<GroupJoinVo> groupJoinVo = groupBoardDao.list("gogo11");
 		System.out.println("groupJoinVo: " + groupJoinVo);
 	}
+	
+//	@Test
+//	public void testDeleteMember() {
+//		boolean result = groupBoardDao.deleteMember("domidgirl33");
+//		System.out.println("reuslt: " + result);
+//	}
 }
