@@ -112,10 +112,11 @@ $(function() {
 					<br>
 					<br>
 				</div>
-				
-				<button type="button" class="btn btn-warning" id="btnModify">수정</button>
-				<button type="submit" class="btn btn-success" id="btnModifyRun" style="display: none">수정완료</button>
-				<a href="/group/removeGroup?gno=${ groupVo.gno }" class="btn btn-danger" id="btnDelete">삭제</a>
+				<c:if test="${ groupVo.g_leader == loginVo.userid }">
+					<button type="button" class="btn btn-warning" id="btnModify">수정</button>
+					<button type="submit" class="btn btn-success" id="btnModifyRun" style="display: none">수정완료</button>
+					<a href="/group/removeGroup?gno=${ groupVo.gno }" class="btn btn-danger" id="btnDelete">삭제</a>
+				</c:if>
 			</form>
 			<c:if test="${ groupVo.g_leader != loginVo.userid }">
 				<form role="form" action="/group/joinGroup" method="post" style="display: inline;">

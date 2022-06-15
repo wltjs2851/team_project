@@ -98,24 +98,51 @@
 	});
 </script>
 <body>
-	<div class='rap'>
-		<div class="header">
-			<div id="prevMonth"><img class="arrows" src="/resources/images/prev.png"></div>
-			<h2 class='dateTitle'></h2>
-			<div id="nextMonth"><img class="arrows" src="/resources/images/next.png"></div>
-		</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class='rap left'>
+					<div class="header">
+						<div id="prevMonth">
+							<img class="arrows" src="/resources/images/prev.png">
+						</div>
+						<h2 class='dateTitle'></h2>
+						<div id="nextMonth">
+							<img class="arrows" src="/resources/images/next.png">
+						</div>
+					</div>
 
-		<div class="grid dateHead">
-			<div>일</div>
-			<div>월</div>
-			<div>화</div>
-			<div>수</div>
-			<div>목</div>
-			<div>금</div>
-			<div>토</div>
+					<div class="grid dateHead">
+						<div>일</div>
+						<div>월</div>
+						<div>화</div>
+						<div>수</div>
+						<div>목</div>
+						<div>금</div>
+						<div>토</div>
+					</div>
+					<div class="grid dateBoard"></div>
+				</div>
+				<div class="right">
+					<div class="content-left">
+				        <div class="main-wrap">
+				          <div id="main-day" class="main-day"></div>
+				          <div id="main-date" class="main-date"></div>
+				        </div>
+				        <div class="todo-wrap">
+				          <div class="todo-title">Todo List</div>
+				          <div class="input-wrap">
+				            <input type="text" placeholder="please write here!!" id="input-box" class="input-box">
+				            <button type="button" id="input-data" class="input-data">INPUT</button>
+				            <div id="input-list" class="input-list"></div>
+				          </div>
+				        </div>
+      				</div>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
 		</div>
-
-		<div class="grid dateBoard"></div>
 	</div>
 </body>
 <script type="text/javascript" src="/resources/js/calendar.js"></script>

@@ -175,14 +175,34 @@ public class MemberController {
 		return "/member/findId";
 	}
 	
+	@RequestMapping(value = "/findIdResult", method = RequestMethod.GET)
+	public String findIdResult() {
+		return "/member/findIdResult";
+	}
+	
+	@RequestMapping(value = "/findIdRun", method = RequestMethod.POST)
+	public String findIdRun(String username, String email, RedirectAttributes rttr) {
+		MemberVo memberVo = memberService.findId(username, email);
+		if (memberVo != null && !memberVo.equals("")) {
+			String userid = memberVo.getUserid();
+			rttr.addFlashAttribute("userid", userid);
+			return "redirect:/member/findIdResult";
+		} else {
+			System.out.println("false");
+			rttr.addFlashAttribute("userid", "false");
+			return "redirect:/member/findIdPop";
+		}
+	}
+	
 	@RequestMapping(value = "/findId", method = RequestMethod.POST)
 	@ResponseBody
 	public String findId(String username, String email) {
 		MemberVo memberVo = memberService.findId(username, email);
+		boolean result = false;
 		if (memberVo != null && !memberVo.equals("")) {
-			String userid = memberVo.getUserid();
-			return userid;
-		} 
-		return null;
+			result = true;
+		}
+		return String.valueOf(result);
 	}
+	
 }

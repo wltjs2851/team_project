@@ -23,7 +23,7 @@ tr.tr_list:hover{
 	font-size: 14px;
 }
 
-#searchImg {
+#searchKcal {
 	position: absolute;
 	width: 25px;
 	top: 10px;
@@ -44,11 +44,13 @@ $(document).ready(function(){
 	
 	// 운동 칼로리 제목 클릭 시 내용보기
 	$(".td_list").click(function(){
-		console.log("클릭 됨");
+		console.log("kcal 게시글 클릭");
 		var kno = $(this).attr("data-kno");
-		location.href = "/admin/selectByKno?kno=" + kno;
-// 		e.preventDefault();
-// 		location.href = "/admin/selectByKno?kno=1";
+// 		location.href = "/admin/selectByKno?kno=" + kno;
+		frmPaging.find("input[name=kno]").val(kno);
+		frmPaging.attr("action", "/admin/selectByKno");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
 	});
 	
 	// 페이지 이동
@@ -62,11 +64,25 @@ $(document).ready(function(){
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
+	
+	// 검색하기
+	$("#searchKcal").on("click", function(e){
+		e.preventDefault();
+		console.log("검색하기 버튼");
+		var keyword = $("#keyword").val();
+		console.log(keyword);
+		frmPaging.find("input[name=keyword]").val(keyword);
+		frmPaging.find("input[name=page]").val(1);
+		frmPaging.attr("action", "/admin/listKcal");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 </script>
 <%-- ${pagingDto} --%>
 <!-- 페이지, 검색 값 -->
 <form id="frmPaging">
+	<input type="hidden" name="kno" value="">
 	<input type="hidden" name="page" value="${ pagingDto.page }">
 	<input type="hidden" name="perPage" value="${ pagingDto.perPage }">
 	<input type="hidden" name="keyword" value="${ pagingDto.keyword }">
@@ -88,8 +104,12 @@ $(document).ready(function(){
 		<div class="col-md-8">
 		<div class="search">
 				<input class="form-control" type="text" placeholder="검색어 입력"
-					id="keyword">
-				<input type="image" src="/resources/images/magnifier.png" id="searchImg">
+					id="keyword"
+					<c:if test="${ pagingDto.keyword != null }">
+						value="${ pagingDto.keyword }"
+					</c:if>
+				>
+				<input type="image" src="/resources/images/magnifier.png" id="searchKcal">
 			<br>
 			</div>
 			<hr>

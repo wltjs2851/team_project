@@ -35,6 +35,20 @@
 
 			$("#td_kcal").html($(this).val() * num);
 		});
+		
+		// 검색하기
+		var frmPaging = $("#frmPaging");
+		$("#searchKcal").on("click", function(e){
+			e.preventDefault();
+			console.log("검색하기 버튼");
+			var keyword = $("#keyword").val();
+			console.log(keyword);
+			frmPaging.find("input[name=keyword]").val(keyword);
+			frmPaging.find("input[name=page]").val(1);
+			frmPaging.attr("action", "/admin/listKcal");
+			frmPaging.attr("method", "get");
+			frmPaging.submit();
+		});
 	});
 </script>
 <style>
@@ -74,7 +88,7 @@ th:first-child, td:first-child {
 	font-size: 14px;
 }
 
-#searchImg {
+#searchKcal {
 	position: absolute;
 	width: 25px;
 	top: 10px;
@@ -82,7 +96,14 @@ th:first-child, td:first-child {
 	margin: 0;
 }
 </style>
+<form id="frmPaging">
+	<input type="hidden" name="kno" value="">
+	<input type="hidden" name="page" value="${ pagingDto.page }">
+	<input type="hidden" name="perPage" value="${ pagingDto.perPage }">
+	<input type="hidden" name="keyword" value="${ pagingDto.keyword }">
+</form>
 <%-- ${kcalVo } --%>
+${pagingDto }
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -96,10 +117,12 @@ th:first-child, td:first-child {
 						<!-- 				<form> -->
 						<div class="search">
 							<input class="form-control" type="text" placeholder="검색어 입력"
-								id="keyword">
-							<input type="image" src="/resources/images/magnifier.png" id="searchImg">
-<!-- 								<img src="/resources/images/magnifier.png" id="searchImg"/> -->
-							
+								id="keyword"
+								<c:if test="${ pagingDto.keyword != null }">
+									value="${ pagingDto.keyword }"
+								</c:if>
+							>
+							<input type="image" src="/resources/images/magnifier.png" id="searchKcal">
 						</div>
 						<br>
 						<!-- 					</form> -->
