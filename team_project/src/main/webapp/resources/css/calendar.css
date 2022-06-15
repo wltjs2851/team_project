@@ -72,6 +72,13 @@
 	cursor: pointer;
 }
 
+.left {
+	float: left;
+}
+
+.right {
+}
+
 /* .prevDay { */
 /*   transform: rotate(-135deg); */
 /* } */
