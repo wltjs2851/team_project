@@ -40,7 +40,7 @@ $(function() {
 
 <%-- ${ groupList } --%>
 <%-- ${ noticeList } --%>
-${ groupVo }
+<%-- ${ groupVo } --%>
 <%-- ${ result } --%>
 
 <%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %>
@@ -183,7 +183,7 @@ ${ groupVo }
 										그룹원
 									</p>
 									<p>
-										${ groupVo.users }
+<%-- 										${ groupVo.users } --%>
 										<a class="btn btn-primary" href="#">쪽지보내기</a>
 <%-- 										<c:if test="그룹장일 경우"> --%>
 											<a class="btn" href="#">내쫓기</a>
