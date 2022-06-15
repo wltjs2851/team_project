@@ -4,8 +4,9 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-내 그룹 리스트
-${ memberVo }
+${ group }
+<div class="popular__product" style="padding: 3% 10%">
+<a href="/groupboard/groupMain/${ group }">내 그룹으로 가기</a>
+</div>
 
-
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>

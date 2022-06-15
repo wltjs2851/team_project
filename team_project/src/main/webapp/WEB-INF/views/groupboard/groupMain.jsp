@@ -144,7 +144,7 @@ ${ groupVo }
 									</c:if>
 								>작성자</option>
 							</select>
-							<a href="/groupboard/groupMain/${ loginVo.gno }" class="btn-primary" style="width: 50px; height:50px; padding: 2% 0">검색 초기화</a>
+							<a href="/groupboard/groupMain/${ groupVo.gno }" class="btn-primary" style="width: 50px; height:50px; padding: 2% 0">검색 초기화</a>
 							</div>
 							
 							<input type="text" id="keyword" value="${searchDto.keyword}">

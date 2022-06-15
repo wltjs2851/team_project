@@ -17,5 +17,6 @@ public interface GroupBoardDao {
 //	public void updateComment(int gbno);
 	public int countComment(int gbno);
 	public String getGb_picdById(int gbno);
+	public String getGroupById(String userid);
 
 }
