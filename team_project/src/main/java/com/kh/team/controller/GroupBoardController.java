@@ -216,6 +216,9 @@ public class GroupBoardController {
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);
 		
+		List<GroupJoinVo> groupJoinMember = groupBoardService.list(gno);
+		model.addAttribute("groupJoinMember", groupJoinMember);
+		
 		return "groupboard/groupInfo";
 	}
 	
