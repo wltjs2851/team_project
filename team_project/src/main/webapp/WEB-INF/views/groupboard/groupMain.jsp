@@ -40,7 +40,7 @@ $(function() {
 
 <%-- ${ groupList } --%>
 <%-- ${ noticeList } --%>
-<%-- ${ groupVo } --%>
+${ groupVo }
 <%-- ${ result } --%>
 
 <%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %>
@@ -53,10 +53,12 @@ $(function() {
 				
 				<c:forEach items="${ noticeList }" var="groupBoardVo" varStatus="status" begin="0" end="2">
 					<h3 style="background-color: powderblue;">
+					<c:if test="${ groupBoardVo.gno == groupVo.gno }">
 						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">[공지] ${ groupBoardVo.gb_title }</a>
+					</c:if>
 					</h3>
 				</c:forEach>
-					<a href="/groupboard/notice?gno=${ loginVo.gno }">전체 공지글 확인하기</a>
+					<a href="/groupboard/notice?gno=${ groupVo.gno }">전체 공지글 확인하기</a>
 				
 					<c:forEach items="${ groupList }" var="groupBoardVo">
 				
