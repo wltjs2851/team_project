@@ -176,12 +176,11 @@ public class GroupBoardController {
 	}
 
 	@RequestMapping(value = "groupDelete", method = RequestMethod.GET)
-	public String delete(int gbno, GroupBoardVo groupBoardVo, RedirectAttributes rttr) {
+	public String delete(int gno, int gbno, SearchDto searchDto, RedirectAttributes rttr) {
 		boolean result = groupBoardService.delete(gbno);
 		rttr.addFlashAttribute("delete_result", result);
-		System.out.println("delete, groupBoardVo: " + groupBoardVo);
 		
-		return "redirect:/groupboard/groupMain";
+		return "redirect:/groupboard/groupMain/" + gno;
 	}
 	
 	@RequestMapping(value = "groupMain/{gno}", method = RequestMethod.GET)

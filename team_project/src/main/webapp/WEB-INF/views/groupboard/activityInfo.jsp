@@ -29,7 +29,7 @@
 			console.log(insertContent);
 			console.log(userid);
 			
-			if(userid == "${groupVo.g_leader}") {
+// 			if(userid == "${groupVo.g_leader}") {
 				
 				var url = "/calendar/save";
 				var sData = {
@@ -48,7 +48,7 @@
 	// 				getCalendarList();
 				}
 			
-			}
+// 			}
 		});
 		function getCalendarList() {
 			var divDate = $(".dateBoard .divDate[data-today]");
