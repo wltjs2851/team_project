@@ -30,6 +30,7 @@ import com.kh.team.util.FileUtil;
 import com.kh.team.vo.CalendarVo;
 import com.kh.team.vo.GroupBoardLikeVo;
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.SearchDto;
@@ -270,14 +271,14 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "myGroupList", method = RequestMethod.GET)
-	public String myGroupList(GroupVo groupVo, Model model, String userid, HttpServletRequest httpRequest) { // 유저 아이디를 기준으로 가입한 그룹들 가져오는,,,
+	public String myGroupList(/*int gno, */GroupVo groupVo, Model model, String userid, HttpServletRequest httpRequest) { // 유저 아이디를 기준으로 가입한 그룹들 가져오는,,,
 		userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
 		
-		String group = groupBoardService.getGroupById(userid);
+		List<GroupJoinVo> group = groupBoardService.list(userid);
 		model.addAttribute("group", group);
 		
-		groupVo = groupService.groupByGno(Integer.parseInt(group));
-		model.addAttribute("groupVo", groupVo);
+//		groupVo = groupService.groupByGno(gno);
+//		model.addAttribute("groupVo", groupVo);
 		
 		return "groupboard/myGroupList";
 	}

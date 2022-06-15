@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.SearchDto;
 
 @Repository
@@ -84,9 +85,9 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public String getGroupById(String userid) {
-		
-		return sqlSession.selectOne(NAMESPACE + "getGroupById", userid);
+	public List<GroupJoinVo> list(String userid) {
+		List<GroupJoinVo> groupJoinList = sqlSession.selectList(NAMESPACE + "getGroupById", userid);
+		return groupJoinList;
 	}
 
 }
