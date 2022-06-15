@@ -10,14 +10,18 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team.service.EmailService;
 import com.kh.team.service.MemberService;
 import com.kh.team.util.FileUtil;
+import com.kh.team.vo.EmailVo;
 import com.kh.team.vo.MemberVo;
 
 @Controller
@@ -26,6 +30,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public String loginForm() {
@@ -180,29 +187,28 @@ public class MemberController {
 		return "/member/findIdResult";
 	}
 	
-	@RequestMapping(value = "/findIdRun", method = RequestMethod.POST)
-	public String findIdRun(String username, String email, RedirectAttributes rttr) {
+	@RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
+	@ResponseBody
+	public String sendEmail(String username, String email) {
 		MemberVo memberVo = memberService.findId(username, email);
 		if (memberVo != null && !memberVo.equals("")) {
-			String userid = memberVo.getUserid();
-			rttr.addFlashAttribute("userid", userid);
-			return "redirect:/member/findIdResult";
+			// id 찾기 이메일 보내기
+			System.out.println(Math.random());
+			EmailVo emailVo = new EmailVo();
+			emailVo.setSubject("??에서 보낸 인증번호입니다.");
+			emailVo.setMessage("인증번호는 0000 입니다.");
+			emailVo.setReceiveMail(email);
+			emailService.sendMailById(emailVo);
+			System.out.println(emailVo);
+			return "true";
 		} else {
-			System.out.println("false");
-			rttr.addFlashAttribute("userid", "false");
-			return "redirect:/member/findIdPop";
+			return "false";
 		}
 	}
 	
-	@RequestMapping(value = "/findId", method = RequestMethod.POST)
-	@ResponseBody
-	public String findId(String username, String email) {
-		MemberVo memberVo = memberService.findId(username, email);
-		boolean result = false;
-		if (memberVo != null && !memberVo.equals("")) {
-			result = true;
-		}
-		return String.valueOf(result);
+	@RequestMapping(value = "/findIdRun", method = RequestMethod.POST)
+	public String findIdRun(String username, String email, RedirectAttributes rttr) {
+		return null;
 	}
 	
 }
