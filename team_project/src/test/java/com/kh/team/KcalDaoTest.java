@@ -27,6 +27,15 @@ public class KcalDaoTest {
 		System.out.println("testInsertKcal, result:" + result);
 	}
 	
+	// 가짜 데이터 넣기 
+	@Test
+	public void testInsertFake() {
+		for (int i = 1; i <= 500; i++) {
+			KcalVo kcalVo = new KcalVo("제목" + i, "30", "100", "보통");
+			kcalDao.insertKcal(kcalVo);
+		}
+	}
+	
 	// 글 수정
 	@Test
 	public void testUpdateKcal() {
@@ -45,14 +54,14 @@ public class KcalDaoTest {
 	}
 	
 	// 글 목록 조회
-	@Test
-	public void testList() {
-		List<KcalVo> kcalList = kcalDao.listKcal();
-		for (KcalVo kcalVo : kcalList) {
-			System.out.println("kcalList:" + kcalVo);
-		}
+//	@Test
+//	public void testList() {
+//		List<KcalVo> kcalList = kcalDao.listKcal();
+//		for (KcalVo kcalVo : kcalList) {
+//			System.out.println("kcalList:" + kcalVo);
+//		}
 //		System.out.println("kcalList:" + kcalList);
-	}
+//	}
 	
 	// 글 삭제 
 	@Test

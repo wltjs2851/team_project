@@ -14,11 +14,18 @@ tr.tr_list:hover{
 /* p > img { */
 /* 	display: none; */
 /* } */
+
+p > br {
+	display: none;
+}
 </style>
 <script>
 $(document).ready(function() {
-	$("p:has(img)").css("display", "none");
-	$("p:has(iframe)").css("display", "none");
+// 	$("p:has(img)").css("display", "none");
+// 	$("p:has(iframe)").css("display", "none");
+	$("iframe").parents("p").remove();
+	$("img").parents("p").remove();
+// 	$("p:has(iframe)").removeAttr("br");
 	
 	var insertRecommend_result = "${insertRecommend_result}";
 	var deleteRecommend_result = "${deleteRecommend_result}";
@@ -35,6 +42,12 @@ $(document).ready(function() {
 		var reno = $(this).attr("data-reno");
 		location.href = "/admin/selectByReno?reno=" + reno;
 	});
+	
+	$(".revo_re_content").each(function() {
+		var t = $(this).text();
+		var t2 = t.substring(0, 100);
+		$(this).text(t2 + "...");
+	});     
 });
 </script>
 <%-- ${listRecommend} --%>
@@ -66,7 +79,8 @@ $(document).ready(function() {
 							</td>
 						<td class="product-details">
 							<h3 class="title">${ReVo.re_title}</h3> 
-							<span>${fn:substring(ReVo.re_content, 0, 200)}...</span>
+							<span class="revo_re_content">${ReVo.re_content}</span><br>
+							
 						</td>
 						<td class="action" data-title="Action">
 							<div class="">

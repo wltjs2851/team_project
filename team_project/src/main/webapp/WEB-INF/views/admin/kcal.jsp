@@ -9,6 +9,27 @@ tr.tr_list{
 tr.tr_list:hover{
 	background-color: skyblue;
 }
+
+.search {
+	position: relative;
+	width: 600px;
+}
+
+#keyword {
+	width: 100%;
+	border: 1px solid #bbb;
+	border-radius: 8px;
+	padding: 10px 12px;
+	font-size: 14px;
+}
+
+#searchImg {
+	position: absolute;
+	width: 25px;
+	top: 10px;
+	right: 12px;
+	margin: 0;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -29,28 +50,49 @@ $(document).ready(function(){
 // 		e.preventDefault();
 // 		location.href = "/admin/selectByKno?kno=1";
 	});
+	
+	// 페이지 이동
+	var frmPaging = $("#frmPaging");
+	$("a.page-link").click(function(e) {
+		e.preventDefault();
+		console.log("클릭");
+		var page = $(this).attr("href");
+		frmPaging.find("input[name=page]").val(page);
+		frmPaging.attr("action", "/admin/listKcal");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 </script>
-<%-- ${listKcal } --%>
-<form id="frmKcal">
-	<input type="hidden" name="kno" value="">
+<%-- ${pagingDto} --%>
+<!-- 페이지, 검색 값 -->
+<form id="frmPaging">
+	<input type="hidden" name="page" value="${ pagingDto.page }">
+	<input type="hidden" name="perPage" value="${ pagingDto.perPage }">
+	<input type="hidden" name="keyword" value="${ pagingDto.keyword }">
 </form>
+
 <div class="container-fluid">
 	<!-- 		칼로리사전 검색 -->
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<h3>운동칼로리</h3>
+			<h2>운동칼로리 사전</h2>
 			<hr>
-			<input type="text">
-			<button type="button" class="btn btn-sm btn-success">검색</button>
-		</div>
+			</div>
 		<div class="col-md-2"></div>
 	</div>
 	<!-- 		칼로리사전 목록 -->
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
+		<div class="search">
+				<input class="form-control" type="text" placeholder="검색어 입력"
+					id="keyword">
+				<input type="image" src="/resources/images/magnifier.png" id="searchImg">
+			<br>
+			</div>
+			<hr>
 			<table class="table">
 				<thead>
 					<tr>
@@ -75,6 +117,39 @@ $(document).ready(function(){
 			</table>
 		</div>
 		<div class="col-md-2"></div>
+	</div>
+<!-- 	페이지 블록 -->
+	<div class="row">
+		<div class="col-md-12">
+			<nav>
+				<ul class="pagination justify-content-center">
+				<c:if test="${pagingDto.startPage != 1}">
+					<li class="page-item">
+						<a class="page-link" href="${pagingDto.startPage - 1}">이전</a>
+					</li>
+				</c:if>
+					<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
+						<li 
+						<c:choose>
+								<c:when test="${v == param.page}">
+									class="page-item active"
+								</c:when>
+								<c:otherwise>
+									class="page-item"
+								</c:otherwise>
+							</c:choose>
+						>
+							<a class="page-link" href="${v}">${v}</a>
+						</li>
+					</c:forEach>
+						<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
+							<li class="page-item">
+								<a class="page-link" href="${pagingDto.endPage + 1}">다음</a>
+							</li>
+						</c:if>
+				</ul>
+			</nav>
+		</div>
 	</div>
 <!-- 	글 작성 버튼  -->
 	<div class="row">

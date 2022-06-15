@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.KcalVo;
+import com.kh.team.vo.PagingDto;
 
 @Repository
 public class KcalDaoImple implements KcalDao{
@@ -49,10 +50,22 @@ public class KcalDaoImple implements KcalDao{
 		return kcalVo;
 	}
 
+//	@Override
+//	public List<KcalVo> listKcal() {
+//		List<KcalVo> listKcal = sqlSession.selectList(NAMESPACE + "listKcal");
+//		return listKcal;
+//	}
+
 	@Override
-	public List<KcalVo> listKcal() {
-		List<KcalVo> listKcal = sqlSession.selectList(NAMESPACE + "listKcal");
+	public List<KcalVo> listKcal(PagingDto pagingDto) {
+		List<KcalVo> listKcal = sqlSession.selectList(NAMESPACE + "listKcal", pagingDto);
 		return listKcal;
+	}
+
+	@Override
+	public int getCountKcal(PagingDto pagingDto) {
+		int count = sqlSession.selectOne(NAMESPACE + "getCountKcal", pagingDto);
+		return count;
 	}
 
 }
