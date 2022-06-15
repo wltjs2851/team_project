@@ -45,6 +45,7 @@ $(document).ready(function(){
 	}
 	
 	// 운동 칼로리 제목 클릭 시 내용보기
+	var frmPaging = $("#frmPaging");
 	$(".td_list").click(function(){
 		console.log("kcal 게시글 클릭");
 		var kno = $(this).attr("data-kno");
@@ -56,7 +57,6 @@ $(document).ready(function(){
 	});
 	
 	// 페이지 이동
-	var frmPaging = $("#frmPaging");
 	$("a.page-link").click(function(e) {
 		e.preventDefault();
 		console.log("클릭");
