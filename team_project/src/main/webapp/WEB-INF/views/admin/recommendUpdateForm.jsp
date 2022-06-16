@@ -61,7 +61,7 @@ function uploadSummernoteImageFile(file) {
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form role="form" action="/admin/insertRecommend" method="post" enctype="multipart/form-data">
+			<form role="form" action="/admin/updateRecommend" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="reno" value="${recommendVo.reno }">
 				<div class="form-group">
 					<input type="text" class="form-control" value="${recommendVo.re_title }"id="re_title" name="re_title" required/>
@@ -74,7 +74,7 @@ function uploadSummernoteImageFile(file) {
 					<input type="text" class="form-control" id="userid" name="userid" value="${recommendVo.userid }"required/>
 				</div>
 				<button type="submit" class="btn btn-primary" 
-					style='width: 80px; height:50px; padding: 1% 0'>글쓰기</button>
+					style='width: 80px; height:50px; padding: 1% 0'>수정완료</button>
 				<br>
 				<br>
 			</form>
