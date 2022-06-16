@@ -12,17 +12,17 @@
 $(function() {
 	var randNum;
 	$("#btnSendMail").click(function() {
-		var username = $("#username").val();
+		var userid = $("#userid").val();
 		var email = $("#email").val();
-		if (username == null || username == "") {
-			$("#none").html("이름을 입력해주세요");
+		if (userid == null || userid == "") {
+			$("#none").html("아이디를 입력해주세요");
 		} else if (email == null || email == "") {
 			$("#none").html("이메일을 입력해주세요");
-		} else if ((username != null && username != "") && (email != null && email != "")) {
+		} else if ((userid != null && userid != "") && (email != null && email != "")) {
 			$("#none").html("");
-			var url = "/member/sendEmailByFindId";
+			var url = "/member/sendEmailByFindPw";
 			var sData = {
-					"username" : username,
+					"userid" : userid,
 					"email" : email
 			};
 			$.post(url, sData, function(rData) {
@@ -33,16 +33,12 @@ $(function() {
 			});
 		}
 	});
-	$("#btnFindId").click(function() {
+	$("#btnUpdatePw").click(function() {
 		if (randNum == $("#cNumber").val()) {
-			$("#frmFindId").submit();
+			$("#frmUpdatePw").submit();
 		} else {
 			alert("인증번호를 확인해주세요");
 		}
-	});
-	$("#btnJoin").click(function() {
-		opener.location.href="/member/joinForm";
-		window.close();
 	});
 });
 </script>
@@ -51,10 +47,10 @@ $(function() {
 	<div class="col-md-4">
 	</div>
 		<div class="col-md-4">
-			<form role="form" action="/member/findIdRun" method="post" id="frmFindId">
+			<form role="form" action="/member/updatePw" method="post" id="frmUpdatePw">
 				<div class="form-group">
-					<span>이름을 입력해주세요</span><br>
-					<input type="text" class="form-control" id="username" name="username" placeholder="이름"/>
+					<span>아이디를 입력해주세요</span><br>
+					<input type="text" class="form-control" id="userid" name="userid" placeholder="아이디"/>
 				</div>
 				<div class="form-group">
 					<span>이메일을 입력해주세요</span><br>
@@ -62,7 +58,7 @@ $(function() {
 				</div>
 				<div class="form-group">
 					<span>인증번호를 입력해주세요</span><br>
-					<input type="text" class="form-control" id="cNumber" name="cNumber" placeholder="인증번호"/> <button id="btnFindId" type="button" class="btn btn-block btn-primary">아이디 확인</button>
+					<input type="text" class="form-control" id="cNumber" name="cNumber" placeholder="인증번호"/> <button id="btnUpdatePw" type="button" class="btn btn-block btn-primary">비밀번호 변경</button>
 				</div>
 				<span id="none" style="color: red;"></span><br>
 			</form>
