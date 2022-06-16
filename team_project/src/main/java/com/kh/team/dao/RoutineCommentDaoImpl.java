@@ -50,4 +50,13 @@ public class RoutineCommentDaoImpl implements RoutineCommentDao{
 		return false;
 	}
 
+	@Override
+	public boolean deleteRoutineCommentAll(int uno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteRoutineCommentAll", uno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

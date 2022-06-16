@@ -28,7 +28,7 @@ $(function() {
 	
 	$("#btnComment").click(function() {
 		var urc_comment = $("#urc_comment").val();
-		var userid = $("#userid").val();
+		var userid = "${loginVo.userid}";
 		var uno = "${routineVo.uno}";
 		var u_pic = "${loginVo.u_pic}";
 		var url = "/routine/addRoutineComment";
@@ -67,12 +67,14 @@ $(function() {
 				cmt +=this.userid + "</p>";
 				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 100%'>"
 							+ this.urc_comment + "</textarea>";
-				cmt += "<button type='button' class='btnModify btn btn-outline-warning' data-urcno=" + this.urcno +
-							" style='width: 80px; height:50px; padding: 1% 0'>수정</button>";
-				cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-urcno=" + this.urcno + 
-						 " style='display: none; width: 80px; height:50px; padding: 1% 0'>수정완료</button>";
-						 cmt += "<button type='button' class='btnDelete btn btn-outline-danger' data-urcno=" + this.urcno +
-						 " style='width: 80px; height:50px; padding: 1% 0'>삭제</button>";
+				if(this.userid == "${loginVo.userid}") {
+					cmt += "<button type='button' class='btnModify btn btn-outline-warning' data-urcno=" + this.urcno +
+								" style='width: 80px; height:50px; padding: 1% 0'>수정</button>";
+					cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-urcno=" + this.urcno + 
+							 " style='display: none; width: 80px; height:50px; padding: 1% 0'>수정완료</button>";
+							 cmt += "<button type='button' class='btnDelete btn btn-outline-danger' data-urcno=" + this.urcno +
+							 " style='width: 80px; height:50px; padding: 1% 0'>삭제</button>";
+				}
 				cmt += "<hr>";
 				cmt += "</div>";
 				$("#comment").append(cmt);
@@ -119,7 +121,50 @@ $(function() {
 			}
 		});
 	});
-});
+	
+	var like_cnt = ${like_cnt};
+	console.log(like_cnt);
+	var span = $("#span_like");
+	
+	if (like_cnt > 0){
+		// 좋아요 1 이상인 경우
+		$("i.fa-heart").css("color", "red");
+	} else {
+		$("i.fa-heart").css("color", "graytext");
+	}
+	
+	var is_like;
+	
+	$("i.fa-heart").click(function() {
+		var like = $(this);
+		var url = "/routine/updateLike";
+		var sendData = {
+				"uno" : "${ routineVo.uno }",
+				"userid" : "${ loginVo.userid }",
+				"ur_like" : parseInt(span.text()),
+				"like_cnt" : like_cnt
+		}
+		$.post(url, sendData, function(receivedData) {
+			console.log("receivedData: ", receivedData);
+			if(receivedData == 1) {
+				like.css("color", "red");
+		 		span.text(parseInt(span.text().trim()) + 1);
+		 		like_cnt = receivedData;
+			} else {					
+				like.css("color", "graytext");
+			 	span.text(parseInt(span.text().trim()) - 1);
+			 	like_cnt = receivedData;
+			}
+		});
+	});
+	
+	function adjustHeight() {
+		var textEle = $('textarea');
+		textEle[0].style.height = 'auto';
+		var textEleHeight = textEle.prop('scrollHeight');
+		textEle.css('height', textEleHeight);
+		}
+	});
 </script>
 
 <div class="container-fluid">
@@ -136,11 +181,15 @@ $(function() {
 				<hr>
 			</div>
 			<div>
-				<i class="fa-solid fa-heart" style="color: red; font-size: 25px;" >좋아요</i>
-				<a href="/routine/modifyRoutineForm?uno=${ routineVo.uno }" class="btn btn-warning"
+				<i class="fa-solid fa-heart" style="color: red; font-size: 25px;" ></i><span id="span_like">${ routineVo.ur_like }</span> &nbsp;
+				<c:if test="${ routineVo.userid == loginVo.userid }">
+				<a href="/routine/modifyRoutineForm?uno=${ routineVo.uno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-warning"
 					style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
-				<a href="/routine/modifyRoutineForm?uno=${ routineVourno }" class="btn btn-danger"
+				<a href="/routine/removeRoutineRun?uno=${ routineVo.uno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-danger"
 					style="width: 60px; height:40px; padding: 0.7% 0">삭제</a>
+				</c:if>
+				<a href="/routine/routineList?page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-outline-primary"
+					style="width: 60px; height:40px; padding: 0.7% 0">목록</a>
 			</div>
 		</div>
 		<div class="col-md-2"></div>
@@ -149,20 +198,16 @@ $(function() {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<hr>
-			<div class="row" style="margin-top: 20px;">
-				<div class="col-md-9">
-					<input type="text" placeholder="댓글 입력" id="urc_comment" class="form-control">
-				</div>
-				<div class="col-md-2">
-					<input type="text" placeholder="userid" id="userid" class="form-control">
-				</div>
-				<div class="col-md-1">
-					<button type="button" id="btnComment" class="btn btn-primary"
-						style="width: 80px; height:50px; padding: 1% 0">댓글달기</button>
-				</div>
+			<div class="col" style="margin-top: 20px;">
+			<div>
+				<textarea onkeyup="adjustHeight();" rows="4"
+				id="urc_comment" style="width: 100%; resize: none;" placeholder="댓글 입력"></textarea>
+				<button type="button" id="btnComment" class="btn btn-primary"
+					style="width: 80px; height: 50px; padding: 1% 0; float: right; margin-top: 5px;">댓글달기</button>
+			</div>
 			</div>
 
-			<div class="row" style="margin-top: 20px; margin-left: 3px;" id="comment">
+			<div class="row" style="margin-top: 25px; margin-left: 3px;" id="comment">
 			</div>
 			<br>
 			<br>

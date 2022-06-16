@@ -9,4 +9,5 @@ public interface RoutineCommentDao {
 	public List<RoutineCommentVo> commentRoutineList(int uno);
 	public boolean updateRoutineComment(RoutineCommentVo routineCommentVo);
 	public boolean deleteRoutineComment(int urcno);
+	public boolean deleteRoutineCommentAll(int uno);
 }

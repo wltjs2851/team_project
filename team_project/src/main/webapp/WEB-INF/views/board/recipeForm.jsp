@@ -166,7 +166,6 @@ $(function() {
 		var sendData = {
 				"rno" : "${ recipeVo.rno }",
 				"userid" : "${ loginVo.userid }",
-				"rlno" : "${ recipeVo.rlno }",
 				"r_like" : parseInt(span.text()),
 				"like_cnt" : like_cnt
 		}
@@ -216,15 +215,16 @@ $(function() {
 		<div class="col-md-8">
 			<hr>
 			<div class="row" style="margin-top: 20px;">
-				<div class="col-md-9">
+				<div class="col-md-10">
 					<input type="text" placeholder="댓글 입력" id="rc_comment" class="form-control">
-				</div>
-				<div class="col-md-2">
-					<input type="text" placeholder="userid" id="userid" class="form-control">
+					<input type="hidden"id="userid" value="${ loginVo.userid }">
 				</div>
 				<div class="col-md-1">
 					<button type="button" id="btnComment" class="btn btn-primary"
 						style="width: 80px; height:50px; padding: 1% 0">댓글달기</button>
+				</div>
+				<div class="col-md-1">
+					
 				</div>
 
 				<div class="row" style="margin-top: 20px; margin-left: 20px;" id="comment">

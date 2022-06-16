@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeVo;
 import com.kh.team.vo.RoutineVo;
 
@@ -29,8 +30,8 @@ public class RoutineDaoImpl implements RoutineDao{
 	}
 
 	@Override
-	public List<RoutineVo> selectRoutine() {
-		List<RoutineVo> list = sqlSession.selectList(NAMESPACE + "selectRoutine");
+	public List<RoutineVo> selectRoutine(PagingDto pagingDto) {
+		List<RoutineVo> list = sqlSession.selectList(NAMESPACE + "selectRoutine", pagingDto);
 		return list;
 	}
 
@@ -59,16 +60,67 @@ public class RoutineDaoImpl implements RoutineDao{
 	}
 
 	@Override
-	public void updateViewcnt(int uno, int u_viewcnt) {
+	public void updateViewcnt(int uno, int ur_viewcnt) {
 		Map<String, Integer> parameter = new HashMap<String, Integer>();
 		parameter.put("uno", uno);
-		parameter.put("u_viewcnt", u_viewcnt);
-		sqlSession.update(NAMESPACE + "updateRecipe", parameter);
+		parameter.put("ur_viewcnt", ur_viewcnt);
+		sqlSession.update(NAMESPACE + "updateViewcnt", parameter);
 	}
 
 	@Override
 	public List<RoutineVo> selectByViewCnt() {
 		List<RoutineVo> list = sqlSession.selectList(NAMESPACE + "selectByViewCnt");
 		return list;
+	}
+
+	@Override
+	public boolean insertLike(int uno, String userid) {
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("uno", uno);
+		parameter.put("userid", userid);
+		int count = sqlSession.insert(NAMESPACE + "insertLike", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteLike(int uno, String userid) {
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("uno", uno);
+		parameter.put("userid", userid);
+		int count = sqlSession.delete(NAMESPACE + "deleteLike", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int countLike(int uno, String userid) {
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("uno", uno);
+		parameter.put("userid", userid);
+		int count = sqlSession.selectOne(NAMESPACE + "countLike", parameter);
+		return count;
+	}
+
+	@Override
+	public boolean updateLikecnt(int uno, int ur_like) {
+		Map<String, Integer> parameter = new HashMap<>();
+		parameter.put("uno", uno);
+		parameter.put("ur_like", ur_like);
+		int count = sqlSession.update(NAMESPACE + "updateLikecnt", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int getCount(PagingDto pagingDto) {
+		int count = sqlSession.selectOne(NAMESPACE + "getCount", pagingDto);
+		return count;
 	}
 }
