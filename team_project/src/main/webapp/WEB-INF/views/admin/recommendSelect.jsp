@@ -240,15 +240,17 @@ $(document).ready(function() {
 <!-- 					<a class="btn btn-outline-dark heart">좋아요</a> -->
 					<span style="font-size: 20px;">${recommendVo.re_like}</span>
 				</div>
-
-				<button type="button" class="btn btn-primary"
-					id="btnUpdateRecommend">수정</button>
-				<button type="submit" class="btn btn-success"
-					id="btnUpdateRunRecommend" style="display: none;">수정완료</button>
-				<a type="button" class="btn btn-danger"
-					href="/admin/deleteRecommend?reno=${recommendVo.reno}">삭제</a>
-			</form>
-
+				
+			<c:choose>
+				<c:when test="${loginVo.userid == 'admin01'}">
+					<button type="button" class="btn btn-primary"
+						id="btnUpdateRecommend">수정</button>
+					<button type="submit" class="btn btn-success"
+						id="btnUpdateRunRecommend" style="display: none;">수정완료</button>
+					<a type="button" class="btn btn-danger"
+						href="/admin/deleteRecommend?reno=${recommendVo.reno}">삭제</a>
+				</c:when>
+			</c:choose>	
 			<!-- 		댓글달기 -->
 			<div class="row">
 				<div class="col-md-10">

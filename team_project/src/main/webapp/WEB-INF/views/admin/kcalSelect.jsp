@@ -190,9 +190,13 @@ th:first-child, td:first-child {
 							<h6>효과 및 참고 사항</h6>
 							<p>: ${kcalVo.k_notes}</p>
 						</div>
+						<c:choose>
+						<c:when test="${loginVo.userid == 'admin01'}">
 						<a class="btn btn-sm btn-success" href="/admin/kcalUpdateForm?kno=${kcalVo.kno }">수정</a>
 						<a class="btn btn-danger" href="/admin/deleteKcal?kno=${kcalVo.kno}"
 						id="btnDeleteKcal">삭제</a>
+						</c:when>
+						</c:choose>
 					</article>
 <!-- 					검색했을 경우 검색 목록 -->
 				<c:choose>
