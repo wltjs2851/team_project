@@ -5,10 +5,20 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 <script>
+$(function(){
 	var modifyResult = "${modifyResult}";
 	if (modifyResult == "true") {
 		alert("회원정보 수정 완료");
 	}
+	
+	$("#chatRoom").click(function(e){
+		e.preventDefault();
+		console.log("채팅방 입장");	
+		var url = "/chat/chat";
+		var option = "width = 650px, height=800px, top=300px, left=300px, scrollbars=yes";
+		window.open(url, "그룹 채팅방 입장", option);
+	});
+});	
 </script>
 <div class="row">
 	<div class="col-md-2">
@@ -30,6 +40,9 @@
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="deleteForm">회원탈퇴</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="chatRoom" style="cursor: pointer;">채팅방</a>
 			</li>
 		</ul>
 	</div>
