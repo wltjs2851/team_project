@@ -45,8 +45,10 @@
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<beans:property name="host" value="smtp.gmail.com" />
 		<beans:property name="port" value="587" /><!-- 465 or 25 -->
-		<beans:property name="username" value="undongproject@gmail.com" />
-		<beans:property name="password" value="uyjufozwlbzbnlei" />
+		<beans:property name="username"
+			value="undongproject@gmail.com" />
+		<beans:property name="password"
+			value="uyjufozwlbzbnlei" />
 		<beans:property name="defaultEncoding" value="utf-8" />
 		<beans:property name="javaMailProperties">
 			<beans:props>
@@ -59,5 +61,10 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-
+	
+<!-- 	소켓 -->
+	<websocket:handlers>
+		<websocket:mapping handler="chatHandler"
+			path="/chat-ws" />
+	</websocket:handlers>
 </beans:beans>

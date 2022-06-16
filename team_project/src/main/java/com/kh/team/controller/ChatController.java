@@ -10,6 +10,6 @@ public class ChatController {
 	
 	@RequestMapping(value = "/chat", method = RequestMethod.GET)
 	public String chat () {
-		return "/chat/chat-ws";
+		return "/chat/chat2";
 	}
 }
