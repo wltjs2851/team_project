@@ -9,7 +9,11 @@
 	</insert>
 	
 	<select id="selectRoutine" resultType="RoutineVo">
-		select * from tbl_userroutine order by uno desc
+		select * from (select rownum rnum, a.* from 
+			(select * from tbl_userroutine
+			<include refid="search"/>
+			order by uno desc) a) 
+		where rnum between #{startRow} and #{endRow}
 	</select>
 	
 	<select id="selectByViewCnt" resultType="RoutineVo">
@@ -25,7 +29,7 @@
 	</update>
 	
 	<delete id="deleteRoutine">
-		delete from tbl_userroutine where uno = #uno}
+		delete from tbl_userroutine where uno = #{uno}
 	</delete>
 	
 	<select id="contentByUno" resultType="RoutineVo">
@@ -36,5 +40,43 @@
 		update tbl_userroutine set ur_viewcnt = #{ur_viewcnt} + 1
 			where uno = #{uno}
 	</update>
-
+	
+	<insert id="insertLike">
+		insert into tbl_routine_like(urlno, uno, userid)
+			values(seq_routine_urlno.nextval, #{uno}, #{userid})
+	</insert>
+	
+	<delete id="deleteLike">
+		delete from tbl_routine_like where uno = #{uno} and userid = #{userid}
+	</delete>
+	
+	<select id="countLike" resultType="int">
+		select count(*) from tbl_routine_like where uno = #{uno} and userid = #{userid}
+	</select>
+	
+	<update id="updateLikecnt">
+		update tbl_userroutine set ur_like = #{ur_like} where uno = #{uno}
+	</update>
+	
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_userroutine<include refid="search"/>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null and keyword != null">
+				<choose>
+					<when test='searchType == "t"'>where ur_title like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "c"'>where ur_content like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "w"'>where userid like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "tc"'>
+					where ur_title like '%' || #{keyword} || '%'
+					or ur_content like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "tcw"'>
+					where ur_title like '%' || #{keyword} || '%'
+					or ur_content like '%' || #{keyword} || '%'
+					or userid like '%' || #{keyword} || '%'
+					</when>
+				</choose>
+			</if>
+	</sql>
 </mapper>
