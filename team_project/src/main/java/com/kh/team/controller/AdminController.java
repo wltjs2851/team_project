@@ -240,6 +240,14 @@ public class AdminController {
 		return heart;
 	}
 	
+	// 추천 운동 글 수정 form 
+	@RequestMapping(value = "/updateRecommendForm", method = RequestMethod.GET)
+	public String updateRecommendForm(Model model, int reno) {
+		RecommendVo recommendVo = recommendService.selectByReno(reno);
+		model.addAttribute("recommendVo", recommendVo);
+		return "admin/recommendUpdateForm";
+	}
+	
 	// 추천 운동 글 수정
 	@RequestMapping(value = "/updateRecommend", method = RequestMethod.POST)
 	public String updateRecommend(RecommendVo recommendVo, RedirectAttributes rttr) {

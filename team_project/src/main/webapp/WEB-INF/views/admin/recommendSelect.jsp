@@ -10,13 +10,13 @@ $(document).ready(function() {
 	}
 
 	// 수정 버튼 클릭
-	$("#btnUpdateRecommend").click(function() {
-		$("*[readonly]").attr("readonly", false);
-		$(this).fadeOut("slow");
-		$("#btnUpdateRunRecommend").fadeIn("slow");
-		$("#fileRecommend").fadeIn("slow");
-		$("#fileLabel").fadeIn("slow");
-	});
+// 	$("#btnUpdateRecommend").click(function() {
+// 		$("*[readonly]").attr("readonly", false);
+// 		$(this).fadeOut("slow");
+// 		$("#btnUpdateRunRecommend").fadeIn("slow");
+// 		$("#fileRecommend").fadeIn("slow");
+// 		$("#fileLabel").fadeIn("slow");
+// 	});
 	
 	// 좋아요
 	var heartval = ${heart};
@@ -240,17 +240,16 @@ $(document).ready(function() {
 <!-- 					<a class="btn btn-outline-dark heart">좋아요</a> -->
 					<span style="font-size: 20px;">${recommendVo.re_like}</span>
 				</div>
-				
+<!-- 			게시글 수정 -->
 			<c:choose>
 				<c:when test="${loginVo.userid == 'admin01'}">
-					<button type="button" class="btn btn-primary"
-						id="btnUpdateRecommend">수정</button>
-					<button type="submit" class="btn btn-success"
-						id="btnUpdateRunRecommend" style="display: none;">수정완료</button>
+					<a type="button" class="btn btn-primary" id="btnUpdateRecommend"
+						href="/admin/updateRecommendForm?reno=${recommendVo.reno }">수정</a>
 					<a type="button" class="btn btn-danger"
 						href="/admin/deleteRecommend?reno=${recommendVo.reno}">삭제</a>
 				</c:when>
 			</c:choose>	
+			
 			<!-- 		댓글달기 -->
 			<div class="row">
 				<div class="col-md-10">
