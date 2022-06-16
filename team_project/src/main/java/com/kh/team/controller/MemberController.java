@@ -1,6 +1,7 @@
 package com.kh.team.controller;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -34,11 +35,13 @@ public class MemberController {
 	@Autowired
 	private EmailService emailService;
 
+	// 로그인 폼으로 이동
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public String loginForm() {
 		return "/member/loginForm";
 	}
 	
+	// 로그인 실행
 	@RequestMapping(value = "/loginRun", method = RequestMethod.POST)
 	public String loginRun(String userid, String userpw, String saveid, HttpSession session, RedirectAttributes rttr, HttpServletResponse response) {
 		MemberVo memberVo = memberService.login(userid, userpw);
@@ -65,17 +68,20 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	// 세션에 저장된 로그인 정보 삭제
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
 	
+	// 가입폼으로 이동
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
 	public String joinForm() {
 		return "/member/joinForm";
 	}
 	
+	// 가입 실행
 	@RequestMapping(value = "/joinRun", method = RequestMethod.POST)
 	public String joinRun(MemberVo memberVo, MultipartFile file, RedirectAttributes rttr) {
 		String originalFilename = file.getOriginalFilename();
@@ -94,16 +100,19 @@ public class MemberController {
 		return "redirect:/member/loginForm";
 	}
 	
+	// 마이페이지로 이동
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String myPage() {
 		return "/member/myPage";
 	}
 	
+	// 마이 포인트로 이동
 	@RequestMapping(value = "/myPoint", method = RequestMethod.GET)
 	public String myPoint() {
 		return "/member/myPoint";
 	}
 	
+	// 프로필사진 출력
 	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)
 	@ResponseBody
 	public byte[] displayImage(String filename) throws Exception {
@@ -113,45 +122,45 @@ public class MemberController {
 		return data;
 	}
 	
+	// 마이페이지에서 수정폼으로
 	@RequestMapping(value = "/modifyForm", method = RequestMethod.GET)
 	public String modifyForm() {
 		return "/member/modifyForm";
 	}
 	
+	// 수정 실행
 	@RequestMapping(value = "/modifyRun", method = RequestMethod.POST)
 	@Transactional
-	public String modifyRun(MemberVo memberVo, MultipartFile file, RedirectAttributes rttr, HttpSession session, String prevImg) {
+	public String modifyRun(MemberVo memberVo, MultipartFile file, RedirectAttributes rttr, HttpSession session, String prevImg) throws Exception {
 		String originalFilename = file.getOriginalFilename();
 		System.out.println(prevImg);
 //		수정폼에서 프로필사진을 등록하였다면 프로필사진 변경
-		try {
-			if (originalFilename != null && !originalFilename.equals("")) {
-				String u_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
+		if (originalFilename != null && !originalFilename.equals("")) {
+			String u_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
+			memberVo.setU_pic(u_pic);
+//		그렇지 않다면 프로필사진 삭제
+		} else {
+			if (prevImg != null && !prevImg.equals("")) {
+				String userid = memberVo.getUserid();
+				String u_pic = memberService.getU_picById(userid);
 				memberVo.setU_pic(u_pic);
-//			그렇지 않다면 프로필사진 삭제
-			} else {
-				if (prevImg != null && !prevImg.equals("")) {
-					String userid = memberVo.getUserid();
-					String u_pic = memberService.getU_picById(userid);
-					memberVo.setU_pic(u_pic);
-				} else if (prevImg == null || prevImg.equals("")) {
-					memberVo.setU_pic(null);
-				}
+			} else if (prevImg == null || prevImg.equals("")) {
+				memberVo.setU_pic(null);
 			}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		}
 		boolean result = memberService.updateMember(memberVo);
 		rttr.addFlashAttribute("modifyResult", result);
 		session.setAttribute("loginVo", memberVo);
 		return "redirect:/member/myPage";
 	}
 	
+	// 회원탈퇴 폼으로 이동
 	@RequestMapping(value = "/deleteForm", method = RequestMethod.GET)
 	public String deleteForm() {
 		return "/member/deleteForm";
 	}
 	
+	// 회원탈퇴실행
 	@RequestMapping(value = "/deleteRun", method = RequestMethod.POST)
 	public String deleteRun(String userid, HttpSession session, HttpServletResponse response) {
 		memberService.deleteMember(userid);
@@ -163,6 +172,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	// 프로필사진 삭제
 	@RequestMapping(value = "/deleteFile", method = RequestMethod.GET)
 	@ResponseBody
 	public String deleteFile(String filename) {
@@ -170,6 +180,7 @@ public class MemberController {
 		return String.valueOf(result);
 	}
 	
+	// 아이디 중복 확인
 	@RequestMapping(value = "/isExist", method = RequestMethod.GET)
 	@ResponseBody
 	public String isExist(String userid) {
@@ -177,16 +188,19 @@ public class MemberController {
 		return String.valueOf(result);
 	}
 	
+	// 아이디 찾기 팝업 실행
 	@RequestMapping(value = "/findIdPop", method = RequestMethod.GET)
 	public String findIdPop() {
 		return "/member/findId";
 	}
 	
+	// 비밀번호 찾기 팝업 실행
 	@RequestMapping(value = "/findPwPop", method = RequestMethod.GET)
 	public String findPwPop() {
 		return "/member/findPw";
 	}
 	
+	// 아이디를 찾을때 이메일 전송
 	@RequestMapping(value = "/sendEmailByFindId", method = RequestMethod.POST)
 	@ResponseBody
 	public String sendEmailByFindId(String username, String email) {
@@ -209,6 +223,7 @@ public class MemberController {
 		}
 	}
 	
+	// 비밀번호를 찾을 때 이메일 전송
 	@RequestMapping(value = "/sendEmailByFindPw", method = RequestMethod.POST)
 	@ResponseBody
 	public String sendEmailByFindPw(String userid, String email) {
@@ -234,6 +249,7 @@ public class MemberController {
 		}
 	}
 	
+	// 아이디 찾기
 	@RequestMapping(value = "/findIdRun", method = RequestMethod.POST)
 	public String findIdRun(String username, String email, RedirectAttributes rttr, Model model) {
 		MemberVo memberVo = memberService.findId(username, email);
@@ -242,6 +258,7 @@ public class MemberController {
 		return "/member/findIdResult";
 	}
 	
+	// 비밀번호 변경
 	@RequestMapping(value = "/updatePw", method = RequestMethod.POST)
 	public String updatePw(String userid, String email, Model model, RedirectAttributes rttr) {
 		MemberVo memberVo = memberService.findPw(userid, email);
@@ -254,6 +271,7 @@ public class MemberController {
 		return "/member/updatePwForm";
 	}
 	
+	// 비밀번호 변경 실행
 	@RequestMapping(value = "/updatePwRun", method = RequestMethod.POST)
 	@ResponseBody
 	public String updatePwRun(String userpw, String userid) {

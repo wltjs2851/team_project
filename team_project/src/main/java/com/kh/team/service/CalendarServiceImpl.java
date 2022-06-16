@@ -30,5 +30,10 @@ public class CalendarServiceImpl implements CalendarServcie {
 		return calendarDao.getCalList(userid);
 	}
 
+	@Override
+	public boolean updateCheck(CalendarVo calendarVo) {
+		return calendarDao.updateCheck(calendarVo);
+	}
+
 	
 }
