@@ -35,17 +35,79 @@ $(function() {
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
+	
+	// 그룹 탈퇴 버튼
+	$("#leaveGroup").click(function() {
+		console.log("click");
+		$("#modal-734488").trigger("click");
+	});
+	
+	// 모달, 탈퇴 버튼
+	$("#leave").click(function() {
+		console.log("Click");
+		var userid = "${loginVo.userid}";
+		var gno = ${groupVo.gno};
+		var url = "/groupboard/leave/" + userid;
+		var sData = {
+				"gno" : gno
+		}
+		
+		$.get(url, sData, function(rData) {
+			console.log(rData);
+		});
+	});
 });
 </script>
 
 <%-- ${ groupList } --%>
 <%-- ${ noticeList } --%>
 ${ groupVo }
-<%-- ${ result } --%>
+<hr>
+${ loginVo }
 
 <%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %>
 
 <div class="container-fluid">
+
+
+<!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
+<div class="row">
+	<div class="col-md-12">
+		 <a id="modal-734488" href="#modal-container-734488" role="button" class="btn" data-toggle="modal" style="display:none;">Launch demo modal</a>
+		
+		<div class="modal fade" id="modal-container-734488" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="myModalLabel">
+							그룹 탈퇴
+						</h5> 
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						정말로 탈퇴하시겠습니까?
+					</div>
+					<div class="modal-footer">
+						 
+						<button id="leave" type="button" class="btn btn-primary">
+							탈퇴
+						</button> 
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">
+							취소
+						</button>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+
+
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
@@ -96,7 +158,7 @@ ${ groupVo }
 							<i class='far fa-heart'></i> ${ groupBoardVo.gb_like }
 						</div>
 						
-						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">...더 보기</a>
+						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }">...더 보기</a>
 						<p>
 <%-- 							<a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a> --%>
 <%-- 							<a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a> --%>
@@ -153,7 +215,7 @@ ${ groupVo }
 						</div>	
 						
 						
-							<a href="/groupboard/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+							<a href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>
@@ -167,7 +229,7 @@ ${ groupVo }
 								<a href="/groupboard/activityInfo/${ groupVo.gno }">활동 정보</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="">그룹 탈퇴</a>
+								<a href="#" id="leaveGroup">그룹 탈퇴</a>
 							</li>
 						</ol>
 					</nav>

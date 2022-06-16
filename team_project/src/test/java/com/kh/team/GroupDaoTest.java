@@ -57,9 +57,9 @@ public class GroupDaoTest {
 	
 	@Test
 	public void testGroupJoinService() {
-		GroupVo groupVo = new GroupVo(1, 1);
-		boolean result = groupService.joinGroup(groupVo, "hong1234");
+		boolean result = groupService.joinGroup(1, "hong1234");
 		System.out.println("result: " + result);
 	}
+	
 	
 }

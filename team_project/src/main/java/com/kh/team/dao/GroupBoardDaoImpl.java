@@ -90,11 +90,7 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		return groupJoinList;
 	}
 
-	@Override
-	public List<GroupJoinVo> list(int gno) {
-		List<GroupJoinVo> groupJoinMember = sqlSession.selectList(NAMESPACE + "getGroupMember", gno);
-		return groupJoinMember;
-	}
+	
 
 	@Override
 	public boolean deleteMember(String userid, int gno) {
@@ -110,12 +106,8 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public boolean updateCtnMember(int gno) {
-		int count = sqlSession.update(NAMESPACE + "updateCntMember", gno);
-		if(count > 0) {
-			return true;
-		}
-		return false;
+	public void updateCtnMember(int gno) {
+		sqlSession.update(NAMESPACE + "updateCntMember", gno);
 	}
 
 }

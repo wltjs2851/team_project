@@ -95,24 +95,20 @@
 	where userid = #{userid})
 </select>
 
-<!-- 그룹별 멤버 가져오기 -->
-<select id="getGroupMember" resultType="GroupJoinVo">
-	select userid from tbl_group_join
-	where gno = #{gno}
-</select>
+
 
 <!-- 그룹에서 멤버 강퇴 -->
-<delete id="deleteMember">
-	delete from tbl_group_join
-	where userid = #{userid} and gno = #{gno}
-</delete>
+<!-- <delete id="deleteMember"> -->
+<!-- 	delete from tbl_group_join -->
+<!-- 	where userid = #{userid} and gno = #{gno} -->
+<!-- </delete> -->
 
 <!-- 그룹 인원 수 업데이트 -->
-<update id="updateCntMember">
-	update tbl_group set
-		g_present = g_present - 1
-	where gno = #{gno}
-</update>
+<!-- <update id="updateCntMember"> -->
+<!-- 	update tbl_group set -->
+<!-- 		g_present = g_present - 1 -->
+<!-- 	where gno = #{gno} -->
+<!-- </update> -->
 
 <!-- 검색 조건(참조용) -->
  <sql id="search">

@@ -5,15 +5,15 @@
 
 
 <%-- ${ loginVo.gno } --%>
-<%-- ${ loginVo } --%>
-${ groupVo }
+${ loginVo }
+<%-- ${ groupVo } --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 		
 			<form role="form" name="frmWrite" action="/groupboard/groupWriteRun" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="gno" value="${ groupVo.gno }">]
-<%-- 				<input type="hidden" name="userid" value="${ loginVo.userid }"> --%>
+				<input type="hidden" name="gno" value="${ groupVo.gno }">
+				<input type="hidden" name="userid" value="${ loginVo.userid }">
 				
 				<div class="form-group">
 					 
@@ -25,11 +25,11 @@ ${ groupVo }
 					<label for="gb_content">내용</label>
 					<input type="text" class="form-control" name="gb_content" id="gb_content" required />
 				</div>
-				<div class="form-group">
+<!-- 				<div class="form-group"> -->
 					 
-					<label for="userid">아이디</label>
-					<input type="text" class="form-control" name="userid" id="userid" />
-				</div>
+<!-- 					<label for="userid">아이디</label> -->
+<!-- 					<input type="text" class="form-control" name="userid" id="userid" /> -->
+<!-- 				</div> -->
 				<div class="form-group">
 					 
 					<label for="file">사진 추가</label>

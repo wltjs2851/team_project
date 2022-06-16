@@ -10,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.team.service.GroupService;
 import com.kh.team.service.MemberService;
 import com.kh.team.util.FileUtil;
+import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
 
@@ -117,11 +119,25 @@ public class GroupController {
 		String userid = memberVo.getUserid();
 		System.out.println("userid: " + userid);
 		System.out.println("groupVo: " + groupVo);
-		boolean result = groupService.joinGroup(groupVo, userid);
+		boolean result = groupService.joinGroup(groupVo.getGno(), userid);
 		rttr.addFlashAttribute("joinResult", result);
 		return "redirect:/group/groupList";
 	}
 
+	@RequestMapping(value = "/deleteMember/{userid}/{gno}", method = RequestMethod.GET)
+	@ResponseBody
+	public String deleteMember( 
+			@PathVariable("userid") String userid, 
+			@PathVariable("gno") int gno) {
+//		System.out.println("deleteMember, gno: " + gno);
+		System.out.println("deleteMember, gno: " + gno);
+		
+		boolean result = groupService.banGroup(gno, userid);
+//		rttr.addFlashAttribute("delete_member", result);
+		
+		return String.valueOf(result);
+	}
+	
 	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)
 	@ResponseBody
 	public byte[] displayImage(String filename) throws Exception {
@@ -130,5 +146,16 @@ public class GroupController {
 		byte[] data = IOUtils.toByteArray(fis);
 		fis.close();
 		return data;
+	}
+	
+	@RequestMapping(value = "groupInfo", method = RequestMethod.GET)
+	public String groupInfo(Model model, int gno) {
+		GroupVo groupVo = groupService.groupByGno(gno);
+		model.addAttribute("groupVo", groupVo);
+		
+		List<GroupJoinVo> groupJoinMember = groupService.list(gno);
+		model.addAttribute("groupJoinMember", groupJoinMember);
+		
+		return "groupboard/groupInfo";
 	}
 }

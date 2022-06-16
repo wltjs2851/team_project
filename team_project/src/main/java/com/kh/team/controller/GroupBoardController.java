@@ -92,13 +92,18 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupRead", method = RequestMethod.GET)
-	public String read(int gbno, Model model, HttpServletRequest httpRequest) throws Exception {
+	public String read(int gno, int gbno, Model model, HttpServletRequest httpRequest) throws Exception {
 		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
 		model.addAttribute("groupBoardVo", groupBoardVo);
 		
 		int count = groupBoardService.countComment(gbno);
 		System.out.println("count: " + count);
 		model.addAttribute("count", count);
+		
+		// 그룹 정보
+		GroupVo groupVo = groupService.groupByGno(gno);
+		model.addAttribute("groupVo", groupVo);
+		System.out.println("groupRead, gno: " + gno);
 
 		// 로그인 한 경우에만 접근 가능
 		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
@@ -184,7 +189,7 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupMain/{gno}", method = RequestMethod.GET)
-	public String main(Model model, String gb_notice, @PathVariable("gno") int gno, SearchDto searchDto) {
+	public String main(HttpSession session, Model model, String gb_notice, @PathVariable("gno") int gno, SearchDto searchDto) {
 		searchDto.setGno(gno);
 		List<GroupBoardVo> groupList = groupBoardService.list(searchDto);
 		model.addAttribute("groupList", groupList);
@@ -198,6 +203,10 @@ public class GroupBoardController {
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);
 		
+		// 시영 테스트
+		session.setAttribute("groupVo", groupVo);
+		
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		
 		return "groupboard/groupMain";
 	}
@@ -211,16 +220,7 @@ public class GroupBoardController {
 		return data;
 	}
 	
-	@RequestMapping(value = "groupInfo", method = RequestMethod.GET)
-	public String groupInfo(Model model, int gno) {
-		GroupVo groupVo = groupService.groupByGno(gno);
-		model.addAttribute("groupVo", groupVo);
-		
-		List<GroupJoinVo> groupJoinMember = groupBoardService.list(gno);
-		model.addAttribute("groupJoinMember", groupJoinMember);
-		
-		return "groupboard/groupInfo";
-	}
+	
 	
 	@RequestMapping(value = "like", method = RequestMethod.POST)
 	public String like() {
@@ -287,10 +287,14 @@ public class GroupBoardController {
 		return "groupboard/myGroupList";
 	}
 	
-	@RequestMapping(value = "deleteMember/{userid}", method = RequestMethod.GET)
-	public String deleteMember(int gno, @PathVariable("userid") String userid, RedirectAttributes rttr) {
+	
+	@RequestMapping(value = "leave/{userid}", method = RequestMethod.GET)
+	public String leaveGroup(@PathVariable("userid") String userid, int gno, RedirectAttributes rttr) {
 		boolean result = groupBoardService.deleteMember(userid, gno);
-		rttr.addFlashAttribute("delete_member", result);
-		return String.valueOf(result);
+		rttr.addFlashAttribute("leave_group", result);
+		
+		groupBoardService.updateCtnMember(gno);
+		
+		return "redirect:/";
 	}
 }
