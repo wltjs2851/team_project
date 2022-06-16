@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/WEB-INF/views/include/header.jsp"%>
 <script>
 	$(document).ready(function() {
@@ -17,12 +18,6 @@
 			$("#fileKcal").fadeIn("slow");
 			$("#btnUpdateRunKcal").fadeIn("slow");
 		});
-
-		// 삭제버튼
-		// 	$("#btnDeleteKcal").click(function(e){
-		// 		e.preventDefault();
-		// 		console.log("삭제버튼누름");
-		// 	});
 
 		// 칼로리 계산기
 		$("#time").on("input", function() {
@@ -49,9 +44,34 @@
 			frmPaging.attr("method", "get");
 			frmPaging.submit();
 		});
+		
+		// 검색해서 들어간 상세 페이지 일 시
+		// 운동 칼로리 제목 클릭 시 내용보기
+		$(".td_list").click(function(){
+			console.log("kcal 게시글에서 검색 목록 클릭");
+			var kno = $(this).attr("data-kno");
+//	 		location.href = "/admin/selectByKno?kno=" + kno;
+			frmPaging.find("input[name=kno]").val(kno);
+			frmPaging.attr("action", "/admin/selectByKno");
+			frmPaging.attr("method", "get");
+			frmPaging.submit();
+		});
+		
+		// 검색 후 페이지 조회 -> 검색 글과 조회 글 표시
+		// 현재 글 번호 
+		var nowKno = "${kcalVo.kno}";
+		console.log(nowKno);
+		
+		// 해당 data-kno 를 가진 tr 구하기
+		$(".tr_list").find("td[data-kno=" + nowKno +"]").parent().css("background-color", "aliceblue");
+		
 	});
 </script>
 <style>
+tr.tr_list{
+	cursor: pointer;
+}
+
 table {
 	border-collapse: collapse;
 	border-top: 1px solid #444444;
@@ -104,6 +124,7 @@ th:first-child, td:first-child {
 </form>
 <%-- ${kcalVo } --%>
 <%-- ${pagingDto } --%>
+<%-- ${listKcal } --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -173,10 +194,27 @@ th:first-child, td:first-child {
 						<a class="btn btn-danger" href="/admin/deleteKcal?kno=${kcalVo.kno}"
 						id="btnDeleteKcal">삭제</a>
 					</article>
+<!-- 					검색했을 경우 검색 목록 -->
+				<c:choose>
+				<c:when test="${not empty pagingDto.keyword}">
 					<article>
-					검색 목록
-					${listKcal }
+					<div> " ${pagingDto.keyword } " 검색 결과</div>
+					<table class="table">
+						<tbody>
+						<c:forEach items="${listKcal}" var="kcalVo">
+							<tr class="tr_list" >
+								<td class="td_kno">${kcalVo.kno}</td>
+								<td data-kno="${kcalVo.kno}" class="td_list">${kcalVo.k_name}</td>
+								<td>${kcalVo.k_time}분</td>
+								<td>${kcalVo.kcal}kcal</td>
+								<td>${kcalVo.k_dgree}</td>
+							</tr>
+						</c:forEach>
+						</tbody>
+					</table>
 					</article>
+				</c:when>
+				</c:choose>
 				</div>
 			</form>
 		</div>

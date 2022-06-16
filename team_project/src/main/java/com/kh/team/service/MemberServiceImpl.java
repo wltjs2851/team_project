@@ -59,4 +59,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.findId(username, email);
 	}
 
+	@Override
+	public MemberVo findPw(String userid, String email) {
+		return memberDao.findPw(userid, email);
+	}
+
+	@Override
+	public boolean updatePw(String userid, String userpw) {
+		return memberDao.updatePw(userid, userpw);
+	}
+
 }
