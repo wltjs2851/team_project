@@ -11,10 +11,6 @@ tr.tr_list:hover{
 	background-color: #CEECF5;
 }
 
-/* p > img { */
-/* 	display: none; */
-/* } */
-
 p > br {
 	display: none;
 }

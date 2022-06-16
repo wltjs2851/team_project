@@ -93,6 +93,7 @@ public class AdminController {
 		pagingDto.setCount(kcalService.getCountKcal(pagingDto));
 		pagingDto.setPage(pagingDto.getPage());
 		List<KcalVo> listKcal = kcalService.listKcal(pagingDto);
+//		pagingDto.setCount(kcalService.getCountKcal(pagingDto));
 //		System.out.println("listKcal:" + listKcal);
 		
 		model.addAttribute("listKcal", listKcal);

@@ -29,7 +29,8 @@
 		var websocket;
 		//입장 버튼을 눌렀을 때 호출되는 함수
 		function connect() {
-			websocket = new WebSocket("ws://localhost/chat-ws");
+			websocket = new WebSocket("ws://192.168.0.95/chat-ws");
+			console.log(websocket);
 			//웹 소켓에 이벤트가 발생했을 때 호출될 함수 등록
 			websocket.onopen = onOpen;
 			websocket.onmessage = onMessage;
@@ -45,6 +46,7 @@
 			msg = document.getElementById("nickname").value;
 			websocket.send(msg + "님이 퇴장하셨습니다");
 			websocket.close();
+			window.close();
 		}
 		//보내기 버튼을 눌렀을 때 호출될 함수
 		function send() {
@@ -72,6 +74,7 @@
 	});
 </script>
 <%-- ${nickname } --%>
+<%-- ${gno } --%>
 <body>
 	<h1>(그룹명) 채팅 방</h1>
 	<div id="beforeEnter">
