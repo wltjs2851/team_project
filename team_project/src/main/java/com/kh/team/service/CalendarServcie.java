@@ -11,4 +11,6 @@ public interface CalendarServcie {
 	public boolean insertCal(CalendarVo calendarVo);
 	
 	public List<CalendarVo> getCalList(String userid);
+	
+	public boolean updateCheck(CalendarVo calendarVo);
 }

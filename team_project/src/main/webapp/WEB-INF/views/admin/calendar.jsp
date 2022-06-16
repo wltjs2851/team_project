@@ -18,31 +18,35 @@
 		var thisDate = new Date().getDate();
 		var thisToday = thisYear + '_' + thisMonth + '_' + thisDate;
 		var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
+		var selectDate = thisToday;
+		var that = divToday;
+		$("#main-day").html(thisToday.substring(0, 4) + "년 " + thisToday.substring(5, 6) + "월 " + thisToday.substring(7) + "일");
 		divToday.attr("style", "background: #FFEBEE;");
 		$(".dateBoard").on("click", ".divDate", function() {
-			var that = $(this);
-			var insertContent = prompt("일정을 입력해주세요.");
-			var selectDate = $(this).attr("data-today");
+			that = $(this);
+			var thatSpan = that.find("span").attr("data-check");
+			selectDate = $(this).attr("data-today");
+			var myDate = selectDate.substring(0, 4) + "년 " + selectDate.substring(5, 6) + "월 " + selectDate.substring(7) + "일";
 			var userid = "${loginVo.userid}";
-			console.log(selectDate);
-			console.log(insertContent);
-			console.log(userid);
-			var url = "/calendar/save";
-			var sData = {
-				'userid' : userid,
-				'content' : insertContent,
-				'start1' : selectDate
-			};
-			if (insertContent != null && insertContent != "") {
-				$.post(url, sData, function(rData) {
-					console.log(rData);
-					if(rData == "true"){
-						that.append("<br><span>" + insertContent + "</span>");
-// 						getCalendarList();
+			$("#main-day").html(myDate);
+			$(".todo-content").html("");
+			$.each(jsonCal, function() {
+				if (this.start1 == that.attr("data-today")) {
+					if (this.checklist == 'true') {
+						if (thatSpan == "false") {
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
+						} else {
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
+						}
+					} else {
+						if (thatSpan == "true") {
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
+						} else {
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
+						}
 					}
-				});
-// 				getCalendarList();
-			}
+				}
+			});
 		});
 		function getCalendarList() {
 			var divDate = $(".dateBoard .divDate[data-today]");
@@ -50,9 +54,8 @@
 				var data = this.dataset.today;
 				var thisDiv = this;
 				$.each(jsonCal, function() {
-					console.log("this:", this);
 					if (this.start1 == data) {
-						$(thisDiv).append("<br><span>" + this.content + "</span>");
+						$(thisDiv).append("<br><span data-check='" + this.checklist + "'>" + this.content + "</span>");
 					}
 				});
 			});
@@ -67,9 +70,7 @@
 			};
 			console.log(sData);
 			$.get('/calendar/cal3', sData, function(rdata) {
-				console.log(rdata, "rData");
 				jsonCal = rdata;
-				console.log(jsonCal, "jsonCal");
 				makeCalendar(prevDay);
 				getCalendarList();
 			});
@@ -86,22 +87,69 @@
 			};
 			console.log(sData);
 			$.get('/calendar/cal3', sData, function(rdata) {
-				console.log(rdata, "rData");
 				jsonCal = rdata;
-				console.log(jsonCal, "jsonCal");
 				makeCalendar(nextDay);
 				getCalendarList();
 			});
 			
 		});
 		getCalendarList();
+		$("#input-data").click(function() {
+			var insertContent = $("#input-box").val();
+			var url = "/calendar/save";
+			var userid = "${loginVo.userid}";
+			var sData = {
+				'userid' : userid,
+				'content' : insertContent,
+				'start1' : selectDate
+			};
+			if (insertContent != null && insertContent != "") {
+				$.post(url, sData, function(rData) {
+					console.log(rData);
+					if(rData == "true"){
+						that.append("<br><span>" + insertContent + "</span>");
+						$(".todo-content").append("<br><input class='checkList' data-today='" + selectDate + "' type='checkbox'><label>" + insertContent + "</label>");
+						$("#input-box").val("");
+					}
+				});
+				getCalendarList();
+			}
+		});
+		$("#update-check").click(function() {
+// 			var insertContent = $("todo-content").text();
+			var insertContent = $(".checkList").next("label").text();
+			var url = "/calendar/update";
+			var userid = "${loginVo.userid}";
+			var checklist = $(".checkList").prop("checked");
+			var sData = {
+				'userid' : userid,
+				'content' : insertContent,
+				'start1' : selectDate,
+				'checklist' : checklist
+			};
+			if (insertContent != null && insertContent != "") {
+				$.post(url, sData, function(rData) {
+					if(rData == "true"){
+// 						that.append("<br><span>" + insertContent + "</span>");
+// 						$(".todo-content").append("<br><input class='checkList' data-today='" + selectDate + "' type='checkbox'>" + insertContent);
+						$("#input-box").val("");
+						// 클릭했던 날짜부분의 check->true
+						that.children("span").attr("data-check", "true");
+					} else if (rData == "false") {
+						$("#input-box").val("");
+						that.children("span").attr("data-check", "false");
+					}
+				});
+// 				getCalendarList();
+			}
+		});
 	});
 </script>
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-8">
+			<div class="col-md-4">
 				<div class='rap left'>
 					<div class="header">
 						<div id="prevMonth">
@@ -124,17 +172,20 @@
 					</div>
 					<div class="grid dateBoard"></div>
 				</div>
+			</div>
+			<div class="col-md-4">
 				<div class="right">
 					<div class="content-left">
 				        <div class="main-wrap">
 				          <div id="main-day" class="main-day"></div>
-				          <div id="main-date" class="main-date"></div>
 				        </div>
 				        <div class="todo-wrap">
 				          <div class="todo-title">Todo List</div>
+				          <div class="todo-content"></div>
 				          <div class="input-wrap">
 				            <input type="text" placeholder="please write here!!" id="input-box" class="input-box">
 				            <button type="button" id="input-data" class="input-data">INPUT</button>
+				            <button type="button" id="update-check">체크</button>
 				            <div id="input-list" class="input-list"></div>
 				          </div>
 				        </div>

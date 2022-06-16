@@ -50,6 +50,7 @@ public class CalendarController {
 		List<CalendarVo> calList = calendarService.getCal(month, userid);
 		JSONArray jsonArray = new JSONArray();
 		model.addAttribute("jsonCal", jsonArray.fromObject(calList));
+		model.addAttribute("calList", calList);
 		return "admin/calendar";
 	}
 	
@@ -90,9 +91,17 @@ public class CalendarController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
 	public String save(String userid, String content, String start1) {
-		CalendarVo vo = new CalendarVo(userid, content, start1); 
+		CalendarVo vo = new CalendarVo(userid, content, start1);
 		boolean result = calendarService.insertCal(vo);
 		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public String update(String userid, String content, String start1, String checklist) {
+		CalendarVo vo = new CalendarVo(userid, content, start1, checklist);
+		calendarService.updateCheck(vo);
+		return checklist;
 	}
 	
 }

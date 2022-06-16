@@ -7,6 +7,7 @@ public class CalendarVo {
 	private String content;
 	private String start1;
 	private String end1;
+	private String checklist;
 	
 	public CalendarVo() {
 		super();
@@ -34,6 +35,22 @@ public class CalendarVo {
 		this.userid = userid;
 		this.content = content;
 		this.start1 = start1;
+	}
+	
+	public CalendarVo(String userid, String content, String start1, String checklist) {
+		super();
+		this.userid = userid;
+		this.content = content;
+		this.start1 = start1;
+		this.checklist = checklist;
+	}
+
+	public String getChecklist() {
+		return checklist;
+	}
+
+	public void setChecklist(String checklist) {
+		this.checklist = checklist;
 	}
 
 	public int getIndx() {
@@ -79,7 +96,7 @@ public class CalendarVo {
 	@Override
 	public String toString() {
 		return "CalendarVo [indx=" + indx + ", userid=" + userid + ", content=" + content + ", start1=" + start1
-				+ ", end1=" + end1 + "]";
+				+ ", end1=" + end1 + ", checklist=" + checklist + "]";
 	}
-	
+
 }

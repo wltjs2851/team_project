@@ -17,6 +17,19 @@ public class RoutineVo {
 		// TODO Auto-generated constructor stub
 	}
 
+	public RoutineVo(int uno, String userid) {
+		super();
+		this.uno = uno;
+		this.userid = userid;
+	}
+
+	public RoutineVo(int uno, String userid, int ur_like) {
+		super();
+		this.uno = uno;
+		this.userid = userid;
+		this.ur_like = ur_like;
+	}
+
 	public RoutineVo(String ur_title, String ur_content, String userid, String ur_pic) {
 		super();
 		this.ur_title = ur_title;

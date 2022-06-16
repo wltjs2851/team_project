@@ -156,7 +156,7 @@
 											alt="루틴이미지" style="border-radius: 30%; overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/routine/routineContent?uno=${freeVo.fno}">${fn:substring(freeVo.f_title, 0, 7)}...</a>
+								<a href="/free/freeContent?fno=${freeVo.fno}">${fn:substring(freeVo.f_title, 0, 7)}...</a>
 								<br>
 								<br>
 								<br>

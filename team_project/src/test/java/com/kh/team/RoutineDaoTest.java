@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team.dao.RecipeDao;
+import com.kh.team.dao.RoutineCommentDao;
 import com.kh.team.dao.RoutineDao;
 import com.kh.team.service.RoutineService;
 import com.kh.team.vo.RecipeVo;
@@ -24,36 +25,29 @@ public class RoutineDaoTest {
 	@Autowired
 	RoutineService routineService;
 	
-	@Test
-	public void testsRoutineInsert() {
-		RoutineVo routineVo = new RoutineVo("·çÆ¾6", "³»¿ë¿ë", "hong2", null);
-		boolean result = routineService.addRoutine(routineVo);
-		System.out.println("result: " + result);
-	}
+	@Autowired
+	RoutineCommentDao commentDao;
+
 	
 	@Test
 	public void testRoutineInsert() {
-		RoutineVo routineVo = new RoutineVo("·çÆ¾1", "³»¿ë1", "user01", null);
-		boolean result = routineDao.insertRoutine(routineVo);
-		System.out.println("result: " + result);
-	}
-	
-	@Test
-	public void testRecipeList() {
-		List<RoutineVo> list = routineDao.selectRoutine();
-		System.out.println("result: " + list);
+		for(int i = 0; i < 112; i++) {			
+			RoutineVo routineVo = new RoutineVo("ë£¨í‹´" + i, "ë‚´ìš©" + i, "user1234", null);
+			boolean result = routineDao.insertRoutine(routineVo);
+			System.out.println("result: " + result);
+		}
 	}
 	
 	@Test
 	public void testRoutineUpdate() {
-		RoutineVo routineVo = new RoutineVo(2, "·çÆ¾2", "±Ù·Â ÈÄ ´Ü¹éÁú", "user01", null);
+		RoutineVo routineVo = new RoutineVo(2, "ï¿½ï¿½Æ¾2", "ï¿½Ù·ï¿½ ï¿½ï¿½ ï¿½Ü¹ï¿½ï¿½ï¿½", "user01", null);
 		boolean result = routineDao.updateRoutine(routineVo);
 		System.out.println("result: " + result);
 	}
 	
 	@Test
 	public void testRecipeDelete() {
-		boolean result = routineDao.deleteRoutine(1);
+		boolean result = commentDao.deleteRoutineCommentAll(131);
 		System.out.println("result: " + result);
 	}
 

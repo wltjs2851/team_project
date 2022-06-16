@@ -22,4 +22,12 @@
 		select * from calendar
 		where userid = #{userid}
 	</select>
+	
+	<update id="updateCheck">
+		update calendar set
+		checklist = #{checklist}
+		where userid = #{userid}
+		and start1 = #{start1}
+		and content = #{content}
+	</update>
 </mapper>

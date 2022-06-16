@@ -42,5 +42,13 @@ public class CalendarDaoImpl implements CalendarDao {
 		return calList;
 	}
 
-	
+	@Override
+	public boolean updateCheck(CalendarVo calendarVo) {
+		int count = sqlSession.update(NAMESPACE + "updateCheck", calendarVo);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

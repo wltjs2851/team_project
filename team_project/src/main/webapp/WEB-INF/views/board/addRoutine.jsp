@@ -56,15 +56,12 @@ function uploadSummernoteImageFile(file) {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form role="form" action="/routine/addRoutineRun" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="userid" name="userid" value="${ loginVo.userid }"/>
 				<div class="form-group">
 					<input type="text" class="form-control" id="ur_title" name="ur_title" required/>
 				</div>
 				<div class="form-group">
 					<textarea id="summernote" name="ur_content"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="userid"> 사용자 </label>  
-					<input type="text" class="form-control" id="userid" name="userid" required/>
 				</div>
 				<button type="submit" class="btn btn-primary" 
 					style='width: 80px; height:50px; padding: 1% 0'>글쓰기</button>
