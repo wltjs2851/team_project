@@ -18,31 +18,39 @@
 		var thisDate = new Date().getDate();
 		var thisToday = thisYear + '_' + thisMonth + '_' + thisDate;
 		var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
+		var selectDate = thisToday;
+		var that = divToday;
+		$("#main-day").html(thisToday.substring(0, 4) + "년 " + thisToday.substring(5, 6) + "월 " + thisToday.substring(7) + "일");
 		divToday.attr("style", "background: #FFEBEE;");
 		$(".dateBoard").on("click", ".divDate", function() {
-			var that = $(this);
-			var insertContent = prompt("일정을 입력해주세요.");
-			var selectDate = $(this).attr("data-today");
+			that = $(this);
+// 			var insertContent = prompt("일정을 입력해주세요.");
+			selectDate = $(this).attr("data-today");
+			var logDate = selectDate.replace(/_/g, " / ");
+			var myDate = selectDate.substring(0, 4) + "년 " + selectDate.substring(5, 6) + "월 " + selectDate.substring(7) + "일";
 			var userid = "${loginVo.userid}";
-			console.log(selectDate);
-			console.log(insertContent);
-			console.log(userid);
+			$("#main-day").html(myDate);
+			$(".todo-content").html("");
+			$.each(jsonCal, function() {
+				if (this.start1 == that.attr("data-today")) {
+					$(".todo-content").html("<input type='checkbox'>" + this.content);
+				}
+			});
 			var url = "/calendar/save";
 			var sData = {
 				'userid' : userid,
-				'content' : insertContent,
+// 				'content' : insertContent,
 				'start1' : selectDate
 			};
-			if (insertContent != null && insertContent != "") {
-				$.post(url, sData, function(rData) {
-					console.log(rData);
-					if(rData == "true"){
-						that.append("<br><span>" + insertContent + "</span>");
-// 						getCalendarList();
-					}
-				});
+// 			if (insertContent != null && insertContent != "") {
+// 				$.post(url, sData, function(rData) {
+// 					console.log(rData);
+// 					if(rData == "true"){
+// 						that.append("<br><span>" + insertContent + "</span>");
+// 					}
+// 				});
 // 				getCalendarList();
-			}
+// 			}
 		});
 		function getCalendarList() {
 			var divDate = $(".dateBoard .divDate[data-today]");
@@ -50,7 +58,6 @@
 				var data = this.dataset.today;
 				var thisDiv = this;
 				$.each(jsonCal, function() {
-					console.log("this:", this);
 					if (this.start1 == data) {
 						$(thisDiv).append("<br><span>" + this.content + "</span>");
 					}
@@ -95,13 +102,34 @@
 			
 		});
 		getCalendarList();
+		$("#input-data").click(function() {
+			var insertContent = $("#input-box").val();
+			var url = "/calendar/save";
+			var userid = "${loginVo.userid}";
+			var sData = {
+				'userid' : userid,
+				'content' : insertContent,
+				'start1' : selectDate
+			};
+			if (insertContent != null && insertContent != "") {
+				$.post(url, sData, function(rData) {
+					console.log(rData);
+					if(rData == "true"){
+						that.append("<br><span>" + insertContent + "</span>");
+						$(".todo-content").append("<br><input type='checkbox'>" + insertContent);
+						$("#input-box").val("");
+					}
+				});
+// 				getCalendarList();
+			}
+		});
 	});
 </script>
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-8">
+			<div class="col-md-4">
 				<div class='rap left'>
 					<div class="header">
 						<div id="prevMonth">
@@ -124,14 +152,16 @@
 					</div>
 					<div class="grid dateBoard"></div>
 				</div>
+			</div>
+			<div class="col-md-4">
 				<div class="right">
 					<div class="content-left">
 				        <div class="main-wrap">
 				          <div id="main-day" class="main-day"></div>
-				          <div id="main-date" class="main-date"></div>
 				        </div>
 				        <div class="todo-wrap">
 				          <div class="todo-title">Todo List</div>
+				          <div class="todo-content"></div>
 				          <div class="input-wrap">
 				            <input type="text" placeholder="please write here!!" id="input-box" class="input-box">
 				            <button type="button" id="input-data" class="input-data">INPUT</button>

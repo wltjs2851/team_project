@@ -50,6 +50,7 @@ public class CalendarController {
 		List<CalendarVo> calList = calendarService.getCal(month, userid);
 		JSONArray jsonArray = new JSONArray();
 		model.addAttribute("jsonCal", jsonArray.fromObject(calList));
+		model.addAttribute("calList", calList);
 		return "admin/calendar";
 	}
 	
