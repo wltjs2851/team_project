@@ -60,9 +60,4 @@
 		</beans:property>
 	</beans:bean>
 
-	<!-- 만들었던 Chathandler 를 매핑 -->
-	<websocket:handlers>
-		<websocket:mapping handler="chatHandler"
-			path="/chat-ws" />
-	</websocket:handlers>
 </beans:beans>

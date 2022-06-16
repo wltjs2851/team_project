@@ -203,7 +203,7 @@ th:first-child, td:first-child {
 						<tbody>
 						<c:forEach items="${listKcal}" var="kcalVo">
 							<tr class="tr_list" >
-								<td class="td_kno">${kcalVo.kno}</td>
+								<td class="td_kno" style="display: none;">${kcalVo.kno}</td>
 								<td data-kno="${kcalVo.kno}" class="td_list">${kcalVo.k_name}</td>
 								<td>${kcalVo.k_time}분</td>
 								<td>${kcalVo.kcal}kcal</td>
