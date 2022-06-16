@@ -55,9 +55,10 @@ $(document).ready(function() {
 			
 			if(rData == 1){
 				$("i.fa-heart").css("color", "red");
-				
+				span.text(parseInt(span.text().trim()) + 1);
 			} else {
 				$("i.fa-heart").css("color", "black");
+				span.text(parseInt(span.text().trim()) - 1);
 			}
 		});
 		
