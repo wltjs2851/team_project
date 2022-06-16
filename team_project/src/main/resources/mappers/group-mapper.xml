@@ -50,5 +50,12 @@
 		select userid from tbl_group_join
 		where gno = #{gno}
 	</select>
+	
+	<!-- 가입한 그룹 목록 가져오기 -->
+	<select id="getGroupById" resultType="GroupVo">
+		select * from tbl_group
+		where gno in (select gno from tbl_group_join
+		where userid = #{userid})
+	</select>
 
 </mapper>

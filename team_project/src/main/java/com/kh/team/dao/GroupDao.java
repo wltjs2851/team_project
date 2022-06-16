@@ -16,4 +16,5 @@ public interface GroupDao {
 	public boolean insertJoinGroup(int gno, String userid);
 	public boolean deleteJoinGroup(int gno, String userid);
 	public List<GroupJoinVo> list(int gno);
+	public List<GroupJoinVo> list(String userid);
 }

@@ -47,13 +47,17 @@ $(function() {
 		console.log("Click");
 		var userid = "${loginVo.userid}";
 		var gno = ${groupVo.gno};
-		var url = "/groupboard/leave/" + userid;
-		var sData = {
-				"gno" : gno
-		}
+		var url = "/group/deleteMember/" + userid + "/" + gno;
+// 		var sData = {
+// 				"gno" : gno
+// 		}
 		
-		$.get(url, sData, function(rData) {
+		$.get(url, function(rData) {
 			console.log(rData);
+			if(rData == "true") {
+				alert("탈퇴 완료");
+				$("#btnModalClose").trigger("click");
+			}
 		});
 	});
 });
@@ -94,7 +98,7 @@ ${ loginVo }
 						<button id="leave" type="button" class="btn btn-primary">
 							탈퇴
 						</button> 
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">
+						<button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">
 							취소
 						</button>
 					</div>

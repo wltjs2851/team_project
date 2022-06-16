@@ -78,4 +78,10 @@ public class GroupServiceImpl implements GroupService{
 		return groupJoinMember;
 	}
 
+	@Override
+	public List<GroupJoinVo> list(String userid) {
+		List<GroupJoinVo> groupJoinList = groupDao.list(userid);
+		return groupJoinList;
+	}
+
 }

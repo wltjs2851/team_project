@@ -85,14 +85,6 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public List<GroupJoinVo> list(String userid) {
-		List<GroupJoinVo> groupJoinList = sqlSession.selectList(NAMESPACE + "getGroupById", userid);
-		return groupJoinList;
-	}
-
-	
-
-	@Override
 	public boolean deleteMember(String userid, int gno) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userid", userid);

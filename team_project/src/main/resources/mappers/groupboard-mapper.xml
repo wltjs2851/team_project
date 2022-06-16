@@ -84,19 +84,6 @@
 	where gbno = #{gbno}
 </select>
 
-<!-- 가입한 그룹 목록 가져오기 -->
-<select id="getGroupById" resultType="GroupVo">
-<!-- 	select gno from tbl_user -->
-<!-- 	where userid = #{userid} -->
-<!-- 	select * from tbl_group_join -->
-<!-- 	where userid = #{userid} -->
-	select * from tbl_group
-	where gno in (select gno from tbl_group_join
-	where userid = #{userid})
-</select>
-
-
-
 <!-- 그룹에서 멤버 강퇴 -->
 <!-- <delete id="deleteMember"> -->
 <!-- 	delete from tbl_group_join -->

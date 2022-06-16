@@ -274,20 +274,6 @@ public class GroupBoardController {
 		return String.valueOf(result);
 	}
 	
-	@RequestMapping(value = "myGroupList", method = RequestMethod.GET)
-	public String myGroupList(/*int gno, */GroupVo groupVo, Model model, String userid, HttpServletRequest httpRequest) { // 유저 아이디를 기준으로 가입한 그룹들 가져오는,,,
-		userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
-		
-		List<GroupJoinVo> group = groupBoardService.list(userid);
-		model.addAttribute("group", group);
-		
-//		groupVo = groupService.groupByGno(gno);
-//		model.addAttribute("groupVo", groupVo);
-		
-		return "groupboard/myGroupList";
-	}
-	
-	
 	@RequestMapping(value = "leave/{userid}", method = RequestMethod.GET)
 	public String leaveGroup(@PathVariable("userid") String userid, int gno, RedirectAttributes rttr) {
 		boolean result = groupBoardService.deleteMember(userid, gno);
