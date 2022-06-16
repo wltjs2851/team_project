@@ -71,7 +71,7 @@ public class GroupBoardDaoTest {
 	
 //	@Test
 //	public void testDeleteMember() {
-//		boolean result = groupBoardDao.deleteMember("domidgirl33");
+//		boolean result = groupBoardDao.deleteMember("domidgirl33", 3);
 //		System.out.println("reuslt: " + result);
 //	}
 }

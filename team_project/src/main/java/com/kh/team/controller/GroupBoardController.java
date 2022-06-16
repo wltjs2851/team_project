@@ -176,7 +176,7 @@ public class GroupBoardController {
 	}
 
 	@RequestMapping(value = "groupDelete", method = RequestMethod.GET)
-	public String delete(int gno, int gbno, SearchDto searchDto, RedirectAttributes rttr) {
+	public String delete(int gno, int gbno, RedirectAttributes rttr) {
 		boolean result = groupBoardService.delete(gbno);
 		rttr.addFlashAttribute("delete_result", result);
 		
@@ -285,5 +285,12 @@ public class GroupBoardController {
 //		model.addAttribute("groupVo", groupVo);
 		
 		return "groupboard/myGroupList";
+	}
+	
+	@RequestMapping(value = "deleteMember/{userid}", method = RequestMethod.GET)
+	public String deleteMember(int gno, @PathVariable("userid") String userid, RedirectAttributes rttr) {
+		boolean result = groupBoardService.deleteMember(userid, gno);
+		rttr.addFlashAttribute("delete_member", result);
+		return String.valueOf(result);
 	}
 }

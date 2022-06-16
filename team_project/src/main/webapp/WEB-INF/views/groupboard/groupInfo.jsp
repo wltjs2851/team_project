@@ -4,9 +4,6 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-<%-- ${ groupVo } --%>
-${ groupJoinMember }
-
 <script>
 $(function() {
 	$(".tab-content > div").hide();
@@ -17,8 +14,26 @@ $(function() {
 		return false;
 	}).filter(":eq(0)").click();
 	
+	$(".btnBan").click(function() {
+		console.log("click");
+// 		var userid = $(this).attr("data-userid");
+		var userid = $(".btnBan").val();
+		console.log(userid);
+		var gno = ${groupVo.gno};
+		var url = "/groupboard/deleteMember/" + userid;
+		sData = {
+				"gno" : gno
+		}
+		
+		$.get(url, sData, function(rData) {
+			console.log(rData);
+		});
+	});
 });
 </script>
+
+<%-- ${ groupVo } --%>
+${ groupJoinMember }
 
 <div class="container-fluid">
 	<div class="row">
@@ -61,16 +76,18 @@ $(function() {
 									<div>
 									
 									<c:forEach items="${groupJoinMember}" var="groupJoinVo">
-										${ groupJoinVo.userid }
+										
+										<span>${ groupJoinVo.userid }</span>
 										
 										<c:if test="${ groupVo.g_leader == loginVo.userid }">
-											<button id="btnBan" class="btn btn-danger" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
+											<button value="${ groupJoinVo.userid }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
 										</c:if>
 										
 										<br><br>
 									</c:forEach>
 									
 									</div>
+
 								</p>
 							</div>
 						</div>
