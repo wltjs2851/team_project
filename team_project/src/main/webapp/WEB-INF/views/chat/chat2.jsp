@@ -63,7 +63,7 @@
 			chatarea = document.getElementById("chatarea");
 			chatarea.innerHTML = data + "<br/>" + chatarea.innerHTML
 		}
-		
+		// 커밋용
 		function onClose() {
 		}
 	});
