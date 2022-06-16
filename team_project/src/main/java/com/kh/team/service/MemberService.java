@@ -19,4 +19,8 @@ public interface MemberService {
 	public boolean isExist(String userid);
 	
 	public MemberVo findId(String username, String email);
+	
+	public MemberVo findPw(String userid, String email);
+	
+	public boolean updatePw(String userid, String userpw);
 }

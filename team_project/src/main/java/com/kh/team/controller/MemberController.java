@@ -182,12 +182,17 @@ public class MemberController {
 		return "/member/findId";
 	}
 	
-	@RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
+	@RequestMapping(value = "/findPwPop", method = RequestMethod.GET)
+	public String findPwPop() {
+		return "/member/findPw";
+	}
+	
+	@RequestMapping(value = "/sendEmailByFindId", method = RequestMethod.POST)
 	@ResponseBody
-	public String sendEmail(String username, String email) {
+	public String sendEmailByFindId(String username, String email) {
 		MemberVo memberVo = memberService.findId(username, email);
 		if (memberVo != null && !memberVo.equals("")) {
-			// id 찾기 이메일 보내기
+			// id찾기 이메일 보내기
 			String randNum = "";
 			for (int i = 1; i <= 6; i++) {
 				randNum += String.valueOf(((int)(Math.random() * 9 + 1)));
@@ -198,7 +203,31 @@ public class MemberController {
 			emailVo.setMessage("인증번호는 " + randNum +  " 입니다.");
 			emailVo.setReceiveMail(email);
 			emailService.sendMailById(emailVo);
-			System.out.println(emailVo);
+			return randNum;
+		} else {
+			return "false";
+		}
+	}
+	
+	@RequestMapping(value = "/sendEmailByFindPw", method = RequestMethod.POST)
+	@ResponseBody
+	public String sendEmailByFindPw(String userid, String email) {
+		System.out.println(userid);
+		System.out.println(email);
+		MemberVo memberVo = memberService.findPw(userid, email);
+		System.out.println(memberVo);
+		if (memberVo != null && !memberVo.equals("")) {
+			// pw 찾기 이메일 보내기
+			String randNum = "";
+			for (int i = 1; i <= 6; i++) {
+				randNum += String.valueOf(((int)(Math.random() * 9 + 1)));
+			}
+			System.out.println(randNum);
+			EmailVo emailVo = new EmailVo();
+			emailVo.setSubject("??에서 보낸 인증번호입니다.");
+			emailVo.setMessage("인증번호는 " + randNum +  " 입니다.");
+			emailVo.setReceiveMail(email);
+			emailService.sendMailById(emailVo);
 			return randNum;
 		} else {
 			return "false";
@@ -211,6 +240,25 @@ public class MemberController {
 //		rttr.addFlashAttribute("userid", memberVo.getUserid());
 		model.addAttribute("userid", memberVo.getUserid());
 		return "/member/findIdResult";
+	}
+	
+	@RequestMapping(value = "/updatePw", method = RequestMethod.POST)
+	public String updatePw(String userid, String email, Model model, RedirectAttributes rttr) {
+		MemberVo memberVo = memberService.findPw(userid, email);
+		if (memberVo != null && !memberVo.equals("")) {
+			model.addAttribute("userid", userid);
+		} else {
+			rttr.addFlashAttribute("userid", "false");
+			return "redirect:/member/updatePwPop";
+		}
+		return "/member/updatePwForm";
+	}
+	
+	@RequestMapping(value = "/updatePwRun", method = RequestMethod.POST)
+	@ResponseBody
+	public String updatePwRun(String userpw, String userid) {
+		boolean result = memberService.updatePw(userid, userpw);
+		return String.valueOf(result);
 	}
 	
 }
