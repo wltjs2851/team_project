@@ -34,15 +34,15 @@
 				if (this.start1 == that.attr("data-today")) {
 					if (this.checklist == 'true') {
 						if (thatSpan == "false") {
-							$(".todo-content").html("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "<label>");
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
 						} else {
-							$(".todo-content").html("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "<label>");
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
 						}
 					} else {
 						if (thatSpan == "true") {
-							$(".todo-content").html("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "<label>");
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
 						} else {
-							$(".todo-content").html("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "<label>");
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
 						}
 					}
 				}
