@@ -63,11 +63,11 @@ public class GroupBoardDaoTest {
 		System.out.println("list: " + list);
 	}
 	
-	@Test
-	public void testJoinList() {
-		List<GroupJoinVo> groupJoinVo = groupBoardDao.list("gogo11");
-		System.out.println("groupJoinVo: " + groupJoinVo);
-	}
+//	@Test
+//	public void testJoinList() {
+//		List<GroupJoinVo> groupJoinVo = groupBoardDao.list("gogo11");
+//		System.out.println("groupJoinVo: " + groupJoinVo);
+//	}
 	
 //	@Test
 //	public void testDeleteMember() {

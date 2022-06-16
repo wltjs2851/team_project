@@ -14,4 +14,5 @@ public interface GroupService {
 	public boolean joinGroup(int gno, String userid);
 	public boolean banGroup(int gno, String userid);
 	public List<GroupJoinVo> list(int gno);
+	public List<GroupJoinVo> list(String userid);
 }

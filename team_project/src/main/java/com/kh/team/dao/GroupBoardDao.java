@@ -19,7 +19,6 @@ public interface GroupBoardDao {
 	public int countComment(int gbno);
 	public String getGb_picdById(int gbno);
 //	public String getGroupById(String userid);
-	public List<GroupJoinVo> list(String userid);
 	
 	public boolean deleteMember(String userid, int gno);
 	public void updateCtnMember(int gno);

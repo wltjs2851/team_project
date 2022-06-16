@@ -107,4 +107,10 @@ public class GroupDaoImpl implements GroupDao{
 		return groupJoinMember;
 	}
 
+	@Override
+	public List<GroupJoinVo> list(String userid) {
+		List<GroupJoinVo> groupJoinList = sqlSession.selectList(NAMESPACE + "getGroupById", userid);
+		return groupJoinList;
+	}
+
 }

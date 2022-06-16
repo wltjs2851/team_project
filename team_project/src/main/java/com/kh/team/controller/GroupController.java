@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
@@ -157,5 +158,18 @@ public class GroupController {
 		model.addAttribute("groupJoinMember", groupJoinMember);
 		
 		return "groupboard/groupInfo";
+	}
+	
+	@RequestMapping(value = "myGroupList", method = RequestMethod.GET)
+	public String myGroupList(/*int gno, */GroupVo groupVo, Model model, String userid, HttpServletRequest httpRequest) { // 유저 아이디를 기준으로 가입한 그룹들 가져오는,,,
+		userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
+		
+		List<GroupJoinVo> group = groupService.list(userid);
+		model.addAttribute("group", group);
+		
+//		groupVo = groupService.groupByGno(gno);
+//		model.addAttribute("groupVo", groupVo);
+		
+		return "groupboard/myGroupList";
 	}
 }

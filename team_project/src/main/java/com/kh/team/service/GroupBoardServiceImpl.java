@@ -67,14 +67,6 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	}
 
 	@Override
-	public List<GroupJoinVo> list(String userid) {
-		List<GroupJoinVo> groupJoinList = groupBoardDao.list(userid);
-		return groupJoinList;
-	}
-
-	
-
-	@Override
 	public boolean deleteMember(String userid, int gno) {
 		boolean result = groupBoardDao.deleteMember(userid, gno);
 		groupBoardDao.updateCtnMember(gno);
