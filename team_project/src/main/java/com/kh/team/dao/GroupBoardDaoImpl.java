@@ -90,4 +90,32 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		return groupJoinList;
 	}
 
+	@Override
+	public List<GroupJoinVo> list(int gno) {
+		List<GroupJoinVo> groupJoinMember = sqlSession.selectList(NAMESPACE + "getGroupMember", gno);
+		return groupJoinMember;
+	}
+
+	@Override
+	public boolean deleteMember(String userid, int gno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userid", userid);
+		map.put("gno", gno);
+		
+		int count = sqlSession.delete(NAMESPACE + "deleteMember", map);
+		if(count > 1) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateCtnMember(int gno) {
+		int count = sqlSession.update(NAMESPACE + "updateCntMember", gno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

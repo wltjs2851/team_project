@@ -95,8 +95,6 @@ public class AdminController {
 		List<KcalVo> listKcal = kcalService.listKcal(pagingDto);
 //		System.out.println("listKcal:" + listKcal);
 		
-		
-		
 		model.addAttribute("listKcal", listKcal);
 		model.addAttribute("pagingDto", pagingDto);
 		return "admin/kcal";// admin/kcal.jsp
@@ -107,9 +105,9 @@ public class AdminController {
 	public String selectByKno(int kno, Model model, PagingDto pagingDto, HttpSession session) {
 		System.out.println("AdminController, selectByKno, kno:" + kno);
 		KcalVo kcalVo = kcalService.selectByKno(kno);
+		List<KcalVo> listKcal = kcalService.listKcal(pagingDto);
 		
-		
-		
+		model.addAttribute("listKcal", listKcal);
 		model.addAttribute("kcalVo", kcalVo);
 		model.addAttribute("pagingDto", pagingDto);
 		return "admin/kcalSelect";

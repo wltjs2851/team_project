@@ -4,7 +4,8 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-${ groupVo }
+<%-- ${ groupVo } --%>
+${ groupJoinMember }
 
 <script>
 $(function() {
@@ -57,6 +58,19 @@ $(function() {
 							<div class="tab-pane" id="tab2">
 								<p>
 									그룹원 목록(그룹장일 경우 강퇴 버튼 보이게)
+									<div>
+									
+									<c:forEach items="${groupJoinMember}" var="groupJoinVo">
+										${ groupJoinVo.userid }
+										
+										<c:if test="${ groupVo.g_leader == loginVo.userid }">
+											<button id="btnBan" class="btn btn-danger" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
+										</c:if>
+										
+										<br><br>
+									</c:forEach>
+									
+									</div>
 								</p>
 							</div>
 						</div>

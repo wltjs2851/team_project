@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@include file="/WEB-INF/views/include/header.jsp"%>
 <script>
 	$(document).ready(function() {
@@ -174,8 +179,30 @@ th:first-child, td:first-child {
 						id="btnDeleteKcal">삭제</a>
 					</article>
 					<article>
-					검색 목록
-					${listKcal }
+					<div> result</div>
+					<table class="table">
+				<thead>
+					<tr>
+						<th></th>
+						<th colspan="4">운동 종목</th>
+						<th>소요시간</th>
+						<th>칼로리</th>
+						<th>난이도</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${listKcal}" var="kcalVo">
+					<tr class="tr_list" >
+						<td>${kcalVo.kno}</td>
+						<td colspan="4" data-kno="${kcalVo.kno}" class="td_list">${kcalVo.k_name}</td>
+						<td>${kcalVo.k_time}분</td>
+						<td>${kcalVo.kcal}kcal</td>
+						<td>${kcalVo.k_dgree}</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			
 					</article>
 				</div>
 			</form>
