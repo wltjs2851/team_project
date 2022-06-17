@@ -63,6 +63,11 @@ $(function() {
 			}
 	});
 	
+	var c = "${data.gb_content}";
+	var content = c.replace(" \" ", "\'");
+	
+	console.log(content);
+	
 	$("#summernote").summernote("code",  "${data.gb_content}");
     
     

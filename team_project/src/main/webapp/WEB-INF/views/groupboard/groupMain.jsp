@@ -243,6 +243,11 @@ $(function() {
 							<a href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
+							<div>
+							<a href="/chat/chat" class="list-group-item list-group-item-action active justify-content-between">
+								그룹 채팅방
+							</a>
+							</div>
 					</div>
 					<nav>
 						<ol class="breadcrumb">

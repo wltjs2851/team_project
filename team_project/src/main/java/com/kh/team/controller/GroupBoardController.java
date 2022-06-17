@@ -157,6 +157,9 @@ public class GroupBoardController {
 	      String originalFilename = file.getOriginalFilename();
 	      System.out.println("prevImg: " + prevImg);
 	      
+	      String content = groupBoardVo.getGb_content();
+	      
+	      
 //	         수정폼에서 사진을 등록하였다면 사진 변경
 	         try {
 	            if(originalFilename != null && !originalFilename.equals("")) {
