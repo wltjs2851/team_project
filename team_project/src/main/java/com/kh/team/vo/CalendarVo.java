@@ -8,6 +8,7 @@ public class CalendarVo {
 	private String start1;
 	private String end1;
 	private String checklist;
+	private int cno;
 	
 	public CalendarVo() {
 		super();
@@ -43,6 +44,23 @@ public class CalendarVo {
 		this.content = content;
 		this.start1 = start1;
 		this.checklist = checklist;
+	}
+	
+	public CalendarVo(String userid, String content, String start1, int cno) {
+		super();
+		this.userid = userid;
+		this.content = content;
+		this.start1 = start1;
+		this.cno = cno;
+	}
+	
+	public CalendarVo(String userid, String content, String start1, String checklist, int cno) {
+		super();
+		this.userid = userid;
+		this.content = content;
+		this.start1 = start1;
+		this.checklist = checklist;
+		this.cno = cno;
 	}
 
 	public String getChecklist() {
@@ -93,10 +111,18 @@ public class CalendarVo {
 		this.end1 = end1;
 	}
 
+	public int getCno() {
+		return cno;
+	}
+
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
+
 	@Override
 	public String toString() {
 		return "CalendarVo [indx=" + indx + ", userid=" + userid + ", content=" + content + ", start1=" + start1
-				+ ", end1=" + end1 + ", checklist=" + checklist + "]";
+				+ ", end1=" + end1 + ", checklist=" + checklist + ", cno=" + cno + "]";
 	}
 
 }

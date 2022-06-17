@@ -34,15 +34,15 @@
 				if (this.start1 == that.attr("data-today")) {
 					if (this.checklist == 'true') {
 						if (thatSpan == "false") {
-							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
+							$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
 						} else {
-							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
+							$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
 						}
 					} else {
 						if (thatSpan == "true") {
-							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
+							$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
 						} else {
-							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
+							$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
 						}
 					}
 				}
@@ -55,7 +55,7 @@
 				var thisDiv = this;
 				$.each(jsonCal, function() {
 					if (this.start1 == data) {
-						$(thisDiv).append("<br><span data-check='" + this.checklist + "'>" + this.content + "</span>");
+						$(thisDiv).append("<br><span data-check='" + this.checklist + "' data-cno='" + this.cno + "'>" + this.content + "</span>");
 					}
 				});
 			});
@@ -106,13 +106,14 @@
 			if (insertContent != null && insertContent != "") {
 				$.post(url, sData, function(rData) {
 					console.log(rData);
-					if(rData == "true"){
+					if(rData == "true") {
 						that.append("<br><span>" + insertContent + "</span>");
 						$(".todo-content").append("<br><input class='checkList' data-today='" + selectDate + "' type='checkbox'><label>" + insertContent + "</label>");
 						$("#input-box").val("");
+					} else if (rData == "false") {
+						alert("일정이 너무 많아요ㅠ")
 					}
 				});
-				getCalendarList();
 			}
 		});
 		$("#update-check").click(function() {
@@ -121,17 +122,17 @@
 			var url = "/calendar/update";
 			var userid = "${loginVo.userid}";
 			var checklist = $(".checkList").prop("checked");
+			var cno = 0;
 			var sData = {
 				'userid' : userid,
 				'content' : insertContent,
 				'start1' : selectDate,
-				'checklist' : checklist
+				'checklist' : checklist,
+				'cno' : cno
 			};
 			if (insertContent != null && insertContent != "") {
 				$.post(url, sData, function(rData) {
 					if(rData == "true"){
-// 						that.append("<br><span>" + insertContent + "</span>");
-// 						$(".todo-content").append("<br><input class='checkList' data-today='" + selectDate + "' type='checkbox'>" + insertContent);
 						$("#input-box").val("");
 						// 클릭했던 날짜부분의 check->true
 						that.children("span").attr("data-check", "true");

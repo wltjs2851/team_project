@@ -8,13 +8,13 @@
 		select * from calendar
 		where userid = #{userid}
 		and start1 like '%' || #{month} || '%'
-		order by start1 asc
+		order by cno asc
 	</select>
 	
 <!-- 	일정 추가  -->
 	<insert id="insertCal">
-		insert into calendar(indx, userid, content, start1)
-		values(cal_index.nextval, #{userid}, #{content}, #{start1})
+		insert into calendar(indx, userid, content, start1, cno)
+		values(cal_index.nextval, #{userid}, #{content}, #{start1}, #{cno, jdbcType=VARCHAR})
 	</insert>	
 	
 <!-- 	일정 목록 -->
@@ -30,4 +30,10 @@
 		and start1 = #{start1}
 		and content = #{content}
 	</update>
+	
+	<select id="getCount" resultType="int">
+		select count(*) from calendar
+		where start1 = #{start1}
+		and userid = #{userid}
+	</select>
 </mapper>

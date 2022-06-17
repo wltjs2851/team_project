@@ -35,5 +35,10 @@ public class CalendarServiceImpl implements CalendarServcie {
 		return calendarDao.updateCheck(calendarVo);
 	}
 
+	@Override
+	public int getCount(String userid, String start1) {
+		return calendarDao.getCount(userid, start1);
+	}
+
 	
 }

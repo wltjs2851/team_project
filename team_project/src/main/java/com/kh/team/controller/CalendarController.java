@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -90,16 +91,23 @@ public class CalendarController {
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
+	@Transactional
 	public String save(String userid, String content, String start1) {
-		CalendarVo vo = new CalendarVo(userid, content, start1);
+		int cno = calendarService.getCount(userid, start1);
+		System.out.println("cno: " + cno);
+		if (cno >= 1) {
+			return "false";
+		}
+		CalendarVo vo = new CalendarVo(userid, content, start1, cno);
 		boolean result = calendarService.insertCal(vo);
 		return String.valueOf(result);
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public String update(String userid, String content, String start1, String checklist) {
-		CalendarVo vo = new CalendarVo(userid, content, start1, checklist);
+	public String update(String userid, String content, String start1, String checklist, int cno) {
+		CalendarVo vo = new CalendarVo(userid, content, start1, checklist, cno);
+		System.out.println(vo);
 		calendarService.updateCheck(vo);
 		return checklist;
 	}

@@ -51,4 +51,12 @@ public class CalendarDaoImpl implements CalendarDao {
 		return false;
 	}
 
+	@Override
+	public int getCount(String userid, String start1) {
+		Map<String, String> map = new HashMap<>();
+		map.put("userid", userid);
+		map.put("start1", start1);
+		return sqlSession.selectOne(NAMESPACE + "getCount", map);
+	}
+
 }
