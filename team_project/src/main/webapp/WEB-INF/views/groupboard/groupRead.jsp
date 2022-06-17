@@ -163,9 +163,9 @@ $(function() {
 });
 </script>
 
-${ groupBoardVo }
-<hr>
-${ groupVo }
+<%-- ${ groupBoardVo } --%>
+<!-- <hr> -->
+<%-- ${ groupVo } --%>
 <%-- ${ heart } --%>
 <%-- ${ count } --%>
 
@@ -316,14 +316,14 @@ ${ groupVo }
 						<div class="list-group-item justify-content-between">
 							<a href="/groupboard/groupMain/${ groupBoardVo.gno }">그룹 메인으로</a>
 						</div>
-							<a href="/groupboard/groupInfo?gno=${ groupBoardVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+							<a href="/group/groupInfo?gno=${ groupBoardVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>
 					<nav>
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item">
-								<a href="/groupboard/groupWriteForm">글쓰기</a>
+								<a href="/groupboard/groupWriteForm?gno=${ groupBoardVo.gno }">글쓰기</a>
 							</li>
 							<li class="breadcrumb-item">
 								<a href="/groupboard/activityInfo/${ groupBoardVo.gno }">활동 정보</a>

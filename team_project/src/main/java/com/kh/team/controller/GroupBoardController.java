@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -144,41 +145,44 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupUpdateForm", method = RequestMethod.GET)
-	public String updateForm(int gbno, Model model) {
-		GroupBoardVo data = groupBoardService.read(gbno);
-		model.addAttribute("data", data);
-		
-		return "groupboard/groupUpdateForm";
-	}
+	   public String updateForm(int gbno, Model model) {
+	      GroupBoardVo data = groupBoardService.read(gbno);
+	      model.addAttribute("data", data);
+	      
+	      return "groupboard/groupUpdateForm";
+	   }
 	
-	@RequestMapping(value = "groupUpdateRun", method = RequestMethod.POST)
-	public String updateRun(MultipartHttpServletRequest request, GroupBoardVo groupBoardVo, RedirectAttributes rttr, MultipartFile file, String prevImg) {
-		String originalFilename = file.getOriginalFilename();
-		System.out.println("prevImg: " + prevImg);
-		
-//			수정폼에서 사진을 등록하였다면 사진 변경
-			try {
-				if(originalFilename != null && !originalFilename.equals("")) {
-					String gb_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
-					groupBoardVo.setGb_pic(gb_pic);
-				} else { // 그렇지 않다면 사진 삭제
-					if(prevImg != null && !prevImg.equals("")) {
-						int gbno = groupBoardVo.getGbno();
-						String gb_pic = groupBoardService.getGb_picById(gbno);
-						groupBoardVo.setGb_pic(gb_pic);
-					} else if(prevImg == null || prevImg.equals("")) {
-						groupBoardVo.setGb_pic(null);
-					}
-				}
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			rttr.addAttribute("gbno", groupBoardVo.getGbno());
-			boolean result = groupBoardService.update(groupBoardVo);
-			rttr.addFlashAttribute("update_result", result);
-		
-		return "redirect:/groupboard/groupRead";
-	}
+	   @RequestMapping(value = "groupUpdateRun", method = RequestMethod.POST)
+	   public String updateRun(MultipartHttpServletRequest request, GroupBoardVo groupBoardVo, RedirectAttributes rttr, MultipartFile file, String prevImg) {
+	      String originalFilename = file.getOriginalFilename();
+	      System.out.println("prevImg: " + prevImg);
+	      
+	      String content = groupBoardVo.getGb_content();
+	      
+	      
+//	         수정폼에서 사진을 등록하였다면 사진 변경
+	         try {
+	            if(originalFilename != null && !originalFilename.equals("")) {
+	               String gb_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
+	               groupBoardVo.setGb_pic(gb_pic);
+	            } else { // 그렇지 않다면 사진 삭제
+	               if(prevImg != null && !prevImg.equals("")) {
+	                  int gbno = groupBoardVo.getGbno();
+	                  String gb_pic = groupBoardService.getGb_picById(gbno);
+	                  groupBoardVo.setGb_pic(gb_pic);
+	               } else if(prevImg == null || prevImg.equals("")) {
+	                  groupBoardVo.setGb_pic(null);
+	               }
+	            }
+	         } catch(Exception e) {
+	            e.printStackTrace();
+	         }
+	         rttr.addAttribute("gbno", groupBoardVo.getGbno());
+	         boolean result = groupBoardService.update(groupBoardVo);
+	         rttr.addFlashAttribute("update_result", result);
+	      
+	      return "redirect:/groupboard/groupRead?gno=" + groupBoardVo.getGno() + "&gbno=" + groupBoardVo.getGbno();
+	   }
 
 	@RequestMapping(value = "groupDelete", method = RequestMethod.GET)
 	public String delete(int gno, int gbno, RedirectAttributes rttr) {
@@ -282,5 +286,17 @@ public class GroupBoardController {
 		groupBoardService.updateCtnMember(gno);
 		
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/uploadSummernoteImageFile", method = RequestMethod.POST)
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
+
+		String uploadPath = "//192.168.0.90/gbpic";
+		String originalFilename = multipartFile.getOriginalFilename();
+
+		String file = FileUtil.uploadFile(uploadPath, originalFilename, multipartFile.getBytes());
+		System.out.println(file);
+		return file;
 	}
 }
