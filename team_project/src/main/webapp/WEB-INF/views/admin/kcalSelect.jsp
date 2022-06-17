@@ -132,7 +132,7 @@ th:first-child, td:first-child {
 			<form role="form" action="/admin/updateKcal" method="post">
 				<input type="hidden" name="kno" value="${kcalVo.kno}" />
 				<div>
-					<h2>운동 칼로리 사전</h2>
+					<h2><a href="/admin/listKcal">운동칼로리 사전</a></h2>
 					<hr>
 					<article class="single-post">
 						<!-- 				<form> -->

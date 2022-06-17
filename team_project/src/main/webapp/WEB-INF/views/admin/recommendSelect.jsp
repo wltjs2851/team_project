@@ -191,6 +191,9 @@ $(document).ready(function() {
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
+		<div>
+		<h3 class="widget-header" style="display: inline-block;"><a href="/admin/listRecommend">추천 운동법</a></h3></div>
+			<hr>
 			<div>
 			<h2>${recommendVo.re_title }</h2>
 			<hr>

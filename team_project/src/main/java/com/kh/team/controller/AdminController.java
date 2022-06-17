@@ -144,21 +144,6 @@ public class AdminController {
 		boolean result = kcalService.updateKcal(kcalVo);
 		rttr.addFlashAttribute("updateKcal_result", result);
 		
-//		if(originalFilename == null || originalFilename == "") {
-//			boolean result = kcalService.updateKcal(kcalVo);
-//			rttr.addFlashAttribute("updateKcal_result", result);
-//		} else {
-//			try {
-//				String k_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
-//				kcalVo.setK_pic(k_pic);
-//				boolean result = kcalService.updateKcal(kcalVo);
-//				rttr.addFlashAttribute("updateKcal_result", result);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-		
-		
 		return "redirect:/admin/selectByKno?kno=" + kcalVo.getKno();
 	}
 	

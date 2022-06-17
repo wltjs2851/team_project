@@ -52,7 +52,7 @@ $(document).ready(function() {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div>
-			<h3 class="widget-header" style="display: inline-block;">추천 운동법</h3>
+			<h3 class="widget-header" style="display: inline-block;"><a href="/admin/listRecommend">추천 운동법</a></h3>
 			<a class="btn btn-primary btn-sm" href="/admin/insertRecommendForm" 
 				style="float: right; width: 110px; height:50px; padding: 1% 0">글 쓰기</a>
 			</div>
