@@ -9,15 +9,6 @@ $(document).ready(function() {
 		alert("추천 운동글 수정 완료");
 	}
 
-	// 수정 버튼 클릭
-	$("#btnUpdateRecommend").click(function() {
-		$("*[readonly]").attr("readonly", false);
-		$(this).fadeOut("slow");
-		$("#btnUpdateRunRecommend").fadeIn("slow");
-		$("#fileRecommend").fadeIn("slow");
-		$("#fileLabel").fadeIn("slow");
-	});
-	
 	// 좋아요
 	var heartval = ${heart};
 	var span = $("i.fa-heart").next();
@@ -55,9 +46,10 @@ $(document).ready(function() {
 			
 			if(rData == 1){
 				$("i.fa-heart").css("color", "red");
-				
+				span.text(parseInt(span.text().trim()) + 1);
 			} else {
 				$("i.fa-heart").css("color", "black");
+				span.text(parseInt(span.text().trim()) - 1);
 			}
 		});
 		
@@ -69,12 +61,12 @@ $(document).ready(function() {
 		// 		e.preventDefault();
 		console.log("댓글 달기")
 		var content = $("#re_comment").val();
-		// 		var user_id = $("#c_user_id").val();
+		var userid = $("#userid").val();
 		var reno = "${recommendVo.reno}";
 
 		var sData = {
 			"re_comment" : content,
-			// 				"user_id" : user_id,
+			"userid" : userid,
 			"reno" : reno
 		};
 		console.log(sData);
@@ -103,8 +95,7 @@ $(document).ready(function() {
 				var tds = tr.find("td");
 				tds.eq(0).text(this.recno);
 				tds.eq(1).text(this.re_comment);
-				tds.eq(2).text(this.user_id);
-				tds.eq(3).text(this.re_regdate);
+				tds.eq(2).text(this.re_regdate);
 
 				// 삭제버튼 찾기
 				tds.find(".btnCommentDelete").attr(
@@ -200,6 +191,9 @@ $(document).ready(function() {
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
+		<div>
+		<h3 class="widget-header" style="display: inline-block;"><a href="/admin/listRecommend">추천 운동법</a></h3></div>
+			<hr>
 			<div>
 			<h2>${recommendVo.re_title }</h2>
 			<hr>
@@ -208,52 +202,29 @@ $(document).ready(function() {
 				${recommendVo.re_content }
 				<hr>
 			</div>
-<!-- 			<div> -->
-<!-- 				<img width="745px;" height="auto" -->
-<%-- 					src="/member/displayImage?filename=${recommendVo.re_pic}" --%>
-<!-- 					alt="운동이미지"> -->
-
-<!-- 			</div> -->
-<!-- 			<form role="form" action="/admin/updateRecommend" method="post" -->
-<!-- 				enctype="multipart/form-data"> -->
-<%-- 				<input type="hidden" name="reno" value="${recommendVo.reno}" /> --%>
-<!-- 				<div class="form-group"> -->
-<!-- 					<label for="re_title"> 제목 </label> <input type="text" -->
-<!-- 						class="form-control" id="re_title" name="re_title" -->
-<%-- 						value="${recommendVo.re_title}" readonly="readonly" /> --%>
-<!-- 				</div> -->
-<!-- 				<div class="form-group"> -->
-<!-- 					<label for="re_content"> 내용 </label> -->
-<!-- 					<textarea rows="10" cols="85" id="re_content" name="re_content" -->
-<%-- 						readonly="readonly">${recommendVo.re_content}</textarea> --%>
-<!-- 				</div> -->
-<!-- 				<div class="form-group"> -->
-<!-- 					<label for="exampleInputFile" id="fileLabel" style="display: none;"> -->
-<!-- 						이미지 </label> <input type="file" class="form-control-file" -->
-<!-- 						id="fileRecommend" style="display: none;" /> -->
-<!-- 				</div> -->
-
+<!-- 			좋아요 -->
 				<div>
 					<i class="fas fa-heart"
 						style="text-align:center; margin: 15px; font-size: 30px; color: graytext; cursor: pointer;" 
 								data-reno="${recommendVo.reno}"></i>
-<!-- 					<a class="btn btn-outline-dark heart">좋아요</a> -->
 					<span style="font-size: 20px;">${recommendVo.re_like}</span>
 				</div>
-
-				<button type="button" class="btn btn-primary"
-					id="btnUpdateRecommend">수정</button>
-				<button type="submit" class="btn btn-success"
-					id="btnUpdateRunRecommend" style="display: none;">수정완료</button>
-				<a type="button" class="btn btn-danger"
-					href="/admin/deleteRecommend?reno=${recommendVo.reno}">삭제</a>
-			</form>
-
+<!-- 			게시글 수정 -->
+			<c:choose>
+				<c:when test="${loginVo.userid == 'admin01'}">
+					<a type="button" class="btn btn-primary" id="btnUpdateRecommend"
+						href="/admin/updateRecommendForm?reno=${recommendVo.reno }">수정</a>
+					<a type="button" class="btn btn-danger"
+						href="/admin/deleteRecommend?reno=${recommendVo.reno}">삭제</a>
+				</c:when>
+			</c:choose>	
+			
 			<!-- 		댓글달기 -->
 			<div class="row">
 				<div class="col-md-10">
 					<input type="text" id="re_comment" class="form-control"
 						placeholder="댓글을 입력해주세요">
+					<input type="hidden" id="userid" value="${loginVo.userid }">
 				</div>
 				<div class="col-md-1">
 					<button type="button" id="btnComment"
@@ -265,7 +236,6 @@ $(document).ready(function() {
 				<!-- 			<div class="col-md-8"> -->
 				<table style="display: none;" id="table_clone">
 					<tr>
-						<td></td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -286,7 +256,6 @@ $(document).ready(function() {
 					<tr>
 						<td>#</td>
 						<td>내용</td>
-						<td>작성자</td>
 						<td>날짜</td>
 						<td>수정</td>
 						<td>삭제</td>

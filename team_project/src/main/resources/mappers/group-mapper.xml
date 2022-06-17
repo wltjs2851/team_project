@@ -32,12 +32,30 @@
 	</insert>
 	
 	<update id="updateGroupMember">
-		update tbl_group set g_present = #{g_present} + 1 where gno = #{gno}
+		update tbl_group set g_present = g_present + #{cnt} where gno = #{gno}
 	</update>
 
+	<delete id="deleteJoinGroup">
+		delete from tbl_group_join
+		where gno = #{gno}
+		and userid = #{userid}
+	</delete>
 	
 	<delete id="deleteGroup">
 		delete from tbl_group where gno = #{gno}
 	</delete>
+	
+	<!-- 그룹별 멤버 가져오기 -->
+	<select id="getGroupMember" resultType="GroupJoinVo">
+		select userid from tbl_group_join
+		where gno = #{gno}
+	</select>
+	
+	<!-- 가입한 그룹 목록 가져오기 -->
+	<select id="getGroupById" resultType="GroupVo">
+		select * from tbl_group
+		where gno in (select gno from tbl_group_join
+		where userid = #{userid})
+	</select>
 
 </mapper>

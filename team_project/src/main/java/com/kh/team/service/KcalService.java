@@ -25,4 +25,6 @@ public interface KcalService {
 		
 		// 칼로리 글 전체 갯수
 		public int getCountKcal(PagingDto pagingDto);
+		
+		public String getK_picByKno(int kno);
 }

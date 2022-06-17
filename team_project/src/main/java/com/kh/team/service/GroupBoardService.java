@@ -19,9 +19,8 @@ public interface GroupBoardService {
 	public int countComment(int gbno);
 	public String getGb_picById(int gbno);
 //	public String getGroupById(String userid);
-	public List<GroupJoinVo> list(String userid);
-	public List<GroupJoinVo> list(int gno);
+	
 	public boolean deleteMember(String userid, int gno);
-	public boolean updateCtnMember(int gno);
+	public void updateCtnMember(int gno);
 
 }

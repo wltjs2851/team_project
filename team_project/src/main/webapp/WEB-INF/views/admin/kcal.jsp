@@ -81,7 +81,7 @@ $(document).ready(function(){
 	});
 });
 </script>
-${pagingDto}
+<%-- ${pagingDto} --%>
 <!-- 페이지, 검색 값 -->
 <form id="frmPaging">
 	<input type="hidden" name="kno" value="">
@@ -95,7 +95,7 @@ ${pagingDto}
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<h2>운동칼로리 사전</h2>
+			<h2><a href="/admin/listKcal">운동칼로리 사전</a></h2>
 			<hr>
 			</div>
 		<div class="col-md-2"></div>

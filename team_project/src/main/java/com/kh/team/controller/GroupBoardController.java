@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -92,13 +93,18 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupRead", method = RequestMethod.GET)
-	public String read(int gbno, Model model, HttpServletRequest httpRequest) throws Exception {
+	public String read(int gno, int gbno, Model model, HttpServletRequest httpRequest) throws Exception {
 		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
 		model.addAttribute("groupBoardVo", groupBoardVo);
 		
 		int count = groupBoardService.countComment(gbno);
 		System.out.println("count: " + count);
 		model.addAttribute("count", count);
+		
+		// 그룹 정보
+		GroupVo groupVo = groupService.groupByGno(gno);
+		model.addAttribute("groupVo", groupVo);
+		System.out.println("groupRead, gno: " + gno);
 
 		// 로그인 한 경우에만 접근 가능
 		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
@@ -139,44 +145,47 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupUpdateForm", method = RequestMethod.GET)
-	public String updateForm(int gbno, Model model) {
-		GroupBoardVo data = groupBoardService.read(gbno);
-		model.addAttribute("data", data);
-		
-		return "groupboard/groupUpdateForm";
-	}
+	   public String updateForm(int gbno, Model model) {
+	      GroupBoardVo data = groupBoardService.read(gbno);
+	      model.addAttribute("data", data);
+	      
+	      return "groupboard/groupUpdateForm";
+	   }
 	
-	@RequestMapping(value = "groupUpdateRun", method = RequestMethod.POST)
-	public String updateRun(MultipartHttpServletRequest request, GroupBoardVo groupBoardVo, RedirectAttributes rttr, MultipartFile file, String prevImg) {
-		String originalFilename = file.getOriginalFilename();
-		System.out.println("prevImg: " + prevImg);
-		
-//			수정폼에서 사진을 등록하였다면 사진 변경
-			try {
-				if(originalFilename != null && !originalFilename.equals("")) {
-					String gb_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
-					groupBoardVo.setGb_pic(gb_pic);
-				} else { // 그렇지 않다면 사진 삭제
-					if(prevImg != null && !prevImg.equals("")) {
-						int gbno = groupBoardVo.getGbno();
-						String gb_pic = groupBoardService.getGb_picById(gbno);
-						groupBoardVo.setGb_pic(gb_pic);
-					} else if(prevImg == null || prevImg.equals("")) {
-						groupBoardVo.setGb_pic(null);
-					}
-				}
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			rttr.addAttribute("gbno", groupBoardVo.getGbno());
-			boolean result = groupBoardService.update(groupBoardVo);
-			rttr.addFlashAttribute("update_result", result);
-		
-		return "redirect:/groupboard/groupRead";
-	}
+	   @RequestMapping(value = "groupUpdateRun", method = RequestMethod.POST)
+	   public String updateRun(MultipartHttpServletRequest request, GroupBoardVo groupBoardVo, RedirectAttributes rttr, MultipartFile file, String prevImg) {
+	      String originalFilename = file.getOriginalFilename();
+	      System.out.println("prevImg: " + prevImg);
+	      
+	      String content = groupBoardVo.getGb_content();
+	      
+	      
+//	         수정폼에서 사진을 등록하였다면 사진 변경
+	         try {
+	            if(originalFilename != null && !originalFilename.equals("")) {
+	               String gb_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
+	               groupBoardVo.setGb_pic(gb_pic);
+	            } else { // 그렇지 않다면 사진 삭제
+	               if(prevImg != null && !prevImg.equals("")) {
+	                  int gbno = groupBoardVo.getGbno();
+	                  String gb_pic = groupBoardService.getGb_picById(gbno);
+	                  groupBoardVo.setGb_pic(gb_pic);
+	               } else if(prevImg == null || prevImg.equals("")) {
+	                  groupBoardVo.setGb_pic(null);
+	               }
+	            }
+	         } catch(Exception e) {
+	            e.printStackTrace();
+	         }
+	         rttr.addAttribute("gbno", groupBoardVo.getGbno());
+	         boolean result = groupBoardService.update(groupBoardVo);
+	         rttr.addFlashAttribute("update_result", result);
+	      
+	      return "redirect:/groupboard/groupRead?gno=" + groupBoardVo.getGno() + "&gbno=" + groupBoardVo.getGbno();
+	   }
 
 	@RequestMapping(value = "groupDelete", method = RequestMethod.GET)
-	public String delete(int gno, int gbno, SearchDto searchDto, RedirectAttributes rttr) {
+	public String delete(int gno, int gbno, RedirectAttributes rttr) {
 		boolean result = groupBoardService.delete(gbno);
 		rttr.addFlashAttribute("delete_result", result);
 		
@@ -184,7 +193,7 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupMain/{gno}", method = RequestMethod.GET)
-	public String main(Model model, String gb_notice, @PathVariable("gno") int gno, SearchDto searchDto) {
+	public String main(HttpSession session, Model model, String gb_notice, @PathVariable("gno") int gno, SearchDto searchDto) {
 		searchDto.setGno(gno);
 		List<GroupBoardVo> groupList = groupBoardService.list(searchDto);
 		model.addAttribute("groupList", groupList);
@@ -198,6 +207,10 @@ public class GroupBoardController {
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);
 		
+		// 시영 테스트
+		session.setAttribute("groupVo", groupVo);
+		
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		
 		return "groupboard/groupMain";
 	}
@@ -211,16 +224,7 @@ public class GroupBoardController {
 		return data;
 	}
 	
-	@RequestMapping(value = "groupInfo", method = RequestMethod.GET)
-	public String groupInfo(Model model, int gno) {
-		GroupVo groupVo = groupService.groupByGno(gno);
-		model.addAttribute("groupVo", groupVo);
-		
-		List<GroupJoinVo> groupJoinMember = groupBoardService.list(gno);
-		model.addAttribute("groupJoinMember", groupJoinMember);
-		
-		return "groupboard/groupInfo";
-	}
+	
 	
 	@RequestMapping(value = "like", method = RequestMethod.POST)
 	public String like() {
@@ -274,16 +278,25 @@ public class GroupBoardController {
 		return String.valueOf(result);
 	}
 	
-	@RequestMapping(value = "myGroupList", method = RequestMethod.GET)
-	public String myGroupList(/*int gno, */GroupVo groupVo, Model model, String userid, HttpServletRequest httpRequest) { // 유저 아이디를 기준으로 가입한 그룹들 가져오는,,,
-		userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
+	@RequestMapping(value = "leave/{userid}", method = RequestMethod.GET)
+	public String leaveGroup(@PathVariable("userid") String userid, int gno, RedirectAttributes rttr) {
+		boolean result = groupBoardService.deleteMember(userid, gno);
+		rttr.addFlashAttribute("leave_group", result);
 		
-		List<GroupJoinVo> group = groupBoardService.list(userid);
-		model.addAttribute("group", group);
+		groupBoardService.updateCtnMember(gno);
 		
-//		groupVo = groupService.groupByGno(gno);
-//		model.addAttribute("groupVo", groupVo);
-		
-		return "groupboard/myGroupList";
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/uploadSummernoteImageFile", method = RequestMethod.POST)
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
+
+		String uploadPath = "//192.168.0.90/gbpic";
+		String originalFilename = multipartFile.getOriginalFilename();
+
+		String file = FileUtil.uploadFile(uploadPath, originalFilename, multipartFile.getBytes());
+		System.out.println(file);
+		return file;
 	}
 }

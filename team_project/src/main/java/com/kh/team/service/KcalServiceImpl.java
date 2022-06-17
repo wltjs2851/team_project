@@ -56,4 +56,9 @@ public class KcalServiceImpl implements KcalService{
 		return kcalDao.getCountKcal(pagingDto);
 	}
 
+	@Override
+	public String getK_picByKno(int kno) {
+		return kcalDao.getK_picByKno(kno);
+	}
+
 }

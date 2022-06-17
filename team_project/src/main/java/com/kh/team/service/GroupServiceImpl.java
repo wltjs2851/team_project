@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.dao.GroupDao;
+import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 
 @Service
@@ -50,13 +51,37 @@ public class GroupServiceImpl implements GroupService{
 
 	@Override
 	@Transactional
-	public boolean joinGroup(GroupVo groupVo, String userid) {
-		boolean groupResult = groupDao.updateGroupMember(groupVo);
-		boolean memberResult = groupDao.insertJoinGroup(groupVo.getGno(), userid);
+	public boolean joinGroup(int gno, String userid) {
+		boolean groupResult = groupDao.updateGroupMember(gno, 1);
+		boolean memberResult = groupDao.insertJoinGroup(gno, userid);
 		if(groupResult && memberResult) {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	@Transactional
+	public boolean banGroup(int gno, String userid) {
+		boolean groupResult = groupDao.updateGroupMember(gno, -1);
+		boolean joinGroupResult = groupDao.deleteJoinGroup(gno, userid);
+		if (groupResult && joinGroupResult) {
+			return true;
+		}
+//		groupDao.
+		return false;
+	}
+	
+	@Override
+	public List<GroupJoinVo> list(int gno) {
+		List<GroupJoinVo> groupJoinMember = groupDao.list(gno);
+		return groupJoinMember;
+	}
+
+	@Override
+	public List<GroupJoinVo> list(String userid) {
+		List<GroupJoinVo> groupJoinList = groupDao.list(userid);
+		return groupJoinList;
 	}
 
 }

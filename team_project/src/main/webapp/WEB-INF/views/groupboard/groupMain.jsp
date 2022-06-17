@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
+
 <script>
 $(function() {
 	var create_result = "${create_result}";
@@ -24,6 +25,7 @@ $(function() {
 	
 	// 검색 버튼
 	$("#btnSearch").click(function() {
+		console.log("click");
 		var searchType = $("#searchType").val();
 		var keyword = $("#keyword").val();
 		console.log("searchType: ", searchType);
@@ -35,35 +37,123 @@ $(function() {
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
+	
+	// 그룹 탈퇴 버튼
+	$("#leaveGroup").click(function() {
+		console.log("click");
+		$("#modal-734488").trigger("click");
+	});
+	
+	// 모달, 탈퇴 버튼
+	$("#leave").click(function() {
+		console.log("Click");
+		var userid = "${loginVo.userid}";
+		var gno = ${groupVo.gno};
+		var url = "/group/deleteMember/" + userid + "/" + gno;
+// 		var sData = {
+// 				"gno" : gno
+// 		}
+		
+		$.get(url, function(rData) {
+			console.log(rData);
+			if(rData == "true") {
+				alert("탈퇴 완료");
+				$("#btnModalClose").trigger("click");
+			}
+		});
+	});
 });
 </script>
 
-<%-- ${ groupList } --%>
-<%-- ${ noticeList } --%>
-${ groupVo }
-<%-- ${ result } --%>
-
 <%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %>
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-9">
+<%-- ${ groupVo } --%>
+<!-- <hr> -->
+<%-- ${ loginVo } --%>
+
+
+<!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
+<div class="row">
+	<div class="col-md-12">
+		 <a id="modal-734488" href="#modal-container-734488" role="button" class="btn" data-toggle="modal" style="display:none;">Launch demo modal</a>
+		
+		<div class="modal fade" id="modal-container-734488" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="myModalLabel">
+							그룹 탈퇴
+						</h5> 
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						정말로 탈퇴하시겠습니까?
+					</div>
+					<div class="modal-footer">
+						 
+						<button id="leave" type="button" class="btn btn-primary">
+							탈퇴
+						</button> 
+						<button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">
+							취소
+						</button>
+					</div>
+				</div>
 				
-				<c:forEach items="${ noticeList }" var="groupBoardVo" varStatus="status" begin="0" end="2">
-					<h3 style="background-color: powderblue;">
-					<c:if test="${ groupBoardVo.gno == groupVo.gno }">
-						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">[공지] ${ groupBoardVo.gb_title }</a>
-					</c:if>
-					</h3>
-				</c:forEach>
-					<a href="/groupboard/notice?gno=${ groupVo.gno }">전체 공지글 확인하기</a>
-				
-					<c:forEach items="${ groupList }" var="groupBoardVo">
-				
-						<h2 style="background-color: aliceblue">${groupBoardVo.gbno}. 제목: ${ groupBoardVo.gb_title }		
-										<button class="btn dropdown-toggle" style="background-color: aliceblue" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+
+
+<!--================================
+=            Page Title            =
+=================================-->
+<section class="page-title">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<!-- Title text -->
+				<h3>${ groupVo.g_name }</h3>
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
+<!--==================================
+=            Blog Section            =
+===================================-->
+
+<section class="blog section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+			
+			<c:forEach items="${ groupList }" var="groupBoardVo">
+				<!-- Article 01 -->
+				<article>
+					<!-- Post Image -->
+					<div class="image">
+						<c:choose>
+							<c:when test="${ empty groupBoardVo.gb_pic }">
+								<div></div>
+							</c:when>
+							<c:otherwise>
+								<img alt="게시글 사진" style="max-width: 50%; height: auto;" src="/groupboard/displayImage?filename=${groupBoardVo.gb_pic}" width="100" height="100">
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<!-- Post Title -->
+					<h3>${ groupBoardVo.gb_title }</h3>
+					<ul class="list-inline">
+						<li class="list-inline-item">
+							by ${ groupBoardVo.userid }
+							<button class="btn dropdown-toggle" style="background-color: #ffffff; width: 20px; height:50px; padding: 1% 0" type="button" id="dropdownMenuButton" data-toggle="dropdown">
 										
 											<i class='fas fa-ellipsis-v'></i>
 										
@@ -76,51 +166,41 @@ ${ groupVo }
 										</c:if>
 											 <a class="dropdown-item" href="#">회원 정보 보기</a>
 											 
-										</div></h2>
-						<p>작성자: ${groupBoardVo.userid}, 작성일: ${ groupBoardVo.gb_regdate }</p>
-						<p>${ groupBoardVo.gb_content }</p>
-						
-						<div>
-							<c:choose>
-								<c:when test="${ empty groupBoardVo.gb_pic }">
-									<div></div>
-								</c:when>
-								<c:otherwise>
-									<img alt="게시글 사진" src="/groupboard/displayImage?filename=${groupBoardVo.gb_pic}" width="100" height="100">
-								</c:otherwise>
-							</c:choose>
-						</div>
-						
-						<div>
-						   		<i class='far fa-comment-alt'></i> ${ groupBoardVo.gb_comment }
-							<i class='far fa-heart'></i> ${ groupBoardVo.gb_like }
-						</div>
-						
-						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }">...더 보기</a>
-						<p>
-<%-- 							<a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }">삭제</a> --%>
-<%-- 							<a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a> --%>
-						</p>
+										</div>
+							</li>
+						<li class="list-inline-item">${ groupBoardVo.gb_regdate }</li>
+					</ul>
+					<!-- Post Description -->
+					<p>${ groupBoardVo.gb_content }</p>
+					
+					<div>
+				   		<i class='far fa-comment-alt'></i> ${ groupBoardVo.gb_comment }
+						<i class='far fa-heart'></i> ${ groupBoardVo.gb_like }
+					</div>
+					
+					<!-- Read more button -->
+					<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }" class="btn btn-transparent">Read More</a>
+				</article>
 				
-					</c:forEach>
-				</div>
+			</c:forEach>
+			
+			</div>
+			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
+				<div class="sidebar">
 				
-				
-				<div class="col-md-3">
-				
-<!-- 				<aside class="column dotcom__aside bottom-12" style="position: fixed;"> -->
-					<div class="list-group">
+				<aside style="position: fixed; top: 30px bottom: 270px;">
+				<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
-							<h2>${ groupVo.g_name }</h2>
+							<h2>그룹 소개</h2>
 						</div>
 						<div class="list-group-item">
-							<h4 class="list-group-item-heading">
-								그룹 소개
-							</h4>
+<!-- 							<h4 class="list-group-item-heading"> -->
+<!-- 								그룹 소개 -->
+<!-- 							</h4> -->
 							<p class="list-group-item-text">
 								${ groupVo.g_intro }
-								...(달력을 넣어서 그룹 일정 표시하도록,,?)
+<!-- 								...(달력을 넣어서 그룹 일정 표시하도록,,?) -->
 							</p>
 						</div>
 						
@@ -147,15 +227,27 @@ ${ groupVo }
 							<a href="/groupboard/groupMain/${ groupVo.gno }" class="btn-primary" style="width: 50px; height:50px; padding: 2% 0">검색 초기화</a>
 							</div>
 							
-							<input type="text" id="keyword" value="${searchDto.keyword}">
-							<button id="btnSearch" style="width: 50px; height:30px; padding: 1% 0" class="btn btn-success">검색</button>
+							<div class="widget search p-0">
+								<div class="input-group">
+								    <input type="text" class="form-control" id="keyword" value="${searchDto.keyword}" placeholder="Search...">
+								    <span id="btnSearch" class="input-group-addon"><i class="fa fa-search"></i></span>
+							    </div>
+							</div>
+							
+<%-- 							<input type="text" id="keyword" value="${searchDto.keyword}"> --%>
+<!-- 							<button id="btnSearch" style="width: 50px; height:30px; padding: 1% 0" class="btn btn-success">검색</button> -->
 							
 						</div>	
 						
 						
-							<a href="/groupboard/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+							<a href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
+							<div>
+							<a href="/chat/chat" class="list-group-item list-group-item-action active justify-content-between">
+								그룹 채팅방
+							</a>
+							</div>
 					</div>
 					<nav>
 						<ol class="breadcrumb">
@@ -167,41 +259,75 @@ ${ groupVo }
 								<a href="/groupboard/activityInfo/${ groupVo.gno }">활동 정보</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="">그룹 탈퇴</a>
+								<a href="#" id="leaveGroup">그룹 탈퇴</a>
 							</li>
 						</ol>
 					</nav>
-					<div class="row">
-						<div>
-							<div class="card">
-								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" />
-								<div class="card-block">
-									<h5 class="card-title">
-										Card title
-									</h5>
-									<p class="card-text">
-										그룹원
-									</p>
-									<p>
-<%-- 										${ groupVo.users } --%>
-										<a class="btn btn-primary" href="#">쪽지보내기</a>
-<%-- 										<c:if test="그룹장일 경우"> --%>
-											<a class="btn" href="#">내쫓기</a>
-<%-- 										</c:if> --%>
-									</p> 
-								</div>
-							</div>
-						</div>
-					</div>
-<!-- 					</aside> -->
 					
+					</aside>
+				
+				
+					<!-- Search Widget -->
+<!-- 					<div class="widget search p-0"> -->
+<!-- 						<div class="input-group"> -->
+<!-- 						    <input type="text" class="form-control" id="expire" placeholder="Search..."> -->
+<!-- 						    <span class="input-group-addon"><i class="fa fa-search"></i></span> -->
+<!-- 					    </div> -->
+<!-- 					</div> -->
+<!-- 					Category Widget -->
+<!-- 					<div class="widget category"> -->
+<!-- 						Widget Header -->
+<!-- 						<h5 class="widget-header">Categories</h5> -->
+<!-- 						<ul class="category-list"> -->
+<!-- 							<li><a href="">Appearel <span class="float-right">(2)</span></a></li> -->
+<!-- 							<li><a href="">Accesories <span class="float-right">(5)</span></a></li> -->
+<!-- 							<li><a href="">Business<span class="float-right">(7)</span></a></li> -->
+<!-- 							<li><a href="">Entertaiment<span class="float-right">(3)</span></a></li> -->
+<!-- 							<li><a href="">Education<span class="float-right">(9)</span></a></li> -->
+<!-- 						</ul> -->
+<!-- 					</div> -->
+<!-- 					Store Widget -->
+<!-- 					<div class="widget related-store"> -->
+<!-- 						Widget Header -->
+<!-- 						<h5 class="widget-header">Related Store</h5> -->
+<!-- 						<ul class="store-list md list-inline"> -->
+<!-- 							<li class="list-inline-item"> -->
+<!-- 								<a href=""><img src="images/popular-offer/populer-offer-02.png" alt="store-image"></a> -->
+<!-- 							</li> -->
+<!-- 							<li class="list-inline-item"> -->
+<!-- 								<a href=""><img src="images/popular-offer/populer-offer-03.png" alt="store-image"></a> -->
+<!-- 							</li> -->
+<!-- 							<li class="list-inline-item"> -->
+<!-- 								<a href=""><img src="images/popular-offer/populer-offer-04.png" alt="store-image"></a> -->
+<!-- 							</li> -->
+<!-- 							<li class="list-inline-item"> -->
+<!-- 								<a href=""><img src="images/popular-offer/populer-offer-05.png" alt="store-image"></a> -->
+<!-- 							</li> -->
+<!-- 							<li class="list-inline-item"> -->
+<!-- 								<a href=""><img src="images/popular-offer/populer-offer-06.png" alt="store-image"></a> -->
+<!-- 							</li> -->
+<!-- 							<li class="list-inline-item"> -->
+<!-- 								<a href=""><img src="images/popular-offer/populer-offer-07.png" alt="store-image"></a> -->
+<!-- 							</li> -->
+<!-- 						</ul> -->
+<!-- 					</div> -->
+<!-- 					Archive Widget -->
+<!-- 					<div class="widget archive"> -->
+<!-- 						Widget Header -->
+<!-- 						<h5 class="widget-header">Archives</h5> -->
+<!-- 						<ul class="archive-list"> -->
+<!-- 							<li><a href="">January 2017</a></li> -->
+<!-- 							<li><a href="">February 2017</a></li> -->
+<!-- 							<li><a href="">March 2017</a></li> -->
+<!-- 							<li><a href="">April 2017</a></li> -->
+<!-- 							<li><a href="">May 2017</a></li> -->
+<!-- 						</ul> -->
+<!-- 					</div> -->
 				</div>
-				
-				
 			</div>
 		</div>
 	</div>
-</div>
+</section>
 
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>

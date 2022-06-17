@@ -4,9 +4,6 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-<%-- ${ groupVo } --%>
-${ groupJoinMember }
-
 <script>
 $(function() {
 	$(".tab-content > div").hide();
@@ -17,8 +14,32 @@ $(function() {
 		return false;
 	}).filter(":eq(0)").click();
 	
+	// 강퇴 버튼
+	$(".btnBan").click(function() {
+		console.log("click");
+		var that = $(this);
+		var userid = that.attr("data-value");
+		console.log(userid);
+		var gno = "${groupVo.gno}";
+		var url = "/group/deleteMember/" + userid + "/" + gno;
+// 		var sData = {
+// 				"gno" : gno
+// 		}
+		
+		$.get(url,function(rData) {
+			console.log(rData);
+			if (rData == "true") {
+				alert("그룹원 삭제 성공");
+				that.parent().fadeOut("slow");
+			}
+		});
+	});
 });
 </script>
+
+${ groupVo }
+<hr>
+${ groupJoinMember }
 
 <div class="container-fluid">
 	<div class="row">
@@ -61,16 +82,18 @@ $(function() {
 									<div>
 									
 									<c:forEach items="${groupJoinMember}" var="groupJoinVo">
-										${ groupJoinVo.userid }
+										<div style="margin: 10px;">
+										<span>${ groupJoinVo.userid }</span>
 										
 										<c:if test="${ groupVo.g_leader == loginVo.userid }">
-											<button id="btnBan" class="btn btn-danger" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
+											<button data-value="${ groupJoinVo.userid }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
 										</c:if>
 										
-										<br><br>
+										</div>
 									</c:forEach>
 									
 									</div>
+
 								</p>
 							</div>
 						</div>

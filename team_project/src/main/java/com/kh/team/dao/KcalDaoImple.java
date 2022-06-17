@@ -68,4 +68,10 @@ public class KcalDaoImple implements KcalDao{
 		return count;
 	}
 
+	@Override
+	public String getK_picByKno(int kno) {
+		String k_pic = sqlSession.selectOne(NAMESPACE + "getK_picByKno", kno);
+		return k_pic;
+	}
+
 }

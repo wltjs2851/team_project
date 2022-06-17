@@ -2,6 +2,7 @@ package com.kh.team.service;
 
 import java.util.List;
 
+import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 
 public interface GroupService {
@@ -10,5 +11,8 @@ public interface GroupService {
 	public boolean moidfyGroup(GroupVo groupVo);
 	public boolean removeGroup(int gno);
 	public GroupVo groupByGno(int gno);
-	public boolean joinGroup(GroupVo groupVo, String userid);
+	public boolean joinGroup(int gno, String userid);
+	public boolean banGroup(int gno, String userid);
+	public List<GroupJoinVo> list(int gno);
+	public List<GroupJoinVo> list(String userid);
 }

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 
 @Repository
@@ -58,10 +59,10 @@ public class GroupDaoImpl implements GroupDao{
 	}
 
 	@Override
-	public boolean updateGroupMember(GroupVo groupVo) {
-		Map<String, Object> parameter = new HashMap<String, Object>();
-		parameter.put("gno", groupVo.getGno());
-		parameter.put("g_present", groupVo.getG_present());
+	public boolean updateGroupMember(int gno, int cnt) {
+		Map<String, Integer> parameter = new HashMap<>();
+		parameter.put("gno", gno);
+		parameter.put("cnt", cnt);
 		int count = sqlSession.update(NAMESPACE + "updateGroupMember", parameter);
 		if(count > 0) {
 			return true;
@@ -86,6 +87,30 @@ public class GroupDaoImpl implements GroupDao{
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean deleteJoinGroup(int gno, String userid) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("gno", gno);
+		map.put("userid", userid);
+		int count = sqlSession.insert(NAMESPACE + "deleteJoinGroup", map);
+		if (count > 0) { 
+			return true;
+		} 
+		return false;
+		
+	}
+	
+	@Override
+	public List<GroupJoinVo> list(int gno) {
+		List<GroupJoinVo> groupJoinMember = sqlSession.selectList(NAMESPACE + "getGroupMember", gno);
+		return groupJoinMember;
+	}
+
+	@Override
+	public List<GroupJoinVo> list(String userid) {
+		List<GroupJoinVo> groupJoinList = sqlSession.selectList(NAMESPACE + "getGroupById", userid);
+		return groupJoinList;
 	}
 
 }

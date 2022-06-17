@@ -4,16 +4,61 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
+<script>
+
+$(function() {
+	$("#summernote").summernote({
+		height: 300,
+		minHeight: null,
+		maxHeight: null,
+		focus: true,
+		lang: "ko-KR",
+		placeholder: '최대 2048자까지 쓸 수 있습니다.',
+			callbacks: {	//여기 부분이 이미지를 첨부하는 부분
+				onImageUpload : function(files) {
+					uploadSummernoteImageFile(files[0]);
+				}
+			}
+	});
+	
+	function uploadSummernoteImageFile(file) {
+		data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "/groupboard/uploadSummernoteImageFile",
+			enctype : 'multipart/form-data',
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				console.log(data);
+				$("#summernote").summernote('insertImage', '/groupboard/displayImage?filename=' + data);
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+	};
+	
+});
+</script>
+
+<script src="/resources/js/summernote/summernote-lite.js"></script>
+<script src="/resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="/resources/css/summernote/summernote-lite.css">
+
 <%-- ${ loginVo.gno } --%>
-<%-- ${ loginVo } --%>
-${ groupVo }
+${ loginVo }
+<%-- ${ groupVo } --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 		
 			<form role="form" name="frmWrite" action="/groupboard/groupWriteRun" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="gno" value="${ groupVo.gno }">]
-<%-- 				<input type="hidden" name="userid" value="${ loginVo.userid }"> --%>
+				<input type="hidden" name="gno" value="${ groupVo.gno }">
+				<input type="hidden" name="userid" value="${ loginVo.userid }">
 				
 				<div class="form-group">
 					 
@@ -23,12 +68,8 @@ ${ groupVo }
 				<div class="form-group">
 					 
 					<label for="gb_content">내용</label>
-					<input type="text" class="form-control" name="gb_content" id="gb_content" required />
-				</div>
-				<div class="form-group">
-					 
-					<label for="userid">아이디</label>
-					<input type="text" class="form-control" name="userid" id="userid" />
+<!-- 					<input type="text" class="form-control" name="gb_content" id="gb_content" required /> -->
+					<textarea id="summernote" name="gb_content"></textarea>
 				</div>
 				<div class="form-group">
 					 

@@ -11,6 +11,7 @@ $(function() {
 		alert("수정 완료");
 	}
 	
+	// 댓글 입력
 	$("#btnCommentInsert").click(function() {
 		console.log("click");
 		var count = $(".count").val();
@@ -162,7 +163,9 @@ $(function() {
 });
 </script>
 
-${ groupBoardVo }
+<%-- ${ groupBoardVo } --%>
+<!-- <hr> -->
+<%-- ${ groupVo } --%>
 <%-- ${ heart } --%>
 <%-- ${ count } --%>
 
@@ -240,7 +243,7 @@ ${ groupBoardVo }
 				<table>
 					<tr>
 						<td><a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn-success">수정</a></td>
-						<td><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn-danger">삭제</a></td>
+						<td><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${groupBoardVo.gno}" class="btn btn-sm btn-danger">삭제</a></td>
 					</tr>
 				</table>
 <!-- 				<button style="margin: 20px 40%">수정</button> -->
@@ -253,6 +256,7 @@ ${ groupBoardVo }
 				<div class="row">
 					<div class="col-md-9">
 						<input type="text" id="c_content" class="form-control" placeholder="댓글을 입력해주세요">
+						<input type="hidden" value="${ loginVo.userid }" id="c_userid" class="form-control">
 					</div>
 					<div>
 						<button type="button" id="btnCommentInsert" class="btn btn-sm btn-primary">완료</button>
@@ -298,27 +302,28 @@ ${ groupBoardVo }
 					<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
-							그룹 명
+							<h2>${ groupVo.g_name }</h2>
 						</div>
 						<div class="list-group-item">
 							<h4 class="list-group-item-heading">
 								그룹 소개
 							</h4>
 							<p class="list-group-item-text">
-								...
+								${ groupVo.g_intro }
+								...(달력을 넣어서 그룹 일정 표시하도록,,?)
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
 							<a href="/groupboard/groupMain/${ groupBoardVo.gno }">그룹 메인으로</a>
 						</div>
-							<a href="/groupboard/groupInfo?gno=${ groupBoardVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+							<a href="/group/groupInfo?gno=${ groupBoardVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>
 					<nav>
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item">
-								<a href="/groupboard/groupWriteForm">글쓰기</a>
+								<a href="/groupboard/groupWriteForm?gno=${ groupBoardVo.gno }">글쓰기</a>
 							</li>
 							<li class="breadcrumb-item">
 								<a href="/groupboard/activityInfo/${ groupBoardVo.gno }">활동 정보</a>

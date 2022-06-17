@@ -93,6 +93,7 @@ public class AdminController {
 		pagingDto.setCount(kcalService.getCountKcal(pagingDto));
 		pagingDto.setPage(pagingDto.getPage());
 		List<KcalVo> listKcal = kcalService.listKcal(pagingDto);
+//		pagingDto.setCount(kcalService.getCountKcal(pagingDto));
 //		System.out.println("listKcal:" + listKcal);
 		
 		model.addAttribute("listKcal", listKcal);
@@ -123,23 +124,25 @@ public class AdminController {
 	}
 	// 운동칼로리 글 수정
 	@RequestMapping(value = "/updateKcal", method = RequestMethod.POST)
-	public String updateKcal(KcalVo kcalVo, RedirectAttributes rttr, MultipartFile file) {
+	public String updateKcal(KcalVo kcalVo, RedirectAttributes rttr, MultipartFile file, String prevImg) throws Exception{
 		String originalFilename = file.getOriginalFilename();
+		System.out.println(prevImg);
 		
-		if(originalFilename == null || originalFilename == "") {
-			boolean result = kcalService.updateKcal(kcalVo);
-			rttr.addFlashAttribute("updateKcal_result", result);
+		if (originalFilename != null && !originalFilename.equals("")) {
+			String k_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
+			kcalVo.setK_pic(k_pic);
 		} else {
-			try {
-				String k_pic = FileUtil.uploadFile("//192.168.0.90/upic", originalFilename, file.getBytes());
+			if (prevImg != null && !prevImg.equals("")) {
+				int kno = kcalVo.getKno();
+				String k_pic = kcalService.getK_picByKno(kno);
 				kcalVo.setK_pic(k_pic);
-				boolean result = kcalService.updateKcal(kcalVo);
-				rttr.addFlashAttribute("updateKcal_result", result);
-			} catch (IOException e) {
-				e.printStackTrace();
+			} else if (prevImg == null || prevImg.equals("")) {
+				kcalVo.setK_pic(null);
 			}
 		}
 		
+		boolean result = kcalService.updateKcal(kcalVo);
+		rttr.addFlashAttribute("updateKcal_result", result);
 		
 		return "redirect:/admin/selectByKno?kno=" + kcalVo.getKno();
 	}
@@ -237,6 +240,14 @@ public class AdminController {
 			heart = 1;
 		}
 		return heart;
+	}
+	
+	// 추천 운동 글 수정 form 
+	@RequestMapping(value = "/updateRecommendForm", method = RequestMethod.GET)
+	public String updateRecommendForm(Model model, int reno) {
+		RecommendVo recommendVo = recommendService.selectByReno(reno);
+		model.addAttribute("recommendVo", recommendVo);
+		return "admin/recommendUpdateForm";
 	}
 	
 	// 추천 운동 글 수정

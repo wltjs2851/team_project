@@ -34,10 +34,72 @@ $(function() {
 			}
 		});
 	});
+	
+	$("#file").change(function(){
+	    setImageFromFile(this, "#pic");
+	});
+	
+	function setImageFromFile(input, expression) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            $(expression).attr("src", e.target.result);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	
+	$("#summernote").summernote({
+		height: 300,
+		minHeight: null,
+		maxHeight: null,
+		focus: true,
+		lang: "ko-KR",
+		placeholder: '최대 2048자까지 쓸 수 있습니다.',
+			callbacks: {	//여기 부분이 이미지를 첨부하는 부분
+				onImageUpload : function(files) {
+					uploadSummernoteImageFile(files[0]);
+				}
+			}
+	});
+	
+	var c = "${data.gb_content}";
+	var content = c.replace(" \" ", "\'");
+	
+	console.log(content);
+	
+	$("#summernote").summernote("code",  "${data.gb_content}");
+    
+    
+
+	function uploadSummernoteImageFile(file) {
+		data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "/groupboard/uploadSummernoteImageFile",
+			enctype : 'multipart/form-data',
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				console.log(data);
+				$("#summernote").summernote('insertImage', "/groupboard/displayImage?filename=" + data);
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+	};
+    
 });
 
 </script>
 
+<script src="/resources/js/summernote/summernote-lite.js"></script>
+<script src="/resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="/resources/css/summernote/summernote-lite.css">
 
 <div class="container-fluid">
 	<div class="row">
@@ -54,13 +116,9 @@ $(function() {
 				<div class="form-group">
 					 
 					<label for="gb_content">내용</label>
-					<input type="text" value="${ data.gb_content }" class="form-control" name="gb_content" id="gb_content" required />
+					<textarea id="summernote" name="gb_content"></textarea>
+<%-- 					<input type="text" value="${ data.gb_content }" class="form-control" name="gb_content" id="gb_content" required /> --%>
 				</div>
-<!-- 				<div class="form-group"> -->
-					 
-<!-- 					<label for="userid">아이디</label> -->
-<!-- 					<input type="text" class="form-control" name="userid" id="userid" /> -->
-<!-- 				</div> -->
 				<div class="form-group">
 					 
 					<label for="file">사진 추가</label>
