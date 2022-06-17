@@ -3,19 +3,33 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="/WEB-INF/views/include/header.jsp"%>
 <script>
-$("#file").change(function(){
-    setImageFromFile(this, "#groupImage");
+$(function(){
+	$("#file").change(function(){
+	    setImageFromFile(this, "#kcalImage");
+	});
+	
+	$("#btnUpdateKcal").click(function(){
+		var prevImg = $("#file").attr("data-image");
+		console.log(prevImg);
+		if (prevImg != null && prevImg != "") {
+			var index = prevImg.lastIndexOf("_");
+			var originalFilename = prevImg.substring(index + 1);
+			$("#prevImg").val(originalFilename);
+		} 
+		$("#frmUpdate").submit();
+	})
+	
+	
+	function setImageFromFile(input, expression) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            $(expression).attr("src", e.target.result);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
 });
-
-function setImageFromFile(input, expression) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $(expression).attr("src", e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
 </script>
 <%-- ${kcalVo } --%>
 <div class="container-fluid">
@@ -23,8 +37,9 @@ function setImageFromFile(input, expression) {
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
-			<form role="form" action="/admin/updateKcal" method="post" enctype="multipart/form-data">
+			<form role="form" action="/admin/updateKcal" method="post" enctype="multipart/form-data" id="frmUpdate">
 			<input type="hidden" name="kno" value="${param.kno }">
+			<input type="hidden" id="prevImg" name="prevImg">
 				<div class="form-group">
 					<label for="k_name">
 						운동 종목
@@ -59,20 +74,21 @@ function setImageFromFile(input, expression) {
 					<label for="file">
 						이미지
 					</label>
-					<input type="file" class="form-control-file" id="file" name="file" value="${kcalVo.k_pic }"/>
 				
 					<c:choose>
 						<c:when test="${ empty kcalVo.k_pic }">
-							<img id="groupImage" src="/resources/images/kcaldefault.png" data-image=""
+							<img id="kcalImage" src="/resources/images/kcaldefault.png"
 								class="img-thumbnail" alt="kcal image" style="height: 100px" name="kcalImage">
+							<input type="file" class="form-control-file" id="file" name="file"/>
 						</c:when>
 						<c:otherwise>
-							<img id="groupImage" src="/member/displayImage?filename=${kcalVo.k_pic  }" data-image="${kcalVo.k_pic  }"
+							<img id="kcalImage" src="/member/displayImage?filename=${kcalVo.k_pic  }"
 								class="img-thumbnail" alt="kcal image" style="width: 100px;" name="kcalImage">
+							<input type="file" class="form-control-file" id="file" name="file" data-image="${kcalVo.k_pic  }"/>
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<button type="submit" class="btn btn-primary">
+				<button type="button" class="btn btn-primary" id="btnUpdateKcal">
 					수정하기
 				</button>
 			</form>

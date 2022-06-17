@@ -81,7 +81,7 @@ $(document).ready(function(){
 	});
 });
 </script>
-${pagingDto}
+<%-- ${pagingDto} --%>
 <!-- 페이지, 검색 값 -->
 <form id="frmPaging">
 	<input type="hidden" name="kno" value="">

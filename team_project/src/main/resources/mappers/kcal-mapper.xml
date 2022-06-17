@@ -51,5 +51,11 @@
 		select count(*) from tbl_kcal
 	</select>
 	
+<!-- 	이전 사진 구하기 -->
+	<select id="getK_picByKno" resultType="String">
+		select k_pic from tbl_kcal
+		where kno = #{kno}
+	</select>
+	
 	
 </mapper>

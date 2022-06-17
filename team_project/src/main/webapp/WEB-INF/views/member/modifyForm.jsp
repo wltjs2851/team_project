@@ -92,7 +92,7 @@ $(function() {
 							<input type="file" class="form-control-file" name="file"/>
 							<p class="help-block">수정할 사진을 등록해주세요</p>
 						</c:when>
-						<c:otherwise>
+						<c:otherwise> 							
 							<img id="pic" height="100px" width="100px" src="/member/displayImage?filename=${loginVo.u_pic}" class="rounded-circle z-depth-2" alt="User Image">
 							<a id="delPic" href="#" data-filename="${loginVo.u_pic}">&times;</a>
 							<input type="file" class="form-control-file" id="file" name="file" data-filename="${loginVo.u_pic}"/>
