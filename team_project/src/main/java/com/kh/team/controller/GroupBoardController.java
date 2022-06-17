@@ -68,6 +68,9 @@ public class GroupBoardController {
 		String originalFilename = file.getOriginalFilename();
 		System.out.println("originalFilename: " + originalFilename);
 		
+		String content = groupBoardVo.getGb_content();
+      groupBoardVo.setGb_content(content.replaceAll("\"", "\'"));
+		
 		if(originalFilename == null || originalFilename == "") {
 			System.out.println("groupBoardController, writeRun, groupBoardVo: " + groupBoardVo);
 			boolean result = groupBoardService.create(groupBoardVo);
