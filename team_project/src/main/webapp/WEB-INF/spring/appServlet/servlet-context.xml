@@ -64,10 +64,9 @@
 	</beans:bean>
 	
 <!-- 소켓 -->
-<websocket:handlers allowed-origins="*">
-	<websocket:mapping handler="handlerChat" path="/chat"/>
-	<websocket:sockjs websocket-enabled="true"></websocket:sockjs>
-</websocket:handlers>
-<beans:bean id="handlerChat" class="com.kh.team.service.HandlerChat"/>
 
+<websocket:handlers>
+		<websocket:mapping handler="chatHandler"
+			path="/chat-ws/*" />
+	</websocket:handlers>
 </beans:beans>
