@@ -13,4 +13,6 @@ public interface CalendarDao {
 	public List<CalendarVo> getCalList(String userid);
 	
 	public boolean updateCheck(CalendarVo calendarVo);
+	
+	public int getCount(String userid, String start1);
 }
