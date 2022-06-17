@@ -132,7 +132,7 @@ th:first-child, td:first-child {
 			<form role="form" action="/admin/updateKcal" method="post">
 				<input type="hidden" name="kno" value="${kcalVo.kno}" />
 				<div>
-					<h2>운동 칼로리 사전</h2>
+					<h2><a href="/admin/listKcal">운동칼로리 사전</a></h2>
 					<hr>
 					<article class="single-post">
 						<!-- 				<form> -->
@@ -190,9 +190,13 @@ th:first-child, td:first-child {
 							<h6>효과 및 참고 사항</h6>
 							<p>: ${kcalVo.k_notes}</p>
 						</div>
+						<c:choose>
+						<c:when test="${loginVo.userid == 'admin01'}">
 						<a class="btn btn-sm btn-success" href="/admin/kcalUpdateForm?kno=${kcalVo.kno }">수정</a>
 						<a class="btn btn-danger" href="/admin/deleteKcal?kno=${kcalVo.kno}"
 						id="btnDeleteKcal">삭제</a>
+						</c:when>
+						</c:choose>
 					</article>
 <!-- 					검색했을 경우 검색 목록 -->
 				<c:choose>

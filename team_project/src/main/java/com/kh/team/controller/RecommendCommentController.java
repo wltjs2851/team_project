@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.team.service.RecommendCommentService;
@@ -19,7 +20,9 @@ public class RecommendCommentController {
 	private RecommendCommentService recommendCommentService;
 	
 	// 댓글 달기 
+	
 	@RequestMapping(value = "/insertComment", method = RequestMethod.POST)
+	@ResponseBody
 	public String insertRecommendComment(RecommendCommentVo recommendCommentVo) {
 		System.out.println("insertComment, recommendCommentVo" + recommendCommentVo);
 		boolean result = recommendCommentService.insertRecommendComment(recommendCommentVo);

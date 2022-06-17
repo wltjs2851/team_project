@@ -25,4 +25,7 @@ public interface KcalDao {
 	
 	// 전체 글 갯수 구하기 
 	public int getCountKcal (PagingDto pagingDto);
+	
+	// 게시글 사진 조회
+	public String getK_picByKno(int kno);
 }
