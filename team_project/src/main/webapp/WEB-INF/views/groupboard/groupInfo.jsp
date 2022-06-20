@@ -56,6 +56,7 @@ $(function() {
 				$(".btnUpdateGLeader").fadeOut("slow");
 				$("#updateGroupInfo").fadeOut("slow");
 				$("#leaveModal").fadeIn("slow");
+				$("#leader").text(g_leader);
 			}
 		});
 	});
@@ -169,7 +170,7 @@ ${ groupJoinMember }
 									<div>
 									
 									<div>
-										그룹장: <span>${ groupVo.g_leader }</span>
+										그룹장: <span id="leader">${ groupVo.g_leader }</span>
 									</div>
 									
 									<c:forEach items="${groupJoinMember}" var="groupJoinVo">
