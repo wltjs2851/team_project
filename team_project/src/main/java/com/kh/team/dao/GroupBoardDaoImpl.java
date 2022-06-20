@@ -112,9 +112,4 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		return false;
 	}
 
-	@Override
-	public void pickGLeader(int gno) {
-		sqlSession.selectOne(NAMESPACE + "pickGLeader", gno);
-	}
-
 }

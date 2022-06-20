@@ -21,7 +21,6 @@ public interface GroupBoardDao {
 	public String getGb_picdById(int gbno);
 //	public String getGroupById(String userid);
 	public boolean updateGLeader(GroupVo groupVo);
-	public void pickGLeader(int gno);
 	
 	public boolean deleteMember(String userid, int gno);
 	public void updateCtnMember(int gno);

@@ -85,9 +85,4 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		return result;
 	}
 
-	@Override
-	public void pickGLeader(int gno) {
-		groupBoardDao.pickGLeader(gno);
-	}
-
 }

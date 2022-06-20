@@ -21,7 +21,6 @@ public interface GroupBoardService {
 	public String getGb_picById(int gbno);
 //	public String getGroupById(String userid);
 	public boolean updateGLeader(GroupVo groupVo);
-	public void pickGLeader(int gno);
 	
 	public boolean deleteMember(String userid, int gno);
 	public void updateCtnMember(int gno);

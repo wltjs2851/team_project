@@ -169,7 +169,7 @@ ${ groupJoinMember }
 									<div>
 									
 									<div>
-										그룹장: <span></span>
+										그룹장: <span>${ groupVo.g_leader }</span>
 									</div>
 									
 									<c:forEach items="${groupJoinMember}" var="groupJoinVo">
