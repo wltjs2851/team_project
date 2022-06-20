@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +35,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.team.service.RecipeCommentService;
 import com.kh.team.service.RecipeService;
 import com.kh.team.util.FileUtil;
+import com.kh.team.util.NaverShopSearch;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeCommentVo;
@@ -178,6 +182,11 @@ public class RecipeController {
 		boolean result = recipeCommentService.modifyRecipeComment(recipeCommentVo);
 		return String.valueOf(result);
 	}
+	
+	@RequestMapping(value = "/searchPopup", method = RequestMethod.GET)
+	public String searchPopup() {
+		return "board/searchPopup";
+	}
 
 	@RequestMapping(value = "/summernote", method = RequestMethod.GET)
 	public String summernote() {
@@ -205,5 +214,21 @@ public class RecipeController {
 	@RequestMapping(value = "/map", method = RequestMethod.GET)
 	public String map() {
 		return "/board/map";
+	}
+	
+	@RequestMapping(value = "/shopping", method = RequestMethod.GET)
+	public String shopping() throws Exception {
+		return "/board/shopping";
+	}
+	
+	@RequestMapping(value = "/shoppingRun", method = RequestMethod.GET)
+	@ResponseBody
+	public Object shopping(String query) throws Exception {
+		NaverShopSearch sh = new NaverShopSearch();
+		String shopping = sh.search(query);
+		System.out.println(query);
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(shopping);
+		return obj;
 	}
 }

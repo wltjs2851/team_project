@@ -4,8 +4,9 @@
   
 <mapper namespace="com.kh.team.mappers.recipe">
 	<insert id="insertRecipe">
-		insert into tbl_recipe(rno, r_title, r_content, userid, r_pic)
-			values(seq_recipe_rno.nextval, #{r_title}, #{r_content}, #{userid}, #{r_pic, jdbcType=VARCHAR})
+		insert into tbl_recipe(rno, r_title, r_content, userid, r_pic, r_product)
+			values(seq_recipe_rno.nextval, #{r_title}, #{r_content}, #{userid},
+				#{r_pic, jdbcType=VARCHAR}, #{r_product, jdbcType=VARCHAR})
 	</insert>
 	
 	<select id="selectRecipe" resultType="RecipeVo">
@@ -17,8 +18,9 @@
 	</select>
 	
 	<update id="updateRecipe">
-		update tbl_recipe set r_title = #{r_title}, r_content = #{r_content}, r_pic = #{r_pic, jdbcType=VARCHAR}
-			where rno = #{rno}
+		update tbl_recipe set r_title = #{r_title}, r_content = #{r_content}, 
+			r_pic = #{r_pic, jdbcType=VARCHAR}, 
+			where rno = #{rno}, r_product = #{r_product, jdbcType=VARCHAR}
 	</update>
 	
 	<delete id="deleteRecipe">
