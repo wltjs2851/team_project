@@ -6,7 +6,8 @@
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 <script>
 $(function() {
-	$("#btnLogin").click(function() {
+	$("#btnLogin").click(function(e) {
+		e.preventDefault();
 // 		아이디 비밀번호 유효값 검사
 		var id = $("#userid").val();
 		var pw = $("#userpw").val();
@@ -45,13 +46,15 @@ $(function() {
 		e.preventDefault();
 		var url = "/member/findIdPop";
 		var option = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
-		window.open(url,"아이디 찾기",option);
+		location.href = url;
+// 		window.open(url,"아이디 찾기",option);
 	});
 	$("#findPw").click(function(e) {
 		e.preventDefault();
 		var url = "/member/findPwPop";
 		var option = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
-		window.open(url,"비밀번호 찾기",option);
+		location.href = url;
+// 		window.open(url,"비밀번호 찾기",option);
 	});
 });
 </script>
@@ -79,7 +82,7 @@ $(function() {
 				</div>
 				<label><a href="#" id="findId">아이디찾기</a></label> / <label><a href="#" id="findPw">비밀번호 찾기</a></label>
 				<span id="none" style="color: red;"></span>
-				<button id="btnLogin" type="button" class="btn btn-block btn-primary">로그인</button>
+				<button id="btnLogin" type="submit" class="btn btn-block btn-primary">로그인</button>
 				<a href="/member/joinForm" class="btn btn-block btn-success">회원가입</a>
 			</form>
 		</div>

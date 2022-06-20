@@ -3,12 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<%@include file="/WEB-INF/views/include/header.jsp"%>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(function() {
@@ -40,34 +35,31 @@ $(function() {
 			$.post(url, sData, function(rData) {
 				console.log(rData);
 				if (rData == "true") {
-					opener.location.href="/member/loginForm";
+					location.href="/member/loginForm";
 					alert("바꾼 비밀번호로 로그인 해주세요");
-					window.close();
 				}
 			});
 		}
 	});
 });
 </script>
-<body>
+<hr>
 <div class="row">
 	<div class="col-md-4">
 	</div>
 		<div class="col-md-4">
 			<form role="form" action="/member/updatePwRun" method="post" id="frmUpdatePwRun">
 				<div class="form-group">
-					<span>새로운 비밀번호를 입력해주세요</span><br>
-					<input type="password" class="form-control" id="userpw" name="userpw" placeholder="비밀번호"/>
+					<input type="password" class="form-control" id="userpw" name="userpw" placeholder="새로운 비밀번호"/>
 				</div>
 				<div class="form-group">
-					<span>비밀번호 확인</span><br>
-					<input type="password" class="form-control" id="pw2"placeholder="비밀번호 확인"/> <button id="btnUpdatePwRun" type="button" class="btn btn-block btn-primary">비밀번호 변경</button>
+					<input type="password" class="form-control" id="pw2"placeholder="비밀번호 확인"/>
 				</div>
 				<span id="none" style="color: red;"></span><br>
+				<button id="btnUpdatePwRun" type="button" class="btn btn-block btn-primary">비밀번호 변경</button>
 			</form>
 		</div>
 	<div class="col-md-4">
 	</div>
 </div>
-</body>
-</html>
+<%@include file="/WEB-INF/views/include/footer.jsp"%>
