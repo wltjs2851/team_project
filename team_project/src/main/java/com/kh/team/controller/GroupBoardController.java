@@ -210,6 +210,9 @@ public class GroupBoardController {
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);
 		
+		List<GroupJoinVo> groupJoinMember = groupService.list(gno);
+		model.addAttribute("groupJoinMember", groupJoinMember);
+		
 		// 시영 테스트
 		session.setAttribute("groupVo", groupVo);
 		
@@ -233,18 +236,6 @@ public class GroupBoardController {
 	public String like() {
 		
 		return "groupboard/like";
-	}
-	
-	@RequestMapping(value = "updateGroupInfoForm", method = RequestMethod.GET)
-	public String updateGroupInfoForm() {
-		
-		return "groupboard/updateGroupInfoForm";
-	}
-	
-	@RequestMapping(value = "updateGroupInfoRun", method = RequestMethod.POST)
-	public String updateGroupInfoRun() {
-		
-		return "redirect:/groupboard/groupInfo";
 	}
 	
 	@RequestMapping(value = "notice", method = RequestMethod.GET)
@@ -301,5 +292,25 @@ public class GroupBoardController {
 		String file = FileUtil.uploadFile(uploadPath, originalFilename, multipartFile.getBytes());
 		System.out.println(file);
 		return file;
+	}
+	
+	@RequestMapping(value = "/leaveGroup/{g_leader}/{gno}", method = RequestMethod.GET)
+	@ResponseBody
+	public String deleteMember( 
+			@PathVariable("g_leader") String userid, 
+			@PathVariable("gno") int gno, GroupVo groupVo, Model model) {
+		boolean result = groupBoardService.updateGLeader(groupVo);
+		System.out.println("updateGLeader, result: " + result);
+
+		System.out.println("deleteMember, gno: " + gno);
+		
+//		boolean result2 = groupService.banGroup(gno, g_leader);
+//		rttr.addFlashAttribute("delete_member", result);
+		
+		List<GroupJoinVo> groupJoinMember = groupService.list(gno);
+		model.addAttribute("groupJoinMember", groupJoinMember);
+		
+		
+		return String.valueOf(result);
 	}
 }

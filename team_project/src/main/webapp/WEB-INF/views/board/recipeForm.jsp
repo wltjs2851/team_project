@@ -198,6 +198,9 @@ $(function() {
 				${ recipeVo.r_content }
 				<hr>
 			</div>
+			<div>
+				${recipeVo.r_product }
+			</div>
 			<div class="row">
 				<i class="fa-solid fa-heart" style="font-size: 25px;" ></i><p style="font-size: 25px"><span id="span_like">${ recipeVo.r_like }</span> &nbsp;
 				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }" class="btn btn-warning"

@@ -15,7 +15,7 @@ function DrawPolygon()
 
         $.each(data, function(index, val)
         {
-            name = val.properties.CTP_KOR_NM;
+            name = val.properties.SIG_KOR_NM;
             console.log("name: "+ name);
             code = val.properties.CTPRVN_CD;
 
@@ -102,33 +102,66 @@ function displayArea(name, code, coordinates, multi)
 		};
 
 		// 다각형에 마우스아웃 이벤트가 발생했을 때 변경할 채우기 옵션입니다
-		var mouseoutOption = {
-		fillColor : '#A2FF99', // 채우기 색깔입니다 
+	var mouseoutOption = {
+		fillColor : '#A2FF99', // 채우기 색깔입니다
 		fillOpacity : 0.2
-	// 채우기 불투명도 입니다        
+	// 채우기 불투명도 입니다
 	};
 
 	// 다각형에 마우스오버 이벤트를 등록합니다
 	kakao.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) {
 
 		// 다각형의 채우기 옵션을 변경합니다
-		polygon.setOptions(mouseoverOption);
-		customOverlay.setContent('<div class="area">' + name + '</div>');
-
+//		polygon.setOptions(mouseoverOption);
+		customOverlay.setContent('<div class="area" style="background-color:white;">' + name +  '</div>');
+		
 		customOverlay.setPosition(mouseEvent.latLng);
 		customOverlay.setMap(map);
 
 	});
 
-	kakao.maps.event.addListener(polygon, 'mouseout', function() {
-
-		// 다각형의 채우기 옵션을 변경합니다
-		polygon.setOptions(mouseoutOption);
-		customOverlay.setMap(null);
-	});
+//	kakao.maps.event.addListener(polygon, 'mouseout', function() {
+//
+//		// 다각형의 채우기 옵션을 변경합니다
+//		polygon.setOptions(mouseoutOption);
+//		customOverlay.setMap(null);
+//	});
+	
+	var click = 0;
 
 	kakao.maps.event.addListener(polygon, 'mousedown', function() {
 		console.log(event);
 		console.log('다각형에 mousedown 이벤트가 발생했습니다!');
-	}); 
+//		if(click == 0) {
+//			click = 1;
+//			clickevent(click);
+//		} else {
+//			click = 0;
+//			clickevent(click);
+//		}
+		
+	});
+	
+	kakao.maps.event.addListener(polygon, 'click', function() {
+        
+        // 현재 지도 레벨에서 2레벨 확대한 레벨
+        var level = map.getLevel()-2;
+        
+        // 지도를 클릭된 폴리곤의 중앙 위치를 기준으로 확대합니다
+        map.setLevel(level, {anchor: centroid(points), animate: {
+            duration: 350            //확대 애니메이션 시간
+        }});            
+ 
+        deletePolygon(polygons);                    //폴리곤 제거      
+    });
+	
+	function clickevent(click) {		
+		if(click == 1) {
+			polygon.setOptions(mouseoverOption);
+			console.log('click 1');
+		} else {
+			polygon.setOptions(mouseoutOption);
+		}
+	}
+	
 }

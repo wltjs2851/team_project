@@ -11,6 +11,7 @@ public class RecipeVo {
 	private String r_pic;
 	private int r_viewcnt;
 	private int r_like;
+	private String r_product;
 	
 	public RecipeVo() {
 		super();
@@ -30,24 +31,27 @@ public class RecipeVo {
 		this.r_like = r_like;
 	}
 
-	public RecipeVo(String r_title, String r_content, String userid, String r_pic) {
+	public RecipeVo(String r_title, String r_content, String userid, String r_pic, String r_product) {
 		super();
 		this.r_title = r_title;
 		this.r_content = r_content;
 		this.userid = userid;
 		this.r_pic = r_pic;
+		this.r_product = r_product;
 	}
 	
-	public RecipeVo(int rno, String r_title, String r_content, String userid, String r_pic) {
+	public RecipeVo(int rno, String r_title, String r_content, String userid, String r_pic, String r_product) {
 		super();
 		this.rno = rno;
 		this.r_title = r_title;
 		this.r_content = r_content;
 		this.userid = userid;
 		this.r_pic = r_pic;
+		this.r_product = r_product;
 	}
 
-	public RecipeVo(int rno, String r_title, String r_content, String userid, String r_pic, int r_viewcnt, int r_like) {
+	public RecipeVo(int rno, String r_title, String r_content, String userid, String r_pic, 
+				int r_viewcnt, int r_like, String r_product) {
 		super();
 		this.rno = rno;
 		this.r_title = r_title;
@@ -56,10 +60,11 @@ public class RecipeVo {
 		this.r_pic = r_pic;
 		this.r_viewcnt = r_viewcnt;
 		this.r_like = r_like;
+		this.r_product = r_product;
 	}
 
 	public RecipeVo(int rno, String r_title, String r_content, String userid, Date r_regdate, String r_pic,
-			int r_viewcnt, int r_like) {
+			int r_viewcnt, int r_like, String r_product) {
 		super();
 		this.rno = rno;
 		this.r_title = r_title;
@@ -69,6 +74,7 @@ public class RecipeVo {
 		this.r_pic = r_pic;
 		this.r_viewcnt = r_viewcnt;
 		this.r_like = r_like;
+		this.r_product = r_product;
 	}
 
 	public int getRno() {
@@ -135,10 +141,18 @@ public class RecipeVo {
 		this.r_like = r_like;
 	}
 
+	public String getR_product() {
+		return r_product;
+	}
+
+	public void setR_product(String r_product) {
+		this.r_product = r_product;
+	}
+
 	@Override
 	public String toString() {
 		return "RecipeVo [rno=" + rno + ", r_title=" + r_title + ", r_content=" + r_content + ", userid=" + userid
-				+ ", r_regdate=" + r_regdate + ", r_pic=" + r_pic + ", r_viewcnt=" + r_viewcnt + ", r_like="
-				+ r_like + "]";
+				+ ", r_regdate=" + r_regdate + ", r_pic=" + r_pic + ", r_viewcnt=" + r_viewcnt + ", r_like=" + r_like
+				+ ", r_product=" + r_product + "]";
 	}
 }
