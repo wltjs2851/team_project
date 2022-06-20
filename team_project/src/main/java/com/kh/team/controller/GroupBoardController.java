@@ -68,6 +68,9 @@ public class GroupBoardController {
 		String originalFilename = file.getOriginalFilename();
 		System.out.println("originalFilename: " + originalFilename);
 		
+		String content = groupBoardVo.getGb_content();
+      groupBoardVo.setGb_content(content.replaceAll("\"", "\'"));
+		
 		if(originalFilename == null || originalFilename == "") {
 			System.out.println("groupBoardController, writeRun, groupBoardVo: " + groupBoardVo);
 			boolean result = groupBoardService.create(groupBoardVo);
@@ -158,7 +161,7 @@ public class GroupBoardController {
 	      System.out.println("prevImg: " + prevImg);
 	      
 	      String content = groupBoardVo.getGb_content();
-	      
+	      groupBoardVo.setGb_content(content.replaceAll("\"", "\'"));
 	      
 //	         수정폼에서 사진을 등록하였다면 사진 변경
 	         try {

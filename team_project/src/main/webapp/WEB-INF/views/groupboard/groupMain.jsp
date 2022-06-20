@@ -62,6 +62,15 @@ $(function() {
 			}
 		});
 	});
+	
+	// 그룹 채팅방 팝업
+	$("#chatRoom").click(function(e){
+		e.preventDefault();
+		console.log("채팅방 입장");	
+		var url = "/chat/chat";
+		var option = "width = 650px, height=800px, top=300px, left=300px, scrollbars=yes";
+		window.open(url, "그룹 채팅방 입장", option);
+	});
 });
 </script>
 
@@ -244,7 +253,7 @@ $(function() {
 								그룹 정보 보기
 							</a>
 							<div>
-							<a href="/chat/chat" class="list-group-item list-group-item-action active justify-content-between">
+							<a href="/chat/chat" class="list-group-item list-group-item-action active justify-content-between" id="chatRoom">
 								그룹 채팅방
 							</a>
 							</div>

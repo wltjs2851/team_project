@@ -84,6 +84,12 @@
 	where gbno = #{gbno}
 </select>
 
+<update id="updateGLeader">
+	update tbl_group set
+	g_leader = #{g_leader}
+	where gno = #{gno}
+</update>
+
 <!-- 그룹에서 멤버 강퇴 -->
 <!-- <delete id="deleteMember"> -->
 <!-- 	delete from tbl_group_join -->
