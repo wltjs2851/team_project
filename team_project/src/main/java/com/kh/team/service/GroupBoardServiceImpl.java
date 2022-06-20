@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.team.dao.GroupBoardDao;
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
+import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.SearchDto;
 
 @Service
@@ -76,6 +77,17 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	@Override
 	public void updateCtnMember(int gno) {
 		groupBoardDao.updateCtnMember(gno);
+	}
+
+	@Override
+	public boolean updateGLeader(GroupVo groupVo) {
+		boolean result = groupBoardDao.updateGLeader(groupVo);
+		return result;
+	}
+
+	@Override
+	public void pickGLeader(int gno) {
+		groupBoardDao.pickGLeader(gno);
 	}
 
 }

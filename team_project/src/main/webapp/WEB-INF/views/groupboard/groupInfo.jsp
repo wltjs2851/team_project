@@ -34,12 +34,99 @@ $(function() {
 			}
 		});
 	});
+	
+	// 그룹장 변경
+	$(".btnUpdateGLeader").click(function() {
+		console.log("Click");
+		
+		var that = $(this);
+		var g_leader = that.attr("data-value");
+		console.log("g_leader: ", g_leader);
+		
+		var gno = "${groupVo.gno}";
+		console.log("gno: " , gno);
+		var url = "/groupboard/leaveGroup/" + g_leader + "/" + gno;
+		console.log("url: ", url);
+		
+		$.get(url, function(rData) {
+			console.log(rData);
+			if(rData == "false") {
+				alert("그룹장 변경 완료");
+				$(".btnBan").fadeOut("slow");
+				$(".btnUpdateGLeader").fadeOut("slow");
+				$("#updateGroupInfo").fadeOut("slow");
+				$("#leaveModal").fadeIn("slow");
+			}
+		});
+	});
+	
+	// 그룹 탈퇴 버튼
+	$("#leaveGroup").click(function() {
+		console.log("click");
+		$("#modal-734488").trigger("click");
+	});
+	
+	// 모달, 탈퇴 버튼(일반 그룹원)
+	$("#leave").click(function() {
+		console.log("Click");
+		var userid = "${loginVo.userid}";
+		var gno = ${groupVo.gno};
+		var url = "/group/deleteMember/" + userid + "/" + gno;
+// 		var sData = {
+// 				"gno" : gno
+// 		}
+		
+		$.get(url, function(rData) {
+			console.log(rData);
+			if(rData == "true") {
+				alert("탈퇴 완료");
+				$("#btnModalClose").trigger("click");
+			}
+		});
+	});
 });
 </script>
 
 ${ groupVo }
 <hr>
 ${ groupJoinMember }
+
+<!-- 그룹 탈퇴 모달 -->
+<div class="row">
+	<div class="col-md-12">
+		 <a id="modal-734488" href="#modal-container-734488" role="button" class="btn" data-toggle="modal" style="display:none;">Launch demo modal</a>
+		
+		<div class="modal fade" id="modal-container-734488" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="myModalLabel">
+							그룹 탈퇴
+						</h5> 
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						정말로 탈퇴하시겠습니까?
+					</div>
+					<div class="modal-footer">
+						 
+						<button id="leave" type="button" class="btn btn-primary">
+							탈퇴
+						</button> 
+						<button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">
+							취소
+						</button>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
 
 <div class="container-fluid">
 	<div class="row">
@@ -81,12 +168,17 @@ ${ groupJoinMember }
 									그룹원 목록(그룹장일 경우 강퇴 버튼 보이게)
 									<div>
 									
+									<div>
+										그룹장: <span></span>
+									</div>
+									
 									<c:forEach items="${groupJoinMember}" var="groupJoinVo">
 										<div style="margin: 10px;">
 										<span>${ groupJoinVo.userid }</span>
 										
 										<c:if test="${ groupVo.g_leader == loginVo.userid }">
 											<button data-value="${ groupJoinVo.userid }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
+											<button data-value="${ groupJoinVo.userid }" class="btnUpdateGLeader btn btn-default" id="btnUpdateGLeader" style="width: 90px; height:30px; padding: 1% 0">권한 넘기기</button>
 										</c:if>
 										
 										</div>
@@ -120,7 +212,7 @@ ${ groupJoinMember }
 							<div class="list-group-item justify-content-between">
 								<c:choose>
 									<c:when test="${ groupVo.g_leader == loginVo.userid }">
-										<a href="/group/groupForm?gno=${ groupVo.gno }">그룹 정보 수정(그룹장만)</a>
+										<a href="/group/groupForm?gno=${ groupVo.gno }" id="updateGroupInfo">그룹 정보 수정(그룹장만)</a>
 									</c:when>
 									<c:otherwise>
 										
@@ -134,14 +226,18 @@ ${ groupJoinMember }
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item">
-									<a href="/groupboard/groupWriteForm">글쓰기</a>
+									<a href="/groupboard/groupWriteForm?gno=${ groupVo.gno }">글쓰기</a>
 								</li>
 								<li class="breadcrumb-item">
 									<a href="#">활동 정보</a>
 								</li>
-								<li class="breadcrumb-item">
-									<a href="">그룹 탈퇴</a>
-								</li>
+								<c:if test="${ groupVo.g_leader == loginVo.userid }">
+								
+									<li id="leaveModal" class="breadcrumb-item" style="display:none;">
+										<a href="#" id="leaveGroup">그룹 탈퇴</a>
+									</li>
+								
+								</c:if>
 							</ol>
 						</nav>
 						<div class="row">

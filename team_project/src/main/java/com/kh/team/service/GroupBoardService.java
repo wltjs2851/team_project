@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
+import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.SearchDto;
 
 public interface GroupBoardService {
@@ -19,6 +20,8 @@ public interface GroupBoardService {
 	public int countComment(int gbno);
 	public String getGb_picById(int gbno);
 //	public String getGroupById(String userid);
+	public boolean updateGLeader(GroupVo groupVo);
+	public void pickGLeader(int gno);
 	
 	public boolean deleteMember(String userid, int gno);
 	public void updateCtnMember(int gno);

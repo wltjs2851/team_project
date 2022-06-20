@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
+import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.SearchDto;
 
 @Repository
@@ -100,6 +101,20 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	@Override
 	public void updateCtnMember(int gno) {
 		sqlSession.update(NAMESPACE + "updateCntMember", gno);
+	}
+
+	@Override
+	public boolean updateGLeader(GroupVo groupVo) {
+		int count = sqlSession.update(NAMESPACE + "updateGLeader", groupVo);
+		if(count > 1) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void pickGLeader(int gno) {
+		sqlSession.selectOne(NAMESPACE + "pickGLeader", gno);
 	}
 
 }

@@ -44,7 +44,7 @@ $(function() {
 		$("#modal-734488").trigger("click");
 	});
 	
-	// 모달, 탈퇴 버튼
+	// 모달, 탈퇴 버튼(일반 그룹원)
 	$("#leave").click(function() {
 		console.log("Click");
 		var userid = "${loginVo.userid}";
@@ -71,14 +71,26 @@ $(function() {
 		var option = "width = 650px, height=800px, top=300px, left=300px, scrollbars=yes";
 		window.open(url, "그룹 채팅방 입장", option);
 	});
+	
+	// 그룹장 변경 팝업
+// 	$("#updateGLeader").click(function(e) {
+// 		e.preventDefault();
+// 		console.log("그룹장 변경");
+// 		var gno = ${groupVo.gno};
+// 		var url = "/groupboard/updateGLeader/" + gno;
+// 		var option = "width = 500px, height=200px, top=300px, left=300px, scrollbars=yes";
+// 		window.open(url, "그룹장 변경", option);
+// 	});
 });
 </script>
 
 <%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %>
 
-<%-- ${ groupVo } --%>
-<!-- <hr> -->
-<%-- ${ loginVo } --%>
+${ groupVo }
+<hr>
+${ loginVo }
+<hr>
+${ groupJoinMember }
 
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
@@ -117,6 +129,49 @@ $(function() {
 		
 	</div>
 </div>
+
+<!-- <!-- 그룹장이 그룹탈퇴 누르면 뜨는 모달창 --> -->
+<!-- <div class="row"> -->
+<!-- 	<div class="col-md-12"> -->
+<!-- 		 <a id="modal-405504" href="#modal-container-405504" role="button" class="btn" data-toggle="modal" style="display:none;">Launch demo modal</a> -->
+		
+<!-- 		<div class="modal fade" id="modal-container-405504" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+<!-- 			<div class="modal-dialog" role="document"> -->
+<!-- 				<div class="modal-content"> -->
+<!-- 					<div class="modal-header"> -->
+<!-- 						<h5 class="modal-title" id="myModalLabel"> -->
+<!-- 							그룹장 변경 -->
+<!-- 						</h5>  -->
+<!-- 						<button type="button" class="close" data-dismiss="modal"> -->
+<!-- 							<span aria-hidden="true">×</span> -->
+<!-- 						</button> -->
+<!-- 					</div> -->
+<!-- 					<div class="modal-body"> -->
+<!-- 						<select name="groupMember" id="groupMember"> -->
+						
+<%-- 							<c:forEach items="${ groupJoinMember }" var="groupJoinVo"> --%>
+<%-- 								<option value="${ groupJoinVo.userid }">${ groupJoinVo.userid }</option> --%>
+<%-- 							</c:forEach> --%>
+							
+<!-- 						</select> -->
+<!-- 					</div> -->
+<!-- 					<div class="modal-footer"> -->
+						 
+<!-- 						<button type="button" class="btn btn-primary"> -->
+<!-- 							변경하고 탈퇴하기 -->
+<!-- 						</button>  -->
+<!-- 						<button type="button" class="btn btn-secondary" data-dismiss="modal"> -->
+<!-- 							Close -->
+<!-- 						</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+				
+<!-- 			</div> -->
+			
+<!-- 		</div> -->
+		
+<!-- 	</div> -->
+<!-- </div> -->
 
 
 <!--================================
@@ -197,7 +252,7 @@ $(function() {
 			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
 				<div class="sidebar">
 				
-				<aside style="position: fixed; top: 30px bottom: 270px;">
+<!-- 				<aside class="sidebar-container widget-area sidebar-primary" style="position: fixed; top: 30px bottom: 270px;"> -->
 				<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
@@ -267,13 +322,15 @@ $(function() {
 								<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
 								<a href="/groupboard/activityInfo/${ groupVo.gno }">활동 정보</a>
 							</li>
-							<li class="breadcrumb-item">
-								<a href="#" id="leaveGroup">그룹 탈퇴</a>
-							</li>
+							<c:if test="${ loginVo.userid != groupVo.g_leader }">
+								<li class="breadcrumb-item">
+									<a href="#" id="leaveGroup">그룹 탈퇴</a>
+								</li>
+							</c:if>
 						</ol>
 					</nav>
 					
-					</aside>
+<!-- 					</aside> -->
 				
 				
 					<!-- Search Widget -->
