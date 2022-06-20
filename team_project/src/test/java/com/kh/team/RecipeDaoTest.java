@@ -22,21 +22,21 @@ public class RecipeDaoTest {
 	@Autowired 
 	RecipeService recipeService;
 	
-	@Test
-	public void testRecipeInsert() {
-		for(int i = 0; i < 51; i++) {			
-			RecipeVo recipeVo = new RecipeVo("식단" + i, "내용" + i, "tuna11", null);
-			boolean result = recipeDao.insertRecipe(recipeVo);
-			System.out.println("result: " + result);
-		}
-	}
+//	@Test
+//	public void testRecipeInsert() {
+//		for(int i = 0; i < 51; i++) {			
+//			RecipeVo recipeVo = new RecipeVo("식단" + i, "내용" + i, "tuna11", null);
+//			boolean result = recipeDao.insertRecipe(recipeVo);
+//			System.out.println("result: " + result);
+//		}
+//	}
 	
-	@Test
-	public void testRecipeUpdate() {
-		RecipeVo recipeVo = new RecipeVo(1, "������1", "�ܹ���", "user01", null);
-		boolean result = recipeDao.updateRecipe(recipeVo);
-		System.out.println("result: " + result);
-	}
+//	@Test
+//	public void testRecipeUpdate() {
+//		RecipeVo recipeVo = new RecipeVo(1, "������1", "�ܹ���", "user01", null);
+//		boolean result = recipeDao.updateRecipe(recipeVo);
+//		System.out.println("result: " + result);
+//	}
 	
 	@Test
 	public void testRecipeDelete() {

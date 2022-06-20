@@ -20,39 +20,64 @@ $(function() {
 				onImageUpload : function(files) {
 					uploadSummernoteImageFile(files[0]);
 				}
-// 				,onPaste: function (e) {
-// 					var clipboardData = e.originalEvent.clipboardData;
-// 					if (clipboardData && clipboardData.items && clipboardData.items.length) {
-// 						var item = clipboardData.items[0];
-// 						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-// 							e.preventDefault();
-// 						}
-// 					}
-// 				}
 			}
-});
-    
-    
-function uploadSummernoteImageFile(file) {
-	data = new FormData();
-	data.append("file", file);
-	$.ajax({
-		data : data,
-		type : "POST",
-		url : "/recipe/uploadSummernoteImageFile",
-		enctype : 'multipart/form-data',
-		cache : false,
-		contentType : false,
-		processData : false,
-		success : function(data) {
-			console.log(data);
-			$("#summernote").summernote('insertImage', '/recipe/displayImage?filename=' + data);
-		},
-		error : function(e) {
-			console.log(e);
-		}
 	});
-};
+    
+    
+	function uploadSummernoteImageFile(file) {
+		data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "/recipe/uploadSummernoteImageFile",
+			enctype : 'multipart/form-data',
+			cache : false,
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				console.log(data);
+				$("#summernote").summernote('insertImage', '/recipe/displayImage?filename=' + data);
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+	};
+
+	$("#btnSearch").click(function(e) {
+		e.preventDefault();
+		var url = "/recipe/searchPopup";
+		var option = "width = 911px, height=615px, top=300px, left=300px, scrollbars=yes";
+		window.open(url,"상품 검색",option);
+	});
+});
+
+function setProduct(obj){
+	var div = "";
+	div += "<div>"
+	div += "<div style='display:inline-block;'>"
+	div += "<img src='" + obj.image + "' height=150>";
+	div += "</div>"
+	div += "<div style='display:inline-block;'>"
+	div += "<span><a href='" + obj.link + "' target='_blank'>" + obj.title +
+			"</a><a href='#' class='a_delete' style='margin-left: 10px;'>&times;</a></span>";
+	div += "<p>" + obj.lprice + "<br>" + obj.category + "<br>" + obj.maker + "</p>";
+	div += "</div>"
+	div += "</div>"
+	$(".shopping").prepend(div);
+	var product = $("#r_product").val();
+	var p = product + div;
+	$("#r_product").val(p);
+}
+
+$(function() {
+	$(".shopping").on("click", ".a_delete", function(e) {
+		e.preventDefault();
+		console.log("click");
+		var shpDiv = $(this).parent().parent().parent();
+		shpDiv.remove();
+	});
 });
 </script>
 <script src="/resources/js/summernote/summernote-lite.js"></script>
@@ -63,19 +88,24 @@ function uploadSummernoteImageFile(file) {
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form role="form" action="/recipe/addRecipeRun" method="post" enctype="multipart/form-data">
+			<form role="form" action="/recipe/addRecipeRun" method="post" enctype="multipart/form-data" id="recipeForm">
+				<input type="hidden" class="form-control" id="userid" name="userid" value="${ loginVo.userid }"/>
+				<input type="hidden" class="form-control" id="r_product" name="r_product"/>
 				<div class="form-group">
 					<input type="text" class="form-control" id="r_title" name="r_title" required/>
 				</div>
 				<div class="form-group">
 					<textarea id="summernote" name="r_content"></textarea>
 				</div>
-				<div class="form-group">
-					<label for="userid"> 사용자 </label>  
-					<input type="text" class="form-control" id="userid" name="userid" required/>
+				<div class="row">
+					<button class="btn btn-info" id="btnSearch" 
+						style='width: 80px; height:50px; padding: 1% 0; float: right;'>검색</button>
 				</div>
-				<button type="submit" class="btn btn-primary" 
-					style='width: 80px; height:50px; padding: 1% 0'>글쓰기</button>
+				<div class="shopping">
+				
+				</div>
+				<button type="submit" class="btn btn-primary" id="btn"
+					style='width: 80px; height:50px; padding: 1% 0; margin-top: 20px;'>글쓰기</button>
 				<br>
 				<br>
 			</form>
