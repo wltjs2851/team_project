@@ -5,9 +5,9 @@
 <script>
 	$(function() {
 		var loginResult = "${loginResult}";
-		if (loginResult == "true") {
-			alert("${loginVo.nickname}(${loginVo.userid})님 환영합니다.");
-		}
+// 		if (loginResult == "true") {
+// 			alert("${loginVo.nickname}(${loginVo.userid})님 환영합니다.");
+// 		}
 	});
 </script>
 <section class="hero-area bg-1 text-center overly">

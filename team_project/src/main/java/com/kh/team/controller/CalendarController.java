@@ -95,7 +95,7 @@ public class CalendarController {
 	public String save(String userid, String content, String start1) {
 		int cno = calendarService.getCount(userid, start1);
 		System.out.println("cno: " + cno);
-		if (cno >= 1) {
+		if (cno >= 5) {
 			return "false";
 		}
 		CalendarVo vo = new CalendarVo(userid, content, start1, cno);

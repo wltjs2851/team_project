@@ -63,6 +63,24 @@
 		</beans:property>
 	</beans:bean>
 	
+	<beans:bean class="com.kh.team.interceptors.AuthInterceptor" id="authInterceptor"></beans:bean>
+		
+	
+	<!-- 인터셉터 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/selectByKno*"/>
+			<mapping path="/admin/selectByReno*"/>
+			<mapping path="/group/groupForm*"/>
+			<mapping path="/recipe/recipeForm*"/>
+			<mapping path="/routine/routineContent*"/>
+			<mapping path="/free/freeContent*"/>
+			<mapping path="/group/myGroupList"/>
+			<exclude-mapping path="/board/list"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 <!-- 소켓 -->
 
 <websocket:handlers>
