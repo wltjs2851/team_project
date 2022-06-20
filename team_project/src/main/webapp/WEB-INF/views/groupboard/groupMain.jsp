@@ -3,6 +3,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
+<style>
+
+/* #sidebar { */
+/* 	width: 400px; */
+/* 	font-size: .85em; */
+/*     margin-top: 0; */
+/*     position:fixed; */
+/*     float: left; */
+/*     top:30%; */
+/*     right:30px; */
+/*     bottom:60%; */
+/*     padding:30px; */
+/*     height: 100%; */
+/*     cursor:default; */
+/*     overflow-y:auto; */
+/*     z-index: 100; */
+/* } */
+
+</style>
 
 <script>
 $(function() {
@@ -86,11 +105,11 @@ $(function() {
 
 <%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %>
 
-${ groupVo }
-<hr>
-${ loginVo }
-<hr>
-${ groupJoinMember }
+<%-- ${ groupVo } --%>
+<!-- <hr> -->
+<%-- ${ loginVo } --%>
+<!-- <hr> -->
+<%-- ${ groupJoinMember } --%>
 
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
@@ -249,10 +268,11 @@ ${ groupJoinMember }
 			</c:forEach>
 			
 			</div>
-			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
+			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0" id="sidebar">
 				<div class="sidebar">
 				
-<!-- 				<aside class="sidebar-container widget-area sidebar-primary" style="position: fixed; top: 30px bottom: 270px;"> -->
+				<aside class="main-sidebar sidebar-dark-primary elevation-4" style="position: fixed; top: 30px bottom: 270px;">
+				<div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-transition os-host-scrollbar-horizontal-hidden">
 				<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
@@ -330,65 +350,10 @@ ${ groupJoinMember }
 						</ol>
 					</nav>
 					
-<!-- 					</aside> -->
+					</div>
+					</aside>
 				
 				
-					<!-- Search Widget -->
-<!-- 					<div class="widget search p-0"> -->
-<!-- 						<div class="input-group"> -->
-<!-- 						    <input type="text" class="form-control" id="expire" placeholder="Search..."> -->
-<!-- 						    <span class="input-group-addon"><i class="fa fa-search"></i></span> -->
-<!-- 					    </div> -->
-<!-- 					</div> -->
-<!-- 					Category Widget -->
-<!-- 					<div class="widget category"> -->
-<!-- 						Widget Header -->
-<!-- 						<h5 class="widget-header">Categories</h5> -->
-<!-- 						<ul class="category-list"> -->
-<!-- 							<li><a href="">Appearel <span class="float-right">(2)</span></a></li> -->
-<!-- 							<li><a href="">Accesories <span class="float-right">(5)</span></a></li> -->
-<!-- 							<li><a href="">Business<span class="float-right">(7)</span></a></li> -->
-<!-- 							<li><a href="">Entertaiment<span class="float-right">(3)</span></a></li> -->
-<!-- 							<li><a href="">Education<span class="float-right">(9)</span></a></li> -->
-<!-- 						</ul> -->
-<!-- 					</div> -->
-<!-- 					Store Widget -->
-<!-- 					<div class="widget related-store"> -->
-<!-- 						Widget Header -->
-<!-- 						<h5 class="widget-header">Related Store</h5> -->
-<!-- 						<ul class="store-list md list-inline"> -->
-<!-- 							<li class="list-inline-item"> -->
-<!-- 								<a href=""><img src="images/popular-offer/populer-offer-02.png" alt="store-image"></a> -->
-<!-- 							</li> -->
-<!-- 							<li class="list-inline-item"> -->
-<!-- 								<a href=""><img src="images/popular-offer/populer-offer-03.png" alt="store-image"></a> -->
-<!-- 							</li> -->
-<!-- 							<li class="list-inline-item"> -->
-<!-- 								<a href=""><img src="images/popular-offer/populer-offer-04.png" alt="store-image"></a> -->
-<!-- 							</li> -->
-<!-- 							<li class="list-inline-item"> -->
-<!-- 								<a href=""><img src="images/popular-offer/populer-offer-05.png" alt="store-image"></a> -->
-<!-- 							</li> -->
-<!-- 							<li class="list-inline-item"> -->
-<!-- 								<a href=""><img src="images/popular-offer/populer-offer-06.png" alt="store-image"></a> -->
-<!-- 							</li> -->
-<!-- 							<li class="list-inline-item"> -->
-<!-- 								<a href=""><img src="images/popular-offer/populer-offer-07.png" alt="store-image"></a> -->
-<!-- 							</li> -->
-<!-- 						</ul> -->
-<!-- 					</div> -->
-<!-- 					Archive Widget -->
-<!-- 					<div class="widget archive"> -->
-<!-- 						Widget Header -->
-<!-- 						<h5 class="widget-header">Archives</h5> -->
-<!-- 						<ul class="archive-list"> -->
-<!-- 							<li><a href="">January 2017</a></li> -->
-<!-- 							<li><a href="">February 2017</a></li> -->
-<!-- 							<li><a href="">March 2017</a></li> -->
-<!-- 							<li><a href="">April 2017</a></li> -->
-<!-- 							<li><a href="">May 2017</a></li> -->
-<!-- 						</ul> -->
-<!-- 					</div> -->
 				</div>
 			</div>
 		</div>

@@ -313,18 +313,4 @@ public class GroupBoardController {
 		
 		return String.valueOf(result);
 	}
-	
-	@RequestMapping(value = "/updateGLeader/{gno}", method = RequestMethod.GET)
-	public String updateGLeader(HttpSession session, GroupVo groupVo, Model model, @PathVariable("gno") int gno) {
-		List<GroupJoinVo> groupJoinMember = groupService.list(gno);
-		model.addAttribute("groupJoinMember", groupJoinMember);
-		
-		groupVo = groupService.groupByGno(gno);
-		model.addAttribute("groupVo", groupVo);
-		
-		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
-		model.addAttribute("loginVo", loginVo);
-		
-		return "groupboard/updateGLeader2";
-	}
 }
