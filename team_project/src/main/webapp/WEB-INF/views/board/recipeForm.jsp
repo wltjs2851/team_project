@@ -211,7 +211,9 @@ $(function() {
 					style="width: 60px; height:40px; padding: 0.7% 0">목록</a>
 			</div>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-2">
+			<h2>추천상품</h2>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-2"></div>

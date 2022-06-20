@@ -66,19 +66,29 @@ function setProduct(obj){
 	div += "</div>"
 	div += "</div>"
 	$(".shopping").prepend(div);
-	var product = $("#r_product").val();
-	var p = product + div;
-	$("#r_product").val(p);
 }
 
 $(function() {
-	$(".shopping").on("click", ".a_delete", function(e) {
+	$("#shopping").on("click", ".a_delete", function(e) {
 		e.preventDefault();
 		console.log("click");
 		var shpDiv = $(this).parent().parent().parent();
 		shpDiv.remove();
+		$("#r_product").val("");
+	});
+	
+	$("#recipeForm").submit(function() {
+		var html =""; 
+		$("#shopping > div").each(function() {
+			html += $(this).html();
+		});
+		console.log("Html:" + html);
+		$("#r_product").val(html);
+		return true;
 	});
 });
+
+
 </script>
 <script src="/resources/js/summernote/summernote-lite.js"></script>
 <script src="/resources/js/summernote/lang/summernote-ko-KR.js"></script>
@@ -101,7 +111,7 @@ $(function() {
 					<button class="btn btn-info" id="btnSearch" 
 						style='width: 80px; height:50px; padding: 1% 0; float: right;'>검색</button>
 				</div>
-				<div class="shopping">
+				<div class="shopping" id="shopping">
 				
 				</div>
 				<button type="submit" class="btn btn-primary" id="btn"
@@ -113,5 +123,4 @@ $(function() {
 		<div class="col-md-2"></div>
 	</div>
 </div>
-
 <%@include file="/WEB-INF/views/include/footer.jsp"%>
