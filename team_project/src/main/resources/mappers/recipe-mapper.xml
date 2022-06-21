@@ -19,8 +19,8 @@
 	
 	<update id="updateRecipe">
 		update tbl_recipe set r_title = #{r_title}, r_content = #{r_content}, 
-			r_pic = #{r_pic, jdbcType=VARCHAR}, 
-			where rno = #{rno}, r_product = #{r_product, jdbcType=VARCHAR}
+			r_pic = #{r_pic, jdbcType=VARCHAR}, r_product = #{r_product, jdbcType=VARCHAR}
+			where rno = #{rno}
 	</update>
 	
 	<delete id="deleteRecipe">

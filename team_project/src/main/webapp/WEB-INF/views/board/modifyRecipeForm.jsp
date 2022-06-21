@@ -91,13 +91,11 @@ $(function() {
 		$("#r_product").val("");
 	});
 	
-	$("#recipeForm").submit(function() {
+	$("#recipeAddForm").submit(function() {
 		var html =""; 
-		$("#shopping > div").each(function() {
-			html += $(this).html();
-		});
-		console.log("Html:" + html);
+		html += $("#shopping").html();
 		$("#r_product").val(html);
+		console.log($("#r_product").val());
 		return true;
 	});
 });
@@ -113,7 +111,8 @@ $(function() {
 		<div class="col-md-11">
 			<div class="col-md-7" style='display:inline-block; vertical-align: top;'>
 					<input type="hidden" name="rno" value="${ recipeVo.rno }">
-					<input type="hidden" class="form-control" id="userid" name="userid" value="${ loginVo.userid }"/>
+					<input type="hidden" id="userid" name="userid" value="${ loginVo.userid }"/>
+					<input type="hidden" id="r_product" name="r_product"/>
 					<div class="form-group">
 						<input type="text" class="form-control" value="${ recipeVo.r_title }" name="r_title" required/>
 					</div>
@@ -131,7 +130,7 @@ $(function() {
 						style='width: 110px; height:50px; padding: 1% 0; margin-bottom: 20px'>추천 상품 검색</button><br>
 				</div>
 					<div class="shopping" id="shopping">
-						<div style=''>
+						<div style='display: inline-block;'>
 							${ recipeVo.r_product }
 						</div>
 					</div>
