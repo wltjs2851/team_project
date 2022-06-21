@@ -1,5 +1,7 @@
 package com.kh.team.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -68,17 +70,25 @@ public class ChatController {
 //		model.addAttribute("nickname", nickname);
 //		return "chat/chat2";
 //	}
-	@RequestMapping(value = "/getChatters/{gno}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getChatters/{gno}/{io}", method = RequestMethod.GET)
 	@ResponseBody
-	public Set<String> getChatters(HttpSession session, @PathVariable("gno") int gno) {
+	public Set<String> getChatters(HttpSession session, @PathVariable("gno") int gno, @PathVariable("io") String io) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String nickname = loginVo.getNickname();
 		Set<String> set = map.get(String.valueOf(gno));
 		if (set == null) {
 			set = new HashSet<String>();
 		}
-		set.add(nickname);
+		if (io.equals("i")) {
+			// 채팅방 입장하면
+			set.add(nickname);
+		} else if (io.equals("o")) {
+			// 채팅방 퇴장하면
+			set.remove(nickname);
+		}
 		map.put(String.valueOf(gno), set);
+//		List<String> chatterList = new ArrayList<>(set);
+//		Collections.sort(chatterList);
 		return set;
 	}
 }

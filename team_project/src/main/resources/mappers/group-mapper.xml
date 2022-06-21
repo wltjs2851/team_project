@@ -69,5 +69,6 @@
 		select nickname from tbl_user 
 		where userid 
 		in (select userid from tbl_group_join where gno = #{gno})
+		order by nickname
 	</select>
 </mapper>

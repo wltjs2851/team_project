@@ -113,14 +113,27 @@
 		
 		//퇴장 버튼을 눌렀을 때 호출되는 함수
 		function disconnect() {
-			msg = document.getElementById("nickname").value;
+			nickname = document.getElementById("nickname").value;
 			if (window.confirm("퇴장하면 채팅 기록이 사라집니다. \n퇴장하시겠습니까?")){
-			websocket.send(msg + "님이 퇴장하셨습니다");
-			websocket.close();
-			window.close();
+				websocket.send(nickname + "님이 퇴장하셨습니다");
 			}
 			
-			connect();
+			// 퇴장하면 
+			var chatInterval = setInterval(function() {
+				$.get("/chat/getChatters/${gno}/o", function(rData) {
+					console.log(rData);
+// 					for(var i = 0; i < rData.length; i++) {
+// 						for(var j = 0; j < $(".p_attend").length; j++){
+// 							if(rData[i] == $(".p_attend").eq(j).attr("data-nick")){
+// 								$(".p_attend[data-nick='"+ rData[i] +"']").find("i").css("color", "#FFDF59");
+// 							}
+// 						}
+// 					}
+					websocket.close();
+					window.close();
+					
+				});
+			}, 1000); 
 		}
 		//보내기 버튼을 눌렀을 때 호출될 함수
 		function send() {
@@ -138,27 +151,37 @@
 			afterEnter.style.display = 'block';
 			websocket.send(nickname + " 님 입장하셨습니다.");
 			var chatInterval = setInterval(function() {
-				$.get("/chat/getChatters/${gno}", function(rData) {
+				$.get("/chat/getChatters/${gno}/i", function(rData) {
 					console.log(rData);
-					var attendNick = $(".p_attend").attr("data-nick");
-					for(var i = 0; i < rData.length; i++) {
-						console.log("넘어오나?");
-							for(var j = 0; j < $(".p_attend").length; j++){
-								console.log("여기는?");
-								if(rData[i] == $(".p_attend").eq(j).attr("data-nick")){
-									console.log("되어라");
-									$(".p_attend[data-nick='"+ rData[i] +"']").find("i").css("color", "#FFDF59");
-								}
-							}
-						}
-// 					for (var i = 0; i < rData.length; i++){
-// 						for(var j = 0; j < "${fn:length(g_nickname)}"; j++){
-							
+// 					var attendNick = $(".p_attend").attr("data-nick");
+// 					var p_attend = $(".p_attend");
+// 					$(".p_attend").each(function(i) {
+// 						if(rData[i] == $(".p_attend").eq(i).attr("data-nick")){
+// 							console.log("되어라");
+// 							$(".p_attend[data-nick='"+ rData[i] +"']").find("i").css("color", "#FFDF59");
+// 						} else {
+// 							$(".p_attend[data-nick='"+ rData[i] +"']").find("i").css("color", "silver");
 // 						}
-// 					}
-					
+// 					});
+					// ['홍']
+					for(var i = 0; i < $(".p_attend").length; i++){
+						
+						var dataNick = $(".p_attend").eq(i).attr("data-nick");
+						console.log("dataNick:", dataNick);
+						
+						var isBeing = rData.includes(dataNick);
+						var color = "";
+						if (rData.includes(dataNick)) {
+							color = "#FFDF59";
+						} else {
+							color = "silver";
+						}
+						
+						$(".p_attend").eq(i).find("i").css("color", color);
+						
+					}
 				});
-			}, 5000);
+			}, 1000);
 		}
 		//웹 소켓에 메시지를 보낼 때 호출될 함수
 		function onMessage(evt) {
