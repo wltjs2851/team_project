@@ -40,7 +40,7 @@
 			console.log(keyword);
 			frmPaging.find("input[name=keyword]").val(keyword);
 			frmPaging.find("input[name=page]").val(1);
-			frmPaging.attr("action", "/admin/listKcal");
+			frmPaging.attr("action", "/kcal/listKcal");
 			frmPaging.attr("method", "get");
 			frmPaging.submit();
 		});
@@ -50,9 +50,9 @@
 		$(".td_list").click(function(){
 			console.log("kcal 게시글에서 검색 목록 클릭");
 			var kno = $(this).attr("data-kno");
-//	 		location.href = "/admin/selectByKno?kno=" + kno;
+//	 		location.href = "/kcal/selectByKno?kno=" + kno;
 			frmPaging.find("input[name=kno]").val(kno);
-			frmPaging.attr("action", "/admin/selectByKno");
+			frmPaging.attr("action", "/kcal/selectByKno");
 			frmPaging.attr("method", "get");
 			frmPaging.submit();
 		});
@@ -129,10 +129,10 @@ th:first-child, td:first-child {
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form role="form" action="/admin/updateKcal" method="post">
+			<form role="form" action="/kcal/updateKcal" method="post">
 				<input type="hidden" name="kno" value="${kcalVo.kno}" />
 				<div>
-					<h2><a href="/admin/listKcal">운동칼로리 사전</a></h2>
+					<h2><a href="/kcal/listKcal">운동칼로리 사전</a></h2>
 					<hr>
 					<article class="single-post">
 						<!-- 				<form> -->
@@ -192,8 +192,8 @@ th:first-child, td:first-child {
 						</div>
 						<c:choose>
 						<c:when test="${loginVo.userid == 'admin01'}">
-						<a class="btn btn-sm btn-success" href="/admin/kcalUpdateForm?kno=${kcalVo.kno }">수정</a>
-						<a class="btn btn-danger" href="/admin/deleteKcal?kno=${kcalVo.kno}"
+						<a class="btn btn-sm btn-success" href="/kcal/kcalUpdateForm?kno=${kcalVo.kno }">수정</a>
+						<a class="btn btn-danger" href="/kcal/deleteKcal?kno=${kcalVo.kno}"
 						id="btnDeleteKcal">삭제</a>
 						</c:when>
 						</c:choose>

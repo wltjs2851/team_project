@@ -37,7 +37,7 @@ $(function(){
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
-			<form role="form" action="/admin/updateKcal" method="post" enctype="multipart/form-data" id="frmUpdate">
+			<form role="form" action="/kcal/updateKcal" method="post" enctype="multipart/form-data" id="frmUpdate">
 			<input type="hidden" name="kno" value="${param.kno }">
 			<input type="hidden" id="prevImg" name="prevImg">
 				<div class="form-group">

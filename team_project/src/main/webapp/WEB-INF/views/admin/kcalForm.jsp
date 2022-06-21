@@ -18,7 +18,7 @@
 					<a class="btn btn-primary btn-large" href="#">목록으로</a>
 				</p>
 			</div>
-			<form role="form" action="/admin/insertKcal" method="post" enctype="multipart/form-data">
+			<form role="form" action="/kcal/insertKcal" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="k_name">
 						운동 종목

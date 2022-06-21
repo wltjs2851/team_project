@@ -27,7 +27,7 @@
 	padding-top: 50px;
 }
 
-.col-md-4 {
+.colRight {
 	background-color: aliceblue;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .dateHead div {
-  background: #e31b20;
+  background: #2D5082;
   color: #fff;
   text-align: center;
   width: 80px;

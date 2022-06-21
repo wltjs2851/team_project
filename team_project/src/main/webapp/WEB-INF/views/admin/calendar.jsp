@@ -20,8 +20,8 @@
 		var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
 		var selectDate = thisToday;
 		var that = divToday;
+		divToday.attr("style", "background: aliceblue;");
 		$("#main-day").html(thisToday.substring(0, 4) + "년 " + thisToday.substring(5, 6) + "월 " + thisToday.substring(7) + "일");
-		divToday.attr("style", "background: #FFEBEE;");
 		$(".dateBoard").on("click", ".divDate", function() {
 			that = $(this);
 			var thatSpan = that.find("span").attr("data-check");
@@ -57,7 +57,7 @@
 				$.each(jsonCal, function(e) {
 					if (this.start1 == data) {
 // 						$(thisDiv).append("<br><span data-check='" + this.checklist + "' data-cno='" + this.cno + "'>" + this.content + "</span>");
-						$(thisDiv).append("<br><span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: #7CFC00;'>●</span>");
+						$(thisDiv).append("<span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: orange; margin-right: 10px;'><i class='fa-solid fa-flag'></i></span>");
 					}
 				});
 			});
@@ -180,7 +180,7 @@
 					<div class="grid dateBoard"></div>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4 colRight">
 				<div class="right">
 					<div class="content-left">
 				        <div class="main-wrap">
@@ -191,7 +191,7 @@
 				          <div class="todo-content"></div>
 				          <div class="input-wrap">
 				            <input type="text" placeholder="please write here!!" id="input-box" class="input-box form-control">
-				            <button type="button" id="input-data" class="btn btn-success"><span>INPUT</span></button>
+				            <button type="button" id="input-data" class="btn btn-outline-primary"><span>INPUT</span></button>
 <!-- 				            <button type="button" id="update-check" class="btn btn-warning"><span>CHECK</span></button> -->
 				            <div id="input-list" class="input-list"></div>
 				          </div>

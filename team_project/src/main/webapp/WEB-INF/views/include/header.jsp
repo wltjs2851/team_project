@@ -68,13 +68,13 @@
 								<a class="nav-link" href="/">메인</a>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="/admin/listKcal" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									관리자 게시판 <span><i class="fa fa-angle-down"></i></span>
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="/admin/listKcal">운동 칼로리</a>
-									<a class="dropdown-item" href="/admin/listRecommend ">추천 운동</a>
+									<a class="dropdown-item" href="/kcal/listKcal">운동 칼로리</a>
+									<a class="dropdown-item" href="/recommend/listRecommend ">추천 운동</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
