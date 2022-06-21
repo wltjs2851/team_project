@@ -18,10 +18,9 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			HttpSession session = request.getSession();
 			MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
 			if (memberVo == null) {
-				String uri = request.getRequestURI();
+				String originalUri = request.getRequestURI();
+				String uri = originalUri.substring(1);
 				String queryString = request.getQueryString();
-				System.out.println("uri : " + uri);
-				System.out.println("queryString : " + queryString);
 				String targetLocation = uri + "?" + queryString;
 				session.setAttribute("targetLocation", targetLocation);
 				response.sendRedirect("/member/loginForm");

@@ -46,7 +46,6 @@ public class HomeController {
 		List<RoutineVo> listRoutine	= routineService.selectByViewCnt();
 		List<FreeVo> listFree = freeService.selectByViewCnt();
 		List<GroupVo> listGroup = groupService.groupListOrder();
-		System.out.println(listGroup);
 		model.addAttribute("listRecommend", listRecommend);
 		model.addAttribute("listRecipe", listRecipe);
 		model.addAttribute("listRoutine", listRoutine);
