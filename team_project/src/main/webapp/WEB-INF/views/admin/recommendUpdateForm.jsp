@@ -37,14 +37,14 @@ function uploadSummernoteImageFile(file) {
 	$.ajax({
 		data : data,
 		type : "POST",
-		url : "/admin/uploadSummernoteImageFile",
+		url : "/recommend/uploadSummernoteImageFile",
 		enctype : 'multipart/form-data',
 		cache : false,
 		contentType : false,
 		processData : false,
 		success : function(data) {
 			console.log(data);
-			$("#summernote").summernote('insertImage', '/admin/displayImage?filename=' + data);
+			$("#summernote").summernote('insertImage', '/recommend/displayImage?filename=' + data);
 		},
 		error : function(e) {
 			console.log(e);
@@ -61,7 +61,7 @@ function uploadSummernoteImageFile(file) {
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form role="form" action="/admin/updateRecommend" method="post" enctype="multipart/form-data">
+			<form role="form" action="/recommend/updateRecommend" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="reno" value="${recommendVo.reno }">
 				<div class="form-group">
 					<input type="text" class="form-control" value="${recommendVo.re_title }"id="re_title" name="re_title" required/>

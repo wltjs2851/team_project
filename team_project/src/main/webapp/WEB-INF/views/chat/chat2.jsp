@@ -61,6 +61,7 @@
 	border-right: none;
 	border-bottom : 2px solid grey;
 }
+
 </style>
 <!-- PLUGINS CSS STYLE -->
 <link href="/resources/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
@@ -87,6 +88,10 @@
 			//연결을 해제해주는 함수 호출
 			send();
 		});
+		
+// 		window.addEventListener("beforeunload", disconnect(){
+// 			disconnect();
+// 		});
 		var websocket;
 		
 		//입장 버튼을 눌렀을 때 호출되는 함수
@@ -103,12 +108,6 @@
 			$("#enter").css("display", "none"); // 입장 하면 입장 버튼 사라짐 
 			$("#exit").css("display", "");
 			
-			// 입장하면 해당 아이디 접속 표시
-// 			var attendNick = "${nickname}";
-// 			console.log("attendNick:", attendNick);
-// 			$(".p_attend[data-nick='"+ attendNick +"']").find("i").css("color", "#FFDF59");
-			
-// 			$(".fa-lightbulb").css("color", "#FFDF59");
 		}
 		
 		//퇴장 버튼을 눌렀을 때 호출되는 함수
@@ -122,16 +121,8 @@
 			var chatInterval = setInterval(function() {
 				$.get("/chat/getChatters/${gno}/o", function(rData) {
 					console.log(rData);
-// 					for(var i = 0; i < rData.length; i++) {
-// 						for(var j = 0; j < $(".p_attend").length; j++){
-// 							if(rData[i] == $(".p_attend").eq(j).attr("data-nick")){
-// 								$(".p_attend[data-nick='"+ rData[i] +"']").find("i").css("color", "#FFDF59");
-// 							}
-// 						}
-// 					}
 					websocket.close();
 					window.close();
-					
 				});
 			}, 1000); 
 		}
@@ -146,6 +137,7 @@
 		}
 		//웹 소켓에 연결되었을 때 호출될 함수
 		function onOpen() {
+			$("#attend").css("display","");
 			nickname = document.getElementById("nickname").value;
 			afterEnter = document.getElementById("afterEnter");
 			afterEnter.style.display = 'block';
@@ -165,10 +157,8 @@
 // 					});
 					// ['홍']
 					for(var i = 0; i < $(".p_attend").length; i++){
-						
 						var dataNick = $(".p_attend").eq(i).attr("data-nick");
 						console.log("dataNick:", dataNick);
-						
 						var isBeing = rData.includes(dataNick);
 						var color = "";
 						if (rData.includes(dataNick)) {
@@ -176,9 +166,7 @@
 						} else {
 							color = "silver";
 						}
-						
 						$(".p_attend").eq(i).find("i").css("color", color);
-						
 					}
 				});
 			}, 1000);
@@ -188,12 +176,6 @@
 			console.log(evt);
 			nickname = document.getElementById("nickname").value;
 			data = evt.data;
-			
-// 			var count1 = data.indexOf("님");
-// 			console.log("count1:", count1);
-// 			var enter = data.substring(0, count1);
-// 			console.log("enter:", enter);
-			
 			var message = data.search(":");
 			
 			var count = data.indexOf(" ");
@@ -233,14 +215,14 @@
 			<h1>(${g_name }) 채팅 방</h1>
 			<hr>
 			<div id="beforeEnter">
-				닉네임 : <input type="text" id="nickname" value="${nickname }" readonly="readonly"/> 
+				닉네임 : <input type="text" id="nickname" value="${nickname }" readonly="readonly" style="border: hidden;"/> 
 						<input type="button" id="enter" value="입장" class="btn btn-outline-warning"/>
 						<input type="button" id="exit" value="퇴장" class="btn btn-outline-danger" style="display:none;"/>
 			</div>
-			<div id="afterEnter" style="display: none">
+			<div id="afterEnter" style="display: none; padding-top: 10px;">
 					<div id="chatarea"
-						style="width: 400px; height: 400px; border: 1px solid; overflow: auto;"></div>
-					<div style="padding-top: 10px;">
+						style="width: 400px; height: 400px; border: 1px solid; overflow: auto; border-radius: 20px; border-color: silver;"></div>
+					<div style="padding-top: 10px; padding-left: 5px;">
 						<input type="text" id="message" /> 
 						<input type="button" id="send"
 							value="보내기" />
@@ -250,18 +232,12 @@
 			</div>
 		<div class="col-md-2">
 			<br>
-			<div id="attend">
-			<strong>${g_name }</strong> 목록
+			<div id="attend" style="display:none; padding-top: 120px;padding-left: 40px;">
+			<strong>${g_name }</strong> 채팅 참여자
 <%-- 			${groupJoinMember} --%>
 			<br>
 			<c:forEach items="${g_nickname }" var="nick" varStatus="status">
 				<p class="p_attend" data-nick="${g_nickname[status.index ]}">${nick}
-<!-- 					<i class='far fa-lightbulb' style='font-size:24px; color:#FFC107;'></i> -->
-<!-- 					<i class='fas fa-lightbulb' style='font-size:24px; color:#FFDF59;'></i> -->
-<!-- 					<i class='fas fa-lightbulb' style='font-size:24px; color:#fc6;'></i> -->
-<!-- 					<i class='fas fa-lightbulb' style='font-size:24px; color:#FFC107;'></i> -->
-<!-- 					<i class='fas fa-lightbulb' style='font-size:24px; color:grey;'></i> -->
-<!-- 					<i class='fas fa-lightbulb' style='font-size:24px; color:#D3D3D3;'></i> -->
 					<i class='fas fa-lightbulb' style='font-size:24px; color:silver;'></i>
 					</p>
 			</c:forEach>

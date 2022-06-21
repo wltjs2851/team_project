@@ -34,7 +34,7 @@ $(document).ready(function() {
 		console.log(reno);
 		var heart = that.prop("name");
 		console.log(heart);
-		var url = "/admin/heart";
+		var url = "/recommend/heart";
 		var sData = {
 				"reno" : reno,
 				"heart" : that.prop('name')
@@ -192,7 +192,7 @@ $(document).ready(function() {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 		<div>
-		<h3 class="widget-header" style="display: inline-block;"><a href="/admin/listRecommend">추천 운동법</a></h3></div>
+		<h3 class="widget-header" style="display: inline-block;"><a href="/recommend/listRecommend">추천 운동법</a></h3></div>
 			<hr>
 			<div>
 			<h2>${recommendVo.re_title }</h2>
@@ -213,9 +213,9 @@ $(document).ready(function() {
 			<c:choose>
 				<c:when test="${loginVo.userid == 'admin01'}">
 					<a type="button" class="btn btn-primary" id="btnUpdateRecommend"
-						href="/admin/updateRecommendForm?reno=${recommendVo.reno }">수정</a>
+						href="/recommend/updateRecommendForm?reno=${recommendVo.reno }">수정</a>
 					<a type="button" class="btn btn-danger"
-						href="/admin/deleteRecommend?reno=${recommendVo.reno}">삭제</a>
+						href="/recommend/deleteRecommend?reno=${recommendVo.reno}">삭제</a>
 				</c:when>
 			</c:choose>	
 			

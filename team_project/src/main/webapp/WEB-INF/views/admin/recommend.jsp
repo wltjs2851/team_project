@@ -36,7 +36,7 @@ $(document).ready(function() {
 	$(".tr_list").click(function(){
 		console.log("추천게시글 클릭");
 		var reno = $(this).attr("data-reno");
-		location.href = "/admin/selectByReno?reno=" + reno;
+		location.href = "/recommend/selectByReno?reno=" + reno;
 	});
 	
 	$(".revo_re_content").each(function() {
@@ -52,8 +52,8 @@ $(document).ready(function() {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div>
-			<h3 class="widget-header" style="display: inline-block;"><a href="/admin/listRecommend">추천 운동법</a></h3>
-			<a class="btn btn-primary btn-sm" href="/admin/insertRecommendForm" 
+			<h3 class="widget-header" style="display: inline-block;"><a href="/recommend/listRecommend">추천 운동법</a></h3>
+			<a class="btn btn-primary btn-sm" href="/recommend/insertRecommendForm" 
 				style="float: right; width: 110px; height:50px; padding: 1% 0">글 쓰기</a>
 			</div>
 			<table class="table table-responsive product-dashboard-table">
