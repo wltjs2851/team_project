@@ -113,4 +113,9 @@ public class GroupDaoImpl implements GroupDao{
 		return groupJoinList;
 	}
 
+	@Override
+	public List<GroupVo> groupListOrder() {
+		return sqlSession.selectList(NAMESPACE + "groupListOrder");
+	}
+
 }

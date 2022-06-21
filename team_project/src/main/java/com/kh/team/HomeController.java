@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.team.service.FreeService;
+import com.kh.team.service.GroupService;
 import com.kh.team.service.RecipeService;
 import com.kh.team.service.RecommendService;
 import com.kh.team.service.RoutineService;
 import com.kh.team.vo.FreeVo;
+import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.RecipeVo;
 import com.kh.team.vo.RecommendVo;
 import com.kh.team.vo.RoutineVo;
@@ -33,6 +35,9 @@ public class HomeController {
 	@Autowired
 	private FreeService freeService;
 	
+	@Autowired
+	private GroupService groupService;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@Transactional
 	public String home(Model model) {
@@ -40,10 +45,13 @@ public class HomeController {
 		List<RecipeVo> listRecipe = recipeService.selectByViewCnt();
 		List<RoutineVo> listRoutine	= routineService.selectByViewCnt();
 		List<FreeVo> listFree = freeService.selectByViewCnt();
+		List<GroupVo> listGroup = groupService.groupListOrder();
+		System.out.println(listGroup);
 		model.addAttribute("listRecommend", listRecommend);
 		model.addAttribute("listRecipe", listRecipe);
 		model.addAttribute("listRoutine", listRoutine);
 		model.addAttribute("listFree", listFree);
+		model.addAttribute("listGroup", listGroup);
 		return "home";
 	}
 	
