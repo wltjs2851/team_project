@@ -8,7 +8,7 @@
 		select * from calendar
 		where userid = #{userid}
 		and start1 like '%' || #{month} || '%'
-		order by start1 asc
+		order by start1 asc, cno asc
 	</select>
 	
 <!-- 	일정 추가  -->
