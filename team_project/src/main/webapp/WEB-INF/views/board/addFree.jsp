@@ -21,6 +21,7 @@ $(function() {
 					uploadSummernoteImageFile(files[0]);
 				}
 			}
+	});
 });
     
     
