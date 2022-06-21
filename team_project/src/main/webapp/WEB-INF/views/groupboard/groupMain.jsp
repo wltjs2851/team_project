@@ -87,7 +87,21 @@ $(function() {
 		window.open(url, "그룹 채팅방 입장", option);
 	});
 	
+	// 신고 팝업
+	$(".report").click(function(e) {
+		e.preventDefault();
+		console.log("신고 클릭");
+		var userid = $(this).next().val();
+		var gno = $("#gno").val();
+		console.log(gno);
+		var url = "/groupboard/reportForm/" + userid + "/" + gno;
+		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
+		window.open(url, "신고 페이지", option);
+	});
 });
+
+// var userid = window.open.document.getElementById("userid").value;
+// var gno = window.open.document.getElementById("gno").value;
 </script>
 
 <%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %>
@@ -97,6 +111,7 @@ $(function() {
 <%-- ${ loginVo } --%>
 <!-- <hr> -->
 <%-- ${ groupJoinMember } --%>
+<%-- ${ groupList } --%>
 
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
@@ -137,7 +152,7 @@ $(function() {
 </div>
 
 
-
+<div>
 <!--================================
 =            Page Title            =
 =================================-->
@@ -198,10 +213,13 @@ $(function() {
 										
 										<c:if test="${ groupVo.g_leader == loginVo.userid }">
 											 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }">삭제</a>
-											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a>
+<%-- 											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a> --%>
 										</c:if>
 											 <a class="dropdown-item" href="#">회원 정보 보기</a>
-											 
+											 <i id="report" class="report fa-solid fa-handcuffs"><a class="dropdows-item" href="#" 
+											 	data-user="${ groupBoardVo.userid }">신고하기</a></i>
+											 <input type="hidden" id="userid" name="userid" value="${ groupBoardVo.userid }">
+											 <input type="hidden" id="gno" name="gno" value="${ groupBoardVo.gno }">
 										</div>
 							</li>
 						<li class="list-inline-item">${ groupBoardVo.gb_regdate }</li>
@@ -228,9 +246,6 @@ $(function() {
 				<div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-transition os-host-scrollbar-horizontal-hidden">
 				<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
-						<div class="list-group-item">
-							<h2>그룹 소개</h2>
-						</div>
 						<div class="list-group-item">
 <!-- 							<h4 class="list-group-item-heading"> -->
 <!-- 								그룹 소개 -->
@@ -312,6 +327,8 @@ $(function() {
 		</div>
 	</div>
 </section>
+
+</div>
 
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>

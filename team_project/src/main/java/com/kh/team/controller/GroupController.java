@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.GroupService;
 import com.kh.team.service.MemberService;
+import com.kh.team.service.ReportService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
@@ -34,6 +35,9 @@ public class GroupController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ReportService reportService;
 
 	@RequestMapping(value = "/groupList", method = RequestMethod.GET)
 	public String getGroupList(Model model) {
@@ -150,12 +154,15 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value = "groupInfo", method = RequestMethod.GET)
-	public String groupInfo(Model model, int gno, HttpSession session) {
+	public String groupInfo(Model model, int gno, HttpSession session/*, String userid*/) {
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);
 		
 		List<GroupJoinVo> groupJoinMember = groupService.list(gno);
 		model.addAttribute("groupJoinMember", groupJoinMember);
+		
+//		int count = reportService.cntReport(gno, userid);
+//		model.addAttribute("count", count);
 		
 		session.setAttribute("g_joinVo", groupJoinMember);
 		
