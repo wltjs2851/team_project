@@ -3,7 +3,6 @@
  */
 
 	
-//    한달짜리만 할때는 이렇게 하면됨
 // Date 포맷 
 const dateFormat = (date) => {
     return date.toLocaleDateString().replace(/\./g, "").split(" ");

@@ -32,28 +32,25 @@
 			$(".todo-content").html("");
 			$.each(jsonCal, function() {
 				if (this.start1 == that.attr("data-today")) {
-					if (this.checklist == 'true') {
-						if (thatSpan == "false") {
-// 							$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
-							$(".todo-content").append("<label>" + this.content + "</label><br>");
-						} else {
-// 							$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
-							$(".todo-content").append("<label>" + this.content + "</label><br>");
-						}
-					} else {
-						if (thatSpan == "true") {
-// 							$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
-							$(".todo-content").append("<label>" + this.content + "</label><br>");
-						} else {
-// 							$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
-							$(".todo-content").append("<label>" + this.content + "</label><br>");
-						}
-					}
+// 					$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
+					$(".todo-content").append("<label>" + this.content + "</label><br>");
+// 					$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
+// 					$(".todo-content").append("<label>" + this.content + "</label><br>");
 				}
 			});
 		});
 		function getCalendarList() {
 			var divDate = $(".dateBoard .divDate[data-today]");
+			divDate.find("span").remove();
+			divDate.find("br").remove();
+			var url = "/calendar/newCalendar";
+			var userid = "${loginVo.userid}";
+			var sData = {
+				'userid' : userid,
+				'start1' : selectDate
+			};
+			$.get(url, sData, function(rData) {
+				jsonCal = rData;
 			$.each(divDate, function() {
 				var data = this.dataset.today;
 				var thisDiv = this;
@@ -63,6 +60,7 @@
 						$(thisDiv).append("<br><span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: #7CFC00;'>●</span>");
 					}
 				});
+			});
 			});
 		}
 		$("#prevMonth").click(function() {
@@ -112,14 +110,15 @@
 				$.post(url, sData, function(rData) {
 					console.log(rData);
 					if(rData == "true") {
-						that.append("<br><span>" + insertContent + "</span>");
+// 						that.append("<br><span>" + insertContent + "</span>");
 // 						that.append("<br><span style='color: #7CFC00;'>●</span>");
 // 						$(".todo-content").append("<br><input class='checkList' data-today='" + selectDate + "' type='checkbox'><label>" + insertContent + "</label>");
-						$(".todo-content").append("<br><label>" + insertContent + "</label>");
+						$(".todo-content").append("<label>" + insertContent + "</label>");
 						$("#input-box").val("");
 					} else if (rData == "false") {
-						alert("이러다 다~ 죽어")
+						alert("이러다 다~ 죽어");
 					}
+					getCalendarList();
 				});
 			}
 		});

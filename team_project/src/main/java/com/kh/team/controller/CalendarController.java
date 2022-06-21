@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.ScheduleService;
 import com.kh.team.vo.ScheduleVo;
@@ -53,6 +55,21 @@ public class CalendarController {
 		model.addAttribute("jsonCal", jsonArray.fromObject(calList));
 		model.addAttribute("calList", calList);
 		return "admin/calendar";
+	}
+	
+	@RequestMapping(value = "/newCalendar", method = RequestMethod.GET)
+	@ResponseBody
+	public JSONArray newCalendar(Model model, HttpSession session, HttpServletRequest httpRequest) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
+		String thisYear = String.valueOf(LocalDate.now().getYear());
+		String thisMonth = String.valueOf(LocalDate.now().getMonthValue());
+		String month = thisYear + "_" + thisMonth;
+		List<CalendarVo> calList = calendarService.getCal(month, userid);
+		JSONArray jsonArray = new JSONArray();
+		model.addAttribute("jsonCal", jsonArray.fromObject(calList));
+		model.addAttribute("calList", calList);
+		return jsonArray.fromObject(calList);
 	}
 	
 	@RequestMapping(value = "/cal3", method = RequestMethod.GET)

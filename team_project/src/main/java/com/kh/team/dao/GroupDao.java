@@ -18,4 +18,7 @@ public interface GroupDao {
 	public List<GroupJoinVo> list(int gno);
 	public List<GroupJoinVo> list(String userid);
 	public List<GroupVo> groupListOrder();
+	
+	// 가입한 그룹 닉네임 가져오기 
+	public List<String> getNickname(int gno);
 }
