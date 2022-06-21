@@ -85,6 +85,18 @@ $(function() {
 			}
 		});
 	});
+	
+	// 신고 팝업
+	$(".report").click(function(e) {
+		e.preventDefault();
+		console.log("신고 클릭");
+		var userid = $(this).next().val();
+		var gno = $("#gno").val();
+		console.log(gno);
+		var url = "/groupboard/reportForm/" + userid + "/" + gno;
+		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
+		window.open(url, "신고 페이지", option);
+	});
 });
 </script>
 
@@ -181,6 +193,11 @@ ${ groupJoinMember }
 											<button data-value="${ groupJoinVo.userid }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
 											<button data-value="${ groupJoinVo.userid }" class="btnUpdateGLeader btn btn-default" id="btnUpdateGLeader" style="width: 90px; height:30px; padding: 1% 0">권한 넘기기</button>
 										</c:if>
+										
+											<i id="report" class="report fa-solid fa-handcuffs"><a class="btn btn-danger" style="width: 40px; height:30px; padding: 1% 0" href="#" 
+											 	data-user="${ groupBoardVo.userid }">신고</a></i>
+											<input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
+											<input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">
 										
 										</div>
 									</c:forEach>

@@ -12,9 +12,15 @@ public class ReportServiceImpl implements ReportService {
 	private ReportDao reportDao;
 
 	@Override
-	public boolean insertReport(int gno, String userid) {
-		boolean reuslt = reportDao.insertReport(gno, userid);
+	public boolean insertReport(int gno, String userid, String rep_cause) {
+		boolean reuslt = reportDao.insertReport(gno, userid, rep_cause);
 		return reuslt;
+	}
+
+	@Override
+	public int cntReport(int gno, String userid) {
+		int cntReport = reportDao.cntReport(gno, userid);
+		return cntReport;
 	}
 
 }

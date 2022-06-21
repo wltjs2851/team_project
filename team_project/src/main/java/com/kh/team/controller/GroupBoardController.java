@@ -324,16 +324,22 @@ public class GroupBoardController {
 		return String.valueOf(result);
 	}
 	
-	@RequestMapping(value = "/reportForm", method = RequestMethod.GET)
-	public String insertReportForm() {
-//		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
-//		model.addAttribute("groupBoardVo", groupBoardVo);
+	@RequestMapping(value = "/reportForm/{userid}/{gno}", method = RequestMethod.GET)
+	public String insertReportForm(@PathVariable("userid") String userid, 
+			@PathVariable("gno") int gno, Model model) {
+		model.addAttribute("gno", gno);
+		model.addAttribute("userid", userid);
 		
 		return "groupboard/reportForm";
 	}
 	
-	public String insertReportRun() {
+	@RequestMapping(value = "/report", method = RequestMethod.GET)
+	@ResponseBody
+	public String report(int gno, String userid, String rep_cause) {
+		boolean result = reportServcie.insertReport(gno, userid, rep_cause);
 		
-		return "redirect:/groupboard/groupMain/";
+		System.out.println("rep_cause: " + rep_cause);
+		
+		return String.valueOf(result);
 	}
 }
