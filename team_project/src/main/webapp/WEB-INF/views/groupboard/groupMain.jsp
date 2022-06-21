@@ -1,25 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
+<%@ include file="/WEB-INF/views/include/header2.jsp" %>
 
 <style>
 
-/* #sidebar { */
-/* 	width: 400px; */
-/* 	font-size: .85em; */
-/*     margin-top: 0; */
-/*     position:fixed; */
-/*     float: left; */
-/*     top:30%; */
-/*     right:30px; */
-/*     bottom:60%; */
-/*     padding:30px; */
-/*     height: 100%; */
-/*     cursor:default; */
-/*     overflow-y:auto; */
-/*     z-index: 100; */
-/* } */
+#sidebar {
+ 	 width: 400px;
+     margin-top: 0;
+     position:fixed;
+     float: left;
+     top:7%;
+     right:30px;
+     bottom:60%;
+     padding:30px;
+     height: 100%;
+     cursor:default;
+     overflow-y:auto;
+     z-index: 100;
+ }
 
 </style>
 
@@ -69,9 +68,6 @@ $(function() {
 		var userid = "${loginVo.userid}";
 		var gno = ${groupVo.gno};
 		var url = "/group/deleteMember/" + userid + "/" + gno;
-// 		var sData = {
-// 				"gno" : gno
-// 		}
 		
 		$.get(url, function(rData) {
 			console.log(rData);
@@ -91,15 +87,6 @@ $(function() {
 		window.open(url, "그룹 채팅방 입장", option);
 	});
 	
-	// 그룹장 변경 팝업
-// 	$("#updateGLeader").click(function(e) {
-// 		e.preventDefault();
-// 		console.log("그룹장 변경");
-// 		var gno = ${groupVo.gno};
-// 		var url = "/groupboard/updateGLeader/" + gno;
-// 		var option = "width = 500px, height=200px, top=300px, left=300px, scrollbars=yes";
-// 		window.open(url, "그룹장 변경", option);
-// 	});
 });
 </script>
 
@@ -149,48 +136,6 @@ $(function() {
 	</div>
 </div>
 
-<!-- <!-- 그룹장이 그룹탈퇴 누르면 뜨는 모달창 --> -->
-<!-- <div class="row"> -->
-<!-- 	<div class="col-md-12"> -->
-<!-- 		 <a id="modal-405504" href="#modal-container-405504" role="button" class="btn" data-toggle="modal" style="display:none;">Launch demo modal</a> -->
-		
-<!-- 		<div class="modal fade" id="modal-container-405504" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
-<!-- 			<div class="modal-dialog" role="document"> -->
-<!-- 				<div class="modal-content"> -->
-<!-- 					<div class="modal-header"> -->
-<!-- 						<h5 class="modal-title" id="myModalLabel"> -->
-<!-- 							그룹장 변경 -->
-<!-- 						</h5>  -->
-<!-- 						<button type="button" class="close" data-dismiss="modal"> -->
-<!-- 							<span aria-hidden="true">×</span> -->
-<!-- 						</button> -->
-<!-- 					</div> -->
-<!-- 					<div class="modal-body"> -->
-<!-- 						<select name="groupMember" id="groupMember"> -->
-						
-<%-- 							<c:forEach items="${ groupJoinMember }" var="groupJoinVo"> --%>
-<%-- 								<option value="${ groupJoinVo.userid }">${ groupJoinVo.userid }</option> --%>
-<%-- 							</c:forEach> --%>
-							
-<!-- 						</select> -->
-<!-- 					</div> -->
-<!-- 					<div class="modal-footer"> -->
-						 
-<!-- 						<button type="button" class="btn btn-primary"> -->
-<!-- 							변경하고 탈퇴하기 -->
-<!-- 						</button>  -->
-<!-- 						<button type="button" class="btn btn-secondary" data-dismiss="modal"> -->
-<!-- 							Close -->
-<!-- 						</button> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-				
-<!-- 			</div> -->
-			
-<!-- 		</div> -->
-		
-<!-- 	</div> -->
-<!-- </div> -->
 
 
 <!--================================
@@ -201,7 +146,6 @@ $(function() {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 offset-md-2 text-center">
-				<!-- Title text -->
 				<h3>${ groupVo.g_name }</h3>
 			</div>
 		</div>
@@ -216,6 +160,15 @@ $(function() {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+			
+			<c:forEach items="${ noticeList }" var="groupBoardVo" varStatus="status" begin="0" end="2">
+				<h3 style="background-color: powderblue;">
+				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
+					<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title }</a>
+				</c:if>
+				</h3>
+			</c:forEach>
+				<a href="/groupboard/notice?gno=${ groupVo.gno }">전체 공지글 확인하기</a>
 			
 			<c:forEach items="${ groupList }" var="groupBoardVo">
 				<!-- Article 01 -->
