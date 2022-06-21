@@ -103,6 +103,8 @@ $(function() {
 ${ groupVo }
 <hr>
 ${ groupJoinMember }
+<hr>
+<%-- ${ count } --%>
 
 <!-- 그룹 탈퇴 모달 -->
 <div class="row">

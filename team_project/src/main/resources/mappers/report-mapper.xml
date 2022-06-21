@@ -18,4 +18,10 @@
  	where userid = #{userid} and gno = #{gno}
  </select>
  
+ <!-- 신고 내역 -->
+ <select id="logReport" resultType="ReportVo">
+ 	select rep_cause from tbl_report
+ 	where userid = #{userid} and gno = #{gno}
+ </select>
+ 
  </mapper>
