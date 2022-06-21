@@ -57,5 +57,10 @@
 		where gno in (select gno from tbl_group_join
 		where userid = #{userid})
 	</select>
+	
+	<select id="groupListOrder" resultType="GroupVo">
+		select * from tbl_group
+		order by g_attend - g_present
+	</select>
 
 </mapper>

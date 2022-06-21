@@ -50,6 +50,10 @@
 		delete from tbl_routine_like where uno = #{uno} and userid = #{userid}
 	</delete>
 	
+	<delete id="deleteLikeAll">
+		delete from tbl_routine_like where uno = #{uno}
+	</delete>
+	
 	<select id="countLike" resultType="int">
 		select count(*) from tbl_routine_like where uno = #{uno} and userid = #{userid}
 	</select>

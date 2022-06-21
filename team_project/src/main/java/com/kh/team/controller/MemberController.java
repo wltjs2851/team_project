@@ -1,7 +1,6 @@
 package com.kh.team.controller;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,6 +43,7 @@ public class MemberController {
 	@RequestMapping(value = "/loginRun", method = RequestMethod.POST)
 	public String loginRun(String userid, String userpw, String saveid, HttpSession session, RedirectAttributes rttr, HttpServletResponse response) {
 		MemberVo memberVo = memberService.login(userid, userpw);
+		String target = (String)session.getAttribute("targetLocation");
 		if (memberVo != null) {
 			session.setAttribute("loginVo", memberVo);
 //			로그인했을때 아이디저장에 체크하였다면 아이디값을 쿠키에 저장
@@ -60,12 +59,18 @@ public class MemberController {
 				cookie.setMaxAge(0);
 				response.addCookie(cookie);
 			}
-			rttr.addFlashAttribute("loginResult", "true");
-		} else {
-			rttr.addFlashAttribute("loginResult", "false");
-			return "redirect:/member/loginForm";
-		}
-		return "redirect:/";
+				rttr.addFlashAttribute("loginResult", "true");
+				
+			} else {
+				rttr.addFlashAttribute("loginResult", "false");
+				return "redirect:/member/loginForm";
+			}
+			if (target == "" || target == null) {
+				return "redirect:/";
+			} else {
+				session.removeAttribute("targetLocation");
+				return "redirect:/" + target;
+			}
 	}
 	
 	// 세션에 저장된 로그인 정보 삭제

@@ -28,7 +28,7 @@ $(function() {
 	
 	$("#btnComment").click(function() {
 		var fc_comment = $("#fc_comment").val();
-		var userid = $("#userid").val();
+		var userid = "${loginVo.userid}";
 		var fno = "${freeVo.fno}";
 		var u_pic = "${loginVo.u_pic}";
 		var url = "/free/addFreeComment";
@@ -119,6 +119,44 @@ $(function() {
 			}
 		});
 	});
+	
+	var like_cnt = ${like_cnt};
+	console.log(like_cnt);
+	var span = $("#span_like");
+	
+	if (like_cnt > 0){
+		// 좋아요 1 이상인 경우
+		$("i.fa-heart").css("color", "red");
+	} else {
+		$("i.fa-heart").css("color", "graytext");
+	}
+	
+	var is_like;
+	
+	$("i.fa-heart").click(function() {
+		var like = $(this);
+		var url = "/free/updateLike";
+		var sendData = {
+				"fno" : "${ freeVo.fno }",
+				"userid" : "${ loginVo.userid }",
+				"f_like" : parseInt(span.text()),
+				"like_cnt" : like_cnt
+		}
+		$.post(url, sendData, function(receivedData) {
+			console.log("receivedData: ", receivedData);
+			if(receivedData == 1) {
+				like.css("color", "red");
+		 		span.text(parseInt(span.text().trim()) + 1);
+		 		span.css("color", "red");
+		 		like_cnt = receivedData;
+			} else {					
+				like.css("color", "graytext");
+			 	span.text(parseInt(span.text().trim()) - 1);
+				span.css("color", "graytext");
+			 	like_cnt = receivedData;
+			}
+		});
+	});
 });
 </script>
 
@@ -136,11 +174,15 @@ $(function() {
 				<hr>
 			</div>
 			<div>
-				<i class="fa-solid fa-heart" style="color: red; font-size: 25px;" >좋아요</i>
-				<a href="/free/modifyFreeForm?fno=${ freeVo.fno }" class="btn btn-warning"
-					style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
-				<a href="/free/deleteFreeRun?fno=${ freeVo.fno }" class="btn btn-danger"
-					style="width: 60px; height:40px; padding: 0.7% 0">삭제</a>
+				<i class="fa-solid fa-heart" style="color: red; font-size: 25px;" ></i><span id="span_like">${ freeVo.f_like }</span>
+				<c:if test="${ freeVo.userid == loginVo.userid }">
+					<a href="/free/modifyFreeForm?fno=${ freeVo.fno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-warning"
+						style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
+					<a href="/free/removeFreeRun?fno=${ freeVo.fno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-danger"
+						style="width: 60px; height:40px; padding: 0.7% 0">삭제</a>
+				</c:if>
+				<a href="/free/freeList?page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-outline-primary"
+					style="width: 60px; height:40px; padding: 0.7% 0">목록</a>
 			</div>
 		</div>
 		<div class="col-md-2"></div>
@@ -149,16 +191,13 @@ $(function() {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<hr>
-			<div class="row" style="margin-top: 20px;">
-				<div class="col-md-9">
-					<input type="text" placeholder="댓글 입력" id="fc_comment" class="form-control">
-				</div>
-				<div class="col-md-2">
-					<input type="text" placeholder="userid" id="userid" class="form-control">
-				</div>
-				<div class="col-md-1">
+			<div class="col" style="margin-top: 20px;">
+				<div>
+					<input type="hidden" id="userid" class="form-control">
+					<textarea onkeyup="adjustHeight();" rows="4" id="fc_comment"
+						style="width: 100%; resize: none;" placeholder="댓글 입력"></textarea>
 					<button type="button" id="btnComment" class="btn btn-primary"
-						style="width: 80px; height:50px; padding: 1% 0">댓글달기</button>
+						style="width: 80px; height: 50px; padding: 1% 0; float: right; margin-top: 5px;">댓글달기</button>
 				</div>
 			</div>
 

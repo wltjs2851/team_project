@@ -4,15 +4,21 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.team.dao.FreeCommentDao;
 import com.kh.team.dao.FreeDao;
 import com.kh.team.vo.FreeVo;
+import com.kh.team.vo.PagingDto;
 
 @Service
 public class FreeServiceImpl implements FreeService{
 	
 	@Autowired
 	FreeDao freeDao;
+	
+	@Autowired
+	FreeCommentDao freeDaoComment;
 
 	@Override
 	public boolean addFree(FreeVo freeVo) {
@@ -20,8 +26,8 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
-	public List<FreeVo> freeList() {
-		return freeDao.selectFreeArticle();
+	public List<FreeVo> freeList(PagingDto pagingDto) {
+		return freeDao.selectFreeArticle(pagingDto);
 	}
 
 	@Override
@@ -30,8 +36,15 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
+	@Transactional
 	public boolean removeFree(int fno) {
-		return freeDao.deleteFreeArticle(fno);
+		boolean deleteComment = freeDaoComment.deleteFreeCommentAll(fno);
+		boolean deleteLike = freeDao.deleteLikeAll(fno);
+		boolean deleteArticle = freeDao.deleteFreeArticle(fno);
+		if(deleteComment && deleteLike && deleteArticle) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -52,6 +65,38 @@ public class FreeServiceImpl implements FreeService{
 	@Override
 	public List<FreeVo> selectByViewCnt() {
 		return freeDao.selectByViewCnt();
+	}
+
+	@Override
+	public int countLike(int fno, String userid) {
+		return freeDao.countLike(fno, userid);
+	}
+
+	@Override
+	@Transactional
+	public boolean decreaseLike(int fno, int f_like, String userid) {
+		boolean resultDelete = freeDao.deleteLike(fno, userid);
+		boolean resultUpdate = freeDao.updateLikecnt(fno, f_like - 1);
+		if(resultDelete && resultUpdate) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	@Transactional
+	public boolean increaseLike(int fno, int f_like, String userid) {
+		boolean resultInsert = freeDao.insertLike(fno, userid);
+		boolean resultUpdate = freeDao.updateLikecnt(fno, f_like + 1);
+		if(resultInsert && resultUpdate) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public int getCount(PagingDto pagingDto) {
+		return freeDao.getCount(pagingDto);
 	}
 	
 }

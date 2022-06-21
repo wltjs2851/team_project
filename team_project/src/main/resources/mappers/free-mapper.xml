@@ -14,7 +14,20 @@
 	</insert>
 	
 	<select id="selectFreeArticle" resultType="FreeVo">
-		select * from tbl_free order by fno desc
+<!-- 		select * from (select rownum rnum, a.* from  -->
+<!-- 			(select * from tbl_free -->
+<!-- 			<include refid="search"/> -->
+<!-- 			order by fno desc) a)  -->
+<!-- 		where rnum between #{startRow} and #{endRow} -->
+		
+		select * from (select rownum rnum, a.* from 
+			(select f.*, c.fname from tbl_free f, tbl_fcategory_code c
+			<include refid="search"/>
+			where f.fcode = c.fcode
+			order by fno desc) a) 
+		where rnum between #{startRow} and #{endRow}
+		
+<!-- 		select f.*, c.fname from tbl_free f, tbl_fcategory_code c where fno = #{fno} and f.fcode = c.fcode -->
 	</select>
 	
 	<select id="selectByViewCnt" resultType="FreeVo">
@@ -31,7 +44,7 @@
 	</update>
 	
 	<delete id="deleteFreeArticle">
-		delete from tbl_free where uno = #{fno}
+		delete from tbl_free where fno = #{fno}
 	</delete>
 	
 	<select id="contentByFno" resultType="FreeVo">
@@ -42,5 +55,47 @@
 		update tbl_free set f_viewcnt = #{f_viewcnt} + 1
 			where fno = #{fno}
 	</update>
+	
+	<insert id="insertLike">
+		insert into tbl_free_like(flno, fno, userid)
+			values(seq_free_flno.nextval, #{fno}, #{userid})
+	</insert>
+	
+	<delete id="deleteLike">
+		delete from tbl_free_like where fno = #{fno} and userid = #{userid}
+	</delete>
+	
+	<delete id="deleteLikeAll">
+		delete from tbl_free_like where fno = #{fno}
+	</delete>
+	
+	<select id="countLike" resultType="int">
+		select count(*) from tbl_free_like where fno = #{fno} and userid = #{userid}
+	</select>
+	
+	<update id="updateLikecnt">
+		update tbl_free set f_like = #{f_like} where fno = #{fno}
+	</update>
+	
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_free<include refid="search"/>
+	</select>
 
+	<sql id="search">
+		<if test="searchType != null and keyword != null">
+				<choose>
+					<when test='searchType == "t"'>where f_title like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "c"'>where f_content like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "w"'>where userid like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "tc"'>
+					where f_title like '%' || #{keyword} || '%'
+					or f_content like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "tcw"'>
+					where f_title like '%' || #{keyword} || '%'
+					or f_content like '%' || #{keyword} || '%'
+					or userid like '%' || #{keyword} || '%'
+					</when>
+				</choose>
+			</if>
+	</sql>
 </mapper>

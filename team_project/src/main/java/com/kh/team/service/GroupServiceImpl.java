@@ -84,4 +84,9 @@ public class GroupServiceImpl implements GroupService{
 		return groupJoinList;
 	}
 
+	@Override
+	public List<GroupVo> groupListOrder() {
+		return groupDao.groupListOrder();
+	}
+
 }

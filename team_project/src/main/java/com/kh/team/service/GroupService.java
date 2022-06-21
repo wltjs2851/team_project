@@ -15,4 +15,5 @@ public interface GroupService {
 	public boolean banGroup(int gno, String userid);
 	public List<GroupJoinVo> list(int gno);
 	public List<GroupJoinVo> list(String userid);
+	public List<GroupVo> groupListOrder();
 }
