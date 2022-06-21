@@ -27,6 +27,7 @@ import com.kh.team.service.GroupBoardLikeService;
 import com.kh.team.service.GroupBoardService;
 import com.kh.team.service.GroupService;
 import com.kh.team.service.MemberService;
+import com.kh.team.service.ReportService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.CalendarVo;
 import com.kh.team.vo.GroupBoardLikeVo;
@@ -53,6 +54,9 @@ public class GroupBoardController {
 	
 	@Autowired
 	private CalendarServcie calendarService;
+	
+	@Autowired
+	private ReportService reportServcie;
 	
 	@RequestMapping(value = "groupWriteForm", method = RequestMethod.GET)
 	public String createForm(Model model, int gno) { // 글쓰기 양식
@@ -318,5 +322,18 @@ public class GroupBoardController {
 		
 		
 		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value = "/reportForm", method = RequestMethod.GET)
+	public String insertReportForm() {
+//		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
+//		model.addAttribute("groupBoardVo", groupBoardVo);
+		
+		return "groupboard/reportForm";
+	}
+	
+	public String insertReportRun() {
+		
+		return "redirect:/groupboard/groupMain/";
 	}
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.kh.team.mappers.report">
+ 
+ <insert id="insertReport">
+ 	insert into tbl_report(repno, userid, gno, rep_cause)
+ 	values(seq_report_repno.nextval, #{userid}, #{gno}, #{rep_cause})
+ </insert>
+ 
+ </mapper>

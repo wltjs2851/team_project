@@ -87,6 +87,13 @@ $(function() {
 		window.open(url, "그룹 채팅방 입장", option);
 	});
 	
+	$("#report").click(function(e) {
+		e.preventDefault();
+		console.log("신고 클릭");
+		var url = "/groupboard/reportForm";
+		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
+		window.open(url, "그룹 채팅방 입장", option);
+	});
 });
 </script>
 
@@ -137,7 +144,7 @@ $(function() {
 </div>
 
 
-
+<div>
 <!--================================
 =            Page Title            =
 =================================-->
@@ -198,10 +205,10 @@ $(function() {
 										
 										<c:if test="${ groupVo.g_leader == loginVo.userid }">
 											 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }">삭제</a>
-											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a>
+<%-- 											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a> --%>
 										</c:if>
 											 <a class="dropdown-item" href="#">회원 정보 보기</a>
-											 
+											 <i id="report" class="fa-solid fa-handcuffs"><a class="dropdows-item" href="#">신고하기</a></i>
 										</div>
 							</li>
 						<li class="list-inline-item">${ groupBoardVo.gb_regdate }</li>
@@ -228,9 +235,6 @@ $(function() {
 				<div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-transition os-host-scrollbar-horizontal-hidden">
 				<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
-						<div class="list-group-item">
-							<h2>그룹 소개</h2>
-						</div>
 						<div class="list-group-item">
 <!-- 							<h4 class="list-group-item-heading"> -->
 <!-- 								그룹 소개 -->
@@ -312,6 +316,8 @@ $(function() {
 		</div>
 	</div>
 </section>
+
+</div>
 
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
