@@ -9,7 +9,7 @@ tr.tr_list{
 }
 
 tr.tr_list:hover{
-	background-color: skyblue;
+	background-color: aliceblue;
 }
 
 .search {
@@ -49,9 +49,9 @@ $(document).ready(function(){
 	$(".td_list").click(function(){
 		console.log("kcal 게시글 클릭");
 		var kno = $(this).attr("data-kno");
-// 		location.href = "/admin/selectByKno?kno=" + kno;
+// 		location.href = "/kcal/selectByKno?kno=" + kno;
 		frmPaging.find("input[name=kno]").val(kno);
-		frmPaging.attr("action", "/admin/selectByKno");
+		frmPaging.attr("action", "/kcal/selectByKno");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -62,7 +62,7 @@ $(document).ready(function(){
 		console.log("클릭");
 		var page = $(this).attr("href");
 		frmPaging.find("input[name=page]").val(page);
-		frmPaging.attr("action", "/admin/listKcal");
+		frmPaging.attr("action", "/kcal/listKcal");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -75,7 +75,7 @@ $(document).ready(function(){
 		console.log(keyword);
 		frmPaging.find("input[name=keyword]").val(keyword);
 		frmPaging.find("input[name=page]").val(1);
-		frmPaging.attr("action", "/admin/listKcal");
+		frmPaging.attr("action", "/kcal/listKcal");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -95,7 +95,7 @@ $(document).ready(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<h2><a href="/admin/listKcal">운동칼로리 사전</a></h2>
+			<h2><a href="/kcal/listKcal">운동칼로리 사전</a></h2>
 			<hr>
 			</div>
 		<div class="col-md-2"></div>
@@ -177,7 +177,7 @@ $(document).ready(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<a class="btn btn-primary btn-sm" href="/admin/insertKcalForm" style="float: right;">글 쓰기</a>
+			<a class="btn btn-primary btn-sm" href="/kcal/insertKcalForm" style="float: right;">글 쓰기</a>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
