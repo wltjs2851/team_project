@@ -261,6 +261,12 @@ public class GroupBoardController {
 		List<CalendarVo> calList = calendarService.getCal(month, userid);
 		JSONArray jsonArray = new JSONArray();
 		model.addAttribute("jsonCal", jsonArray.fromObject(calList));
+
+		GroupVo groupVo = groupService.groupByGno(gno);
+		model.addAttribute("groupVo", groupVo);
+		
+		List<GroupJoinVo> groupJoinMember = groupService.list(gno);
+		model.addAttribute("groupJoinMember", groupJoinMember);
 		
 		return "groupboard/activityInfo";
 	}
