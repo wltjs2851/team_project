@@ -150,18 +150,20 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value = "groupInfo", method = RequestMethod.GET)
-	public String groupInfo(Model model, int gno) {
+	public String groupInfo(Model model, int gno, HttpSession session) {
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);
 		
 		List<GroupJoinVo> groupJoinMember = groupService.list(gno);
 		model.addAttribute("groupJoinMember", groupJoinMember);
 		
+		session.setAttribute("g_joinVo", groupJoinMember);
+		
 		return "groupboard/groupInfo";
 	}
 	
 	@RequestMapping(value = "myGroupList", method = RequestMethod.GET)
-	public String myGroupList(/*int gno, */GroupVo groupVo, Model model, String userid, HttpServletRequest httpRequest) { // 유저 아이디를 기준으로 가입한 그룹들 가져오는,,,
+	public String myGroupList(/*int gno, */GroupVo groupVo, Model model, String userid, HttpServletRequest httpRequest, HttpSession session) { // 유저 아이디를 기준으로 가입한 그룹들 가져오는,,,
 		userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
 		
 		List<GroupJoinVo> group = groupService.list(userid);
@@ -169,6 +171,8 @@ public class GroupController {
 		
 //		groupVo = groupService.groupByGno(gno);
 //		model.addAttribute("groupVo", groupVo);
+		
+//		session.setAttribute("g_joinVo", group);
 		
 		return "groupboard/myGroupList";
 	}
