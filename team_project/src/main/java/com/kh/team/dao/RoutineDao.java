@@ -16,6 +16,7 @@ public interface RoutineDao {
 	public List<RoutineVo> selectByViewCnt();
 	public boolean insertLike(int uno, String userid);
 	public boolean deleteLike(int uno, String userid);
+	public boolean deleteLikeAll(int uno);
 	public int countLike(int uno, String userid);
 	public boolean updateLikecnt(int uno, int ur_like);
 	public int getCount(PagingDto pagingDto);

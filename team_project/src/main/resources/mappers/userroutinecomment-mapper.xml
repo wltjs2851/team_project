@@ -32,6 +32,7 @@
  	where urcno = #{urcno}
  </delete>
  
+<!--  댓글 전체 삭제 -->
  <delete id="deleteRoutineCommentAll">
  	delete from tbl_ucomment
  	where uno = #{uno}

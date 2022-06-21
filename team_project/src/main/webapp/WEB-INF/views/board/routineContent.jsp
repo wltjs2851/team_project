@@ -199,12 +199,12 @@ $(function() {
 		<div class="col-md-8">
 			<hr>
 			<div class="col" style="margin-top: 20px;">
-			<div>
-				<textarea onkeyup="adjustHeight();" rows="4"
-				id="urc_comment" style="width: 100%; resize: none;" placeholder="댓글 입력"></textarea>
-				<button type="button" id="btnComment" class="btn btn-primary"
-					style="width: 80px; height: 50px; padding: 1% 0; float: right; margin-top: 5px;">댓글달기</button>
-			</div>
+				<div>	
+					<textarea onkeyup="adjustHeight();" rows="4"
+					id="urc_comment" style="width: 100%; resize: none;" placeholder="댓글 입력"></textarea>
+					<button type="button" id="btnComment" class="btn btn-primary"
+						style="width: 80px; height: 50px; padding: 1% 0; float: right; margin-top: 5px;">댓글달기</button>
+				</div>
 			</div>
 
 			<div class="row" style="margin-top: 25px; margin-left: 3px;" id="comment">
