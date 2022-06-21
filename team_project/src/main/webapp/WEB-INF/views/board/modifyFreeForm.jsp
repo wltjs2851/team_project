@@ -58,10 +58,15 @@ function uploadSummernoteImageFile(file) {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form role="form" action="/free/modifyFreeRun" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="userid" name="userid" value="${ loginVo.userid }"/>
 				<input type="hidden" name="fno" value="${ freeVo.fno }">
+				<input type="hidden" name="page" value="${ param.page }">
+				<input type="hidden" name="perPage" value="${ param.perPage }">
+				<input type="hidden" name="keyword" value="${ param.keyword }">
+				<input type="hidden" name="searchType" value="${ param.searchType }">
 				<div class="form-group row">
 					<div class="col-md-1">
-						<select name="fcode">
+						<select name="fcode" class="form-control">
 						<c:forEach items="${ categoryList }" var="categoryList">
 							<option value="${ categoryList.fcode }"
 								<c:if test="${ categoryList.fcode == freeVo.fcode }">
@@ -77,10 +82,6 @@ function uploadSummernoteImageFile(file) {
 				</div>
 				<div class="form-group">
 					<textarea id="summernote" name="f_content"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="userid"> 사용자 </label>  
-					<input type="text" class="form-control" id="userid" name="userid" value="${ freeVo.userid }" required/>
 				</div>
 				<button type="submit" class="btn btn-success" 
 					style='width: 80px; height:50px; padding: 1% 0'>수정완료</button>

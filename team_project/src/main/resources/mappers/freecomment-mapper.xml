@@ -32,4 +32,10 @@
  	where fcno = #{fcno}
  </delete>
  
+ <!--  댓글 전체 삭제 -->
+ <delete id="deleteFreeCommentAll">
+ 	delete from tbl_fcomment
+ 	where fno = #{fno}
+ </delete>
+ 
  </mapper>

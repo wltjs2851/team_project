@@ -60,9 +60,9 @@ function uploadSummernoteImageFile(file) {
 			<form role="form" action="/routine/modifyRoutineRun" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="uno" value="${ routineVo.uno }">
 				<input type="hidden" name="page" value="${ param.page }">
-			<input type="hidden" name="perPage" value="${ param.perPage }">
-			<input type="hidden" name="keyword" value="${ param.keyword }">
-			<input type="hidden" name="searchType" value="${ param.searchType }">
+				<input type="hidden" name="perPage" value="${ param.perPage }">
+				<input type="hidden" name="keyword" value="${ param.keyword }">
+				<input type="hidden" name="searchType" value="${ param.searchType }">
 				<div class="form-group">
 					<input type="text" class="form-control" value="${ routineVo.ur_title }" name="ur_title" required/>
 				</div>

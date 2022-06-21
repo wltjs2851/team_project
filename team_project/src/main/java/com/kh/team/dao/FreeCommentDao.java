@@ -9,4 +9,5 @@ public interface FreeCommentDao {
 	public List<FreeCommentVo> commentFreeList(int fno);
 	public boolean updateFreeComment(FreeCommentVo freeCommentVo);
 	public boolean deleteFreeComment(int fcno);
+	public boolean deleteFreeCommentAll(int fno);
 }

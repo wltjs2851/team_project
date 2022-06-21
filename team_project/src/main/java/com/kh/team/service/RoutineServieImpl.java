@@ -39,8 +39,9 @@ public class RoutineServieImpl implements RoutineService{
 	@Transactional
 	public boolean removeRoutine(int uno) {
 		boolean commentDelete = routineCommentDao.deleteRoutineCommentAll(uno);
+		boolean likeDelete = routineDao.deleteLikeAll(uno);
 		boolean contentDelete = routineDao.deleteRoutine(uno);
-		if(contentDelete && commentDelete) {
+		if(contentDelete && commentDelete && likeDelete) {
 			return true;
 		}
 		return false;

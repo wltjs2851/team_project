@@ -48,4 +48,13 @@ public class FreeCommentDaoImpl implements FreeCommentDao{
 		return false;
 	}
 
+	@Override
+	public boolean deleteFreeCommentAll(int fno) {
+		int count = sqlSession.update(NAMESPACE + "deleteFreeCommentAll", fno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

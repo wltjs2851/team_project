@@ -123,4 +123,13 @@ public class RoutineDaoImpl implements RoutineDao{
 		int count = sqlSession.selectOne(NAMESPACE + "getCount", pagingDto);
 		return count;
 	}
+
+	@Override
+	public boolean deleteLikeAll(int uno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteLikeAll", uno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
 }

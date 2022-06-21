@@ -3,6 +3,11 @@ package com.kh.team.controller;
 import java.io.FileInputStream;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.dao.FreeCommentDao;
 import com.kh.team.service.FreeCommentService;
@@ -23,6 +29,8 @@ import com.kh.team.service.RoutineService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.FreeVo;
+import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
 import com.kh.team.vo.RoutineCommentVo;
@@ -39,8 +47,10 @@ public class FreeController {
 	FreeCommentService freeCommentService;
 	
 	@RequestMapping(value = "/freeList", method = RequestMethod.GET)
-	public String FreeList(Model model) {
-		List<FreeVo> freeList = freeService.freeList();
+	public String FreeList(Model model, PagingDto pagingDto) {
+		pagingDto.setCount(freeService.getCount(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
+		List<FreeVo> freeList = freeService.freeList(pagingDto);
 		model.addAttribute("freeList", freeList);
 		return "board/freeList";
 	}
@@ -67,9 +77,38 @@ public class FreeController {
 	}
 
 	@RequestMapping(value = "/freeContent", method = RequestMethod.GET)
-	public String freeContent(Model model, int fno) {
+	public String freeContent(Model model, int fno, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		FreeVo freeVo = freeService.contentByFno(fno);
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		int like_cnt = freeService.countLike(fno, memberVo.getUserid());
+		model.addAttribute("like_cnt", like_cnt);
 		model.addAttribute("freeVo", freeVo);
+		
+		Cookie oldCookie = null;
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("postView")) {
+	                oldCookie = cookie;
+	            }
+	        }
+	    }
+	    
+	    if (oldCookie != null) {
+	        if (!oldCookie.getValue().contains("[" + fno +"/" + memberVo.getUserid() + "]")) {
+	        	freeService.updateViewcnt(fno, freeVo.getF_viewcnt());
+	            oldCookie.setValue(oldCookie.getValue() + "_[" + fno +"/" + memberVo.getUserid() + "]");
+	            oldCookie.setPath("/");
+	            oldCookie.setMaxAge(60 * 60 * 12);
+	            response.addCookie(oldCookie);
+	        }
+	    } else {
+	    	freeService.updateViewcnt(fno, freeVo.getF_viewcnt());
+	        Cookie newCookie = new Cookie("postView","[" + fno +"/" + memberVo.getUserid() + "]");
+	        newCookie.setPath("/");
+	        newCookie.setMaxAge(60 * 60 * 24);
+	        response.addCookie(newCookie);
+	    }
 		return "board/freeContent";
 	}
 
@@ -83,12 +122,45 @@ public class FreeController {
 	}
 
 	@RequestMapping(value = "/modifyFreeRun", method = RequestMethod.POST)
-	public String modifyFreeRun(FreeVo freeVo) {
+	public String modifyFreeRun(FreeVo freeVo, RedirectAttributes rttr, PagingDto pagingDto) {
 		System.out.println("FreeController, modifyFreeRun, FreeVo: " + freeVo);
 		String content = freeVo.getF_content();
 		freeVo.setF_content(content.replaceAll("\"", "\'"));
 		freeService.modifyFree(freeVo);
-		return "redirect:/free/freeContent?fno=" + freeVo.getFno();
+		rttr.addAttribute("fno", freeVo.getFno());
+		rttr.addAttribute("page", pagingDto.getPage());
+		rttr.addAttribute("perPage", pagingDto.getPerPage());
+		rttr.addAttribute("searchType", pagingDto.getSearchType());
+		rttr.addAttribute("keyword", pagingDto.getKeyword());
+		return "redirect:/free/freeContent";
+	}
+	
+	@RequestMapping(value = "/updateLike", method = RequestMethod.POST)
+	@ResponseBody
+	public int updateLike(FreeVo freeVo, @RequestParam("like_cnt") int like_cnt, Model model) {
+		System.out.println(freeVo);
+		int fno = freeVo.getFno();
+		String userid = freeVo.getUserid();
+		int f_like = freeVo.getF_like();
+		
+		if(like_cnt > 0) {
+			freeService.decreaseLike(fno, f_like, userid);
+			like_cnt = 0;
+		} else {
+			freeService.increaseLike(fno, f_like, userid);
+			like_cnt = 1;
+		}
+		return like_cnt;
+	}
+	
+	@RequestMapping(value = "/removeFreeRun", method = RequestMethod.GET)
+	public String removeRoutine(int fno, RedirectAttributes rttr, PagingDto pagingDto) {
+		freeService.removeFree(fno);
+		rttr.addAttribute("page", pagingDto.getPage());
+		rttr.addAttribute("perPage", pagingDto.getPerPage());
+		rttr.addAttribute("searchType", pagingDto.getSearchType());
+		rttr.addAttribute("keyword", pagingDto.getKeyword());
+		return "redirect:/free/freeList";
 	}
 	
 	@RequestMapping(value = "/addFreeComment", method = RequestMethod.POST)

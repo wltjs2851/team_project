@@ -46,7 +46,6 @@ function uploadSummernoteImageFile(file) {
 		}
 	});
 };
-});
 </script>
 <script src="/resources/js/summernote/summernote-lite.js"></script>
 <script src="/resources/js/summernote/lang/summernote-ko-KR.js"></script>
@@ -57,9 +56,10 @@ function uploadSummernoteImageFile(file) {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form role="form" action="/free/addFreeRun" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="userid" name="userid" value="${ loginVo.userid }"/>
 				<div class="form-group row">
 					<div class="col-md-1">
-						<select name="fcode">
+						<select name="fcode" class="form-control">
 						<c:forEach items="${ categoryList }" var="categoryList">					
 							<option value="${ categoryList.fcode }">${ categoryList.fname }</option>
 						</c:forEach>
@@ -71,10 +71,6 @@ function uploadSummernoteImageFile(file) {
 				</div>
 				<div class="form-group">
 					<textarea id="summernote" name="f_content"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="userid"> 사용자 </label>  
-					<input type="text" class="form-control" id="userid" name="userid" required/>
 				</div>
 				<button type="submit" class="btn btn-primary" 
 					style='width: 80px; height:50px; padding: 1% 0'>글쓰기</button>
