@@ -16,4 +16,6 @@ public interface GroupService {
 	public List<GroupJoinVo> list(int gno);
 	public List<GroupJoinVo> list(String userid);
 	public List<GroupVo> groupListOrder();
+	
+	public List<String> getNickname(int gno);
 }

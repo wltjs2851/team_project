@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -24,6 +25,12 @@ public class ChatHandler extends TextWebSocketHandler {
 	// 클라이언트가 연결에 성공했을 때 호출되는 메소드
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		Map<String, Object> attrMap = session.getAttributes();
+		Set<String> keys = attrMap.keySet();
+		System.out.println("keys:" + keys);
+		for (String key : keys) {
+			System.out.println("key:" + key);
+		}
 		String uri = session.getUri().toString();
 		System.out.println(uri.toString());
 		String gno = uri.substring(uri.lastIndexOf("/") + 1); 
