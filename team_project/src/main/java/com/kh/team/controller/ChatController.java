@@ -1,14 +1,20 @@
 package com.kh.team.controller;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.service.GroupService;
 import com.kh.team.vo.GroupJoinVo;
@@ -18,6 +24,8 @@ import com.kh.team.vo.MemberVo;
 @Controller
 @RequestMapping("/chat")
 public class ChatController {
+	
+	private static Map<String, Set<String>> map = new HashMap<String, Set<String>>();
 	
 	@Autowired
 	private GroupService groupService;
@@ -35,8 +43,11 @@ public class ChatController {
 		GroupVo groupVo = (GroupVo)session.getAttribute("groupVo");
 		// 그룹 가입한 회원
 		List<GroupJoinVo> groupJoinMember = groupService.list(groupVo.getGno());
-		
 		System.out.println("groupJoinMember:" +  groupJoinMember);
+		
+		// 그룹 가입한 회원 닉네임 얻어오기
+		List<String> g_nickname = groupService.getNickname(groupVo.getGno());
+		System.out.println("chatController, 그룹 가입한 사람 닉네임:" + g_nickname);
 		
 		System.out.println("Chat, groupVo:" + groupVo);
 		model.addAttribute("gno", groupVo.getGno());
@@ -44,6 +55,7 @@ public class ChatController {
 		model.addAttribute("nickname", nickname);
 		model.addAttribute("loginVo", loginVo);
 		model.addAttribute("groupJoinMember", groupJoinMember);
+		model.addAttribute("g_nickname", g_nickname);
 		return "/chat/chat2";
 	}
 	
@@ -56,4 +68,17 @@ public class ChatController {
 //		model.addAttribute("nickname", nickname);
 //		return "chat/chat2";
 //	}
+	@RequestMapping(value = "/getChatters/{gno}", method = RequestMethod.GET)
+	@ResponseBody
+	public Set<String> getChatters(HttpSession session, @PathVariable("gno") int gno) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String nickname = loginVo.getNickname();
+		Set<String> set = map.get(String.valueOf(gno));
+		if (set == null) {
+			set = new HashSet<String>();
+		}
+		set.add(nickname);
+		map.put(String.valueOf(gno), set);
+		return set;
+	}
 }

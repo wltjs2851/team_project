@@ -118,4 +118,10 @@ public class GroupDaoImpl implements GroupDao{
 		return sqlSession.selectList(NAMESPACE + "groupListOrder");
 	}
 
+	@Override
+	public List<String> getNickname(int gno) {
+		List<String> nickname = sqlSession.selectList(NAMESPACE + "getNickname", gno);
+		return nickname;
+	}
+
 }

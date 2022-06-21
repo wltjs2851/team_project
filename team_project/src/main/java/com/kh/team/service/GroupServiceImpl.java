@@ -89,4 +89,9 @@ public class GroupServiceImpl implements GroupService{
 		return groupDao.groupListOrder();
 	}
 
+	@Override
+	public List<String> getNickname(int gno) {
+		return groupDao.getNickname(gno);
+	}
+
 }

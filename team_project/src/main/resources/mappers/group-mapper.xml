@@ -62,5 +62,12 @@
 		select * from tbl_group
 		order by g_attend - g_present
 	</select>
-
+	
+	
+<!-- 	가입한 그룹 회원 닉네임 가져오기 -->
+	<select id="getNickname" resultType="String">
+		select nickname from tbl_user 
+		where userid 
+		in (select userid from tbl_group_join where gno = #{gno})
+	</select>
 </mapper>
