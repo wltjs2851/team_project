@@ -79,10 +79,7 @@ $(function() {
 	
 	$("#recipeForm").submit(function() {
 		var html =""; 
-		$("#shopping > div").each(function() {
-			html += $(this).html();
-		});
-		console.log("Html:" + html);
+		html += $("#shopping").html();
 		$("#r_product").val(html);
 		return true;
 	});
@@ -95,32 +92,37 @@ $(function() {
 <link rel="stylesheet" href="/resources/css/summernote/summernote-lite.css">
 
 <div class="container-fluid">
+	<form role="form" action="/recipe/addRecipeRun" method="post" enctype="multipart/form-data" id="recipeForm">
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
-			<form role="form" action="/recipe/addRecipeRun" method="post" enctype="multipart/form-data" id="recipeForm">
-				<input type="hidden" class="form-control" id="userid" name="userid" value="${ loginVo.userid }"/>
-				<input type="hidden" class="form-control" id="r_product" name="r_product"/>
-				<div class="form-group">
-					<input type="text" class="form-control" id="r_title" name="r_title" required/>
-				</div>
-				<div class="form-group">
-					<textarea id="summernote" name="r_content"></textarea>
-				</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-11">
+			<div class="col-md-8" style='display:inline-block; vertical-align: top;'>
+					<input type="hidden" class="form-control" id="userid" name="userid" value="${ loginVo.userid }"/>
+					<input type="hidden" class="form-control" id="r_product" name="r_product"/>
+					<div class="form-group">
+						<input type="text" class="form-control" id="r_title" name="r_title" required/>
+					</div>
+					<div class="form-group">
+						<textarea id="summernote" name="r_content"></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary" id="btn"
+						style='width: 80px; height:50px; padding: 1% 0; margin-top: 20px;'>글쓰기</button>
+					<br>
+					<br>
+			</div>
+			<div class="col-md-3" style='display:inline-block; vertical-align: top;'>
 				<div class="row">
 					<button class="btn btn-info" id="btnSearch" 
-						style='width: 80px; height:50px; padding: 1% 0; float: right;'>검색</button>
+						style='width: 110px; height:50px; padding: 1% 0; margin-bottom: 20px'>추천 상품 검색</button>
 				</div>
 				<div class="shopping" id="shopping">
-				
+					<div style='display: inline-block;'>
+						${ recipeVo.r_product }
+					</div>
 				</div>
-				<button type="submit" class="btn btn-primary" id="btn"
-					style='width: 80px; height:50px; padding: 1% 0; margin-top: 20px;'>글쓰기</button>
-				<br>
-				<br>
-			</form>
+			</div>
 		</div>
-		<div class="col-md-2"></div>
 	</div>
+	</form>
 </div>
 <%@include file="/WEB-INF/views/include/footer.jsp"%>

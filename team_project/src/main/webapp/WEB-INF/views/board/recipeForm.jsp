@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@include file="/WEB-INF/views/include/header.jsp"%>
 
@@ -18,6 +19,7 @@
 	
 	p:{
 		color: black;
+		font-size: 18px;
 	}
 </style>
 
@@ -187,8 +189,8 @@ $(function() {
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-1"></div>
+		<div class="col-md-7">
 			<div>
 				<h2>${ recipeVo.r_title }</h2>
 				<p style="color: #888;">${ recipeVo.userid } &nbsp; ${ recipeVo.r_regdate }</p>
@@ -197,9 +199,6 @@ $(function() {
 			<div>
 				${ recipeVo.r_content }
 				<hr>
-			</div>
-			<div>
-				${recipeVo.r_product }
 			</div>
 			<div class="row">
 				<i class="fa-solid fa-heart" style="font-size: 25px;" ></i><p style="font-size: 25px"><span id="span_like">${ recipeVo.r_like }</span> &nbsp;
@@ -210,14 +209,7 @@ $(function() {
 				<a href="/recipe/recipeList" class="btn btn-outline-primary"
 					style="width: 60px; height:40px; padding: 0.7% 0">목록</a>
 			</div>
-		</div>
-		<div class="col-md-2">
-			<h2>추천상품</h2>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+			
 			<hr>
 			<div class="row" style="margin-top: 20px;">
 				<div class="col-md-10">
@@ -244,9 +236,12 @@ $(function() {
 			<br>
 			<br>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-4">
+			<h2>추천상품</h2>
+			${fn:replace(recipeVo.r_product, '×', '')}
+		</div>
 	</div>
-	
 </div>
+
 
 <%@include file="/WEB-INF/views/include/footer.jsp"%>
