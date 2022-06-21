@@ -22,8 +22,6 @@
 						운동운동운동운동운동운동운동운동운동 <br> 운동운동운동운동운동운동운동운동운동 <br>
 						운동운동운동운동운동운동운동운동운동 <br> 운동운동운동운동운동운동운동운동운동
 					</p>
-
-
 				</div>
 				<!-- Advance Search -->
 				<div class="advance-search">
@@ -46,9 +44,7 @@
 							</div>
 						</div>
 					</form>
-
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -80,17 +76,16 @@
 							<c:forEach items="${listRecipe}" var="recipeVo">
 								<c:choose>
 									<c:when test="${empty recipeVo.r_pic}">
-										<img width="60px" height="40px" style="align-items: center; border-radius: 30%; overflow: hidden;"
+										<img class="rounded-circle" width="30px" height="30px" style="align-items: center; overflow: hidden;"
 											src="/resources/images/recipe.png" alt="식단이미지">
 									</c:when>
 									<c:otherwise>
-										<img width="60px" height="40px"
+										<img class="rounded-circle" width="30px" height="30px"
 											src="/member/displayImage?filename=${recipeVo.r_pic}"
-											alt="식단이미지" style="border-radius: 30%; overflow: hidden;">
+											alt="식단이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
 								<a href="/recipe/recipeForm?rno=${recipeVo.rno}">${fn:substring(recipeVo.r_title, 0, 7)}...</a>
-								<br>
 								<br>
 								<br>
 							</c:forEach>
@@ -112,26 +107,22 @@
 							<c:forEach items="${listRoutine}" var="routineVo">
 								<c:choose>
 									<c:when test="${empty routineVo.ur_pic}">
-										<img width="60px" height="40px" style="align-items: center; border-radius: 30%; overflow: hidden;"
+										<img class="rounded-circle" width="30px" height="30px" style="align-items: center; overflow: hidden;"
 											src="/resources/images/routine.png" alt="루틴이미지">
 									</c:when>
 									<c:otherwise>
-										<img width="60px" height="40px"
+										<img class="rounded-circle" width="30px" height="30px"
 											src="/member/displayImage?filename=${routineVo.ur_pic}"
-											alt="루틴이미지" style="border-radius: 30%; overflow: hidden;">
+											alt="루틴이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
 								<a href="/routine/routineContent?uno=${routineVo.uno}">${fn:substring(routineVo.ur_title, 0, 7)}...</a>
-								<br>
 								<br>
 								<br>
 							</c:forEach>
 						</div>
 					</div>
 				</div>
-
-
-
 			</div>
 			<div class="col-sm-12 col-lg-3">
 				<!-- product card -->
@@ -147,26 +138,22 @@
 							<c:forEach items="${listFree}" var="freeVo">
 								<c:choose>
 									<c:when test="${empty freeVo.f_pic}">
-										<img width="60px" height="40px" style="align-items: center; border-radius: 30%; overflow: hidden;"
+										<img class="rounded-circle" width="30px" height="30px" style="align-items: center; overflow: hidden;"
 											src="/resources/images/routine.png" alt="루틴이미지">
 									</c:when>
 									<c:otherwise>
-										<img width="60px" height="40px"
+										<img class="rounded-circle" width="30px" height="30px"
 											src="/member/displayImage?filename=${freeVo.f_pic}"
-											alt="루틴이미지" style="border-radius: 30%; overflow: hidden;">
+											alt="루틴이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
 								<a href="/free/freeContent?fno=${freeVo.fno}">${fn:substring(freeVo.f_title, 0, 7)}...</a>
-								<br>
 								<br>
 								<br>
 							</c:forEach>
 						</div>
 					</div>
 				</div>
-
-
-
 			</div>
 			<div class="col-sm-12 col-lg-3">
 				<!-- product card -->
@@ -182,17 +169,16 @@
 							<c:forEach items="${listRecommend}" var="ReVo">
 								<c:choose>
 									<c:when test="${empty ReVo.re_pic}">
-										<img width="40px" height="20px" style="align-items: center; border-radius: 30%; overflow: hidden;"
+										<img class="rounded-circle" width="30px" height="30px" style="align-items: center; overflow: hidden;"
 											src="/resources/images/exercise.png" alt="운동이미지">
 									</c:when>
 									<c:otherwise>
-										<img width="60px" height="40px"
+										<img class="rounded-circle" width="30px" height="30px"
 											src="/member/displayImage?filename=${ReVo.re_pic}"
-											alt="운동이미지" style="border-radius: 30%; overflow: hidden;">
+											alt="운동이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
 								<a href="/admin/selectByReno?reno=${ReVo.reno}">${fn:substring(ReVo.re_title, 0, 7)}...</a>
-								<br>
 								<br>
 								<br>
 							</c:forEach>
@@ -200,6 +186,31 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-title">
+					<h2>현재 그룹 상황</h2>
+					<p>각 그룹들의 총인원과 현재인원입니다.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<c:forEach items="${listGroup}" var="groupVo">
+				<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+					<div class="category-block">
+						<div class="header">
+							<i class="fa fa-laptop icon-bg-1"></i> 
+								<h4>${groupVo.g_name}</h4>
+						</div>
+							<ul class="category-list" >
+								<li><a href="/group/groupForm?gno=${groupVo.gno}">인원<span>${groupVo.g_present} / ${groupVo.g_attend}</span></a></li>
+							</ul>
+						</div>
+					</div>
+			</c:forEach> 
 		</div>
 	</div>
 </section>
