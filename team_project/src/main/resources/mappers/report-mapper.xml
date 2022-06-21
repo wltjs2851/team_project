@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.kh.team.mappers.report">
+ 
+ <!-- 신고하기 -->
+ <insert id="insertReport">
+ 	insert into tbl_report(repno, userid, gno, rep_cause)
+ 	values(seq_report_repno.nextval, #{userid}, #{gno}, #{rep_cause})
+ </insert>
+ 
+ <!-- 신고 횟수 -->
+ <select id="cntReport" resultType="ReportVo">
+ 	select count(*) from tbl_report
+ 	where userid = #{userid} and gno = #{gno}
+ </select>
+ 
+ <!-- 신고 내역 -->
+ <select id="logReport" resultType="ReportVo">
+ 	select rep_cause from tbl_report
+ 	where userid = #{userid} and gno = #{gno}
+ </select>
+ 
+ </mapper>

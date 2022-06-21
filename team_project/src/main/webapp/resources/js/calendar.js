@@ -3,7 +3,6 @@
  */
 
 	
-//    한달짜리만 할때는 이렇게 하면됨
 // Date 포맷 
 const dateFormat = (date) => {
     return date.toLocaleDateString().replace(/\./g, "").split(" ");
@@ -39,7 +38,7 @@ const dateFormat = (date) => {
 
     // 현재 날짜 표시하기
     for (let i = 1; i <= lastDay; i++) {
-    	  htmlDummy += `<div class='divDate' data-today='${currentYear + "_" + currentMonth + "_" + i}'>${i}</div>`;
+    	  htmlDummy += `<div class='divDate' data-today='${currentYear + "_" + currentMonth + "_" + i}'><p>${i}</p></div>`;
     }
     
     

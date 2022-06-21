@@ -102,14 +102,11 @@ $(function() {
 					<div class="list-group">
 						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
-							그룹 명
+							<h3>${ groupVo.g_name }</h3>
 						</div>
 						<div class="list-group-item">
-							<h4 class="list-group-item-heading">
-								그룹 소개
-							</h4>
 							<p class="list-group-item-text">
-								...
+								${ groupVo.g_intro }
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">

@@ -45,16 +45,12 @@ $(function() {
 	$("#findId").click(function(e) {
 		e.preventDefault();
 		var url = "/member/findIdPop";
-		var option = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
 		location.href = url;
-// 		window.open(url,"아이디 찾기",option);
 	});
 	$("#findPw").click(function(e) {
 		e.preventDefault();
 		var url = "/member/findPwPop";
-		var option = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
 		location.href = url;
-// 		window.open(url,"비밀번호 찾기",option);
 	});
 });
 </script>

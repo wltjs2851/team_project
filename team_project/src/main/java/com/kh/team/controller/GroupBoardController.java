@@ -27,6 +27,7 @@ import com.kh.team.service.GroupBoardLikeService;
 import com.kh.team.service.GroupBoardService;
 import com.kh.team.service.GroupService;
 import com.kh.team.service.MemberService;
+import com.kh.team.service.ReportService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.CalendarVo;
 import com.kh.team.vo.GroupBoardLikeVo;
@@ -53,6 +54,9 @@ public class GroupBoardController {
 	
 	@Autowired
 	private CalendarServcie calendarService;
+	
+	@Autowired
+	private ReportService reportServcie;
 	
 	@RequestMapping(value = "groupWriteForm", method = RequestMethod.GET)
 	public String createForm(Model model, int gno) { // 글쓰기 양식
@@ -316,6 +320,25 @@ public class GroupBoardController {
 		List<GroupJoinVo> groupJoinMember = groupService.list(gno);
 		model.addAttribute("groupJoinMember", groupJoinMember);
 		
+		
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value = "/reportForm/{userid}/{gno}", method = RequestMethod.GET)
+	public String insertReportForm(@PathVariable("userid") String userid, 
+			@PathVariable("gno") int gno, Model model) {
+		model.addAttribute("gno", gno);
+		model.addAttribute("userid", userid);
+		
+		return "groupboard/reportForm";
+	}
+	
+	@RequestMapping(value = "/report", method = RequestMethod.GET)
+	@ResponseBody
+	public String report(int gno, String userid, String rep_cause) {
+		boolean result = reportServcie.insertReport(gno, userid, rep_cause);
+		
+		System.out.println("rep_cause: " + rep_cause);
 		
 		return String.valueOf(result);
 	}

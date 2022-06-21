@@ -305,12 +305,8 @@ $(function() {
 							<h2>${ groupVo.g_name }</h2>
 						</div>
 						<div class="list-group-item">
-							<h4 class="list-group-item-heading">
-								그룹 소개
-							</h4>
 							<p class="list-group-item-text">
 								${ groupVo.g_intro }
-								...(달력을 넣어서 그룹 일정 표시하도록,,?)
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
