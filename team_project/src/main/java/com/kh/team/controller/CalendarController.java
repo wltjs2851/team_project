@@ -83,8 +83,8 @@ public class CalendarController {
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public String update(String userid, String content, String start1, String checklist, int cno) {
-		CalendarVo vo = new CalendarVo(userid, content, start1, checklist, cno);
+	public String update(String userid, String content, String start1, String checklist) {
+		CalendarVo vo = new CalendarVo(userid, content, start1, checklist);
 		System.out.println(vo);
 		calendarService.updateCheck(vo);
 		return checklist;

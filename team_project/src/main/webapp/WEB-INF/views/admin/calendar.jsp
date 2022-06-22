@@ -24,18 +24,28 @@
 		$("#main-day").html(thisToday.substring(0, 4) + "년 " + thisToday.substring(5, 6) + "월 " + thisToday.substring(7) + "일");
 		$(".dateBoard").on("click", ".divDate", function() {
 			that = $(this);
-			var thatSpan = that.find("span").attr("data-check");
 			selectDate = $(this).attr("data-today");
 			var myDate = selectDate.substring(0, 4) + "년 " + selectDate.substring(5, 6) + "월 " + selectDate.substring(7) + "일";
 			var userid = "${loginVo.userid}";
 			$("#main-day").html(myDate);
 			$(".todo-content").html("");
-			$.each(jsonCal, function() {
+			$.each(jsonCal, function(e) {
+			var thatSpan = that.find("span").eq(e).attr("data-check");
+			console.log(thatSpan);
 				if (this.start1 == that.attr("data-today")) {
-// 					$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
-					$(".todo-content").append("<label>" + this.content + "</label><br>");
-// 					$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
-// 					$(".todo-content").append("<label>" + this.content + "</label><br>");
+					if (this.checklist == 'true') {
+						if (thatSpan == "false") {
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
+						} else {
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
+						}
+					} else {
+						if (thatSpan == "true") {
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
+						} else {
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
+						}
+					}
 				}
 			});
 		});
@@ -56,7 +66,6 @@
 				var thisDiv = this;
 				$.each(jsonCal, function(e) {
 					if (this.start1 == data) {
-// 						$(thisDiv).append("<br><span data-check='" + this.checklist + "' data-cno='" + this.cno + "'>" + this.content + "</span>");
 						$(thisDiv).append("<span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: orange; margin-right: 10px;'><i class='fa-solid fa-flag'></i></span>");
 					}
 				});
@@ -110,10 +119,7 @@
 				$.post(url, sData, function(rData) {
 					console.log(rData);
 					if(rData == "true") {
-// 						that.append("<br><span>" + insertContent + "</span>");
-// 						that.append("<br><span style='color: #7CFC00;'>●</span>");
-// 						$(".todo-content").append("<br><input class='checkList' data-today='" + selectDate + "' type='checkbox'><label>" + insertContent + "</label>");
-						$(".todo-content").append("<label>" + insertContent + "</label>");
+						$(".todo-content").append("<input class='checkList' data-today='" + selectDate + "' type='checkbox'><label>" + insertContent + "</label>");
 						$("#input-box").val("");
 					} else if (rData == "false") {
 						alert("이러다 다~ 죽어");
@@ -122,34 +128,33 @@
 				});
 			}
 		});
-// 		$("#update-check").click(function() {
-// // 			var insertContent = $("todo-content").text();
-// 			var insertContent = $(".checkList").next("label").text();
-// 			var url = "/calendar/update";
-// 			var userid = "${loginVo.userid}";
-// 			var checklist = $(".checkList").prop("checked");
-// 			var cno = 0;
-// 			var sData = {
-// 				'userid' : userid,
-// 				'content' : insertContent,
-// 				'start1' : selectDate,
-// 				'checklist' : checklist,
-// 				'cno' : cno
-// 			};
-// 			if (insertContent != null && insertContent != "") {
-// 				$.post(url, sData, function(rData) {
-// 					if(rData == "true"){
-// 						$("#input-box").val("");
-// 						// 클릭했던 날짜부분의 check->true
-// 						that.children("span").attr("data-check", "true");
-// 					} else if (rData == "false") {
-// 						$("#input-box").val("");
-// 						that.children("span").attr("data-check", "false");
-// 					}
-// 				});
-// // 				getCalendarList();
-// 			}
-// 		});
+		$("#update-check").click(function() {
+			var url = "/calendar/update";
+			var userid = "${loginVo.userid}";
+			for (var i = 0; i < $(".todo-content").find("input").length; i++) {
+				var insertContent = $(".checkList").eq(i).next("label").text();
+				var checklist = $(".checkList").eq(i).prop("checked");
+				var sData = {
+					'userid' : userid,
+					'content' : insertContent,
+					'start1' : selectDate,
+					'checklist' : checklist
+				};
+				if (insertContent != null && insertContent != "") {
+					$.post(url, sData, function(rData) {
+						if(rData == "true"){
+							$("#input-box").val("");
+							// 클릭했던 날짜부분의 check->true
+							that.children("span").attr("data-check", "true");
+						} else if (rData == "false") {
+							$("#input-box").val("");
+							that.children("span").attr("data-check", "false");
+						}
+					});
+				}
+			}
+			getCalendarList();
+		});
 	});
 </script>
 <body>
@@ -192,7 +197,7 @@
 				          <div class="input-wrap">
 				            <input type="text" placeholder="please write here!!" id="input-box" class="input-box form-control">
 				            <button type="button" id="input-data" class="btn btn-outline-primary"><span>INPUT</span></button>
-<!-- 				            <button type="button" id="update-check" class="btn btn-warning"><span>CHECK</span></button> -->
+				            <button type="button" id="update-check" class="btn btn-outline-warning"><span>CHECK</span></button>
 				            <div id="input-list" class="input-list"></div>
 				          </div>
 				        </div>
