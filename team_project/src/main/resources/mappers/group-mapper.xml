@@ -93,4 +93,9 @@
 		in (select userid from tbl_group_join where gno = #{gno})
 		order by nickname
 	</select>
+	
+	<select id="groupByLocation" resultType="GroupVo">
+		select * from tbl_group
+		where dno = #{dno}
+	</select>
 </mapper>

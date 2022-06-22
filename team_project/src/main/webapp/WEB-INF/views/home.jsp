@@ -243,22 +243,112 @@
 				</div>
 			</div>
 		</div>
+<!-- 		<div class="row"> -->
+<%-- 			<c:forEach items="${listGroup}" var="groupVo"> --%>
+<%-- 				<c:if test="${groupVo.g_present < groupVo.g_attend}"> --%>
+<!-- 					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6"> -->
+<!-- 						<div class="category-block"> -->
+<!-- 							<div class="header"> -->
+<!-- 								<img src="/resources/images/smile.png" class="rounded-circle"> -->
+<%-- 								<h4>${groupVo.g_name}</h4> --%>
+<!-- 							</div> -->
+<!-- 							<ul class="category-list" > -->
+<%-- 								<li><a href="/group/groupForm?gno=${groupVo.gno}">인원<span>${groupVo.g_present} / ${groupVo.g_attend}</span></a></li> --%>
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<%-- 				</c:if> --%>
+<%-- 			</c:forEach>  --%>
+<!-- 		</div> -->
 		<div class="row">
-			<c:forEach items="${listGroup}" var="groupVo">
-				<c:if test="${groupVo.g_present < groupVo.g_attend}">
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						<div class="category-block">
-							<div class="header">
-								<img src="/resources/images/smile.png" class="rounded-circle">
-								<h4>${groupVo.g_name}</h4>
-							</div>
-							<ul class="category-list" >
-								<li><a href="/group/groupForm?gno=${groupVo.gno}">인원<span>${groupVo.g_present} / ${groupVo.g_attend}</span></a></li>
-							</ul>
-						</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>서울특별시</h4>
 					</div>
-				</c:if>
-			</c:forEach> 
+					<ul class="category-list">
+						<li><a href="">대충</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>부산광역시</h4>
+					</div>
+					<ul class="category-list">
+						<li><a href="">대충</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>인천광역시</h4>
+					</div>
+					<ul class="category-list">
+						<li><a href="">대충</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>대구광역시</h4>
+					</div>
+					<ul class="category-list">
+						<li><a href="">대충</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>대전광역시</h4>
+					</div>
+					<ul class="category-list">
+						<li><a href="">대충</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>광주광역시</h4>
+					</div>
+					<ul class="category-list">
+						<li><a href="">대충</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>울산광역시</h4>
+					</div>
+					<ul class="category-list">
+						<li><a href="">대충</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>경기도</h4>
+					</div>
+					<ul class="category-list">
+						<li><a href="">대충</a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>

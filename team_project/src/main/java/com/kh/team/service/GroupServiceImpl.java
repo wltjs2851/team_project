@@ -116,4 +116,9 @@ public class GroupServiceImpl implements GroupService{
 		return groupDao.groupLocationSgno(dno, sno);
 	}
 
+	@Override
+	public List<GroupVo> groupByLocation(int dno) {
+		return groupDao.groupByLocation(dno);
+	}
+
 }

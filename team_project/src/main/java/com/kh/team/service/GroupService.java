@@ -20,6 +20,7 @@ public interface GroupService {
 	public List<LocationVo> groupLocation();
 	public List<LocationVo> groupLocationSno(int dno);
 	public List<LocationVo> groupLocationSgno(int dno, int sno);
+	public List<GroupVo> groupByLocation(int dno);
 	
 	public List<String> getNickname(int gno);
 }
