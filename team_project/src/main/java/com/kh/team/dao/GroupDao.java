@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
+import com.kh.team.vo.LocationVo;
 
 public interface GroupDao {
 	public boolean insertGroup(GroupVo groupVo);
@@ -18,6 +19,8 @@ public interface GroupDao {
 	public List<GroupJoinVo> list(int gno);
 	public List<GroupJoinVo> list(String userid);
 	public List<GroupVo> groupListOrder();
+	public List<LocationVo> groupLocation();
+	public List<LocationVo> groupLocationUno(int dno);
 	
 	// 가입한 그룹 닉네임 가져오기 
 	public List<String> getNickname(int gno);

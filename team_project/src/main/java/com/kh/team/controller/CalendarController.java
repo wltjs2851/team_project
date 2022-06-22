@@ -13,20 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.ScheduleService;
-import com.kh.team.vo.ScheduleVo;
 
 import net.sf.json.JSONArray;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.kh.team.service.CalendarServcie;
 import com.kh.team.vo.CalendarVo;
 import com.kh.team.vo.MemberVo;
-
 
 @Controller
 @RequestMapping("/calendar")
@@ -76,34 +70,6 @@ public class CalendarController {
 	@ResponseBody
 	public List<CalendarVo> calendar3(String month, String userid) {
 		return calendarService.getCal(month, userid);
-	}
-	
-	// 시영
-	@RequestMapping(value = "/cal2", method = RequestMethod.GET)
-	public String calendar2(Model model, HttpSession session, HttpServletRequest httpRequest) {
-//		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
-//		String userid = loginVo.getUserid();
-		
-//		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
-//		List<CalendarVo> calList = calendarService.getCal(userid);
-//		model.addAttribute("calList", calList);
-		return "admin/calendar2";
-	}
-	
-	// 달력 일정 추가 
-	@RequestMapping(value = "/add", method = RequestMethod.PATCH)
-	public String insertSchedule(ScheduleVo scheduleVo) {
-		boolean result = service.insertSchedule(scheduleVo);
-		System.out.println("ScheduleAdd, result:" + result);
-		return "redirect:/calendar/list";
-	}
-	
-	// 달력 목록
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String scheduleList(Model model) {
-		List<ScheduleVo> scheduleList = service.scheduleList();
-		model.addAttribute("scheduleList", scheduleList);
-		return "admin/schedule";
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
