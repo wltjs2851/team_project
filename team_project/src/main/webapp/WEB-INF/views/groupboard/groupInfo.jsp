@@ -185,7 +185,7 @@ $(function() {
 						<div class="tab-content">
 							<div class="active" id="tab1">
 								<p>
-									위치: ${ groupVo.g_location }<br>
+<%-- 									위치: ${ groupVo.g_location }<br> --%>
 									운동: ${ groupVo.excercise_type }<br>
 									최대 인원수: ${ groupVo.g_attend }<br>
 									개설 날짜: ${ groupVo.g_regdate }<br>

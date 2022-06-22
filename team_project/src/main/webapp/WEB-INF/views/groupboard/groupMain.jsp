@@ -179,7 +179,7 @@ $(function() {
 			<c:forEach items="${ noticeList }" var="groupBoardVo" varStatus="status" begin="0" end="2">
 				<h3 style="background-color: powderblue;">
 				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
-					<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title }</a>
+					<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
 				</c:if>
 				</h3>
 			</c:forEach>

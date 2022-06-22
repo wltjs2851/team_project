@@ -240,13 +240,15 @@ $(function() {
 					<span id="like" style="font-size: 30px;">${ groupBoardVo.gb_like }</span>
 				
 				<!-- 수정, 삭제 버튼 -->
-				<c:if test="${ loginVo.userid == groupBoardVo.userid }">
-				<table>
-					<tr>
-						<td><a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn-success">수정</a></td>
-						<td><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${groupBoardVo.gno}" class="btn btn-sm btn-danger">삭제</a></td>
-					</tr>
-				</table>
+				<c:if test="${ loginVo.userid == groupVo.g_leader }">
+					<c:if test="${ loginVo.userid == groupBoardVo.userid }">
+					<table>
+						<tr>
+							<td><a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn-success">수정</a></td>
+							<td><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${groupBoardVo.gno}" class="btn btn-sm btn-danger">삭제</a></td>
+						</tr>
+					</table>
+					</c:if>
 				</c:if>
 				
 				<!-- 댓글 -->

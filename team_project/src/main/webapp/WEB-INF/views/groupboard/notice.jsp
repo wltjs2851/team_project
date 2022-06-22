@@ -35,7 +35,7 @@ $(function() {
 
 </script>
 
-<%-- ${ noticeList } --%>
+${ noticeList }
 <%-- ${ groupVo } --%>
 <%-- ${ groupVo.gno } --%>
 <%-- ${ noticeList.gno } --%>
@@ -90,7 +90,7 @@ $(function() {
 				<c:forEach items="${ noticeList }" var="groupBoardVo">
 				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
 					<h3 style="background-color: yellowgreen;">
-						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title }</a>
+						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
 					</h3>
 				</c:if>
 				</c:forEach>
@@ -129,24 +129,24 @@ $(function() {
 							</li>
 						</ol>
 					</nav>
-					<div class="row">
-						<div>
-							<div class="card">
-								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" />
-								<div class="card-block">
-									<h5 class="card-title">
-										Card title
-									</h5>
-									<p class="card-text">
-										그룹원
-									</p>
-									<p>
-										<a class="btn btn-primary" href="#">쪽지보내기</a>
-									</p> 
-								</div>
-							</div>
-						</div>
-					</div>
+<!-- 					<div class="row"> -->
+<!-- 						<div> -->
+<!-- 							<div class="card"> -->
+<!-- 								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" /> -->
+<!-- 								<div class="card-block"> -->
+<!-- 									<h5 class="card-title"> -->
+<!-- 										Card title -->
+<!-- 									</h5> -->
+<!-- 									<p class="card-text"> -->
+<!-- 										그룹원 -->
+<!-- 									</p> -->
+<!-- 									<p> -->
+<!-- 										<a class="btn btn-primary" href="#">쪽지보내기</a> -->
+<!-- 									</p>  -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 <!-- 					</aside> -->
 				
 				</div>
