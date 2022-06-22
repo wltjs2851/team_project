@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.team.service.ScheduleService;
-
 import net.sf.json.JSONArray;
 
 import com.kh.team.service.CalendarServcie;
@@ -25,9 +23,6 @@ import com.kh.team.vo.MemberVo;
 @Controller
 @RequestMapping("/calendar")
 public class CalendarController {
-	
-	@Autowired
-	private ScheduleService service;
 	
 	@Autowired
 	private CalendarServcie calendarService;

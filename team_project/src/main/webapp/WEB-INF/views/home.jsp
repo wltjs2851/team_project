@@ -13,6 +13,8 @@
 // 		if (loginResult == "true") {
 // 			alert("${loginVo.nickname}(${loginVo.userid})님 환영합니다.");
 // 		}
+		function categoryChange(e) {
+		};
 	});
 </script>
 <section class="hero-area bg-1 text-center overly">
@@ -36,29 +38,38 @@
 							<div class="col-lg-6 col-md-12">
 								<div class="block d-flex">
 									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="place" >
-										<option value="울산">울산</option>
-										<option>부산</option>
-										<option>서울</option>
-										<option>대구</option>
-										<option>인천</option>
+										<option>도시를 선택해주세요.</option>
+										<option value="1">서울특별시</option>
+										<option value="2">인천광역시</option>
+										<option value="3">대전광역시</option>
+										<option value="4">대구광역시</option>
+										<option value="5">울산광역시</option>
+										<option value="6">부산광역시</option>
+										<option value="7">광주광역시</option>
+										<option value="8">세종특별자치시</option>
+										<option value="9">경기도</option>
+										<option value="10">강원도</option>
+										<option value="11">충청북도</option>
+										<option value="12">충청남도</option>
+										<option value="13">전라북도</option>
+										<option value="14">전라남도</option>
+										<option value="15">경상북도</option>
+										<option value="16">경상남도</option>
+										<option value="17">제주특별자치도</option>
 									</select>
-<!-- 									<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" -->
-<!-- 										id="search" placeholder="지역"> -->
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-12">
 								<div class="block d-flex">
 									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="place2" >
-<%-- 										<c:choose> --%>
-<%-- 											<c:when test="${#place.val() == '울산'}"> --%>
-<!-- 												<option>ㅎㅇ</option> -->
-<%-- 											</c:when> --%>
-<%-- 										</c:choose> --%>
-										<option>울산</option>
-										<option>부산</option>
-										<option>서울</option>
-										<option>대구</option>
-										<option>인천</option>
+										<c:choose>
+											<c:when test="${place.val() == '울산'}">
+												<option>ㅎㅇ</option>
+											</c:when>
+											<c:otherwise>
+												<option>ㅠㅠ</option>
+											</c:otherwise>
+										</c:choose>
 									</select>
 <!-- 									<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" -->
 <!-- 										id="search" placeholder="종목"> -->
