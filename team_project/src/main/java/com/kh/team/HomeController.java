@@ -53,18 +53,26 @@ public class HomeController {
 		List<LocationVo> listLocation = groupService.groupLocation();
 		List<GroupVo> seoulGroup = groupService.groupByLocation(1);
 		List<GroupVo> incheonGroup = groupService.groupByLocation(2);
-		List<GroupVo> dajeonGroup = groupService.groupByLocation(3);
+		List<GroupVo> daejeonGroup = groupService.groupByLocation(3);
 		List<GroupVo> daeguGroup = groupService.groupByLocation(4);
 		List<GroupVo> ulsanGroup = groupService.groupByLocation(5);
 		List<GroupVo> busanGroup = groupService.groupByLocation(6);
 		List<GroupVo> gwangjuGroup = groupService.groupByLocation(7);
-		List<GroupVo> kyeongkiGroup = groupService.groupByLocation(9);
+		List<GroupVo> gyeonggiGroup = groupService.groupByLocation(9);
 		model.addAttribute("listRecommend", listRecommend);
 		model.addAttribute("listRecipe", listRecipe);
 		model.addAttribute("listRoutine", listRoutine);
 		model.addAttribute("listFree", listFree);
 		model.addAttribute("listGroup", listGroup);
 		model.addAttribute("listLocation", listLocation);
+		model.addAttribute("seoulGroup", seoulGroup);
+		model.addAttribute("incheonGroup", incheonGroup);
+		model.addAttribute("daejeonGroup", daejeonGroup);
+		model.addAttribute("daeguGroup", daeguGroup);
+		model.addAttribute("ulsanGroup", ulsanGroup);
+		model.addAttribute("busanGroup", busanGroup);
+		model.addAttribute("gwangjuGroup", gwangjuGroup);
+		model.addAttribute("gyeonggiGroup", gyeonggiGroup);
 		return "home";
 	}
 	
