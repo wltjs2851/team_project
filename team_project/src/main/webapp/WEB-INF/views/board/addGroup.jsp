@@ -9,9 +9,9 @@ $(function() {
 	$("#g_location").change(function() {
 		var dno = $("#g_location").val();
 		var url = "/group/getUno/" + dno;
+		$("#u_location").removeAttr('style');
+		$("#u_location").empty();
 		$.get(url, function(receivedData) {
-			$("#u_location").removeAttr('style');
-			$("#u_location").empty();
 			$.each(receivedData, function() {
 				var sgg = "";
 				sgg += "<option value=" + this.uno + ">" + this.lname + "</option>";
@@ -38,14 +38,18 @@ $(function() {
 <!-- 					select box 스크롤 사용 -->
 					<div>
 						<div class="col-md-2" style="display: inline-block;">
-							<select id="g_location" name="g_location" class="form-control">
+							<select id="g_location" name="dno" class="form-control">
 								<c:forEach items="${ locationVo }" var="locationVo">
 									<option value="${ locationVo.dno }">${ locationVo.lname }</option>
 								</c:forEach>
 							</select>
 						</div>
 						<div class="col-md-2" style="display: inline-block;">
-							<select id="u_location" name="u_location" class="form-control" style="display: none;">
+							<select id="u_location" name="sno" class="form-control" style="display: none;">
+							</select>
+						</div>
+						<div class="col-md-2" style="display: inline-block;">
+							<select id="u_location" name="sgno" class="form-control" style="display: none;">
 							</select>
 						</div>
 					</div>
