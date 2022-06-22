@@ -126,8 +126,8 @@
 	});
 </script>
 
-<%-- ${ groupVo } --%>
-${ groupJoinMember }
+${ groupVo }
+<%-- ${ groupJoinMember } --%>
 
 <body>
 	<div class="container-fluid">
@@ -167,7 +167,7 @@ ${ groupJoinMember }
 				        
 				        <c:if test="${ groupVo.g_leader == loginVo.userid }">
 				        
-				          <div class="todo-title">오늘의 일정</div>
+				          <div class="todo-title">그룹 일정</div>
 				          <div class="todo-content"></div>
 				          <div class="input-wrap">
 				            <input type="text" placeholder="please write here!!" id="input-box" class="input-box form-control">

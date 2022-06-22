@@ -233,7 +233,7 @@ $(function() {
 												 <input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
 												 <input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">
 											</c:if>
-												 <a class="dropdown-item" href="#">회원 정보 보기</a>
+												 <a class="dropdown-item" href="/groupboard/memberInfo?userid=${ groupJoinVo.userid }">회원 정보 보기</a>
 											</div>
 										
 										</div>
