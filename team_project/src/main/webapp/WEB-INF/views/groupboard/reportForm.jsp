@@ -87,7 +87,7 @@ $(function() {
 							<input type="text" class="form-control" id="rep_cause" name="rep_cause" />
 						</div>
 						
-						<button type="button" id="btnReport" class="btn btn-primary">
+						<button type="button" id="btnReport" class="btn btn-danger">
 							신고하기
 						</button>
 						<button type="button" id="btnClose" class="btn btn-success">닫기</button>

@@ -43,14 +43,25 @@ public class ReportDaoImpl implements ReportDao {
 	}
 
 	@Override
-	public List<String> reportList(int gno, String userid) {
+	public List<ReportVo> reportList(int gno, String userid) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userid", userid);
 		map.put("gno", gno);
 		System.out.println(gno);
 		System.out.println(userid);
-		List<String> reportList = sqlSession.selectList(NAMESPACE + "logReport", map);
+		List<ReportVo> reportList = sqlSession.selectList(NAMESPACE + "logReport", map);
 		return reportList;
 	}
+	
+//	@Override
+//	public List<String> reportList(int gno, String userid) {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("userid", userid);
+//		map.put("gno", gno);
+//		System.out.println(gno);
+//		System.out.println(userid);
+//		List<String> reportList = sqlSession.selectList(NAMESPACE + "logReport", map);
+//		return reportList;
+//	}
 
 }

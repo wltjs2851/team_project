@@ -205,22 +205,9 @@ ${ groupJoinMember }
 										<div style="margin: 10px;">
 										<span>${ groupJoinVo.userid }</span>
 										
-										<button class="btn dropdown-toggle" style="background-color: #ffffff; width: 20px; height:50px; padding: 1% 0" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+										
 							
-								<i class='fas fa-ellipsis-v'></i>
 							
-							</button>
-							
-							<!-- 신고 관련 -->
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							
-							<c:if test="${ groupVo.g_leader == loginVo.userid }">
-								 <a id="reportList" class="reportList dropdown-item" href="#">신고 목록</a>
-								 <input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
-								 <input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">
-							</c:if>
-								 <a class="dropdown-item" href="#">회원 정보 보기</a>
-							</div>
 										
 										<c:if test="${ groupVo.g_leader == loginVo.userid }">
 											<button data-value="${ groupJoinVo.userid }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
@@ -231,6 +218,23 @@ ${ groupJoinMember }
 											 	data-user="${ groupBoardVo.userid }">신고</a></i>
 											<input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
 											<input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">
+											
+											<!-- 신고 관련 -->
+											<button class="btn dropdown-toggle" style="background-color: #ffffff; width: 20px; height:50px; padding: 1% 0" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+											
+												<i class='fas fa-ellipsis-v'></i>
+											
+											</button>
+											
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											
+											<c:if test="${ groupVo.g_leader == loginVo.userid }">
+												 <a id="reportList" class="reportList dropdown-item" href="#">신고 목록</a>
+												 <input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
+												 <input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">
+											</c:if>
+												 <a class="dropdown-item" href="#">회원 정보 보기</a>
+											</div>
 										
 										</div>
 									</c:forEach>

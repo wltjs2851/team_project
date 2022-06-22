@@ -347,11 +347,22 @@ public class GroupBoardController {
 	@RequestMapping(value = "/reportList/{userid}/{gno}", method = RequestMethod.GET)
 	public String reportList(@PathVariable("userid") String userid, 
 			@PathVariable("gno") int gno, Model model) {
-		List<String> reportList = reportServcie.reportList(gno, userid);
+		List<ReportVo> reportList = reportServcie.reportList(gno, userid);
 		System.out.println("reportList: " + reportList);
 		
 		model.addAttribute("reportList", reportList);
 		
 		return "groupboard/reportList";
 	}
+	
+//	@RequestMapping(value = "/reportList/{userid}/{gno}", method = RequestMethod.GET)
+//	public String reportList(@PathVariable("userid") String userid, 
+//			@PathVariable("gno") int gno, Model model) {
+//		List<String> reportList = reportServcie.reportList(gno, userid);
+//		System.out.println("reportList: " + reportList);
+//		
+//		model.addAttribute("reportList", reportList);
+//		
+//		return "groupboard/reportList";
+//	}
 }
