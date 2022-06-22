@@ -3,8 +3,8 @@ package com.kh.team.vo;
 public class LocationVo {
 	private int lno;
 	private int dno;
-	private int uno;
 	private int sno;
+	private int sgno;
 	private String lname;
 	
 	public LocationVo() {
@@ -12,20 +12,20 @@ public class LocationVo {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public LocationVo(int dno, int uno, int sno, String lname) {
+	public LocationVo(int dno, int sno, int sgno, String lname) {
 		super();
 		this.dno = dno;
-		this.uno = uno;
 		this.sno = sno;
+		this.sgno = sgno;
 		this.lname = lname;
 	}
 
-	public LocationVo(int lno, int dno, int uno, int sno, String lname) {
+	public LocationVo(int lno, int dno, int sno, int sgno, String lname) {
 		super();
 		this.lno = lno;
 		this.dno = dno;
-		this.uno = uno;
 		this.sno = sno;
+		this.sgno = sgno;
 		this.lname = lname;
 	}
 
@@ -45,20 +45,20 @@ public class LocationVo {
 		this.dno = dno;
 	}
 
-	public int getUno() {
-		return uno;
-	}
-
-	public void setUno(int uno) {
-		this.uno = uno;
-	}
-
-	public int getSno() {
+	public int getsno() {
 		return sno;
 	}
 
-	public void setSno(int sno) {
+	public void setsno(int sno) {
 		this.sno = sno;
+	}
+
+	public int getSgno() {
+		return sgno;
+	}
+
+	public void setSgno(int sgno) {
+		this.sgno = sgno;
 	}
 
 	public String getLname() {
@@ -71,6 +71,6 @@ public class LocationVo {
 
 	@Override
 	public String toString() {
-		return "LocationVo [lno=" + lno + ", dno=" + dno + ", uno=" + uno + ", sno=" + sno + ", lname=" + lname + "]";
+		return "LocationVo [lno=" + lno + ", dno=" + dno + ", sno=" + sno + ", sgno=" + sgno + ", lname=" + lname + "]";
 	}
 }

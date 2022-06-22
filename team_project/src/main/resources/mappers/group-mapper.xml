@@ -23,8 +23,12 @@
 		select * from tbl_group_location where sno is null and sgno is null
 	</select>
 	
-	<select id="groupLocationUno" resultType="LocationVo">
+	<select id="groupLocationSno" resultType="LocationVo">
 		select * from tbl_group_location where sno is not null and sgno is null and dno = #{dno}
+	</select>
+	
+	<select id="groupLocationSgno" resultType="LocationVo">
+		select * from tbl_group_location where sgno is not null and dno = #{dno} and sno = #{sno}
 	</select>
 	
 <!-- 그룹 상세보기 -->
