@@ -2,17 +2,49 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/header.jsp"%>
-<style>
-.nice-select {
-	width: 400px;
-}
-</style>
 <script>
 	$(function() {
 		var loginResult = "${loginResult}";
 // 		if (loginResult == "true") {
 // 			alert("${loginVo.nickname}(${loginVo.userid})님 환영합니다.");
 // 		}
+		var dno;
+		var sno;
+		var sgno;
+		$("#location").on("change", function() {
+			dno = $(this).val();
+			var url = "/getSno/" + dno;
+			$.get(url, function(rData) {
+				if (rData != null && rData != "") {
+					$("#s_location").show();
+					$("#sg_location").hide();
+					$("#s_location").html("");
+					$("#s_location").html("<option>선택해주세요.</option>");
+					$.each(rData, function(e) {
+						$("#s_location").append("<option value='" + rData[e].sno + "'>" + rData[e].lname + "</option>")
+					});
+				}
+			});
+		});
+		$("#s_location").on("change", function() {
+			sno = $(this).val();
+			var url = "/getSgno/" + dno + "/" + sno;
+			$.get(url, function(rData) {
+				if (rData != null && rData != "") {
+					$("#sg_location").show();
+					$("#sg_loaction").html("");
+					$("#sg_location").html("<option>선택해주세요.</option>");
+					$.each(rData, function(e) {
+						$("#sg_location").append("<option value='" + rData[e].sgno + "'>" + rData[e].lname + "</option>");
+					}); 
+				} else {
+					$("#sg_location").hide();
+				} 
+			});
+		});
+		$("#sg_location").on("change", function() {
+			sgno = $(this).val();
+		});
 	});
 </script>
 <section class="hero-area bg-1 text-center overly">
@@ -33,31 +65,26 @@
 					<form action="#">
 						<div class="row">
 							<!-- Store Search -->
-							<div class="col-lg-6 col-md-12">
+							<div class="col-lg-4 col-md-12">
 								<div class="block d-flex">
-									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="place" >
-<!-- 										<option>도시를 선택해주세요.</option> -->
-<%-- 										<c:forEach items="" var=""> --%>
-<!-- 											<option value=""></option> -->
-<%-- 										</c:forEach> --%>
+									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="location" >
+										<option>도시를 선택해주세요.</option>
+										<c:forEach items="${listLocation}" var="locationVo">
+											<option value="${locationVo.dno}">${locationVo.lname}</option>
+										</c:forEach>
 									</select>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-12">
+							<div class="col-lg-4 col-md-12">
 								<div class="block d-flex">
-									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="place2" >
-<%-- 										<c:choose> --%>
-<%-- 											<c:when test="${place.val() == '울산'}"> --%>
-<!-- 												<option>ㅎㅇ</option> -->
-<%-- 											</c:when> --%>
-<%-- 											<c:otherwise> --%>
-<!-- 												<option>ㅠㅠ</option> -->
-<%-- 											</c:otherwise> --%>
-<%-- 										</c:choose> --%>
+									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="s_location" style="display: none;" >
 									</select>
-<!-- 									<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" -->
-<!-- 										id="search" placeholder="종목"> -->
-									<!-- Search Button -->
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-12">
+								<div class="block d-flex">
+									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="sg_location" style="display: none;" >
+									</select>
 									<button class="btn btn-main">SEARCH</button>
 								</div>
 							</div>
