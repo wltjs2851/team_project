@@ -2,6 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script>
+$(function(){
+	
+
+	$(".selectId").click(function(e){
+		e.preventDefault();
+		console.log("회원상세조회");	
+		var userid = $(this).attr("data-id");
+		console.log("userid:", userid);
+		var url = "/admin/selectMember?userid=" + userid;
+		var option = "width = 800px, height=800px, top=300px, left=300px, scrollbars=yes";
+		window.open(url, "그룹 채팅방 입장", option);
+	});
+});
+</script>
 <%-- ${lastestMember } --%>
 <h1>회원전체목록</h1>
 <%-- ${memberList } --%>
@@ -39,7 +54,7 @@
 			<tbody>
 			<c:forEach items="${memberList }" var="memberVo">
 				<tr>
-					<td>${memberVo.userid }</td>
+					<td><a class="selectId" data-id="${memberVo.userid }">${memberVo.userid }</a></td>
 					<td>${memberVo.username }</td>
 					<td>${memberVo.nickname }</td>
 					<td>${memberVo.age }세(

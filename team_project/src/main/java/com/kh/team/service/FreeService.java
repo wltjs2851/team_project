@@ -18,4 +18,6 @@ public interface FreeService {
 	public boolean decreaseLike(int fno, int f_like, String userid);
 	public boolean increaseLike(int fno, int f_like, String userid);
 	public int getCount(PagingDto pagingDto);
+	
+	public List<FreeVo> adminFreeList(String userid);
 }

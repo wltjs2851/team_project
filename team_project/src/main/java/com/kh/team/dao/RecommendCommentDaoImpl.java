@@ -51,4 +51,10 @@ public class RecommendCommentDaoImpl implements RecommendCommentDao{
 		return recommendCommentList;
 	}
 
+	@Override
+	public List<RecommendCommentVo> adminRecommendComment(String userid) {
+		List<RecommendCommentVo> adminRecommendComment = sqlSession.selectList(NAMESPACE + "adminRecommendComment", userid);
+		return adminRecommendComment;
+	}
+
 }

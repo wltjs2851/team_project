@@ -132,4 +132,10 @@ public class RoutineDaoImpl implements RoutineDao{
 		}
 		return false;
 	}
+
+	@Override
+	public List<RoutineVo> adminRoutineList(String userid) {
+		List<RoutineVo> adminRoutineList = sqlSession.selectList(NAMESPACE + "adminRoutineList", userid);
+		return adminRoutineList;
+	}
 }

@@ -3,6 +3,7 @@ package com.kh.team.dao;
 import java.util.List;
 
 import com.kh.team.vo.RecipeCommentVo;
+import com.kh.team.vo.RecommendCommentVo;
 
 
 public interface RecipeCommentDao {
@@ -10,4 +11,6 @@ public interface RecipeCommentDao {
 	public List<RecipeCommentVo> commentRecipeList(int rno);
 	public boolean udpateRecipeComment(RecipeCommentVo commentVo);
 	public boolean deleteRecipeComment(int rcno);
+	
+	public List<RecipeCommentVo> adminRecipeComment(String userid);
 }

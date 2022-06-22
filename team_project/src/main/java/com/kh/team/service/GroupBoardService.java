@@ -27,5 +27,7 @@ public interface GroupBoardService {
 	
 	public boolean deleteMember(String userid, int gno);
 	public void updateCtnMember(int gno);
+	
+	public List<GroupBoardVo> adminGroupBoardList(String userid);
 
 }

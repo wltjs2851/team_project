@@ -10,4 +10,6 @@ public interface FreeCommentDao {
 	public boolean updateFreeComment(FreeCommentVo freeCommentVo);
 	public boolean deleteFreeComment(int fcno);
 	public boolean deleteFreeCommentAll(int fno);
+	
+	public List<FreeCommentVo> adminFreeComment(String userid);
 }

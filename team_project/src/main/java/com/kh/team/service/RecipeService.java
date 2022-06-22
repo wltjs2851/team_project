@@ -17,4 +17,6 @@ public interface RecipeService {
 	public int isLike(int rno, String userid);
 	public boolean decreaseLike(int rno, int r_like, String userid);
 	public boolean increaseLike(int rno, int r_like, String userid);
+	
+	public List<RecipeVo> adminRecipeList(String userid);
 }

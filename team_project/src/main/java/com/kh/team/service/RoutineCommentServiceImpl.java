@@ -35,4 +35,9 @@ public class RoutineCommentServiceImpl implements RoutineCommentService{
 		return routineCommentDao.deleteRoutineComment(urcno);
 	}
 
+	@Override
+	public List<RoutineCommentVo> adminRoutineComment(String userid) {
+		return routineCommentDao.adminRoutineComment(userid);
+	}
+
 }

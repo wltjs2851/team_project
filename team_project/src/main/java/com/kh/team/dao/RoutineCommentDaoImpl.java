@@ -59,4 +59,10 @@ public class RoutineCommentDaoImpl implements RoutineCommentDao{
 		return false;
 	}
 
+	@Override
+	public List<RoutineCommentVo> adminRoutineComment(String userid) {
+		List<RoutineCommentVo> adminRoutineComment = sqlSession.selectList(NAMESPACE + "adminRoutineComment", userid);
+		return adminRoutineComment;
+	}
+
 }

@@ -34,4 +34,9 @@ public class FreeCommentServiceImpl implements FreeCommentService{
 		return freeCommentDao.deleteFreeComment(fcno);
 	}
 
+	@Override
+	public List<FreeCommentVo> adminFreeComment(String userid) {
+		return freeCommentDao.adminFreeComment(userid);
+	}
+
 }

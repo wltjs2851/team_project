@@ -17,4 +17,6 @@ public interface RoutineService {
 	public boolean decreaseLike(int uno, int ur_like, String userid);
 	public boolean increaseLike(int uno, int ur_like, String userid);
 	public int getCount(PagingDto pagingDto);
+	
+	public List<RoutineVo> adminRoutineList(String userid);
 }

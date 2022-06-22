@@ -83,4 +83,9 @@
 				</choose>
 			</if>
 	</sql>
+	 <!-- 	회원 작성글 찾기  -->
+	<select id="adminRoutineList" resultType="RoutineVo">
+		select uno, ur_title, ur_regdate from tbl_userroutine
+		where userid = #{userid}
+	</select>
 </mapper>

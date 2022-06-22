@@ -107,4 +107,10 @@
     </if>
  </sql>
  
+ <!-- 	회원 작성글 찾기  -->
+	<select id="adminGroupBoardList" resultType="GroupBoardVo">
+		select gbno, gb_title, gb_regdate from tbl_group_board
+		where userid = #{userid}
+	</select>
+	
  </mapper>

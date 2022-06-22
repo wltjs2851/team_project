@@ -86,4 +86,9 @@
 			</if>
 	</sql>
 
+<!-- 	회원 작성글 찾기  -->
+	<select id="adminRecipeList" resultType="RecipeVo">
+		select rno, r_title, r_regdate from tbl_recipe
+		where userid = #{userid}
+	</select>
 </mapper>

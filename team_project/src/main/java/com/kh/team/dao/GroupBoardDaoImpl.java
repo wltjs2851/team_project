@@ -120,4 +120,10 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		return memberVo;
 	}
 
+	@Override
+	public List<GroupBoardVo> adminGroupBoardList(String userid) {
+		List<GroupBoardVo> adminGroupBoardList = sqlSession.selectList(NAMESPACE + "adminGroupBoardList", userid);
+		return adminGroupBoardList;
+	}
+
 }

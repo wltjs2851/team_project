@@ -48,4 +48,9 @@ public class GroupBoardCommentServiceImpl implements GroupBoardCommentService {
 		groupBoardCommentDao.updateCommentDelete(gbno);
 	}
 
+	@Override
+	public List<GroupBoardCommentVo> adminGroupBoardComment(String userid) {
+		return groupBoardCommentDao.adminGroupBoardComment(userid);
+	}
+
 }

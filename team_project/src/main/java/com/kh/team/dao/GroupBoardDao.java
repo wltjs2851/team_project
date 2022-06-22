@@ -6,6 +6,7 @@ import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.RecipeVo;
 import com.kh.team.vo.ReportVo;
 import com.kh.team.vo.SearchDto;
 
@@ -27,5 +28,7 @@ public interface GroupBoardDao {
 	
 	public boolean deleteMember(String userid, int gno);
 	public void updateCtnMember(int gno);
+	
+	public List<GroupBoardVo> adminGroupBoardList(String userid);
 
 }

@@ -10,4 +10,6 @@ public interface RecommendCommentService {
 		public boolean udpateRecommendComment(RecommendCommentVo recommendCommentVo);
 		public boolean deleteRecommendCommnet(int recno);
 		public List<RecommendCommentVo> recommendCommentList(int reno);
+		
+		public List<RecommendCommentVo> adminRecommendComment(String userid);
 }

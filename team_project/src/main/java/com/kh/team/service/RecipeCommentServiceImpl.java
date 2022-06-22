@@ -34,4 +34,9 @@ public class RecipeCommentServiceImpl implements RecipeCommentService{
 		return recipeCommentDao.deleteRecipeComment(rcno);
 	}
 
+	@Override
+	public List<RecipeCommentVo> adminRecipeComment(String userid) {
+		return recipeCommentDao.adminRecipeComment(userid);
+	}
+
 }
