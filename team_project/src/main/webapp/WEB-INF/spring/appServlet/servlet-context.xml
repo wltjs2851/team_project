@@ -82,6 +82,7 @@
 			<mapping path="/recipe/addRecipeForm*"/>
 			<mapping path="/routine/addRoutineForm*"/>
 			<mapping path="/free/addFreeForm*"/>
+			<mapping path="/calendar/cal"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

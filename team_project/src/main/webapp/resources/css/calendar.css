@@ -16,7 +16,7 @@
 /* 달력 */
 
 #main-day {
-	font-size: 80px;
+	font-size: 50px;
 /* 	font-family: "bau"; */
 	font: bold;
 	padding-top: 50px;
@@ -44,7 +44,7 @@
   background: #2D5082;
   color: #fff;
   text-align: center;
-  width: 80px;
+  width: 100px;
   height: 41px;
 }
 
@@ -67,8 +67,8 @@
   padding: .6rem .8rem;
   border-radius: .6rem;
   border: 1px solid #eee;
-  width: 80px;
-  height: 41px;
+  width: 100px;
+  height: 100px;
 }
 
 .noColor {
