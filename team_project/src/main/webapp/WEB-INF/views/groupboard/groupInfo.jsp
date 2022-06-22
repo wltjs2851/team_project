@@ -97,6 +97,20 @@ $(function() {
 		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
 		window.open(url, "신고 페이지", option);
 	});
+	
+	
+	$(".reportList").click(function(e) {
+		e.preventDefault();
+		console.log("click");
+		var userid = $(this).next().val();
+		console.log(userid);
+		var gno = $("#gno").val();
+		console.log(gno);
+		
+		var url = "/groupboard/reportList/" + userid + "/" + gno;
+		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
+		window.open(url, "회원 신고 목록", option);
+	});
 });
 </script>
 
@@ -201,13 +215,11 @@ ${ groupJoinMember }
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							
 							<c:if test="${ groupVo.g_leader == loginVo.userid }">
-								 <a class="dropdown-item disabled" href="#">신고 목록</a>
+								 <a id="reportList" class="reportList dropdown-item" href="#">신고 목록</a>
+								 <input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
+								 <input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">
 							</c:if>
 								 <a class="dropdown-item" href="#">회원 정보 보기</a>
-								 <i id="report" class="report fa-solid fa-handcuffs"><a class="dropdows-item" href="#" 
-								 	data-user="${ groupBoardVo.userid }">신고하기</a></i>
-								 <input type="hidden" id="userid" name="userid" value="${ groupBoardVo.userid }">
-								 <input type="hidden" id="gno" name="gno" value="${ groupBoardVo.gno }">
 							</div>
 										
 										<c:if test="${ groupVo.g_leader == loginVo.userid }">

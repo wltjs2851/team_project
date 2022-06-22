@@ -9,8 +9,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team.dao.GroupBoardDao;
+import com.kh.team.dao.ReportDao;
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
+import com.kh.team.vo.ReportVo;
 import com.kh.team.vo.SearchDto;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,6 +21,9 @@ public class GroupBoardDaoTest {
 	
 	@Autowired
 	private GroupBoardDao groupBoardDao;
+	
+	@Autowired
+	private ReportDao reportDao;
 	
 	@Test
 	public void testCreate() { // 지금 당장은 아이디 널 값 가능하도록
@@ -74,4 +79,10 @@ public class GroupBoardDaoTest {
 //		boolean result = groupBoardDao.deleteMember("domidgirl33", 3);
 //		System.out.println("reuslt: " + result);
 //	}
+	
+	@Test
+	public void testReportList() {
+		List<String> list = reportDao.reportList(11, "domidgirl33");
+		System.out.println("list: " + list);
+	}
 }

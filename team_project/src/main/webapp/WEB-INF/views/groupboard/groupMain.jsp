@@ -83,7 +83,7 @@ $(function() {
 		e.preventDefault();
 		console.log("채팅방 입장");	
 		var url = "/chat/chat";
-		var option = "width = 650px, height=800px, top=300px, left=300px, scrollbars=yes";
+		var option = "width = 800px, height=800px, top=300px, left=300px, scrollbars=yes";
 		window.open(url, "그룹 채팅방 입장", option);
 	});
 	
