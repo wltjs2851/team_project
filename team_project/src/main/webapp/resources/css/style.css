@@ -519,6 +519,10 @@ button {
  * Card Styles
  *
  */
+.card {
+	background-color: whitesmoke;
+}
+
 .card-main {
   border-radius: 2px;
   border: none;
@@ -1185,6 +1189,8 @@ ul.pagination .active a {
   padding: 20px 25px;
   border-radius: 3px;
   margin-bottom: 25px;
+  width: 255px;
+  height: 360px;
 }
 
 .category-block .header {

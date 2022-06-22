@@ -151,4 +151,9 @@ public class GroupDaoImpl implements GroupDao{
 		return sqlSession.selectList(NAMESPACE + "groupByLocation", dno);
 	}
 
+	@Override
+	public List<GroupVo> searchLocation(LocationVo locationVo) {
+		return sqlSession.selectList(NAMESPACE + "searchLocation", locationVo);
+	}
+
 }

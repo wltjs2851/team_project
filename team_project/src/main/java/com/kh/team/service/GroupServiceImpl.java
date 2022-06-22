@@ -121,4 +121,9 @@ public class GroupServiceImpl implements GroupService{
 		return groupDao.groupByLocation(dno);
 	}
 
+	@Override
+	public List<GroupVo> searchLocation(LocationVo locationVo) {
+		return groupDao.searchLocation(locationVo);
+	}
+
 }

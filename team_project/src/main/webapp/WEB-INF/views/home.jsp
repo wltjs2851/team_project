@@ -20,6 +20,9 @@
 					$("#sg_location").hide();
 					$("#s_location").html("");
 					$("#s_location").html("<option>선택해주세요.</option>");
+					sno = null;
+					sgno = null;
+					console.log("sno, sgno null");
 					$.each(rData, function(e) {
 						$("#s_location").append("<option value='" + rData[e].sno + "'>" + rData[e].lname + "</option>")
 					});
@@ -39,11 +42,21 @@
 					}); 
 				} else {
 					$("#sg_location").hide();
+					sgno = null;
 				}
 			});
 		});
 		$("#sg_location").on("change", function() {
 			sgno = $(this).val();
+		});
+		$("#locationSearch").click(function() {
+// 			dno = $("#location").val();
+// 			sno = $("#s_location").val();
+// 			sgno = $("#sg_location").val();
+			console.log("dno", dno);
+			console.log("sno", sno);
+			console.log("sgno", sgno);
+			$("#frmSearchLocation").submit();
 		});
 	});
 </script>
@@ -62,12 +75,12 @@
 				</div>
 				<!-- Advance Search -->
 				<div class="advance-search">
-					<form action="#">
+					<form action="/group/searchLocation" method="get" id="frmSearchLocation">
 						<div class="row">
 							<!-- Store Search -->
 							<div class="col-lg-4 col-md-12">
 								<div class="block d-flex">
-									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="location" >
+									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="location" name="dno" >
 										<option>도시를 선택해주세요.</option>
 										<c:forEach items="${listLocation}" var="locationVo">
 											<option value="${locationVo.dno}">${locationVo.lname}</option>
@@ -77,15 +90,15 @@
 							</div>
 							<div class="col-lg-4 col-md-12">
 								<div class="block d-flex">
-									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="s_location" style="display: none;" >
+									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="s_location" style="display: none;" name="sno">
 									</select>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-12">
 								<div class="block d-flex">
-									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="sg_location" style="display: none;" >
+									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="sg_location" style="display: none;" name="sgno">
 									</select>
-									<button class="btn btn-main">SEARCH</button>
+									<button class="btn btn-main" id="locationSearch">SEARCH</button>
 								</div>
 							</div>
 						</div>
@@ -243,28 +256,11 @@
 				</div>
 			</div>
 		</div>
-<!-- 		<div class="row"> -->
-<%-- 			<c:forEach items="${listGroup}" var="groupVo"> --%>
-<%-- 				<c:if test="${groupVo.g_present < groupVo.g_attend}"> --%>
-<!-- 					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6"> -->
-<!-- 						<div class="category-block"> -->
-<!-- 							<div class="header"> -->
-<!-- 								<img src="/resources/images/smile.png" class="rounded-circle"> -->
-<%-- 								<h4>${groupVo.g_name}</h4> --%>
-<!-- 							</div> -->
-<!-- 							<ul class="category-list" > -->
-<%-- 								<li><a href="/group/groupForm?gno=${groupVo.gno}">인원<span>${groupVo.g_present} / ${groupVo.g_attend}</span></a></li> --%>
-<!-- 							</ul> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<%-- 				</c:if> --%>
-<%-- 			</c:forEach>  --%>
-<!-- 		</div> -->
 		<div class="row">
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/smile.png" class="rounded-circle">
+						<img src="/resources/images/seoul.png" class="rounded-circle">
 						<h4>서울특별시</h4>
 					</div>
 					<c:forEach items="${seoulGroup}" var="seoulVo">
@@ -277,7 +273,7 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/smile.png" class="rounded-circle">
+						<img src="/resources/images/busan.png" class="rounded-circle">
 						<h4>부산광역시</h4>
 					</div>
 					<c:forEach items="${busanGroup}" var="busanVo">
@@ -290,7 +286,7 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/smile.png" class="rounded-circle">
+						<img src="/resources/images/incheon.png" class="rounded-circle">
 						<h4>인천광역시</h4>
 					</div>
 					<c:forEach items="${incheonGroup}" var="incheonVo">
@@ -303,7 +299,7 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/smile.png" class="rounded-circle">
+						<img src="/resources/images/daegu.png" class="rounded-circle">
 						<h4>대구광역시</h4>
 					</div>
 					<c:forEach items="${daeguGroup}" var="daeguVo">
@@ -316,7 +312,7 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/smile.png" class="rounded-circle">
+						<img src="/resources/images/daejeon.png" class="rounded-circle">
 						<h4>대전광역시</h4>
 					</div>
 					<c:forEach items="${daejeonGroup}" var="daejeonVo">
@@ -329,7 +325,7 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/smile.png" class="rounded-circle">
+						<img src="/resources/images/gwangju.png" class="rounded-circle">
 						<h4>광주광역시</h4>
 					</div>
 					<c:forEach items="${gwangjuGroup}" var="gwangjuVo">
@@ -342,7 +338,7 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/smile.png" class="rounded-circle">
+						<img src="/resources/images/ulsan.png" class="rounded-circle">
 						<h4>울산광역시</h4>
 					</div>
 					<c:forEach items="${ulsanGroup}" var="ulsanVo">
@@ -355,7 +351,7 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/smile.png" class="rounded-circle">
+						<img src="/resources/images/gyeonggi.png" class="rounded-circle">
 						<h4>경기도</h4>
 					</div>
 					<c:forEach items="${gyeonggiGroup}" var="gyeonggiVo">

@@ -19,6 +19,13 @@ public class LocationVo {
 		this.sgno = sgno;
 		this.lname = lname;
 	}
+	
+	public LocationVo(int dno, int sno, int sgno) {
+		super();
+		this.dno = dno;
+		this.sno = sno;
+		this.sgno = sgno;
+	}
 
 	public LocationVo(int lno, int dno, int sno, int sgno, String lname) {
 		super();

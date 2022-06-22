@@ -48,6 +48,15 @@ public class GroupController {
 		return "board/groupList";
 	}
 	
+	@RequestMapping(value = "/searchLocation", method = RequestMethod.GET)
+	public String searchLocation(LocationVo locationVo, Model model) {
+		System.out.println(locationVo);
+		List<GroupVo> list = groupService.searchLocation(locationVo);
+		System.out.println(list);
+		model.addAttribute("groupList", list);
+		return "board/groupList";
+	}
+	
 	@RequestMapping(value = "/groupList2", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GroupVo> groupList2(Model model) {
