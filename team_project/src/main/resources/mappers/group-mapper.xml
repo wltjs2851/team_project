@@ -100,4 +100,11 @@
             order by g_attend - g_present)
 		where dno = #{dno} and rownum &lt;= 3
 	</select>
+	
+	<select id="searchLocation" resultType="GroupVo">
+		select * from tbl_group
+		where dno = #{dno, jdbcType=VARCHAR}
+		and sno = #{sno, jdbcType=VARCHAR}
+		and sgno = #{sgno, jdbcType=VARCHAR}
+	</select>
 </mapper>

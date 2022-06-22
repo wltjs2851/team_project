@@ -31,47 +31,54 @@
 		<div class="col-md-8">
 			<div class="tabbable" id="tabs-834783">
 				<ul class="nav nav-tabs">
-					<li class="nav-item"><a class="nav-link active" href="#tab1"
+					<li class="nav-item"><a class="nav-link" href="/admin/selectMember?userid=${userid }"
 						data-toggle="tab">작성글</a></li>
-					<li class="nav-item"><a class="nav-link" href="/admin/comment?userid=${userid}"
+					<li class="nav-item"><a class="nav-link active" href="#tab2"
 						data-toggle="tab">작성댓글</a></li>
 				</ul>
 			</div>
 			<table class="table">
 				<thead>
 					<tr align="center">
-						<th>글번호</th>
-						<th>글제목</th>
+						<th>댓글번호</th>
+						<th>댓글</th>
 						<th>작성일</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${freeList }" var="FreeVo">
+					<c:forEach items="${freeList }" var="free">
 						<tr>
-							<td>${FreeVo.fno }</td>
-							<td>${FreeVo.f_title }</td>
-							<td>${FreeVo.f_regdate }</td>
+							<td>${free.fcno }</td>
+							<td>${free.fc_comment }</td>
+							<td>${free.f_regdate }</td>
 						</tr>
 					</c:forEach>
-					<c:forEach items="${recipeList }" var="RecipeVo">
+					<c:forEach items="${recipeList }" var="recipe">
 						<tr>
-							<td>${RecipeVo.rno }</td>
-							<td>${RecipeVo.r_title }</td>
-							<td>${RecipeVo.r_regdate }</td>
+							<td>${recipe.rcno }</td>
+							<td>${recipe.rc_comment }</td>
+							<td>${recipe.rc_regdate }</td>
 						</tr>
 					</c:forEach>
-					<c:forEach items="${groupBoardList }" var="groupBoardVo">
+					<c:forEach items="${groupBoardList }" var="groupBoard">
 						<tr>
-							<td>${groupBoardVo.gbno }</td>
-							<td>${groupBoardVo.gb_title }</td>
-							<td>${groupBoardVo.gb_regdate }</td>
+							<td>${groupBoard.gbcno }</td>
+							<td>${groupBoard.gbc_content }</td>
+							<td>${groupBoard.gbc_regdate }</td>
 						</tr>
 					</c:forEach>
-					<c:forEach items="${routineList }" var="routineVo">
+					<c:forEach items="${routineList }" var="routine">
 						<tr>
-							<td>${routineVo.uno }</td>
-							<td>${routineVo.ur_title }</td>
-							<td>${routineVo.ur_regdate }</td>
+							<td>${routine.urcno }</td>
+							<td>${routine.urc_comment }</td>
+							<td>${routine.u_regdate }</td>
+						</tr>
+					</c:forEach>
+					<c:forEach items="${recommendList }" var="recommend">
+						<tr>
+							<td>${recommend.recno }</td>
+							<td>${recommend.re_comment }</td>
+							<td>${recommend.re_regdate }</td>
 						</tr>
 					</c:forEach>
 				</tbody>

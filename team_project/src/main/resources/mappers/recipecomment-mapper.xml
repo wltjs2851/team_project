@@ -32,4 +32,9 @@
  	where rcno = #{rcno}
  </delete>
  
+ <!--  유저 작성 댓글 조회 -->
+	<select id="adminRecipeComment" resultType="RecipeCommentVo">
+		select rcno, rc_comment, rc_regdate from tbl_rcomment
+		where userid = #{userid}
+	</select>
  </mapper>

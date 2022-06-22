@@ -9,4 +9,6 @@ public interface RecipeCommentService {
 	public List<RecipeCommentVo> selectRecipeCommentList(int rno);
 	public boolean modifyRecipeComment(RecipeCommentVo commentVo);
 	public boolean removeRecipeComment(int rcno);
+	
+	public List<RecipeCommentVo> adminRecipeComment(String userid);
 }
