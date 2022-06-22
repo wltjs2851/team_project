@@ -1,6 +1,7 @@
 package com.kh.team.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -102,6 +103,18 @@ public class MemberDaoImpl implements MemberDao {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<MemberVo> getLatestMember() {
+		List<MemberVo> getLastestMember = sqlSession.selectList(NS + "getLatestMember");
+		return getLastestMember;
+	}
+
+	@Override
+	public List<MemberVo> getMemberList() {
+		List<MemberVo> getMemberList = sqlSession.selectList(NS + "getMemberList");
+		return getMemberList;
 	}
 
 }

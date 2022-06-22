@@ -132,9 +132,23 @@ public class GroupDaoImpl implements GroupDao{
 	}
 
 	@Override
-	public List<LocationVo> groupLocationUno(int dno) {
-		List<LocationVo> location = sqlSession.selectList(NAMESPACE + "groupLocationUno", dno);
+	public List<LocationVo> groupLocationSno(int dno) {
+		List<LocationVo> location = sqlSession.selectList(NAMESPACE + "groupLocationSno", dno);
 		return location;
+	}
+
+	@Override
+	public List<LocationVo> groupLocationSgno(int dno, int sno) {
+		Map<String, Integer> parameter = new HashMap<>();
+		parameter.put("dno", dno);
+		parameter.put("sno", sno);
+		List<LocationVo> location = sqlSession.selectList(NAMESPACE + "groupLocationSgno", parameter);
+		return location;
+	}
+
+	@Override
+	public List<GroupVo> groupByLocation(int dno) {
+		return sqlSession.selectList(NAMESPACE + "groupByLocation", dno);
 	}
 
 }

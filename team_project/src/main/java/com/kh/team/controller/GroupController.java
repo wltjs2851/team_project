@@ -47,6 +47,14 @@ public class GroupController {
 		model.addAttribute("groupList", list);
 		return "board/groupList";
 	}
+	
+	@RequestMapping(value = "/groupList2", method = RequestMethod.GET)
+	@ResponseBody
+	public List<GroupVo> groupList2(Model model) {
+		List<GroupVo> list = groupService.groupList();
+		model.addAttribute("groupList", list);
+		return list;
+	}
 
 	@RequestMapping(value = "/addGroupForm", method = RequestMethod.GET)
 	public String addGroupForm(Model model) {
@@ -85,15 +93,28 @@ public class GroupController {
 	@RequestMapping(value = "/groupForm", method = RequestMethod.GET)
 	public String readGroupForm(int gno, Model model) {
 		GroupVo groupVo = groupService.groupByGno(gno);
+		List<LocationVo> locationVo = groupService.groupLocation();
+		List<LocationVo> s_location = groupService.groupLocationSno(groupVo.getDno());
+		List<LocationVo> sg_location = groupService.groupLocationSgno(groupVo.getDno(), groupVo.getSno());
 		model.addAttribute("groupVo", groupVo);
+		model.addAttribute("locationVo", locationVo);
+		model.addAttribute("s_location", s_location);
+		model.addAttribute("sg_location", sg_location);
 		return "board/groupForm";
 	}
 	
-	@RequestMapping(value = "/getUno/{dno}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getSno/{dno}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<LocationVo> getUno(@PathVariable("dno") int dno) {
-		List<LocationVo> u_location = groupService.groupLocationUno(dno);
-		return u_location;
+	public List<LocationVo> getSno(@PathVariable("dno") int dno) {
+		List<LocationVo> s_location = groupService.groupLocationSno(dno);
+		return s_location;
+	}
+	
+	@RequestMapping(value = "/getSgno/{dno}/{sno}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<LocationVo> getSgno(@PathVariable("dno") int dno, @PathVariable("sno") int sno) {
+		List<LocationVo> sg_location = groupService.groupLocationSgno(dno, sno);
+		return sg_location;
 	}
 
 	@RequestMapping(value = "/modifyGroupRun", method = RequestMethod.POST)
@@ -118,15 +139,14 @@ public class GroupController {
 			groupVo.setG_pic(g_pic);
 			groupService.moidfyGroup(groupVo);
 		}
-
+		
 		return "redirect:/group/groupForm?gno=" + groupVo.getGno();
 	}
 	
 	@RequestMapping(value = "/removeGroup", method = RequestMethod.GET)
-	public String readGroupForm(int gno) {
-		groupService.removeGroup(gno);
-		//user table gno값도 삭제
-		return "board/groupList";
+	public String removeGroup(int gno, String userid) {
+		groupService.removeGroup(gno, userid);
+		return "redirect:/group/groupList";
 	}
 	
 	

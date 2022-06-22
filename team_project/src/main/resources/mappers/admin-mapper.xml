@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.admin">
+	<select id="adminList" resultType="AdminVo">
+	<![CDATA[
+		select fno as "number", f_title as "title", f_regdate as "regdate" from tbl_free
+		where userid= #{userid}
+			union
+		select rno as "number", r_title as "title", r_regdate as "regdate" from tbl_recipe
+		where userid= #{userid}
+			union
+		select gbno as "number", gb_title as "title", gb_regdate as "regdate" from tbl_group_board
+		where userid= #{userid}
+			union
+		select uno as "number", ur_title as "title", ur_regdate as "regdate" from tbl_userroutine
+		where userid= #{userid}
+		order by "regdate" desc
+	]]>
+	</select>
+</mapper>

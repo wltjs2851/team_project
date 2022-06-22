@@ -161,7 +161,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<div class='rap left'>
 					<div class="header">
 						<div id="prevMonth">
@@ -185,7 +185,7 @@
 					<div class="grid dateBoard"></div>
 				</div>
 			</div>
-			<div class="col-md-4 colRight">
+			<div class="col-md-3 colRight">
 				<div class="right">
 					<div class="content-left">
 				        <div class="main-wrap">

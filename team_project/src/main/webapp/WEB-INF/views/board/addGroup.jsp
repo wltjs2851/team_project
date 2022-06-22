@@ -8,16 +8,35 @@
 $(function() {
 	$("#g_location").change(function() {
 		var dno = $("#g_location").val();
-		var url = "/group/getUno/" + dno;
+		var url = "/group/getSno/" + dno;
 		$("#u_location").removeAttr('style');
 		$("#u_location").empty();
 		$.get(url, function(receivedData) {
 			$.each(receivedData, function() {
 				var sgg = "";
-				sgg += "<option value=" + this.uno + ">" + this.lname + "</option>";
+				sgg += "<option value=" + this.sno + ">" + this.lname + "</option>";
 				console.log("sgg: " + sgg);
 				$("#u_location").append(sgg);	
 			});
+		});
+	});
+	
+	$("#u_location").change(function() {
+		var dno = $("#g_location").val();
+		var sno = $("#u_location").val();
+		var url = "/group/getSgno/" + dno + "/" + sno;
+		$.get(url, function(receivedData) {
+			console.log(receivedData)
+			if(receivedData != "") {				
+				$("#sg_location").removeAttr('style');
+				$("#sg_location").empty();
+				$.each(receivedData, function() {
+					var sgg = "";
+					sgg += "<option value=" + this.sgno + ">" + this.lname + "</option>";
+					console.log("sgg: " + sgg);
+					$("#sg_location").append(sgg);	
+				});
+			}
 		});
 	});
 });
@@ -49,7 +68,7 @@ $(function() {
 							</select>
 						</div>
 						<div class="col-md-2" style="display: inline-block;">
-							<select id="u_location" name="sgno" class="form-control" style="display: none;">
+							<select id="sg_location" name="sgno" class="form-control" style="display: none;">
 							</select>
 						</div>
 					</div>

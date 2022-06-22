@@ -2,6 +2,7 @@ package com.kh.team.dao;
 
 import java.util.List;
 
+import com.kh.team.vo.FreeVo;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeVo;
 
@@ -23,4 +24,6 @@ public interface RecipeDao {
 	public boolean deleteLike(int rno, String userid);
 	public int countLike(int rno, String userid);
 	public boolean updateLikecnt(int rno, int r_like);
+	
+	public List<RecipeVo> adminRecipeList(String userid);
 }

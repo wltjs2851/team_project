@@ -1,5 +1,7 @@
 package com.kh.team.service;
 
+import java.util.List;
+
 import com.kh.team.vo.MemberVo;
 
 public interface MemberService {
@@ -23,4 +25,8 @@ public interface MemberService {
 	public MemberVo findPw(String userid, String email);
 	
 	public boolean updatePw(String userid, String userpw);
+	
+	public List<MemberVo> getLatestMember();
+	
+	public List<MemberVo> getMemberList();
 }

@@ -63,7 +63,7 @@
 		console.log(nowKno);
 		
 		// 해당 data-kno 를 가진 tr 구하기
-		$(".tr_list").find("td[data-kno=" + nowKno +"]").parent().css("background-color", "aliceblue");
+		$(".tr_list").find("td[data-kno=" + nowKno +"]").parent().css("background-color", "#F3F3F3");
 		
 	});
 </script>
@@ -119,6 +119,7 @@ padding-left: 10px;
 	margin: 0;
 }
 </style>
+<link href="/resources/css/kcal.css" rel="stylesheet"/>
 <form id="frmPaging">
 	<input type="hidden" name="kno" value="">
 	<input type="hidden" name="page" value="${ pagingDto.page }">
@@ -205,15 +206,20 @@ padding-left: 10px;
 				<c:when test="${not empty pagingDto.keyword}">
 					<article>
 					<div> " ${pagingDto.keyword } " 검색 결과</div>
-					<table class="table">
+					<br>
+					<table class="table" style="border: none;">
+						<thead>
+							<tr style="text-align: center;">
+								<th width="620px;" style="background-color: white;">운동 종목</th>
+								<th style="background-color: white;">소모 칼로리</th>
+							</tr>
+						</thead>
 						<tbody>
 						<c:forEach items="${listKcal}" var="kcalVo">
-							<tr class="tr_list" >
+							<tr class="tr_list" style="border-bottom: none;">
 								<td class="td_kno" style="display: none;">${kcalVo.kno}</td>
 								<td data-kno="${kcalVo.kno}" class="td_list">${kcalVo.k_name}</td>
-								<td>${kcalVo.k_time}분</td>
 								<td>${kcalVo.kcal}kcal</td>
-								<td>${kcalVo.k_dgree}</td>
 							</tr>
 						</c:forEach>
 						</tbody>

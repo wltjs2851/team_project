@@ -20,4 +20,7 @@ public interface FreeDao {
 	public int countLike(int fno, String userid);
 	public boolean updateLikecnt(int fno, int f_like);
 	public int getCount(PagingDto pagingDto);
+	
+	// 유저가 작성한 글 찾기 
+	public List<FreeVo> adminFreeList(String userid);
 }

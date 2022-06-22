@@ -2,6 +2,7 @@ package com.kh.team.dao;
 
 import java.util.List;
 
+import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeVo;
 import com.kh.team.vo.RoutineVo;
@@ -20,4 +21,6 @@ public interface RoutineDao {
 	public int countLike(int uno, String userid);
 	public boolean updateLikecnt(int uno, int ur_like);
 	public int getCount(PagingDto pagingDto);
+	
+	public List<RoutineVo> adminRoutineList(String userid);
 }
