@@ -98,4 +98,10 @@
 				</choose>
 			</if>
 	</sql>
+	
+<!-- 	회원 작성글 찾기  -->
+	<select id="adminFreeList" resultType="FreeVo">
+		select fno, f_title, f_regdate from tbl_free
+		where userid = #{userid}
+	</select>
 </mapper>

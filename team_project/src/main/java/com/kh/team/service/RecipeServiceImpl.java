@@ -83,4 +83,9 @@ public class RecipeServiceImpl implements RecipeService{
 		return recipeDao.getCount(pagingDto);
 	}
 
+	@Override
+	public List<RecipeVo> adminRecipeList(String userid) {
+		return recipeDao.adminRecipeList(userid);
+	}
+
 }

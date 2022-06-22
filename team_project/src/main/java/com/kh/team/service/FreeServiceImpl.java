@@ -98,5 +98,10 @@ public class FreeServiceImpl implements FreeService{
 	public int getCount(PagingDto pagingDto) {
 		return freeDao.getCount(pagingDto);
 	}
+
+	@Override
+	public List<FreeVo> adminFreeList(String userid) {
+		return freeDao.adminFreeList(userid);
+	}
 	
 }

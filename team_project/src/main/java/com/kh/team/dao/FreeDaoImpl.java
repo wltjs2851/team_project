@@ -138,4 +138,10 @@ public class FreeDaoImpl implements FreeDao{
 		return false;
 	}
 
+	@Override
+	public List<FreeVo> adminFreeList(String userid) {
+		List<FreeVo> adminFreeList = sqlSession.selectList(NAMESPACE + "adminFreeList", userid);
+		return adminFreeList;
+	}
+
 }

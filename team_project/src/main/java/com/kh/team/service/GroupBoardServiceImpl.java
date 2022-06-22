@@ -93,4 +93,9 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		return memberVo;
 	}
 
+	@Override
+	public List<GroupBoardVo> adminGroupBoardList(String userid) {
+		return groupBoardDao.adminGroupBoardList(userid);
+	}
+
 }

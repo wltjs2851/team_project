@@ -94,4 +94,9 @@ public class RoutineServieImpl implements RoutineService{
 		return routineDao.getCount(pagingDto);
 	}
 
+	@Override
+	public List<RoutineVo> adminRoutineList(String userid) {
+		return routineDao.adminRoutineList(userid);
+	}
+
 }

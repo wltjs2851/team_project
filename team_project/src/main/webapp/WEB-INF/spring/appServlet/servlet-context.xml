@@ -88,8 +88,8 @@
 	
 <!-- 소켓 -->
 
-<websocket:handlers>
-		<websocket:mapping handler="chatHandler"
-			path="/chat-ws/*" />
-	</websocket:handlers>
+<!-- <websocket:handlers> -->
+<!-- 		<websocket:mapping handler="chatHandler" -->
+<!-- 			path="/chat-ws/*" /> -->
+<!-- 	</websocket:handlers> -->
 </beans:beans>

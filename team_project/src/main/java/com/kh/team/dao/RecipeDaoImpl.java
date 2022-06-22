@@ -134,4 +134,10 @@ public class RecipeDaoImpl implements RecipeDao{
 		return count;
 	}
 
+	@Override
+	public List<RecipeVo> adminRecipeList(String userid) {
+		List<RecipeVo> adminRecipeList = sqlSession.selectList(NAMESPACE + "adminRecipeList", userid);
+		return adminRecipeList;
+	}
+
 }
