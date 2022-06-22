@@ -1,5 +1,7 @@
 package com.kh.team.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -67,6 +69,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean updatePw(String userid, String userpw) {
 		return memberDao.updatePw(userid, userpw);
+	}
+
+	@Override
+	public List<MemberVo> getLatestMember() {
+		return memberDao.getLatestMember();
 	}
 
 }
