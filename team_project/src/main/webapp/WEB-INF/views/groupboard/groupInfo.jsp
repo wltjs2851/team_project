@@ -114,10 +114,10 @@ $(function() {
 });
 </script>
 
-${ groupVo }
-<hr>
-${ groupJoinMember }
-<hr>
+<%-- ${ groupVo } --%>
+<!-- <hr> -->
+<%-- ${ groupJoinMember } --%>
+<!-- <hr> -->
 <%-- ${ count } --%>
 
 <!-- 그룹 탈퇴 모달 -->
@@ -261,18 +261,12 @@ ${ groupJoinMember }
 								</h4>
 								<p class="list-group-item-text">
 									${ groupVo.g_intro }
-									...
 								</p>
 							</div>
 							<div class="list-group-item justify-content-between">
-								<c:choose>
-									<c:when test="${ groupVo.g_leader == loginVo.userid }">
-										<a href="/group/groupForm?gno=${ groupVo.gno }" id="updateGroupInfo">그룹 정보 수정(그룹장만)</a>
-									</c:when>
-									<c:otherwise>
-										
-									</c:otherwise>
-								</c:choose>
+									<c:if test="${ groupVo.g_leader == loginVo.userid }">
+										<a href="/group/groupForm?gno=${ groupVo.gno }" id="updateGroupInfo">그룹 정보 수정</a>
+									</c:if>
 							</div>
 								<a href="/groupboard/groupMain/${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 									그룹 메인으로
@@ -284,7 +278,7 @@ ${ groupJoinMember }
 									<a href="/groupboard/groupWriteForm?gno=${ groupVo.gno }">글쓰기</a>
 								</li>
 								<li class="breadcrumb-item">
-									<a href="#">활동 정보</a>
+									<a href="/groupboard/activityInfo/${ groupVo.gno }">활동 정보</a>
 								</li>
 								<c:if test="${ groupVo.g_leader == loginVo.userid }">
 								
@@ -295,24 +289,24 @@ ${ groupJoinMember }
 								</c:if>
 							</ol>
 						</nav>
-						<div class="row">
-							<div>
-								<div class="card">
-									<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" />
-									<div class="card-block">
-										<h5 class="card-title">
-											Card title
-										</h5>
-										<p class="card-text">
-											그룹원
-										</p>
-										<p>
-											<a class="btn btn-primary" href="#">쪽지보내기</a>
-										</p> 
-									</div>
-								</div>
-							</div>
-						</div>
+<!-- 						<div class="row"> -->
+<!-- 							<div> -->
+<!-- 								<div class="card"> -->
+<!-- 									<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" /> -->
+<!-- 									<div class="card-block"> -->
+<!-- 										<h5 class="card-title"> -->
+<!-- 											Card title -->
+<!-- 										</h5> -->
+<!-- 										<p class="card-text"> -->
+<!-- 											그룹원 -->
+<!-- 										</p> -->
+<!-- 										<p> -->
+<!-- 											<a class="btn btn-primary" href="#">쪽지보내기</a> -->
+<!-- 										</p>  -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 						</aside>
 				
 				
