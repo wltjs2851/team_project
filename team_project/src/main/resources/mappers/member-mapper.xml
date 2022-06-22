@@ -69,4 +69,12 @@
 		delete from tbl_user
 		where userid = #{userid}
 	</delete>
+	
+<!-- 	최근 가입한 회원 리스트 -->
+	<select id="getLatestMember" resultType="MemberVo">
+		select * from
+			(select * from tbl_user
+			order by regdate desc)
+		where rownum &lt;= 4
+	</select>
 </mapper>

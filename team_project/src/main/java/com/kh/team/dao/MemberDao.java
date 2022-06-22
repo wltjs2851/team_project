@@ -1,5 +1,7 @@
 package com.kh.team.dao;
 
+import java.util.List;
+
 import com.kh.team.vo.EmailVo;
 import com.kh.team.vo.MemberVo;
 
@@ -24,5 +26,8 @@ public interface MemberDao  {
 	public MemberVo findPw(String userid, String email);
 	
 	public boolean updatePw(String userid, String userpw);
+	
+	// 최근 가입 회원 
+	public List<MemberVo> getLatestMember();
 	
 }
