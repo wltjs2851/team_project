@@ -72,28 +72,31 @@ tr.tr_list{
 	cursor: pointer;
 }
 
-table {
-	border-collapse: collapse;
-	border-top: 1px solid #444444;
-	/* 	 margin-left: auto; */
-	/*     margin-right: auto; */
-	width: 600px;
-}
+table { 
+border-collapse: collapse;
+border-top: 1px solid #444444;
+/* margin-left: auto; */
+/* margin-right: auto; */
+width: 600px;
+border-radius: 5px;
+} 
 
-th, td {
-	border-bottom: 1px solid #444444;
-	border-left: 1px solid #444444;
-	padding: 13px;
-}
+th, td { 
+border-bottom: 1px solid silver;
+border-left: 1px solid silver;
+border-right: 1px solid silver;
+padding: 13px;
+} 
 
 th {
-	background-color: #CEE3F6;
-	padding-left: 10px;
+/* background-color: #CEE3F6; */
+background-color: aliceblue;
+padding-left: 10px;
 }
 
-th:first-child, td:first-child {
-	border-left: none;
-}
+/* th:first-child, td:first-child { */
+/* /* 	border-left: none; */ */
+/* } */
 
 .search {
 	position: relative;
@@ -101,7 +104,7 @@ th:first-child, td:first-child {
 }
 
 #keyword {
-	width: 100%;
+	width: 80%;
 	border: 1px solid #bbb;
 	border-radius: 8px;
 	padding: 10px 12px;
@@ -111,8 +114,8 @@ th:first-child, td:first-child {
 #searchKcal {
 	position: absolute;
 	width: 25px;
-	top: 10px;
-	right: 12px;
+	top: 105px;
+	right: 270px;
 	margin: 0;
 }
 </style>
@@ -131,10 +134,10 @@ th:first-child, td:first-child {
 		<div class="col-md-8">
 			<form role="form" action="/kcal/updateKcal" method="post">
 				<input type="hidden" name="kno" value="${kcalVo.kno}" />
-				<div>
+				<div style="width: 850px;">
 					<h2><a href="/kcal/listKcal">운동칼로리 사전</a></h2>
 					<hr>
-					<article class="single-post">
+					<article class="single-post" style="padding-left: 80px;">
 						<!-- 				<form> -->
 						<div class="search">
 							<input class="form-control" type="text" placeholder="검색어 입력"
@@ -147,7 +150,7 @@ th:first-child, td:first-child {
 						</div>
 						<br>
 						<!-- 					</form> -->
-						<div>
+						<div style="padding-left: 90px;">
 							<c:choose>
 							<c:when test="${ empty kcalVo.k_pic }">
 								<img src="/resources/images/kcaldefault.png"
@@ -160,7 +163,6 @@ th:first-child, td:first-child {
 					</c:choose>
 						</div>
 						<table>
-							<colgroup></colgroup>
 							<tbody>
 								<tr>
 									<th>운동종목</th>
