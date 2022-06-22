@@ -77,4 +77,10 @@
 			order by regdate desc)
 		where rownum &lt;= 4
 	</select>
+	
+<!-- 	전체 회원 조회 -->
+	<select id="getMemberList" resultType="MemberVo">
+		select * from tbl_user
+		order by regdate desc
+	</select>
 </mapper>

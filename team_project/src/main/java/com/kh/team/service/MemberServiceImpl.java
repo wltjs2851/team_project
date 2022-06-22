@@ -76,4 +76,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.getLatestMember();
 	}
 
+	@Override
+	public List<MemberVo> getMemberList() {
+		return memberDao.getMemberList();
+	}
+
 }

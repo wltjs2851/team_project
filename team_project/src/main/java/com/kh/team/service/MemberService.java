@@ -27,4 +27,6 @@ public interface MemberService {
 	public boolean updatePw(String userid, String userpw);
 	
 	public List<MemberVo> getLatestMember();
+	
+	public List<MemberVo> getMemberList();
 }

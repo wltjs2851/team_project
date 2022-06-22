@@ -27,7 +27,10 @@ public interface MemberDao  {
 	
 	public boolean updatePw(String userid, String userpw);
 	
-	// 최근 가입 회원 
+	// 최근 가입 회원 4명
 	public List<MemberVo> getLatestMember();
+	
+	// 전체 회원 조회
+	public List<MemberVo> getMemberList();
 	
 }
