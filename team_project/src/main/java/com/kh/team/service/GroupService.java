@@ -18,7 +18,8 @@ public interface GroupService {
 	public List<GroupJoinVo> list(String userid);
 	public List<GroupVo> groupListOrder();
 	public List<LocationVo> groupLocation();
-	public List<LocationVo> groupLocationUno(int dno);
+	public List<LocationVo> groupLocationSno(int dno);
+	public List<LocationVo> groupLocationSgno(int dno, int sno);
 	
 	public List<String> getNickname(int gno);
 }

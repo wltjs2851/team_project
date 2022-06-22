@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.team.service.ScheduleService;
-
 import net.sf.json.JSONArray;
 
 import com.kh.team.service.CalendarServcie;
@@ -25,9 +23,6 @@ import com.kh.team.vo.MemberVo;
 @Controller
 @RequestMapping("/calendar")
 public class CalendarController {
-	
-	@Autowired
-	private ScheduleService service;
 	
 	@Autowired
 	private CalendarServcie calendarService;
@@ -88,8 +83,8 @@ public class CalendarController {
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public String update(String userid, String content, String start1, String checklist, int cno) {
-		CalendarVo vo = new CalendarVo(userid, content, start1, checklist, cno);
+	public String update(String userid, String content, String start1, String checklist) {
+		CalendarVo vo = new CalendarVo(userid, content, start1, checklist);
 		System.out.println(vo);
 		calendarService.updateCheck(vo);
 		return checklist;

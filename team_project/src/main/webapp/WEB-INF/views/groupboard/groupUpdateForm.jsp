@@ -55,7 +55,7 @@ $(function() {
 		maxHeight: null,
 		focus: true,
 		lang: "ko-KR",
-		placeholder: '최대 2048자까지 쓸 수 있습니다.',
+		placeholder: '최대 2048자까지 쓸 수 있으며, 부적절한 사진을 게시할 경우 강퇴합니다.',
 			callbacks: {	//여기 부분이 이미지를 첨부하는 부분
 				onImageUpload : function(files) {
 					uploadSummernoteImageFile(files[0]);

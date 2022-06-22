@@ -240,14 +240,14 @@ $(function() {
 					<span id="like" style="font-size: 30px;">${ groupBoardVo.gb_like }</span>
 				
 				<!-- 수정, 삭제 버튼 -->
+				<c:if test="${ loginVo.userid == groupBoardVo.userid }">
 				<table>
 					<tr>
 						<td><a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn-success">수정</a></td>
 						<td><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${groupBoardVo.gno}" class="btn btn-sm btn-danger">삭제</a></td>
 					</tr>
 				</table>
-<!-- 				<button style="margin: 20px 40%">수정</button> -->
-<!-- 				<button>삭제</button> -->
+				</c:if>
 				
 				<!-- 댓글 -->
 				<div class="comments">
@@ -271,14 +271,17 @@ $(function() {
 								<td></td>
 								<td></td>
 								<td></td>
-								<td>
-									<button type="button"
-										class="btn btn-sm btn-warning btnCommentModify">수정</button>
-								</td>
-								<td>
-									<button type="button" 
-										class="btn btn-sm btn-danger btnCommentDelete">삭제</button>
-								</td>
+								
+								<c:if test="${ loginVo.userid == groupBoardVo.userid }">
+									<td>
+										<button type="button"
+											class="btn btn-sm btn-warning btnCommentModify">수정</button>
+									</td>
+									<td>
+										<button type="button" 
+											class="btn btn-sm btn-danger btnCommentDelete">삭제</button>
+									</td>
+								</c:if>
 							</tr>
 						</table>
 						<table class="table" id="table_comment_list">
@@ -324,29 +327,29 @@ $(function() {
 							<li class="breadcrumb-item">
 								<a href="/groupboard/activityInfo/${ groupBoardVo.gno }">활동 정보</a>
 							</li>
-							<li class="breadcrumb-item">
-								<a href="">그룹 탈퇴</a>
-							</li>
+<!-- 							<li class="breadcrumb-item"> -->
+<!-- 								<a href="">그룹 탈퇴</a> -->
+<!-- 							</li> -->
 						</ol>
 					</nav>
-					<div class="row">
-						<div>
-							<div class="card">
-								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" />
-								<div class="card-block">
-									<h5 class="card-title">
-										Card title
-									</h5>
-									<p class="card-text">
-										그룹원
-									</p>
-									<p>
-										<a class="btn btn-primary" href="#">쪽지보내기</a>
-									</p> 
-								</div>
-							</div>
-						</div>
-					</div>
+<!-- 					<div class="row"> -->
+<!-- 						<div> -->
+<!-- 							<div class="card"> -->
+<!-- 								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" /> -->
+<!-- 								<div class="card-block"> -->
+<!-- 									<h5 class="card-title"> -->
+<!-- 										Card title -->
+<!-- 									</h5> -->
+<!-- 									<p class="card-text"> -->
+<!-- 										그룹원 -->
+<!-- 									</p> -->
+<!-- 									<p> -->
+<!-- 										<a class="btn btn-primary" href="#">쪽지보내기</a> -->
+<!-- 									</p>  -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 <!-- 					</aside> -->
 				
 				</div>

@@ -11,6 +11,7 @@ import com.kh.team.dao.GroupBoardDao;
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
+import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.ReportVo;
 import com.kh.team.vo.SearchDto;
 
@@ -86,6 +87,10 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		return result;
 	}
 
-	
+	@Override
+	public MemberVo pickGroupMember(String userid) {
+		MemberVo memberVo = groupBoardDao.pickGroupMember(userid);
+		return memberVo;
+	}
 
 }

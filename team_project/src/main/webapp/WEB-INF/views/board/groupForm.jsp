@@ -17,9 +17,7 @@
 $(function() {
 	$("#btnModify").click(function() {
 		$("*[readonly]").attr("readonly", false);
-		$("#g_location").removeAttr("disabled").show();
 		$("#file").removeAttr("disabled");
-		$(".nice-select").remove();
 		$(this).hide();
 		$("#btnJoin").hide();
 		$("#btnDelete").hide();
@@ -39,6 +37,12 @@ $(function() {
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
+	
+	$("#btnDelete").click(function() {
+		if("${groupVo.g_present}" > 1) {
+			alert("그룹원이 남아있습니다.");
+		}
+	});
 });
 </script>
 
@@ -54,13 +58,45 @@ $(function() {
 					<label for="g_location">
 						지역 &nbsp;
 					</label> 
-					<select class="form-control" id="g_location" name="g_location" disabled style="display: block">
-						<option value="seoul">서울</option>
-						<option value="incheon">인천</option>
-						<option value="daegu">대구</option>
-						<option value="ulsan">울산</option>
-						<option value="busan">부산</option>
-					</select>
+					<div>
+						<div class="col-md-2" style="display: inline-block;">
+							<select id="g_location" name="dno" class="form-control" disabled>
+								<c:forEach items="${ locationVo }" var="locationVo">
+									<option value="${ groupVo.dno }"	
+										<c:if test="${ groupVo.dno == locationVo.dno }">
+											selected
+										</c:if>
+									>${ locationVo.lname }</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-md-2" style="display: inline-block;">
+							<select id="u_location" name="sno" class="form-control" disabled>
+								<c:forEach items="${ s_location }" var="locationVo">
+									<option value="${ groupVo.sno }"	
+										<c:if test="${ groupVo.sno == locationVo.sno }">
+											selected
+										</c:if>
+									>${ locationVo.lname }</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-md-2" style="display: inline-block;">
+								<select id="sg_location" name="sgno" class="form-control" disabled
+						<c:if test="${ groupVo.sgno == '0' }">
+								style="display=none;"
+							</c:if>
+								>
+									<c:forEach items="${ sg_location }" var="locationVo">
+										<option value="${ groupVo.sgno }"	
+											<c:if test="${ groupVo.sgno == locationVo.sgno }">
+												selected
+											</c:if>
+										>${ locationVo.lname }</option>
+								</c:forEach>
+								</select>
+						</div>
+					</div>
 				</div>
 				
 				<div class="form-group">
@@ -115,7 +151,7 @@ $(function() {
 				<c:if test="${ groupVo.g_leader == loginVo.userid }">
 					<button type="button" class="btn btn-warning" id="btnModify">수정</button>
 					<button type="submit" class="btn btn-success" id="btnModifyRun" style="display: none">수정완료</button>
-					<a href="/group/removeGroup?gno=${ groupVo.gno }" class="btn btn-danger" id="btnDelete">삭제</a>
+					<a id="btnDelete" class="btn btn-danger" id="btnDelete">삭제</a>
 				</c:if>
 			</form>
 			<c:if test="${ groupVo.g_leader != loginVo.userid }">

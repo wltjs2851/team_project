@@ -27,8 +27,14 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public List<String> reportList(int gno, String userid) {
-		List<String> reportList = reportDao.reportList(gno, userid);
+	public List<ReportVo> reportList(int gno, String userid) {
+		List<ReportVo> reportList = reportDao.reportList(gno, userid);
 		return reportList;
 	}
+	
+//	@Override
+//	public List<String> reportList(int gno, String userid) {
+//		List<String> reportList = reportDao.reportList(gno, userid);
+//		return reportList;
+//	}
 }

@@ -82,7 +82,7 @@ public class GroupBoardDaoTest {
 	
 	@Test
 	public void testReportList() {
-		List<String> list = reportDao.reportList(11, "domidgirl33");
+		List<ReportVo> list = reportDao.reportList(11, "domidgirl33");
 		System.out.println("list: " + list);
 	}
 }

@@ -79,15 +79,17 @@ $(function() {
 							<div><input type="radio" name="rep_cause" value="부적절한 글 게시">부적절한 글 게시</div>
 							<div><input type="radio" name="rep_cause" value="불법적인 홍보">불법적인 홍보</div>
 							<div><input type="radio" name="rep_cause" value="방정하지 못한 언행">방정하지 못한 언행</div>
-							<div><input type="radio" name="rep_cause">기타</div>
+							<div><input type="radio" name="rep_cause" value="타인을 비난하거나 비방함">타인을 비난하거나 비방함</div>
+							<div><input type="radio" name="rep_cause" value="종교 권유 및 전도">종교 권유 및 전도</div>
+<!-- 							<div><input type="radio" name="rep_cause">기타</div> -->
 							 
-							<label for="rep_cause">
-								기타
-							</label>
-							<input type="text" class="form-control" id="rep_cause" name="rep_cause" />
+<!-- 							<label for="rep_cause"> -->
+<!-- 								기타 -->
+<!-- 							</label> -->
+<!-- 							<input type="text" class="form-control" id="rep_cause" name="rep_cause" /> -->
 						</div>
 						
-						<button type="button" id="btnReport" class="btn btn-primary">
+						<button type="button" id="btnReport" class="btn btn-danger">
 							신고하기
 						</button>
 						<button type="button" id="btnClose" class="btn btn-success">닫기</button>

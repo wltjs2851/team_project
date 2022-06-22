@@ -75,8 +75,13 @@
 			<mapping path="/recipe/recipeForm*"/>
 			<mapping path="/routine/routineContent*"/>
 			<mapping path="/free/freeContent*"/>
-			<mapping path="/group/myGroupList"/>
-			<exclude-mapping path="/board/list"/>
+			<mapping path="/group/myGroupList*"/>
+			<mapping path="/kcal/insertKcalForm*"/>
+			<mapping path="/recommend/insertRecommendForm*"/>
+			<mapping path="/group/addGroupForm*"/>
+			<mapping path="/recipe/addRecipeForm*"/>
+			<mapping path="/routine/addRoutineForm*"/>
+			<mapping path="/free/addFreeForm*"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

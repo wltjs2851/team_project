@@ -18,12 +18,36 @@
 
 </head>
 <body>
-${ reportList } <br>
+<%-- ${ reportList	 } --%>
+<!-- <hr> -->
+<h2>신고 목록</h2>
 <hr>
+<script>
 
-<c:forEach items="${ reportList }" var="reportVo">
-	${ reportVo }
-</c:forEach>
+var str = "${reportList}";
+console.log(str);
+
+var lsit = str.replace("[", "");
+var list = lsit.replace("]", "");
+
+var res = list.split(", ");
+
+for(var i in res) {
+	document.write(res[i] + '<br/>');
+}
+
+$(function() {
+	$("#btnClose").click(function() {
+		window.close();
+	});
+});
+
+</script>
+
+<!-- 신고 목록:  -->
+<%-- <span id="span">${ reportList }</span> --%>
+<hr>
+<button type="button" id="btnClose" class="btn btn-danger">닫기</button>
 
 </body>
 </html>
