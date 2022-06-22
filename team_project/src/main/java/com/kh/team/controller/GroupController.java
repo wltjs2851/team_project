@@ -24,7 +24,9 @@ import com.kh.team.service.ReportService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
+import com.kh.team.vo.LocationVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.RecipeCommentVo;
 
 @Controller
 @RequestMapping("/group")
@@ -47,7 +49,9 @@ public class GroupController {
 	}
 
 	@RequestMapping(value = "/addGroupForm", method = RequestMethod.GET)
-	public String addGroupForm() {
+	public String addGroupForm(Model model) {
+		List<LocationVo> locationVo = groupService.groupLocation();
+		model.addAttribute("locationVo", locationVo);
 		return "board/addGroup";
 	}
 
@@ -84,6 +88,13 @@ public class GroupController {
 		model.addAttribute("groupVo", groupVo);
 		return "board/groupForm";
 	}
+	
+	@RequestMapping(value = "/getUno/{dno}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<LocationVo> getUno(@PathVariable("dno") int dno) {
+		List<LocationVo> u_location = groupService.groupLocationUno(dno);
+		return u_location;
+	}
 
 	@RequestMapping(value = "/modifyGroupRun", method = RequestMethod.POST)
 	public String modifyGroupRun(GroupVo groupVo, MultipartFile file) {
@@ -117,6 +128,8 @@ public class GroupController {
 		//user table gno값도 삭제
 		return "board/groupList";
 	}
+	
+	
 
 	@RequestMapping(value = "/joinGroup", method = RequestMethod.POST)
 	public String joinGroup(GroupVo groupVo, HttpSession session, RedirectAttributes rttr) {

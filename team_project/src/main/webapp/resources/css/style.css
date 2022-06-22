@@ -1327,16 +1327,6 @@ ul.pagination .active a {
   padding: 10px 15px;
 }
 
-.nice-select {
-  float: none;
-  display: inline-block;
-  border-radius: 0;
-}
-
-.nice-select .list {
-  border-radius: 0;
-}
-
 .product-item {
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
@@ -1567,14 +1557,6 @@ ul.pagination .active a {
   border-radius: 10px;
   padding: 3px 8px;
   color: #84919B;
-}
-
-.widget.filter .nice-select {
-  width: 100%;
-}
-
-.widget.filter .nice-select .list {
-  width: 100%;
 }
 
 .widget.price-range b {

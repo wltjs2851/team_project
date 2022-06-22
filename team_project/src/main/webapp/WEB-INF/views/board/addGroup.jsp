@@ -4,6 +4,25 @@
 
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
+<script>
+$(function() {
+	$("#g_location").change(function() {
+		var dno = $("#g_location").val();
+		var url = "/group/getUno/" + dno;
+		$.get(url, function(receivedData) {
+			$("#u_location").removeAttr('style');
+			$("#u_location").empty();
+			$.each(receivedData, function() {
+				var sgg = "";
+				sgg += "<option value=" + this.uno + ">" + this.lname + "</option>";
+				console.log("sgg: " + sgg);
+				$("#u_location").append(sgg);	
+			});
+		});
+	});
+});
+</script>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
@@ -16,13 +35,20 @@
 					<label for="g_location">
 						지역 
 					</label> &nbsp;
-					<select class="form-control" id="g_location" name="g_location">
-						<option value="seoul">서울</option>
-						<option value="incheon">인천</option>
-						<option value="daegu">대구</option>
-						<option value="ulsan">울산</option>
-						<option value="busan">부산</option>
-					</select>
+<!-- 					select box 스크롤 사용 -->
+					<div>
+						<div class="col-md-2" style="display: inline-block;">
+							<select id="g_location" name="g_location" class="form-control">
+								<c:forEach items="${ locationVo }" var="locationVo">
+									<option value="${ locationVo.dno }">${ locationVo.lname }</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-md-2" style="display: inline-block;">
+							<select id="u_location" name="u_location" class="form-control" style="display: none;">
+							</select>
+						</div>
+					</div>
 				</div>
 				
 				<div class="form-group">
