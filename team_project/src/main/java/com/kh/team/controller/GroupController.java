@@ -47,6 +47,14 @@ public class GroupController {
 		model.addAttribute("groupList", list);
 		return "board/groupList";
 	}
+	
+	@RequestMapping(value = "/groupList2", method = RequestMethod.GET)
+	@ResponseBody
+	public List<GroupVo> groupList2(Model model) {
+		List<GroupVo> list = groupService.groupList();
+		model.addAttribute("groupList", list);
+		return list;
+	}
 
 	@RequestMapping(value = "/addGroupForm", method = RequestMethod.GET)
 	public String addGroupForm(Model model) {
@@ -136,10 +144,9 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value = "/removeGroup", method = RequestMethod.GET)
-	public String removeGroup(int gno) {
-		groupService.removeGroup(gno);
-		//user table gno값도 삭제
-		return "board/groupList";
+	public String removeGroup(int gno, String userid) {
+		groupService.removeGroup(gno, userid);
+		return "redirect:/group/groupList";
 	}
 	
 	

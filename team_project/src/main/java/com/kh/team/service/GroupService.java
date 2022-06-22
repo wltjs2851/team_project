@@ -10,7 +10,7 @@ public interface GroupService {
 	public boolean addGroup(GroupVo groupVo);
 	public List<GroupVo> groupList();
 	public boolean moidfyGroup(GroupVo groupVo);
-	public boolean removeGroup(int gno);
+	public boolean removeGroup(int gno, String userid);
 	public GroupVo groupByGno(int gno);
 	public boolean joinGroup(int gno, String userid);
 	public boolean banGroup(int gno, String userid);
