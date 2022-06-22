@@ -90,6 +90,12 @@
 	where gno = #{gno}
 </select>
 
+<!-- 그룹원 정보 보기 -->
+<select id="pickGroupMember" resultType="MemberVo">
+	select * from tbl_user
+	where userid = #{userid}
+</select>
+
 <!-- 검색 조건(참조용) -->
  <sql id="search">
  	<if test="searchType != null and keyword != null">

@@ -216,7 +216,8 @@ $(function() {
 								 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }">삭제</a>
 <%-- 											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a> --%>
 							</c:if>
-								 <a class="dropdown-item" href="#">회원 정보 보기</a>
+								 <a class="dropdown-item" href="/groupboard/memberInfo?userid=${ groupBoardVo.userid }">회원 정보 보기</a>
+								 
 								 <i id="report" class="report fa-solid fa-handcuffs"><a class="dropdows-item" href="#" 
 								 	data-user="${ groupBoardVo.userid }">신고하기</a></i>
 								 <input type="hidden" id="userid" name="userid" value="${ groupBoardVo.userid }">
