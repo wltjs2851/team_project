@@ -35,6 +35,7 @@ import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.ReportVo;
 import com.kh.team.vo.SearchDto;
 
 import net.sf.json.JSONArray;
@@ -341,5 +342,16 @@ public class GroupBoardController {
 		System.out.println("rep_cause: " + rep_cause);
 		
 		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value = "/reportList/{userid}/{gno}", method = RequestMethod.GET)
+	public String reportList(@PathVariable("userid") String userid, 
+			@PathVariable("gno") int gno, Model model) {
+		List<String> reportList = reportServcie.reportList(gno, userid);
+		System.out.println("reportList: " + reportList);
+		
+		model.addAttribute("reportList", reportList);
+		
+		return "groupboard/reportList";
 	}
 }

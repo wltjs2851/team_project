@@ -11,6 +11,7 @@ import com.kh.team.dao.GroupBoardDao;
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
+import com.kh.team.vo.ReportVo;
 import com.kh.team.vo.SearchDto;
 
 @Service
@@ -84,5 +85,7 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		boolean result = groupBoardDao.updateGLeader(groupVo);
 		return result;
 	}
+
+	
 
 }

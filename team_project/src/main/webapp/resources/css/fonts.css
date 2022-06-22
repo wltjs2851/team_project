@@ -1,0 +1,14 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+@font-face {
+	src: url("/resources/css/fonts/BMJUA_ttf.ttf");
+	font-family:"jua";
+}
+
+h1 {
+	font-family: "jua";
+}
+
+* {
+	font-family: "jua";
+}

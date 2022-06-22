@@ -11,6 +11,17 @@ public class ReportVo {
 		super();
 	}
 
+	public ReportVo(String rep_casue) {
+		super();
+		this.rep_casue = rep_casue;
+	}
+
+	public ReportVo(String userid, int gno) {
+		super();
+		this.userid = userid;
+		this.gno = gno;
+	}
+
 	public ReportVo(int repno, String userid, int gno, String rep_casue) {
 		super();
 		this.repno = repno;
