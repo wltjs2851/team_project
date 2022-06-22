@@ -8,12 +8,13 @@ public class GroupVo {
 	private String excercise_type;
 	private int g_attend;
 	private String g_intro;
-	private String g_location;
 	private Date g_regdate;
 	private String g_pic;
 	private int g_present;
 	private String g_leader;
-	private String userid;
+	private int dno;
+	private int sno;
+	private int sgno;
 	
 	public GroupVo() {
 		super();
@@ -33,40 +34,50 @@ public class GroupVo {
 		this.g_leader = g_leader;
 	}
 
-	public GroupVo(String g_name, String excercise_type, int g_attend, String g_intro, String g_location) {
+	public GroupVo(String g_name, String excercise_type, int g_attend, String g_intro) {
 		super();
 		this.g_name = g_name;
 		this.excercise_type = excercise_type;
 		this.g_attend = g_attend;
 		this.g_intro = g_intro;
-		this.g_location = g_location;
 	}
 	
-	public GroupVo(String g_name, String excercise_type, int g_attend, String g_intro, String g_location,
+	public GroupVo(String g_name, String excercise_type, int g_attend, String g_intro, String g_pic, int dno, int sno,
+			int sgno) {
+		super();
+		this.g_name = g_name;
+		this.excercise_type = excercise_type;
+		this.g_attend = g_attend;
+		this.g_intro = g_intro;
+		this.g_pic = g_pic;
+		this.dno = dno;
+		this.sno = sno;
+		this.sgno = sgno;
+	}
+
+	public GroupVo(String g_name, String excercise_type, int g_attend, String g_intro,
 			String g_pic, String g_leader) {
 		super();
 		this.g_name = g_name;
 		this.excercise_type = excercise_type;
 		this.g_attend = g_attend;
 		this.g_intro = g_intro;
-		this.g_location = g_location;
 		this.g_pic = g_pic;
 		this.g_leader = g_leader;
 	}
 
 	
-	public GroupVo(int gno, String g_name, String excercise_type, int g_attend, String g_intro, String g_location,
+	public GroupVo(int gno, String g_name, String excercise_type, int g_attend, String g_intro,
 			String g_pic) {
 		super();
 		this.g_name = g_name;
 		this.excercise_type = excercise_type;
 		this.g_attend = g_attend;
 		this.g_intro = g_intro;
-		this.g_location = g_location;
 		this.g_pic = g_pic;
 	}
 
-	public GroupVo(int gno, String g_name, String excercise_type, int g_attend, String g_intro, String g_location,
+	public GroupVo(int gno, String g_name, String excercise_type, int g_attend, String g_intro,
 			Date g_regdate, String g_pic, int g_present) {
 		super();
 		this.gno = gno;
@@ -74,7 +85,6 @@ public class GroupVo {
 		this.excercise_type = excercise_type;
 		this.g_attend = g_attend;
 		this.g_intro = g_intro;
-		this.g_location = g_location;
 		this.g_regdate = g_regdate;
 		this.g_pic = g_pic;
 		this.g_present = g_present;
@@ -120,14 +130,6 @@ public class GroupVo {
 		this.g_intro = g_intro;
 	}
 
-	public String getG_location() {
-		return g_location;
-	}
-
-	public void setG_location(String g_location) {
-		this.g_location = g_location;
-	}
-
 	public Date getG_regdate() {
 		return g_regdate;
 	}
@@ -160,10 +162,28 @@ public class GroupVo {
 		this.g_leader = g_leader;
 	}
 
-	@Override
-	public String toString() {
-		return "GroupVo [gno=" + gno + ", g_name=" + g_name + ", excercise_type=" + excercise_type + ", g_attend="
-				+ g_attend + ", g_intro=" + g_intro + ", g_location=" + g_location + ", g_regdate=" + g_regdate
-				+ ", g_pic=" + g_pic + ", g_present=" + g_present + ", g_leader=" + g_leader + "]";
+	public int getDno() {
+		return dno;
 	}
+
+	public void setDno(int dno) {
+		this.dno = dno;
+	}
+
+	public int getSno() {
+		return sno;
+	}
+
+	public void setSno(int sno) {
+		this.sno = sno;
+	}
+
+	public int getSgno() {
+		return sgno;
+	}
+
+	public void setSgno(int sgno) {
+		this.sgno = sgno;
+	}
+	
 }

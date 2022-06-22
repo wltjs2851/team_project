@@ -36,29 +36,24 @@
 							<div class="col-lg-6 col-md-12">
 								<div class="block d-flex">
 									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="place" >
-										<option value="울산">울산</option>
-										<option>부산</option>
-										<option>서울</option>
-										<option>대구</option>
-										<option>인천</option>
+<!-- 										<option>도시를 선택해주세요.</option> -->
+<%-- 										<c:forEach items="" var=""> --%>
+<!-- 											<option value=""></option> -->
+<%-- 										</c:forEach> --%>
 									</select>
-<!-- 									<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" -->
-<!-- 										id="search" placeholder="지역"> -->
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-12">
 								<div class="block d-flex">
 									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="place2" >
 <%-- 										<c:choose> --%>
-<%-- 											<c:when test="${#place.val() == '울산'}"> --%>
+<%-- 											<c:when test="${place.val() == '울산'}"> --%>
 <!-- 												<option>ㅎㅇ</option> -->
 <%-- 											</c:when> --%>
+<%-- 											<c:otherwise> --%>
+<!-- 												<option>ㅠㅠ</option> -->
+<%-- 											</c:otherwise> --%>
 <%-- 										</c:choose> --%>
-										<option>울산</option>
-										<option>부산</option>
-										<option>서울</option>
-										<option>대구</option>
-										<option>인천</option>
 									</select>
 <!-- 									<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" -->
 <!-- 										id="search" placeholder="종목"> -->

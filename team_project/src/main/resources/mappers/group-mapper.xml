@@ -9,8 +9,9 @@
 
 <!-- 그룹 생성 -->
 	<insert id="insertGroup">
-		insert into tbl_group(gno, g_name, excercise_type, g_attend, g_intro, g_location, g_pic, g_leader)
-			values(#{gno}, #{g_name}, #{excercise_type}, #{g_attend},#{g_intro}, #{g_location}, #{g_pic, jdbcType=VARCHAR}, #{g_leader})
+		insert into tbl_group(gno, g_name, excercise_type, g_attend, g_intro, g_pic, g_leader, dno, sno, sgno)
+			values(#{gno}, #{g_name}, #{excercise_type}, #{g_attend},#{g_intro}, #{g_pic, jdbcType=VARCHAR}, 
+				#{g_leader}, #{dno}, #{sno, jdbcType=VARCHAR}, #{sgno, jdbcType=VARCHAR})
 	</insert>
 
 <!-- 그룹 리스트	 -->
@@ -19,11 +20,11 @@
 	</select>
 	
 	<select id="groupLocation" resultType="LocationVo">
-		select * from tbl_group_location where uno is null and sno is null
+		select * from tbl_group_location where sno is null and sgno is null
 	</select>
 	
 	<select id="groupLocationUno" resultType="LocationVo">
-		select * from tbl_group_location where uno is not null and sno is null and dno = #{dno}
+		select * from tbl_group_location where sno is not null and sgno is null and dno = #{dno}
 	</select>
 	
 <!-- 그룹 상세보기 -->
@@ -34,7 +35,8 @@
 <!-- 그룹 수정 -->
 	<update id="updateGroup">
 		update tbl_group set g_name = #{g_name}, excercise_type = #{excercise_type}, g_attend = #{g_attend},
-				g_intro = #{g_intro}, g_location = #{g_location}, g_pic = #{g_pic, jdbcType=VARCHAR}
+				g_intro = #{g_intro}, g_pic = #{g_pic, jdbcType=VARCHAR}, dno = #{dno}, sno = #{sno, jdbcType=VARCHAR}, 
+					sgno = #{sgno, jdbcType=VARCHAR}
 			where gno = #{gno}
 	</update>
 

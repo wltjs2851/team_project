@@ -12,8 +12,11 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
   />
+
 </head>
 <style>
+
+
 /* 보낸 사람 말풍선 */
 .alert-primary:after {
 	content: '';
@@ -67,6 +70,7 @@
 <link href="/resources/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
 <!-- Bootstrap -->
 <link href="/resources/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/fonts.css" rel="stylesheet"/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -210,7 +214,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-1"></div>
-			<div class="col-md-5">
+			<div class="col-md-7">
 			<br>
 			<h1>(${g_name }) 채팅 방</h1>
 			<hr>
@@ -230,12 +234,12 @@
 			</div>
 			
 			</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<br>
 			<div id="attend" style="display:none; padding-top: 120px;padding-left: 40px;">
-			<strong>${g_name }</strong> 채팅 참여자
+			<strong>${g_name }</strong><br>채팅 참여자
 <%-- 			${groupJoinMember} --%>
-			<br>
+			<br><br>
 			<c:forEach items="${g_nickname }" var="nick" varStatus="status">
 				<p class="p_attend" data-nick="${g_nickname[status.index ]}">${nick}
 					<i class='fas fa-lightbulb' style='font-size:24px; color:silver;'></i>
