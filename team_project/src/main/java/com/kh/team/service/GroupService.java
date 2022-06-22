@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
+import com.kh.team.vo.LocationVo;
 
 public interface GroupService {
 	public boolean addGroup(GroupVo groupVo);
@@ -16,6 +17,8 @@ public interface GroupService {
 	public List<GroupJoinVo> list(int gno);
 	public List<GroupJoinVo> list(String userid);
 	public List<GroupVo> groupListOrder();
+	public List<LocationVo> groupLocation();
+	public List<LocationVo> groupLocationUno(int dno);
 	
 	public List<String> getNickname(int gno);
 }

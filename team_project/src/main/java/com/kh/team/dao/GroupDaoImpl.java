@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
+import com.kh.team.vo.LocationVo;
 
 @Repository
 public class GroupDaoImpl implements GroupDao{
@@ -122,6 +123,18 @@ public class GroupDaoImpl implements GroupDao{
 	public List<String> getNickname(int gno) {
 		List<String> nickname = sqlSession.selectList(NAMESPACE + "getNickname", gno);
 		return nickname;
+	}
+
+	@Override
+	public List<LocationVo> groupLocation() {
+		List<LocationVo> location = sqlSession.selectList(NAMESPACE + "groupLocation");
+		return location;
+	}
+
+	@Override
+	public List<LocationVo> groupLocationUno(int dno) {
+		List<LocationVo> location = sqlSession.selectList(NAMESPACE + "groupLocationUno", dno);
+		return location;
 	}
 
 }

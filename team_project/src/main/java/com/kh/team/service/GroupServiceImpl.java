@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.team.dao.GroupDao;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
+import com.kh.team.vo.LocationVo;
 
 @Service
 public class GroupServiceImpl implements GroupService{
@@ -92,6 +93,16 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public List<String> getNickname(int gno) {
 		return groupDao.getNickname(gno);
+	}
+
+	@Override
+	public List<LocationVo> groupLocation() {
+		return groupDao.groupLocation();
+	}
+
+	@Override
+	public List<LocationVo> groupLocationUno(int dno) {
+		return groupDao.groupLocationUno(dno);
 	}
 
 }

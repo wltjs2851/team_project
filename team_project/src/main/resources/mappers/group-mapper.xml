@@ -7,40 +7,56 @@
 		select seq_group_gno.nextval from dual 
 	</select>
 
+<!-- 그룹 생성 -->
 	<insert id="insertGroup">
 		insert into tbl_group(gno, g_name, excercise_type, g_attend, g_intro, g_location, g_pic, g_leader)
 			values(#{gno}, #{g_name}, #{excercise_type}, #{g_attend},#{g_intro}, #{g_location}, #{g_pic, jdbcType=VARCHAR}, #{g_leader})
 	</insert>
-	
+
+<!-- 그룹 리스트	 -->
 	<select id="selectGroup" resultType="GroupVo">
 		select * from tbl_group order by gno desc
 	</select>
 	
+	<select id="groupLocation" resultType="LocationVo">
+		select * from tbl_group_location where uno is null and sno is null
+	</select>
+	
+	<select id="groupLocationUno" resultType="LocationVo">
+		select * from tbl_group_location where uno is not null and sno is null and dno = #{dno}
+	</select>
+	
+<!-- 그룹 상세보기 -->
 	<select id="groupByGno" resultType="GroupVo">
 		select * from tbl_group where gno = #{gno}
 	</select>
 	
+<!-- 그룹 수정 -->
 	<update id="updateGroup">
 		update tbl_group set g_name = #{g_name}, excercise_type = #{excercise_type}, g_attend = #{g_attend},
 				g_intro = #{g_intro}, g_location = #{g_location}, g_pic = #{g_pic, jdbcType=VARCHAR}
 			where gno = #{gno}
 	</update>
-	
+
+<!-- 그룹 가입	 -->
 	<insert id="insertJoinGroup">
 		insert into tbl_group_join(jno, gno, userid)
 			values(seq_group_jno.nextval, #{gno}, #{userid})
 	</insert>
 	
+	
 	<update id="updateGroupMember">
 		update tbl_group set g_present = g_present + #{cnt} where gno = #{gno}
 	</update>
 
+<!-- 그룹 탈퇴 -->
 	<delete id="deleteJoinGroup">
 		delete from tbl_group_join
 		where gno = #{gno}
 		and userid = #{userid}
 	</delete>
 	
+<!-- 그룹 삭제 -->
 	<delete id="deleteGroup">
 		delete from tbl_group where gno = #{gno}
 	</delete>
