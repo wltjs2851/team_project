@@ -28,8 +28,10 @@ public class AdminController {
 	}
 	
 	// 전체 회원 목록
-	@RequestMapping(value="memberList", method = RequestMethod.GET)
-	public String adminMember() {
+	@RequestMapping(value="/memberList", method = RequestMethod.GET)
+	public String adminMember(Model model) {
+		List<MemberVo> memberList = memberSerive.getMemberList();
+		model.addAttribute("memberList", memberList);
 		return "/admin/adminMember";
 	}
 	

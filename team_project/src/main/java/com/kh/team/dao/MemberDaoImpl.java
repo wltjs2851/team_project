@@ -111,4 +111,10 @@ public class MemberDaoImpl implements MemberDao {
 		return getLastestMember;
 	}
 
+	@Override
+	public List<MemberVo> getMemberList() {
+		List<MemberVo> getMemberList = sqlSession.selectList(NS + "getMemberList");
+		return getMemberList;
+	}
+
 }
