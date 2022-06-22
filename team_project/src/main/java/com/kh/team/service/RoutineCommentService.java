@@ -2,6 +2,7 @@ package com.kh.team.service;
 
 import java.util.List;
 
+import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RoutineCommentVo;
 
 public interface RoutineCommentService {
@@ -9,5 +10,7 @@ public interface RoutineCommentService {
 	public List<RoutineCommentVo> selectRoutineCommentList(int uno);
 	public boolean modifyRoutineComment(RoutineCommentVo routineCommentVo);
 	public boolean removeRoutineComment(int urcno);
+	
+	public List<RoutineCommentVo> adminRoutineComment(String userid);
 
 }

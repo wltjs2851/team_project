@@ -2,6 +2,7 @@ package com.kh.team.service;
 
 import java.util.List;
 
+import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.GroupBoardCommentVo;
 
 public interface GroupBoardCommentService {
@@ -12,5 +13,7 @@ public interface GroupBoardCommentService {
 	public boolean deleteGroupComment(int gbcno);
 	public void updateComment(int gbno);
 	public void updateCommentDelete(int gbno);
+	
+	public List<GroupBoardCommentVo> adminGroupBoardComment(String userid);
 
 }

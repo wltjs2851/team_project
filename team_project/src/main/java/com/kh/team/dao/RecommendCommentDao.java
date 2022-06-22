@@ -2,6 +2,7 @@ package com.kh.team.dao;
 
 import java.util.List;
 
+import com.kh.team.vo.GroupBoardCommentVo;
 import com.kh.team.vo.RecommendCommentVo;
 
 public interface RecommendCommentDao {
@@ -11,5 +12,7 @@ public interface RecommendCommentDao {
 	public boolean udpateRecommendComment(RecommendCommentVo recommendCommentVo);
 	public boolean deleteRecommendCommnet(int recno);
 	public List<RecommendCommentVo> recommendCommentList(int reno);
+	
+	public List<RecommendCommentVo> adminRecommendComment(String userid);
 
 }

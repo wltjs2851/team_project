@@ -49,4 +49,10 @@ public class RecipeCommentDaoImpl implements RecipeCommentDao{
 		return false;
 	}
 
+	@Override
+	public List<RecipeCommentVo> adminRecipeComment(String userid) {
+		List<RecipeCommentVo> adminRecipeComment = sqlSession.selectList(NAMESPACE + "adminRecipeComment", userid);
+		return adminRecipeComment;
+	}
+
 }

@@ -9,4 +9,6 @@ public interface FreeCommentService {
 	public List<FreeCommentVo> commentFreeList(int fno);
 	public boolean modifyFreeComment(FreeCommentVo freeCommentVo);
 	public boolean removeFreeComment(int fcno);
+	
+	public List<FreeCommentVo> adminFreeComment(String userid);
 }

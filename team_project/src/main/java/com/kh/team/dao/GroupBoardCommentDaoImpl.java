@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.GroupBoardCommentVo;
 
 @Repository
@@ -68,5 +69,13 @@ public class GroupBoardCommentDaoImpl implements GroupBoardCommentDao {
 		System.out.println("gorupBoardCommentDaoImpl, gbno: " + gbno);
 		sqlSession.update(NAMESPACE + "updateCommentDelete", map);
 	}
+
+	@Override
+	public List<GroupBoardCommentVo> adminGroupBoardComment(String userid) {
+		List<GroupBoardCommentVo> adminGroupBoardComment = 
+				sqlSession.selectList(NAMESPACE + "adminGroupBoardComment", userid);
+		return adminGroupBoardComment;
+	}
+
 
 }

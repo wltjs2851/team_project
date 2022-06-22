@@ -53,4 +53,9 @@
 	where gbno = #{gbno}
  </update>
  
+ <!--  유저 작성 댓글 조회 -->
+	<select id="adminGroupBoardComment" resultType="GroupBoardCommentVo">
+		select gbcno, gbc_content, gbc_regdate from tbl_group_board_comment
+		where userid = #{userid}
+	</select>
  </mapper>
