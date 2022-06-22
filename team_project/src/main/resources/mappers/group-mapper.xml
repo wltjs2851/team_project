@@ -93,4 +93,11 @@
 		in (select userid from tbl_group_join where gno = #{gno})
 		order by nickname
 	</select>
+	
+	<select id="groupByLocation" resultType="GroupVo">
+		select * from (select * from tbl_group
+            where not g_attend = g_present
+            order by g_attend - g_present)
+		where dno = #{dno} and rownum &lt;= 3
+	</select>
 </mapper>

@@ -39,7 +39,7 @@
 					}); 
 				} else {
 					$("#sg_location").hide();
-				} 
+				}
 			});
 		});
 		$("#sg_location").on("change", function() {
@@ -243,20 +243,128 @@
 				</div>
 			</div>
 		</div>
+<!-- 		<div class="row"> -->
+<%-- 			<c:forEach items="${listGroup}" var="groupVo"> --%>
+<%-- 				<c:if test="${groupVo.g_present < groupVo.g_attend}"> --%>
+<!-- 					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6"> -->
+<!-- 						<div class="category-block"> -->
+<!-- 							<div class="header"> -->
+<!-- 								<img src="/resources/images/smile.png" class="rounded-circle"> -->
+<%-- 								<h4>${groupVo.g_name}</h4> --%>
+<!-- 							</div> -->
+<!-- 							<ul class="category-list" > -->
+<%-- 								<li><a href="/group/groupForm?gno=${groupVo.gno}">인원<span>${groupVo.g_present} / ${groupVo.g_attend}</span></a></li> --%>
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<%-- 				</c:if> --%>
+<%-- 			</c:forEach>  --%>
+<!-- 		</div> -->
 		<div class="row">
-			<c:forEach items="${listGroup}" var="groupVo">
-				<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-					<div class="category-block">
-						<div class="header">
-							<i class="fa fa-laptop icon-bg-1"></i> 
-								<h4>${groupVo.g_name}</h4>
-						</div>
-							<ul class="category-list" >
-								<li><a href="/group/groupForm?gno=${groupVo.gno}">인원<span>${groupVo.g_present} / ${groupVo.g_attend}</span></a></li>
-							</ul>
-						</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>서울특별시</h4>
 					</div>
-			</c:forEach> 
+					<c:forEach items="${seoulGroup}" var="seoulVo">
+						<ul class="category-list">
+							<li><a href="/group/groupForm?gno=${seoulVo.gno}">${seoulVo.g_name}<span>${seoulVo.g_present} / ${seoulVo.g_attend}</span></a></li>
+						</ul>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>부산광역시</h4>
+					</div>
+					<c:forEach items="${busanGroup}" var="busanVo">
+						<ul class="category-list">
+							<li><a href="/group/groupForm?gno=${busanVo.gno}">${busanVo.g_name}<span>${busanVo.g_present} / ${busanVo.g_attend}</span></a></li>
+						</ul>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>인천광역시</h4>
+					</div>
+					<c:forEach items="${incheonGroup}" var="incheonVo">
+						<ul class="category-list">
+							<li><a href="/group/groupForm?gno=${incheonVo.gno}">${incheonVo.g_name}<span>${incheonVo.g_present} / ${incheonVo.g_attend}</span></a></li>
+						</ul>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>대구광역시</h4>
+					</div>
+					<c:forEach items="${daeguGroup}" var="daeguVo">
+						<ul class="category-list">
+							<li><a href="/group/groupForm?gno=${daeguVo.gno}">${daeguVo.g_name}<span>${daeguVo.g_present} / ${daeguVo.g_attend}</span></a></li>
+						</ul>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>대전광역시</h4>
+					</div>
+					<c:forEach items="${daejeonGroup}" var="daejeonVo">
+						<ul class="category-list">
+							<li><a href="/group/groupForm?gno=${daejeonVo.gno}">${daejeonVo.g_name}<span>${daejeonVo.g_present} / ${daejeonVo.g_attend}</span></a></li>
+						</ul>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>광주광역시</h4>
+					</div>
+					<c:forEach items="${gwangjuGroup}" var="gwangjuVo">
+						<ul class="category-list">
+							<li><a href="/group/groupForm?gno=${gwangjuVo.gno}">${gwangjuVo.g_name}<span>${gwangjuVo.g_present} / ${gwangjuVo.g_attend}</span></a></li>
+						</ul>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>울산광역시</h4>
+					</div>
+					<c:forEach items="${ulsanGroup}" var="ulsanVo">
+						<ul class="category-list">
+							<li><a href="/group/groupForm?gno=${ulsanVo.gno}">${ulsanVo.g_name}<span>${ulsanVo.g_present} / ${ulsanVo.g_attend}</span></a></li>
+						</ul>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+				<div class="category-block">
+					<div class="header">
+						<img src="/resources/images/smile.png" class="rounded-circle">
+						<h4>경기도</h4>
+					</div>
+					<c:forEach items="${gyeonggiGroup}" var="gyeonggiVo">
+						<ul class="category-list">
+							<li><a href="/group/groupForm?gno=${gyeonggiVo.gno}">${gyeonggiVo.g_name}<span>${gyeonggiVo.g_present} / ${gyeonggiVo.g_attend}</span></a></li>
+						</ul>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>

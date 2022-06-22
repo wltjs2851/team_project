@@ -46,8 +46,14 @@ public class GroupServiceImpl implements GroupService{
 	}
 	
 	@Override
-	public boolean removeGroup(int gno) {
-		return groupDao.deleteGroup(gno);
+	@Transactional
+	public boolean removeGroup(int gno, String userid) {
+		boolean deleteMember = groupDao.deleteJoinGroup(gno, userid);
+		boolean deleteGroup = groupDao.deleteGroup(gno);
+		if(deleteMember && deleteGroup) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -108,6 +114,11 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public List<LocationVo> groupLocationSgno(int dno, int sno) {
 		return groupDao.groupLocationSgno(dno, sno);
+	}
+
+	@Override
+	public List<GroupVo> groupByLocation(int dno) {
+		return groupDao.groupByLocation(dno);
 	}
 
 }

@@ -22,6 +22,7 @@ public interface GroupDao {
 	public List<LocationVo> groupLocation();
 	public List<LocationVo> groupLocationSno(int dno);
 	public List<LocationVo> groupLocationSgno(int dno, int sno);
+	public List<GroupVo> groupByLocation(int dno);
 	
 	// 가입한 그룹 닉네임 가져오기 
 	public List<String> getNickname(int gno);

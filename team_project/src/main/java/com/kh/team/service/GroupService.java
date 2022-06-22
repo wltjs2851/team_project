@@ -10,7 +10,7 @@ public interface GroupService {
 	public boolean addGroup(GroupVo groupVo);
 	public List<GroupVo> groupList();
 	public boolean moidfyGroup(GroupVo groupVo);
-	public boolean removeGroup(int gno);
+	public boolean removeGroup(int gno, String userid);
 	public GroupVo groupByGno(int gno);
 	public boolean joinGroup(int gno, String userid);
 	public boolean banGroup(int gno, String userid);
@@ -20,6 +20,7 @@ public interface GroupService {
 	public List<LocationVo> groupLocation();
 	public List<LocationVo> groupLocationSno(int dno);
 	public List<LocationVo> groupLocationSgno(int dno, int sno);
+	public List<GroupVo> groupByLocation(int dno);
 	
 	public List<String> getNickname(int gno);
 }

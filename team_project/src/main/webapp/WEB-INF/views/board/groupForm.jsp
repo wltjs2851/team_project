@@ -41,8 +41,14 @@ $(function() {
 	$("#btnDelete").click(function() {
 		if("${groupVo.g_present}" > 1) {
 			alert("그룹원이 남아있습니다.");
+		} else {
+			$(this).attr("href","/group/removeGroup?gno=${groupVo.gno}&userid=${loginVo.userid}");
 		}
 	});
+	
+	if("${groupVo.sgno}" == 0) {
+		$("#sg_location").hide();
+	}
 });
 </script>
 
@@ -82,11 +88,7 @@ $(function() {
 							</select>
 						</div>
 						<div class="col-md-2" style="display: inline-block;">
-								<select id="sg_location" name="sgno" class="form-control" disabled
-						<c:if test="${ groupVo.sgno == '0' }">
-								style="display=none;"
-							</c:if>
-								>
+								<select id="sg_location" name="sgno" class="form-control" disabled>
 									<c:forEach items="${ sg_location }" var="locationVo">
 										<option value="${ groupVo.sgno }"	
 											<c:if test="${ groupVo.sgno == locationVo.sgno }">
