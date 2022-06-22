@@ -83,7 +83,7 @@ $(function() {
 		e.preventDefault();
 		console.log("채팅방 입장");	
 		var url = "/chat/chat";
-		var option = "width = 650px, height=800px, top=300px, left=300px, scrollbars=yes";
+		var option = "width = 800px, height=800px, top=300px, left=300px, scrollbars=yes";
 		window.open(url, "그룹 채팅방 입장", option);
 	});
 	
@@ -205,23 +205,24 @@ $(function() {
 						<li class="list-inline-item">
 							by ${ groupBoardVo.userid }
 							<button class="btn dropdown-toggle" style="background-color: #ffffff; width: 20px; height:50px; padding: 1% 0" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-										
-											<i class='fas fa-ellipsis-v'></i>
-										
-										</button>
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										
-										<c:if test="${ groupVo.g_leader == loginVo.userid }">
-											 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }">삭제</a>
+							
+								<i class='fas fa-ellipsis-v'></i>
+							
+							</button>
+							
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							
+							<c:if test="${ groupVo.g_leader == loginVo.userid }">
+								 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }">삭제</a>
 <%-- 											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a> --%>
-										</c:if>
-											 <a class="dropdown-item" href="#">회원 정보 보기</a>
-											 <i id="report" class="report fa-solid fa-handcuffs"><a class="dropdows-item" href="#" 
-											 	data-user="${ groupBoardVo.userid }">신고하기</a></i>
-											 <input type="hidden" id="userid" name="userid" value="${ groupBoardVo.userid }">
-											 <input type="hidden" id="gno" name="gno" value="${ groupBoardVo.gno }">
-										</div>
-							</li>
+							</c:if>
+								 <a class="dropdown-item" href="#">회원 정보 보기</a>
+								 <i id="report" class="report fa-solid fa-handcuffs"><a class="dropdows-item" href="#" 
+								 	data-user="${ groupBoardVo.userid }">신고하기</a></i>
+								 <input type="hidden" id="userid" name="userid" value="${ groupBoardVo.userid }">
+								 <input type="hidden" id="gno" name="gno" value="${ groupBoardVo.gno }">
+							</div>
+						</li>
 						<li class="list-inline-item">${ groupBoardVo.gb_regdate }</li>
 					</ul>
 					<!-- Post Description -->

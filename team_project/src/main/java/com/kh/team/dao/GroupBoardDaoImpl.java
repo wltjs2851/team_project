@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
+import com.kh.team.vo.ReportVo;
 import com.kh.team.vo.SearchDto;
 
 @Repository
@@ -111,5 +112,7 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 		}
 		return false;
 	}
+
+	
 
 }

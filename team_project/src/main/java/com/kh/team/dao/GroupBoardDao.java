@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
+import com.kh.team.vo.ReportVo;
 import com.kh.team.vo.SearchDto;
 
 public interface GroupBoardDao {
