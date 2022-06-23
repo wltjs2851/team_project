@@ -59,8 +59,8 @@ $(function(){
 					<td>${memberVo.nickname }</td>
 					<td>${memberVo.age }세(
 					<c:choose>
-						<c:when test="${memberVo.gender == 'F' }">여</c:when>
-						<c:otherwise>남</c:otherwise>
+						<c:when test="${memberVo.gender == 'F' }"><i class="fa-solid fa-neuter"></i></c:when>
+						<c:otherwise><i class="fa-solid fa-mars"></i></c:otherwise>
 					</c:choose>
 					)</td>
 					<td>${memberVo.email }</td>

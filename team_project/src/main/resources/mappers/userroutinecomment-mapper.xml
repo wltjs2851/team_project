@@ -40,7 +40,7 @@
  
  <!--  유저 작성 댓글 조회 -->
 	<select id="adminRoutineComment" resultType="RoutineCommentVo">
-		select urcno, urc_comment, urc_regdate from tbl_ucomment
+		select urcno, uno, urc_comment, urc_regdate from tbl_ucomment
 		where userid = #{userid}
 	</select>
  </mapper>

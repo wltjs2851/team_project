@@ -49,35 +49,35 @@
 					<c:forEach items="${freeList }" var="free">
 						<tr>
 							<td>${free.fcno }</td>
-							<td>${free.fc_comment }</td>
+							<td class="td_free" data-fcno=${free.fcno }>${free.fc_comment }</td>
 							<td>${free.f_regdate }</td>
 						</tr>
 					</c:forEach>
 					<c:forEach items="${recipeList }" var="recipe">
 						<tr>
 							<td>${recipe.rcno }</td>
-							<td>${recipe.rc_comment }</td>
+							<td class="td_recipe" data-fcno=${recipe.rcno }>${recipe.rc_comment }</td>
 							<td>${recipe.rc_regdate }</td>
 						</tr>
 					</c:forEach>
 					<c:forEach items="${groupBoardList }" var="groupBoard">
 						<tr>
 							<td>${groupBoard.gbcno }</td>
-							<td>${groupBoard.gbc_content }</td>
+							<td class="td_groupBoard" data-fcno=${groupBoard.gbcno }>${groupBoard.gbc_content }</td>
 							<td>${groupBoard.gbc_regdate }</td>
 						</tr>
 					</c:forEach>
 					<c:forEach items="${routineList }" var="routine">
 						<tr>
 							<td>${routine.urcno }</td>
-							<td>${routine.urc_comment }</td>
+							<td class="td_routine" data-fcno=${routine.urcno }>${routine.urc_comment }</td>
 							<td>${routine.u_regdate }</td>
 						</tr>
 					</c:forEach>
 					<c:forEach items="${recommendList }" var="recommend">
 						<tr>
 							<td>${recommend.recno }</td>
-							<td>${recommend.re_comment }</td>
+							<td class="td_recommend" data-fcno=${recommend.recno }>${recommend.re_comment }</td>
 							<td>${recommend.re_regdate }</td>
 						</tr>
 					</c:forEach>
