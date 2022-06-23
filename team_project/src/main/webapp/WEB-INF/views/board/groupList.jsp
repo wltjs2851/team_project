@@ -138,35 +138,8 @@ $(function() {
 	if(joinResult == "true") {
 		alert("그룹에 가입하셨습니다.");
 	}
-
-// 	var currentPage=1;
-// 	var isLoading=false;
 	
-// 	$(window).on("scroll",function(){
-// 	    //위로 스크롤된 길이
-// 	    let scrollTop=$(window).scrollTop();
-// 	    //웹브라우저의 창의 높이
-// 	    let windowHeight=$(window).height();
-// 	    //문서 전체의 높이
-// 	    let documentHeight=$(document).height();
-// 	    //바닥까지 스크롤 되었는 지 여부를 알아낸다.
-// 	    let isBottom=scrollTop+windowHeight + 10 >= documentHeight;
-
-// 	    if(isBottom){
-// 	        //만일 현재 마지막 페이지라면
-// 	        if(currentPage == "${totalPageCount}" || isLoading){
-// 	            return; //함수를 여기서 끝낸다.
-// 	        }
-// 	        //현재 로딩 중이라고 표시한다.
-// 	        isLoading=true;
-// 	        //요청할 페이지 번호를 1 증가시킨다.
-// 	        currentPage++;
-// 	        //추가로 받아올 페이지를 서버에 ajax 요청을 하고
-// 	        console.log("inscroll"+currentPage);
-// 	        getGroupList();
-
-// 	    }; 
-// 	});
+	getGroupList();
 
 	var count = 2;
     window.onscroll = function(e) {

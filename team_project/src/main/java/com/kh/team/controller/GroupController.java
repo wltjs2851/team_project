@@ -51,7 +51,7 @@ public class GroupController {
 	@RequestMapping(value = "/groupList2", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GroupVo> groupList2(Model model, int startRow, LocationVo locationVo) {
-		int perCount = 3;
+		int perCount = 7;
 		System.out.println(startRow);
 		System.out.println("groupList2" + locationVo);
 //		int count = groupService.getCount();
