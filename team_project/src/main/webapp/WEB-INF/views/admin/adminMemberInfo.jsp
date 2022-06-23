@@ -97,29 +97,80 @@ th, td {
 							</tbody>
 						</table>
 					</div>
-					<!-- /.d-flex -->
-
-<!-- 					<div class="position-relative mb-4"> -->
-<!-- 						<div class="chartjs-size-monitor"> -->
-<!-- 							<div class="chartjs-size-monitor-expand"> -->
-<!-- 								<div class=""></div> -->
-<!-- 							</div> -->
-<!-- 							<div class="chartjs-size-monitor-shrink"> -->
-<!-- 								<div class=""></div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<%-- 						<canvas id="visitors-chart" height="0" --%>
-<%-- 							style="display: block; width: 639px; height: 0px;" --%>
-<%-- 							class="chartjs-render-monitor" width="639"></canvas> --%>
-<!-- 					</div> -->
-
 				</div>
 <!-- 				card-body 끝 -->
 			</div> 
 <!-- 			카드 끝 -->
+
 <!-- 			회원 가입한 그룹 내역 -->
 		<div>
-			${groupVo }
+		<c:forEach items="${groupList }" var="list">
+			<c:forEach items="${groupInfo }" var="test">
+				<c:if test="${list.g_name == test.g_name }">${test.userid }</c:if>
+			</c:forEach>
+		</c:forEach>
+		</div>
+		<div>
+<%-- 			${groupList } --%>
+			<br>
+<%-- 			${groupMemberList} --%>
+				${groupList }<br>
+<%-- 				${groupInfo } --%>
+				
+			<div class="card">
+        <div class="card-header">
+          <h3 class="card-title">가입한 그룹 목록</h3>
+        </div>
+        <div class="card-body p-0" style="display: block;">
+          <table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th style="width: 5%">
+                          #
+                      </th>
+                      <th style="width: 20%">
+                          그룹 이름
+                      </th>
+                      <th style="width: 30%">
+                          그룹 멤버
+                      </th>
+                      <th>
+                          인원
+                      </th>
+                      <th style="width: 8%" class="text-center">
+                          Status
+                      </th>
+                      <th style="width: 16%">
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+								<c:forEach items="${groupList }" var="list">
+									<tr>
+										<td>${list.gno }</td>
+										<td>${list.g_name}</td>
+										<td><c:forEach items="${groupInfo }" var="test">
+												<c:if test="${list.g_name == test.g_name }">
+<!-- 												<ul class="list-inline"> -->
+												<li class="list-inline-item">${test.userid }<img alt="Avatar"
+													class="table-avatar" src="../../dist/img/avatar.png">
+												</li>
+<!-- 											</ul> -->
+               							   </c:if>
+											</c:forEach></td>
+										<td>
+											${list.g_present }/${list.g_attend }
+										</td>
+										<td class="project_progress"></td>
+										<td class="project-state"></td>
+										<td class="project-actions text-right"></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
 		</div>
 		</div>
 		<div class="col-md-1"></div>

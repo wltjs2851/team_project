@@ -172,9 +172,9 @@ public class GroupDaoImpl implements GroupDao{
 	}
 
 	@Override
-	public GroupVo getGroupByUserId(String userid) {
-		GroupVo groupVo = sqlSession.selectOne(NAMESPACE + "getGroupByUserId", userid);
-		return groupVo;
+	public List<GroupVo> getGroupByUserId(String userid) {
+		List<GroupVo> groupList = sqlSession.selectList(NAMESPACE + "getGroupByUserId", userid);
+		return groupList;
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.AdminVo;
+import com.kh.team.vo.testVo;
 
 @Repository
 public class AdminDaoImpl implements AdminDao{
@@ -20,6 +21,12 @@ private final String NAMESPACE = "com.kh.team.mappers.admin.";
 	public List<AdminVo> adminList(String userid) {
 		List<AdminVo> adminList = sqlSession.selectList(NAMESPACE + "adminList", userid);
 		return adminList;
+	}
+
+	@Override
+	public List<testVo> getGroupInfo() {
+		List<testVo> getGroupInfo = sqlSession.selectList(NAMESPACE + "getGroupInfo");
+		return getGroupInfo;
 	}
 
 }

@@ -20,4 +20,12 @@
 		order by "regdate" desc
 	]]>
 	</select>
+	
+	<select id="getGroupInfo" resultType="testVo">
+		select g.gno, g_name, g_attend, g_present, g_leader, u.userid, u.u_pic
+		from tbl_group g, tbl_group_join j, tbl_user u
+		where j.userid = u.userid 
+		and g.gno = j.gno 
+		order by g_name
+	</select>
 </mapper>
