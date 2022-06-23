@@ -50,33 +50,36 @@ public class GroupController {
 	
 	@RequestMapping(value = "/groupList2", method = RequestMethod.GET)
 	@ResponseBody
-	public List<GroupVo> groupList2(Model model, int startRow) {
+	public List<GroupVo> groupList2(Model model, int startRow, LocationVo locationVo) {
 		int perCount = 3;
 		System.out.println(startRow);
-		int count = groupService.getCount();
-		int totalPageCount = (int) Math.ceil(count / (double) perCount);
+		System.out.println("groupList2" + locationVo);
+//		int count = groupService.getCount();
+//		int totalPageCount = (int) Math.ceil(count / (double) perCount);
 		int endRow = startRow + perCount;
-		List<GroupVo> list = groupService.selectGroupList(startRow, endRow);
-		model.addAttribute("totalPageCount", totalPageCount);
+		List<GroupVo> list = null;
+		if (locationVo.getDno() != 0) {
+			list = groupService.searchLocation(locationVo);
+		} else {
+			list = groupService.selectGroupList(startRow, endRow);
+		}
 		return list;
 	}
 	
 	@RequestMapping(value = "/searchLocation", method = RequestMethod.GET)
 	public String searchLocation(LocationVo locationVo, Model model) {
-		System.out.println(locationVo);
-		List<GroupVo> list = groupService.searchLocation(locationVo);
-		System.out.println(list);
-		model.addAttribute("groupList", list);
+		System.out.println("searchLocation" + locationVo);
+		model.addAttribute("locationVo", locationVo);
 		return "board/groupList";
 	}
 	
-	@RequestMapping(value = "/groupList2", method = RequestMethod.GET)
-	@ResponseBody
-	public List<GroupVo> groupList2(Model model) {
-		List<GroupVo> list = groupService.groupList();
-		model.addAttribute("groupList", list);
-		return list;
-	}
+//	@RequestMapping(value = "/groupList2", method = RequestMethod.GET)
+//	@ResponseBody
+//	public List<GroupVo> groupList2(Model model) {
+//		List<GroupVo> list = groupService.groupList();
+//		model.addAttribute("groupList", list);
+//		return list;
+//	}
 
 	@RequestMapping(value = "/addGroupForm", method = RequestMethod.GET)
 	public String addGroupForm(Model model) {

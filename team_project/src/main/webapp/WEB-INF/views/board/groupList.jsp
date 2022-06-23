@@ -181,7 +181,17 @@ $(function() {
 	function getGroupList() {
 		console.log($("#groupDiv > div").length);
 		var startRow = $("#groupDiv > div").length + 1;
-		  $.ajax({
+		var dno = "";
+		var sno = "";
+		var sgno = "";
+		if (${locationVo != null}) {
+			dno = "${locationVo.dno}";
+			sno = "${locationVo.sno}";
+			sgno = "${locationVo.sgno}";
+		}
+		if ("${locationVo}" == "") {
+			console.log("locationVo == null")
+			$.ajax({
 		      url :"/group/groupList2",
 		      type : "get",
 		      dataType : "json",
@@ -208,7 +218,39 @@ $(function() {
  		  		});      
  		      }
  		   });
-
+		} else {
+			console.log("else");
+			$.ajax({
+			      url :"/group/groupList2",
+			      type : "get",
+			      dataType : "json",
+			      data : {
+			         "startRow" : startRow,
+			         "dno" : dno,
+			         "sno" : sno,
+			         "sgno" : sgno
+			      },
+			      success : function(rData){
+			         console.log("ajax", rData);
+			         $.each(rData, function() {
+	 		  			var div = "";
+	 		  			div += "<div class='col-lg-3 col-md-6 col-sm-6 group' onclick='location.href ='/group/groupForm?gno=" + this.gno +
+			  						"'' style=cursor:pointer; display: none;' id='groupList'>";
+	 		  			div += "<div class='product_item'><div style='text-align: center;'>"; 		  			if(this.g_pic == null) {
+	 		  				div += "<img src='/resources/images/board/groupDefault.png'" +
+			  				"class='img-thumbnail' alt='group image' style='height: 280px'>";
+			  			} else {
+			  				div += "<img src='/group/displayImage?filename=" + this.g_pic +
+			  					"' class='img-thumbnail' alt='group image' style='height: 280px; text-align: center;'>";
+			  			}
+			  			div += "<div class='comment'><h5>" + this.g_name + "</h5>" + this.g_intro + "<br>";
+			  			div += "<i class='fa-solid fa-user-group'></i>" + this.g_present + "/" + this.g_attend + "</div>";
+	 		  			div += "</div></div></div>";
+	 		  			$("#groupDiv").append(div);
+	 		  		});      
+	 		      }
+	 		   });
+		}
  	}
  });
 </script>
