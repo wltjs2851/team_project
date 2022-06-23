@@ -193,49 +193,16 @@ $(function() {
 <%-- ${ heart } --%>
 <%-- ${ count } --%>
 
-<!-- 모달 -->
-<!-- <div class="row"> -->
-<!-- 		<div class="col-md-12"> -->
-<!-- 			 <a id="modal-402154" href="#modal-container-402154" role="button" class="btn" data-toggle="modal" style="display:none;">Launch demo modal</a> -->
-			
-<!-- 			<div class="modal fade" id="modal-container-402154" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
-<!-- 				<div class="modal-dialog" role="document"> -->
-<!-- 					<div class="modal-content"> -->
-<!-- 						<div class="modal-header"> -->
-<!-- 							<h5 class="modal-title" id="myModalLabel"> -->
-<!-- 								댓글 수정 -->
-<!-- 							</h5>  -->
-<!-- 							<button type="button" class="close" data-dismiss="modal"> -->
-<!-- 								<span aria-hidden="true">×</span> -->
-<!-- 							</button> -->
-<!-- 						</div> -->
-<!-- 						<div class="modal-body"> -->
-<!-- 							<input type="text" class="form-control" id="modalContent"> -->
-<!-- 						</div> -->
-<!-- 						<div class="modal-footer"> -->
-							 
-<!-- 							<button type="button" class="btn btn-primary" id="btnModalSave"> -->
-<!-- 								변경 -->
-<!-- 							</button>  -->
-<!-- 							<button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal"> -->
-<!-- 								닫기 -->
-<!-- 							</button> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-					
-<!-- 				</div> -->
-				
-<!-- 			</div> -->
-			
-<!-- 		</div> -->
-<!-- </div> -->
 
 
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-9">
+				
+				<div class="col-md-2"></div>
+			
+				<div class="col-md-8">
 					<h2 style="margin: 20px;">
 						${ groupBoardVo.gb_title }
 					</h2>
@@ -300,7 +267,7 @@ $(function() {
 				</div>
 				
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 				
 <!-- 				<aside class="main-sidebar sidebar-dark-primary elevation-4"> -->
 					<div class="list-group">

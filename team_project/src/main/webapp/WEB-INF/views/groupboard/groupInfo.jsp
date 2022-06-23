@@ -161,7 +161,10 @@ $(function() {
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-9">
+				
+				<div class="col-md-2"></div>
+			
+				<div class="col-md-8">
 				
 				<div style="margin: 20px;"><img src="/groupboard/displayImage?filename=${groupVo.g_pic}" alt="그룹 사진"></div>
 				
@@ -293,7 +296,7 @@ $(function() {
 				
 				
 				
-				<div class="col-md-3">
+				<div class="col-md-2">
 				
 				
 					<aside class="column dotcom__aside bottom-12">
