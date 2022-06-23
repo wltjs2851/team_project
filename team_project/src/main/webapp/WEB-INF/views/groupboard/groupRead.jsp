@@ -50,25 +50,35 @@ $(function() {
 				console.log("u_pic: ", this.u_pic);
 				var cmt = "";
 				cmt += "<div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
-				cmt += "<p style='font-size: large; font-weight: bold;'>";
+				cmt += "<div class='row'><p style='font-size: large; font-weight: bold;'>";
 				if(this.u_pic == null) {
 					cmt += "<img src='/resources/images/board/personDefault.png' class='rounded-circle z-depth-2' width=40px>";
 				} else {
 					cmt += "<img src='/groupboard/displayImage?filename=" + this.u_pic + 
-							"' class='rounded-circle z-depth-2' width=40px>";
+							"' class='rounded-circle z-depth-2' width=40px style='margin-right: 10px;'>";
 				}
-				cmt +=this.userid + "</p>";
-				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 100%'>" + this.gbc_content
-					+ "</textarea>";
-				cmt += "<button type='button' class='btnModify btn btn-outline-warning' data-gbcno=" + this.gbcno +
-					 " style='width: 80px; height:50px; padding: 1% 0'>수정</button>";
-				cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-gbcno=" + this.gbcno + 
-						 " style='display: none; width: 80px; height:50px; padding: 1% 0'>수정완료</button>";
-						 cmt += "<button type='button' class='btnDelete btn btn-outline-danger' data-gbcno=" + this.gbcno +
-						 " style='width: 80px; height:50px; padding: 1% 0'>삭제</button>";
-				cmt += "<hr>";
+				cmt += this.userid + "</p>";
+				
+				if("${loginVo.userid}" == this.userid) {				
+					cmt += "<div class='dropdown' style='float:right'>"
+					cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
+					cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
+					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
+					cmt += "		<button class='dropdown-item btnModify' type='button' data-gbcno=" + this.gbcno +">수정</button>"
+					cmt += "		<button class='dropdown-item btnDelete' type='button' data-gbcno=" + this.gbcno +">삭제</button>"
+					cmt += "</div></div>";
+				}
+				cmt += "</div>"
+				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
+					+ this.gbc_content + "</textarea>";
+				if("${loginVo.userid}" == this.userid) {	
+					cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-gbcno=" + this.gbcno + 
+							 " style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
+				}	
+				cmt += "<hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
 				cmt += "</div>";
-				$("#comment").append(cmt);
+				$("#comment").append(cmt);	
+					
 			})
 		});
 	}
@@ -143,31 +153,33 @@ $(function() {
 	});
 	
 	// 댓글 수정 버튼
-	$("#table_comment_list").on("click", ".btnCommentModify", function() {
-		$("#modal-402154").trigger("click");
-		var tr = $(this).parents("tr");
-		console.log(tr);
-		var gbc_content = tr.find("td").eq(1).text();
-		console.log(gbc_content);
-		$("#modalContent").val(gbc_content);
-		$("#btnModalSave").attr("data-gbcno", $(this).attr("data-gbcno"));
-	});
-	
-	// 모달창 저장 버튼
-	$("#btnModalSave").click(function() {
-		var gbc_content = $("#modalContent").val();
+	$("#comment").on("click", ".btnModify", function() {
 		var gbcno = $(this).attr("data-gbcno");
-		var sData = {
-				"gbc_content" : gbc_content,
-				"gbcno"	  : gbcno
-		};
-		var url = "/groupcomment/updateGroupComment";
-		$.post(url, sData, function(rData) {
-			console.log(rData);
-			if (rData == "true") {
-				getCommentList();
-				$("#btnModalClose").trigger("click");
-			}
+		var btnModifyRun = $(this).parent().parent().parent().parent().find(".btnModifyRun");
+		console.log(btnModifyRun);
+		var comment = btnModifyRun.prev();
+		btnModifyRun.show();
+		console.log(comment);
+		comment.removeAttr("disabled");
+		btnModifyRun.click(function() {
+			var gbcno = btnModifyRun.attr("data-gbcno");
+			console.log(gbcno);
+			var gbc_content = comment.val();
+			console.log(gbc_content);
+			var sData = {
+					"gbcno" : gbcno,
+					"gbc_content" : gbc_content
+			};
+			var url = "/groupcomment/updateGroupComment";
+			$.post(url, sData, function(rData) {
+				console.log(rData);
+				if(rData == "true") {
+					comment.attr("disabled", true);
+					$(".btnModify").show();
+					$(".btnModifyRun").hide();
+					getCommentList();
+				}
+			});
 		});
 	});
 	
@@ -182,41 +194,41 @@ $(function() {
 <%-- ${ count } --%>
 
 <!-- 모달 -->
-<div class="row">
-		<div class="col-md-12">
-			 <a id="modal-402154" href="#modal-container-402154" role="button" class="btn" data-toggle="modal" style="display:none;">Launch demo modal</a>
+<!-- <div class="row"> -->
+<!-- 		<div class="col-md-12"> -->
+<!-- 			 <a id="modal-402154" href="#modal-container-402154" role="button" class="btn" data-toggle="modal" style="display:none;">Launch demo modal</a> -->
 			
-			<div class="modal fade" id="modal-container-402154" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="myModalLabel">
-								댓글 수정
-							</h5> 
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<input type="text" class="form-control" id="modalContent">
-						</div>
-						<div class="modal-footer">
+<!-- 			<div class="modal fade" id="modal-container-402154" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+<!-- 				<div class="modal-dialog" role="document"> -->
+<!-- 					<div class="modal-content"> -->
+<!-- 						<div class="modal-header"> -->
+<!-- 							<h5 class="modal-title" id="myModalLabel"> -->
+<!-- 								댓글 수정 -->
+<!-- 							</h5>  -->
+<!-- 							<button type="button" class="close" data-dismiss="modal"> -->
+<!-- 								<span aria-hidden="true">×</span> -->
+<!-- 							</button> -->
+<!-- 						</div> -->
+<!-- 						<div class="modal-body"> -->
+<!-- 							<input type="text" class="form-control" id="modalContent"> -->
+<!-- 						</div> -->
+<!-- 						<div class="modal-footer"> -->
 							 
-							<button type="button" class="btn btn-primary" id="btnModalSave">
-								변경
-							</button> 
-							<button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">
-								닫기
-							</button>
-						</div>
-					</div>
+<!-- 							<button type="button" class="btn btn-primary" id="btnModalSave"> -->
+<!-- 								변경 -->
+<!-- 							</button>  -->
+<!-- 							<button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal"> -->
+<!-- 								닫기 -->
+<!-- 							</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 					
-				</div>
+<!-- 				</div> -->
 				
-			</div>
+<!-- 			</div> -->
 			
-		</div>
-</div>
+<!-- 		</div> -->
+<!-- </div> -->
 
 
 <div class="container-fluid">
