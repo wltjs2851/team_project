@@ -23,7 +23,38 @@
 <link href="/resources/css/fonts.css" rel="stylesheet" />
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+$(function(){
 	
+	$(".td_free").click(function(){
+		console.log("자유게시판 작성글 클릭");
+		var fno = $(this).attr("data-fno");
+		location.href = "/free/freeContent?fno=" + fno;
+	});
+	
+	$(".td_recipe").click(function(){
+		console.log("식단 게시판 작성글 클릭");
+		var rno = $(this).attr("data-rno");
+		location.href = "/recipe/recipeForm?rno=" + rno;
+	});
+	
+	$(".td_groupBoard").click(function(){
+		console.log("그룹게시판 작성글 클릭");
+		var gbno = $(this).attr("data-gbno");
+		location.href = "/groupboard/groupRead?gbno=" + gbno;
+	});
+	
+	$(".td_routine").click(function(){
+		console.log("루틴게시판 작성글 클릭");
+		var uno = $(this).attr("data-uno");
+		location.href = "/routine/routineContent?uno=" + uno;
+	});
+	
+	$(".td_recommend").click(function(){
+		console.log("루틴게시판 작성글 클릭");
+		var reno = $(this).attr("data-reno");
+		location.href = "/recommend/selectByReno?reno=" + reno;
+	});
+});	
 </script>
 <body>
 	<div class="row">
@@ -49,35 +80,35 @@
 					<c:forEach items="${freeList }" var="free">
 						<tr>
 							<td>${free.fcno }</td>
-							<td class="td_free" data-fcno=${free.fcno }>${free.fc_comment }</td>
+							<td class="td_free" data-fno=${free.fno }>${free.fc_comment }</td>
 							<td>${free.f_regdate }</td>
 						</tr>
 					</c:forEach>
 					<c:forEach items="${recipeList }" var="recipe">
 						<tr>
 							<td>${recipe.rcno }</td>
-							<td class="td_recipe" data-fcno=${recipe.rcno }>${recipe.rc_comment }</td>
+							<td class="td_recipe" data-rno=${recipe.rno }>${recipe.rc_comment }</td>
 							<td>${recipe.rc_regdate }</td>
 						</tr>
 					</c:forEach>
 					<c:forEach items="${groupBoardList }" var="groupBoard">
 						<tr>
 							<td>${groupBoard.gbcno }</td>
-							<td class="td_groupBoard" data-fcno=${groupBoard.gbcno }>${groupBoard.gbc_content }</td>
+							<td class="td_groupBoard" data-gbno=${groupBoard.gbno }>${groupBoard.gbc_content }</td>
 							<td>${groupBoard.gbc_regdate }</td>
 						</tr>
 					</c:forEach>
 					<c:forEach items="${routineList }" var="routine">
 						<tr>
 							<td>${routine.urcno }</td>
-							<td class="td_routine" data-fcno=${routine.urcno }>${routine.urc_comment }</td>
+							<td class="td_routine" data-uno=${routine.uno }>${routine.urc_comment }</td>
 							<td>${routine.u_regdate }</td>
 						</tr>
 					</c:forEach>
 					<c:forEach items="${recommendList }" var="recommend">
 						<tr>
 							<td>${recommend.recno }</td>
-							<td class="td_recommend" data-fcno=${recommend.recno }>${recommend.re_comment }</td>
+							<td class="td_recommend" data-reno=${recommend.reno }>${recommend.re_comment }</td>
 							<td>${recommend.re_regdate }</td>
 						</tr>
 					</c:forEach>
