@@ -29,6 +29,11 @@
 th, td {
 	padding: 7px;
 }
+
+.groupMember{
+	padding: 7px;
+}
+
 </style>
 <!-- PLUGINS CSS STYLE -->
 <link href="/resources/plugins/jquery-ui/jquery-ui.min.css"
@@ -47,6 +52,7 @@ th, td {
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
+		<br>
 			<div class="card">
 				<div class="card-header border-0">
 					<div class="d-flex justify-content-between" style="width: 100%;">
@@ -104,19 +110,11 @@ th, td {
 
 <!-- 			회원 가입한 그룹 내역 -->
 		<div>
-		<c:forEach items="${groupList }" var="list">
-			<c:forEach items="${groupInfo }" var="test">
-				<c:if test="${list.g_name == test.g_name }">${test.userid }</c:if>
-			</c:forEach>
-		</c:forEach>
-		</div>
-		<div>
 <%-- 			${groupList } --%>
-			<br>
 <%-- 			${groupMemberList} --%>
-				${groupList }<br>
+<%-- 				${groupList }<br> --%>
 <%-- 				${groupInfo } --%>
-				
+				<br>
 			<div class="card">
         <div class="card-header">
           <h3 class="card-title">가입한 그룹 목록</h3>
@@ -128,19 +126,19 @@ th, td {
                       <th style="width: 5%">
                           #
                       </th>
-                      <th style="width: 20%">
+                      <th style="width: 15%">
                           그룹 이름
                       </th>
-                      <th style="width: 30%">
+                      <th style="width: 45%">
                           그룹 멤버
                       </th>
                       <th>
                           인원
                       </th>
                       <th style="width: 8%" class="text-center">
-                          Status
+                          지역
                       </th>
-                      <th style="width: 16%">
+                      <th style="width: 6%">
                       </th>
                   </tr>
               </thead>
@@ -152,8 +150,18 @@ th, td {
 										<td><c:forEach items="${groupInfo }" var="test">
 												<c:if test="${list.g_name == test.g_name }">
 <!-- 												<ul class="list-inline"> -->
-												<li class="list-inline-item">${test.userid }<img alt="Avatar"
-													class="table-avatar" src="../../dist/img/avatar.png">
+												<li class="list-inline-item">${test.userid }
+<!-- 												<li class="list-inline-item"> -->
+												<c:choose>
+												<c:when test="${empty test.u_pic }">
+												<img class="rounded-circle groupMember" width="60px;" height="auto" style="align-items: center; overflow: hidden;"
+												src="/resources/images/profile.png" alt="프로필">
+												</c:when>
+												<c:otherwise>
+												<img class="rounded-circle groupMember" width="60px;" height="auto" style="align-items: center; overflow: hidden;"
+												src="/member/displayImage?filename=${test.u_pic}" alt="프로필">
+												</c:otherwise>
+												</c:choose>
 												</li>
 <!-- 											</ul> -->
                							   </c:if>
