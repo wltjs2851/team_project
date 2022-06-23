@@ -10,6 +10,11 @@
 
 <link href='/resources/css/calendar.css' rel='stylesheet' />
 </head>
+
+<%-- ${ groupVo.g_leader } --%>
+<!-- <hr> -->
+<%-- ${ groupJoinMember } --%>
+
 <script>
 	$(function() {
 		var jsonCal = ${jsonCal};
@@ -20,33 +25,31 @@
 		var divToday = $(".dateBoard .divDate[data-today=" + thisToday + "]");
 		var selectDate = thisToday;
 		var that = divToday;
+		divToday.attr("style", "background: aliceblue;");
 		$("#main-day").html(thisToday.substring(0, 4) + "년 " + thisToday.substring(5, 6) + "월 " + thisToday.substring(7) + "일");
-		divToday.attr("style", "background: #FFEBEE;");
 		$(".dateBoard").on("click", ".divDate", function() {
 			that = $(this);
-			var thatSpan = that.find("span").attr("data-check");
 			selectDate = $(this).attr("data-today");
-			var myDate = selectDate.substring(0, 4) + "년 " + selectDate.substring(5, 6) + "월 " + selectDate.substring(7) + "일";
-			var userid = "${groupJoinVo.userid}";
+			var myDate = selectDate.split("_")[0] + "년 " + selectDate.split("_")[1] + "월 " + selectDate.split("_")[2] + "일";
+			var userid = "${loginVo.userid}";
 			$("#main-day").html(myDate);
 			$(".todo-content").html("");
-			$.each(jsonCal, function() {
-				if (this.start1 == that.attr("data-today")) {
+			$.each(jsonCal, function(e) {
+			var thatSpan = that.find("span").eq(e).attr("data-check");
+// 			console.log(thatSpan);
+			console.log(this.gc_content);
+				if (this.gc_date == that.attr("data-today")) {
 					if (this.checklist == 'true') {
 						if (thatSpan == "false") {
-// 							$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
-							$(".todo-content").append("<label>" + this.content + "</label><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.gc_content + "</label><br>");
 						} else {
-// 							$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
-							$(".todo-content").append("<label>" + this.content + "</label><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.gc_content + "</label><br>");
 						}
 					} else {
 						if (thatSpan == "true") {
-// 							$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
-							$(".todo-content").append("<label>" + this.content + "</label><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.gc_content + "</label><br>");
 						} else {
-// 							$(".todo-content").append("<input class='checkList' value='" + this.cno + "' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
-							$(".todo-content").append("<label>" + this.content + "</label><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.gc_content + "</label><br>");
 						}
 					}
 				}
@@ -54,14 +57,26 @@
 		});
 		function getCalendarList() {
 			var divDate = $(".dateBoard .divDate[data-today]");
-			$.each(divDate, function() {
-				var data = this.dataset.today;
-				var thisDiv = this;
-				$.each(jsonCal, function(e) {
-					if (this.start1 == data) {
-// 						$(thisDiv).append("<br><span data-check='" + this.checklist + "' data-cno='" + this.cno + "'>" + this.content + "</span>");
-						$(thisDiv).append("<br><span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: #7CFC00;'>●</span>");
-					}
+			divDate.find("span").remove();
+			divDate.find("br").remove();
+			var url = "/groupcal/groupCalendar";
+			var gno = "${groupVo.gno}";
+			var sData = {
+				'gno' : gno,
+				'gc_date' : selectDate
+			};
+			console.log(sData);
+			$.get(url, sData, function(rData) {
+				console.log(rData);
+				jsonCal = rData;
+				$.each(divDate, function() {
+					var data = this.dataset.today;
+					var thisDiv = this;
+					$.each(jsonCal, function(e) {
+						if (this.gc_date == data) {
+							$(thisDiv).append("<span data-check='" + this.checklist + "' data-gc_todo_cnt='" + this.gc_todo_cnt + "' style='color: orange; margin-right: 10px;'><i class='fa-solid fa-flag'></i></span>");
+						}
+					});
 				});
 			});
 		}
@@ -71,7 +86,7 @@
 			var prevMonth = prevDay.getMonth() + 1;
 			var sData = {
 				'month' : prevYear + '_' + prevMonth,
-				'userid' : '${groupJoinVo.userid}'
+				'userid' : '${loginVo.userid}'
 			};
 			console.log(sData);
 			$.get('/calendar/cal3', sData, function(rdata) {
@@ -88,7 +103,7 @@
 			var nextMonth = nextDay.getMonth() + 1;
 			var sData = {
 				'month' : nextYear + '_' + nextMonth,
-				'userid' : '${groupJoinVo.userid}'
+				'userid' : '${loginVo.userid}'
 			};
 			console.log(sData);
 			$.get('/calendar/cal3', sData, function(rdata) {
@@ -101,39 +116,60 @@
 		getCalendarList();
 		$("#input-data").click(function() {
 			var insertContent = $("#input-box").val();
-			var url = "/calendar/save";
-			var userid = "${groupJoinVo.userid}";
+			var url = "/groupcal/insertGroupCal";
+			var gno = "${groupVo.gno}";
 			var sData = {
-				'userid' : userid,
-				'content' : insertContent,
-				'start1' : selectDate
+					'gno' : gno,
+				'gc_content' : insertContent,
+				'gc_date' : selectDate
 			};
 			if (insertContent != null && insertContent != "") {
 				$.post(url, sData, function(rData) {
 					console.log(rData);
 					if(rData == "true") {
-						that.append("<br><span>" + insertContent + "</span>");
-// 						that.append("<br><span style='color: #7CFC00;'>●</span>");
-// 						$(".todo-content").append("<br><input class='checkList' data-today='" + selectDate + "' type='checkbox'><label>" + insertContent + "</label>");
-						$(".todo-content").append("<br><label>" + insertContent + "</label>");
+						$("#todo-content").append("<span class='checkList' data-today='" + selectDate + "' type='checkbox'><label>" + insertContent + "</label>");
 						$("#input-box").val("");
 					} else if (rData == "false") {
-						alert("이러다 다~ 죽어")
+						alert("이러다 다~ 죽어");
 					}
+					getCalendarList();
 				});
 			}
 		});
+		$("#update-check").click(function() {
+			var url = "/calendar/update";
+			var userid = "${loginVo.userid}";
+			for (var i = 0; i < $(".todo-content").find("input").length; i++) {
+				var insertContent = $(".checkList").eq(i).next("label").text();
+				var checklist = $(".checkList").eq(i).prop("checked");
+				var sData = {
+					'userid' : userid,
+					'gc_content' : insertContent,
+					'gc_date' : selectDate,
+					'checklist' : checklist
+				};
+				if (insertContent != null && insertContent != "") {
+					$.post(url, sData, function(rData) {
+						if(rData == "true"){
+							$("#input-box").val("");
+							// 클릭했던 날짜부분의 check->true
+							that.children("span").attr("data-check", "true");
+						} else if (rData == "false") {
+							$("#input-box").val("");
+							that.children("span").attr("data-check", "false");
+						}
+					});
+				}
+			}
+			getCalendarList();
+		});
 	});
 </script>
-
-${ groupVo }
-<%-- ${ groupJoinMember } --%>
-
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<div class='rap left'>
 					<div class="header">
 						<div id="prevMonth">
@@ -157,28 +193,28 @@ ${ groupVo }
 					<div class="grid dateBoard"></div>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3 colRight">
 				<div class="right">
 					<div class="content-left">
 				        <div class="main-wrap">
 				          <div id="main-day" class="main-day"></div>
 				        </div>
+				        
+			        
 				        <div class="todo-wrap">
-				        
-				        <c:if test="${ groupVo.g_leader == loginVo.userid }">
-				        
-				          <div class="todo-title">그룹 일정</div>
-				          <div class="todo-content"></div>
-				          <div class="input-wrap">
-				            <input type="text" placeholder="please write here!!" id="input-box" class="input-box form-control">
-				            <button type="button" id="input-data" class="btn btn-success"><span>INPUT</span></button>
-<!-- 				            <button type="button" id="update-check" class="btn btn-warning"><span>CHECK</span></button> -->
-				            <div id="input-list" class="input-list"></div>
-				          </div>
-				          
+				          <div class="todo-title">오늘의 일정</div>
+				          <div class="todo-content" id="todo-content"></div>
+				          <c:if test="${ loginVo.userid == groupVo.g_leader }">
+					          <div class="input-wrap">
+					            <input type="text" placeholder="please write here!!" id="input-box" class="input-box form-control">
+					            <button type="button" id="input-data" class="btn btn-outline-primary"><span>INPUT</span></button>
+	<!-- 				            <button type="button" id="update-check" class="btn btn-outline-warning"><span>CHECK</span></button> -->
+					            <div id="input-list" class="input-list"></div>
+					          </div>
 				          </c:if>
-				          
 				        </div>
+			        
+				        
       				</div>
 				</div>
 			</div>

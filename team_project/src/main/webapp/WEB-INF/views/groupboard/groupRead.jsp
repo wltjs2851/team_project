@@ -16,13 +16,15 @@ $(function() {
 		console.log("click");
 		var count = $(".count").val();
 		console.log("count: ", count);
-		var gbc_content = $("#c_content").val();
+		var gbc_content = $("#c_content").val(); // c_content: 댓글 입력하는 곳
 		var userid = $("#c_userid").val();
 		var gbno = "${groupBoardVo.gbno}";
+		var u_pic = "${loginVo.u_pic}";
 		var sData = {
 				"gbc_content" : gbc_content,
 				"userid" : userid,
-				"gbno" : gbno
+				"gbno" : gbno,
+				"u_pic" : u_pic
 		}
 		console.log("sData: ", sData);
 		
@@ -30,6 +32,7 @@ $(function() {
 		$.post(url, sData, function(rData) {
 			console.log(rData);
 			if(rData == "true") {
+				$("#c_content").val("");
 				$(".count").text("${groupBoardVo.gb_comment + 1}");
 // 				$(".count").val(text(${count + 1}));
 				getCommentList();
@@ -39,25 +42,44 @@ $(function() {
 	
 	function getCommentList() {
 		var gbno = "${groupBoardVo.gbno}";
-		console.log(gbno);
 		var url = "/groupcomment/groupCommentList/" + gbno;
 		$.get(url, function(rData) {
-			console.log(rData); 
-			$("#table_comment_list tr:gt(0)").remove();
-			
+			console.log(rData);
+			$("#comment > div").empty();
 			$.each(rData, function() {
-				var tr = $("#table_clone tr").clone();
-				var tds = tr.find("td");
+				console.log("u_pic: ", this.u_pic);
+				var cmt = "";
+				cmt += "<div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
+				cmt += "<div class='row'><p style='font-size: large; font-weight: bold;'>";
+				if(this.u_pic == null) {
+					cmt += "<img src='/resources/images/board/personDefault.png' class='rounded-circle z-depth-2' width=40px>";
+				} else {
+					cmt += "<img src='/groupboard/displayImage?filename=" + this.u_pic + 
+							"' class='rounded-circle z-depth-2' width=40px style='margin-right: 10px;'>";
+				}
+				cmt += this.userid + "</p>";
 				
-				tds.eq(0).text(this.gbcno);
-				tds.eq(1).text(this.gbc_content);
-				tds.eq(2).text(this.userid);
-				tds.eq(3).text(this.gbc_regdate);
-				tds.find(".btnCommentDelete").attr("data-gbcno", this.gbcno);
-				tds.find(".btnCommentModify").attr("data-gbcno", this.gbcno);
-				
-				$("#table_comment_list").append(tr);
-			});
+				if("${loginVo.userid}" == this.userid) {				
+					cmt += "<div class='dropdown' style='float:right'>"
+					cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
+					cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
+					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
+					cmt += "		<button class='dropdown-item btnModify' type='button' data-gbcno=" + this.gbcno +">수정</button>"
+					cmt += "		<button class='dropdown-item btnDelete' type='button' data-gbcno=" + this.gbcno +">삭제</button>"
+					cmt += "</div></div>";
+				}
+				cmt += "</div>"
+				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
+					+ this.gbc_content + "</textarea>";
+				if("${loginVo.userid}" == this.userid) {	
+					cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-gbcno=" + this.gbcno + 
+							 " style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
+				}	
+				cmt += "<hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
+				cmt += "</div>";
+				$("#comment").append(cmt);	
+					
+			})
 		});
 	}
 	
@@ -110,7 +132,7 @@ $(function() {
 	});
 	
 	// 댓글 삭제
-	$("#table_comment_list").on("click", ".btnCommentDelete", function() {
+	$("#comment").on("click", ".btnDelete", function() {
 		console.log("댓글 삭제 버튼");
 		var gbcno = $(this).attr("data-gbcno");
 		var url = "/groupcomment/deleteGroupComment/" + gbcno;
@@ -131,31 +153,33 @@ $(function() {
 	});
 	
 	// 댓글 수정 버튼
-	$("#table_comment_list").on("click", ".btnCommentModify", function() {
-		$("#modal-402154").trigger("click");
-		var tr = $(this).parents("tr");
-		console.log(tr);
-		var gbc_content = tr.find("td").eq(1).text();
-		console.log(gbc_content);
-		$("#modalContent").val(gbc_content);
-		$("#btnModalSave").attr("data-gbcno", $(this).attr("data-gbcno"));
-	});
-	
-	// 모달창 저장 버튼
-	$("#btnModalSave").click(function() {
-		var gbc_content = $("#modalContent").val();
+	$("#comment").on("click", ".btnModify", function() {
 		var gbcno = $(this).attr("data-gbcno");
-		var sData = {
-				"gbc_content" : gbc_content,
-				"gbcno"	  : gbcno
-		};
-		var url = "/groupcomment/updateGroupComment";
-		$.post(url, sData, function(rData) {
-			console.log(rData);
-			if (rData == "true") {
-				getCommentList();
-				$("#btnModalClose").trigger("click");
-			}
+		var btnModifyRun = $(this).parent().parent().parent().parent().find(".btnModifyRun");
+		console.log(btnModifyRun);
+		var comment = btnModifyRun.prev();
+		btnModifyRun.show();
+		console.log(comment);
+		comment.removeAttr("disabled");
+		btnModifyRun.click(function() {
+			var gbcno = btnModifyRun.attr("data-gbcno");
+			console.log(gbcno);
+			var gbc_content = comment.val();
+			console.log(gbc_content);
+			var sData = {
+					"gbcno" : gbcno,
+					"gbc_content" : gbc_content
+			};
+			var url = "/groupcomment/updateGroupComment";
+			$.post(url, sData, function(rData) {
+				console.log(rData);
+				if(rData == "true") {
+					comment.attr("disabled", true);
+					$(".btnModify").show();
+					$(".btnModifyRun").hide();
+					getCommentList();
+				}
+			});
 		});
 	});
 	
@@ -169,49 +193,16 @@ $(function() {
 <%-- ${ heart } --%>
 <%-- ${ count } --%>
 
-<!-- 모달 -->
-<div class="row">
-		<div class="col-md-12">
-			 <a id="modal-402154" href="#modal-container-402154" role="button" class="btn" data-toggle="modal" style="display:none;">Launch demo modal</a>
-			
-			<div class="modal fade" id="modal-container-402154" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="myModalLabel">
-								댓글 수정
-							</h5> 
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<input type="text" class="form-control" id="modalContent">
-						</div>
-						<div class="modal-footer">
-							 
-							<button type="button" class="btn btn-primary" id="btnModalSave">
-								변경
-							</button> 
-							<button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">
-								닫기
-							</button>
-						</div>
-					</div>
-					
-				</div>
-				
-			</div>
-			
-		</div>
-</div>
 
 
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-9">
+				
+				<div class="col-md-2"></div>
+			
+				<div class="col-md-8">
 					<h2 style="margin: 20px;">
 						${ groupBoardVo.gb_title }
 					</h2>
@@ -240,13 +231,15 @@ $(function() {
 					<span id="like" style="font-size: 30px;">${ groupBoardVo.gb_like }</span>
 				
 				<!-- 수정, 삭제 버튼 -->
-				<c:if test="${ loginVo.userid == groupBoardVo.userid }">
-				<table>
-					<tr>
-						<td><a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn-success">수정</a></td>
-						<td><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${groupBoardVo.gno}" class="btn btn-sm btn-danger">삭제</a></td>
-					</tr>
-				</table>
+				<c:if test="${ loginVo.userid == groupVo.g_leader }">
+					<c:if test="${ loginVo.userid == groupBoardVo.userid }">
+					<table>
+						<tr>
+							<td><a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn btn-outline-warning">수정</a></td>
+							<td><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${groupBoardVo.gno}" class="btn btn-sm btn-outline-danger">삭제</a></td>
+						</tr>
+					</table>
+					</c:if>
 				</c:if>
 				
 				<!-- 댓글 -->
@@ -259,47 +252,22 @@ $(function() {
 						<input type="hidden" value="${ loginVo.userid }" id="c_userid" class="form-control">
 					</div>
 					<div>
-						<button type="button" id="btnCommentInsert" class="btn btn-sm btn-primary">완료</button>
+						<button type="button" id="btnCommentInsert" class="btn btn-sm btn-outline-primary">완료</button>
+					</div>
+				
+				<div class="row" style="margin-top: 20px; margin-left: 20px;" id="comment">
+					<div style="display: none;">
+						<button type="button" class="btn btn-sm btn-outline-warning btnCommentModify"
+							style="width: 10%; height:50px; padding: 1% 0">수정</button>
+						<button type="submit" class="btn btn-sm btn-outline-success btnCommentModifyRun" 
+							style="display: none; width: 10%; height:50px; padding: 1% 0">수정완료</button>
 					</div>
 				</div>
 				
-				<div class="row" style="margin-top:30px;">
-					<div class="col-md-12">
-						<table style="display:none;" id="table_clone">
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								
-								<c:if test="${ loginVo.userid == groupBoardVo.userid }">
-									<td>
-										<button type="button"
-											class="btn btn-sm btn-warning btnCommentModify">수정</button>
-									</td>
-									<td>
-										<button type="button" 
-											class="btn btn-sm btn-danger btnCommentDelete">삭제</button>
-									</td>
-								</c:if>
-							</tr>
-						</table>
-						<table class="table" id="table_comment_list">
-							<tr>
-								<td>#</td>
-								<td>내용</td>
-								<td>작성자</td>
-								<td>날짜</td>
-								<td>수정</td>
-								<td>삭제</td>
-							</tr>
-						</table>
-					</div>
 				</div>
 				
-				
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 				
 <!-- 				<aside class="main-sidebar sidebar-dark-primary elevation-4"> -->
 					<div class="list-group">
@@ -332,25 +300,6 @@ $(function() {
 <!-- 							</li> -->
 						</ol>
 					</nav>
-<!-- 					<div class="row"> -->
-<!-- 						<div> -->
-<!-- 							<div class="card"> -->
-<!-- 								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" /> -->
-<!-- 								<div class="card-block"> -->
-<!-- 									<h5 class="card-title"> -->
-<!-- 										Card title -->
-<!-- 									</h5> -->
-<!-- 									<p class="card-text"> -->
-<!-- 										그룹원 -->
-<!-- 									</p> -->
-<!-- 									<p> -->
-<!-- 										<a class="btn btn-primary" href="#">쪽지보내기</a> -->
-<!-- 									</p>  -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					</aside> -->
 				
 				</div>
 			</div>

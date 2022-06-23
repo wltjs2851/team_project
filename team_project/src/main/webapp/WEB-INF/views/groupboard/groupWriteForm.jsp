@@ -50,7 +50,7 @@ $(function() {
 <link rel="stylesheet" href="/resources/css/summernote/summernote-lite.css">
 
 <%-- ${ loginVo.gno } --%>
-${ loginVo }
+<%-- ${ loginVo } --%>
 <%-- ${ groupVo } --%>
 <div class="container-fluid">
 	<div class="row">

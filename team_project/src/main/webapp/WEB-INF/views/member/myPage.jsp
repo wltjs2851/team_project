@@ -18,8 +18,26 @@ $(function(){
 		var option = "width = 650px, height=800px, top=300px, left=300px, scrollbars=yes";
 		window.open(url, "그룹 채팅방 입장", option);
 	});
+	$(".like_tr").click(function() {
+		var post = $("#tab").find("a.active").data("post");
+		var no = $(this).find("td").eq(0).html();
+		if (post == "fno") {
+			url = "/free/freeContent?" + post + "=" + no;
+		} else if (post == "gbno") {
+			var gno = $(this).prev().val();
+			url = "/groupboard/groupRead?" + post + "=" + no + "&gno=" + gno;
+		} else if (post == "rno") {
+			url = "/recipe/recipeForm?" + post + "=" + no;
+		} else if (post == "uno") {
+			url = "/routine/routineContent?" + post + "=" + no;
+		} else if (post == "reno") {
+			url = "/recommend/selectByReno?" + post + "=" + no;
+		}
+		location.href = url;
+	});
 });	
 </script>
+<hr>
 <div class="row">
 	<div class="col-md-2">
 		<ul class="nav flex-column nav-pills">
@@ -30,19 +48,16 @@ $(function(){
 				<a class="nav-link" href="modifyForm">회원정보 수정</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="myPoint">포인트 내역</a>
+				<a class="nav-link" href="/member/myActivity?type=write">활동내용</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#">나의 그룹</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">나의 일정</a>
+				<a class="nav-link" href="/calendar/cal">나의 일정</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="deleteForm">회원탈퇴</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" id="chatRoom" style="cursor: pointer;">채팅방</a>
 			</li>
 		</ul>
 	</div>
@@ -95,6 +110,7 @@ $(function(){
 				<td>${loginVo.regdate}</td>
 			</tr>
 		</table>
+		<hr>
 	</div>
 	<div class="col-md-2"></div>
 </div>

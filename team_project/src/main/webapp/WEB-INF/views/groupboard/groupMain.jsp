@@ -179,7 +179,7 @@ $(function() {
 			<c:forEach items="${ noticeList }" var="groupBoardVo" varStatus="status" begin="0" end="2">
 				<h3 style="background-color: powderblue;">
 				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
-					<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title }</a>
+					<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
 				</c:if>
 				</h3>
 			</c:forEach>
@@ -278,7 +278,7 @@ $(function() {
 									</c:if>
 								>작성자</option>
 							</select>
-							<a href="/groupboard/groupMain/${ groupVo.gno }" class="btn-primary" style="width: 50px; height:50px; padding: 2% 0">검색 초기화</a>
+							<a href="/groupboard/groupMain/${ groupVo.gno }" class="btn-outline-primary" style="width: 50px; height:50px; padding: 2% 0">검색 초기화</a>
 							</div>
 							
 							<div class="widget search p-0">
