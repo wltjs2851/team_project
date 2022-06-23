@@ -13,6 +13,7 @@ import com.kh.team.service.FreeCommentService;
 import com.kh.team.service.FreeService;
 import com.kh.team.service.GroupBoardCommentService;
 import com.kh.team.service.GroupBoardService;
+import com.kh.team.service.GroupService;
 import com.kh.team.service.MemberService;
 import com.kh.team.service.RecipeCommentService;
 import com.kh.team.service.RecipeService;
@@ -24,6 +25,7 @@ import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.FreeVo;
 import com.kh.team.vo.GroupBoardCommentVo;
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
@@ -64,6 +66,9 @@ public class AdminController {
 	@Autowired
 	private RecommendCommentService recommendCommentService;
 	
+	@Autowired
+	private GroupService groupService;
+	
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public String adminMain(Model model) {
 		
@@ -90,6 +95,10 @@ public class AdminController {
 		
 		List<AdminVo> adminList = adminService.adminList(userid);
 		model.addAttribute("adminList", adminList);
+		
+//		가입한 그룹 정보
+		GroupVo groupVo = groupService.getGroupByUserId(userid);
+		model.addAttribute("groupVo", groupVo);
 		
 		return "/admin/adminMemberInfo";
 	}
@@ -137,5 +146,7 @@ public class AdminController {
 		
 		return "/admin/adminMemberComment";
 	}
+	
+	
 	
 }
