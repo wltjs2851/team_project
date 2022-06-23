@@ -1,6 +1,7 @@
 package com.kh.team.controller;
 
 import java.io.FileInputStream;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -19,9 +20,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.EmailService;
 import com.kh.team.service.MemberService;
+import com.kh.team.service.MyLikeContentService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.EmailVo;
+import com.kh.team.vo.FreeVo;
+import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.RecipeVo;
+import com.kh.team.vo.RecommendVo;
+import com.kh.team.vo.RoutineVo;
 
 @Controller
 @RequestMapping("/member")
@@ -32,6 +39,9 @@ public class MemberController {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private MyLikeContentService MyLikeContentService;
 
 	// 로그인 폼으로 이동
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
@@ -107,14 +117,26 @@ public class MemberController {
 	
 	// 마이페이지로 이동
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
-	public String myPage() {
+	public String myPage(Model model) {
 		return "/member/myPage";
 	}
 	
-	// 마이 포인트로 이동
-	@RequestMapping(value = "/myPoint", method = RequestMethod.GET)
-	public String myPoint() {
-		return "/member/myPoint";
+	// 나의 활동으로 이동
+	@RequestMapping(value = "/myActivity", method = RequestMethod.GET)
+	public String myActivity(HttpSession session, Model model) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		String userid = loginVo.getUserid();
+		List<FreeVo> freeLike = MyLikeContentService.getFreeByLike(userid);
+		List<GroupBoardVo> groupBoardLike = MyLikeContentService.getGroupBoardByLike(userid);
+		List<RecipeVo> recipeLike = MyLikeContentService.getRecipeByLike(userid);
+		List<RoutineVo> routineLike = MyLikeContentService.getRoutineByLike(userid);
+		List<RecommendVo> recommendLike = MyLikeContentService.getRecommendByLike(userid);
+		model.addAttribute("freeLike", freeLike);
+		model.addAttribute("groupBoardLike", groupBoardLike);
+		model.addAttribute("recipeLike", recipeLike);
+		model.addAttribute("routineLike", routineLike);
+		model.addAttribute("recommendLike", recommendLike);
+		return "/member/myActivity";
 	}
 	
 	// 프로필사진 출력

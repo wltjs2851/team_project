@@ -65,10 +65,10 @@ $(function() {
 				<a class="nav-link">메뉴</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/member/modifyForm" style="background-color: #fd9a9a">회원정보 수정</a>
+				<a class="nav-link" style="background-color: #fd9a9a">회원정보 수정</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/member/myPoint">포인트 내역</a>
+				<a class="nav-link" href="/member/myActivity">활동내역</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#">나의 그룹</a>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.team.mappers.myLikeContent">
+
+	<select id="getFreeByLike" resultType="FreeVo">
+		select * from tbl_free
+		where userid = (select distinct userid from tbl_free_like
+						where userid = #{userid})
+	</select>
+	
+	<select id="getGroupBoardByLike" resultType="GroupBoardVo">
+		select * from tbl_group_board
+		where userid = (select distinct userid from tbl_group_board_like
+						where userid = #{userid})
+	</select>
+	
+	<select id="getRecipeByLike" resultType="RecipeVo">
+		select * from tbl_recipe
+		where userid = (select distinct userid from tbl_recipe_like
+						where userid = #{userid})
+	</select>
+	
+	<select id="getRoutineByLike" resultType="RoutineVo">
+		select * from tbl_userroutine
+		where userid = (select distinct userid from tbl_routine_like
+						where userid = #{userid})
+	</select>
+	
+	<select id="getRecommendByLike" resultType="RecommendVo">
+		select * from tbl_recommend
+		where userid = (select distinct userid from tbl_recommend_like
+						where userid = #{userid})
+	</select>
+	
+</mapper>
