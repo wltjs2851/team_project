@@ -31,24 +31,25 @@ ${ groupJoinMember }
 			that = $(this);
 			selectDate = $(this).attr("data-today");
 			var myDate = selectDate.substring(0, 4) + "년 " + selectDate.substring(5, 6) + "월 " + selectDate.substring(7) + "일";
-			var userid = "${groupJoinVo.userid}";
+			var userid = "${loginVo.userid}";
 			$("#main-day").html(myDate);
 			$(".todo-content").html("");
 			$.each(jsonCal, function(e) {
 			var thatSpan = that.find("span").eq(e).attr("data-check");
-			console.log(thatSpan);
-				if (this.start1 == that.attr("data-today")) {
+// 			console.log(thatSpan);
+			console.log(this.gc_content);
+				if (this.gc_date == that.attr("data-today")) {
 					if (this.checklist == 'true') {
 						if (thatSpan == "false") {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.gc_content + "</label><br>");
 						} else {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.gc_content + "</label><br>");
 						}
 					} else {
 						if (thatSpan == "true") {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.gc_content + "</label><br>");
 						} else {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.gc_content + "</label><br>");
 						}
 					}
 				}
@@ -67,16 +68,16 @@ ${ groupJoinMember }
 			console.log(sData);
 			$.get(url, sData, function(rData) {
 				console.log(rData);
-// 				jsonCal = rData;
-// 				$.each(divDate, function() {
-// 					var data = this.dataset.today;
-// 					var thisDiv = this;
-// 					$.each(jsonCal, function(e) {
-// 						if (this.start1 == data) {
-// 							$(thisDiv).append("<span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: orange; margin-right: 10px;'><i class='fa-solid fa-flag'></i></span>");
-// 						}
-// 					});
-// 				});
+				jsonCal = rData;
+				$.each(divDate, function() {
+					var data = this.dataset.today;
+					var thisDiv = this;
+					$.each(jsonCal, function(e) {
+						if (this.gc_date == data) {
+							$(thisDiv).append("<span data-check='" + this.checklist + "' data-gc_todo_cnt='" + this.gc_todo_cnt + "' style='color: orange; margin-right: 10px;'><i class='fa-solid fa-flag'></i></span>");
+						}
+					});
+				});
 			});
 		}
 		$("#prevMonth").click(function() {
@@ -85,7 +86,7 @@ ${ groupJoinMember }
 			var prevMonth = prevDay.getMonth() + 1;
 			var sData = {
 				'month' : prevYear + '_' + prevMonth,
-				'userid' : '${groupJoinVo.userid}'
+				'userid' : '${loginVo.userid}'
 			};
 			console.log(sData);
 			$.get('/calendar/cal3', sData, function(rdata) {
@@ -102,7 +103,7 @@ ${ groupJoinMember }
 			var nextMonth = nextDay.getMonth() + 1;
 			var sData = {
 				'month' : nextYear + '_' + nextMonth,
-				'userid' : '${groupJoinVo.userid}'
+				'userid' : '${loginVo.userid}'
 			};
 			console.log(sData);
 			$.get('/calendar/cal3', sData, function(rdata) {
@@ -137,14 +138,14 @@ ${ groupJoinMember }
 		});
 		$("#update-check").click(function() {
 			var url = "/calendar/update";
-			var userid = "${groupJoinVo.userid}";
+			var userid = "${loginVo.userid}";
 			for (var i = 0; i < $(".todo-content").find("input").length; i++) {
 				var insertContent = $(".checkList").eq(i).next("label").text();
 				var checklist = $(".checkList").eq(i).prop("checked");
 				var sData = {
 					'userid' : userid,
-					'content' : insertContent,
-					'start1' : selectDate,
+					'gc_content' : insertContent,
+					'gc_date' : selectDate,
 					'checklist' : checklist
 				};
 				if (insertContent != null && insertContent != "") {
@@ -168,7 +169,7 @@ ${ groupJoinMember }
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<div class='rap left'>
 					<div class="header">
 						<div id="prevMonth">
@@ -192,7 +193,7 @@ ${ groupJoinMember }
 					<div class="grid dateBoard"></div>
 				</div>
 			</div>
-			<div class="col-md-4 colRight">
+			<div class="col-md-3 colRight">
 				<div class="right">
 					<div class="content-left">
 				        <div class="main-wrap">
@@ -206,7 +207,7 @@ ${ groupJoinMember }
 				          <div class="input-wrap">
 				            <input type="text" placeholder="please write here!!" id="input-box" class="input-box form-control">
 				            <button type="button" id="input-data" class="btn btn-outline-primary"><span>INPUT</span></button>
-				            <button type="button" id="update-check" class="btn btn-outline-warning"><span>CHECK</span></button>
+<!-- 				            <button type="button" id="update-check" class="btn btn-outline-warning"><span>CHECK</span></button> -->
 				            <div id="input-list" class="input-list"></div>
 				          </div>
 				        </div>
