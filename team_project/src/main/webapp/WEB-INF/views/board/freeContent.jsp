@@ -57,23 +57,31 @@ $(function() {
 				console.log(this);
 				var cmt = "";
 				cmt += "<div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
-				cmt += "<p style='font-size: large; font-weight: bold;'>";
+				cmt += "<div class='row'><p style='font-size: large; font-weight: bold;'>";
 				if(this.u_pic == null) {
 					cmt += "<img src='/resources/images/board/personDefault.png' class='rounded-circle z-depth-2' width=40px>";
 				} else {
 					cmt += "<img src='/free/displayImage?filename=" + this.u_pic + 
-							"' class='rounded-circle z-depth-2' width=40px>";
+							"' class='rounded-circle z-depth-2' width=40px style='margin-right: 10px;'>";
 				}
 				cmt +=this.userid + "</p>";
-				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 100%'>"
+				if("${loginVo.userid}" == this.userid) {				
+					cmt += "<div class='dropdown' style='float:right'>"
+					cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
+					cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
+					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
+					cmt += "		<button class='dropdown-item btnModify' type='button' data-fcno=" + this.fcno +">수정</button>"
+					cmt += "		<button class='dropdown-item btnDelete' type='button' data-fcno=" + this.fcno +">삭제</button>"
+					cmt += "</div></div>";
+				}
+				cmt += "</div>"
+				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
 							+ this.fc_comment + "</textarea>";
-				cmt += "<button type='button' class='btnModify btn btn-outline-warning' data-fcno=" + this.fcno +
-							" style='width: 80px; height:50px; padding: 1% 0'>수정</button>";
-				cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-fcno=" + this.fcno + 
-						 " style='display: none; width: 80px; height:50px; padding: 1% 0'>수정완료</button>";
-						 cmt += "<button type='button' class='btnDelete btn btn-outline-danger' data-fcno=" + this.fcno +
-						 " style='width: 80px; height:50px; padding: 1% 0'>삭제</button>";
-				cmt += "<hr>";
+				if("${loginVo.userid}" == this.userid) {	
+					cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-fcno=" + this.fcno + 
+							 " style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
+				}
+				cmt += "<hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
 				cmt += "</div>";
 				$("#comment").append(cmt);
 			})
@@ -82,10 +90,9 @@ $(function() {
 	
 	$("#comment").on("click", ".btnModify", function() {
 		var fcno = $(this).attr("data-fcno");
-		var btnModifyRun = $(this).next();
-		console.log(fcno);
-		var comment = $(this).prev();
-		$(this).hide();
+		var btnModifyRun = $(this).parent().parent().parent().parent().find(".btnModifyRun");
+		console.log(btnModifyRun);
+		var comment = btnModifyRun.prev();
 		btnModifyRun.show();
 		console.log(comment);
 		comment.removeAttr("disabled");
@@ -111,6 +118,7 @@ $(function() {
 	
 	$("#comment").on("click", ".btnDelete", function() {
 		var fcno = $(this).attr("data-fcno");
+		console.log(fcno);
 		var url = "/free/removeFreeComment/" + fcno;
 		$.get(url, function(receivedData) {
 			console.log(receivedData);
@@ -198,10 +206,13 @@ $(function() {
 						style="width: 100%; resize: none;" placeholder="댓글 입력"></textarea>
 					<button type="button" id="btnComment" class="btn btn-primary"
 						style="width: 80px; height: 50px; padding: 1% 0; float: right; margin-top: 5px;">댓글달기</button>
+					<br>
+					<br>
+					<br>
 				</div>
 			</div>
 
-			<div class="row" style="margin-top: 20px; margin-left: 3px;" id="comment">
+			<div class="row" style="margin-top: 20px; margin-left: 22px" id="comment">
 			</div>
 			<br>
 			<br>

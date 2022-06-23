@@ -11,7 +11,7 @@ $(function(){
 		console.log("회원상세조회");	
 		var userid = $(this).attr("data-id");
 		console.log("userid:", userid);
-		var url = "/admin/selectMember?userid=" + userid;
+		var url = "/admin/info?userid=" + userid;
 		var option = "width = 800px, height=800px, top=300px, left=300px, scrollbars=yes";
 		window.open(url, "그룹 채팅방 입장", option);
 	});

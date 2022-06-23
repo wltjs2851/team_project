@@ -13,6 +13,7 @@ import com.kh.team.service.FreeCommentService;
 import com.kh.team.service.FreeService;
 import com.kh.team.service.GroupBoardCommentService;
 import com.kh.team.service.GroupBoardService;
+import com.kh.team.service.GroupService;
 import com.kh.team.service.MemberService;
 import com.kh.team.service.RecipeCommentService;
 import com.kh.team.service.RecipeService;
@@ -24,6 +25,7 @@ import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.FreeVo;
 import com.kh.team.vo.GroupBoardCommentVo;
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
@@ -64,6 +66,9 @@ public class AdminController {
 	@Autowired
 	private RecommendCommentService recommendCommentService;
 	
+	@Autowired
+	private GroupService groupService;
+	
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public String adminMain(Model model) {
 		
@@ -81,12 +86,29 @@ public class AdminController {
 		return "/admin/adminMember";
 	}
 	
-	@RequestMapping(value="/selectMember", method = RequestMethod.GET)
+	// 관리자가 본 회원 정보
+	@RequestMapping(value="/info", method = RequestMethod.GET)
 	public String adminSelectMember(String userid, Model model) {
+		System.out.println("adminSelectMember:" + userid);
+		MemberVo memberVo = memberSerive.memberByUserid(userid);
+		model.addAttribute("memberVo", memberVo);
+		
+		List<AdminVo> adminList = adminService.adminList(userid);
+		model.addAttribute("adminList", adminList);
+		
+//		가입한 그룹 정보
+		GroupVo groupVo = groupService.getGroupByUserId(userid);
+		model.addAttribute("groupVo", groupVo);
+		
+		return "/admin/adminMemberInfo";
+	}
+	
+	// 회원이 작성한 글 
+	@RequestMapping(value="/board", method = RequestMethod.GET)
+	public String adminMemberBoard(String userid, Model model) {
 		System.out.println("userid:" + userid);
 //		List<AdminVo> adminList = adminService.adminList(userid);
 //		model.addAttribute("adminList", adminList);
-		MemberVo memberVo = memberSerive.memberByUserid(userid);
 		
 		List<FreeVo> freeList = freeService.adminFreeList(userid);
 		List<RecipeVo> recipeList = recipeService.adminRecipeList(userid);
@@ -98,9 +120,8 @@ public class AdminController {
 		model.addAttribute("recipeList", recipeList);
 		model.addAttribute("groupBoardList", groupBoardList);
 		model.addAttribute("routineList", routineList);
-		model.addAttribute("memberVo", memberVo);
 		
-		return "/admin/adminSelectMember";
+		return "/admin/adminMemberBoard";
 	}
 	
 	// 회원이 작성한 댓글
@@ -125,5 +146,7 @@ public class AdminController {
 		
 		return "/admin/adminMemberComment";
 	}
+	
+	
 	
 }
