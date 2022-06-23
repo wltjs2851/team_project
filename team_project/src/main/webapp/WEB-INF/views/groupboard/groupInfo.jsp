@@ -29,7 +29,7 @@ $(function() {
 		$.get(url,function(rData) {
 			console.log(rData);
 			if (rData == "true") {
-				alert("그룹원 삭제 성공");
+				alert("그룹원 강퇴 성공");
 				that.parent().fadeOut("slow");
 			}
 		});

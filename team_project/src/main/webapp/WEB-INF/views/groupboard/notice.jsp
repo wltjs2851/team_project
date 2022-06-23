@@ -39,6 +39,7 @@ $(function() {
 <%-- ${ groupVo } --%>
 <%-- ${ groupVo.gno } --%>
 <%-- ${ noticeList.gno } --%>
+<%-- ${ loginVo } --%>
 
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
@@ -136,9 +137,12 @@ $(function() {
 							<li class="breadcrumb-item">
 								<a href="/groupboard/activityInfo/${ groupVo.gno }">활동 정보</a>
 							</li>
-							<li class="breadcrumb-item">
-								<a href="#" id="leaveGroup">그룹 탈퇴</a>
-							</li>
+							
+							<c:if test="${ groupVo.g_leader == loginVo.userid }">
+								<li id="leaveModal" class="breadcrumb-item" style="display:none;">
+									<a href="#" id="leaveGroup">그룹 탈퇴</a>
+								</li>
+							</c:if>
 						</ol>
 					</nav>
 				
