@@ -15,7 +15,7 @@ $(function() {
 		frmPaging.find("input[name=searchType]").val(searchType);
 		frmPaging.find("input[name=keyword]").val(keyword);
 		frmPaging.find("input[name=page]").val(1);
-		frmPaging.attr("action", "/free/addFreeForm");
+		frmPaging.attr("action", "/free/freeList");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -74,46 +74,54 @@ $(function() {
 				<a class="btn btn-primary" href="/free/addFreeForm" 
 					style='width: 80px; height:50px; padding: 1% 0'>글쓰기</a>
 				<div class="row" style="float: right;">
-					<select id="searchType" class="form-control" 
-					style="margin-right: 20px;">
-						<option value="t"
-							<c:if test="${ pagingDto.searchType == 't' }">
-								selected
-							</c:if> 
-						>제목</option>
-						<option value="c"
-							<c:if test="${ pagingDto.searchType == 'c' }">
-								selected
-							</c:if>
-						>내용</option>
-						<option value="w"
-							<c:if test="${ pagingDto.searchType == 'w' }">
-								selected
-							</c:if>
-						>작성자</option>
-						<option value="tc"
-							<c:if test="${ pagingDto.searchType == 'tc' }">
-								selected
-							</c:if>
-						>제목 + 내용</option>
-						<option value="tcw"
-							<c:if test="${ pagingDto.searchType == 'tcw' }">
-								selected
-							</c:if>
-						>제목 + 내용 + 작성자</option>
-					</select>
-					<input id="keyword" type="text"  class="form-control" style='width: 40%; margin-left: 10px;'
+					<div style='display: inline-block;'>
+						<select id="searchType" class="form-control" 
+						style="height:50px;">
+							<option value="t"
+								<c:if test="${ pagingDto.searchType == 't' }">
+									selected
+								</c:if> 
+							>제목</option>
+							<option value="c"
+								<c:if test="${ pagingDto.searchType == 'c' }">
+									selected
+								</c:if>
+							>내용</option>
+							<option value="w"
+								<c:if test="${ pagingDto.searchType == 'w' }">
+									selected
+								</c:if>
+							>작성자</option>
+							<option value="tc"
+								<c:if test="${ pagingDto.searchType == 'tc' }">
+									selected
+								</c:if>
+							>제목 + 내용</option>
+							<option value="tcw"
+								<c:if test="${ pagingDto.searchType == 'tcw' }">
+									selected
+								</c:if>
+							>제목 + 내용 + 작성자</option>
+						</select>
+					</div>
+					<div style='display: inline-block;'>
+					<input id="keyword" type="text"  class="form-control" style='width: 100%; margin-left: 10px;'
 						<c:if test="${ pagingDto.keyword != null }">
 							value="${ pagingDto.keyword }"
 						</c:if>
 					>
-					<a class="btn btn-sm btn-success" id="btnSearch"
-					 style="margin-left: 15px; width: 80px; height:50px; padding: 1% 0; line-height: 40px">검색</a>
+					</div>
+					<div style='display: inline-block;'>
+						<a class="btn btn-sm btn-success" id="btnSearch"
+						 style="margin-left: 15px; width: 80px; height:50px; padding: 1% 0; line-height: 40px;">검색</a>
+					</div>
 				</div>
 				<br><br>
 			</div>
 		</div>
 		<div class="col-md-2"></div>
+	</div>
+	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div class="pagination justify-content-center">
