@@ -86,6 +86,7 @@ public class AdminController {
 		System.out.println("userid:" + userid);
 //		List<AdminVo> adminList = adminService.adminList(userid);
 //		model.addAttribute("adminList", adminList);
+		MemberVo memberVo = memberSerive.memberByUserid(userid);
 		
 		List<FreeVo> freeList = freeService.adminFreeList(userid);
 		List<RecipeVo> recipeList = recipeService.adminRecipeList(userid);
@@ -97,6 +98,7 @@ public class AdminController {
 		model.addAttribute("recipeList", recipeList);
 		model.addAttribute("groupBoardList", groupBoardList);
 		model.addAttribute("routineList", routineList);
+		model.addAttribute("memberVo", memberVo);
 		
 		return "/admin/adminSelectMember";
 	}
@@ -112,7 +114,6 @@ public class AdminController {
 		List<GroupBoardCommentVo> groupBoardList = groupBoardCommentService.adminGroupBoardComment(userid);
 		List<RoutineCommentVo> routineList = routineCommentService.adminRoutineComment(userid);
 		List<RecommendCommentVo> recommendList = recommendCommentService.adminRecommendComment(userid);
-		
 		
 		
 		model.addAttribute("userid", userid);
