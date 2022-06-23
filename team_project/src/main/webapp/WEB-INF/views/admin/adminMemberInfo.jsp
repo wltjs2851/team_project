@@ -119,7 +119,7 @@ th, td {
 <!-- 			카드 끝 -->
 <!-- 			회원 가입한 그룹 내역 -->
 		<div>
-			
+			${groupVo }
 		</div>
 		</div>
 		<div class="col-md-1"></div>

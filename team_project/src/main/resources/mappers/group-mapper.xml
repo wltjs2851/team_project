@@ -125,6 +125,6 @@
 	<select id="getGroupByUserId" resultType="GroupVo">
 		select * from tbl_group
 			where gno
-		in (select gno from tbl_group_join where userid = #{userid});
+		in (select gno from tbl_group_join where userid = #{userid})
 	</select>
 </mapper>
