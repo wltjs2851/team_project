@@ -162,17 +162,19 @@ $(function() {
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-9">
-					<h2>
-						그룹 이름: ${ groupVo.g_name }
-					</h2>
+				
+				<div style="margin: 20px;"><img src="/groupboard/displayImage?filename=${groupVo.g_pic}" alt="그룹 사진"></div>
+				
+<!-- 					<h2> -->
+<%-- 						그룹 이름: ${ groupVo.g_name } --%>
+<!-- 					</h2> -->
 					
-					<h3>
-						그룹 소개
-					</h3>
-					<p>
-						${ groupVo.g_intro }
-					</p>
-					
+<!-- 					<h3> -->
+<!-- 						그룹 소개 -->
+<!-- 					</h3> -->
+<!-- 					<p> -->
+<%-- 						${ groupVo.g_intro } --%>
+<!-- 					</p> -->
 					<div class="tabbable" id="tabs-367776">
 						<ul class="nav nav-tabs">
 							<li class="nav-item">
@@ -186,10 +188,49 @@ $(function() {
 							<div class="active" id="tab1">
 								<p>
 <%-- 									위치: ${ groupVo.g_location }<br> --%>
-									운동: ${ groupVo.excercise_type }<br>
-									최대 인원수: ${ groupVo.g_attend }<br>
-									개설 날짜: ${ groupVo.g_regdate }<br>
-									그룹 정보(개설 날짜, 위치, 모임 목적, 최대 인원수)
+<%-- 									운동: ${ groupVo.excercise_type }<br> --%>
+<%-- 									최대 인원수: ${ groupVo.g_attend }<br> --%>
+<%-- 									개설 날짜: ${ groupVo.g_regdate }<br> --%>
+<!-- 									그룹 정보(개설 날짜, 위치, 모임 목적, 최대 인원수) -->
+									
+									<table class="table table-bordered table-hover table-sm">
+				<tbody>
+					<tr>
+						<th class="w-25 text-secondary">그룹명</th>
+						<th>${ groupVo.g_name }</th>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<th class="w-25 text-secondary">그룹장</th>
+						<th>${ groupVo.g_leader }</th>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<th class="w-25 text-secondary">그룹 소개글</th>
+						<th>${ groupVo.g_intro }</th>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<th class="w-25 text-secondary">운동</th>
+						<th>${ groupVo.excercise_type }</th>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<th class="w-25 text-secondary">최대 인원수</th>
+						<th>${ groupVo.g_attend }</th>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<th class="w-25 text-secondary">개설 날짜</th>
+						<th>${ groupVo.g_regdate }</th>
+					</tr>
+				</tbody>
+			</table>
 								</p>
 							</div>
 							<div class="tab-pane" id="tab2">
@@ -246,6 +287,12 @@ $(function() {
 						</div>
 					</div>
 				</div>
+				
+				
+				
+				
+				
+				
 				<div class="col-md-3">
 				
 				
@@ -289,28 +336,12 @@ $(function() {
 								</c:if>
 							</ol>
 						</nav>
-<!-- 						<div class="row"> -->
-<!-- 							<div> -->
-<!-- 								<div class="card"> -->
-<!-- 									<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" /> -->
-<!-- 									<div class="card-block"> -->
-<!-- 										<h5 class="card-title"> -->
-<!-- 											Card title -->
-<!-- 										</h5> -->
-<!-- 										<p class="card-text"> -->
-<!-- 											그룹원 -->
-<!-- 										</p> -->
-<!-- 										<p> -->
-<!-- 											<a class="btn btn-primary" href="#">쪽지보내기</a> -->
-<!-- 										</p>  -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
 						</aside>
 				
 				
 				</div>
+				
+				
 			</div>
 		</div>
 	</div>

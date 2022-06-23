@@ -124,7 +124,7 @@ $(function() {
 						<div class="list-group-item justify-content-between">
 							<a href="/groupboard/groupMain/${ groupVo.gno }">그룹 메인으로</a>
 						</div>
-							<a href="/groupboard/groupInfo?gno=${ loginVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+							<a href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>

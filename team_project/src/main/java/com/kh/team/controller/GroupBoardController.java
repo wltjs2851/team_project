@@ -101,7 +101,7 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupRead", method = RequestMethod.GET)
-	public String read(int gno, int gbno, Model model, HttpServletRequest httpRequest) throws Exception {
+	public String read(HttpSession session, int gno, int gbno, Model model, HttpServletRequest httpRequest) throws Exception {
 		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
 		model.addAttribute("groupBoardVo", groupBoardVo);
 		
@@ -115,6 +115,7 @@ public class GroupBoardController {
 		System.out.println("groupRead, gno: " + gno);
 
 		// 로그인 한 경우에만 접근 가능
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
 		
 		// 좋아요
@@ -293,7 +294,7 @@ public class GroupBoardController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value = "/uploadSummernoteImageFile", method = RequestMethod.POST)
+	@RequestMapping(value = "/uploadSummernoteImageFile", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	@ResponseBody
 	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
 

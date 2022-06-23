@@ -16,15 +16,13 @@ $(function() {
 		console.log("click");
 		var count = $(".count").val();
 		console.log("count: ", count);
-		var gbc_content = $("#c_content").val(); // c_content: 댓글 입력하는 곳
+		var gbc_content = $("#c_content").val();
 		var userid = $("#c_userid").val();
 		var gbno = "${groupBoardVo.gbno}";
-		var u_pic = "${loginVo.u_pic}";
 		var sData = {
 				"gbc_content" : gbc_content,
 				"userid" : userid,
-				"gbno" : gbno,
-				"u_pic" : u_pic
+				"gbno" : gbno
 		}
 		console.log("sData: ", sData);
 		
@@ -32,7 +30,6 @@ $(function() {
 		$.post(url, sData, function(rData) {
 			console.log(rData);
 			if(rData == "true") {
-				$("#c_content").val("");
 				$(".count").text("${groupBoardVo.gb_comment + 1}");
 // 				$(".count").val(text(${count + 1}));
 				getCommentList();
@@ -42,34 +39,25 @@ $(function() {
 	
 	function getCommentList() {
 		var gbno = "${groupBoardVo.gbno}";
+		console.log(gbno);
 		var url = "/groupcomment/groupCommentList/" + gbno;
 		$.get(url, function(rData) {
-			console.log(rData);
-			$("#comment > div").empty();
+			console.log(rData); 
+			$("#table_comment_list tr:gt(0)").remove();
+			
 			$.each(rData, function() {
-				console.log("u_pic: ", this.u_pic);
-				var cmt = "";
-				cmt += "<div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
-				cmt += "<p style='font-size: large; font-weight: bold;'>";
-				if(this.u_pic == null) {
-					cmt += "<img src='/resources/images/board/personDefault.png' class='rounded-circle z-depth-2' width=40px>";
-				} else {
-					cmt += "<img src='/groupboard/displayImage?filename=" + this.u_pic + 
-							"' class='rounded-circle z-depth-2' width=40px>";
-				}
-				cmt +=this.userid + "</p>";
-				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 100%'>" + this.gbc_content
-					+ "</textarea>";
-				cmt += "<button type='button' class='btnModify btn btn-outline-warning' data-gbcno=" + this.gbcno +
-					 " style='width: 80px; height:50px; padding: 1% 0'>수정</button>";
-				cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-gbcno=" + this.gbcno + 
-						 " style='display: none; width: 80px; height:50px; padding: 1% 0'>수정완료</button>";
-						 cmt += "<button type='button' class='btnDelete btn btn-outline-danger' data-gbcno=" + this.gbcno +
-						 " style='width: 80px; height:50px; padding: 1% 0'>삭제</button>";
-				cmt += "<hr>";
-				cmt += "</div>";
-				$("#comment").append(cmt);
-			})
+				var tr = $("#table_clone tr").clone();
+				var tds = tr.find("td");
+				
+				tds.eq(0).text(this.gbcno);
+				tds.eq(1).text(this.gbc_content);
+				tds.eq(2).text(this.userid);
+				tds.eq(3).text(this.gbc_regdate);
+				tds.find(".btnCommentDelete").attr("data-gbcno", this.gbcno);
+				tds.find(".btnCommentModify").attr("data-gbcno", this.gbcno);
+				
+				$("#table_comment_list").append(tr);
+			});
 		});
 	}
 	
@@ -122,7 +110,7 @@ $(function() {
 	});
 	
 	// 댓글 삭제
-	$("#comment").on("click", ".btnDelete", function() {
+	$("#table_comment_list").on("click", ".btnCommentDelete", function() {
 		console.log("댓글 삭제 버튼");
 		var gbcno = $(this).attr("data-gbcno");
 		var url = "/groupcomment/deleteGroupComment/" + gbcno;
@@ -275,17 +263,42 @@ $(function() {
 					<div>
 						<button type="button" id="btnCommentInsert" class="btn btn-sm btn-outline-primary">완료</button>
 					</div>
+				</div>
 				
-				<div class="row" style="margin-top: 20px; margin-left: 20px;" id="comment">
-					<div style="display: none;">
-						<button type="button" class="btn btn-sm btn-outline-warning btnCommentModify"
-							style="width: 10%; height:50px; padding: 1% 0">수정</button>
-						<button type="submit" class="btn btn-sm btn-outline-success btnCommentModifyRun" 
-							style="display: none; width: 10%; height:50px; padding: 1% 0">수정완료</button>
+				<div class="row" style="margin-top:30px;">
+					<div class="col-md-12">
+						<table style="display:none;" id="table_clone">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								
+								<c:if test="${ loginVo.userid == groupBoardVo.userid }">
+									<td>
+										<button type="button"style="width: 60px; height:50px; padding: 1% 0"
+											class="btn btn-sm btn-warning btnCommentModify">수정</button>
+									</td>
+									<td>
+										<button type="button" style="width: 60px; height:50px; padding: 1% 0"
+											class="btn btn-sm btn-danger btnCommentDelete">삭제</button>
+									</td>
+								</c:if>
+							</tr>
+						</table>
+						<table class="table" id="table_comment_list">
+							<tr>
+								<td>#</td>
+								<td>내용</td>
+								<td>작성자</td>
+								<td>날짜</td>
+								<td>수정</td>
+								<td>삭제</td>
+							</tr>
+						</table>
 					</div>
 				</div>
 				
-				</div>
 				
 				</div>
 				<div class="col-md-3">
