@@ -113,6 +113,8 @@ public class AdminController {
 		List<RoutineCommentVo> routineList = routineCommentService.adminRoutineComment(userid);
 		List<RecommendCommentVo> recommendList = recommendCommentService.adminRecommendComment(userid);
 		
+		
+		
 		model.addAttribute("userid", userid);
 		model.addAttribute("freeList", freeList);
 		model.addAttribute("recipeList", recipeList);

@@ -155,5 +155,20 @@ public class GroupDaoImpl implements GroupDao{
 	public List<GroupVo> searchLocation(LocationVo locationVo) {
 		return sqlSession.selectList(NAMESPACE + "searchLocation", locationVo);
 	}
+	
+	@Override
+	public List<GroupVo> selectGroupList(int startRow, int endRow) {
+		Map<String, Integer> parameter = new HashMap<>();
+		parameter.put("startRow", startRow);
+		parameter.put("endRow", endRow);
+		List<GroupVo> list = sqlSession.selectList(NAMESPACE + "selectGroupList", parameter);
+		return list;
+	}
+
+	@Override
+	public int getCount() {
+		int count = sqlSession.selectOne(NAMESPACE + "getCount");
+		return count;
+	}
 
 }

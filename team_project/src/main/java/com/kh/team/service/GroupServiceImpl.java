@@ -126,4 +126,13 @@ public class GroupServiceImpl implements GroupService{
 		return groupDao.searchLocation(locationVo);
 	}
 
+	@Override
+	public List<GroupVo> selectGroupList(int startRow, int endRow) {
+		return groupDao.selectGroupList(startRow, endRow);
+	}
+
+	@Override
+	public int getCount() {
+		return groupDao.getCount();
+	}
 }

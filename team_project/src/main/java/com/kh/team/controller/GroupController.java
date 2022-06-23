@@ -48,6 +48,19 @@ public class GroupController {
 		return "board/groupList";
 	}
 	
+	@RequestMapping(value = "/groupList2", method = RequestMethod.GET)
+	@ResponseBody
+	public List<GroupVo> groupList2(Model model, int startRow) {
+		int perCount = 3;
+		System.out.println(startRow);
+		int count = groupService.getCount();
+		int totalPageCount = (int) Math.ceil(count / (double) perCount);
+		int endRow = startRow + perCount;
+		List<GroupVo> list = groupService.selectGroupList(startRow, endRow);
+		model.addAttribute("totalPageCount", totalPageCount);
+		return list;
+	}
+	
 	@RequestMapping(value = "/searchLocation", method = RequestMethod.GET)
 	public String searchLocation(LocationVo locationVo, Model model) {
 		System.out.println(locationVo);
