@@ -120,4 +120,11 @@
 			and sgno = #{sgno, jdbcType=VARCHAR}) a) 
 		where rnum between #{startRow} and #{endRow}
 	</select>
+	
+<!-- 	회원이 가입한 그룹정보 가져오기 -->
+	<select id="getGroupByUserId" resultType="GroupVo">
+		select * from tbl_group
+			where gno
+		in (select gno from tbl_group_join where userid = #{userid})
+	</select>
 </mapper>
