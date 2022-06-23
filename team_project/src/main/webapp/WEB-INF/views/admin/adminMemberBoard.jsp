@@ -142,56 +142,10 @@ $(function(){
 	
 });
 </script>
-<%-- ${memberVo } --%>
-<!-- 페이지, 검색 값 -->
-<form id="frmPaging">
-	<input type="hidden" name="fno" value="">
-	<input type="hidden" name="rno" value="">
-	<input type="hidden" name="gbno" value="">
-	<input type="hidden" name="uno" value="">
-	<input type="hidden" name="page" value="${ pagingDto.page }">
-	<input type="hidden" name="perPage" value="${ pagingDto.perPage }">
-	<input type="hidden" name="keyword" value="${ pagingDto.keyword }">
-</form>
 <body>
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-		<div class="card">
-              <div class="card-header border-0">
-                <div class="d-flex justify-content-between" style="width: 100%;">
-                  <h3 class="card-title">회원 정보</h3>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="d-flex">
-                	<div style="padding-right: 60px;">
-                	<c:choose>
-	                	<c:when test="${empty memberVo.u_pic}">
-							<img class="rounded-circle" width="150px;" height="auto" style="align-items: center; overflow: hidden;"
-												src="/resources/images/profile.png" alt="프로필">
-						</c:when>
-						<c:otherwise>
-		                  	<img class="rounded-circle" width="150px" height="auto"
-												src="/member/displayImage?filename=${memberVo.u_pic}"
-												alt="프로필" style="overflow: hidden;">
-						</c:otherwise>
-						</c:choose>
-                 	 </div>
-                </div>
-                <div class="userInfo">
-                <table>
-                	<thead></thead>
-                </table>
-                </div>
-                <!-- /.d-flex -->
-
-                <div class="position-relative mb-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                  <canvas id="visitors-chart" height="0" style="display: block; width: 639px; height: 0px;" class="chartjs-render-monitor" width="639"></canvas>
-                </div>
-
-              </div>
-            </div>
 <!-- 		회원 전체 작성글/ 댓글 -->
 			<div class="tabbable" id="tabs-834783">
 				<ul class="nav nav-tabs">

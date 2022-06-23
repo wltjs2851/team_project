@@ -81,12 +81,25 @@ public class AdminController {
 		return "/admin/adminMember";
 	}
 	
-	@RequestMapping(value="/selectMember", method = RequestMethod.GET)
+	// 관리자가 본 회원 정보
+	@RequestMapping(value="/info", method = RequestMethod.GET)
 	public String adminSelectMember(String userid, Model model) {
+		System.out.println("adminSelectMember:" + userid);
+		MemberVo memberVo = memberSerive.memberByUserid(userid);
+		model.addAttribute("memberVo", memberVo);
+		
+		List<AdminVo> adminList = adminService.adminList(userid);
+		model.addAttribute("adminList", adminList);
+		
+		return "/admin/adminMemberInfo";
+	}
+	
+	// 회원이 작성한 글 
+	@RequestMapping(value="/board", method = RequestMethod.GET)
+	public String adminMemberBoard(String userid, Model model) {
 		System.out.println("userid:" + userid);
 //		List<AdminVo> adminList = adminService.adminList(userid);
 //		model.addAttribute("adminList", adminList);
-		MemberVo memberVo = memberSerive.memberByUserid(userid);
 		
 		List<FreeVo> freeList = freeService.adminFreeList(userid);
 		List<RecipeVo> recipeList = recipeService.adminRecipeList(userid);
@@ -98,9 +111,8 @@ public class AdminController {
 		model.addAttribute("recipeList", recipeList);
 		model.addAttribute("groupBoardList", groupBoardList);
 		model.addAttribute("routineList", routineList);
-		model.addAttribute("memberVo", memberVo);
 		
-		return "/admin/adminSelectMember";
+		return "/admin/adminMemberBoard";
 	}
 	
 	// 회원이 작성한 댓글
