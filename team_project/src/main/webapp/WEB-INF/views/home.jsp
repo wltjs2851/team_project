@@ -22,7 +22,6 @@
 					$("#s_location").html("<option>선택해주세요.</option>");
 					sno = null;
 					sgno = null;
-					console.log("sno, sgno null");
 					$.each(rData, function(e) {
 						$("#s_location").append("<option value='" + rData[e].sno + "'>" + rData[e].lname + "</option>")
 					});
@@ -50,9 +49,6 @@
 			sgno = $(this).val();
 		});
 		$("#locationSearch").click(function() {
-// 			dno = $("#location").val();
-// 			sno = $("#s_location").val();
-// 			sgno = $("#sg_location").val();
 			console.log("dno", dno);
 			console.log("sno", sno);
 			console.log("sgno", sgno);

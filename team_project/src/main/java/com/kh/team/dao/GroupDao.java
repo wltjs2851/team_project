@@ -9,6 +9,8 @@ import com.kh.team.vo.LocationVo;
 public interface GroupDao {
 	public boolean insertGroup(GroupVo groupVo);
 	public List<GroupVo> selectGroup();
+	public List<GroupVo> selectGroupList(int startRow, int endRow);
+	public int getCount();
 	public boolean updateGroup(GroupVo groupVo);
 	public boolean deleteGroup(int gno);
 	public GroupVo groupByGno(int gno);

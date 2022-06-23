@@ -6,12 +6,23 @@ public class LocationVo {
 	private int sno;
 	private int sgno;
 	private String lname;
+	private int startRow;
+	private int endRow;
 	
 	public LocationVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
+	public LocationVo(int dno, int sno, int sgno, int startRow, int endRow) {
+		super();
+		this.dno = dno;
+		this.sno = sno;
+		this.sgno = sgno;
+		this.startRow = startRow;
+		this.endRow = endRow;
+	}
+
 	public LocationVo(int dno, int sno, int sgno, String lname) {
 		super();
 		this.dno = dno;
@@ -34,6 +45,22 @@ public class LocationVo {
 		this.sno = sno;
 		this.sgno = sgno;
 		this.lname = lname;
+	}
+
+	public int getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
 	}
 
 	public int getLno() {
@@ -78,6 +105,8 @@ public class LocationVo {
 
 	@Override
 	public String toString() {
-		return "LocationVo [lno=" + lno + ", dno=" + dno + ", sno=" + sno + ", sgno=" + sgno + ", lname=" + lname + "]";
+		return "LocationVo [lno=" + lno + ", dno=" + dno + ", sno=" + sno + ", sgno=" + sgno + ", lname=" + lname
+				+ ", startRow=" + startRow + ", endRow=" + endRow + "]";
 	}
+
 }

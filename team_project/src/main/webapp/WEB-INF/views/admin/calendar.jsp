@@ -25,7 +25,7 @@
 		$(".dateBoard").on("click", ".divDate", function() {
 			that = $(this);
 			selectDate = $(this).attr("data-today");
-			var myDate = selectDate.substring(0, 4) + "년 " + selectDate.substring(5, 6) + "월 " + selectDate.substring(7) + "일";
+			var myDate = selectDate.split("_")[0] + "년 " + selectDate.split("_")[1] + "월 " + selectDate.split("_")[2] + "일";
 			var userid = "${loginVo.userid}";
 			$("#main-day").html(myDate);
 			$(".todo-content").html("");

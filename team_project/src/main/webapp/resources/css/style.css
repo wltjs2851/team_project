@@ -1271,12 +1271,12 @@ ul.pagination .active a {
 .category-block .category-list li a {
   display: block;
   color: #777;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .category-block .category-list li a span {
   float: right;
-  font-size: 10px;
+  font-size: 13px;
   background: #F4F7F9;
   border-radius: 10px;
   padding: 3px 8px;
