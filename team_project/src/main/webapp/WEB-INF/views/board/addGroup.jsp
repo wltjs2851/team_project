@@ -6,36 +6,42 @@
 
 <script>
 $(function() {
-	$("#g_location").change(function() {
-		var dno = $("#g_location").val();
+	$("#location").on("change", function() {
+		var dno = $("#location").val();
 		var url = "/group/getSno/" + dno;
-		$("#u_location").removeAttr('style');
-		$("#u_location").empty();
+		$("#s_location").empty();
 		$.get(url, function(receivedData) {
 			$.each(receivedData, function() {
-				var sgg = "";
-				sgg += "<option value=" + this.sno + ">" + this.lname + "</option>";
-				console.log("sgg: " + sgg);
-				$("#u_location").append(sgg);	
+				if(receivedData != null && receivedData != "") {	
+					$("#s_location").show();
+					$("#sg_location").hide();
+					var sgg = "";
+					sgg += "<option value=" + this.sno + ">" + this.lname + "</option>";
+					console.log("sgg: " + sgg);
+					$("#s_location").append(sgg);	
+				}
 			});
 		});
 	});
 	
-	$("#u_location").change(function() {
-		var dno = $("#g_location").val();
-		var sno = $("#u_location").val();
+	$("#s_location").on("change", function() {
+		var dno = $("#location").val();
+		var sno = $("#s_location").val();
 		var url = "/group/getSgno/" + dno + "/" + sno;
 		$.get(url, function(receivedData) {
 			console.log(receivedData)
-			if(receivedData != "") {				
+			if(receivedData != null && receivedData != "") {				
 				$("#sg_location").removeAttr('style');
 				$("#sg_location").empty();
+				$("#sg_location").show();
 				$.each(receivedData, function() {
 					var sgg = "";
 					sgg += "<option value=" + this.sgno + ">" + this.lname + "</option>";
 					console.log("sgg: " + sgg);
 					$("#sg_location").append(sgg);	
 				});
+			} else {
+				$("#sg_location").hide();
 			}
 		});
 	});
@@ -57,14 +63,14 @@ $(function() {
 <!-- 					select box 스크롤 사용 -->
 					<div>
 						<div class="col-md-2" style="display: inline-block;">
-							<select id="g_location" name="dno" class="form-control">
+							<select id="location" name="dno" class="form-control">
 								<c:forEach items="${ locationVo }" var="locationVo">
 									<option value="${ locationVo.dno }">${ locationVo.lname }</option>
 								</c:forEach>
 							</select>
 						</div>
 						<div class="col-md-2" style="display: inline-block;">
-							<select id="u_location" name="sno" class="form-control" style="display: none;">
+							<select id="s_location" name="sno" class="form-control" style="display: none;">
 							</select>
 						</div>
 						<div class="col-md-2" style="display: inline-block;">

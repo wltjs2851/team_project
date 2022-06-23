@@ -9,6 +9,7 @@ import com.kh.team.vo.LocationVo;
 public interface GroupService {
 	public boolean addGroup(GroupVo groupVo);
 	public List<GroupVo> groupList();
+	public List<GroupVo> selectGroupList(int startRow, int endRow);
 	public boolean moidfyGroup(GroupVo groupVo);
 	public boolean removeGroup(int gno, String userid);
 	public GroupVo groupByGno(int gno);
@@ -22,6 +23,7 @@ public interface GroupService {
 	public List<LocationVo> groupLocationSgno(int dno, int sno);
 	public List<GroupVo> groupByLocation(int dno);
 	public List<GroupVo> searchLocation(LocationVo locationVo);
+	public int getCount();
 	
 	public List<String> getNickname(int gno);
 }
