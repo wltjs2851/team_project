@@ -4,7 +4,7 @@
     $(document).on('ready', function () {
         
         // Nice Select
-        $('select').niceSelect();
+//        $('select').niceSelect();
         // -----------------------------
         //  Client Slider
         // -----------------------------
@@ -72,9 +72,9 @@
 
 
 
- $(document).ready(function() {
-  $('select:not(.ignore)').niceSelect();      
-});
+// $(document).ready(function() {
+//  $('select:not(.ignore)').niceSelect();      
+//});
 
 
 

@@ -175,9 +175,11 @@ $(function() {
 		         console.log("ajax", rData);
 		         $.each(rData, function() {
  		  			var div = "";
- 		  			div += "<div class='col-lg-3 col-md-6 col-sm-6 group' onclick='location.href ='/group/groupForm?gno=" + this.gno +
-		  						"'' style=cursor:pointer; display: none;' id='groupList'>";
- 		  			div += "<div class='product_item'><div style='text-align: center;'>"; 		  			if(this.g_pic == null) {
+ 		  			div += "<div class='col-lg-3 col-md-6 col-sm-6 group'" + 
+ 		  			"onclick=location.href='/group/groupForm?gno=" + this.gno +
+ 		  			"'	style=cursor:pointer; display: none;' id='groupList'>";
+ 		  			div += "<div class='product_item'><div style='text-align: center;'>"; 		  			
+ 		  			if(this.g_pic == null) {
  		  				div += "<img src='/resources/images/board/groupDefault.png'" +
 		  				"class='img-thumbnail' alt='group image' style='height: 280px'>";
 		  			} else {
