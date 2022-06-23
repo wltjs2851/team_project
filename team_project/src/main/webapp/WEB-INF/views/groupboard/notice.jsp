@@ -35,7 +35,7 @@ $(function() {
 
 </script>
 
-${ noticeList }
+<%-- ${ noticeList } --%>
 <%-- ${ groupVo } --%>
 <%-- ${ groupVo.gno } --%>
 <%-- ${ noticeList.gno } --%>
@@ -78,18 +78,30 @@ ${ noticeList }
 	</div>
 </div>
 
+<!--================================
+=            Page Title            =
+=================================-->
+<section class="page-title">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<h3>${ groupVo.g_name }</h3>
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-9">
-				
+<section class="blog section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">				
 				<h2>공지글 전체 보기</h2>
 				
 				<c:forEach items="${ noticeList }" var="groupBoardVo">
 				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
-					<h3 style="background-color: yellowgreen;">
+					<h3 style="background-color: #B0E0E6;">
 						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
 					</h3>
 				</c:if>
@@ -129,31 +141,13 @@ ${ noticeList }
 							</li>
 						</ol>
 					</nav>
-<!-- 					<div class="row"> -->
-<!-- 						<div> -->
-<!-- 							<div class="card"> -->
-<!-- 								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" /> -->
-<!-- 								<div class="card-block"> -->
-<!-- 									<h5 class="card-title"> -->
-<!-- 										Card title -->
-<!-- 									</h5> -->
-<!-- 									<p class="card-text"> -->
-<!-- 										그룹원 -->
-<!-- 									</p> -->
-<!-- 									<p> -->
-<!-- 										<a class="btn btn-primary" href="#">쪽지보내기</a> -->
-<!-- 									</p>  -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					</aside> -->
 				
 				</div>
 			</div>
 		</div>
+		
 	</div>
-</div>
-
+	</div>
+</section>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>

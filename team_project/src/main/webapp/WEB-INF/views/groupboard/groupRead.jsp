@@ -244,8 +244,8 @@ $(function() {
 					<c:if test="${ loginVo.userid == groupBoardVo.userid }">
 					<table>
 						<tr>
-							<td><a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn-success">수정</a></td>
-							<td><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${groupBoardVo.gno}" class="btn btn-sm btn-danger">삭제</a></td>
+							<td><a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn btn-outline-warning">수정</a></td>
+							<td><a href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${groupBoardVo.gno}" class="btn btn-sm btn-outline-danger">삭제</a></td>
 						</tr>
 					</table>
 					</c:if>
@@ -261,7 +261,7 @@ $(function() {
 						<input type="hidden" value="${ loginVo.userid }" id="c_userid" class="form-control">
 					</div>
 					<div>
-						<button type="button" id="btnCommentInsert" class="btn btn-sm btn-primary">완료</button>
+						<button type="button" id="btnCommentInsert" class="btn btn-sm btn-outline-primary">완료</button>
 					</div>
 				</div>
 				
@@ -276,11 +276,11 @@ $(function() {
 								
 								<c:if test="${ loginVo.userid == groupBoardVo.userid }">
 									<td>
-										<button type="button"
+										<button type="button"style="width: 60px; height:50px; padding: 1% 0"
 											class="btn btn-sm btn-warning btnCommentModify">수정</button>
 									</td>
 									<td>
-										<button type="button" 
+										<button type="button" style="width: 60px; height:50px; padding: 1% 0"
 											class="btn btn-sm btn-danger btnCommentDelete">삭제</button>
 									</td>
 								</c:if>

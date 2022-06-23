@@ -11,9 +11,9 @@
 <link href='/resources/css/calendar.css' rel='stylesheet' />
 </head>
 
-${ groupVo.g_leader }
-<hr>
-${ groupJoinMember }
+<%-- ${ groupVo.g_leader } --%>
+<!-- <hr> -->
+<%-- ${ groupJoinMember } --%>
 
 <script>
 	$(function() {
@@ -30,7 +30,7 @@ ${ groupJoinMember }
 		$(".dateBoard").on("click", ".divDate", function() {
 			that = $(this);
 			selectDate = $(this).attr("data-today");
-			var myDate = selectDate.substring(0, 4) + "년 " + selectDate.substring(5, 6) + "월 " + selectDate.substring(7) + "일";
+			var myDate = selectDate.split("_")[0] + "년 " + selectDate.split("_")[1] + "월 " + selectDate.split("_")[2] + "일";
 			var userid = "${loginVo.userid}";
 			$("#main-day").html(myDate);
 			$(".todo-content").html("");
@@ -200,18 +200,20 @@ ${ groupJoinMember }
 				          <div id="main-day" class="main-day"></div>
 				        </div>
 				        
-			        <c:if test="${ loginVo.userid == groupVo.g_leader }">
+			        
 				        <div class="todo-wrap">
 				          <div class="todo-title">오늘의 일정</div>
 				          <div class="todo-content" id="todo-content"></div>
-				          <div class="input-wrap">
-				            <input type="text" placeholder="please write here!!" id="input-box" class="input-box form-control">
-				            <button type="button" id="input-data" class="btn btn-outline-primary"><span>INPUT</span></button>
-<!-- 				            <button type="button" id="update-check" class="btn btn-outline-warning"><span>CHECK</span></button> -->
-				            <div id="input-list" class="input-list"></div>
-				          </div>
+				          <c:if test="${ loginVo.userid == groupVo.g_leader }">
+					          <div class="input-wrap">
+					            <input type="text" placeholder="please write here!!" id="input-box" class="input-box form-control">
+					            <button type="button" id="input-data" class="btn btn-outline-primary"><span>INPUT</span></button>
+	<!-- 				            <button type="button" id="update-check" class="btn btn-outline-warning"><span>CHECK</span></button> -->
+					            <div id="input-list" class="input-list"></div>
+					          </div>
+				          </c:if>
 				        </div>
-			        </c:if>
+			        
 				        
       				</div>
 				</div>

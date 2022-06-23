@@ -214,7 +214,7 @@ $(function() {
 											<button data-value="${ groupJoinVo.userid }" class="btnUpdateGLeader btn btn-default" id="btnUpdateGLeader" style="width: 90px; height:30px; padding: 1% 0">권한 넘기기</button>
 										</c:if>
 										
-											<i id="report" class="report fa-solid fa-handcuffs"><a class="btn btn-danger" style="width: 40px; height:30px; padding: 1% 0" href="#" 
+											<i id="report" class="report fa-solid fa-handcuffs"><a class="btn btn-outline-danger" style="width: 40px; height:30px; padding: 1% 0" href="#" 
 											 	data-user="${ groupBoardVo.userid }">신고</a></i>
 											<input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
 											<input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">
