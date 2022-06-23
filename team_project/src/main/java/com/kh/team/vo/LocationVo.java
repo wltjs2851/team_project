@@ -47,14 +47,6 @@ public class LocationVo {
 		this.lname = lname;
 	}
 
-	public int getSno() {
-		return sno;
-	}
-
-	public void setSno(int sno) {
-		this.sno = sno;
-	}
-
 	public int getStartRow() {
 		return startRow;
 	}
@@ -113,6 +105,8 @@ public class LocationVo {
 
 	@Override
 	public String toString() {
-		return "LocationVo [lno=" + lno + ", dno=" + dno + ", sno=" + sno + ", sgno=" + sgno + ", lname=" + lname + "]";
+		return "LocationVo [lno=" + lno + ", dno=" + dno + ", sno=" + sno + ", sgno=" + sgno + ", lname=" + lname
+				+ ", startRow=" + startRow + ", endRow=" + endRow + "]";
 	}
+
 }

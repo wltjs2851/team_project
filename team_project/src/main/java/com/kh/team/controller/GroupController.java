@@ -59,6 +59,7 @@ public class GroupController {
 		int endRow = startRow + perCount;
 		List<GroupVo> list = null;
 		if (locationVo.getDno() != 0) {
+			locationVo.setEndRow(endRow);
 			list = groupService.searchLocation(locationVo);
 		} else {
 			list = groupService.selectGroupList(startRow, endRow);
