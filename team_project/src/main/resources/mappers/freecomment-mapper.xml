@@ -40,7 +40,7 @@
  
 <!--  유저 작성 댓글 조회 -->
 <select id="adminFreeComment" resultType="FreeCommentVo">
-	select fcno, fc_comment, f_regdate from tbl_fcomment
+	select fcno, fno, fc_comment, f_regdate from tbl_fcomment
 	where userid = #{userid}
 </select>
  

@@ -19,6 +19,13 @@
 		select * from tbl_group order by gno desc
 	</select>
 	
+	<select id="selectGroupList" resultType="GroupVo">
+		select * from (select rownum rnum, a.* from 
+			(select * from tbl_group
+			order by g_regdate desc) a) 
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	
 	<select id="groupLocation" resultType="LocationVo">
 		select * from tbl_group_location where sno is null and sgno is null
 	</select>
@@ -29,6 +36,10 @@
 	
 	<select id="groupLocationSgno" resultType="LocationVo">
 		select * from tbl_group_location where sgno is not null and dno = #{dno} and sno = #{sno}
+	</select>
+	
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_group
 	</select>
 	
 <!-- 그룹 상세보기 -->

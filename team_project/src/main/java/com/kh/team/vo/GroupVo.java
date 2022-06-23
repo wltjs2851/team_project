@@ -15,6 +15,8 @@ public class GroupVo {
 	private int dno;
 	private int sno;
 	private int sgno;
+	private int startRow;
+	private int endRow;
 	
 	public GroupVo() {
 		super();
@@ -42,7 +44,7 @@ public class GroupVo {
 		this.g_intro = g_intro;
 	}
 	
-	public GroupVo(String g_name, String excercise_type, int g_attend, String g_intro, String g_pic, int dno, int sno,
+	public GroupVo(String g_name, String excercise_type, int g_attend, String g_intro, String g_leader, String g_pic, int dno, int sno,
 			int sgno) {
 		super();
 		this.g_name = g_name;
@@ -53,6 +55,7 @@ public class GroupVo {
 		this.dno = dno;
 		this.sno = sno;
 		this.sgno = sgno;
+		this.g_leader = g_leader;
 	}
 
 	public GroupVo(String g_name, String excercise_type, int g_attend, String g_intro,
@@ -185,5 +188,28 @@ public class GroupVo {
 	public void setSgno(int sgno) {
 		this.sgno = sgno;
 	}
-	
+
+	public int getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+
+	@Override
+	public String toString() {
+		return "GroupVo [gno=" + gno + ", g_name=" + g_name + ", excercise_type=" + excercise_type + ", g_attend="
+				+ g_attend + ", g_intro=" + g_intro + ", g_regdate=" + g_regdate + ", g_pic=" + g_pic + ", g_present="
+				+ g_present + ", g_leader=" + g_leader + ", dno=" + dno + ", sno=" + sno + ", sgno=" + sgno
+				+ ", startRow=" + startRow + ", endRow=" + endRow + "]";
+	}
 }
