@@ -1,6 +1,7 @@
 package com.kh.team.controller;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -20,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.EmailService;
 import com.kh.team.service.MemberService;
-import com.kh.team.service.MyLikeContentService;
+import com.kh.team.service.MyContentService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.EmailVo;
 import com.kh.team.vo.FreeVo;
@@ -41,7 +42,7 @@ public class MemberController {
 	private EmailService emailService;
 	
 	@Autowired
-	private MyLikeContentService MyLikeContentService;
+	private MyContentService myContentService;
 
 	// 로그인 폼으로 이동
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
@@ -121,16 +122,43 @@ public class MemberController {
 		return "/member/myPage";
 	}
 	
-	// 나의 활동으로 이동
+	// 내 활동 목록으로 이동
 	@RequestMapping(value = "/myActivity", method = RequestMethod.GET)
-	public String myActivity(HttpSession session, Model model) {
+	@Transactional
+	public String myActivityLike(HttpSession session, Model model, String type) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = loginVo.getUserid();
-		List<FreeVo> freeLike = MyLikeContentService.getFreeByLike(userid);
-		List<GroupBoardVo> groupBoardLike = MyLikeContentService.getGroupBoardByLike(userid);
-		List<RecipeVo> recipeLike = MyLikeContentService.getRecipeByLike(userid);
-		List<RoutineVo> routineLike = MyLikeContentService.getRoutineByLike(userid);
-		List<RecommendVo> recommendLike = MyLikeContentService.getRecommendByLike(userid);
+		List<FreeVo> freeLike = new ArrayList<>();
+		List<GroupBoardVo> groupBoardLike = new ArrayList<>();
+		List<RecipeVo> recipeLike = new ArrayList<>();
+		List<RoutineVo> routineLike = new ArrayList<>();
+		List<RecommendVo> recommendLike = new ArrayList<>();
+		System.out.println(type);
+		if (type.equals("like")) {
+			freeLike = myContentService.getFreeByLike(userid);
+			groupBoardLike = myContentService.getGroupBoardByLike(userid);
+			recipeLike = myContentService.getRecipeByLike(userid);
+			routineLike = myContentService.getRoutineByLike(userid);
+			recommendLike = myContentService.getRecommendByLike(userid);
+			System.out.println("freeLike" + freeLike);
+			System.out.println("groupBoardLike" + groupBoardLike);
+			System.out.println("recipeLike" + recipeLike);
+			System.out.println("routineLike" + routineLike);
+			System.out.println("recommendLike" + recommendLike);
+		} else if (type.equals("write")) {
+			freeLike = myContentService.getWriteFree(userid);
+			groupBoardLike = myContentService.getWriteGroupBoard(userid);
+			recipeLike = myContentService.getWriteRecipe(userid);
+			routineLike = myContentService.getWriteRoutine(userid);
+			recommendLike = myContentService.getWriteRecommend(userid);
+			System.out.println("freeLike" + freeLike);
+			System.out.println("groupBoardLike" + groupBoardLike);
+			System.out.println("recipeLike" + recipeLike);
+			System.out.println("routineLike" + routineLike);
+			System.out.println("recommendLike" + recommendLike);
+		} else if (type.equals("comment")) {
+			
+		}
 		model.addAttribute("freeLike", freeLike);
 		model.addAttribute("groupBoardLike", groupBoardLike);
 		model.addAttribute("recipeLike", recipeLike);
@@ -138,6 +166,25 @@ public class MemberController {
 		model.addAttribute("recommendLike", recommendLike);
 		return "/member/myActivity";
 	}
+	
+//	// 내가 쓴 글 목록으로 이동
+//	@RequestMapping(value = "/myActivityWrite", method = RequestMethod.GET)
+//	@Transactional
+//	public String myActivityWrite(HttpSession session, Model model) {
+//		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+//		String userid = loginVo.getUserid();
+//		List<FreeVo> freeLike = myContentService.getWriteFree(userid);
+//		List<GroupBoardVo> groupBoardLike = myContentService.getWriteGroupBoard(userid);
+//		List<RecipeVo> recipeLike = myContentService.getWriteRecipe(userid);
+//		List<RoutineVo> routineLike = myContentService.getWriteRoutine(userid);
+//		List<RecommendVo> recommendLike = myContentService.getWriteRecommend(userid);
+//		model.addAttribute("freeLike", freeLike);
+//		model.addAttribute("groupBoardLike", groupBoardLike);
+//		model.addAttribute("recipeLike", recipeLike);
+//		model.addAttribute("routineLike", routineLike);
+//		model.addAttribute("recommendLike", recommendLike);
+//		return "/member/myActivityLike";
+//	}
 	
 	// 프로필사진 출력
 	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)

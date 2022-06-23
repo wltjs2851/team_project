@@ -59,9 +59,6 @@ $(function(){
 			<li class="nav-item">
 				<a class="nav-link" href="deleteForm">회원탈퇴</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" id="chatRoom" style="cursor: pointer;">채팅방</a>
-			</li>
 		</ul>
 	</div>
 	<div class="col-md-8">

@@ -13,9 +13,9 @@ import com.kh.team.vo.RecommendVo;
 import com.kh.team.vo.RoutineVo;
 
 @Repository
-public class MyLikeContentImplDao implements MyLikeContentDao {
+public class MyContentDaoImpl implements MyContentDao {
 	
-	private final String NAMESPACE = "com.kh.team.mappers.myLikeContent.";
+	private final String NAMESPACE = "com.kh.team.mappers.myContent.";
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -43,6 +43,31 @@ public class MyLikeContentImplDao implements MyLikeContentDao {
 	@Override
 	public List<RecommendVo> getRecommendByLike(String userid) {
 		return sqlSession.selectList(NAMESPACE + "getRecommendByLike", userid);
+	}
+
+	@Override
+	public List<FreeVo> getWriteFree(String userid) {
+		return sqlSession.selectList(NAMESPACE + "getWriteFree", userid);
+	}
+
+	@Override
+	public List<GroupBoardVo> getWriteGroupBoard(String userid) {
+		return sqlSession.selectList(NAMESPACE + "getWriteGroupBoard", userid);
+	}
+
+	@Override
+	public List<RecipeVo> getWriteRecipe(String userid) {
+		return sqlSession.selectList(NAMESPACE + "getWriteRecipe", userid);
+	}
+
+	@Override
+	public List<RoutineVo> getWriteRoutine(String userid) {
+		return sqlSession.selectList(NAMESPACE + "getWriteRoutine", userid);
+	}
+
+	@Override
+	public List<RecommendVo> getWriteRecommend(String userid) {
+		return sqlSession.selectList(NAMESPACE + "getWriteRecommend", userid);
 	}
 
 }

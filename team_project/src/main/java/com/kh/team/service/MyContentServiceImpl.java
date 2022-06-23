@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.team.dao.MyLikeContentDao;
+import com.kh.team.dao.MyContentDao;
 import com.kh.team.vo.FreeVo;
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.RecipeVo;
@@ -13,10 +13,10 @@ import com.kh.team.vo.RecommendVo;
 import com.kh.team.vo.RoutineVo;
 
 @Service
-public class MyLikeContentServiceImpl implements MyLikeContentService {
+public class MyContentServiceImpl implements MyContentService {
 	
 	@Autowired
-	private MyLikeContentDao dao;
+	private MyContentDao dao;
 
 	@Override
 	public List<FreeVo> getFreeByLike(String userid) {
@@ -41,6 +41,31 @@ public class MyLikeContentServiceImpl implements MyLikeContentService {
 	@Override
 	public List<RecommendVo> getRecommendByLike(String userid) {
 		return dao.getRecommendByLike(userid);
+	}
+
+	@Override
+	public List<FreeVo> getWriteFree(String userid) {
+		return dao.getWriteFree(userid);
+	}
+
+	@Override
+	public List<GroupBoardVo> getWriteGroupBoard(String userid) {
+		return dao.getWriteGroupBoard(userid);
+	}
+
+	@Override
+	public List<RecipeVo> getWriteRecipe(String userid) {
+		return dao.getWriteRecipe(userid);
+	}
+
+	@Override
+	public List<RoutineVo> getWriteRoutine(String userid) {
+		return dao.getWriteRoutine(userid);
+	}
+
+	@Override
+	public List<RecommendVo> getWriteRecommend(String userid) {
+		return dao.getWriteRecommend(userid);
 	}
 	
 }
