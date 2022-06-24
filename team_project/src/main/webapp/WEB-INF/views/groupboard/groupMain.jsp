@@ -5,20 +5,39 @@
 
 <style>
 
-#sidebar {
- 	 width: 400px;
-     margin-top: 0;
-     position:fixed;
-     float: left;
-     top:7%;
-     right:30px;
-     bottom:60%;
-     padding:30px;
-     height: 100%;
-     cursor:default;
-     overflow-y:auto;
-     z-index: 100;
- }
+/* #sidebar { */
+/*  	 width: 600px; */
+/*      margin-top: 0; */
+/*      position:fixed; */
+/*      float: left; */
+/*      top:7%; */
+/*      right:30px; */
+/*      bottom:60%; */
+/*      padding:30px; */
+/*      height: 100%; */
+/*      cursor:default; */
+/*      overflow-y:auto; */
+/*      z-index: 100; */
+/*  } */
+
+.main-sidebar {
+	width: 450px;
+	margin-top: 0;
+	position:fixed;
+	float: left;
+	top:7%;
+	right:30px;
+	bottom:60%;
+	padding:30px;
+	height: 100%;
+	cursor:default;
+	overflow-y:auto;
+	z-index: 100;
+}
+
+#searchType {
+	width: 100px;
+}
 
 </style>
 
@@ -156,7 +175,7 @@ $(function() {
 <!--================================
 =            Page Title            =
 =================================-->
-<section class="page-title">
+<section class="page-title" style="background-color: #2D5082;">
 	<!-- Container Start -->
 	<div class="container">
 		<div class="row">
@@ -177,9 +196,9 @@ $(function() {
 			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
 			
 			<c:forEach items="${ noticeList }" var="groupBoardVo" varStatus="status" begin="0" end="2">
-				<h3 style="background-color: powderblue;">
+				<h3 style="background-color: #2D5082;">
 				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
-					<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
+					<a style="color: #ffffff;" href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
 				</c:if>
 				</h3>
 			</c:forEach>
@@ -246,8 +265,8 @@ $(function() {
 				
 				<aside class="main-sidebar sidebar-dark-primary elevation-4" style="position: fixed; top: 30px bottom: 270px;">
 				<div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-transition os-host-scrollbar-horizontal-hidden">
-				<div class="list-group">
-						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
+				<div class="list-group" style="border-color: #2D5082;">
+						 <a style="background-color: #2D5082; color: #ffffff;" href="#" class="list-group-item">Home</a>
 						<div class="list-group-item">
 <!-- 							<h4 class="list-group-item-heading"> -->
 <!-- 								그룹 소개 -->
@@ -284,7 +303,7 @@ $(function() {
 							<div class="widget search p-0">
 								<div class="input-group">
 								    <input type="text" class="form-control" id="keyword" value="${searchDto.keyword}" placeholder="Search...">
-								    <span id="btnSearch" class="input-group-addon"><i class="fa fa-search"></i></span>
+								    <span style="background-color: #2D5082;" id="btnSearch" class="input-group-addon"><i class="fa fa-search"></i></span>
 							    </div>
 							</div>
 							
@@ -294,14 +313,15 @@ $(function() {
 						</div>	
 						
 						
-							<a href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
-								그룹 정보 보기
-							</a>
-							<div>
-							<a href="/chat/chat" class="list-group-item list-group-item-action active justify-content-between" id="chatRoom">
+							
+							<div class="list-group-item justify-content-between">
+							<a style="background-color: #ffffff; color: #2D5082;" href="/chat/chat" id="chatRoom">
 								그룹 채팅방
 							</a>
 							</div>
+							<a style="background-color: #2D5082;" href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+								그룹 정보 보기
+							</a>
 					</div>
 					<nav>
 						<ol class="breadcrumb">

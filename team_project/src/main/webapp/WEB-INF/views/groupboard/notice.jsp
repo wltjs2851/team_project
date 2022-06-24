@@ -111,7 +111,7 @@ $(function() {
 <!--================================
 =            Page Title            =
 =================================-->
-<section class="page-title">
+<section style="background-color: #2D5082;" class="page-title">
 	<!-- Container Start -->
 	<div class="container">
 		<div class="row">
@@ -131,8 +131,8 @@ $(function() {
 				
 				<c:forEach items="${ noticeList }" var="groupBoardVo">
 				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
-					<h3 style="background-color: #B0E0E6;">
-						<a class="noticeList" data-gbno="${ groupBoardVo.gbno }" href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
+					<h3 style="background-color: #2D5082;">
+						<a style="color: #ffffff; class="noticeList" data-gbno="${ groupBoardVo.gbno }" href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
 					</h3>
 				</c:if>
 				</c:forEach>
@@ -180,7 +180,7 @@ $(function() {
 				
 <!-- 				<aside class="column dotcom__aside bottom-12" style="position: fixed;"> -->
 					<div class="list-group">
-						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
+						 <a style="background-color: #2D5082;" href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
 							<h3>${ groupVo.g_name }</h3>
 						</div>
@@ -192,7 +192,7 @@ $(function() {
 						<div class="list-group-item justify-content-between">
 							<a href="/groupboard/groupMain/${ groupVo.gno }">그룹 메인으로</a>
 						</div>
-							<a href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+							<a style="background-color: #2D5082;" href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>
