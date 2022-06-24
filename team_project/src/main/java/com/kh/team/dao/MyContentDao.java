@@ -2,10 +2,15 @@ package com.kh.team.dao;
 
 import java.util.List;
 
+import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.FreeVo;
+import com.kh.team.vo.GroupBoardCommentVo;
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
+import com.kh.team.vo.RecommendCommentVo;
 import com.kh.team.vo.RecommendVo;
+import com.kh.team.vo.RoutineCommentVo;
 import com.kh.team.vo.RoutineVo;
 
 public interface MyContentDao {
@@ -23,5 +28,12 @@ public interface MyContentDao {
 	public List<RecipeVo> getWriteRecipe(String userid);
 	public List<RoutineVo> getWriteRoutine(String userid);
 	public List<RecommendVo> getWriteRecommend(String userid);
+	
+// 내가 쓴 댓글
+	public List<FreeCommentVo> getFreeComment(String userid);
+	public List<GroupBoardCommentVo> getGroupBoardComment(String userid);
+	public List<RecipeCommentVo> getRecipeComment(String userid);
+	public List<RoutineCommentVo> getRoutineComment(String userid);
+	public List<RecommendCommentVo> getRecommendComment(String userid);
 	
 }

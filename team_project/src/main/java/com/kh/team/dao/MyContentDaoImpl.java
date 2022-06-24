@@ -6,10 +6,15 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.FreeVo;
+import com.kh.team.vo.GroupBoardCommentVo;
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
+import com.kh.team.vo.RecommendCommentVo;
 import com.kh.team.vo.RecommendVo;
+import com.kh.team.vo.RoutineCommentVo;
 import com.kh.team.vo.RoutineVo;
 
 @Repository
@@ -68,6 +73,31 @@ public class MyContentDaoImpl implements MyContentDao {
 	@Override
 	public List<RecommendVo> getWriteRecommend(String userid) {
 		return sqlSession.selectList(NAMESPACE + "getWriteRecommend", userid);
+	}
+
+	@Override
+	public List<FreeCommentVo> getFreeComment(String userid) {
+		return sqlSession.selectList(NAMESPACE + "getFreeComment", userid);
+	}
+
+	@Override
+	public List<GroupBoardCommentVo> getGroupBoardComment(String userid) {
+		return sqlSession.selectList(NAMESPACE + "getGroupBoardComment", userid);
+	}
+
+	@Override
+	public List<RecipeCommentVo> getRecipeComment(String userid) {
+		return sqlSession.selectList(NAMESPACE + "getRecipeComment", userid);
+	}
+
+	@Override
+	public List<RoutineCommentVo> getRoutineComment(String userid) {
+		return sqlSession.selectList(NAMESPACE + "getRoutineComment", userid);
+	}
+
+	@Override
+	public List<RecommendCommentVo> getRecommendComment(String userid) {
+		return sqlSession.selectList(NAMESPACE + "getRecommendComment", userid);
 	}
 
 }

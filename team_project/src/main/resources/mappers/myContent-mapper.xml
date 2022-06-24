@@ -60,4 +60,29 @@
 		where userid = #{userid}
 	</select>
 	
+	<select id="getFreeComment" resultType="FreeCommentVo">
+		select * from tbl_fcomment
+		where userid = #{userid}
+	</select>
+	
+	<select id="getGroupBoardComment" resultType="GroupBoardCommentVo">
+		select * from tbl_group_board_comment
+		where userid = #{userid}
+	</select>
+	
+	<select id="getRecipeComment" resultType="RecipeCommentVo">
+		select * from tbl_rcomment		
+		where userid = #{userid}
+	</select>
+	
+	<select id="getRoutineComment" resultType="RoutineCommentVo">
+		select * from tbl_ucomment
+		where userid = #{userid}
+	</select>
+	
+	<select id="getRecommendComment" resultType="RecommendCommentVo">
+		select * from tbl_reccomment
+		where userid = #{userid}
+	</select>
+	
 </mapper>
