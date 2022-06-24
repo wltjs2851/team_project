@@ -82,6 +82,7 @@
 	<select id="getMemberList" resultType="MemberVo">
 		select * from (select rownum rnum, a.* from 
 			(select * from tbl_user
+				where (userid || username || email || address || nickname || age) like '%' || #{keyword, jdbcType=VARCHAR} || '%'
 			order by regdate desc) a)
 		where rnum between #{startRow} and #{endRow}
 	</select>

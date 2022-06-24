@@ -86,6 +86,7 @@ public class AdminController {
 	public String adminMember(Model model, PagingDto pagingDto) {
 		System.out.println("AdminController, memberList, pagingDto:" + pagingDto);
 		pagingDto.setCount(memberSerive.getCountMember(pagingDto));
+		System.out.println(pagingDto.getCount());
 		pagingDto.setPage(pagingDto.getPage());
 		List<MemberVo> memberList = memberSerive.getMemberList(pagingDto);
 		

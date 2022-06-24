@@ -115,6 +115,7 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public List<MemberVo> getMemberList(PagingDto pagingDto) {
 		List<MemberVo> getMemberList = sqlSession.selectList(NS + "getMemberList", pagingDto);
+		System.out.println("getMemberList, search:" + getMemberList);
 		return getMemberList;
 	}
 
