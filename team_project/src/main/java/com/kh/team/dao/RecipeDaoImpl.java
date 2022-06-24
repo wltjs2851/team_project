@@ -140,4 +140,13 @@ public class RecipeDaoImpl implements RecipeDao{
 		return adminRecipeList;
 	}
 
+	@Override
+	public boolean deleteLikeAll(int rno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteLikeAll", rno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

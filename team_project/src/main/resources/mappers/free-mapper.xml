@@ -22,6 +22,7 @@
 		
 		select * from (select rownum rnum, a.* from 
 			(select f.*, c.fname from tbl_free f, tbl_fcategory_code c
+			where f.fcode = c.fcode
 			<include refid="search"/>
 			order by fno desc) a) 
 		where rnum between #{startRow} and #{endRow}
@@ -84,25 +85,22 @@
 		<choose>
 			<when test="searchType != null and keyword != null">
 					<choose>
-						<when test='searchType == "t"'>where f_title like '%' || #{keyword} || '%' and f.fcode = c.fcode</when>
-						<when test='searchType == "c"'>where f_content like '%' || #{keyword} || '%' and f.fcode = c.fcode</when>
-						<when test='searchType == "w"'>where userid like '%' || #{keyword} || '%' and f.fcode = c.fcode</when>
+						<when test='searchType == "t"'>and f_title like '%' || #{keyword} || '%'</when>
+						<when test='searchType == "c"'>and f_content like '%' || #{keyword} || '%'</when>
+						<when test='searchType == "w"'>and userid like '%' || #{keyword} || '%'</when>
 						<when test='searchType == "tc"'>
-						where (f_title like '%' || #{keyword} || '%'
+						and (f_title like '%' || #{keyword} || '%'
 						or f_content like '%' || #{keyword} || '%')
-						and f.fcode = c.fcode</when>
+						</when>
 						<when test='searchType == "tcw"'>
-						where (f_title like '%' || #{keyword} || '%'
+						and (f_title like '%' || #{keyword} || '%'
 						or f_content like '%' || #{keyword} || '%'
 						or userid like '%' || #{keyword} || '%' )
-						and f.fcode = c.fcode
 						</when>
 						
 					</choose>
 			</when>
-			<when test="searchType == null and keyword == null">
-				where f.fcode = c.fcode
-			</when>
+			
 		</choose>
 	</sql>
 	

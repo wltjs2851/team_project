@@ -60,6 +60,10 @@
 		delete from tbl_recipe_like where rno = #{rno} and userid = #{userid}
 	</delete>
 	
+	<delete id="deleteLikeAll">
+		delete from tbl_recipe_like where rno = #{rno}
+	</delete>
+	
 	<select id="countLike" resultType="int">
 		select count(*) from tbl_recipe_like where rno = #{rno} and userid = #{userid}
 	</select>

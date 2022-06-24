@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.team.dao.RecipeCommentDao;
 import com.kh.team.dao.RecipeDao;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeVo;
@@ -15,6 +16,9 @@ public class RecipeServiceImpl implements RecipeService{
 	
 	@Autowired 
 	private RecipeDao recipeDao;
+	
+	@Autowired 
+	private RecipeCommentDao recipeCommentDao;
 
 	@Override
 	public boolean addRecipe(RecipeVo recipeVo) {
@@ -33,7 +37,13 @@ public class RecipeServiceImpl implements RecipeService{
 
 	@Override
 	public boolean removeRecipe(int rno) {
-		return recipeDao.deleteRecipe(rno);
+		boolean deleteComment = recipeCommentDao.deleteRecipeCommentAll(rno);
+		boolean deleteLike = recipeDao.deleteLikeAll(rno);
+		boolean deleteRecipe = recipeDao.deleteRecipe(rno);
+		if(deleteComment && deleteLike && deleteRecipe) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override

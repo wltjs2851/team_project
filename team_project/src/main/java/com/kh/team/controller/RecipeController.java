@@ -125,12 +125,28 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "/recipeModifyRun", method = RequestMethod.POST)
-	public String recipeModifyRun(RecipeVo recipeVo) {
+	public String recipeModifyRun(RecipeVo recipeVo, RedirectAttributes rttr, PagingDto pagingDto) {
 		System.out.println("RecipeController, recipeModifyRun, recipeVo: " + recipeVo);
 		String content = recipeVo.getR_content();
 		recipeVo.setR_content(content.replaceAll("\"", "\'"));
 		recipeService.moidfyRecipe(recipeVo);
-		return "redirect:/recipe/recipeForm?rno=" + recipeVo.getRno();
+		System.out.println(pagingDto.getPage());
+		rttr.addAttribute("rno", recipeVo.getRno());
+		rttr.addAttribute("page", pagingDto.getPage());
+		rttr.addAttribute("perPage", pagingDto.getPerPage());
+		rttr.addAttribute("searchType", pagingDto.getSearchType());
+		rttr.addAttribute("keyword", pagingDto.getKeyword());
+		return "redirect:/recipe/recipeForm";
+	}
+	
+	@RequestMapping(value = "/recipeRemoveRun", method = RequestMethod.GET)
+	public String recipeRemoveRun(int rno, RedirectAttributes rttr, PagingDto pagingDto) {
+		recipeService.removeRecipe(rno);
+		rttr.addAttribute("page", pagingDto.getPage());
+		rttr.addAttribute("perPage", pagingDto.getPerPage());
+		rttr.addAttribute("searchType", pagingDto.getSearchType());
+		rttr.addAttribute("keyword", pagingDto.getKeyword());
+		return "redirect:/recipe/recipeList";
 	}
 	
 	@RequestMapping(value = "/updateLike", method = RequestMethod.POST)

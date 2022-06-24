@@ -30,6 +30,7 @@ public class FreeDaoImpl implements FreeDao{
 	@Override
 	public List<FreeVo> selectFreeArticle(PagingDto pagingDto) {
 		List<FreeVo> list = sqlSession.selectList(NAMESPACE + "selectFreeArticle", pagingDto);
+		System.out.println("selectFreeArticle:" + list);
 		return list;
 	}
 
