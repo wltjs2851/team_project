@@ -8,8 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+  />
 </head>
 <style>
 .card-body {
@@ -41,7 +43,7 @@ th, td {
 <!-- Bootstrap -->
 <link href="/resources/plugins/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<link href="/resources/css/fonts.css" rel="stylesheet" />
+<link href="/resources/css/admin.css" rel="stylesheet" />
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -100,6 +102,10 @@ th, td {
 									<th>주소</th>
 									<td>${memberVo.address}</td>
 								</tr>
+								<tr>
+									<th>가입일</th>
+									<td>${memberVo.regdate}</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -148,19 +154,27 @@ th, td {
 										<td>${list.gno }</td>
 										<td>${list.g_name}</td>
 										<td><c:forEach items="${groupInfo }" var="test">
-												<c:if test="${list.g_name == test.g_name }">
+												<c:if test="${list.gno == test.gno }">
 <!-- 												<ul class="list-inline"> -->
-												<li class="list-inline-item">${test.userid }
+												<li class="list-inline-item">
+												
 <!-- 												<li class="list-inline-item"> -->
 												<c:choose>
 												<c:when test="${empty test.u_pic }">
 												<img class="rounded-circle groupMember" width="60px;" height="auto" style="align-items: center; overflow: hidden;"
-												src="/resources/images/profile.png" alt="프로필">
+												src="/resources/images/profile.png" alt="프로필"><br>
 												</c:when>
 												<c:otherwise>
 												<img class="rounded-circle groupMember" width="60px;" height="auto" style="align-items: center; overflow: hidden;"
-												src="/member/displayImage?filename=${test.u_pic}" alt="프로필">
+												src="/member/displayImage?filename=${test.u_pic}" alt="프로필"><br>
 												</c:otherwise>
+												</c:choose>
+												<c:choose>
+												<c:when test="${list.g_leader == test.userid }">
+												<i class='fas fa-crown' style="color: orange;"></i>
+													<strong>${test.userid }</strong>
+												</c:when>
+												<c:otherwise>${test.userid }</c:otherwise>
 												</c:choose>
 												</li>
 <!-- 											</ul> -->
