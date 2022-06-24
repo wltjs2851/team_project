@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.kh.team.mappers.reportboard">
+ 
+ <!-- 신고하기 -->
+ <insert id="insertReportBoard">
+ 	insert into tbl_report_board(rbno, rno, uno, fno, rcno, urcno, fcno, recno, rep_cause, sender, receiver)
+ 	values(seq_report_board_rbno.nextval, #{rno, jdbcType=VARCHAR}, #{uno, jdbcType=VARCHAR}, #{fno, jdbcType=VARCHAR}, #{rcno, jdbcType=VARCHAR}, 
+ 	#{urcno, jdbcType=VARCHAR}, #{fcno, jdbcType=VARCHAR}, #{recno, jdbcType=VARCHAR}, #{rep_cause},
+ 	#{sender}, #{receiver})
+ </insert>
+ 
+ <!-- 신고 내역 -->
+ <select id="getReportBoardList" resultType="ReportBoardVo">
+ 	select rep_cause from tbl_report
+ 	where userid = #{userid} and gno = #{gno}
+ </select>
+ 
+ </mapper>

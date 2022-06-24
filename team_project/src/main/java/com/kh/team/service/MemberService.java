@@ -3,6 +3,7 @@ package com.kh.team.service;
 import java.util.List;
 
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 
 public interface MemberService {
 	
@@ -28,5 +29,7 @@ public interface MemberService {
 	
 	public List<MemberVo> getLatestMember();
 	
-	public List<MemberVo> getMemberList();
+	public int getCountMember(PagingDto pagingDto);
+	
+	public List<MemberVo> getMemberList(PagingDto pagingDto);
 }

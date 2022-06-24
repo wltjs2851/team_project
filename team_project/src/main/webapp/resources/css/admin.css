@@ -5,15 +5,15 @@
 	font-family:"nanum";
 }
 
-@font-face {
-	src: url("/resources/css/fonts/BMJUA_ttf.ttf");
-	font-family:"jua";
-}
+/* @font-face { */
+/* 	src: url("/resources/css/fonts/BMJUA_ttf.ttf"); */
+/* 	font-family:"jua"; */
+/* } */
 
-h3 {
-	font-family: "jua";
+/* h3 { */
+/* 	font-family: "jua"; */
 	
-}
+/* } */
 * {
 	font-family: "nanum";
 }

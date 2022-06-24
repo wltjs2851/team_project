@@ -71,8 +71,8 @@ function uploadSummernoteImageFile(file) {
 					<textarea id="summernote" name="re_content"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="userid"> 사용자 </label>  
-					<input type="text" class="form-control" id="userid" name="userid" required/>
+<!-- 					<label for="userid"> 사용자 </label>   -->
+					<input type="hidden" class="form-control" id="userid" name="userid" value="admin01"/>
 				</div>
 				<button type="submit" class="btn btn-primary" 
 					style='width: 80px; height:50px; padding: 1% 0'>글쓰기</button>

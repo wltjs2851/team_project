@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.team.vo.EmailVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 
 public interface MemberDao  {
 
@@ -30,7 +31,10 @@ public interface MemberDao  {
 	// 최근 가입 회원 4명
 	public List<MemberVo> getLatestMember();
 	
+	// 전체 회원수 구하기
+	public int getCountMember(PagingDto pagingDto);
+	
 	// 전체 회원 조회
-	public List<MemberVo> getMemberList();
+	public List<MemberVo> getMemberList(PagingDto pagingDto);
 	
 }

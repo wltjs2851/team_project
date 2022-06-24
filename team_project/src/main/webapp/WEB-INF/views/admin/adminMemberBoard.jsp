@@ -40,25 +40,25 @@ $(function(){
 	$(".td_free").click(function(){
 		console.log("자유게시판 작성글 클릭");
 		var fno = $(this).attr("data-fno");
-		location.href = "/free/freeContent?fno=" + fno;
+		window.opener.location.href = "/free/freeContent?fno=" + fno;
 	});
 	
 	$(".td_recipe").click(function(){
 		console.log("식단 게시판 작성글 클릭");
 		var rno = $(this).attr("data-rno");
-		location.href = "/recipe/recipeForm?rno=" + rno;
+		window.opener.location.href = "/recipe/recipeForm?rno=" + rno;
 	});
 	
 	$(".td_groupBoard").click(function(){
 		console.log("그룹게시판 작성글 클릭");
 		var gbno = $(this).attr("data-gbno");
-		location.href = "/groupboard/groupRead?gbno=" + gbno;
+		window.opener.location.href = "/groupboard/groupRead?gbno=" + gbno;
 	});
 	
 	$(".td_routine").click(function(){
 		console.log("루틴게시판 작성글 클릭");
 		var uno = $(this).attr("data-uno");
-		location.href = "/routine/routineContent?uno=" + uno;
+		window.opener.location.href = "/routine/routineContent?uno=" + uno;
 	});
 	
 	function pagination() {
@@ -167,7 +167,7 @@ $(function(){
 					<c:forEach items="${freeList }" var="FreeVo">
 						<tr>
 							<td>${FreeVo.fno }</td>
-							<td class="td_free" data-fno=${freeVo.fno }>${FreeVo.f_title }</td>
+							<td class="td_free" data-fno=${FreeVo.fno }>${FreeVo.f_title }</td>
 							<td>${FreeVo.f_regdate }</td>
 						</tr>
 					</c:forEach>
