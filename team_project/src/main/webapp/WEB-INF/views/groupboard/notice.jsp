@@ -60,7 +60,7 @@ $(function() {
 <%-- ${ groupVo.gno } --%>
 <%-- ${ noticeList.gno } --%>
 <%-- ${ loginVo } --%>
-${ pagingDto }
+<%-- ${ pagingDto } --%>
 
 
 <form id="frmPaging">

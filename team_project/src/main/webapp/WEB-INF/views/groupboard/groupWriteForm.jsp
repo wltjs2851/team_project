@@ -71,14 +71,14 @@ $(function() {
 <!-- 					<input type="text" class="form-control" name="gb_content" id="gb_content" required /> -->
 					<textarea id="summernote" name="gb_content"></textarea>
 				</div>
-				<div class="form-group">
+<!-- 				<div class="form-group"> -->
 					 
-					<label for="file">사진 추가</label>
-					<input type="file" class="form-control-file" name="file" id="file" />
-					<p class="help-block">
-						부적절한 사진을 게시할 경우 강퇴
-					</p>
-				</div>
+<!-- 					<label for="file">사진 추가</label> -->
+<!-- 					<input type="file" class="form-control-file" name="file" id="file" /> -->
+<!-- 					<p class="help-block"> -->
+<!-- 						부적절한 사진을 게시할 경우 강퇴 -->
+<!-- 					</p> -->
+<!-- 				</div> -->
 				
 				<div class="checkbox">
 					 
