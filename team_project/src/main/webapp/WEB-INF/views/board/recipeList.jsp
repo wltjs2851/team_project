@@ -28,6 +28,12 @@ $(function() {
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
+	
+	$(".content").click(function() {
+		var rno = $(this).attr("data-rno");
+		$(this).attr("href", "/recipe/recipeForm?rno=" + rno + "&page=${pagingDto.page}&searchType=${param.searchType}" +
+				"&keyword=${param.keyword}");
+	});
 });
 </script>
 
@@ -56,7 +62,7 @@ $(function() {
 					<c:forEach items="${ recipeList }" var="recipeVo">
 					<tr>
 						<td>${ recipeVo.rno }</td>
-						<td><a href="/recipe/recipeForm?rno=${ recipeVo.rno }">${ recipeVo.r_title }</a></td>
+						<td><a class="content" data-rno="${ recipeVo.rno }"  href="#">${ recipeVo.r_title }</a></td>
 						<td>${ recipeVo.userid }</td>
 						<td>${ recipeVo.r_viewcnt }</td>
 						<td>${ recipeVo.r_regdate }</td>
@@ -128,7 +134,7 @@ $(function() {
 					<c:forEach begin="${ pagingDto.startPage }" end="${ pagingDto.endPage }" var="i">
 					<li 
 						<c:choose>
-							<c:when test="${i == param.page }">
+							<c:when test="${i == pagingDto.page }">
 								class="page-item active"
 							</c:when>
 							<c:otherwise>

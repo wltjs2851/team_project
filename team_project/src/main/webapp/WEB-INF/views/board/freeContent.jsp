@@ -206,13 +206,10 @@ $(function() {
 						style="width: 100%; resize: none;" placeholder="댓글 입력"></textarea>
 					<button type="button" id="btnComment" class="btn btn-primary"
 						style="width: 80px; height: 50px; padding: 1% 0; float: right; margin-top: 5px;">댓글달기</button>
-					<br>
-					<br>
-					<br>
 				</div>
 			</div>
 
-			<div class="row" style="margin-top: 20px; margin-left: 22px" id="comment">
+			<div class="row" style="margin-top: 55px; margin-left: 22px" id="comment">
 			</div>
 			<br>
 			<br>
