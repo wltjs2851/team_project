@@ -28,7 +28,7 @@ $(function() {
 	console.log(gno);
 	
 	$("#reportUser").text(userid);
-	$("#reportGno").text(gno);
+// 	$("#reportGno").text(gno);
 	
 	$("#btnReport").click(function() {
 		console.log("Click");
@@ -70,8 +70,11 @@ $(function() {
 					<form role="form">
 					
 						<div>
-							<h2><span id="reportGno"></span>번 그룹 <span id="reportUser"></span> 신고</h2>
+							<h2><span id="reportUser"></span> 신고</h2>
 						</div>
+						
+						익명으로 신고하므로 신고인은 철저히 보호됩니다.
+						<hr>
 						
 						<div class="form-group">
 						

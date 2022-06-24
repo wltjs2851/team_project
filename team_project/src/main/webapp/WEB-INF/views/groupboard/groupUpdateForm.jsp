@@ -121,9 +121,9 @@ $(function() {
 				</div>
 				<div class="form-group">
 					 
-					<label for="file">사진 추가</label>
+<!-- 					<label for="file">사진 추가</label> -->
 					
-					<div class="image">
+					<div class="image" style="display: none;">
 						<c:choose>
 							<c:when test="${empty groupBoardVo.gb_pic}">
 <!-- 								<img src="/resources/images/profile.png" height="100px" width="100px" class="rounded-circle z-depth-2"> -->
