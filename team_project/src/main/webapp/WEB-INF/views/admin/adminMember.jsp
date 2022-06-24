@@ -4,8 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script>
 $(function(){
-	
-
 	$(".selectId").click(function(e){
 		e.preventDefault();
 		console.log("회원상세조회");	

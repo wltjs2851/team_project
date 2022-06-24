@@ -25,11 +25,15 @@ $(document).ready(function() {
 	
 	var insertRecommend_result = "${insertRecommend_result}";
 	var deleteRecommend_result = "${deleteRecommend_result}";
+	var notAdmin = "${notAdmin}";
 	if (insertRecommend_result == "true") {
 		alert("추천운동 추가 완료");
 	}
 	if (deleteRecommend_result == "true"){
 		alert("추천운동 글 삭제");
+	}
+	if (notAdmin == "false") {
+		alert("관리자만 등록할수이따")
 	}
 	
 	// 글 조회
@@ -53,8 +57,10 @@ $(document).ready(function() {
 		<div class="col-md-8">
 			<div>
 			<h3 class="widget-header" style="display: inline-block;"><a href="/recommend/listRecommend">추천 운동법</a></h3>
+			<c:if test="${loginVo.userid == 'admin01'}">
 			<a class="btn btn-primary btn-sm" href="/recommend/insertRecommendForm" 
 				style="float: right; width: 110px; height:50px; padding: 1% 0">글 쓰기</a>
+			</c:if>
 			</div>
 			<table class="table table-responsive product-dashboard-table">
 				<tbody>
