@@ -55,4 +55,13 @@ public class RecipeCommentDaoImpl implements RecipeCommentDao{
 		return adminRecipeComment;
 	}
 
+	@Override
+	public boolean deleteRecipeCommentAll(int rno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteRecipeCommentAll", rno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

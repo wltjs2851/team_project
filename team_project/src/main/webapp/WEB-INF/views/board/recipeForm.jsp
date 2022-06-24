@@ -68,7 +68,7 @@ $(function() {
 	
 	$("#btnComment").click(function() {
 		var rc_comment = $("#rc_comment").val();
-		var userid = $("#userid").val();
+		var userid = "${loginVo.userid}";
 		var rno = "${recipeVo.rno}";
 		var u_pic = "${loginVo.u_pic}";
 		var url = "/recipe/addRecipeComment";
@@ -94,26 +94,33 @@ $(function() {
 			console.log(receivedData);
 			$("#comment > div").empty();
 			$.each(receivedData, function() {
-				console.log(this.u_pic);
 				var cmt = "";
 				cmt += "<div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
-				cmt += "<p style='font-size: large; font-weight: bold;'>";
+				cmt += "<div class='row'><p style='font-size: large; font-weight: bold;'>";
 				if(this.u_pic == null) {
 					cmt += "<img src='/resources/images/board/personDefault.png' class='rounded-circle z-depth-2' width=40px>";
 				} else {
-					cmt += "<img src='/recipe/displayImage?filename=" + this.u_pic + 
-							"' class='rounded-circle z-depth-2' width=40px>";
+					cmt += "<img src='/free/displayImage?filename=" + this.u_pic + 
+							"' class='rounded-circle z-depth-2' width=40px style='margin-right: 10px;'>";
 				}
 				cmt +=this.userid + "</p>";
-				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 100%'>" + this.rc_comment
-					+ "</textarea>";
-				cmt += "<button type='button' class='btnModify btn btn-outline-warning' data-rcno=" + this.rcno +
-					 " style='width: 80px; height:50px; padding: 1% 0'>수정</button>";
-				cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-rcno=" + this.rcno + 
-						 " style='display: none; width: 80px; height:50px; padding: 1% 0'>수정완료</button>";
-						 cmt += "<button type='button' class='btnDelete btn btn-outline-danger' data-rcno=" + this.rcno +
-						 " style='width: 80px; height:50px; padding: 1% 0'>삭제</button>";
-				cmt += "<hr>";
+				if("${loginVo.userid}" == this.userid) {				
+					cmt += "<div class='dropdown' style='float:right'>"
+					cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
+					cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
+					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
+					cmt += "		<button class='dropdown-item btnModify' type='button' data-rcno=" + this.rcno +">수정</button>"
+					cmt += "		<button class='dropdown-item btnDelete' type='button' data-rcno=" + this.rcno +">삭제</button>"
+					cmt += "</div></div>";
+				}
+				cmt += "</div>"
+				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
+							+ this.rc_comment + "</textarea>";
+				if("${loginVo.userid}" == this.userid) {	
+					cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-rcno=" + this.rcno + 
+							 " style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
+				}
+				cmt += "<hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
 				cmt += "</div>";
 				$("#comment").append(cmt);
 			})
@@ -122,12 +129,10 @@ $(function() {
 	
 	$("#comment").on("click", ".btnModify", function() {
 		var rcno = $(this).attr("data-rcno");
-		var btnModifyRun = $(this).next();
+		var btnModifyRun = $(this).parent().parent().parent().parent().find(".btnModifyRun");
 		console.log(rcno);
-		var comment = $(this).prev();
-		$(this).hide();
+		var comment = btnModifyRun.prev();
 		btnModifyRun.show();
-		console.log(comment);
 		comment.removeAttr("disabled");
 		btnModifyRun.click(function() {
 			var rcno = btnModifyRun.attr("data-rcno");
@@ -189,8 +194,16 @@ $(function() {
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-7">
+	<c:choose>
+		<c:when test="${ recipeVo.r_product == ' ' || empty recipeVo.r_product }">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+		</c:when>
+		<c:otherwise>	
+			<div class="col-md-2"></div>
+			<div class="col-md-7">
+		</c:otherwise>
+	</c:choose>
 			<div>
 				<h2>${ recipeVo.r_title }</h2>
 				<p style="color: #888;">${ recipeVo.userid } &nbsp; ${ recipeVo.r_regdate }</p>
@@ -198,48 +211,50 @@ $(function() {
 			</div>
 			<div>
 				${ recipeVo.r_content }
-				<hr>
+			<hr>
 			</div>
 			<div class="row">
 				<i class="fa-solid fa-heart" style="font-size: 25px;" ></i><p style="font-size: 25px"><span id="span_like">${ recipeVo.r_like }</span> &nbsp;
-				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }" class="btn btn-warning"
-					style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
-				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }" class="btn btn-danger"
-					style="width: 60px; height:40px; padding: 0.7% 0">삭제</a>
-				<a href="/recipe/recipeList" class="btn btn-outline-primary"
-					style="width: 60px; height:40px; padding: 0.7% 0">목록</a>
+				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" 
+					class="btn btn-warning" style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
+				<a href="/recipe/recipeRemoveRun?rno=${ recipeVo.rno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}"
+					 class="btn btn-danger" style="width: 60px; height:40px; padding: 0.7% 0">삭제</a>
+				<a href="/recipe/recipeList?page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}"
+				 class="btn btn-outline-primary" style="width: 60px; height:40px; padding: 0.7% 0">목록</a>
 			</div>
-			
 			<hr>
-			<div class="row" style="margin-top: 20px;">
-				<div class="col-md-10">
-					<input type="text" placeholder="댓글 입력" id="rc_comment" class="form-control">
-					<input type="hidden"id="userid" value="${ loginVo.userid }">
-				</div>
-				<div class="col-md-1">
+			<div class="col" style="margin-top: 20px;">
+				<div>
+					<input type="hidden" id="userid" class="form-control">
+					<textarea onkeyup="adjustHeight();" rows="4" id="rc_comment"
+						style="width: 100%; resize: none;" placeholder="댓글 입력"></textarea>
 					<button type="button" id="btnComment" class="btn btn-primary"
-						style="width: 80px; height:50px; padding: 1% 0">댓글달기</button>
+						style="width: 80px; height: 50px; padding: 1% 0; float: right; margin-top: 5px;">댓글달기</button>
 				</div>
-				<div class="col-md-1">
-					
-				</div>
-
-				<div class="row" style="margin-top: 20px; margin-left: 20px;" id="comment">
-					<div style="display: none;">
-						<button type="button" class="btn btn-sm btn-outline-warning btnCommentModify"
-							style="width: 10%; height:50px; padding: 1% 0">수정</button>
-						<button type="submit" class="btn btn-sm btn-outline-success btnCommentModifyRun" 
-							style="display: none; width: 10%; height:50px; padding: 1% 0">수정완료</button>
-					</div>
-				</div>
+			</div>
+			<div class="row" style="margin-top: 55px; margin-left: 22px" id="comment">
 			</div>
 			<br>
 			<br>
 		</div>
-		<div class="col-md-4">
-			<h2>추천상품</h2>
-			${fn:replace(recipeVo.r_product, '×', '')}
-		</div>
+		<c:choose>
+			<c:when test="${ recipeVo.r_product == ' ' || empty recipeVo.r_product }">
+				<div class="col-md-2"></div>
+			</c:when>
+			<c:otherwise>	
+				<div class="col-md-3" style='padding-right:15%'>
+				<h2>추천상품</h2>
+				${fn:replace(recipeVo.r_product, '×', '')}
+				</div>
+			</c:otherwise>
+		</c:choose>
+		
+<!-- 			<div class="col-md-3" style='padding-right=50%'> -->
+<%-- 			<c:if test="${ not empty recipeVo.r_product }">	 --%>
+<!-- 				<h2>추천상품</h2> -->
+<%-- 				${fn:replace(recipeVo.r_product, '×', '')} --%>
+<%-- 			</c:if> --%>
+<!-- 			</div> -->
 	</div>
 </div>
 

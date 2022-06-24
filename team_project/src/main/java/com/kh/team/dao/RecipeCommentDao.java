@@ -11,6 +11,7 @@ public interface RecipeCommentDao {
 	public List<RecipeCommentVo> commentRecipeList(int rno);
 	public boolean udpateRecipeComment(RecipeCommentVo commentVo);
 	public boolean deleteRecipeComment(int rcno);
+	public boolean deleteRecipeCommentAll(int rno);
 	
 	public List<RecipeCommentVo> adminRecipeComment(String userid);
 }

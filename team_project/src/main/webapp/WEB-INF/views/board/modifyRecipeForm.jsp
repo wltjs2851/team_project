@@ -113,6 +113,10 @@ $(function() {
 					<input type="hidden" name="rno" value="${ recipeVo.rno }">
 					<input type="hidden" id="userid" name="userid" value="${ loginVo.userid }"/>
 					<input type="hidden" id="r_product" name="r_product"/>
+					<input type="hidden" name="page" value="${ param.page }">
+					<input type="hidden" name="perPage" value="${ param.perPage }">
+					<input type="hidden" name="keyword" value="${ param.keyword }">
+					<input type="hidden" name="searchType" value="${ param.searchType }">
 					<div class="form-group">
 						<input type="text" class="form-control" value="${ recipeVo.r_title }" name="r_title" required/>
 					</div>

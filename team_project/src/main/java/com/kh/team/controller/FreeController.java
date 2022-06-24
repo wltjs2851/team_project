@@ -48,6 +48,7 @@ public class FreeController {
 	
 	@RequestMapping(value = "/freeList", method = RequestMethod.GET)
 	public String FreeList(Model model, PagingDto pagingDto) {
+		System.out.println("list: " + pagingDto);
 		pagingDto.setCount(freeService.getCount(pagingDto));
 		pagingDto.setPage(pagingDto.getPage());
 		List<FreeVo> freeList = freeService.freeList(pagingDto);
