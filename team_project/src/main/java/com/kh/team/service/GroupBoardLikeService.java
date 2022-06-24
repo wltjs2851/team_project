@@ -9,4 +9,6 @@ public interface GroupBoardLikeService {
 	public void updateLike(int gbno);
 	public int countLike(GroupBoardLikeVo groupBoardLikeVo);
 
+	public boolean deleteAllLike(int gbno);
+
 }

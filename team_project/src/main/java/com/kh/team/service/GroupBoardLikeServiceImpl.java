@@ -34,4 +34,10 @@ public class GroupBoardLikeServiceImpl implements GroupBoardLikeService {
 		return groupBoardLikeDao.countLike(groupBoardLikeVo);
 	}
 
+	@Override
+	public boolean deleteAllLike(int gbno) {
+		boolean result = groupBoardLikeDao.deleteAllLike(gbno);
+		return result;
+	}
+
 }
