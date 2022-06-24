@@ -14,6 +14,8 @@ public interface GroupBoardCommentService {
 	public void updateComment(int gbno);
 	public void updateCommentDelete(int gbno);
 	
+	public boolean deleteAllGComment(int gbno);
+	
 	public List<GroupBoardCommentVo> adminGroupBoardComment(String userid);
 
 }

@@ -77,5 +77,14 @@ public class GroupBoardCommentDaoImpl implements GroupBoardCommentDao {
 		return adminGroupBoardComment;
 	}
 
+	@Override
+	public boolean deleteAllGComment(int gbno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteAllGComment", gbno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 
 }
