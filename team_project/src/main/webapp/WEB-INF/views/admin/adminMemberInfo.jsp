@@ -40,7 +40,11 @@ th, td {
 	padding: 7px;
 }
 
-.hide {
+.hide1 {
+	display: none;
+}
+
+.hide2 {
 	display: none;
 }
 </style>
@@ -54,39 +58,75 @@ th, td {
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 $(function(){
-	$("#minimize").click(function(){
+	$("#minimize1").click(function(){
 		console.log("최소화 클릭");
 		var cardBody = $("#card-body");
 		console.log(cardBody);
-		if (cardBody.hasClass('hide')){
+		if (cardBody.hasClass('hide1')){
 			// 숨겨져 있다면
 			console.log("if");
-			cardBody.removeClass('hide');
+			cardBody.removeClass('hide1');
 		} else {
 			// 숨겨지지 않았다면
 			console.log("else");
-			cardBody.addClass('hide');
+			cardBody.addClass('hide1');
 			$(this).css("display", "none");
-			$(".fa-plus").css("display", "");
+			$("#plus1").css("display", "");
 		}
 	});
 	
-	$("#plus").click(function(){
+	$("#plus1").click(function(){
 		console.log("최대화 클릭");
 		var cardBody = $("#card-body");
 		console.log(cardBody);
-		if (cardBody.hasClass('hide')){
+		if (cardBody.hasClass('hide1')){
 			// 숨겨져 있다면
 			console.log("if");
-			cardBody.removeClass('hide');
+			cardBody.removeClass('hide1');
 			$(this).css("display", "none");
-			$(".fa-window-minimize").css("display", "");
+			$("#minimize1").css("display", "");
 		} else {
 			// 숨겨지지 않았다면
 			console.log("else");
-			cardBody.addClass('hide');
+			cardBody.addClass('hide1');
 			$(this).css("display", "none");
-			$(".fa-window-minimize").css("display", "");
+			$("#minimize1").css("display", "");
+		}
+	});
+	
+	$("#minimize2").click(function(){
+		console.log("최소화 클릭");
+		var cardBody = $("#card-body2");
+		console.log(cardBody);
+		if (cardBody.hasClass('hide2')){
+			// 숨겨져 있다면
+			console.log("if");
+			cardBody.removeClass('hide2');
+		} else {
+			// 숨겨지지 않았다면
+			console.log("else");
+			cardBody.addClass('hide2');
+			$(this).css("display", "none");
+			$("#plus2").css("display", "");
+		}
+	});
+	
+	$("#plus2").click(function(){
+		console.log("최대화 클릭");
+		var cardBody = $("#card-body2");
+		console.log(cardBody);
+		if (cardBody.hasClass('hide2')){
+			// 숨겨져 있다면
+			console.log("if");
+			cardBody.removeClass('hide2');
+			$(this).css("display", "none");
+			$("#minimize2").css("display", "");
+		} else {
+			// 숨겨지지 않았다면
+			console.log("else");
+			cardBody.addClass('hide2');
+			$(this).css("display", "none");
+			$("#minimize2").css("display", "");
 		}
 	});
 });
@@ -161,28 +201,28 @@ $(function(){
 			<div class="card">
 	        <div class="card-header" style="width: 100%;">
 	          <h3 class="card-title" >가입한 그룹 목록
-	          <i class='fas fa-window-minimize' id="minimize" style="float: right;"></i>
-	          <i class='fas fa-plus' style="display: none; float: right;" id="plus"></i></h3>
+	          <i class='fas fa-window-minimize' id="minimize1" style="float: right;"></i>
+	          <i class='fas fa-plus' style="display: none; float: right;" id="plus1"></i></h3>
 	        </div>
         <div class="card-body p-0" id="card-body">
           <table class="table table-striped projects">
           	<c:choose>
               	<c:when test="${not empty groupList }">
               <thead>
-                  <tr>
+                  <tr style="text-align: center;">
                       <th style="width: 5%">
                           #
                       </th>
                       <th style="width: 15%">
                           그룹 이름
                       </th>
-                      <th style="width: 45%">
+                      <th style="width: 45%;">
                           그룹 멤버
                       </th>
                       <th>
                           인원
                       </th>
-                      <th style="width: 8%" class="text-center">
+                      <th style="width: 10%" class="text-center">
                           지역
                       </th>
                       <th style="width: 6%">
@@ -244,48 +284,47 @@ $(function(){
 		</div>
 		
 <!-- 		작성 글/댓글 -->
+<%-- ${adminList } --%>
 		<div><br>
 			<div class="card">
 	        <div class="card-header" style="width: 100%;">
-	          <h3 class="card-title" >작성 글
-	          <i class='fas fa-window-minimize' id="minimize" style="float: right;"></i>
-	          <i class='fas fa-plus' style="display: none; float: right;" id="plus"></i></h3>
+	          <h3 class="card-title" >최근 작성 글
+	          <i class='fas fa-window-minimize' id="minimize2" style="float: right;"></i>
+	          <i class='fas fa-plus' style="display: none; float: right;" id="plus2"></i></h3>
 	        </div>
-        <div class="card-body p-0" id="card-body">
+        <div class="card-body p-0" id="card-body2">
           <table class="table table-striped projects">
+          <c:choose>
+          	<c:when test="${not empty adminList}">
               <thead>
                   <tr>
                       <th style="width: 5%">
                           #
                       </th>
-                      <th style="width: 15%">
-                          그룹 이름
-                      </th>
                       <th style="width: 45%">
-                          그룹 멤버
+                          글 제목 
                       </th>
-                      <th>
-                          인원
-                      </th>
-                      <th style="width: 8%" class="text-center">
-                          지역
-                      </th>
-                      <th style="width: 6%">
+                      <th style="width: 20%">
+                          작성일
                       </th>
                   </tr>
               </thead>
               <tbody>
+              <c:forEach items="${adminList }" var="admin">
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>
-					</td>
-					<td class="project_progress"></td>
-					<td class="project-state"></td>
-					<td class="project-actions text-right"></td>
+					<td>${admin.number }</td>
+					<td>${admin.title }</td>
+					<td>${admin.regdate }</td>
 				</tr>
+			</c:forEach>	
 			</tbody>
+			</c:when>
+			<c:otherwise>
+				<div style="text-align: center;"><br>
+					<p>작성한 글이 없습니다.</p>
+					</div>
+			</c:otherwise>
+			</c:choose>
           </table>
         </div>
         <!-- /.card-body -->
