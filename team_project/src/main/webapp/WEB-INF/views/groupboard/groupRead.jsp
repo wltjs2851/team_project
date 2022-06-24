@@ -255,7 +255,7 @@ $(function() {
 						<button type="button" id="btnCommentInsert" class="btn btn-sm btn-outline-primary">완료</button>
 					</div>
 				
-				<div class="row" style="margin-top: 20px; margin-left: 20px;" id="comment">
+				<div class="row col-md-9" style="margin-top: 20px; margin-left: 20px;" id="comment">
 					<div style="display: none;">
 						<button type="button" class="btn btn-sm btn-outline-warning btnCommentModify"
 							style="width: 10%; height:50px; padding: 1% 0">수정</button>

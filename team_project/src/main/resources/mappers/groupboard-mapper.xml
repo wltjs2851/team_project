@@ -96,6 +96,12 @@
 	where userid = #{userid}
 </select>
 
+<!-- 글 갯수 -->
+<select id="getCount" resultType="int">
+	select count(*) from tbl_group_board
+	where gb_notice = 'on' and gno = #{gno}
+</select>
+
 <!-- 검색 조건(참조용) -->
  <sql id="search">
  	<if test="searchType != null and keyword != null">

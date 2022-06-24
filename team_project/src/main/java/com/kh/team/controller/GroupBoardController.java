@@ -35,6 +35,7 @@ import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.ReportVo;
 import com.kh.team.vo.SearchDto;
 
@@ -245,12 +246,16 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "notice", method = RequestMethod.GET)
-	public String notice(String gb_notice, Model model, int gno) {
+	public String notice(String gb_notice, Model model, int gno, PagingDto pagingDto) {
 		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);
-//		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
+
+		pagingDto.setCount(groupBoardService.getCount(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
+		System.out.println("notice, pagingDto:" + pagingDto);
+		model.addAttribute("pagingDto", pagingDto);
 		
 		model.addAttribute("noticeList", noticeList);
-//		model.addAttribute("groupBoardVo", groupBoardVo);
+		
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);
 		

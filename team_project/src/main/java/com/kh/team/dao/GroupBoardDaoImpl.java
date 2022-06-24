@@ -12,6 +12,7 @@ import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.ReportVo;
 import com.kh.team.vo.SearchDto;
 
@@ -124,6 +125,12 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	public List<GroupBoardVo> adminGroupBoardList(String userid) {
 		List<GroupBoardVo> adminGroupBoardList = sqlSession.selectList(NAMESPACE + "adminGroupBoardList", userid);
 		return adminGroupBoardList;
+	}
+
+	@Override
+	public int getCount(PagingDto pagingDto) {
+		int count = sqlSession.selectOne(NAMESPACE + "getCount", pagingDto);
+		return count;
 	}
 
 }

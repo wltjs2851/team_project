@@ -235,7 +235,7 @@ $(function() {
 					</div>
 					
 					<!-- Read more button -->
-					<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }" class="btn btn-transparent">Read More</a>
+					<a style="width: 90px; height:40px; padding: 1% 0" href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }" class="btn btn-transparent">...더 보기</a>
 				</article>
 				
 			</c:forEach>

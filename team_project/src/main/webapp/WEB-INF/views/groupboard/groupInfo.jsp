@@ -238,11 +238,13 @@ $(function() {
 							</div>
 							<div class="tab-pane" id="tab2">
 								<p>
-									그룹원 목록(그룹장일 경우 강퇴 버튼 보이게)
+<!-- 									그룹원 목록(그룹장일 경우 강퇴 버튼 보이게) -->
 									<div>
 									
 									<div>
 										그룹장: <span id="leader">${ groupVo.g_leader }</span>
+<%-- 										<p style="border-radius: 5em; padding: 0.5em; background: #E7B7B7;">그룹장: <span id="leader">${ groupVo.g_leader }</span></p> --%>
+<%-- 										<p style="border-left: 10px solid #688FF4; padding: 0.5em; border-bottom: 2px solid #688FF4; ">그룹장: <span id="leader">${ groupVo.g_leader }</span></p> --%>
 									</div>
 									
 									<c:forEach items="${groupJoinMember}" var="groupJoinVo">
