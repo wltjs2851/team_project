@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <%-- ${ data } --%>
-${ data.gb_pic }
+<%-- ${ data.gb_pic } --%>
 
 <script>
 
@@ -107,6 +107,7 @@ $(function() {
 			<form role="form" action="/groupboard/groupUpdateRun" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="gbno" value="${ param.gbno }">
 				<input type="hidden" id="prevImg" name="prevImg" value="${ data.gb_pic }">
+				<input type="hidden" id="gno" name="gno" value="${ data.gno }">
 				
 				<div class="form-group">
 					 
@@ -117,7 +118,6 @@ $(function() {
 					 
 					<label for="gb_content">내용</label>
 					<textarea id="summernote" name="gb_content"></textarea>
-<%-- 					<input type="text" value="${ data.gb_content }" class="form-control" name="gb_content" id="gb_content" required /> --%>
 				</div>
 				<div class="form-group">
 					 
@@ -140,28 +140,10 @@ $(function() {
 					</div>
 					
 					
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="${ not empty groupBoardVo.gb_pic }"> --%>
-<%-- 							<img id="pic" src="/groupboard/displayImage?filename=${groupBoardVo.gb_pic}"> --%>
-<%-- 							<a id="delPic" href="#" data-filename="${groupBoardVo.gb_pic}">&times;</a> --%>
-<%-- 							<input type="file" value="${ groupBoardVo.gb_pic }" class="form-control-file" name="file" id="file"/> --%>
-<%-- 						</c:when> --%>
-<%-- 						<c:otherwise> --%>
-<%-- 							<input type="file" value="${ data.gb_pic }" class="form-control-file" name="file" id="file"/> --%>
-<%-- 						</c:otherwise> --%>
-<%-- 					</c:choose> --%>
-					
 					<p class="help-block">
 						부적절한 사진을 게시할 경우 강퇴
 					</p>
 				</div>
-				
-<!-- 				<div class="checkbox"> -->
-					 
-<!-- 					<label for="gb_notice"> -->
-<!-- 						<input type="checkbox" name="gb_notice" id="gb_notice"/> 공지 -->
-<!-- 					</label> -->
-<!-- 				</div>  -->
 				
 				<button type="submit" id="btnModify" class="btn btn-primary">
 					글 수정하기

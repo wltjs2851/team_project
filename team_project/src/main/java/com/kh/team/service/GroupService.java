@@ -26,5 +26,5 @@ public interface GroupService {
 	public int getCount();
 	
 	public List<String> getNickname(int gno);
-	public GroupVo getGroupByUserId(String userid);
+	public List<GroupVo> getGroupByUserId(String userid);
 }

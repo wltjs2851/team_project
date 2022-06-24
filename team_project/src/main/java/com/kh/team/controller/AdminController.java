@@ -25,6 +25,7 @@ import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.FreeVo;
 import com.kh.team.vo.GroupBoardCommentVo;
 import com.kh.team.vo.GroupBoardVo;
+import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.RecipeCommentVo;
@@ -32,6 +33,7 @@ import com.kh.team.vo.RecipeVo;
 import com.kh.team.vo.RecommendCommentVo;
 import com.kh.team.vo.RoutineCommentVo;
 import com.kh.team.vo.RoutineVo;
+import com.kh.team.vo.testVo;
 
 @Controller
 @RequestMapping("/admin")
@@ -97,8 +99,17 @@ public class AdminController {
 		model.addAttribute("adminList", adminList);
 		
 //		가입한 그룹 정보
-		GroupVo groupVo = groupService.getGroupByUserId(userid);
-		model.addAttribute("groupVo", groupVo);
+		List<GroupVo> groupList = groupService.getGroupByUserId(userid);
+		model.addAttribute("groupList", groupList);
+		
+		// 가입한 그룹의 멤버들 정보
+//		List<GroupJoinVo> groupMemberList = groupService.list(userid);
+//		model.addAttribute("groupMemberList", groupMemberList);
+		List<testVo> groupInfo = adminService.getGroupInfo();
+		System.out.println("groupInfo:" + groupInfo);
+		model.addAttribute("groupInfo", groupInfo);
+		
+		
 		
 		return "/admin/adminMemberInfo";
 	}

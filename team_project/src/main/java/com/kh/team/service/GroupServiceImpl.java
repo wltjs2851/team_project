@@ -137,7 +137,7 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	public GroupVo getGroupByUserId(String userid) {
+	public List<GroupVo> getGroupByUserId(String userid) {
 		return groupDao.getGroupByUserId(userid);
 	}
 }

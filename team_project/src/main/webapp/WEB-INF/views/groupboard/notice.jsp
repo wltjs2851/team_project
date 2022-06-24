@@ -39,6 +39,7 @@ $(function() {
 <%-- ${ groupVo } --%>
 <%-- ${ groupVo.gno } --%>
 <%-- ${ noticeList.gno } --%>
+<%-- ${ loginVo } --%>
 
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
@@ -78,19 +79,31 @@ $(function() {
 	</div>
 </div>
 
+<!--================================
+=            Page Title            =
+=================================-->
+<section class="page-title">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<h3>${ groupVo.g_name }</h3>
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-9">
-				
+<section class="blog section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">				
 				<h2>공지글 전체 보기</h2>
 				
 				<c:forEach items="${ noticeList }" var="groupBoardVo">
 				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
-					<h3 style="background-color: yellowgreen;">
-						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title }</a>
+					<h3 style="background-color: #B0E0E6;">
+						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
 					</h3>
 				</c:if>
 				</c:forEach>
@@ -112,7 +125,7 @@ $(function() {
 						<div class="list-group-item justify-content-between">
 							<a href="/groupboard/groupMain/${ groupVo.gno }">그룹 메인으로</a>
 						</div>
-							<a href="/groupboard/groupInfo?gno=${ loginVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+							<a href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>
@@ -124,36 +137,21 @@ $(function() {
 							<li class="breadcrumb-item">
 								<a href="/groupboard/activityInfo/${ groupVo.gno }">활동 정보</a>
 							</li>
-							<li class="breadcrumb-item">
-								<a href="#" id="leaveGroup">그룹 탈퇴</a>
-							</li>
+							
+							<c:if test="${ groupVo.g_leader == loginVo.userid }">
+								<li id="leaveModal" class="breadcrumb-item" style="display:none;">
+									<a href="#" id="leaveGroup">그룹 탈퇴</a>
+								</li>
+							</c:if>
 						</ol>
 					</nav>
-					<div class="row">
-						<div>
-							<div class="card">
-								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" />
-								<div class="card-block">
-									<h5 class="card-title">
-										Card title
-									</h5>
-									<p class="card-text">
-										그룹원
-									</p>
-									<p>
-										<a class="btn btn-primary" href="#">쪽지보내기</a>
-									</p> 
-								</div>
-							</div>
-						</div>
-					</div>
-<!-- 					</aside> -->
 				
 				</div>
 			</div>
 		</div>
+		
 	</div>
-</div>
-
+	</div>
+</section>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>

@@ -47,6 +47,9 @@ public class GroupBoardCommentController {
 	@RequestMapping(value = "/updateGroupComment", method = RequestMethod.POST)
 	public String updateGroupComment(GroupBoardCommentVo groupBoardCommentVo) {
 		boolean result = groupBoardCommentService.updateGroupComment(groupBoardCommentVo);
+		String gbc_content = groupBoardCommentVo.getGbc_content();
+		System.out.println("updateGroupComment: " + groupBoardCommentVo);
+		System.out.println("gbc_content: " + gbc_content);
 		return String.valueOf(result);
 	}
 	

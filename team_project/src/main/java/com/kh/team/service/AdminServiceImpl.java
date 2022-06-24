@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.team.dao.AdminDao;
 import com.kh.team.vo.AdminVo;
+import com.kh.team.vo.testVo;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -16,6 +17,10 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<AdminVo> adminList(String userid) {
 		return adminDao.adminList(userid);
+	}
+	@Override
+	public List<testVo> getGroupInfo() {
+		return adminDao.getGroupInfo();
 	}
 
 }
