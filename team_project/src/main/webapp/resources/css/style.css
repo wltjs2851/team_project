@@ -5,6 +5,26 @@ body {
   font-family: "Muli", sans-serif;
 }
 
+th.number {
+	width: 110px;	
+}
+
+th.title {
+	width: 575px;
+}
+
+th.writer {
+	width: 190px;
+}
+
+th.like {
+	width: 140px;
+}
+
+th.regdate {
+	width: 235px;
+}
+
 .like_tr {
 	cursor: pointer;
 }

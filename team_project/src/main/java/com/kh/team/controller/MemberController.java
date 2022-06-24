@@ -24,11 +24,16 @@ import com.kh.team.service.MemberService;
 import com.kh.team.service.MyContentService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.EmailVo;
+import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.FreeVo;
+import com.kh.team.vo.GroupBoardCommentVo;
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
+import com.kh.team.vo.RecommendCommentVo;
 import com.kh.team.vo.RecommendVo;
+import com.kh.team.vo.RoutineCommentVo;
 import com.kh.team.vo.RoutineVo;
 
 @Controller
@@ -128,63 +133,48 @@ public class MemberController {
 	public String myActivityLike(HttpSession session, Model model, String type) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = loginVo.getUserid();
-		List<FreeVo> freeLike = new ArrayList<>();
-		List<GroupBoardVo> groupBoardLike = new ArrayList<>();
-		List<RecipeVo> recipeLike = new ArrayList<>();
-		List<RoutineVo> routineLike = new ArrayList<>();
-		List<RecommendVo> recommendLike = new ArrayList<>();
+		List<FreeVo> free = new ArrayList<>();
+		List<GroupBoardVo> groupBoard = new ArrayList<>();
+		List<RecipeVo> recipe = new ArrayList<>();
+		List<RoutineVo> routine = new ArrayList<>();
+		List<RecommendVo> recommend = new ArrayList<>();
 		System.out.println(type);
 		if (type.equals("like")) {
-			freeLike = myContentService.getFreeByLike(userid);
-			groupBoardLike = myContentService.getGroupBoardByLike(userid);
-			recipeLike = myContentService.getRecipeByLike(userid);
-			routineLike = myContentService.getRoutineByLike(userid);
-			recommendLike = myContentService.getRecommendByLike(userid);
-			System.out.println("freeLike" + freeLike);
-			System.out.println("groupBoardLike" + groupBoardLike);
-			System.out.println("recipeLike" + recipeLike);
-			System.out.println("routineLike" + routineLike);
-			System.out.println("recommendLike" + recommendLike);
+			free = myContentService.getFreeByLike(userid);
+			groupBoard = myContentService.getGroupBoardByLike(userid);
+			recipe = myContentService.getRecipeByLike(userid);
+			routine = myContentService.getRoutineByLike(userid);
+			recommend = myContentService.getRecommendByLike(userid);
+			System.out.println("freeLike" + free);
+			System.out.println("groupBoardLike" + groupBoard);
+			System.out.println("recipeLike" + recipe);
+			System.out.println("routineLike" + routine);
+			System.out.println("recommendLike" + recommend);
 		} else if (type.equals("write")) {
-			freeLike = myContentService.getWriteFree(userid);
-			groupBoardLike = myContentService.getWriteGroupBoard(userid);
-			recipeLike = myContentService.getWriteRecipe(userid);
-			routineLike = myContentService.getWriteRoutine(userid);
-			recommendLike = myContentService.getWriteRecommend(userid);
-			System.out.println("freeLike" + freeLike);
-			System.out.println("groupBoardLike" + groupBoardLike);
-			System.out.println("recipeLike" + recipeLike);
-			System.out.println("routineLike" + routineLike);
-			System.out.println("recommendLike" + recommendLike);
+			free = myContentService.getWriteFree(userid);
+			groupBoard = myContentService.getWriteGroupBoard(userid);
+			recipe = myContentService.getWriteRecipe(userid);
+			routine = myContentService.getWriteRoutine(userid);
+			recommend = myContentService.getWriteRecommend(userid);
 		} else if (type.equals("comment")) {
-			
+			List<FreeCommentVo> freeComment = myContentService.getFreeComment(userid);
+			List<GroupBoardCommentVo> groupBoardComment = myContentService.getGroupBoardComment(userid);
+			List<RecipeCommentVo> recipeComment = myContentService.getRecipeComment(userid);
+			List<RoutineCommentVo> routineComment = myContentService.getRoutineComment(userid);
+			List<RecommendCommentVo> recommendComment = myContentService.getRecommendComment(userid);
+			model.addAttribute("freeComment", freeComment);
+			model.addAttribute("groupBoardComment", groupBoardComment);
+			model.addAttribute("recipeComment", recipeComment);
+			model.addAttribute("routineComment", routineComment);
+			model.addAttribute("recommendComment", recommendComment);
 		}
-		model.addAttribute("freeLike", freeLike);
-		model.addAttribute("groupBoardLike", groupBoardLike);
-		model.addAttribute("recipeLike", recipeLike);
-		model.addAttribute("routineLike", routineLike);
-		model.addAttribute("recommendLike", recommendLike);
+		model.addAttribute("free", free);
+		model.addAttribute("groupBoard", groupBoard);
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("routine", routine);
+		model.addAttribute("recommend", recommend);
 		return "/member/myActivity";
 	}
-	
-//	// 내가 쓴 글 목록으로 이동
-//	@RequestMapping(value = "/myActivityWrite", method = RequestMethod.GET)
-//	@Transactional
-//	public String myActivityWrite(HttpSession session, Model model) {
-//		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
-//		String userid = loginVo.getUserid();
-//		List<FreeVo> freeLike = myContentService.getWriteFree(userid);
-//		List<GroupBoardVo> groupBoardLike = myContentService.getWriteGroupBoard(userid);
-//		List<RecipeVo> recipeLike = myContentService.getWriteRecipe(userid);
-//		List<RoutineVo> routineLike = myContentService.getWriteRoutine(userid);
-//		List<RecommendVo> recommendLike = myContentService.getWriteRecommend(userid);
-//		model.addAttribute("freeLike", freeLike);
-//		model.addAttribute("groupBoardLike", groupBoardLike);
-//		model.addAttribute("recipeLike", recipeLike);
-//		model.addAttribute("routineLike", routineLike);
-//		model.addAttribute("recommendLike", recommendLike);
-//		return "/member/myActivityLike";
-//	}
 	
 	// 프로필사진 출력
 	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)
