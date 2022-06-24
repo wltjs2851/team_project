@@ -248,13 +248,6 @@ $(function() {
 				</div>
 			</c:otherwise>
 		</c:choose>
-		
-<!-- 			<div class="col-md-3" style='padding-right=50%'> -->
-<%-- 			<c:if test="${ not empty recipeVo.r_product }">	 --%>
-<!-- 				<h2>추천상품</h2> -->
-<%-- 				${fn:replace(recipeVo.r_product, '×', '')} --%>
-<%-- 			</c:if> --%>
-<!-- 			</div> -->
 	</div>
 </div>
 
