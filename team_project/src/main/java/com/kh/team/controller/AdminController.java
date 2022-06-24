@@ -28,6 +28,7 @@ import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
 import com.kh.team.vo.RecommendCommentVo;
@@ -82,9 +83,14 @@ public class AdminController {
 	
 	// 전체 회원 목록
 	@RequestMapping(value="/memberList", method = RequestMethod.GET)
-	public String adminMember(Model model) {
-		List<MemberVo> memberList = memberSerive.getMemberList();
+	public String adminMember(Model model, PagingDto pagingDto) {
+		System.out.println("AdminController, memberList, pagingDto:" + pagingDto);
+		pagingDto.setCount(memberSerive.getCountMember(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
+		List<MemberVo> memberList = memberSerive.getMemberList(pagingDto);
+		
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("pagingDto", pagingDto);
 		return "/admin/adminMember";
 	}
 	

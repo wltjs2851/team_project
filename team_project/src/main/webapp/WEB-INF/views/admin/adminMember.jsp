@@ -13,11 +13,31 @@ $(function(){
 		var option = "width = 800px, height=800px, top=300px, left=300px, scrollbars=yes";
 		window.open(url, "그룹 채팅방 입장", option);
 	});
+	
+	// 페이지 이동
+	var frmPaging = $("#frmPaging");
+	$("a.page-link").click(function(e) {
+		e.preventDefault();
+		console.log("클릭");
+		var page = $(this).attr("href");
+		frmPaging.find("input[name=page]").val(page);
+		frmPaging.attr("action", "/admin/memberList");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 </script>
 <%-- ${lastestMember } --%>
+<!-- 페이지, 검색 값 -->
+<form id="frmPaging">
+	<input type="hidden" name="userid" value="">
+	<input type="hidden" name="page" value="${ pagingDto.page }">
+	<input type="hidden" name="perPage" value="${ pagingDto.perPage }">
+	<input type="hidden" name="keyword" value="${ pagingDto.keyword }">
+</form>
 <h1>회원전체목록</h1>
 <%-- ${memberList } --%>
+${pagingDto }
 <div class="row">
 	<div class="col-md-2">
 		<ul class="nav flex-column nav-pills">
@@ -69,7 +89,38 @@ $(function(){
 			</c:forEach>
 			</tbody>
 		</table>
+		<div>
+		<nav>
+				<ul class="pagination justify-content-center">
+				<c:if test="${pagingDto.startPage != 1}">
+					<li class="page-item">
+						<a class="page-link" href="${pagingDto.startPage - 1}">이전</a>
+					</li>
+				</c:if>
+					<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
+						<li 
+						<c:choose>
+								<c:when test="${v == param.page}">
+									class="page-item active"
+								</c:when>
+								<c:otherwise>
+									class="page-item"
+								</c:otherwise>
+							</c:choose>
+						>
+							<a class="page-link" href="${v}">${v}</a>
+						</li>
+					</c:forEach>
+						<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
+							<li class="page-item">
+								<a class="page-link" href="${pagingDto.endPage + 1}">다음</a>
+							</li>
+						</c:if>
+				</ul>
+			</nav>
+		</div>
 	</div>
 	<div class="col-md-2"></div>
+	
 </div>
 <%@include file="/WEB-INF/views/include/footer.jsp"%>
