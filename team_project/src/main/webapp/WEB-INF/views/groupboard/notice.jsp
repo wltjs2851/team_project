@@ -31,6 +31,26 @@ $(function() {
 			}
 		});
 	});
+
+	var frmPaging = $("#frmPaging");
+	
+	$(".noticeList").click(function() {
+		var gbno = $(this).attr("data-gbno");
+		console.log(gbno);
+		frmPaging.find("input[name=gbno]").val(gbno);
+		frmPaging.attr("action", "/groupboard/notice");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
+	
+	$("a.page-link").click(function(e) {
+		e.preventDefault();
+		var page = $(this).attr("href");
+		frmPaging.find("input[name=page]").val(page);
+		frmPaging.attr("action", "/groupboard/notice");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 
 </script>
@@ -40,6 +60,15 @@ $(function() {
 <%-- ${ groupVo.gno } --%>
 <%-- ${ noticeList.gno } --%>
 <%-- ${ loginVo } --%>
+${ pagingDto }
+
+
+<form id="frmPaging">
+	<input type="hidden" name="gbno" value="">
+	<input type="hidden" name="gno" value="${ groupVo.gno }">
+	<input type="hidden" name="page" value="${ pagingDto.page }">
+	<input type="hidden" name="perPage" value="${ pagingDto.perPage }">
+</form>
 
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
@@ -103,10 +132,48 @@ $(function() {
 				<c:forEach items="${ noticeList }" var="groupBoardVo">
 				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
 					<h3 style="background-color: #B0E0E6;">
-						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
+						<a class="noticeList" data-gbno="${ groupBoardVo.gbno }" href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
 					</h3>
 				</c:if>
 				</c:forEach>
+				
+				
+				<!-- 페이징 -->
+				<div class="row">
+					<div class="col-md-12">
+						<nav>
+							<ul class="pagination justify-content-center">
+							<c:if test="${pagingDto.startPage != 1}">
+								<li class="page-item">
+									<a class="page-link" 
+										href="${pagingDto.startPage - 1}">&laquo;</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="i">
+								<li 
+									<c:choose>	
+										<c:when test="${i == param.page}">
+											class="page-item active"
+										</c:when>
+										<c:otherwise>
+											class="page-item"
+										</c:otherwise>
+									</c:choose>
+								>
+									<a href="${i}" class="page-link">${i}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pagingDto.endPage != pagingDto.totalPage}">	
+								<li class="page-item">
+									<a class="page-link" 
+									href="${pagingDto.endPage + 1}">&raquo;</a>
+								</li>
+							</c:if>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				
 				
 				</div>
 				<div class="col-md-3">
@@ -153,5 +220,6 @@ $(function() {
 	</div>
 	</div>
 </section>
+
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>

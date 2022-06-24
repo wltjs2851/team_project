@@ -12,6 +12,8 @@ public class PagingDto {
 	private int startPage;
 	private int endPage;
 	private final int PAGE_BLOCK = 5;
+	
+	private int gno;
 
 	public PagingDto() {
 		super();
@@ -31,6 +33,22 @@ public class PagingDto {
 		if(endPage > totalPage) {
 			endPage = totalPage;
 		}
+	}
+
+	public PagingDto(int page, int startRow, int endRow, String searchType, String keyword, int perPage, int totalPage,
+			int count, int startPage, int endPage, int gno) {
+		super();
+		this.page = page;
+		this.startRow = startRow;
+		this.endRow = endRow;
+		this.searchType = searchType;
+		this.keyword = keyword;
+		this.perPage = perPage;
+		this.totalPage = totalPage;
+		this.count = count;
+		this.startPage = startPage;
+		this.endPage = endPage;
+		this.gno = gno;
 	}
 
 	public int getStartRow() {
@@ -103,6 +121,14 @@ public class PagingDto {
 
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
+	}
+
+	public int getGno() {
+		return gno;
+	}
+
+	public void setGno(int gno) {
+		this.gno = gno;
 	}
 
 	@Override
