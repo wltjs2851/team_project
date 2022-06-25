@@ -32,6 +32,11 @@
  	where rcno = #{rcno}
  </delete>
  
+ <delete id="deleteRecipeCommentAll">
+ 	delete from tbl_rcomment
+ 	where rno = #{rno}
+ </delete>
+ 
  <!--  유저 작성 댓글 조회 -->
 	<select id="adminRecipeComment" resultType="RecipeCommentVo">
 		select rcno, rno, rc_comment, rc_regdate from tbl_rcomment

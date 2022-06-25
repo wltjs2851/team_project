@@ -33,6 +33,12 @@
  	where gbcno = #{gbcno}
  </delete>
  
+ <!-- 댓글 전체 삭제 -->
+ <delete id="deleteAllGComment">
+ 	delete from tbl_group_board_comment
+ 	where gbno = #{gbno}
+ </delete>
+ 
  <!-- 댓글 갯수 -->
  <select id="countGroupComment" resultType="GroupBoardCommentVo">
  	select count(*) from tbl_group_board_comment

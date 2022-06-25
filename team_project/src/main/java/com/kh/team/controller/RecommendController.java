@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,14 @@ public class RecommendController {
 		
 		// 추천 운동 글쓰기 
 		@RequestMapping(value = "/insertRecommend", method = RequestMethod.POST)
-		public String insertRecommend(RecommendVo recommendVo) {
+		public String insertRecommend(RecommendVo recommendVo, RedirectAttributes rttr) {
 			System.out.println("AdminController, insertRecommend, recommendVo:" + recommendVo);
 			String content = recommendVo.getRe_content();
+			String userid = recommendVo.getUserid();
+			if (!userid.equals("admin01")) {
+				rttr.addFlashAttribute("notAdmin", "false");
+				return "redirect:/recommend/listRecommend";
+			}
 			System.out.println("insertRecommend, content:" + content);
 			
 			recommendVo.setRe_content(content.replaceAll("\"", "\'"));
@@ -53,7 +59,7 @@ public class RecommendController {
 				re_pic = re_pic.substring(9, re_pic.indexOf("\""));
 				recommendVo.setRe_pic(re_pic);
 			}
-			recommendService.insertRecommend(recommendVo);
+//			recommendService.insertRecommend(recommendVo);
 			return "redirect:/recommend/listRecommend";
 		}
 		

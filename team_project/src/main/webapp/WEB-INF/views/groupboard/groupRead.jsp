@@ -255,7 +255,7 @@ $(function() {
 						<button type="button" id="btnCommentInsert" class="btn btn-sm btn-outline-primary">완료</button>
 					</div>
 				
-				<div class="row" style="margin-top: 20px; margin-left: 20px;" id="comment">
+				<div class="row col-md-9" style="margin-top: 20px; margin-left: 20px;" id="comment">
 					<div style="display: none;">
 						<button type="button" class="btn btn-sm btn-outline-warning btnCommentModify"
 							style="width: 10%; height:50px; padding: 1% 0">수정</button>
@@ -271,7 +271,7 @@ $(function() {
 				
 <!-- 				<aside class="main-sidebar sidebar-dark-primary elevation-4"> -->
 					<div class="list-group">
-						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
+						 <a style="background-color: #2D5082;" href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
 							<h2>${ groupVo.g_name }</h2>
 						</div>
@@ -283,7 +283,7 @@ $(function() {
 						<div class="list-group-item justify-content-between">
 							<a href="/groupboard/groupMain/${ groupBoardVo.gno }">그룹 메인으로</a>
 						</div>
-							<a href="/group/groupInfo?gno=${ groupBoardVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+							<a style="background-color: #2D5082;" href="/group/groupInfo?gno=${ groupBoardVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>

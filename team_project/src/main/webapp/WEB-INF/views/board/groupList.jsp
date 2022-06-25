@@ -141,15 +141,21 @@ $(function() {
 	
 	getGroupList();
 
-	var count = 2;
-    window.onscroll = function(e) {
-      console.log(window.innerHeight , window.scrollY,document.body.offsetHeight)
-      if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { 
-        setTimeout(function(){
-        	getGroupList();
-        }, 1000)  
-      }
-    }
+	window.onscroll = function(e) {
+	      console.log(window.innerHeight , window.scrollY,document.body.offsetHeight)
+	      if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { 
+	        setTimeout(function(){
+	           getGroupList();
+	        }, 1000)  
+	      }
+	    }
+
+// 	   $(window).scroll(function() {
+//        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+//                      //console.log(++page);
+//             getGroupList();
+//        }
+//    });
 	
 	function getGroupList() {
 		console.log($("#groupDiv > div").length);
@@ -157,7 +163,7 @@ $(function() {
 		var dno = "";
 		var sno = "";
 		var sgno = "";
-		if (${locationVo != null}) {
+		if ("${locationVo}" == null || "${locationVo}" == '') {
 			dno = "${locationVo.dno}";
 			sno = "${locationVo.sno}";
 			sgno = "${locationVo.sgno}";

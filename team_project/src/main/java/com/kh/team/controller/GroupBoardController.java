@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.CalendarServcie;
+import com.kh.team.service.GroupBoardCommentService;
 import com.kh.team.service.GroupBoardLikeService;
 import com.kh.team.service.GroupBoardService;
 import com.kh.team.service.GroupService;
@@ -35,6 +36,7 @@ import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.ReportVo;
 import com.kh.team.vo.SearchDto;
 
@@ -58,6 +60,12 @@ public class GroupBoardController {
 	
 	@Autowired
 	private ReportService reportServcie;
+	
+	@Autowired
+	private GroupBoardCommentService gbcService;
+	
+	@Autowired
+	private GroupBoardLikeService gblService;
 	
 	@RequestMapping(value = "groupWriteForm", method = RequestMethod.GET)
 	public String createForm(Model model, int gno) { // 글쓰기 양식
@@ -195,6 +203,8 @@ public class GroupBoardController {
 
 	@RequestMapping(value = "groupDelete", method = RequestMethod.GET)
 	public String delete(int gno, int gbno, RedirectAttributes rttr) {
+		boolean deleteAllComment = gbcService.deleteAllGComment(gbno);
+		boolean deleteAllLike = gblService.deleteAllLike(gbno);
 		boolean result = groupBoardService.delete(gbno);
 		rttr.addFlashAttribute("delete_result", result);
 		
@@ -245,12 +255,16 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "notice", method = RequestMethod.GET)
-	public String notice(String gb_notice, Model model, int gno) {
+	public String notice(String gb_notice, Model model, int gno, PagingDto pagingDto) {
 		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);
-//		GroupBoardVo groupBoardVo = groupBoardService.read(gbno);
+
+		pagingDto.setCount(groupBoardService.getCount(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
+		System.out.println("notice, pagingDto:" + pagingDto);
+		model.addAttribute("pagingDto", pagingDto);
 		
 		model.addAttribute("noticeList", noticeList);
-//		model.addAttribute("groupBoardVo", groupBoardVo);
+		
 		GroupVo groupVo = groupService.groupByGno(gno);
 		model.addAttribute("groupVo", groupVo);
 		

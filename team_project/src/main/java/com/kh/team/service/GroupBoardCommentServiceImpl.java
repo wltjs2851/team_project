@@ -53,4 +53,10 @@ public class GroupBoardCommentServiceImpl implements GroupBoardCommentService {
 		return groupBoardCommentDao.adminGroupBoardComment(userid);
 	}
 
+	@Override
+	public boolean deleteAllGComment(int gbno) {
+		
+		return groupBoardCommentDao.deleteAllGComment(gbno);
+	}
+
 }

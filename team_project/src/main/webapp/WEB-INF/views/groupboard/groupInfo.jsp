@@ -238,11 +238,13 @@ $(function() {
 							</div>
 							<div class="tab-pane" id="tab2">
 								<p>
-									그룹원 목록(그룹장일 경우 강퇴 버튼 보이게)
+<!-- 									그룹원 목록(그룹장일 경우 강퇴 버튼 보이게) -->
 									<div>
 									
 									<div>
 										그룹장: <span id="leader">${ groupVo.g_leader }</span>
+<%-- 										<p style="border-radius: 5em; padding: 0.5em; background: #E7B7B7;">그룹장: <span id="leader">${ groupVo.g_leader }</span></p> --%>
+<%-- 										<p style="border-left: 10px solid #688FF4; padding: 0.5em; border-bottom: 2px solid #688FF4; ">그룹장: <span id="leader">${ groupVo.g_leader }</span></p> --%>
 									</div>
 									
 									<c:forEach items="${groupJoinMember}" var="groupJoinVo">
@@ -301,7 +303,7 @@ $(function() {
 				
 					<aside class="column dotcom__aside bottom-12">
 						<div class="list-group">
-							 <a href="#" class="list-group-item list-group-item-action active">Home</a>
+							 <a style="background-color: #2D5082;" href="#" class="list-group-item list-group-item-action active">Home</a>
 							<div class="list-group-item">
 								<h2>${ groupVo.g_name }</h2>
 							</div>
@@ -318,7 +320,7 @@ $(function() {
 										<a href="/group/groupForm?gno=${ groupVo.gno }" id="updateGroupInfo">그룹 정보 수정</a>
 									</c:if>
 							</div>
-								<a href="/groupboard/groupMain/${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+								<a style="background-color: #2D5082;" href="/groupboard/groupMain/${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 									그룹 메인으로
 								</a>
 						</div>

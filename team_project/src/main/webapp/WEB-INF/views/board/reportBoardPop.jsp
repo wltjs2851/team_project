@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -14,51 +14,23 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
+</head>
 <script>
-// var userid = window.opener.document.getElementById("userid").value;
-// var gno = window.opener.document.getElementById("gno").value;
-
 $(function() {
-	var userid = "${userid}";
-	var gno = "${gno}";
-	
-	console.log(userid);
-	console.log(gno);
-	
-	$("#reportUser").text(userid);
-// 	$("#reportGno").text(gno);
-	
-	$("#btnReport").click(function() {
-		console.log("Click");
-		
-		
-		var rep_cause = $(":radio[name='rep_cause']:checked").val();
-		console.log(rep_cause);
-		var url = "/groupboard/report";
-		
-		var sData = {
-				"userid" : userid,
-				"gno" : gno,
-				"rep_cause" : rep_cause
-		}
-		
-		$.get(url, sData, function(rData) {
-			console.log(rData);
-			if(rData == "true") {
-				alert("신고 완료");
-			}
-		});
-	});
-	
 	$("#btnClose").click(function() {
 		window.close();
 	});
+	
+	$("#btnReport").click(function() {
+		$("reportForm").submit();
+		setTimeout(function() {   
+            window.close();
+
+         }, 100);
+	});
 });
 </script>
-
-
+<body>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -66,17 +38,39 @@ $(function() {
 				<div class="col-md-3">
 				</div>
 				
-				<div class="col-md-6">
-					<form role="form">
-					
+				<div class="col-md-6" style='margin-top: 18px;'>
+					<form role="form" id="reportForm" method="post" action="/reportBoard/addReportRun">
 						<div>
-							<h2><span id="reportUser"></span> 신고</h2>
+							<h2>${ reportBoardVo.receiver }회원 신고</h2>
 						</div>
 						
-						익명으로 신고하므로 신고인은 철저히 보호됩니다.
-						<hr>
-						
 						<div class="form-group">
+							<c:choose>
+								<c:when test="${ reportBoardVo.rno != 0 }">								
+									<input type="hidden" name="rno" value="${ reportBoardVo.rno }">
+								</c:when>
+								<c:when test="${ reportBoardVo.uno != 0 }">								
+									<input type="hidden" name="uno" value="${ reportBoardVo.uno }">
+								</c:when>
+								<c:when test="${ reportBoardVo.fno != 0 }">								
+									<input type="hidden" name="fno" value="${ reportBoardVo.fno }">
+								</c:when>
+								<c:when test="${ reportBoardVo.rcno != 0 }">								
+									<input type="hidden" name="rcno" value="${ reportBoardVo.rcno }">
+								</c:when>
+								<c:when test="${ reportBoardVo.urcno != 0 }">								
+									<input type="hidden" name="urcno" value="${ reportBoardVo.urcno }">
+								</c:when>
+								<c:when test="${ reportBoardVo.fcno != 0 }">								
+									<input type="hidden" name="fcno" value="${ reportBoardVo.fcno }">
+								</c:when>
+								<c:when test="${ reportBoardVo.recno != 0 }">								
+									<input type="hidden" name="recno" value="${ reportBoardVo.recno }">
+								</c:when>
+							</c:choose>
+							<input type="hidden" name="receiver" value="${ reportBoardVo.receiver }">
+							<input type="hidden" name="sender" value="${ reportBoardVo.sender }">
+						
 						
 							<div><input type="radio" name="rep_cause" value="부적절한 사진 게시">부적절한 사진 게시</div>
 							<div><input type="radio" name="rep_cause" value="부적절한 글 게시">부적절한 글 게시</div>
@@ -84,12 +78,6 @@ $(function() {
 							<div><input type="radio" name="rep_cause" value="방정하지 못한 언행">방정하지 못한 언행</div>
 							<div><input type="radio" name="rep_cause" value="타인을 비난하거나 비방함">타인을 비난하거나 비방함</div>
 							<div><input type="radio" name="rep_cause" value="종교 권유 및 전도">종교 권유 및 전도</div>
-<!-- 							<div><input type="radio" name="rep_cause">기타</div> -->
-							 
-<!-- 							<label for="rep_cause"> -->
-<!-- 								기타 -->
-<!-- 							</label> -->
-<!-- 							<input type="text" class="form-control" id="rep_cause" name="rep_cause" /> -->
 						</div>
 						
 						<button type="button" id="btnReport" class="btn btn-outline-danger">
@@ -106,5 +94,5 @@ $(function() {
 		</div>
 	</div>
 </div>
-
-
+</body>
+</html>

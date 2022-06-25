@@ -55,14 +55,16 @@ $(function() {
 
 function setProduct(obj){
 	var div = "";
-	div += "<div>"
-	div += "<div style='display:inline-block;'>"
-	div += "<img src='" + obj.image + "' height=150>";
-	div += "</div>"
-	div += "<div style='display:inline-block;'>"
+	div += "<div style='display: inline-block;'>"
+	div += "<div class='row'>";
+	div += "<div>";
+	div += "<img src='" + obj.image + "' height=150 style='margin-left:10px'>";
+	div += "</div>";
+	div += "</div>";
 	div += "<span><a href='" + obj.link + "' target='_blank'>" + obj.title +
 			"</a><a href='#' class='a_delete' style='margin-left: 10px;'>&times;</a></span>";
-	div += "<p>" + obj.lprice + "<br>" + obj.category + "<br>" + obj.maker + "</p>";
+	div += "<p>" + obj.lprice + "/" + obj.category + "/" + obj.maker + "</p>";
+	div += "</div>"
 	div += "</div>"
 	div += "</div>"
 	$(".shopping").prepend(div);
@@ -94,8 +96,8 @@ $(function() {
 <div class="container-fluid">
 	<form role="form" action="/recipe/addRecipeRun" method="post" enctype="multipart/form-data" id="recipeForm">
 	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-11">
+		<div class="col-md-2"></div>
+		<div class="col-md-10">
 			<div class="col-md-8" style='display:inline-block; vertical-align: top;'>
 					<input type="hidden" class="form-control" id="userid" name="userid" value="${ loginVo.userid }"/>
 					<input type="hidden" class="form-control" id="r_product" name="r_product"/>
@@ -110,16 +112,12 @@ $(function() {
 					<br>
 					<br>
 			</div>
-			<div class="col-md-3" style='display:inline-block; vertical-align: top;'>
+			<div class="col-md-2" style='display:inline-block; vertical-align: top;'>
 				<div class="row">
 					<button class="btn btn-info" id="btnSearch" 
 						style='width: 110px; height:50px; padding: 1% 0; margin-bottom: 20px'>추천 상품 검색</button>
 				</div>
-				<div class="shopping" id="shopping">
-					<div style='display: inline-block;'>
-						${ recipeVo.r_product }
-					</div>
-				</div>
+				<div class="shopping" id="shopping"></div>
 			</div>
 		</div>
 	</div>

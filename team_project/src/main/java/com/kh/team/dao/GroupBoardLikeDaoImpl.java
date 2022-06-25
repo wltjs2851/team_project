@@ -34,4 +34,13 @@ public class GroupBoardLikeDaoImpl implements GroupBoardLikeDao {
 		return sqlSession.selectOne(NAMESPACE + "countLike", groupBoardLikeVo);
 	}
 
+	@Override
+	public boolean deleteAllLike(int gbno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteAllLike", gbno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

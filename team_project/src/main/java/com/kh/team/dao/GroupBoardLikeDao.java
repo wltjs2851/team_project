@@ -8,5 +8,7 @@ public interface GroupBoardLikeDao {
 	public void deleteLike(GroupBoardLikeVo groupBoardLikeVo);
 	public void updateLike(int gbno);
 	public int countLike(GroupBoardLikeVo groupBoardLikeVo);
+	
+	public boolean deleteAllLike(int gbno);
 
 }

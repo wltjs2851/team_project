@@ -22,6 +22,7 @@ public interface RecipeDao {
 	public int countComment(int rno, String userid);
 	public boolean insertLike(int rno, String userid);
 	public boolean deleteLike(int rno, String userid);
+	public boolean deleteLikeAll(int rno);
 	public int countLike(int rno, String userid);
 	public boolean updateLikecnt(int rno, int r_like);
 	

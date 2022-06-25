@@ -31,6 +31,26 @@ $(function() {
 			}
 		});
 	});
+
+	var frmPaging = $("#frmPaging");
+	
+	$(".noticeList").click(function() {
+		var gbno = $(this).attr("data-gbno");
+		console.log(gbno);
+		frmPaging.find("input[name=gbno]").val(gbno);
+		frmPaging.attr("action", "/groupboard/notice");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
+	
+	$("a.page-link").click(function(e) {
+		e.preventDefault();
+		var page = $(this).attr("href");
+		frmPaging.find("input[name=page]").val(page);
+		frmPaging.attr("action", "/groupboard/notice");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 
 </script>
@@ -40,6 +60,15 @@ $(function() {
 <%-- ${ groupVo.gno } --%>
 <%-- ${ noticeList.gno } --%>
 <%-- ${ loginVo } --%>
+<%-- ${ pagingDto } --%>
+
+
+<form id="frmPaging">
+	<input type="hidden" name="gbno" value="">
+	<input type="hidden" name="gno" value="${ groupVo.gno }">
+	<input type="hidden" name="page" value="${ pagingDto.page }">
+	<input type="hidden" name="perPage" value="${ pagingDto.perPage }">
+</form>
 
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
@@ -82,7 +111,7 @@ $(function() {
 <!--================================
 =            Page Title            =
 =================================-->
-<section class="page-title">
+<section style="background-color: #2D5082;" class="page-title">
 	<!-- Container Start -->
 	<div class="container">
 		<div class="row">
@@ -102,18 +131,56 @@ $(function() {
 				
 				<c:forEach items="${ noticeList }" var="groupBoardVo">
 				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
-					<h3 style="background-color: #B0E0E6;">
-						<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
+					<h3 style="background-color: #2D5082;">
+						<a style="color: #ffffff; class="noticeList" data-gbno="${ groupBoardVo.gbno }" href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
 					</h3>
 				</c:if>
 				</c:forEach>
+				
+				
+				<!-- 페이징 -->
+				<div class="row">
+					<div class="col-md-12">
+						<nav>
+							<ul class="pagination justify-content-center">
+							<c:if test="${pagingDto.startPage != 1}">
+								<li class="page-item">
+									<a class="page-link" 
+										href="${pagingDto.startPage - 1}">&laquo;</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="i">
+								<li 
+									<c:choose>	
+										<c:when test="${i == param.page}">
+											class="page-item active"
+										</c:when>
+										<c:otherwise>
+											class="page-item"
+										</c:otherwise>
+									</c:choose>
+								>
+									<a href="${i}" class="page-link">${i}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pagingDto.endPage != pagingDto.totalPage}">	
+								<li class="page-item">
+									<a class="page-link" 
+									href="${pagingDto.endPage + 1}">&raquo;</a>
+								</li>
+							</c:if>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				
 				
 				</div>
 				<div class="col-md-3">
 				
 <!-- 				<aside class="column dotcom__aside bottom-12" style="position: fixed;"> -->
 					<div class="list-group">
-						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
+						 <a style="background-color: #2D5082;" href="#" class="list-group-item list-group-item-action active">Home</a>
 						<div class="list-group-item">
 							<h3>${ groupVo.g_name }</h3>
 						</div>
@@ -125,7 +192,7 @@ $(function() {
 						<div class="list-group-item justify-content-between">
 							<a href="/groupboard/groupMain/${ groupVo.gno }">그룹 메인으로</a>
 						</div>
-							<a href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+							<a style="background-color: #2D5082;" href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기
 							</a>
 					</div>
@@ -153,5 +220,6 @@ $(function() {
 	</div>
 	</div>
 </section>
+
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>

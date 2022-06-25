@@ -80,7 +80,14 @@
 	
 <!-- 	전체 회원 조회 -->
 	<select id="getMemberList" resultType="MemberVo">
-		select * from tbl_user
-		order by regdate desc
+		select * from (select rownum rnum, a.* from 
+			(select * from tbl_user
+			order by regdate desc) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	
+<!-- 	전체 회원 수 구하기 -->
+	<select id="getCountMember" resultType="int">
+		select count(*) from tbl_user
 	</select>
 </mapper>

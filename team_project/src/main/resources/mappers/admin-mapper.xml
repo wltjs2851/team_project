@@ -6,7 +6,8 @@
 <mapper namespace="com.kh.team.mappers.admin">
 	<select id="adminList" resultType="AdminVo">
 	<![CDATA[
-		select fno as "number", f_title as "title", f_regdate as "regdate" from tbl_free
+	select * from
+		(select fno as "number", f_title as "title", f_regdate as "regdate" from tbl_free
 		where userid= #{userid}
 			union
 		select rno as "number", r_title as "title", r_regdate as "regdate" from tbl_recipe
@@ -17,7 +18,8 @@
 			union
 		select uno as "number", ur_title as "title", ur_regdate as "regdate" from tbl_userroutine
 		where userid= #{userid}
-		order by "regdate" desc
+		order by "regdate" desc)
+	where rownum <= 5	
 	]]>
 	</select>
 	

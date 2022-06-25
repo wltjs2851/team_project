@@ -18,6 +18,12 @@
  	where userid = #{userid} and gbno = #{gbno}
  </delete>
  
+ <!-- 좋아요 전체 삭제 -->
+ <delete id="deleteAllLike">
+ 	delete from tbl_group_board_like
+ 	where gbno = #{gbno}
+ </delete>
+ 
  <!-- 좋아요 업데이트 -->
  <update id="updateLike">
  	update tbl_group_board set

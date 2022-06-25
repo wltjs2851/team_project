@@ -20,15 +20,6 @@ $(function() {
 				onImageUpload : function(files) {
 					uploadSummernoteImageFile(files[0]);
 				}
-// 				,onPaste: function (e) {
-// 					var clipboardData = e.originalEvent.clipboardData;
-// 					if (clipboardData && clipboardData.items && clipboardData.items.length) {
-// 						var item = clipboardData.items[0];
-// 						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-// 							e.preventDefault();
-// 						}
-// 					}
-// 				}
 			}
 	});
 	var c = "${recipeVo.r_content}";
@@ -69,14 +60,16 @@ $(function() {
 
 function setProduct(obj){
 	var div = "";
-	div += "<div>"
-	div += "<div style='display:inline-block;'>"
-	div += "<img src='" + obj.image + "' height=150>";
-	div += "</div>"
-	div += "<div style='display:inline-block;'>"
+	div += "<div style='display: inline-block;'>"
+	div += "<div class='row'>";
+	div += "<div>";
+	div += "<img src='" + obj.image + "' height=150 style='margin-left:10px'>";
+	div += "</div>";
+	div += "</div>";
 	div += "<span><a href='" + obj.link + "' target='_blank'>" + obj.title +
 			"</a><a href='#' class='a_delete' style='margin-left: 10px;'>&times;</a></span>";
-	div += "<p>" + obj.lprice + "<br>" + obj.category + "<br>" + obj.maker + "</p>";
+	div += "<p>" + obj.lprice + "/" + obj.category + "/" + obj.maker + "</p>";
+	div += "</div>"
 	div += "</div>"
 	div += "</div>"
 	$(".shopping").prepend(div);
@@ -113,6 +106,10 @@ $(function() {
 					<input type="hidden" name="rno" value="${ recipeVo.rno }">
 					<input type="hidden" id="userid" name="userid" value="${ loginVo.userid }"/>
 					<input type="hidden" id="r_product" name="r_product"/>
+					<input type="hidden" name="page" value="${ param.page }">
+					<input type="hidden" name="perPage" value="${ param.perPage }">
+					<input type="hidden" name="keyword" value="${ param.keyword }">
+					<input type="hidden" name="searchType" value="${ param.searchType }">
 					<div class="form-group">
 						<input type="text" class="form-control" value="${ recipeVo.r_title }" name="r_title" required/>
 					</div>
@@ -130,9 +127,7 @@ $(function() {
 						style='width: 110px; height:50px; padding: 1% 0; margin-bottom: 20px'>추천 상품 검색</button><br>
 				</div>
 					<div class="shopping" id="shopping">
-						<div style='display: inline-block;'>
-							${ recipeVo.r_product }
-						</div>
+						${ recipeVo.r_product }
 					</div>
 			</div>
 		</div>

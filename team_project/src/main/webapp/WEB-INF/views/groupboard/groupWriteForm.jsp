@@ -69,9 +69,9 @@ $(function() {
 					 
 					<label for="gb_content">내용</label>
 <!-- 					<input type="text" class="form-control" name="gb_content" id="gb_content" required /> -->
-					<textarea id="summernote" name="gb_content"></textarea>
+					<textarea id="summernote" name="gb_content" required></textarea>
 				</div>
-				<div class="form-group">
+				<div style="display: none;" class="form-group">
 					 
 					<label for="file">사진 추가</label>
 					<input type="file" class="form-control-file" name="file" id="file" />
