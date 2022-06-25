@@ -138,18 +138,22 @@ public class MemberController {
 		List<RecipeVo> recipe = new ArrayList<>();
 		List<RoutineVo> routine = new ArrayList<>();
 		List<RecommendVo> recommend = new ArrayList<>();
-		System.out.println(type);
+//		List<FreeCommentVo> freeComment = new ArrayList<>();
+//		List<GroupBoardCommentVo> groupBoardComment = new ArrayList<>();
+//		List<RecipeCommentVo> recipeComment = new ArrayList<>();
+//		List<RoutineCommentVo> routineComment = new ArrayList<>();
+//		List<RecommendCommentVo> recommendComment = new ArrayList<>();
+		List<FreeCommentVo> freeComment = null;
+		List<GroupBoardCommentVo> groupBoardComment = null;
+		List<RecipeCommentVo> recipeComment = null;
+		List<RoutineCommentVo> routineComment = null;
+		List<RecommendCommentVo> recommendComment = null;
 		if (type.equals("like")) {
 			free = myContentService.getFreeByLike(userid);
 			groupBoard = myContentService.getGroupBoardByLike(userid);
 			recipe = myContentService.getRecipeByLike(userid);
 			routine = myContentService.getRoutineByLike(userid);
 			recommend = myContentService.getRecommendByLike(userid);
-			System.out.println("freeLike" + free);
-			System.out.println("groupBoardLike" + groupBoard);
-			System.out.println("recipeLike" + recipe);
-			System.out.println("routineLike" + routine);
-			System.out.println("recommendLike" + recommend);
 		} else if (type.equals("write")) {
 			free = myContentService.getWriteFree(userid);
 			groupBoard = myContentService.getWriteGroupBoard(userid);
@@ -157,22 +161,22 @@ public class MemberController {
 			routine = myContentService.getWriteRoutine(userid);
 			recommend = myContentService.getWriteRecommend(userid);
 		} else if (type.equals("comment")) {
-			List<FreeCommentVo> freeComment = myContentService.getFreeComment(userid);
-			List<GroupBoardCommentVo> groupBoardComment = myContentService.getGroupBoardComment(userid);
-			List<RecipeCommentVo> recipeComment = myContentService.getRecipeComment(userid);
-			List<RoutineCommentVo> routineComment = myContentService.getRoutineComment(userid);
-			List<RecommendCommentVo> recommendComment = myContentService.getRecommendComment(userid);
-			model.addAttribute("freeComment", freeComment);
-			model.addAttribute("groupBoardComment", groupBoardComment);
-			model.addAttribute("recipeComment", recipeComment);
-			model.addAttribute("routineComment", routineComment);
-			model.addAttribute("recommendComment", recommendComment);
+			freeComment = myContentService.getFreeComment(userid);
+			groupBoardComment = myContentService.getGroupBoardComment(userid);
+			recipeComment = myContentService.getRecipeComment(userid);
+			routineComment = myContentService.getRoutineComment(userid);
+			recommendComment = myContentService.getRecommendComment(userid);
 		}
 		model.addAttribute("free", free);
 		model.addAttribute("groupBoard", groupBoard);
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("routine", routine);
 		model.addAttribute("recommend", recommend);
+		model.addAttribute("freeComment", freeComment);
+		model.addAttribute("groupBoardComment", groupBoardComment);
+		model.addAttribute("recipeComment", recipeComment);
+		model.addAttribute("routineComment", routineComment);
+		model.addAttribute("recommendComment", recommendComment);
 		return "/member/myActivity";
 	}
 	
