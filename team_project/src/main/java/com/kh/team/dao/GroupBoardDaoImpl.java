@@ -59,11 +59,11 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public List<GroupBoardVo> list(SearchDto searchDto) {
+	public List<GroupBoardVo> list(PagingDto pagingDto) {
 		Map<String, Object> map = new HashMap<String, Object>();
 //		map.put("gno", gno);
 //		map.put("searchDto", searchDto);
-		List<GroupBoardVo> groupList = sqlSession.selectList(NAMESPACE + "list", searchDto);
+		List<GroupBoardVo> groupList = sqlSession.selectList(NAMESPACE + "list", pagingDto);
 		System.out.println("map: " + map);
 		System.out.println("Dao, groupList," + groupList);
 		System.out.println("Dao, groupList, count:" + groupList.size());
@@ -130,6 +130,13 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	@Override
 	public int getCount(PagingDto pagingDto) {
 		int count = sqlSession.selectOne(NAMESPACE + "getCount", pagingDto);
+		return count;
+	}
+
+	@Override
+	public int getCountMain(PagingDto pagingDto) {
+		int count = sqlSession.selectOne(NAMESPACE + "getCountMain", pagingDto);
+		System.out.println("groupBoardDao, count: " + count);
 		return count;
 	}
 

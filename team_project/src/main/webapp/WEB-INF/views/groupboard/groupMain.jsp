@@ -70,6 +70,7 @@ $(function() {
 		
 		frmPaging.find("input[name=searchType]").val(searchType);
 		frmPaging.find("input[name=keyword]").val(keyword);
+		frmPaging.find("input[name=page]").val(1);
 		frmPaging.attr("action", "/groupboard/groupMain/${gno}");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
@@ -117,13 +118,41 @@ $(function() {
 		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
 		window.open(url, "신고 페이지", option);
 	});
+
+	
+	$("a.page-link").click(function(e) {
+		e.preventDefault();
+		var page = $(this).attr("href");
+		frmPaging.find("input[name=page]").val(page);
+		frmPaging.attr("action", "/groupboard/groupMain");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
+	
+	$(".readMore").click(function() {
+		var gbno = $(this).attr("data-gbno");
+		console.log(gbno);
+		frmPaging.find("input[name=gbno]").val(gbno);
+		frmPaging.attr("action", "/groupboard/groupRead");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 
 // var userid = window.open.document.getElementById("userid").value;
 // var gno = window.open.document.getElementById("gno").value;
 </script>
 
-<%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %> --%>
+
+<form id="frmPaging">
+	<input type="hidden" name="gbno" value="">
+	<input type="hidden" name="gno" value="${ groupVo.gno }">
+	<input type="hidden" name="page" value="${ pagingDto.page }">
+	<input type="hidden" name="perPage" value="${ pagingDto.perPage }">
+	<input type="hidden" name="searchType" value="${ pagingDto.searchType }">
+	<input type="hidden" name="keyword" value="${ pagingDto.keyword }">
+</form>
 
 <%-- ${ groupVo } --%>
 <!-- <hr> -->
@@ -131,7 +160,8 @@ $(function() {
 <!-- <hr> -->
 <%-- ${ groupJoinMember } --%>
 <%-- ${ groupList } --%>
-
+${ pagingDto.totalPage }
+<%-- ${ param.page } --%>
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
 <div class="row">
@@ -254,12 +284,51 @@ $(function() {
 					</div>
 					
 					<!-- Read more button -->
-					<a style="width: 90px; height:40px; padding: 1% 0" href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }" class="btn btn-transparent">...더 보기</a>
+					<a data-gbno="${ groupBoardVo.gbno }" style="width: 90px; height:40px; padding: 1% 0" href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }" class="readMore btn btn-transparent">...더 보기</a>
 				</article>
 				
 			</c:forEach>
 			
 			</div>
+			
+			
+			<!-- 페이징 -->
+				<div class="row">
+					<div class="col-md-12">
+						<nav>
+							<ul class="pagination justify-content-center">
+							<c:if test="${pagingDto.startPage != 1}">
+								<li class="page-item">
+									<a class="page-link" href="${pagingDto.startPage - 1}">&laquo</a>
+								</li>
+							</c:if>
+								<li class="page-item">
+									<a class="page-link" href="#">1</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">2</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">3</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">4</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">5</a>
+								</li>
+								
+								<c:if test="${ pagingDto.endPage == pagingDto.totalPage }">
+								<li class="page-item">
+									<a class="page-link" href="${pagingDto.endPage + 1}">&raquo;</a>
+								</li>
+								</c:if>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			
+			
 			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0" id="sidebar">
 				<div class="sidebar">
 				

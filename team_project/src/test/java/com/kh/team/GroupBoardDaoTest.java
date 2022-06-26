@@ -59,14 +59,14 @@ public class GroupBoardDaoTest {
 		System.out.println("count: " + count);
 	}
 	
-	@Test
-	public void testList() {
-		SearchDto searchDto = new SearchDto("t", "11");
-		searchDto.setGno(11);
-		List<GroupBoardVo> list = groupBoardDao.list(searchDto);
-		
-		System.out.println("list: " + list);
-	}
+//	@Test
+//	public void testList() {
+//		SearchDto searchDto = new SearchDto("t", "11");
+//		searchDto.setGno(11);
+//		List<GroupBoardVo> list = groupBoardDao.list(searchDto);
+//		
+//		System.out.println("list: " + list);
+//	}
 	
 //	@Test
 //	public void testJoinList() {

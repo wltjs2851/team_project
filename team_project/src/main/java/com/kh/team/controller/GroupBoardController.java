@@ -212,10 +212,15 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupMain/{gno}", method = RequestMethod.GET)
-	public String main(HttpSession session, Model model, String gb_notice, @PathVariable("gno") int gno, SearchDto searchDto) {
+	public String main(HttpSession session, Model model, String gb_notice, @PathVariable("gno") int gno, SearchDto searchDto, PagingDto pagingDto) {
 		searchDto.setGno(gno);
-		List<GroupBoardVo> groupList = groupBoardService.list(searchDto);
+		List<GroupBoardVo> groupList = groupBoardService.list(pagingDto);
 		model.addAttribute("groupList", groupList);
+
+		pagingDto.setCount(groupBoardService.getCountMain(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
+		System.out.println("main, pagingDto:" + pagingDto);
+		model.addAttribute("pagingDto", pagingDto);
 		
 		System.out.println("controller, groupList: " + groupList);
 		System.out.println("controller, searchDto: " + searchDto);
