@@ -18,6 +18,7 @@ import com.kh.team.service.MemberService;
 import com.kh.team.service.RecipeCommentService;
 import com.kh.team.service.RecipeService;
 import com.kh.team.service.RecommendCommentService;
+import com.kh.team.service.ReportBoardService;
 import com.kh.team.service.RoutineCommentService;
 import com.kh.team.service.RoutineService;
 import com.kh.team.vo.AdminVo;
@@ -32,6 +33,7 @@ import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
 import com.kh.team.vo.RecommendCommentVo;
+import com.kh.team.vo.ReportBoardVo;
 import com.kh.team.vo.RoutineCommentVo;
 import com.kh.team.vo.RoutineVo;
 import com.kh.team.vo.testVo;
@@ -71,6 +73,9 @@ public class AdminController {
 	
 	@Autowired
 	private GroupService groupService;
+	
+	@Autowired
+	private ReportBoardService reportBoardService;
 	
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public String adminMain(Model model) {
@@ -165,6 +170,13 @@ public class AdminController {
 		return "/admin/adminMemberComment";
 	}
 	
-	
+	// 게시판 신고 리스트 
+	@RequestMapping(value="/reportBoard", method = RequestMethod.GET)
+	public String adminReportList(Model model) {
+		List<ReportBoardVo> reportBoardVo = reportBoardService.getReportBoardList();
+		System.out.println("reportBoardVo:" + reportBoardVo);
+		model.addAttribute("reportBoardVo", reportBoardVo);
+		return "/admin/adminReportList";
+	}
 	
 }

@@ -77,7 +77,7 @@ $(function(){
 
 		jQuery('.pagination').append('<li class="page-item">'
 						+ '<a class="page-link" href="#" aria-label="Previous">'
-						+ '<span aria-hidden="true" class="mdi mdi-chevron-left"></span>'
+						+ '<span aria-hidden="true" class="mdi mdi-chevron-left">Previous</span>'
 						+ '<span class="sr-only">Previous</span></a></li>');
 
 		for (var i = 1; i <= num_pages; i++) {

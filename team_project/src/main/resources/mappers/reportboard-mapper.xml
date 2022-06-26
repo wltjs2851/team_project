@@ -15,9 +15,14 @@
  </insert>
  
  <!-- 신고 내역 -->
+<!--  <select id="getReportBoardList" resultType="ReportBoardVo"> -->
+<!--  	select rep_cause from tbl_report -->
+<!--  	where userid = #{userid} and gno = #{gno} -->
+<!--  </select> -->
+ 
  <select id="getReportBoardList" resultType="ReportBoardVo">
- 	select rep_cause from tbl_report
- 	where userid = #{userid} and gno = #{gno}
+ 	select * from tbl_report_board
+ 	order by rbno desc
  </select>
  
  </mapper>

@@ -27,8 +27,8 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 
 	@Override
 	public List<ReportBoardVo> getReportBoardList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ReportBoardVo> reportBoardList = sqlSession.selectList(NAMESPACE + "getReportBoardList");
+		return reportBoardList;
 	}
 
 	@Override

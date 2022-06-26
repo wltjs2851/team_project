@@ -21,8 +21,7 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 
 	@Override
 	public List<ReportBoardVo> getReportBoardList() {
-		// TODO Auto-generated method stub
-		return null;
+		return reportBoardDao.getReportBoardList();
 	}
 
 	@Override
