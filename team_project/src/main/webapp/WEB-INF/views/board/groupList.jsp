@@ -163,7 +163,7 @@ $(function() {
 		var dno = "";
 		var sno = "";
 		var sgno = "";
-		if ("${locationVo}" == null || "${locationVo}" == '') {
+		if ("${locationVo}" != null && "${locationVo}" != '') {
 			dno = "${locationVo.dno}";
 			sno = "${locationVo.sno}";
 			sgno = "${locationVo.sgno}";

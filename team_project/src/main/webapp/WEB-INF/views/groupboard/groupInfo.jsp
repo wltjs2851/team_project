@@ -303,7 +303,7 @@ $(function() {
 				
 					<aside class="column dotcom__aside bottom-12">
 						<div class="list-group">
-							 <a href="#" class="list-group-item list-group-item-action active">Home</a>
+							 <a style="background-color: #2D5082;" href="#" class="list-group-item list-group-item-action active">Home</a>
 							<div class="list-group-item">
 								<h2>${ groupVo.g_name }</h2>
 							</div>
@@ -320,7 +320,7 @@ $(function() {
 										<a href="/group/groupForm?gno=${ groupVo.gno }" id="updateGroupInfo">그룹 정보 수정</a>
 									</c:if>
 							</div>
-								<a href="/groupboard/groupMain/${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+								<a style="background-color: #2D5082;" href="/groupboard/groupMain/${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 									그룹 메인으로
 								</a>
 						</div>
