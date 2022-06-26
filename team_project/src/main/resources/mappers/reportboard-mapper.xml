@@ -8,10 +8,10 @@
  
  <!-- 신고하기 -->
  <insert id="insertReportBoard">
- 	insert into tbl_report_board(rbno, rno, uno, fno, rcno, urcno, fcno, recno, rep_cause, sender, receiver)
+ 	insert into tbl_report_board(rbno, rno, uno, fno, rcno, urcno, fcno, recno, rep_cause, sender, receiver, rep_etc)
  	values(seq_report_board_rbno.nextval, #{rno, jdbcType=VARCHAR}, #{uno, jdbcType=VARCHAR}, #{fno, jdbcType=VARCHAR}, #{rcno, jdbcType=VARCHAR}, 
  	#{urcno, jdbcType=VARCHAR}, #{fcno, jdbcType=VARCHAR}, #{recno, jdbcType=VARCHAR}, #{rep_cause},
- 	#{sender}, #{receiver})
+ 	#{sender}, #{receiver}, #{rep_etc, jdbcType=VARCHAR})
  </insert>
  
  <!-- 신고 내역 -->
