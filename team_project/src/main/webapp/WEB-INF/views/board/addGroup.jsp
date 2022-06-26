@@ -11,16 +11,19 @@ $(function() {
 		var url = "/group/getSno/" + dno;
 		$("#s_location").empty();
 		$.get(url, function(receivedData) {
-			$.each(receivedData, function() {
-				if(receivedData != null && receivedData != "") {	
-					$("#s_location").show();
-					$("#sg_location").hide();
+			if(receivedData != null && receivedData != "") {	
+				$("#s_location").show();
+				$("#sg_location").hide();
+				$("#s_location").append("<option>선택해주세요.</option>");
+				$.each(receivedData, function() {
 					var sgg = "";
 					sgg += "<option value=" + this.sno + ">" + this.lname + "</option>";
 					console.log("sgg: " + sgg);
 					$("#s_location").append(sgg);	
-				}
-			});
+				});
+			} else {
+				$("#s_location").hide();
+			}
 		});
 	});
 	
@@ -29,11 +32,12 @@ $(function() {
 		var sno = $("#s_location").val();
 		var url = "/group/getSgno/" + dno + "/" + sno;
 		$.get(url, function(receivedData) {
-			console.log(receivedData)
+			console.log(receivedData);
 			if(receivedData != null && receivedData != "") {				
 				$("#sg_location").removeAttr('style');
 				$("#sg_location").empty();
 				$("#sg_location").show();
+				$("#sg_location").append("<option>선택해주세요.</option>");
 				$.each(receivedData, function() {
 					var sgg = "";
 					sgg += "<option value=" + this.sgno + ">" + this.lname + "</option>";
@@ -61,9 +65,10 @@ $(function() {
 						지역 
 					</label> &nbsp;
 <!-- 					select box 스크롤 사용 -->
-					<div>
-						<div class="col-md-2" style="display: inline-block;">
+					<div style="margin-left: 2px;">
+						<div class="col-md-3" style="display: inline-block; padding-left: 0px;">
 							<select id="location" name="dno" class="form-control">
+								<option value="">도시를 선택해주세요.</option>
 								<c:forEach items="${ locationVo }" var="locationVo">
 									<option value="${ locationVo.dno }">${ locationVo.lname }</option>
 								</c:forEach>
@@ -71,6 +76,7 @@ $(function() {
 						</div>
 						<div class="col-md-2" style="display: inline-block;">
 							<select id="s_location" name="sno" class="form-control" style="display: none;">
+								<option selected>선택해주세요.</option>
 							</select>
 						</div>
 						<div class="col-md-2" style="display: inline-block;">
