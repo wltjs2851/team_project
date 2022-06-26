@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -177,6 +178,22 @@ public class AdminController {
 		System.out.println("reportBoardVo:" + reportBoardVo);
 		model.addAttribute("reportBoardVo", reportBoardVo);
 		return "/admin/adminReportList";
+	}
+	
+	// 신고 내역 처리 양식
+	@RequestMapping(value="/reportUpdateForm", method = RequestMethod.GET)
+	public String adminReportForm(int rbno, Model model) {
+		ReportBoardVo reportBoardVo = reportBoardService.getReportByRbno(rbno);
+		model.addAttribute("reportBoardVo", reportBoardVo);
+		return "/admin/adminReportUpdateForm";
+	}
+	
+	// 신고받은 회원 탈퇴 처리
+	@RequestMapping(value="/userOutRun/{userid}", method = RequestMethod.GET)
+	public String adminUserOutRun(@PathVariable("userid") String userid) {
+		boolean result = memberSerive.deleteMember(userid);
+		System.out.println("adminController, userOutRun, result :" + result);
+		return String.valueOf(result);
 	}
 	
 }

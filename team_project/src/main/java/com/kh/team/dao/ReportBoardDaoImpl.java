@@ -37,4 +37,10 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 		return false;
 	}
 
+	@Override
+	public ReportBoardVo getReportByRbno(int rbno) {
+		ReportBoardVo reportBoardVo = sqlSession.selectOne(NAMESPACE + "getReportByRbno", rbno);
+		return reportBoardVo;
+	}
+
 }

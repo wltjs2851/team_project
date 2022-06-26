@@ -25,4 +25,9 @@
  	order by rbno desc
  </select>
  
+<!--  신고내역 조회 -->
+ <select id="getReportByRbno" resultType="ReportBoardVo">
+ 	select * from tbl_report_board
+ 	where rbno = #{rbno}
+ </select>
  </mapper>

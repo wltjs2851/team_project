@@ -9,4 +9,7 @@ public interface AdminService {
 	public List<AdminVo> adminList(String userid);
 	
 	public List<testVo> getGroupInfo();
+	
+	// 회원 강퇴
+	public boolean userOut(String userid);
 }

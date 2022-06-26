@@ -26,8 +26,12 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 
 	@Override
 	public boolean modifyReportBoard(int rep_state) {
-		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public ReportBoardVo getReportByRbno(int rbno) {
+		return reportBoardDao.getReportByRbno(rbno);
 	}
 
 }
