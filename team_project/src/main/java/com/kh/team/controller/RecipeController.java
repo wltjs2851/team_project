@@ -19,10 +19,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -196,6 +194,13 @@ public class RecipeController {
 	@ResponseBody
 	public String modifyComment(RecipeCommentVo recipeCommentVo) {
 		boolean result = recipeCommentService.modifyRecipeComment(recipeCommentVo);
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value = "/removeRecipeComment/{rcno}", method = RequestMethod.GET)
+	@ResponseBody
+	public String removeRoutineComment(@PathVariable("rcno") int rcno) {
+		boolean result = recipeCommentService.removeRecipeComment(rcno);
 		return String.valueOf(result);
 	}
 	

@@ -28,10 +28,22 @@ $(function() {
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
+	
 	$(".content").click(function() {
 		var fno = $(this).attr("data-fno");
 		$(this).attr("href", "/free/freeContent?fno=" + fno + "&page=${pagingDto.page}&searchType=${param.searchType}" +
 				"&keyword=${param.keyword}");
+	});
+	
+	$(".btnBoardReport").click(function() {
+		var fno = $(this).parent().parent().parent().find(".content").attr("data-fno");
+		var sender = "${loginVo.userid}";
+		var receiver = $(this).attr("data-user");
+		var url = "/reportBoard/reportBoardPop?fno=" + fno + "&sender=" + sender + "&receiver=" + receiver;
+		var option = "width = 350px, height=400px, top=300px, left=300px, scrollbars=yes";
+		window.open(url,"신고",option);
+	
+		console.log(sender);
 	});
 });
 </script>
@@ -63,7 +75,23 @@ $(function() {
 						<td>${ freeVo.fno }</td>
 						<td><a class="content" data-fno="${ freeVo.fno }" href="#">
 							[${ freeVo.fname }] ${ freeVo.f_title }</a></td>
-						<td>${ freeVo.userid }</td>
+						<td>
+							<c:choose>
+								<c:when test="${loginVo.userid == freeVo.userid}">
+									${freeVo.userid}
+								</c:when>
+								<c:otherwise>
+									<button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown'
+										style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0;'>
+										${ freeVo.userid }<i class='fas fa-ellipsis-v' style='margin-left:10px'></i></button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<button class="dropdown-item btnBoardReport" type='button' 
+										data-user='${ freeVo.userid }'>신고하기</button>
+										<button class="dropdown-item" type='button'>회원정보보기</button>
+									</div>
+								</c:otherwise>
+							</c:choose>
+						</td>
 						<td>${ freeVo.f_viewcnt }</td>
 						<td>${ freeVo.f_regdate }</td>
 					</tr>

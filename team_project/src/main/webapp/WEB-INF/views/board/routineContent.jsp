@@ -54,31 +54,6 @@ $(function() {
 			console.log(receivedData);
 			$("#comment > div").empty();
 			$.each(receivedData, function() {
-// 				console.log(this);
-// 				var cmt = "";
-// 				cmt += "<div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
-// 				cmt += "<p style='font-size: large; font-weight: bold;'>";
-// 				if(this.u_pic == null) {
-// 					cmt += "<img src='/resources/images/board/personDefault.png' class='rounded-circle z-depth-2' width=40px>";
-// 				} else {
-// 					cmt += "<img src='/routine/displayImage?filename=" + this.u_pic + 
-// 							"' class='rounded-circle z-depth-2' width=40px>";
-// 				}
-// 				cmt +=this.userid + "</p>";
-// 				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 100%'>"
-// 							+ this.urc_comment + "</textarea>";
-// 				if(this.userid == "${loginVo.userid}") {
-// 					cmt += "<button type='button' class='btnModify btn btn-outline-warning' data-urcno=" + this.urcno +
-// 								" style='width: 80px; height:50px; padding: 1% 0'>수정</button>";
-// 					cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-urcno=" + this.urcno + 
-// 							 " style='display: none; width: 80px; height:50px; padding: 1% 0'>수정완료</button>";
-// 							 cmt += "<button type='button' class='btnDelete btn btn-outline-danger' data-urcno=" + this.urcno +
-// 							 " style='width: 80px; height:50px; padding: 1% 0'>삭제</button>";
-// 				}
-// 				cmt += "<hr>";
-// 				cmt += "</div>";
-// 				$("#comment").append(cmt);
-				
 				var cmt = "";
 				cmt += "<div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
 				cmt += "<div class='row'><p style='font-size: large; font-weight: bold;'>";
@@ -89,21 +64,24 @@ $(function() {
 							"' class='rounded-circle z-depth-2' width=40px style='margin-right: 10px;'>";
 				}
 				cmt +=this.userid + "</p>";
+				cmt += "<div class='dropdown' style='float:right'>"
+				cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
+				cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
+				cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
 				if("${loginVo.userid}" == this.userid) {				
-					cmt += "<div class='dropdown' style='float:right'>"
-					cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
-					cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
-					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
-					cmt += "		<button class='dropdown-item btnModify' type='button' data-urcno=" + this.urcno +">수정</button>"
-					cmt += "		<button class='dropdown-item btnDelete' type='button' data-urcno=" + this.urcno +">삭제</button>"
-					cmt += "</div></div>";
+					cmt += "		<button class='dropdown-item btnModify' type='button' data-urcno='" + this.urcno +"'>수정</button>"
+					cmt += "		<button class='dropdown-item btnDelete' type='button' data-urcno='" + this.urcno +"'>삭제</button>"
+				} else {
+					cmt += "		<button class='dropdown-item btnReport' type='button' data-urcno='" + this.urcno +
+						"' data-user='" + this.userid + "'>신고</button>"
 				}
+				cmt += "</div></div>";
 				cmt += "</div>"
 				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
 							+ this.urc_comment + "</textarea>";
 				if("${loginVo.userid}" == this.userid) {	
-					cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-urcno=" + this.urcno + 
-							 " style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
+					cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-urcno='" + this.urcno + 
+							 "' style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
 				}
 				cmt += "<hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
 				cmt += "</div>";
@@ -149,6 +127,15 @@ $(function() {
 				getCommentList();
 			}
 		});
+	});
+	
+	$("#comment").on("click", ".btnReport", function() {
+		var urcno = $(this).attr("data-urcno");
+		var receiver = $(this).attr("data-user");
+		var sender = "${loginVo.userid}";
+		var url = "/reportBoard/reportBoardPop?urcno=" + urcno + "&sender=" + sender + "&receiver=" + receiver;
+		var option = "width = 350px, height=400px, top=300px, left=300px, scrollbars=yes";
+		window.open(url,"신고",option);
 	});
 	
 	var like_cnt = ${like_cnt};
