@@ -17,7 +17,7 @@ public class ReportBoardTest {
 	
 	@Test
 	public void insertReportTest() {
-		ReportBoardVo reportBoardVo = new ReportBoardVo(7, 0, 0, 0, 0, 0, 0, "ºÒ¹ýÀÓ", "hong1234", "gogo11");
+		ReportBoardVo reportBoardVo = new ReportBoardVo(7, 0, 0, 0, 0, 0, 0, "ï¿½Ò¹ï¿½ï¿½ï¿½", "hong1234", "gogo11", null);
 		boolean result = reportBoardDao.insertReportBoard(reportBoardVo);
 		System.out.println(result);
 	}

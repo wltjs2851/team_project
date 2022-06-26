@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,6 +19,7 @@ import com.kh.team.service.MemberService;
 import com.kh.team.service.RecipeCommentService;
 import com.kh.team.service.RecipeService;
 import com.kh.team.service.RecommendCommentService;
+import com.kh.team.service.ReportBoardService;
 import com.kh.team.service.RoutineCommentService;
 import com.kh.team.service.RoutineService;
 import com.kh.team.vo.AdminVo;
@@ -32,6 +34,7 @@ import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
 import com.kh.team.vo.RecommendCommentVo;
+import com.kh.team.vo.ReportBoardVo;
 import com.kh.team.vo.RoutineCommentVo;
 import com.kh.team.vo.RoutineVo;
 import com.kh.team.vo.testVo;
@@ -72,6 +75,9 @@ public class AdminController {
 	@Autowired
 	private GroupService groupService;
 	
+	@Autowired
+	private ReportBoardService reportBoardService;
+	
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public String adminMain(Model model) {
 		
@@ -86,6 +92,7 @@ public class AdminController {
 	public String adminMember(Model model, PagingDto pagingDto) {
 		System.out.println("AdminController, memberList, pagingDto:" + pagingDto);
 		pagingDto.setCount(memberSerive.getCountMember(pagingDto));
+		System.out.println(pagingDto.getCount());
 		pagingDto.setPage(pagingDto.getPage());
 		List<MemberVo> memberList = memberSerive.getMemberList(pagingDto);
 		
@@ -164,6 +171,29 @@ public class AdminController {
 		return "/admin/adminMemberComment";
 	}
 	
+	// 게시판 신고 리스트 
+	@RequestMapping(value="/reportBoard", method = RequestMethod.GET)
+	public String adminReportList(Model model) {
+		List<ReportBoardVo> reportBoardVo = reportBoardService.getReportBoardList();
+		System.out.println("reportBoardVo:" + reportBoardVo);
+		model.addAttribute("reportBoardVo", reportBoardVo);
+		return "/admin/adminReportList";
+	}
 	
+	// 신고 내역 처리 양식
+	@RequestMapping(value="/reportUpdateForm", method = RequestMethod.GET)
+	public String adminReportForm(int rbno, Model model) {
+		ReportBoardVo reportBoardVo = reportBoardService.getReportByRbno(rbno);
+		model.addAttribute("reportBoardVo", reportBoardVo);
+		return "/admin/adminReportUpdateForm";
+	}
+	
+	// 신고받은 회원 탈퇴 처리
+	@RequestMapping(value="/userOutRun/{userid}", method = RequestMethod.GET)
+	public String adminUserOutRun(@PathVariable("userid") String userid) {
+		boolean result = memberSerive.deleteMember(userid);
+		System.out.println("adminController, userOutRun, result :" + result);
+		return String.valueOf(result);
+	}
 	
 }

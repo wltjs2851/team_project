@@ -25,6 +25,19 @@ $(function(){
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
+	
+	// 검색하기
+	$("#searchKcal").on("click", function(e){
+		e.preventDefault();
+		console.log("검색하기 버튼");
+		var keyword = $("#keyword").val();
+		console.log(keyword);
+		frmPaging.find("input[name=keyword]").val(keyword);
+		frmPaging.find("input[name=page]").val(1);
+		frmPaging.attr("action", "/admin/memberList");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 </script>
 <%-- ${lastestMember } --%>
@@ -38,6 +51,7 @@ $(function(){
 <h1>회원전체목록</h1>
 <%-- ${memberList } --%>
 ${pagingDto }
+
 <div class="row">
 	<div class="col-md-2">
 		<ul class="nav flex-column nav-pills">
@@ -56,6 +70,15 @@ ${pagingDto }
 		</ul>
 	</div>
 	<div class="col-md-8">
+	<div class="search">
+				<input class="form-control" type="text" placeholder="회원 정보 검색"
+					id="keyword"
+					<c:if test="${ pagingDto.keyword != null }">
+						value="${ pagingDto.keyword }"
+					</c:if>
+				>
+				<input type="image" src="/resources/images/magnifier.png" id="searchKcal"><br>
+	</div>
 		<table class="table">
 			<thead>
 				<tr align="center">

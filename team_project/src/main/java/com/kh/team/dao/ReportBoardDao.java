@@ -5,10 +5,13 @@ import java.util.List;
 import com.kh.team.vo.ReportBoardVo;
 
 public interface ReportBoardDao {
-	//½Å°í µî·Ï
+	//ï¿½Å°ï¿½ ï¿½ï¿½ï¿½
 	public boolean insertReportBoard(ReportBoardVo reportBoardVo);
-	//½Å°í¸®½ºÆ® Ãâ·Â
+	//ï¿½Å°ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
 	public List<ReportBoardVo> getReportBoardList();
-	//½Å°í ¼öÁ¤(rep_state ÄÃ·³ ¼öÁ¤/½Å°í È®ÀÎ À¯¹« ¹× Ã¶È¸)
+	//ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½(rep_state ï¿½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½/ï¿½Å°ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ã¶È¸)
 	public boolean updateReportBoard(int rep_state);
+	
+	// ì‹ ê³  ë²ˆí˜¸ì— ë”°ë¥¸ ì‹ ê³  ë‚´ì—­ ì¡°íšŒ
+	public ReportBoardVo getReportByRbno(int rbno);
 }
