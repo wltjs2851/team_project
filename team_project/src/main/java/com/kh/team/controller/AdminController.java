@@ -206,10 +206,18 @@ public class AdminController {
 	}
 	
 	// 신고받은 회원에게 경고 메시지 보내기 
-	@RequestMapping(value="/userWarning/{userid}", method = RequestMethod.GET)
+//	@RequestMapping(value="/userWarning/{userid}", method = RequestMethod.GET)
+//	@ResponseBody
+//	public String adminUserWarning(@PathVariable("userid") String userid, WarningMessageVo warningMessageVo) {
+//		System.out.println("adminController, userWarning, userid:" + userid);
+//		boolean result = warningMessageService.insertWarningMessage(warningMessageVo);
+//		System.out.println("adminController, userWarning, result:" + result);
+//		return String.valueOf(result);
+//	}
+	
+	@RequestMapping(value="/userWarning", method = RequestMethod.POST)
 	@ResponseBody
-	public String adminUserWarning(@PathVariable("userid") String userid, WarningMessageVo warningMessageVo) {
-		System.out.println("adminController, userWarning, userid:" + userid);
+	public String adminUserWarning(WarningMessageVo warningMessageVo) {
 		boolean result = warningMessageService.insertWarningMessage(warningMessageVo);
 		System.out.println("adminController, userWarning, result:" + result);
 		return String.valueOf(result);
