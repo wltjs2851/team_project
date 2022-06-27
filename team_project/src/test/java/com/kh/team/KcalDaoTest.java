@@ -9,7 +9,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team.dao.KcalDao;
+import com.kh.team.dao.MemberDao;
 import com.kh.team.vo.KcalVo;
+import com.kh.team.vo.MemberVo;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,6 +20,9 @@ public class KcalDaoTest {
 	
 	@Autowired
 	private KcalDao kcalDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 	
 	// kcal 사전 페이지 글 추가 
 	@Test
@@ -33,6 +38,14 @@ public class KcalDaoTest {
 		for (int i = 1; i <= 500; i++) {
 			KcalVo kcalVo = new KcalVo("제목" + i, "30", "100", "보통");
 			kcalDao.insertKcal(kcalVo);
+		}
+	}
+	
+	@Test
+	public void testInsertUser() {
+		for (int i =1; i <= 10; i++) {
+			MemberVo memberVo = new MemberVo("test" + i, "test1234!", "테스트", "test", "test", "f", "테스트", 1);
+			memberDao.joinMember(memberVo);
 		}
 	}
 	

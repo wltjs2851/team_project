@@ -65,6 +65,7 @@ $(function(){
 	
 	// 신고 처리
 	$("#btnReportUpdateRun").click(function(){
+		var userid = "${reportBoardVo.receiver}";
 		console.log("신고 처리 버튼 누름");
 		var reportRun = $(":radio[name='reportRun']:checked").val();
 		console.log("reportRun:", reportRun);
@@ -72,9 +73,10 @@ $(function(){
 			console.log("해당 게시글 삭제");
 		} else if (reportRun == "userWarning"){
 			console.log("신고받은 회원 경고주기");
+			var url = "/admin/userWarning/" + userid;
+			
 		} else {
 			console.log("신고받은 회원 추방");
-			var userid = "${reportBoardVo.receiver}";
 			var url = "/admin/userOutRun/" + userid;
 // 			var sData = {
 // 					"userid" : userid

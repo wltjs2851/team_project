@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.service.AdminService;
 import com.kh.team.service.FreeCommentService;
@@ -22,6 +23,7 @@ import com.kh.team.service.RecommendCommentService;
 import com.kh.team.service.ReportBoardService;
 import com.kh.team.service.RoutineCommentService;
 import com.kh.team.service.RoutineService;
+import com.kh.team.service.WarningMessageService;
 import com.kh.team.vo.AdminVo;
 import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.FreeVo;
@@ -37,6 +39,7 @@ import com.kh.team.vo.RecommendCommentVo;
 import com.kh.team.vo.ReportBoardVo;
 import com.kh.team.vo.RoutineCommentVo;
 import com.kh.team.vo.RoutineVo;
+import com.kh.team.vo.WarningMessageVo;
 import com.kh.team.vo.testVo;
 
 @Controller
@@ -77,6 +80,9 @@ public class AdminController {
 	
 	@Autowired
 	private ReportBoardService reportBoardService;
+	
+	@Autowired
+	private WarningMessageService warningMessageService;
 	
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public String adminMain(Model model) {
@@ -190,9 +196,22 @@ public class AdminController {
 	
 	// 신고받은 회원 탈퇴 처리
 	@RequestMapping(value="/userOutRun/{userid}", method = RequestMethod.GET)
+	@ResponseBody
 	public String adminUserOutRun(@PathVariable("userid") String userid) {
-		boolean result = memberSerive.deleteMember(userid);
-		System.out.println("adminController, userOutRun, result :" + result);
+		System.out.println("adminController, userOutRun, userid:" + userid);
+//		boolean result = memberSerive.deleteMember(userid);
+		boolean result = adminService.userOut(userid);
+		System.out.println("adminController, userOutRun2, result :" + result);
+		return String.valueOf(result);
+	}
+	
+	// 신고받은 회원에게 경고 메시지 보내기 
+	@RequestMapping(value="/userWarning/{userid}", method = RequestMethod.GET)
+	@ResponseBody
+	public String adminUserWarning(@PathVariable("userid") String userid, WarningMessageVo warningMessageVo) {
+		System.out.println("adminController, userWarning, userid:" + userid);
+		boolean result = warningMessageService.insertWarningMessage(warningMessageVo);
+		System.out.println("adminController, userWarning, result:" + result);
 		return String.valueOf(result);
 	}
 	
