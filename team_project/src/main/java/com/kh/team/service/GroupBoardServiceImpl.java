@@ -47,8 +47,8 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	}
 
 	@Override
-	public List<GroupBoardVo> list(SearchDto searchDto) {
-		List<GroupBoardVo> groupList = groupBoardDao.list(searchDto);
+	public List<GroupBoardVo> list(PagingDto pagingDto) {
+		List<GroupBoardVo> groupList = groupBoardDao.list(pagingDto);
 		return groupList;
 	}
 
@@ -102,6 +102,12 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	@Override
 	public int getCount(PagingDto pagingDto) {
 		int count = groupBoardDao.getCount(pagingDto);
+		return count;
+	}
+
+	@Override
+	public int getCountMain(int gno) {
+		int count = groupBoardDao.getCountMain(gno);
 		return count;
 	}
 

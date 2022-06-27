@@ -4,8 +4,8 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-${ group }
-<hr>
+<%-- ${ group } --%>
+<!-- <hr> -->
 <%-- ${ groupVo } --%>
 
 <c:forEach items="${ group }" var="groupVo">

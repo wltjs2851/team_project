@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.service.AdminService;
 import com.kh.team.service.FreeCommentService;
@@ -18,8 +20,10 @@ import com.kh.team.service.MemberService;
 import com.kh.team.service.RecipeCommentService;
 import com.kh.team.service.RecipeService;
 import com.kh.team.service.RecommendCommentService;
+import com.kh.team.service.ReportBoardService;
 import com.kh.team.service.RoutineCommentService;
 import com.kh.team.service.RoutineService;
+import com.kh.team.service.WarningMessageService;
 import com.kh.team.vo.AdminVo;
 import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.FreeVo;
@@ -28,11 +32,14 @@ import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeCommentVo;
 import com.kh.team.vo.RecipeVo;
 import com.kh.team.vo.RecommendCommentVo;
+import com.kh.team.vo.ReportBoardVo;
 import com.kh.team.vo.RoutineCommentVo;
 import com.kh.team.vo.RoutineVo;
+import com.kh.team.vo.WarningMessageVo;
 import com.kh.team.vo.testVo;
 
 @Controller
@@ -71,6 +78,12 @@ public class AdminController {
 	@Autowired
 	private GroupService groupService;
 	
+	@Autowired
+	private ReportBoardService reportBoardService;
+	
+	@Autowired
+	private WarningMessageService warningMessageService;
+	
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public String adminMain(Model model) {
 		
@@ -82,9 +95,15 @@ public class AdminController {
 	
 	// 전체 회원 목록
 	@RequestMapping(value="/memberList", method = RequestMethod.GET)
-	public String adminMember(Model model) {
-		List<MemberVo> memberList = memberSerive.getMemberList();
+	public String adminMember(Model model, PagingDto pagingDto) {
+		System.out.println("AdminController, memberList, pagingDto:" + pagingDto);
+		pagingDto.setCount(memberSerive.getCountMember(pagingDto));
+		System.out.println(pagingDto.getCount());
+		pagingDto.setPage(pagingDto.getPage());
+		List<MemberVo> memberList = memberSerive.getMemberList(pagingDto);
+		
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("pagingDto", pagingDto);
 		return "/admin/adminMember";
 	}
 	
@@ -158,6 +177,42 @@ public class AdminController {
 		return "/admin/adminMemberComment";
 	}
 	
+	// 게시판 신고 리스트 
+	@RequestMapping(value="/reportBoard", method = RequestMethod.GET)
+	public String adminReportList(Model model) {
+		List<ReportBoardVo> reportBoardVo = reportBoardService.getReportBoardList();
+		System.out.println("reportBoardVo:" + reportBoardVo);
+		model.addAttribute("reportBoardVo", reportBoardVo);
+		return "/admin/adminReportList";
+	}
 	
+	// 신고 내역 처리 양식
+	@RequestMapping(value="/reportUpdateForm", method = RequestMethod.GET)
+	public String adminReportForm(int rbno, Model model) {
+		ReportBoardVo reportBoardVo = reportBoardService.getReportByRbno(rbno);
+		model.addAttribute("reportBoardVo", reportBoardVo);
+		return "/admin/adminReportUpdateForm";
+	}
+	
+	// 신고받은 회원 탈퇴 처리
+	@RequestMapping(value="/userOutRun/{userid}", method = RequestMethod.GET)
+	@ResponseBody
+	public String adminUserOutRun(@PathVariable("userid") String userid) {
+		System.out.println("adminController, userOutRun, userid:" + userid);
+//		boolean result = memberSerive.deleteMember(userid);
+		boolean result = adminService.userOut(userid);
+		System.out.println("adminController, userOutRun2, result :" + result);
+		return String.valueOf(result);
+	}
+	
+	// 신고받은 회원에게 경고 메시지 보내기 
+	@RequestMapping(value="/userWarning/{userid}", method = RequestMethod.GET)
+	@ResponseBody
+	public String adminUserWarning(@PathVariable("userid") String userid, WarningMessageVo warningMessageVo) {
+		System.out.println("adminController, userWarning, userid:" + userid);
+		boolean result = warningMessageService.insertWarningMessage(warningMessageVo);
+		System.out.println("adminController, userWarning, result:" + result);
+		return String.valueOf(result);
+	}
 	
 }

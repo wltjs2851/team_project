@@ -30,4 +30,21 @@
 		and g.gno = j.gno 
 		order by g_name
 	</select>
+	
+	<select id="getGno" resultType="int">
+		select gno from tbl_group_join
+		where userid = #{userid}
+	</select>
+	
+	<select id="getGmember" resultType="String">
+		select userid from tbl_group_join
+		where gno = #{gno}
+	</select>
+	
+	<!-- 그룹장 변경 -->
+	<update id="updateGLeader">
+		update tbl_group set
+		g_leader = #{g_leader}
+		where gno = #{gno}
+	</update>
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team.dao.AdminDao;
 import com.kh.team.dao.KcalDao;
+import com.kh.team.service.AdminService;
 import com.kh.team.vo.AdminVo;
 import com.kh.team.vo.KcalVo;
 
@@ -20,6 +21,9 @@ public class AdminDaoTest {
 	
 	@Autowired
 	private AdminDao dao;
+	
+	@Autowired
+	private AdminService service;
 	
 	
 	// 글 목록 조회
@@ -37,6 +41,12 @@ public class AdminDaoTest {
 		String userid = "hong1234";
 		List<AdminVo> adminList = dao.adminList(userid);
 		System.out.println("adminList:"+adminList);
+	}
+	
+	@Test
+	public void testMemberOut() {
+		boolean result = service.userOut("test3");
+		System.out.println("result: " + result);
 	}
 	
 	

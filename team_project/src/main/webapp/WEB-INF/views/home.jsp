@@ -5,6 +5,10 @@
 <script>
 	$(function() {
 		var loginResult = "${loginResult}";
+		var logout = "${logout}";
+		if (logout == "logout") {
+			alert("로그아웃 되었습니다.");
+		}
 // 		if (loginResult == "true") {
 // 			alert("${loginVo.nickname}(${loginVo.userid})님 환영합니다.");
 // 		}
@@ -14,17 +18,20 @@
 		$("#location").on("change", function() {
 			dno = $(this).val();
 			var url = "/getSno/" + dno;
+			$(this).css("width", "425px");
+			$("#s_location").css("width", "425px");
 			$.get(url, function(rData) {
 				if (rData != null && rData != "") {
 					$("#s_location").show();
 					$("#sg_location").hide();
 					$("#s_location").html("");
-					$("#s_location").html("<option>선택해주세요.</option>");
+					$("#s_location").html("<option value='0'>선택해주세요.</option>");
 					sno = null;
 					sgno = null;
 					$.each(rData, function(e) {
 						$("#s_location").append("<option value='" + rData[e].sno + "'>" + rData[e].lname + "</option>")
 					});
+					console.log(dno, sno, sgno);
 				}
 			});
 		});
@@ -33,26 +40,36 @@
 			var url = "/getSgno/" + dno + "/" + sno;
 			$.get(url, function(rData) {
 				if (rData != null && rData != "") {
+					$("#location").css("width", "284px");
+					$("#s_location").css("width", "284px");
+					$("#sg_location").css("width", "284px");
 					$("#sg_location").show();
 					$("#sg_loaction").html("");
-					$("#sg_location").html("<option>선택해주세요.</option>");
+					$("#sg_location").html("<option value='0'>선택해주세요.</option>");
 					$.each(rData, function(e) {
 						$("#sg_location").append("<option value='" + rData[e].sgno + "'>" + rData[e].lname + "</option>");
-					}); 
+					});
+					sgno = null;
 				} else {
+					$("#location").css("width", "425px");
+					$("#s_location").css("width", "425px");
 					$("#sg_location").hide();
 					sgno = null;
 				}
+				console.log(dno, sno, sgno);
 			});
 		});
 		$("#sg_location").on("change", function() {
 			sgno = $(this).val();
+			console.log(dno, sno, sgno);
 		});
-		$("#locationSearch").click(function() {
-			console.log("dno", dno);
-			console.log("sno", sno);
-			console.log("sgno", sgno);
-			$("#frmSearchLocation").submit();
+		$("#locationSearch").click(function(e) {
+			e.preventDefault();
+			if (dno == null || dno == "") {
+				alert("검색하시려면 지역을 선택해주세요.");
+			} else if (dno != null && dno != "") {
+				$("#frmSearchLocation").submit();
+			}
 		});
 	});
 </script>
@@ -74,26 +91,31 @@
 					<form action="/group/searchLocation" method="get" id="frmSearchLocation">
 						<div class="row">
 							<!-- Store Search -->
-							<div class="col-lg-4 col-md-12">
+							<div class="col-lg-10 col-md-12">
 								<div class="block d-flex">
 									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="location" name="dno" >
-										<option>도시를 선택해주세요.</option>
+										<option value="">도시를 선택해주세요.</option>
 										<c:forEach items="${listLocation}" var="locationVo">
 											<option value="${locationVo.dno}">${locationVo.lname}</option>
 										</c:forEach>
 									</select>
+									<div class="block d-flex">
+										<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="s_location" style="display: none;" name="sno">
+										</select>
+									</div>
+									<div class="block d-flex">
+										<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="sg_location" style="display: none;" name="sgno">
+										</select>
+									</div>
 								</div>
 							</div>
-							<div class="col-lg-4 col-md-12">
+<!-- 							<div class="col-lg-4 col-md-12"> -->
+<!-- 								<div class="block d-flex"> -->
+									
+<!-- 								</div> -->
+<!-- 							</div> -->
+							<div class="col-lg-2 col-md-12">
 								<div class="block d-flex">
-									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="s_location" style="display: none;" name="sno">
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-12">
-								<div class="block d-flex">
-									<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="sg_location" style="display: none;" name="sgno">
-									</select>
 									<button class="btn btn-main" id="locationSearch">SEARCH</button>
 								</div>
 							</div>

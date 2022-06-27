@@ -67,6 +67,7 @@ $(function() {
 					<div>
 						<div class="col-md-2" style="display: inline-block;">
 							<select id="g_location" name="dno" class="form-control" disabled>
+								<option value="">도시를 선택해주세요.</option>
 								<c:forEach items="${ locationVo }" var="locationVo">
 									<option value="${ groupVo.dno }"	
 										<c:if test="${ groupVo.dno == locationVo.dno }">

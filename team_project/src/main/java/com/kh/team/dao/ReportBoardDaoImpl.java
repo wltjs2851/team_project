@@ -27,14 +27,20 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 
 	@Override
 	public List<ReportBoardVo> getReportBoardList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ReportBoardVo> reportBoardList = sqlSession.selectList(NAMESPACE + "getReportBoardList");
+		return reportBoardList;
 	}
 
 	@Override
 	public boolean updateReportBoard(int rep_state) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public ReportBoardVo getReportByRbno(int rbno) {
+		ReportBoardVo reportBoardVo = sqlSession.selectOne(NAMESPACE + "getReportByRbno", rbno);
+		return reportBoardVo;
 	}
 
 }

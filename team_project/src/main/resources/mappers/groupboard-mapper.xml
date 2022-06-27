@@ -102,6 +102,12 @@
 	where gb_notice = 'on' and gno = #{gno}
 </select>
 
+<!-- 그룹 메인 페이징 -->
+<select id="getCountMain" resultType="int">
+	select count(*) from tbl_group_board
+	where gno = #{gno}
+</select>
+
 <!-- 검색 조건(참조용) -->
  <sql id="search">
  	<if test="searchType != null and keyword != null">

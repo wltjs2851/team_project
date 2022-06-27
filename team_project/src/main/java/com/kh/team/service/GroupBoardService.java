@@ -16,7 +16,7 @@ public interface GroupBoardService {
 	public GroupBoardVo read(int gbno);
 	public boolean update(GroupBoardVo groupBoardVo);
 	public boolean delete(int gbno);
-	public List<GroupBoardVo> list(SearchDto searchDto);
+	public List<GroupBoardVo> list(PagingDto pagingDto);
 //	public List<GroupBoardVo> list(SearchDto searchDto);
 	public List<GroupBoardVo> notice(String gb_notice);
 //	public void updateComment(int gbno);
@@ -26,6 +26,7 @@ public interface GroupBoardService {
 	public boolean updateGLeader(GroupVo groupVo);
 	public MemberVo pickGroupMember(String userid);
 	public int getCount(PagingDto pagingDto);
+	public int getCountMain(int gno);
 	
 	public boolean deleteMember(String userid, int gno);
 	public void updateCtnMember(int gno);

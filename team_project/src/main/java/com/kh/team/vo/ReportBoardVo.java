@@ -16,6 +16,7 @@ public class ReportBoardVo {
 	private String receiver;
 	private Date rep_regdate;
 	private int rep_state;
+	private String rep_etc;
 	
 	public ReportBoardVo() {
 		super();
@@ -23,7 +24,7 @@ public class ReportBoardVo {
 	}
 	
 	public ReportBoardVo(int rno, int uno, int fno, int rcno, int urcno, int fcno, int recno, String rep_cause,
-			String sender, String receiver, int rep_state) {
+			String sender, String receiver, int rep_state, String rep_etc) {
 		super();
 		this.rno = rno;
 		this.uno = uno;
@@ -36,10 +37,11 @@ public class ReportBoardVo {
 		this.sender = sender;
 		this.receiver = receiver;
 		this.rep_state = rep_state;
+		this.rep_etc = rep_etc;
 	}
 
 	public ReportBoardVo(int rno, int uno, int fno, int rcno, int urcno, int fcno, int recno, String rep_cause,
-			String sender, String receiver) {
+			String sender, String receiver, String rep_etc) {
 		super();
 		this.rno = rno;
 		this.uno = uno;
@@ -51,10 +53,11 @@ public class ReportBoardVo {
 		this.rep_cause = rep_cause;
 		this.sender = sender;
 		this.receiver = receiver;
+		this.rep_etc = rep_etc;
 	}
 
 	public ReportBoardVo(int rbno, int rno, int uno, int fno, int rcno, int urcno, int fcno, int recno, String rep_cause,
-			String sender, String receiver, Date rep_regdate, int rep_state) {
+			String sender, String receiver, Date rep_regdate, int rep_state, String rep_etc) {
 		super();
 		this.rbno = rbno;
 		this.rno = rno;
@@ -69,6 +72,7 @@ public class ReportBoardVo {
 		this.receiver = receiver;
 		this.rep_regdate = rep_regdate;
 		this.rep_state = rep_state;
+		this.rep_etc = rep_etc;
 	}
 
 	public int getRbno() {
@@ -175,10 +179,19 @@ public class ReportBoardVo {
 		this.rep_state = rep_state;
 	}
 
+	public String getRep_etc() {
+		return rep_etc;
+	}
+
+	public void setRep_etc(String rep_etc) {
+		this.rep_etc = rep_etc;
+	}
+
 	@Override
 	public String toString() {
 		return "ReportBoardVo [rbno=" + rbno + ", rno=" + rno + ", uno=" + uno + ", fno=" + fno + ", rcno=" + rcno
 				+ ", urcno=" + urcno + ", fcno=" + fcno + ", recno=" + recno + ", rep_cause=" + rep_cause + ", sender="
-				+ sender + ", receiver=" + receiver + ", rep_regdate=" + rep_regdate + ", rep_state=" + rep_state + "]";
+				+ sender + ", receiver=" + receiver + ", rep_regdate=" + rep_regdate + ", rep_state=" + rep_state
+				+ ", rep_etc=" + rep_etc + "]";
 	}
 }

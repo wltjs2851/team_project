@@ -8,16 +8,26 @@
  
  <!-- 신고하기 -->
  <insert id="insertReportBoard">
- 	insert into tbl_report_board(rbno, rno, uno, fno, rcno, urcno, fcno, recno, rep_cause, sender, receiver)
+ 	insert into tbl_report_board(rbno, rno, uno, fno, rcno, urcno, fcno, recno, rep_cause, sender, receiver, rep_etc)
  	values(seq_report_board_rbno.nextval, #{rno, jdbcType=VARCHAR}, #{uno, jdbcType=VARCHAR}, #{fno, jdbcType=VARCHAR}, #{rcno, jdbcType=VARCHAR}, 
  	#{urcno, jdbcType=VARCHAR}, #{fcno, jdbcType=VARCHAR}, #{recno, jdbcType=VARCHAR}, #{rep_cause},
- 	#{sender}, #{receiver})
+ 	#{sender}, #{receiver}, #{rep_etc, jdbcType=VARCHAR})
  </insert>
  
  <!-- 신고 내역 -->
+<!--  <select id="getReportBoardList" resultType="ReportBoardVo"> -->
+<!--  	select rep_cause from tbl_report -->
+<!--  	where userid = #{userid} and gno = #{gno} -->
+<!--  </select> -->
+ 
  <select id="getReportBoardList" resultType="ReportBoardVo">
- 	select rep_cause from tbl_report
- 	where userid = #{userid} and gno = #{gno}
+ 	select * from tbl_report_board
+ 	order by rbno desc
  </select>
  
+<!--  신고내역 조회 -->
+ <select id="getReportByRbno" resultType="ReportBoardVo">
+ 	select * from tbl_report_board
+ 	where rbno = #{rbno}
+ </select>
  </mapper>

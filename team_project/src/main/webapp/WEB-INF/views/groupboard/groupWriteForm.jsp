@@ -69,7 +69,7 @@ $(function() {
 					 
 					<label for="gb_content">내용</label>
 <!-- 					<input type="text" class="form-control" name="gb_content" id="gb_content" required /> -->
-					<textarea id="summernote" name="gb_content"></textarea>
+					<textarea id="summernote" name="gb_content" required></textarea>
 				</div>
 				<div style="display: none;" class="form-group">
 					 

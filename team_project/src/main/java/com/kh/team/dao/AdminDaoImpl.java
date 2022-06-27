@@ -1,6 +1,8 @@
 package com.kh.team.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,31 @@ private final String NAMESPACE = "com.kh.team.mappers.admin.";
 	public List<testVo> getGroupInfo() {
 		List<testVo> getGroupInfo = sqlSession.selectList(NAMESPACE + "getGroupInfo");
 		return getGroupInfo;
+	}
+
+	@Override
+	public List<Integer> getGno(String userid) {
+		List<Integer> gnoList = sqlSession.selectList(NAMESPACE + "getGno", userid);
+		return gnoList;
+	}
+
+	@Override
+	public List<String> getGmember(int gno) {
+		List<String> memberList = sqlSession.selectList(NAMESPACE + "getGmember", gno);
+		return memberList;
+	}
+
+	@Override
+	public boolean updateGLeader(int gno, String userid) {
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("gno", gno);
+		parameter.put("g_leader", userid);
+		System.out.println(parameter);
+		int count = sqlSession.update(NAMESPACE + "updateGLeader", parameter);
+		if(count > 0) {
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -42,7 +42,7 @@ public class RecipeCommentDaoImpl implements RecipeCommentDao{
 
 	@Override
 	public boolean deleteRecipeComment(int rcno) {
-		int count = sqlSession.delete(NAMESPACE, rcno);
+		int count = sqlSession.delete(NAMESPACE + "deleteRecipeCommnet", rcno);
 		if(count > 0) {
 			return true;
 		}

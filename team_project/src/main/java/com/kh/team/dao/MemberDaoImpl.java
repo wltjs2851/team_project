@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -112,9 +113,16 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public List<MemberVo> getMemberList() {
-		List<MemberVo> getMemberList = sqlSession.selectList(NS + "getMemberList");
+	public List<MemberVo> getMemberList(PagingDto pagingDto) {
+		List<MemberVo> getMemberList = sqlSession.selectList(NS + "getMemberList", pagingDto);
+		System.out.println("getMemberList, search:" + getMemberList);
 		return getMemberList;
+	}
+
+	@Override
+	public int getCountMember(PagingDto pagingDto) {
+		int count = sqlSession.selectOne(NS + "getCountMember", pagingDto);
+		return count;
 	}
 
 }

@@ -100,36 +100,34 @@ $(function() {
 <div class="container-fluid">
 	<form role="form" action="/recipe/recipeModifyRun" method="post" id="recipeAddForm" enctype="multipart/form-data">
 	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-11">
-			<div class="col-md-7" style='display:inline-block; vertical-align: top;'>
-					<input type="hidden" name="rno" value="${ recipeVo.rno }">
-					<input type="hidden" id="userid" name="userid" value="${ loginVo.userid }"/>
-					<input type="hidden" id="r_product" name="r_product"/>
-					<input type="hidden" name="page" value="${ param.page }">
-					<input type="hidden" name="perPage" value="${ param.perPage }">
-					<input type="hidden" name="keyword" value="${ param.keyword }">
-					<input type="hidden" name="searchType" value="${ param.searchType }">
-					<div class="form-group">
-						<input type="text" class="form-control" value="${ recipeVo.r_title }" name="r_title" required/>
-					</div>
-					<div class="form-group">
-						<textarea id="summernote" name="r_content"></textarea>
-					</div>
-					<button type="submit" class="btn btn-success" 
-						style='width: 80px; height:50px; padding: 1% 0'>수정완료</button>
-					<br>
-					<br>
-			</div>
-			<div class="col-md-4" style='display:inline-block; vertical-align: top;'>
-				<div class="row">
-					<button class="btn btn-info" id="btnSearch" 
-						style='width: 110px; height:50px; padding: 1% 0; margin-bottom: 20px'>추천 상품 검색</button><br>
+		<div class="col-md-2"></div>
+		<div class="col-md-7" style='display:inline-block; vertical-align: top;'>
+				<input type="hidden" name="rno" value="${ recipeVo.rno }">
+				<input type="hidden" id="userid" name="userid" value="${ loginVo.userid }"/>
+				<input type="hidden" id="r_product" name="r_product"/>
+				<input type="hidden" name="page" value="${ param.page }">
+				<input type="hidden" name="perPage" value="${ param.perPage }">
+				<input type="hidden" name="keyword" value="${ param.keyword }">
+				<input type="hidden" name="searchType" value="${ param.searchType }">
+				<div class="form-group">
+					<input type="text" class="form-control" value="${ recipeVo.r_title }" name="r_title" required/>
 				</div>
-					<div class="shopping" id="shopping">
-						${ recipeVo.r_product }
-					</div>
+				<div class="form-group">
+					<textarea id="summernote" name="r_content"></textarea>
+				</div>
+				<button type="submit" class="btn btn-success" 
+					style='width: 80px; height:50px; padding: 1% 0'>수정완료</button>
+				<br>
+				<br>
+		</div>
+		<div class="col-md-3" style='display:inline-block; vertical-align: top;'>
+			<div class="row">
+				<button class="btn btn-info" id="btnSearch" 
+					style='width: 110px; height:50px; padding: 1% 0; margin-bottom: 20px'>추천 상품 검색</button><br>
 			</div>
+				<div class="shopping" id="shopping">
+					${ recipeVo.r_product }
+				</div>
 		</div>
 	</div>
 	</form>

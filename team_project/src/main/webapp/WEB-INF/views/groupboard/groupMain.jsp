@@ -5,20 +5,39 @@
 
 <style>
 
-#sidebar {
- 	 width: 400px;
-     margin-top: 0;
-     position:fixed;
-     float: left;
-     top:7%;
-     right:30px;
-     bottom:60%;
-     padding:30px;
-     height: 100%;
-     cursor:default;
-     overflow-y:auto;
-     z-index: 100;
- }
+/* #sidebar { */
+/*  	 width: 600px; */
+/*      margin-top: 0; */
+/*      position:fixed; */
+/*      float: left; */
+/*      top:7%; */
+/*      right:30px; */
+/*      bottom:60%; */
+/*      padding:30px; */
+/*      height: 100%; */
+/*      cursor:default; */
+/*      overflow-y:auto; */
+/*      z-index: 100; */
+/*  } */
+
+.main-sidebar {
+	width: 450px;
+	margin-top: 0;
+	position:fixed;
+	float: left;
+	top:7%;
+	right:30px;
+	bottom:60%;
+	padding:30px;
+	height: 100%;
+	cursor:default;
+	overflow-y:auto;
+	z-index: 100;
+}
+
+#searchType {
+	width: 100px;
+}
 
 </style>
 
@@ -51,6 +70,7 @@ $(function() {
 		
 		frmPaging.find("input[name=searchType]").val(searchType);
 		frmPaging.find("input[name=keyword]").val(keyword);
+		frmPaging.find("input[name=page]").val(1);
 		frmPaging.attr("action", "/groupboard/groupMain/${gno}");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
@@ -98,13 +118,41 @@ $(function() {
 		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
 		window.open(url, "신고 페이지", option);
 	});
+
+	
+	$("a.page-link").click(function(e) {
+		e.preventDefault();
+		var page = $(this).attr("href");
+		frmPaging.find("input[name=page]").val(page);
+		frmPaging.attr("action", "/groupboard/groupMain");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
+	
+	$(".readMore").click(function() {
+		var gbno = $(this).attr("data-gbno");
+		console.log(gbno);
+		frmPaging.find("input[name=gbno]").val(gbno);
+		frmPaging.attr("action", "/groupboard/groupRead");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 
 // var userid = window.open.document.getElementById("userid").value;
 // var gno = window.open.document.getElementById("gno").value;
 </script>
 
-<%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %> --%>
+
+<form id="frmPaging">
+	<input type="hidden" name="gbno" value="">
+	<input type="hidden" name="gno" value="${ groupVo.gno }">
+	<input type="hidden" name="page" value="${ pagingDto.page }">
+	<input type="hidden" name="perPage" value="${ pagingDto.perPage }">
+	<input type="hidden" name="searchType" value="${ pagingDto.searchType }">
+	<input type="hidden" name="keyword" value="${ pagingDto.keyword }">
+</form>
 
 <%-- ${ groupVo } --%>
 <!-- <hr> -->
@@ -112,7 +160,8 @@ $(function() {
 <!-- <hr> -->
 <%-- ${ groupJoinMember } --%>
 <%-- ${ groupList } --%>
-
+${ pagingDto.totalPage }
+<%-- ${ param.page } --%>
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
 <div class="row">
@@ -156,7 +205,7 @@ $(function() {
 <!--================================
 =            Page Title            =
 =================================-->
-<section class="page-title">
+<section class="page-title" style="background-color: #2D5082;">
 	<!-- Container Start -->
 	<div class="container">
 		<div class="row">
@@ -177,9 +226,9 @@ $(function() {
 			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
 			
 			<c:forEach items="${ noticeList }" var="groupBoardVo" varStatus="status" begin="0" end="2">
-				<h3 style="background-color: powderblue;">
+				<h3 style="background-color: #2D5082;">
 				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
-					<a href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
+					<a style="color: #ffffff;" href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
 				</c:if>
 				</h3>
 			</c:forEach>
@@ -235,19 +284,58 @@ $(function() {
 					</div>
 					
 					<!-- Read more button -->
-					<a style="width: 90px; height:40px; padding: 1% 0" href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }" class="btn btn-transparent">...더 보기</a>
+					<a data-gbno="${ groupBoardVo.gbno }" style="width: 90px; height:40px; padding: 1% 0" href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }" class="readMore btn btn-transparent">...더 보기</a>
 				</article>
 				
 			</c:forEach>
 			
 			</div>
+			
+			
+			<!-- 페이징 -->
+				<div class="row">
+					<div class="col-md-12">
+						<nav>
+							<ul class="pagination justify-content-center">
+							<c:if test="${pagingDto.startPage != 1}">
+								<li class="page-item">
+									<a class="page-link" href="${pagingDto.startPage - 1}">&laquo</a>
+								</li>
+							</c:if>
+								<li class="page-item">
+									<a class="page-link" href="#">1</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">2</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">3</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">4</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">5</a>
+								</li>
+								
+								<c:if test="${ pagingDto.endPage != pagingDto.totalPage }">
+								<li class="page-item">
+									<a class="page-link" href="${pagingDto.endPage + 1}">&raquo;</a>
+								</li>
+								</c:if>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			
+			
 			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0" id="sidebar">
 				<div class="sidebar">
 				
 				<aside class="main-sidebar sidebar-dark-primary elevation-4" style="position: fixed; top: 30px bottom: 270px;">
 				<div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-transition os-host-scrollbar-horizontal-hidden">
-				<div class="list-group">
-						 <a href="#" class="list-group-item list-group-item-action active">Home</a>
+				<div class="list-group" style="border-color: #2D5082;">
+						 <a style="background-color: #2D5082; color: #ffffff;" href="#" class="list-group-item">Home</a>
 						<div class="list-group-item">
 <!-- 							<h4 class="list-group-item-heading"> -->
 <!-- 								그룹 소개 -->
@@ -284,7 +372,7 @@ $(function() {
 							<div class="widget search p-0">
 								<div class="input-group">
 								    <input type="text" class="form-control" id="keyword" value="${searchDto.keyword}" placeholder="Search...">
-								    <span id="btnSearch" class="input-group-addon"><i class="fa fa-search"></i></span>
+								    <span style="background-color: #2D5082;" id="btnSearch" class="input-group-addon"><i class="fa fa-search"></i></span>
 							    </div>
 							</div>
 							
@@ -294,14 +382,15 @@ $(function() {
 						</div>	
 						
 						
-							<a href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
-								그룹 정보 보기
-							</a>
-							<div>
-							<a href="/chat/chat" class="list-group-item list-group-item-action active justify-content-between" id="chatRoom">
+							
+							<div class="list-group-item justify-content-between">
+							<a style="background-color: #ffffff; color: #2D5082;" href="/chat/chat" id="chatRoom">
 								그룹 채팅방
 							</a>
 							</div>
+							<a style="background-color: #2D5082;" href="/group/groupInfo?gno=${ groupVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
+								그룹 정보 보기
+							</a>
 					</div>
 					<nav>
 						<ol class="breadcrumb">

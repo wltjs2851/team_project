@@ -39,7 +39,7 @@ $(function() {
 		var receiver = $(this).attr("data-user");
 		var url = "/reportBoard/reportBoardPop?uno=" + uno + "&sender=" + sender + "&receiver=" + receiver;
 		var option = "width = 350px, height=400px, top=300px, left=300px, scrollbars=yes";
-		window.open(url,"상품 검색",option);
+		window.open(url,"신고",option);
 	
 		console.log(sender);
 	});

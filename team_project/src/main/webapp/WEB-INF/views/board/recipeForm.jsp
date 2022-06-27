@@ -104,16 +104,19 @@ $(function() {
 							"' class='rounded-circle z-depth-2' width=40px style='margin-right: 10px;'>";
 				}
 				cmt +=this.userid + "</p>";
-				if("${loginVo.userid}" == this.userid) {				
-					cmt += "<div class='dropdown' style='float:right'>"
+				cmt += "<div class='dropdown' style='float:right'>"
 					cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
 					cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
 					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
-					cmt += "		<button class='dropdown-item btnModify' type='button' data-rcno=" + this.rcno +">수정</button>"
-					cmt += "		<button class='dropdown-item btnDelete' type='button' data-rcno=" + this.rcno +">삭제</button>"
+					if("${loginVo.userid}" == this.userid) {				
+						cmt += "		<button class='dropdown-item btnModify' type='button' data-rcno='" + this.rcno +"'>수정</button>"
+						cmt += "		<button class='dropdown-item btnDelete' type='button' data-rcno='" + this.rcno +"'>삭제</button>"
+					} else {
+						cmt += "		<button class='dropdown-item btnReport' type='button' data-rcno='" + this.rcno +
+							"' data-user='" + this.userid + "'>신고</button>"
+					}
 					cmt += "</div></div>";
-				}
-				cmt += "</div>"
+					cmt += "</div>"
 				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
 							+ this.rc_comment + "</textarea>";
 				if("${loginVo.userid}" == this.userid) {	
@@ -152,6 +155,26 @@ $(function() {
 				}
 			});
 		});
+	});
+	
+	$("#comment").on("click", ".btnDelete", function() {
+		var rcno = $(this).attr("data-rcno");
+		var url = "/recipe/removeRecipeComment/" + rcno;
+		$.get(url, function(receivedData) {
+			console.log(receivedData);
+			if(receivedData == "true") {
+				getCommentList();
+			}
+		});
+	});
+	
+	$("#comment").on("click", ".btnReport", function() {
+		var rcno = $(this).attr("data-rcno");
+		var receiver = $(this).attr("data-user");
+		var sender = "${loginVo.userid}";
+		var url = "/reportBoard/reportBoardPop?rcno=" + rcno + "&sender=" + sender + "&receiver=" + receiver;
+		var option = "width = 350px, height=400px, top=300px, left=300px, scrollbars=yes";
+		window.open(url,"신고",option);
 	});
 	
 	var like_cnt = ${like_cnt};

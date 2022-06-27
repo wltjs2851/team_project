@@ -90,7 +90,7 @@
 								</div>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#">나의 일정</a>
+								<a class="nav-link" href="/calendar/cal">나의 일정</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="/group/myGroupList">그룹</a>
