@@ -281,7 +281,7 @@ $(function() {
 							</p>
 						</div>
 						<div class="list-group-item justify-content-between">
-							<a href="/groupboard/groupMain/${ groupBoardVo.gno }">그룹 메인으로</a>
+							<a href="/groupboard/groupMain/${ groupBoardVo.gno }?gbno=${groupBoardVo.gbno}?gno=${param.gno}?page=${param.page}">그룹 메인으로</a>
 						</div>
 							<a style="background-color: #2D5082;" href="/group/groupInfo?gno=${ groupBoardVo.gno }" class="list-group-item list-group-item-action active justify-content-between">
 								그룹 정보 보기

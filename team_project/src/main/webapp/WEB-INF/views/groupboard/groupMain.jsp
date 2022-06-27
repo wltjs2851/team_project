@@ -25,7 +25,7 @@
 	margin-top: 0;
 	position:fixed;
 	float: left;
-	top:9.5%;
+	top:7%;
 	right:30px;
 	bottom:60%;
 	padding:30px;
@@ -39,11 +39,6 @@
 	width: 100px;
 }
 
-.main-sidebar.fixed.sidebar{position: fixed; top: 0;}
-
-.stop-scrolling {
-	overflow: hideen;
-}
 </style>
 
 <script>
@@ -137,10 +132,12 @@ $(function() {
 	$(".readMore").click(function() {
 		var gbno = $(this).attr("data-gbno");
 		console.log(gbno);
-		frmPaging.find("input[name=gbno]").val(gbno);
-		frmPaging.attr("action", "/groupboard/groupRead");
-		frmPaging.attr("method", "get");
-		frmPaging.submit();
+// 		frmPaging.find("input[name=gbno]").val(gbno);
+// 		frmPaging.attr("action", "/groupboard/groupRead");
+// 		frmPaging.attr("method", "get");
+// 		frmPaging.submit();
+		$(this).attr("href", "/groupboard/groupRead?gbno=" + gbno + "&gno=${groupVo.gno}&page=${pagingDto.page}&searchType=${param.searchType}" +
+		"&keyword=${param.keyword}");
 	});
 	
 // 	let paging = document.getElementById("paging").scrollHeight;
@@ -152,17 +149,18 @@ $(function() {
 // 		if(sidebar > 40) {
 // 			document.getElementById("sidebar").addEventListener("scroll", false);
 // 		}
-});
+// });
 
 // var userid = window.open.document.getElementById("userid").value;
 // var gno = window.open.document.getElementById("gno").value;
 
-window.addEventListener("scroll", function() {
-	console.log(window.scrollX, window.scrollY);
-	if(window.scrollY > 4599) {
-		console.log("4599 초과");
-		$("#sidebar").addClass('stop-scrolling');
-	}
+	window.addEventListener("scroll", function() {
+		console.log(window.scrollX, window.scrollY);
+		if(window.scrollY > 4599) {
+			console.log("4599 초과");
+		}
+	});
+
 });
 </script>
 
@@ -183,7 +181,7 @@ window.addEventListener("scroll", function() {
 <!-- <hr> -->
 <%-- ${ groupJoinMember } --%>
 <%-- ${ groupList } --%>
-${ pagingDto.totalPage }
+<%-- ${ pagingDto.totalPage } --%>
 <%-- ${ param.page } --%>
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->

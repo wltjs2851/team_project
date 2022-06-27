@@ -49,7 +49,7 @@
  	
  	select * from (select rownum rnum, a.* from 
 			(select * from tbl_group_board
-            where gno = 11
+            where gno = #{gno}
  		 	<include refid="search"></include>
 			order by gbno desc) a) 
 		where rnum between #{startRow} and #{endRow}
