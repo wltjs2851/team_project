@@ -148,7 +148,6 @@ $(function(){
 });
 </script>
 <%-- ${memberVo } --%>
-${reportBoardVo }
 <body>
 	<div class="row">
 		<div class="col-md-1"></div>

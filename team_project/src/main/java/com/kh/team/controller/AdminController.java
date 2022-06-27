@@ -1,6 +1,9 @@
 package com.kh.team.controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.AdminService;
 import com.kh.team.service.FreeCommentService;
@@ -85,8 +89,19 @@ public class AdminController {
 	private WarningMessageService warningMessageService;
 	
 	@RequestMapping(value="/main", method = RequestMethod.GET)
-	public String adminMain(Model model) {
-		
+	public String adminMain(HttpSession session, Model model, RedirectAttributes rttr) {
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		if(memberVo == null) {
+			System.out.println("if");
+			rttr.addFlashAttribute("ifAdmin", "notLogin");
+			return "/home";
+		}
+		String userid = memberVo.getUserid();
+		System.out.println(memberVo);
+		if (!userid.equals("admin01")) {
+			rttr.addFlashAttribute("ifAdmin", "false");
+			return "/home";
+		}
 		List<MemberVo> lastestMember = memberSerive.getLatestMember();
 		System.out.println("최근 가입 회원 목록:" + lastestMember);
 		model.addAttribute("lastestMember", lastestMember);

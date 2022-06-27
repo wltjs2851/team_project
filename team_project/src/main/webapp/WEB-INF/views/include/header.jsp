@@ -88,6 +88,7 @@
 									<a class="dropdown-item" href="/free/freeList">자유게시판</a>
 								</div>
 							</li>
+							<c:if test="${loginVo.userid != 'admin01'}">
 							<li class="nav-item">
 								<a class="nav-link" href="/calendar/cal">나의 일정</a>
 							</li>
@@ -121,6 +122,7 @@
 									<a href="#" class="dropdown-item dropdown-footer">See All
 										Notifications</a>
 								</div></li>
+								</c:if>
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
 						<c:choose>
@@ -136,9 +138,18 @@
 								<li class="nav-item">
 									<a class="nav-link btn-danger" href="/member/logout">로그아웃</a>
 								</li>
-								<li class="nav-item">
-									<a class="nav-link btn-success" href="/member/myPage">마이페이지</a>
-								</li>
+								<c:choose>
+									<c:when test="${loginVo.userid == 'admin01'}">
+										<li class="nav-item">
+											<a class="nav-link btn-success" href="/admin/main">관리자모드</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item">
+											<a class="nav-link btn-success" href="/member/myPage">마이페이지</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 						</ul>
