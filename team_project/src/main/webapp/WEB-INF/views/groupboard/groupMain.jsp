@@ -25,7 +25,7 @@
 	margin-top: 0;
 	position:fixed;
 	float: left;
-	top:7%;
+	top:9.5%;
 	right:30px;
 	bottom:60%;
 	padding:30px;
@@ -39,6 +39,11 @@
 	width: 100px;
 }
 
+.main-sidebar.fixed.sidebar{position: fixed; top: 0;}
+
+.stop-scrolling {
+	overflow: hideen;
+}
 </style>
 
 <script>
@@ -71,7 +76,7 @@ $(function() {
 		frmPaging.find("input[name=searchType]").val(searchType);
 		frmPaging.find("input[name=keyword]").val(keyword);
 		frmPaging.find("input[name=page]").val(1);
-		frmPaging.attr("action", "/groupboard/groupMain/${gno}");
+		frmPaging.attr("action", "/groupboard/groupMain/${groupVo.gno}");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -124,7 +129,7 @@ $(function() {
 		e.preventDefault();
 		var page = $(this).attr("href");
 		frmPaging.find("input[name=page]").val(page);
-		frmPaging.attr("action", "/groupboard/groupMain");
+		frmPaging.attr("action", "/groupboard/groupMain/${groupVo.gno}");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -137,10 +142,28 @@ $(function() {
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
+	
+// 	let paging = document.getElementById("paging").scrollHeight;
+// 	console.log("paging: ", paging);
+	
+// 	let sidebar = documetn.getElementById("sidebar").scrollTop;
+// 	console.log("sidebar: ", sidebar);
+
+// 		if(sidebar > 40) {
+// 			document.getElementById("sidebar").addEventListener("scroll", false);
+// 		}
 });
 
 // var userid = window.open.document.getElementById("userid").value;
 // var gno = window.open.document.getElementById("gno").value;
+
+window.addEventListener("scroll", function() {
+	console.log(window.scrollX, window.scrollY);
+	if(window.scrollY > 4599) {
+		console.log("4599 초과");
+		$("#sidebar").addClass('stop-scrolling');
+	}
+});
 </script>
 
 <%-- <%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %> --%>
@@ -292,41 +315,7 @@ ${ pagingDto.totalPage }
 			</div>
 			
 			
-			<!-- 페이징 -->
-				<div class="row">
-					<div class="col-md-12">
-						<nav>
-							<ul class="pagination justify-content-center">
-							<c:if test="${pagingDto.startPage != 1}">
-								<li class="page-item">
-									<a class="page-link" href="${pagingDto.startPage - 1}">&laquo</a>
-								</li>
-							</c:if>
-								<li class="page-item">
-									<a class="page-link" href="#">1</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">2</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">3</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">4</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">5</a>
-								</li>
-								
-								<c:if test="${ pagingDto.endPage != pagingDto.totalPage }">
-								<li class="page-item">
-									<a class="page-link" href="${pagingDto.endPage + 1}">&raquo;</a>
-								</li>
-								</c:if>
-							</ul>
-						</nav>
-					</div>
-				</div>
+			
 			
 			
 			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0" id="sidebar">
@@ -349,24 +338,24 @@ ${ pagingDto.totalPage }
 						<div class="list-group-item justify-content-between">
 						
 							<div>
-							<select id="searchType">
+							<a href="/groupboard/groupMain/${ groupVo.gno }" class="btn-outline-primary" style="width: 50px; height:50px; padding: 1% 0">검색 초기화</a>
+							<select id="searchType" class="form-control">
 								<option value="t"
-									<c:if test="${ searchDto.searchType == 't' }">
+									<c:if test="${ pagingDto.searchType == 't' }">
 										selected
 									</c:if>
 								>제목</option>
 								<option value="c"
-									<c:if test="${ searchDto.searchType == 'c' }">
+									<c:if test="${ pagingDto.searchType == 'c' }">
 										selected
 									</c:if>
 								>내용</option>
 								<option value="w"
-									<c:if test="${ searchDto.searchType == 'w' }">
+									<c:if test="${ pagingDto.searchType == 'w' }">
 										selected
 									</c:if>
 								>작성자</option>
 							</select>
-							<a href="/groupboard/groupMain/${ groupVo.gno }" class="btn-outline-primary" style="width: 50px; height:50px; padding: 2% 0">검색 초기화</a>
 							</div>
 							
 							<div class="widget search p-0">
@@ -418,6 +407,41 @@ ${ pagingDto.totalPage }
 		</div>
 	</div>
 </section>
+
+<!-- 페이징 -->
+<div class="row" id="paging">
+	<div class="col-md-12">
+		<nav>
+			<ul class="pagination justify-content-center">
+			<c:if test="${pagingDto.startPage != 1}">
+				<li class="page-item">
+					<a class="page-link" href="${pagingDto.startPage - 1}">&laquo</a>
+				</li>
+			</c:if>
+				<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="i">
+				<li 
+					<c:choose>	
+						<c:when test="${i == param.page}">
+							class="page-item active"
+						</c:when>
+						<c:otherwise>
+							class="page-item"
+						</c:otherwise>
+					</c:choose>
+				>
+					<a href="${i}" class="page-link">${i}</a>
+				</li>
+			</c:forEach>
+				
+				<c:if test="${ pagingDto.endPage != pagingDto.totalPage }">
+				<li class="page-item">
+					<a class="page-link" href="${pagingDto.endPage + 1}">&raquo;</a>
+				</li>
+				</c:if>
+			</ul>
+		</nav>
+	</div>
+</div>
 
 </div>
 

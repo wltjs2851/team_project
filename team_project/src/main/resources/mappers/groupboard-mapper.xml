@@ -41,11 +41,18 @@
 <!--  	select * from tbl_group_board -->
 <!--  	where gno = #{gno} -->
 <!--  	order by gbno desc -->
- 	select * from (select rownum rnum, a.* from
- 		(select * from tbl_group_board
- 		 <include refid="search"></include>) a)
- 	where gno = #{gno}
- 	order by gbno desc
+<!--  	select * from (select rownum rnum, a.* from -->
+<!--  		(select * from tbl_group_board -->
+<!--  		 <include refid="search"></include>) a) -->
+<!--  	where gno = #{gno} and rnum between #{startRow} and #{endRow} -->
+<!--  	order by gbno desc -->
+ 	
+ 	select * from (select rownum rnum, a.* from 
+			(select * from tbl_group_board
+            where gno = 11
+ 		 	<include refid="search"></include>
+			order by gbno desc) a) 
+		where rnum between #{startRow} and #{endRow}
  </select>
  
  <!-- 공지글만 뽑아내기 -->
@@ -106,15 +113,16 @@
 <select id="getCountMain" resultType="int">
 	select count(*) from tbl_group_board
 	where gno = #{gno}
+ 		  <include refid="search"></include>
 </select>
 
 <!-- 검색 조건(참조용) -->
  <sql id="search">
  	<if test="searchType != null and keyword != null">
     	<choose>
-    		<when test='searchType == "t"'>where gb_title like '%' || #{keyword} || '%'</when>
-    		<when test='searchType == "c"'>where gb_content like '%' || #{keyword} || '%'</when>
-    		<when test='searchType == "w"'>where userid like '%' || #{keyword} || '%'</when>
+    		<when test='searchType == "t"'>and gb_title like '%' || #{keyword} || '%'</when>
+    		<when test='searchType == "c"'>and gb_content like '%' || #{keyword} || '%'</when>
+    		<when test='searchType == "w"'>and userid like '%' || #{keyword} || '%'</when>
     	</choose>
     </if>
  </sql>
