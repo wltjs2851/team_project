@@ -27,7 +27,7 @@ public interface GroupBoardDao {
 	public boolean updateGLeader(GroupVo groupVo);
 	public MemberVo pickGroupMember(String userid);
 	public int getCount(PagingDto pagingDto);
-	public int getCountMain(PagingDto pagingDto);
+	public int getCountMain(int gno);
 	
 	public boolean deleteMember(String userid, int gno);
 	public void updateCtnMember(int gno);

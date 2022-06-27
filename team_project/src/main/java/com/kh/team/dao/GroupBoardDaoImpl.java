@@ -134,8 +134,8 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public int getCountMain(PagingDto pagingDto) {
-		int count = sqlSession.selectOne(NAMESPACE + "getCountMain", pagingDto);
+	public int getCountMain(int gno) {
+		int count = sqlSession.selectOne(NAMESPACE + "getCountMain", gno);
 		System.out.println("groupBoardDao, count: " + count);
 		return count;
 	}
