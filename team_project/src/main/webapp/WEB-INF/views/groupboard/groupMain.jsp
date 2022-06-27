@@ -318,7 +318,7 @@ ${ pagingDto.totalPage }
 									<a class="page-link" href="#">5</a>
 								</li>
 								
-								<c:if test="${ pagingDto.endPage == pagingDto.totalPage }">
+								<c:if test="${ pagingDto.endPage != pagingDto.totalPage }">
 								<li class="page-item">
 									<a class="page-link" href="${pagingDto.endPage + 1}">&raquo;</a>
 								</li>

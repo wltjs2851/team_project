@@ -217,7 +217,7 @@ public class GroupBoardController {
 		List<GroupBoardVo> groupList = groupBoardService.list(pagingDto);
 		model.addAttribute("groupList", groupList);
 
-		pagingDto.setCount(groupBoardService.getCountMain(pagingDto));
+		pagingDto.setCount(groupBoardService.getCountMain(gno));
 		pagingDto.setPage(pagingDto.getPage());
 		System.out.println("main, pagingDto:" + pagingDto);
 		model.addAttribute("pagingDto", pagingDto);

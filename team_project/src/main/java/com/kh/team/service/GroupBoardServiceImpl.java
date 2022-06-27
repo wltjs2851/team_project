@@ -106,8 +106,8 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	}
 
 	@Override
-	public int getCountMain(PagingDto pagingDto) {
-		int count = groupBoardDao.getCountMain(pagingDto);
+	public int getCountMain(int gno) {
+		int count = groupBoardDao.getCountMain(gno);
 		return count;
 	}
 
