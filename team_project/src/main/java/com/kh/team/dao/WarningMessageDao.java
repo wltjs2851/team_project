@@ -9,5 +9,8 @@ public interface WarningMessageDao {
 	public boolean insertWarningMessage(WarningMessageVo warningMessageVo);
 	
 	// 경고 목록 
-	public List<WarningMessageVo> listWarningMessage(String userid, String mType);
+	public List<WarningMessageVo> listWarningMessage(String userid);
+	
+	//경고 개수
+	public int warningCount(String userid);
 }
