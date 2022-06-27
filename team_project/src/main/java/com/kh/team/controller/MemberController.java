@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.team.service.EmailService;
 import com.kh.team.service.MemberService;
 import com.kh.team.service.MyContentService;
+import com.kh.team.util.EgovHttpSessionBindingListener;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.EmailVo;
 import com.kh.team.vo.FreeCommentVo;
@@ -62,6 +63,8 @@ public class MemberController {
 		String target = (String)session.getAttribute("targetLocation");
 		if (memberVo != null) {
 			session.setAttribute("loginVo", memberVo);
+			EgovHttpSessionBindingListener listener = new EgovHttpSessionBindingListener();
+			session.setAttribute(memberVo.getUserid(), listener);
 //			로그인했을때 아이디저장에 체크하였다면 아이디값을 쿠키에 저장
 			if (saveid != null && !saveid.equals("")) {
 				Cookie cookie = new Cookie("saveid", userid);

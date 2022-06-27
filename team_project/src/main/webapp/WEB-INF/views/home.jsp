@@ -5,6 +5,10 @@
 <script>
 	$(function() {
 		var loginResult = "${loginResult}";
+		var logout = "${logout}";
+		if (logout == "logout") {
+			alert("로그아웃 되었습니다.");
+		}
 // 		if (loginResult == "true") {
 // 			alert("${loginVo.nickname}(${loginVo.userid})님 환영합니다.");
 // 		}
