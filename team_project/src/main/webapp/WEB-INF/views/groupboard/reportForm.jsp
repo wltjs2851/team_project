@@ -84,6 +84,9 @@ $(function() {
 							<div><input type="radio" name="rep_cause" value="방정하지 못한 언행">방정하지 못한 언행</div>
 							<div><input type="radio" name="rep_cause" value="타인을 비난하거나 비방함">타인을 비난하거나 비방함</div>
 							<div><input type="radio" name="rep_cause" value="종교 권유 및 전도">종교 권유 및 전도</div>
+							<div><input type="radio" name="rep_cause" value="기타">기타
+								<input type="text" name="rep_etc">
+							</div>
 <!-- 							<div><input type="radio" name="rep_cause">기타</div> -->
 							 
 <!-- 							<label for="rep_cause"> -->

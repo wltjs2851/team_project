@@ -39,6 +39,17 @@ $(function() {
 			}
 		});
 	});
+
+	// 신고 팝업
+	$("#comment").on("click", ".report", function() {
+// 		var gbcno = $(this).attr("data-gbcno");
+		var userid = $(this).next().val();
+		console.log(userid);
+		var gno = $("#gno").val();
+		var url = "/groupboard/reportForm/" + userid + "/" + gno;
+		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
+		window.open(url,"신고",option);
+	});
 	
 	function getCommentList() {
 		var gbno = "${groupBoardVo.gbno}";
@@ -59,13 +70,23 @@ $(function() {
 				}
 				cmt += this.userid + "</p>";
 				
-				if("${loginVo.userid}" == this.userid) {				
-					cmt += "<div class='dropdown' style='float:right'>"
-					cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
-					cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
+				cmt += "<div class='dropdown' style='float:right'>"
+				cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
+				cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
+				if("${loginVo.userid}" == this.userid) {
+					
 					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
 					cmt += "		<button class='dropdown-item btnModify' type='button' data-gbcno=" + this.gbcno +">수정</button>"
 					cmt += "		<button class='dropdown-item btnDelete' type='button' data-gbcno=" + this.gbcno +">삭제</button>"
+					cmt += "</div></div>";
+				} else {
+					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
+// 					cmt += "<i id='report' class='report fa-solid fa-handcuffs'><a class='dropdows-item' href='#' 
+// 				 	data-user='${ groupBoardVo.userid }''>신고하기</a></i>"
+					cmt += "		<a class='dropdown-item' href='/groupboard/memberInfo?userid=${ groupBoardVo.userid }'>회원 정보 보기</a>";
+					cmt += "		<i id='report' class='report fa-solid fa-handcuffs'><a class='dropdows-item' href='#' data-user='${ groupBoardVo.userid }''>신고하기</a></button></i>";
+					cmt += " <input type='hidden' id='userid' name='userid' value='${ groupBoardVo.userid }'>";
+					cmt += " <input type='hidden' id='gno' name='gno' value='${ groupBoardVo.gno }'>";
 					cmt += "</div></div>";
 				}
 				cmt += "</div>"
