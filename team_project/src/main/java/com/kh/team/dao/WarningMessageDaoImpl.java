@@ -28,12 +28,15 @@ public class WarningMessageDaoImpl implements WarningMessageDao{
 	}
 
 	@Override
-	public List<WarningMessageVo> listWarningMessage(String userid, String mType) {
-		Map<String, String> parameter = new HashMap<String, String>();
-		parameter.put("userid", userid);
-		parameter.put("mType", mType);
-		List<WarningMessageVo> listWarningMessage = sqlSession.selectList(NAMESPACE + "listWarningMessage", parameter);
+	public List<WarningMessageVo> listWarningMessage(String userid) {
+		List<WarningMessageVo> listWarningMessage = sqlSession.selectList(NAMESPACE + "listWarningMessage", userid);
 		return listWarningMessage;
+	}
+
+	@Override
+	public int warningCount(String userid) {
+		int count = sqlSession.selectOne(NAMESPACE + "warningMessageCount", userid);
+		return count;
 	}
 
 }

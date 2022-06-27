@@ -9,7 +9,6 @@ import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecipeVo;
 import com.kh.team.vo.ReportVo;
-import com.kh.team.vo.SearchDto;
 
 public interface GroupBoardDao {
 	
@@ -27,7 +26,7 @@ public interface GroupBoardDao {
 	public boolean updateGLeader(GroupVo groupVo);
 	public MemberVo pickGroupMember(String userid);
 	public int getCount(PagingDto pagingDto);
-	public int getCountMain(int gno);
+	public int getCountMain(PagingDto pagingDto);
 	
 	public boolean deleteMember(String userid, int gno);
 	public void updateCtnMember(int gno);
