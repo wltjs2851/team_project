@@ -80,6 +80,7 @@
 					or ur_content like '%' || #{keyword} || '%'
 					or userid like '%' || #{keyword} || '%'
 					</when>
+					
 				</choose>
 			</if>
 	</sql>

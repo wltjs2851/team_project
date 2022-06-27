@@ -62,8 +62,10 @@ ${reportBoardVo }
 												<c:when test="${report.rno > 0}">식단게시판</c:when>
 												<c:when test="${report.uno > 0}">루틴게시판</c:when>
 												<c:when test="${report.fno > 0}">자유게시판</c:when>
-												<c:when test="${report.recno > 0}">추천운동게시판</c:when>
-												<c:when test="${report.urcno > 0}">루틴게시판</c:when>
+												<c:when test="${report.fcno > 0}">자유게시판 댓글</c:when>
+												<c:when test="${report.rcno > 0}">식단게시판 댓글</c:when>
+												<c:when test="${report.recno > 0}">추천운동게시판 댓글</c:when>
+												<c:when test="${report.urcno > 0}">루틴게시판 댓글</c:when>
 											</c:choose>
 										</td>
 										<td>${report.rep_cause }</td>

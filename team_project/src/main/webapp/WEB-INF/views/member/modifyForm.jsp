@@ -71,10 +71,10 @@ $(function() {
 				<a class="nav-link" href="/member/myActivity?type=write">활동내역</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">나의 그룹</a>
+				<a class="nav-link" href="/group/myGroupList">나의 그룹</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">나의 일정</a>
+				<a class="nav-link" href="/calendar/cal">나의 일정</a>
 			</li>
 		</ul>
 	</div>

@@ -65,6 +65,15 @@ $(function(){
 	
 	// 신고 처리
 	$("#btnReportUpdateRun").click(function(){
+		var userid = "${reportBoardVo.receiver}";
+		var rno = "${reportBoardVo.rno}";
+		var uno = "${reportBoardVo.uno}";
+		var fno = "${reportBoardVo.fno}";
+		var rcno = "${reportBoardVo.rcno}";
+		var urcno = "${reportBoardVo.urcno}";
+		var fcno = "${reportBoardVo.fcno}";
+		var recno = "${reportBoardVo.recno}";
+		var board = "";
 		console.log("신고 처리 버튼 누름");
 		var reportRun = $(":radio[name='reportRun']:checked").val();
 		console.log("reportRun:", reportRun);
@@ -72,9 +81,46 @@ $(function(){
 			console.log("해당 게시글 삭제");
 		} else if (reportRun == "userWarning"){
 			console.log("신고받은 회원 경고주기");
+			var sender = "admin01";
+			var receiver = "${reportBoardVo.receiver}";
+			var rep_cause = "${reportBoardVo.rep_cause}";
+			
+			if (rno > 0){
+				board = "식단게시판";
+			} else if (uno > 0 ){
+				board = "루틴게시판";
+			} else if (fno > 0) {
+				board = "자유게시판";
+			} else if (rcno > 0) {
+				board = "식단게시판 댓글";
+			} else if (urcno > 0) {
+				board = "루틴게시판 댓글";
+			} else if (fcno > 0) {
+				board = "자유게시판 댓글";
+			} else if (recno > 0) {
+				board = "추천운동게시판 댓글";
+			}
+			
+			var message = userid +"님 "+ board +"\u00a0" + "[" + rep_cause;
+			if ("${reportBoardVo.rep_etc}" != null && "${reportBoardVo.rep_etc}" != "") {
+				message += "사유(${reportBoardVo.rep_etc})"; 
+			}
+			message += "]로 인해 신고접수 되었습니다.";
+			var url = "/admin/userWarning";
+			var sData = {
+				"receiver" : receiver,
+				"sender" : sender,
+				"message": message
+			};
+			$.post(url, sData, function(rData){
+				console.log("userWarning:", rData);
+				if(rData == "true"){
+					alert("회원에게 경고주기 완료");
+				}
+			});
+			console.log(message);
 		} else {
 			console.log("신고받은 회원 추방");
-			var userid = "${reportBoardVo.receiver}";
 			var url = "/admin/userOutRun/" + userid;
 // 			var sData = {
 // 					"userid" : userid
@@ -112,8 +158,10 @@ ${reportBoardVo }
 			  <div>
 				  <input type="radio" id="html" name="reportRun" value="boardDelete">
 				  <label for="boardDelete">해당 게시글 삭제하기</label><br>
+				
 				  <input type="radio" id="css" name="reportRun" value="userWarning">
 				  <label for="userWarning">${reportBoardVo.receiver } 회원 경고</label><br>
+				
 				  <input type="radio" id="javascript" name="reportRun" value="userOut">
 				  <label for="userOut">${reportBoardVo.receiver } 회원 강제 탈퇴</label>
 			</div>

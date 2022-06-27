@@ -45,7 +45,8 @@ public class AdminDaoTest {
 	
 	@Test
 	public void testMemberOut() {
-		service.userOut("test01");
+		boolean result = service.userOut("test3");
+		System.out.println("result: " + result);
 	}
 	
 	
