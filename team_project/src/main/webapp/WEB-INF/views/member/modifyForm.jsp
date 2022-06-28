@@ -12,7 +12,11 @@ $(function() {
 			var index = prevImg.lastIndexOf("_");
 			var originalFilename = prevImg.substring(index + 1);
 			$("#prevImg").val(originalFilename);
-		} 
+		}
+		var username = $("#username").val();
+		var age = $("#age").val();
+		var email = $("#email").val();
+		var address = $("#address").val();
 // 		비밀번호를 수정하려고 입력한다면 유효값 검사를 실행 아니라면 이전 비밀번호 그대로 저장
 		var pw = $("#userpw").val();
 		var pw2 = $("#userpw2").val();
@@ -20,21 +24,25 @@ $(function() {
 		var pattern1 = /[0-9]/; // 숫자
 		var pattern2 = /[a-zA-Z]/; // 문자
 		var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
-		if (pw == null || pw == "") {
-			$("#userpw").val(userpw);
-			$("#userpw2").val(userpw);
-			$("#frmModify").submit();
-		} else if (pw != null || pw != "") {
-			if (!pattern1.test(pw) || !pattern2.test(pw) || !pattern3.test(pw)|| pw.length < 8) {
-				$("#wrongpw").html("비밀번호는 8자리 이상 문자, 숫자, 특수문자가 포함됩니다.");
-				$("#userpw").val("").focus();
-			} else if (pw != pw2) {
-				$("#wrongpw").html("");
-				$("#notMatch").html("비밀번호가 일치하지 않습니다.");
-				$("#userpw2").val("").focus();
-			} else {
+		if ((username != null && username != "") && (age != null && age != "") && (email != null && email != "") && (address != null && address != "")) {
+			if (pw == null || pw == "") {
+				$("#userpw").val(userpw);
+				$("#userpw2").val(userpw);
 				$("#frmModify").submit();
+			} else if (pw != null || pw != "") {
+				if (!pattern1.test(pw) || !pattern2.test(pw) || !pattern3.test(pw)|| pw.length < 8) {
+					$("#wrongpw").html("비밀번호는 8자리 이상 문자, 숫자, 특수문자가 포함됩니다.");
+					$("#userpw").val("").focus();
+				} else if (pw != pw2) {
+					$("#wrongpw").html("");
+					$("#notMatch").html("비밀번호가 일치하지 않습니다.");
+					$("#userpw2").val("").focus();
+				} else {
+					$("#frmModify").submit();
+				}
 			}
+		} else {
+			alert("정보를 올바르게 기입해주세요");
 		}
 		
 	});
@@ -62,7 +70,7 @@ $(function() {
 	<div class="col-md-2">
 		<ul class="nav flex-column nav-pills">
 			<li class="nav-item">
-				<a class="nav-link" href="/member/myPage">메뉴</a>
+				<a class="nav-link" href="/member/myPage">내 정보</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" style="background-color: #fd9a9a">회원정보 수정</a>
@@ -100,8 +108,9 @@ $(function() {
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<div class="info">
-					<span style="font-size: 35px; align-content: center;"><input class="form-control"type="text" name="nickname" value="${loginVo.nickname}">(${loginVo.userid})</span>
+				<div class="info" style="padding-top: 25px; padding-left: 15px;">
+					<input class="form-control" type="hidden" name="nickname" value="${loginVo.nickname}">
+					<span style="font-size: 35px; align-content: center;">${loginVo.nickname}(${loginVo.userid})</span>
 				</div>
 			</div>
 		</c:if>

@@ -69,14 +69,14 @@ $(function() {
 			$("#frmJoin").submit();
 		}
 	});
-	$("#btnIsExist").click(function() {
+	$("#userid").on("input", function() {
 		var id = $("#userid").val();
-		if (id == null || id == "") {
-			$("#wrongId").html("아이디를 입력해주세요.");
-			$("#userid").val("").focus();
-		} else if (!pattern1.test(id) || !pattern2.test(id) || id.length > 14) {
-			$("#wrongId").html("아이디는 14자리 이하 문자와 숫자가 포함되어야 합니다.");
-			$("#userid").val("").focus();
+		if (!pattern1.test(id) || !pattern2.test(id) || id.length > 14) {
+			if (id == "") {
+				$("#wrongId").html("아이디를 입력해주세요.");
+			} else {
+				$("#wrongId").html("아이디는 14자리 이하 문자와 숫자가 포함되어야 합니다.");
+			}
 		} else {
 			var url = "/member/isExist";
 			var sData = {
@@ -86,10 +86,8 @@ $(function() {
 				console.log(rData);
 				if (rData == "true") {
 					$("#wrongId").html("이미 존재하는 아이디입니다.");
-					$("#userid").val("").focus();
 				} else if (rData == "false") {
 					$("#wrongId").html("사용할 수 있는 아이디입니다.");
-					$("#userid").attr("readonly", true)
 				}
 				isExist = rData;
 			});
@@ -110,7 +108,6 @@ $(function() {
 				<div class="form-group">
 					<label for="userid">아이디</label>
 					<input type="text" class="form-control" id="userid" name="userid"/>
-					<button type="button" id="btnIsExist">아이디 확인</button>
 					<span id="wrongId"></span>
 				</div>
 				<div class="form-group">
