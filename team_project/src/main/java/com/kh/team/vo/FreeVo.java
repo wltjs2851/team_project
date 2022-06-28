@@ -13,6 +13,7 @@ public class FreeVo {
 	private int f_like;
 	private int fcode;
 	private String fname;
+	private int visible;
 	
 	public FreeVo() {
 		super();
@@ -51,6 +52,22 @@ public class FreeVo {
 		this.f_like = f_like;
 		this.fcode = fcode;
 		this.fname = fname;
+	}
+
+	public FreeVo(int fno, String f_title, String f_content, String userid, Date f_regdate, String f_pic, int f_viewcnt,
+			int f_like, int fcode, String fname, int visible) {
+		super();
+		this.fno = fno;
+		this.f_title = f_title;
+		this.f_content = f_content;
+		this.userid = userid;
+		this.f_regdate = f_regdate;
+		this.f_pic = f_pic;
+		this.f_viewcnt = f_viewcnt;
+		this.f_like = f_like;
+		this.fcode = fcode;
+		this.fname = fname;
+		this.visible = visible;
 	}
 
 	public int getFno() {
@@ -133,10 +150,18 @@ public class FreeVo {
 		this.fname = fname;
 	}
 
+	public int getVisible() {
+		return visible;
+	}
+
+	public void setVisible(int visible) {
+		this.visible = visible;
+	}
+
 	@Override
 	public String toString() {
 		return "FreeVo [fno=" + fno + ", f_title=" + f_title + ", f_content=" + f_content + ", userid=" + userid
 				+ ", f_regdate=" + f_regdate + ", f_pic=" + f_pic + ", f_viewcnt=" + f_viewcnt + ", f_like=" + f_like
-				+ ", fcode=" + fcode + ", fname=" + fname + "]";
+				+ ", fcode=" + fcode + ", fname=" + fname + ", visible=" + visible + "]";
 	}
 }

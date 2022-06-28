@@ -11,12 +11,11 @@ $(function(){
 		var rbno = $(this).attr("data-rbno");
 		console.log("신고번호:", rbno);
 		var url = "/admin/reportUpdateForm?rbno=" + rbno;
-		var option = "width = 800px, height=600px, scrollbars=yes";
+		var option = "width = 300px, height=300px, scrollbars=yes";
 		window.open(url, "신고내역 접수", option);
 	});
 });
 </script>
-${reportBoardVo }
 <h1>관리자 페이지</h1>
 <div class="row">
 	<div class="col-md-2">
@@ -76,7 +75,7 @@ ${reportBoardVo }
 										<td>
 											<c:choose>
 												<c:when test="${report.rep_state == '0'}">처리 전</c:when>
-												<c:otherwise>처리 후 </c:otherwise>
+												<c:otherwise>처리 완료 </c:otherwise>
 											</c:choose>
 										</td>
 										<td>

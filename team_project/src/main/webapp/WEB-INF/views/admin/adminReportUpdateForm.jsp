@@ -80,7 +80,24 @@ $(function(){
 		var reportRun = $(":radio[name='reportRun']:checked").val();
 		console.log("reportRun:", reportRun);
 		if (reportRun == "boardDelete"){
-			console.log("해당 게시글 삭제");
+			var url = "/admin/removeArticle";
+			sendData = {
+					"rbno" : rbno,
+					"uno" : uno,
+					"rno" : rno,
+					"fno" : fno,
+					"rcno" : rcno,
+					"urcno" : urcno,
+					"fcno" : fcno,
+					"rcno" : rcno,
+					"recno" : recno
+			}
+			$.get(url, sendData, function(rData){
+				console.log("delete article:", rData);
+				if (rData == "true"){
+					alert("ㅎ");
+				}
+			});
 		} else if (reportRun == "userWarning"){
 			console.log("신고받은 회원 경고주기");
 			var sender = "admin01";
@@ -88,7 +105,7 @@ $(function(){
 			var rep_cause = "${reportBoardVo.rep_cause}";
 			
 			if (rno > 0){
-				board = "식단게시판";
+				board = "식단 게시판";
 			} else if (uno > 0 ){
 				board = "루틴게시판";
 			} else if (fno > 0) {
@@ -152,14 +169,14 @@ $(function(){
 </script>
 <%-- ${memberVo } --%>
 <body>
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-2"></div>
+		<div class="col-md-8" style="margin-left: 20px;">
 			<form action="/action_page.php">
 			  <p>신고내역 처리하기</p>
 			  <div>
 				  <input type="radio" id="html" name="reportRun" value="boardDelete">
-				  <label for="boardDelete">해당 게시글 삭제하기</label><br>
+				  <label for="boardDelete">해당 글/댓글 규제하기</label><br>
 				
 				  <input type="radio" id="css" name="reportRun" value="userWarning">
 				  <label for="userWarning">${reportBoardVo.receiver } 회원 경고</label><br>
@@ -173,7 +190,7 @@ $(function(){
 			<button type="button" id="btnClose" class="btn btn-outline-success">닫기</button>
 			</form>
 		</div>
-		<div class="col-md-1"></div>
+		<div class="col-md-2"></div>
 	</div>
 </body>
 </html>

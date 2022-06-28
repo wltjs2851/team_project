@@ -9,6 +9,7 @@ public class RecipeCommentVo {
 	private String userid;
 	private Date rc_regdate;
 	private String u_pic;
+	private int visible;
 	
 	public RecipeCommentVo() {
 		super();
@@ -37,6 +38,18 @@ public class RecipeCommentVo {
 		this.userid = userid;
 		this.rc_regdate = rc_regdate;
 		this.u_pic = u_pic;
+	}
+
+	public RecipeCommentVo(int rcno, int rno, String rc_comment, String userid, Date rc_regdate, String u_pic,
+			int visible) {
+		super();
+		this.rcno = rcno;
+		this.rno = rno;
+		this.rc_comment = rc_comment;
+		this.userid = userid;
+		this.rc_regdate = rc_regdate;
+		this.u_pic = u_pic;
+		this.visible = visible;
 	}
 
 	public int getRcno() {
@@ -87,9 +100,17 @@ public class RecipeCommentVo {
 		this.u_pic = u_pic;
 	}
 
+	public int getVisible() {
+		return visible;
+	}
+
+	public void setVisible(int visible) {
+		this.visible = visible;
+	}
+
 	@Override
 	public String toString() {
 		return "RecipeCommentVo [rcno=" + rcno + ", rno=" + rno + ", rc_comment=" + rc_comment + ", userid=" + userid
-				+ ", rc_regdate=" + rc_regdate + ", u_pic=" + u_pic + "]";
+				+ ", rc_regdate=" + rc_regdate + ", u_pic=" + u_pic + ", visible=" + visible + "]";
 	}
 }

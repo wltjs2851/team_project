@@ -36,7 +36,6 @@ $(function() {
 			<div class="row">
 				<div class="col-md-3">
 				</div>
-				${ reportBoardVo }
 				<div class="col-md-6" style='margin-top: 18px;'>
 					<form role="form" id="reportForm" method="post" action="/reportBoard/addReportRun">
 						<div>
@@ -72,7 +71,7 @@ $(function() {
 						
 						
 							<div><input type="radio" name="rep_cause" value="부적절한 사진 게시">부적절한 사진 게시</div>
-							<div><input type="radio" name="rep_cause" value="부적절한 글 게시">부적절한 글 게시</div>
+							<div><input type="radio" name="rep_cause" value="부적절한 글 게시">부적절한 글/댓글 게시</div>
 							<div><input type="radio" name="rep_cause" value="불법적인 홍보">불법적인 홍보</div>
 							<div><input type="radio" name="rep_cause" value="방정하지 못한 언행">방정하지 못한 언행</div>
 							<div><input type="radio" name="rep_cause" value="타인을 비난하거나 비방함">타인을 비난하거나 비방함</div>
