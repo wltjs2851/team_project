@@ -20,12 +20,11 @@ $(function(){
 <div class="row">
 	<div class="col-md-2">
 		<ul class="nav flex-column nav-pills">
-			<li class="nav-item"><a class="nav-link"
-				style="background-color: #fd9a9a;">메뉴</a></li>
+			<li class="nav-item"><a class="nav-link">메뉴</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/admin/memberList">회원</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/reportBoard">신고
-					내역</a></li>
+			<li class="nav-item" style="background-color: #fd9a9a;">
+			<a class="nav-link" href="/admin/reportBoard">신고내역</a></li>
 		</ul>
 	</div>
 	<div class="col-md-8">

@@ -48,7 +48,10 @@
 	
 <!-- 	전체 글 갯수 구하기  -->
 	<select id="getCountKcal" resultType="int">
-		select count(*) from tbl_kcal
+		select count(*) from tbl_kcal 
+			<if test="keyword != null">
+				where k_name like '%' || #{keyword} || '%'
+			</if>
 	</select>
 	
 <!-- 	이전 사진 구하기 -->

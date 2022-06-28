@@ -162,7 +162,7 @@
 											alt="식단이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/recipe/recipeForm?rno=${recipeVo.rno}">${fn:substring(recipeVo.r_title, 0, 7)}...</a>
+								<a href="/recipe/recipeForm?rno=${recipeVo.rno}&page=1">${fn:substring(recipeVo.r_title, 0, 7)}...</a>
 								<br>
 								<br>
 							</c:forEach>
@@ -193,7 +193,7 @@
 											alt="루틴이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/routine/routineContent?uno=${routineVo.uno}">${fn:substring(routineVo.ur_title, 0, 7)}...</a>
+								<a href="/routine/routineContent?uno=${routineVo.uno}&page=1">${fn:substring(routineVo.ur_title, 0, 7)}...</a>
 								<br>
 								<br>
 							</c:forEach>
@@ -224,7 +224,7 @@
 											alt="루틴이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/free/freeContent?fno=${freeVo.fno}">${fn:substring(freeVo.f_title, 0, 7)}...</a>
+								<a href="/free/freeContent?fno=${freeVo.fno}&page=1">${fn:substring(freeVo.f_title, 0, 7)}...</a>
 								<br>
 								<br>
 							</c:forEach>
@@ -255,7 +255,7 @@
 											alt="운동이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/admin/selectByReno?reno=${ReVo.reno}">${fn:substring(ReVo.re_title, 0, 7)}...</a>
+								<a href="/recommend/selectByReno?reno=${ReVo.reno}&page=1">${fn:substring(ReVo.re_title, 0, 7)}...</a>
 								<br>
 								<br>
 							</c:forEach>

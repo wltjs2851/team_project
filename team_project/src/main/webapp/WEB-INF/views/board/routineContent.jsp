@@ -108,7 +108,7 @@ $(function() {
 			var urc_comment = comment.val();
 			var sendData = {
 					"urcno" : urcno,
-					"urc_comment" : urc_comment
+					"urc_comment" : comment
 			};
 			var url = "/routine/modifyRoutineComment"
 			$.post(url, sendData, function(receivedData) {
