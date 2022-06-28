@@ -77,7 +77,9 @@
 			<mapping path="/free/freeContent*"/>
 			<mapping path="/group/myGroupList*"/>
 			<mapping path="/kcal/insertKcalForm*"/>
+			<mapping path="/kcal/selectByKno*"/>
 			<mapping path="/recommend/insertRecommendForm*"/>
+			<mapping path="/recommend/selectByReno*"/>
 			<mapping path="/group/addGroupForm*"/>
 			<mapping path="/recipe/addRecipeForm*"/>
 			<mapping path="/routine/addRoutineForm*"/>

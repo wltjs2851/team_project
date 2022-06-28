@@ -42,7 +42,7 @@ $(function(){
 	<div class="col-md-2">
 		<ul class="nav flex-column nav-pills">
 			<li class="nav-item">
-				<a class="nav-link" style="background-color: #fd9a9a;">메뉴</a>
+				<a class="nav-link" style="background-color: #fd9a9a;">내 정보</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="modifyForm">회원정보 수정</a>
@@ -74,7 +74,7 @@ $(function(){
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<div class="info">
+				<div class="info" style="padding-top: 25px; padding-left: 15px;">
 					<span style="font-size: 35px; align-content: center;">${loginVo.nickname}(${loginVo.userid})</span>
 				</div>
 			</div>
