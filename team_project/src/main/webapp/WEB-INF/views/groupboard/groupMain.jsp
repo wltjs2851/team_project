@@ -94,7 +94,7 @@ $(function() {
 			if(rData == "true") {
 				alert("탈퇴 완료");
 				$("#btnModalClose").trigger("click");
-				$("#leave").fadeOut("slow");
+				$("#leaveGroup").fadeOut("slow");
 			}
 		});
 	});
