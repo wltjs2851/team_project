@@ -212,11 +212,12 @@ public class AdminController {
 	// 신고받은 회원 탈퇴 처리
 	@RequestMapping(value="/userOutRun/{userid}", method = RequestMethod.GET)
 	@ResponseBody
-	public String adminUserOutRun(@PathVariable("userid") String userid) {
+	public String adminUserOutRun(@PathVariable("userid") String userid, int rbno) {
 		System.out.println("adminController, userOutRun, userid:" + userid);
-//		boolean result = memberSerive.deleteMember(userid);
 		boolean result = adminService.userOut(userid);
 		System.out.println("adminController, userOutRun2, result :" + result);
+		System.out.println("rbno:" + rbno);
+		reportBoardService.updateRepState(rbno);
 		return String.valueOf(result);
 	}
 	
@@ -230,9 +231,11 @@ public class AdminController {
 //		return String.valueOf(result);
 //	}
 	
+	// 경고주기
 	@RequestMapping(value="/userWarning", method = RequestMethod.POST)
 	@ResponseBody
-	public String adminUserWarning(WarningMessageVo warningMessageVo) {
+	public String adminUserWarning(WarningMessageVo warningMessageVo, int rbno) {
+		System.out.println("userWarning, rbno:" + rbno);
 		boolean result = warningMessageService.insertWarningMessage(warningMessageVo);
 		System.out.println("adminController, userWarning, result:" + result);
 		return String.valueOf(result);

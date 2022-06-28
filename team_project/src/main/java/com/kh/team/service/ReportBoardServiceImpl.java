@@ -34,4 +34,9 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 		return reportBoardDao.getReportByRbno(rbno);
 	}
 
+	@Override
+	public boolean updateRepState(int rbno) {
+		return reportBoardDao.updateRepState(rbno);
+	}
+
 }
