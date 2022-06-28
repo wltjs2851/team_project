@@ -65,27 +65,32 @@ $(function() {
 							"' class='rounded-circle z-depth-2' width=40px style='margin-right: 10px;'>";
 				}
 				cmt +=this.userid + "</p>";
-				cmt += "<div class='dropdown' style='float:right'>"
-					cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
-					cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
-					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
-					if("${loginVo.userid}" == this.userid) {				
-						cmt += "		<button class='dropdown-item btnModify' type='button' data-fcno='" + this.fcno +"'>수정</button>"
-						cmt += "		<button class='dropdown-item btnDelete' type='button' data-fcno='" + this.fcno +"'>삭제</button>"
-					} else {
-						cmt += "		<button class='dropdown-item btnReport' type='button' data-fcno='" + this.fcno +
-							"' data-user='" + this.userid + "'>신고</button>"
+				if(this.visible == 1) {
+					cmt += "</div><div style='margin-bottom: 15px;'><h3>관리자에 의해 규제된 댓글입니다.<h3>";
+					cmt += "</div><hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
+				} else {
+					cmt += "<div class='dropdown' style='float:right'>"
+						cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
+						cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
+						cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
+						if("${loginVo.userid}" == this.userid) {				
+							cmt += "		<button class='dropdown-item btnModify' type='button' data-fcno='" + this.fcno +"'>수정</button>"
+							cmt += "		<button class='dropdown-item btnDelete' type='button' data-fcno='" + this.fcno +"'>삭제</button>"
+						} else {
+							cmt += "		<button class='dropdown-item btnReport' type='button' data-fcno='" + this.fcno +
+								"' data-user='" + this.userid + "'>신고</button>"
+						}
+						cmt += "</div></div>";
+						cmt += "</div>"
+					cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
+								+ this.fc_comment + "</textarea>";
+					if("${loginVo.userid}" == this.userid) {	
+						cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-fcno=" + this.fcno + 
+								 " style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
 					}
-					cmt += "</div></div>";
-					cmt += "</div>"
-				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
-							+ this.fc_comment + "</textarea>";
-				if("${loginVo.userid}" == this.userid) {	
-					cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-fcno=" + this.fcno + 
-							 " style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
+					cmt += "<hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
+					cmt += "</div>";
 				}
-				cmt += "<hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
-				cmt += "</div>";
 				$("#comment").append(cmt);
 			})
 		});
@@ -178,9 +183,18 @@ $(function() {
 		});
 	});
 });
+
+function adjustHeight() {
+	var textEle = $('textarea');
+	textEle[0].style.height = 'auto';
+	var textEleHeight = textEle.prop('scrollHeight');
+	textEle.css('height', textEleHeight);
+}
 </script>
 
 <div class="container-fluid">
+	<c:choose>
+	<c:when test="${ freeVo.visible == 0 }">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
@@ -228,7 +242,24 @@ $(function() {
 		</div>
 		<div class="col-md-2"></div>
 	</div>
-	
+	</c:when>
+	<c:otherwise>
+		<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div>
+				<h2>${ freeVo.f_title }</h2>
+				<p style="color: #888;">${ freeVo.userid } &nbsp; ${ freeVo.f_regdate }</p>
+				<hr>
+				<div style="text-align: center; margin-bottom: 100px; margin-top: 100px;">
+					<h1>관리자에 의해 규제된 글입니다.</h1>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+		</div>
+	</c:otherwise>
+	</c:choose>
 </div>
 
 <%@include file="/WEB-INF/views/include/footer.jsp"%>

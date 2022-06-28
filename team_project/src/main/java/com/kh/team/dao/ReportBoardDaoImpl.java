@@ -52,4 +52,67 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 		return false;
 	}
 
+	@Override
+	public boolean updateRecipeVisible(int rno) {
+		int count = sqlSession.update(NAMESPACE + "updaetRecipeVisible", rno);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateRoutineVisible(int uno) {
+		int count = sqlSession.update(NAMESPACE + "updaetRoutineVisible", uno);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateFreeVisible(int fno) {
+		int count = sqlSession.update(NAMESPACE + "updaetFreeVisible", fno);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateRCommentVisible(int rcno) {
+		int count = sqlSession.update(NAMESPACE + "updaetRCommentVisible", rcno);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateURCommentVisible(int urcno) {
+		int count = sqlSession.update(NAMESPACE + "updaetURCommentVisible", urcno);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateFCommentVisible(int fcno) {
+		int count = sqlSession.update(NAMESPACE + "updaetFCommentVisible", fcno);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateRECommentVisible(int recno) {
+		int count = sqlSession.update(NAMESPACE + "updaetRECommentVisible", recno);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

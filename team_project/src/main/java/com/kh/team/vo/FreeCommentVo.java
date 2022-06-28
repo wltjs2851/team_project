@@ -9,6 +9,7 @@ public class FreeCommentVo {
 	private String userid;
 	private Date f_regdate;
 	private String u_pic;
+	private int visible;
 	
 	public FreeCommentVo() {
 		super();
@@ -37,6 +38,18 @@ public class FreeCommentVo {
 		this.userid = userid;
 		this.f_regdate = f_regdate;
 		this.u_pic = u_pic;
+	}
+
+	public FreeCommentVo(int fcno, int fno, String fc_comment, String userid, Date f_regdate, String u_pic,
+			int visible) {
+		super();
+		this.fcno = fcno;
+		this.fno = fno;
+		this.fc_comment = fc_comment;
+		this.userid = userid;
+		this.f_regdate = f_regdate;
+		this.u_pic = u_pic;
+		this.visible = visible;
 	}
 
 	public int getFcno() {
@@ -87,9 +100,17 @@ public class FreeCommentVo {
 		this.u_pic = u_pic;
 	}
 
+	public int getVisible() {
+		return visible;
+	}
+
+	public void setVisible(int visible) {
+		this.visible = visible;
+	}
+
 	@Override
 	public String toString() {
 		return "FreeCommentVo [fcno=" + fcno + ", fno=" + fno + ", fc_comment=" + fc_comment + ", userid=" + userid
-				+ ", f_regdate=" + f_regdate + ", u_pic=" + u_pic + "]";
+				+ ", f_regdate=" + f_regdate + ", u_pic=" + u_pic + ", visible=" + visible + "]";
 	}
 }

@@ -213,29 +213,46 @@ public class AdminController {
 	@RequestMapping(value="/userOutRun/{userid}", method = RequestMethod.GET)
 	@ResponseBody
 	public String adminUserOutRun(@PathVariable("userid") String userid, int rbno) {
-		System.out.println("adminController, userOutRun, userid:" + userid);
+		reportBoardService.updateRepState(rbno);
 		boolean result = adminService.userOut(userid);
 		System.out.println("adminController, userOutRun2, result :" + result);
 		System.out.println("rbno:" + rbno);
-		reportBoardService.updateRepState(rbno);
 		return String.valueOf(result);
 	}
-	
-	// 신고받은 회원에게 경고 메시지 보내기 
-//	@RequestMapping(value="/userWarning/{userid}", method = RequestMethod.GET)
-//	@ResponseBody
-//	public String adminUserWarning(@PathVariable("userid") String userid, WarningMessageVo warningMessageVo) {
-//		System.out.println("adminController, userWarning, userid:" + userid);
-//		boolean result = warningMessageService.insertWarningMessage(warningMessageVo);
-//		System.out.println("adminController, userWarning, result:" + result);
-//		return String.valueOf(result);
-//	}
+
+	// 신고받은 글 및 댓글 안 보이게 처리
+	@RequestMapping(value="/removeArticle", method = RequestMethod.GET)
+	@ResponseBody
+	public String adminRemoveArticle(int rbno, int rno, int uno, int fno, int rcno, int urcno, int fcno, int recno) {
+		System.out.println("fcno: " + fcno + " uno: " + uno);
+		boolean boardResult = false;
+		if(rno > 0) {
+			boardResult = reportBoardService.updateRecipeVisible(rno);
+		} else if(uno > 0) {
+			boardResult = reportBoardService.updateRoutineVisible(uno);
+		} else if(fno > 0) {
+			boardResult = reportBoardService.updateFreeVisible(fno);
+		} else if(rcno > 0) {
+			boardResult = reportBoardService.updateRCommentVisible(rcno);
+		} else if(urcno > 0) {
+			boardResult = reportBoardService.updateURCommentVisible(urcno);
+		} else if(recno > 0) {
+			boardResult = reportBoardService.updateRECommentVisible(recno);
+		} else if(fcno > 0) {
+			boardResult = reportBoardService.updateFreeVisible(fcno);
+		}
+		boolean reportResult = reportBoardService.updateRepState(rbno);
+		if(reportResult && boardResult) {
+			return String.valueOf(true);
+		}
+		return String.valueOf(false);
+	}
 	
 	// 경고주기
 	@RequestMapping(value="/userWarning", method = RequestMethod.POST)
 	@ResponseBody
 	public String adminUserWarning(WarningMessageVo warningMessageVo, int rbno) {
-		System.out.println("userWarning, rbno:" + rbno);
+		reportBoardService.updateRepState(rbno);
 		boolean result = warningMessageService.insertWarningMessage(warningMessageVo);
 		System.out.println("adminController, userWarning, result:" + result);
 		return String.valueOf(result);

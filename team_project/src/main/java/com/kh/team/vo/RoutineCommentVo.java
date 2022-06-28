@@ -9,6 +9,7 @@ public class RoutineCommentVo {
 	private String userid;
 	private Date u_regdate;
 	private String u_pic;
+	private int visible;
 	
 	public RoutineCommentVo() {
 		super();
@@ -37,6 +38,18 @@ public class RoutineCommentVo {
 		this.userid = userid;
 		this.u_regdate = u_regdate;
 		this.u_pic = u_pic;
+	}
+
+	public RoutineCommentVo(int urcno, int uno, String urc_comment, String userid, Date u_regdate, String u_pic,
+			int visible) {
+		super();
+		this.urcno = urcno;
+		this.uno = uno;
+		this.urc_comment = urc_comment;
+		this.userid = userid;
+		this.u_regdate = u_regdate;
+		this.u_pic = u_pic;
+		this.visible = visible;
 	}
 
 	public int getUrcno() {
@@ -87,9 +100,17 @@ public class RoutineCommentVo {
 		this.u_pic = u_pic;
 	}
 
+	public int getVisible() {
+		return visible;
+	}
+
+	public void setVisible(int visible) {
+		this.visible = visible;
+	}
+
 	@Override
 	public String toString() {
 		return "RoutineCommentVo [urcno=" + urcno + ", uno=" + uno + ", urc_comment=" + urc_comment + ", userid="
-				+ userid + ", u_regdate=" + u_regdate + ", u_pic=" + u_pic + "]";
+				+ userid + ", u_regdate=" + u_regdate + ", u_pic=" + u_pic + ", visible=" + visible + "]";
 	}
 }
