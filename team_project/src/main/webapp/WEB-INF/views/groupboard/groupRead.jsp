@@ -83,9 +83,9 @@ $(function() {
 					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
 // 					cmt += "<i id='report' class='report fa-solid fa-handcuffs'><a class='dropdows-item' href='#' 
 // 				 	data-user='${ groupBoardVo.userid }''>신고하기</a></i>"
-					cmt += "		<a class='dropdown-item' href='/groupboard/memberInfo?userid=${ groupBoardVo.userid }'>회원 정보 보기</a>";
-					cmt += "		<i id='report' class='report fa-solid fa-handcuffs'><a class='dropdows-item' href='#' data-user='${ groupBoardVo.userid }''>신고하기</a></button></i>";
-					cmt += " <input type='hidden' id='userid' name='userid' value='${ groupBoardVo.userid }'>";
+					cmt += "		<a class='dropdown-item' href='/groupboard/memberInfo?userid=" + this.userid + "'>회원 정보 보기</a>";
+					cmt += "		<i id='report' class='report fa-solid fa-handcuffs'><a class='dropdows-item' href='#' data-user='" + this.userid + "'>신고하기</a></button></i>";
+					cmt += " <input type='hidden' id='userid' name='userid' value='" + this.userid + "'>";
 					cmt += " <input type='hidden' id='gno' name='gno' value='${ groupBoardVo.gno }'>";
 					cmt += "</div></div>";
 				}

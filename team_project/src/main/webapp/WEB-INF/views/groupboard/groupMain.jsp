@@ -23,7 +23,7 @@
 #sidebar {
 	width: 450px;
 	margin-top: 0;
-	position:fixed;
+/* 	position:fixed; */
 	float: left;
 	top:7%;
 	right:30px;
@@ -321,7 +321,11 @@ $(function() {
 			
 			
 			
-			<div style="position: fixed; top: 30px bottom: 270px;" class="col-md-10 offset-md-1 col-lg-3 offset-lg-0" id="sidebar">
+			<div
+				<c:if test="${ groupList != null }">
+			 style="position: fixed; top: 30px bottom: 270px;"
+			 </c:if>
+			 class="col-md-10 offset-md-1 col-lg-3 offset-lg-0" id="sidebar">
 				<div class="sidebar">
 				
 				<aside class="main-sidebar sidebar-dark-primary elevation-4">
