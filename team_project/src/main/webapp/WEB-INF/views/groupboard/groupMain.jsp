@@ -94,6 +94,7 @@ $(function() {
 			if(rData == "true") {
 				alert("탈퇴 완료");
 				$("#btnModalClose").trigger("click");
+				$("#leave").fadeOut("slow");
 			}
 		});
 	});
@@ -132,27 +133,10 @@ $(function() {
 	$(".readMore").click(function() {
 		var gbno = $(this).attr("data-gbno");
 		console.log(gbno);
-// 		frmPaging.find("input[name=gbno]").val(gbno);
-// 		frmPaging.attr("action", "/groupboard/groupRead");
-// 		frmPaging.attr("method", "get");
-// 		frmPaging.submit();
 		$(this).attr("href", "/groupboard/groupRead?gbno=" + gbno + "&gno=${groupVo.gno}&page=${pagingDto.page}&searchType=${param.searchType}" +
 		"&keyword=${param.keyword}");
 	});
 	
-// 	let paging = document.getElementById("paging").scrollHeight;
-// 	console.log("paging: ", paging);
-	
-// 	let sidebar = documetn.getElementById("sidebar").scrollTop;
-// 	console.log("sidebar: ", sidebar);
-
-// 		if(sidebar > 40) {
-// 			document.getElementById("sidebar").addEventListener("scroll", false);
-// 		}
-// });
-
-// var userid = window.open.document.getElementById("userid").value;
-// var gno = window.open.document.getElementById("gno").value;
 
 	window.addEventListener("scroll", function() {
 		console.log(window.scrollX, window.scrollY);
@@ -160,9 +144,7 @@ $(function() {
 			console.log("4599 초과");
 		}
 	});
-// 	window.scroll(function() {
-// 		$("#sidebar").css("margin-top", Math.max(-250,0-$(this).scrollTop()));
-// 	});
+	
 	$(window).scroll(function(){
 		$("#sidebar").css("margin-top",Math.max(-85,0-$(this).scrollTop()));
 	});
@@ -389,20 +371,22 @@ $(function() {
 							</a>
 					</div>
 					<nav>
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item">
-								<a href="/groupboard/groupWriteForm?gno=${ groupVo.gno }">글쓰기</a>
-							</li>
-							<li class="breadcrumb-item">
-								<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
-								<a href="/groupboard/activityInfo/${ groupVo.gno }">활동 정보</a>
-							</li>
-							<c:if test="${ loginVo.userid != groupVo.g_leader }">
+<%-- 						<c:if test="${ groupJoinVo.userid == loginVo.userid }"> --%>
+							<ol class="breadcrumb">
 								<li class="breadcrumb-item">
-									<a href="#" id="leaveGroup">그룹 탈퇴</a>
+									<a href="/groupboard/groupWriteForm?gno=${ groupVo.gno }">글쓰기</a>
 								</li>
-							</c:if>
-						</ol>
+								<li class="breadcrumb-item">
+									<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
+									<a href="/groupboard/activityInfo/${ groupVo.gno }">활동 정보</a>
+								</li>
+								<c:if test="${ loginVo.userid != groupVo.g_leader }">
+									<li class="breadcrumb-item">
+										<a href="#" id="leaveGroup">그룹 탈퇴</a>
+									</li>
+								</c:if>
+							</ol>
+<%-- 						</c:if> --%>
 					</nav>
 					
 					</div>
