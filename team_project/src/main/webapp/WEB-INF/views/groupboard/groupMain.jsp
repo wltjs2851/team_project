@@ -20,7 +20,7 @@
 /*      z-index: 100; */
 /*  } */
 
-.main-sidebar {
+#sidebar {
 	width: 450px;
 	margin-top: 0;
 	position:fixed;
@@ -160,7 +160,12 @@ $(function() {
 			console.log("4599 초과");
 		}
 	});
-
+// 	window.scroll(function() {
+// 		$("#sidebar").css("margin-top", Math.max(-250,0-$(this).scrollTop()));
+// 	});
+	$(window).scroll(function(){
+		$("#sidebar").css("margin-top",Math.max(-85,0-$(this).scrollTop()));
+	});
 });
 </script>
 
@@ -316,10 +321,10 @@ $(function() {
 			
 			
 			
-			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0" id="sidebar">
+			<div style="position: fixed; top: 30px bottom: 270px;" class="col-md-10 offset-md-1 col-lg-3 offset-lg-0" id="sidebar">
 				<div class="sidebar">
 				
-				<aside class="main-sidebar sidebar-dark-primary elevation-4" style="position: fixed; top: 30px bottom: 270px;">
+				<aside class="main-sidebar sidebar-dark-primary elevation-4">
 				<div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-transition os-host-scrollbar-horizontal-hidden">
 				<div class="list-group" style="border-color: #2D5082;">
 						 <a style="background-color: #2D5082; color: #ffffff;" href="#" class="list-group-item">Home</a>
