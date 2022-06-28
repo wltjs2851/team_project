@@ -43,4 +43,13 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 		return reportBoardVo;
 	}
 
+	@Override
+	public boolean updateRepState(int rbno) {
+		int count = sqlSession.update(NAMESPACE + "updateRepState", rbno);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

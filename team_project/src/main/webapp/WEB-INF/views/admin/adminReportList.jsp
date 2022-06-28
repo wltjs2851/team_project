@@ -51,6 +51,7 @@ ${reportBoardVo }
 										<th>receiver</th>
 										<th>신고 날짜</th>
 										<th>상태</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -72,6 +73,12 @@ ${reportBoardVo }
 										<td>${report.sender }</td>
 										<td>${report.receiver }</td>
 										<td>${report.rep_regdate }</td>
+										<td>
+											<c:choose>
+												<c:when test="${report.rep_state == '0'}">처리 전</c:when>
+												<c:otherwise>처리 후 </c:otherwise>
+											</c:choose>
+										</td>
 										<td>
 <%-- 											<a href="/admin/reportUpdateForm?rbno=${report.rbno }" class="btn btn-sm btn-warning">신고 접수</a> --%>
 											<a><button class="reportUpdate" data-rbno="${report.rbno }">신고 접수</button></a>

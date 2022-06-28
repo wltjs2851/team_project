@@ -74,6 +74,8 @@ $(function(){
 		var fcno = "${reportBoardVo.fcno}";
 		var recno = "${reportBoardVo.recno}";
 		var board = "";
+		
+		var rbno = "${reportBoardVo.rbno}";
 		console.log("신고 처리 버튼 누름");
 		var reportRun = $(":radio[name='reportRun']:checked").val();
 		console.log("reportRun:", reportRun);
@@ -108,6 +110,7 @@ $(function(){
 			message += "]로 인해 신고접수 되었습니다.";
 			var url = "/admin/userWarning";
 			var sData = {
+					"rbno" : rbno,
 				"receiver" : receiver,
 				"sender" : sender,
 				"message": message
@@ -125,7 +128,7 @@ $(function(){
 // 			var sData = {
 // 					"userid" : userid
 // 			};
-			$.get(url, function(rData){
+			$.get(url,{"rbno" : rbno}, function(rData){
 				console.log("userOutResult:", rData);
 				if (rData == "true"){
 					alert("회원 추방 완료");

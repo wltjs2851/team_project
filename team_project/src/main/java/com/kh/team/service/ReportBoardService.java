@@ -13,4 +13,6 @@ public interface ReportBoardService {
 		public boolean modifyReportBoard(int rep_state);
 		
 		public ReportBoardVo getReportByRbno(int rbno);
+		
+		public boolean updateRepState(int rbno);
 }

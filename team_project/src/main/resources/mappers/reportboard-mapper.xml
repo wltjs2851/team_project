@@ -30,4 +30,11 @@
  	select * from tbl_report_board
  	where rbno = #{rbno}
  </select>
+ 
+<!--  신고 상태 업데이트 -->
+<update id="updateRepState">
+	update tbl_report_board set
+		rep_state = 1
+	where rbno = #{rbno}
+</update>
  </mapper>

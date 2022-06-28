@@ -14,4 +14,7 @@ public interface ReportBoardDao {
 	
 	// 신고 번호에 따른 신고 내역 조회
 	public ReportBoardVo getReportByRbno(int rbno);
+	
+	// 신고 처리 후 상태 변경
+	public boolean updateRepState(int rbno);
 }
