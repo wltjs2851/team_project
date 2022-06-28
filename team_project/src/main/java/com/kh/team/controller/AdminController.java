@@ -1,6 +1,9 @@
 package com.kh.team.controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.service.AdminService;
 import com.kh.team.service.FreeCommentService;
@@ -22,6 +27,7 @@ import com.kh.team.service.RecommendCommentService;
 import com.kh.team.service.ReportBoardService;
 import com.kh.team.service.RoutineCommentService;
 import com.kh.team.service.RoutineService;
+import com.kh.team.service.WarningMessageService;
 import com.kh.team.vo.AdminVo;
 import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.FreeVo;
@@ -37,6 +43,7 @@ import com.kh.team.vo.RecommendCommentVo;
 import com.kh.team.vo.ReportBoardVo;
 import com.kh.team.vo.RoutineCommentVo;
 import com.kh.team.vo.RoutineVo;
+import com.kh.team.vo.WarningMessageVo;
 import com.kh.team.vo.testVo;
 
 @Controller
@@ -78,9 +85,23 @@ public class AdminController {
 	@Autowired
 	private ReportBoardService reportBoardService;
 	
+	@Autowired
+	private WarningMessageService warningMessageService;
+	
 	@RequestMapping(value="/main", method = RequestMethod.GET)
-	public String adminMain(Model model) {
-		
+	public String adminMain(HttpSession session, Model model, RedirectAttributes rttr) {
+		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
+		if(memberVo == null) {
+			System.out.println("if");
+			rttr.addFlashAttribute("ifAdmin", "notLogin");
+			return "/home";
+		}
+		String userid = memberVo.getUserid();
+		System.out.println(memberVo);
+		if (!userid.equals("admin01")) {
+			rttr.addFlashAttribute("ifAdmin", "false");
+			return "/home";
+		}
 		List<MemberVo> lastestMember = memberSerive.getLatestMember();
 		System.out.println("최근 가입 회원 목록:" + lastestMember);
 		model.addAttribute("lastestMember", lastestMember);
@@ -190,9 +211,50 @@ public class AdminController {
 	
 	// 신고받은 회원 탈퇴 처리
 	@RequestMapping(value="/userOutRun/{userid}", method = RequestMethod.GET)
-	public String adminUserOutRun(@PathVariable("userid") String userid) {
-		boolean result = memberSerive.deleteMember(userid);
-		System.out.println("adminController, userOutRun, result :" + result);
+	@ResponseBody
+	public String adminUserOutRun(@PathVariable("userid") String userid, int rbno) {
+		reportBoardService.updateRepState(rbno);
+		boolean result = adminService.userOut(userid);
+		System.out.println("adminController, userOutRun2, result :" + result);
+		System.out.println("rbno:" + rbno);
+		return String.valueOf(result);
+	}
+
+	// 신고받은 글 및 댓글 안 보이게 처리
+	@RequestMapping(value="/removeArticle", method = RequestMethod.GET)
+	@ResponseBody
+	public String adminRemoveArticle(int rbno, int rno, int uno, int fno, int rcno, int urcno, int fcno, int recno) {
+		System.out.println("fcno: " + fcno + " uno: " + uno);
+		boolean boardResult = false;
+		if(rno > 0) {
+			boardResult = reportBoardService.updateRecipeVisible(rno);
+		} else if(uno > 0) {
+			boardResult = reportBoardService.updateRoutineVisible(uno);
+		} else if(fno > 0) {
+			boardResult = reportBoardService.updateFreeVisible(fno);
+		} else if(rcno > 0) {
+			boardResult = reportBoardService.updateRCommentVisible(rcno);
+		} else if(urcno > 0) {
+			boardResult = reportBoardService.updateURCommentVisible(urcno);
+		} else if(recno > 0) {
+			boardResult = reportBoardService.updateRECommentVisible(recno);
+		} else if(fcno > 0) {
+			boardResult = reportBoardService.updateFreeVisible(fcno);
+		}
+		boolean reportResult = reportBoardService.updateRepState(rbno);
+		if(reportResult && boardResult) {
+			return String.valueOf(true);
+		}
+		return String.valueOf(false);
+	}
+	
+	// 경고주기
+	@RequestMapping(value="/userWarning", method = RequestMethod.POST)
+	@ResponseBody
+	public String adminUserWarning(WarningMessageVo warningMessageVo, int rbno) {
+		reportBoardService.updateRepState(rbno);
+		boolean result = warningMessageService.insertWarningMessage(warningMessageVo);
+		System.out.println("adminController, userWarning, result:" + result);
 		return String.valueOf(result);
 	}
 	

@@ -9,6 +9,7 @@ public class RecommendCommentVo {
 	private String re_comment;
 	private String userid;
 	private Date re_regdate;
+	private int visible;
 
 	public RecommendCommentVo() {
 		super();
@@ -23,10 +24,14 @@ public class RecommendCommentVo {
 		this.re_regdate = re_regdate;
 	}
 
-	@Override
-	public String toString() {
-		return "RecommendCommentVo [recno=" + recno + ", reno=" + reno + ", re_comment=" + re_comment + ", userid="
-				+ userid + ", re_regdate=" + re_regdate + "]";
+	public RecommendCommentVo(int recno, int reno, String re_comment, String userid, Date re_regdate, int visible) {
+		super();
+		this.recno = recno;
+		this.reno = reno;
+		this.re_comment = re_comment;
+		this.userid = userid;
+		this.re_regdate = re_regdate;
+		this.visible = visible;
 	}
 
 	public int getRecno() {
@@ -67,6 +72,20 @@ public class RecommendCommentVo {
 
 	public void setRe_regdate(Date re_regdate) {
 		this.re_regdate = re_regdate;
+	}
+
+	public int getVisible() {
+		return visible;
+	}
+
+	public void setVisible(int visible) {
+		this.visible = visible;
+	}
+
+	@Override
+	public String toString() {
+		return "RecommendCommentVo [recno=" + recno + ", reno=" + reno + ", re_comment=" + re_comment + ", userid="
+				+ userid + ", re_regdate=" + re_regdate + ", visible=" + visible + "]";
 	}
 
 }

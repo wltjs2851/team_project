@@ -11,6 +11,7 @@ public class RoutineVo {
 	private String ur_pic;
 	private int ur_viewcnt;
 	private int ur_like;
+	private int visible;
 	
 	public RoutineVo() {
 		super();
@@ -70,6 +71,20 @@ public class RoutineVo {
 		this.ur_pic = ur_pic;
 		this.ur_viewcnt = ur_viewcnt;
 		this.ur_like = ur_like;
+	}
+
+	public RoutineVo(int uno, String ur_title, String ur_content, String userid, Date ur_regdate, String ur_pic,
+			int ur_viewcnt, int ur_like, int visible) {
+		super();
+		this.uno = uno;
+		this.ur_title = ur_title;
+		this.ur_content = ur_content;
+		this.userid = userid;
+		this.ur_regdate = ur_regdate;
+		this.ur_pic = ur_pic;
+		this.ur_viewcnt = ur_viewcnt;
+		this.ur_like = ur_like;
+		this.visible = visible;
 	}
 
 	public int getUno() {
@@ -136,10 +151,18 @@ public class RoutineVo {
 		this.ur_like = ur_like;
 	}
 
+	public int getVisible() {
+		return visible;
+	}
+
+	public void setVisible(int visible) {
+		this.visible = visible;
+	}
+
 	@Override
 	public String toString() {
 		return "RoutineVo [uno=" + uno + ", ur_title=" + ur_title + ", ur_content=" + ur_content + ", userid=" + userid
 				+ ", ur_regdate=" + ur_regdate + ", ur_pic=" + ur_pic + ", ur_viewcnt=" + ur_viewcnt + ", ur_like="
-				+ ur_like + "]";
+				+ ur_like + ", visible=" + visible + "]";
 	}
 }

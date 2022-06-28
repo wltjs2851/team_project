@@ -14,7 +14,6 @@ import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.ReportVo;
-import com.kh.team.vo.SearchDto;
 
 @Repository
 public class GroupBoardDaoImpl implements GroupBoardDao {
@@ -134,8 +133,8 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public int getCountMain(int gno) {
-		int count = sqlSession.selectOne(NAMESPACE + "getCountMain", gno);
+	public int getCountMain(PagingDto pagingDto) {
+		int count = sqlSession.selectOne(NAMESPACE + "getCountMain", pagingDto);
 		System.out.println("groupBoardDao, count: " + count);
 		return count;
 	}

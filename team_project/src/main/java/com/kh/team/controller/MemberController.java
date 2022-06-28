@@ -350,4 +350,12 @@ public class MemberController {
 		return String.valueOf(result);
 	}
 	
+	@RequestMapping(value = "/memberInfo", method = RequestMethod.GET)
+	public String findIdRun(String userid, Model model) {
+		
+		MemberVo memberVo = memberService.memberByUserid(userid);
+		model.addAttribute("memberVo", memberVo);
+		return "/board/memberInfo";
+	}
+	
 }

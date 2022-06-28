@@ -30,4 +30,53 @@
  	select * from tbl_report_board
  	where rbno = #{rbno}
  </select>
+ 
+<!--  신고 상태 업데이트 -->
+<update id="updateRepState">
+	update tbl_report_board set
+		rep_state = 1
+	where rbno = #{rbno}
+</update>
+
+<update id="updaetRecipeVisible">
+	update tbl_recipe set
+		visible = 1
+	where rno = #{rno}
+</update>
+
+<update id="updaetRoutineVisible">
+	update tbl_userroutine set
+		visible = 1
+	where uno = #{uno}
+</update>
+
+<update id="updaetFreeVisible">
+	update tbl_free set
+		visible = 1
+	where fno = #{fno}
+</update>
+
+<update id="updaetRCommentVisible">
+	update tbl_rcomment set
+		visible = 1
+	where rcno = #{rcno}
+</update>
+
+<update id="updaetURCommentVisible">
+	update tbl_ucomment set
+		visible = 1
+	where urcno = #{urcno}
+</update>
+
+<update id="updaetFCommentVisible">
+	update tbl_fcomment set
+		visible = 1
+	where fcno = #{fcno}
+</update>
+
+<update id="updaetRECommentVisible">
+	update tbl_reccomment set
+		visible = 1
+	where recno = #{recno}
+</update>
  </mapper>

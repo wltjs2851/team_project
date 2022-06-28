@@ -61,13 +61,14 @@ $(document).ready(function() {
 		// 		e.preventDefault();
 		console.log("댓글 달기")
 		var content = $("#re_comment").val();
-		var userid = $("#userid").val();
+		var userid = "${loginVo.userid}";
 		var reno = "${recommendVo.reno}";
-
+		var u_pic = "${loginVo.u_pic}";
 		var sData = {
 			"re_comment" : content,
 			"userid" : userid,
-			"reno" : reno
+			"reno" : reno,
+			"u_pic" : u_pic
 		};
 		console.log(sData);
 
@@ -75,6 +76,7 @@ $(document).ready(function() {
 		$.post(url, sData, function(rData) {
 			console.log(rData);
 			if (rData == "true") {
+				$("#re_comment").val("");
 				$("#btnComment").css("color", "white");
 				getCommentList();
 			}
@@ -87,102 +89,108 @@ $(document).ready(function() {
 		var url = "/reccomment/listComment/" + reno;
 		$.get(url, function(rData) {
 			console.log(rData);
-
-			$("#table_comment_list tr:gt(0)").remove();
-
+			$("#comment > div").empty();
 			$.each(rData, function() {
-				var tr = $("#table_clone tr").clone();
-				var tds = tr.find("td");
-				tds.eq(0).text(this.recno);
-				tds.eq(1).text(this.re_comment);
-				tds.eq(2).text(this.re_regdate);
-
-				// 삭제버튼 찾기
-				tds.find(".btnCommentDelete").attr(
-						"data-recno", this.recno);
-				// 수정 버튼
-				tds.find(".btnCommentModify").attr(
-						"data-recno", this.recno);
-				$("#table_comment_list").append(tr);
+				var cmt = "";
+				cmt += "<div style='width:100%; word-break:break-all;word-wrap:break-word;'>";
+				cmt += "<div class='row'><p style='font-size: large; font-weight: bold;'>";
+				if(this.u_pic == null) {
+					cmt += "<img src='/resources/images/board/personDefault.png' class='rounded-circle z-depth-2' width=40px>";
+				} else {
+					cmt += "<img src='/recommend/displayImage?filename=" + this.u_pic + 
+							"' class='rounded-circle z-depth-2' width=40px style='margin-right: 10px;'>";
+				}
+				cmt +=this.userid + "</p>";
+				if(this.visible == 1) {
+					cmt += "</div><div style='margin-bottom: 15px;'><h3>관리자에 의해 규제된 댓글입니다.<h3>";
+					cmt += "</div><hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
+				} else {
+					cmt += "<div class='dropdown' style='float:right'>"
+					cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
+					cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
+					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
+					if("${loginVo.userid}" == this.userid) {				
+						cmt += "		<button class='dropdown-item btnModify' type='button' data-recno='" + this.recno +"'>수정</button>"
+						cmt += "		<button class='dropdown-item btnDelete' type='button' data-recno='" + this.recno +"'>삭제</button>"
+					} else {
+						cmt += "		<button class='dropdown-item btnReport' type='button' data-recno='" + this.recno +
+							"' data-user='" + this.userid + "'>신고</button>"
+					}
+					cmt += "</div></div>";
+					cmt += "</div>"
+					cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
+								+ this.re_comment + "</textarea>";
+					if("${loginVo.userid}" == this.userid) {	
+						cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-recno='" + this.recno + 
+								 "' style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
+					}
+					cmt += "<hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
+					cmt += "</div>";
+				}
+				$("#comment").append(cmt);
 			});
 		});
 	}
-
-	// 댓글 삭제 버튼 
-	$("#table_comment_list").on(
-			"click",
-			".btnCommentDelete",
-			function() {
-				console.log("댓글 삭제 버튼 눌림");
-				var recno = $(this).attr("data-recno");
-				console.log(recno);
-				var url = "/reccomment/deleteComment/"
-						+ recno;
-				$.get(url, function(rData) {
-					console.log(rData);
-					if (rData == "true") {
-						getCommentList();
-					}
-				});
-			});
-
-	// 댓글 수정 버튼 
-	$("#table_comment_list")
-			.on(
-					"click",
-					".btnCommentModify",
-					function() {
-						console.log("댓글 수정 버튼 눌림");
-						$(this).fadeOut("slow");
-						$(this)
-								.next(
-										".btnModifyRunComment")
-								.fadeIn("slow");
-						var tr = $(this).parents("tr"); //-> console확인
-						console.log(tr);
-						var tr_content = tr.find("td")
-								.eq(1);
-						var re_comment = tr.find("td")
-								.eq(1).text();
-						console.log(tr_content);
-						console.log(re_comment);
-						$(tr_content)
-								.html(
-										"<input type='text' class='contentModify' value='" + re_comment +"'/>");
-
-						// 		$(this).fadeOut("slow");
-						// 		$(this).next("#btnModifyRunComment").fadeIn("slow");
-						$(".btnModifyRunComment").attr(
-								"data-recno",
-								$(this).attr("data-recno"));
-					});
-
-	// 댓글 수정 저장 버튼
-	$("#table_comment_list").on(
-			"click",
-			".btnModifyRunComment",
-			function() {
-				console.log("댓글 수정완료 버튼 누름");
-				var re_comment = $(this).parents("tr")
-						.find(".contentModify").val();
-				var recno = $(this).attr("data-recno");
-				console.log("recno:" + recno);
-				console.log("re_comment:" + re_comment);
-				var sData = {
-
-					"re_comment" : re_comment,
-					"recno" : recno
+	
+	//댓글 수정
+	$("#comment").on("click", ".btnModify", function() {
+		var urcno = $(this).attr("data-recno");
+		var btnModifyRun = $(this).parent().parent().parent().parent().find(".btnModifyRun");
+		console.log(btnModifyRun);
+		var comment = btnModifyRun.prev();
+		btnModifyRun.show();
+		console.log(comment);
+		comment.removeAttr("disabled");
+		btnModifyRun.click(function() {
+			var rcno = btnModifyRun.attr("data-urcno");
+			var urc_comment = comment.val();
+			var sendData = {
+					"recno" : recno,
+					"urc_comment" : comment
+			};
+			var url = "/reccomment/updateComment"
+			$.post(url, sendData, function(receivedData) {
+				console.log(receivedData);
+				if(receivedData == "true") {
+					comment.attr("disabled", true);
+					$(".btnModify").show();
+					$(".btnModifyRun").hide();
+					getCommentList();
 				}
-				var url = "/reccomment/updateComment";
-				$.post(url, sData, function(rData) {
-					console.log("rData:", rData);
-					if (rData == "true") {
-						getCommentList();
-					}
-				});
 			});
+		});
+	});
+	
+	//댓글 삭제
+	$("#comment").on("click", ".btnDelete", function() {
+		var recno = $(this).attr("data-recno");
+		var url = "/routine/removeRoutineComment/" + recno;
+		$.get(url, function(receivedData) {
+			console.log(receivedData);
+			if(receivedData == "true") {
+				getCommentList();
+			}
+		});
+	});
+	
+	//댓글 신고
+	$("#comment").on("click", ".btnReport", function() {
+		var recno = $(this).attr("data-recno");
+		var receiver = $(this).attr("data-user");
+		var sender = "${loginVo.userid}";
+		var url = "/reportBoard/reportBoardPop?recno=" + recno + "&sender=" + sender + "&receiver=" + receiver;
+		var option = "width = 350px, height=400px, top=300px, left=300px, scrollbars=yes";
+		window.open(url,"신고",option);
+	});
 
 	getCommentList();
+	
+	function adjustHeight() {
+		var textEle = $('textarea');
+		textEle[0].style.height = 'auto';
+		var textEleHeight = textEle.prop('scrollHeight');
+		textEle.css('height', textEleHeight);
+	}
 });
 </script>
 <%-- ${recommendVo} --%>
@@ -218,50 +226,26 @@ $(document).ready(function() {
 						href="/recommend/deleteRecommend?reno=${recommendVo.reno}">삭제</a>
 				</c:when>
 			</c:choose>	
-			
-			<!-- 		댓글달기 -->
-			<div class="row">
-				<div class="col-md-10">
-					<input type="text" id="re_comment" class="form-control"
-						placeholder="댓글을 입력해주세요">
-					<input type="hidden" id="userid" value="${loginVo.userid }">
-				</div>
-				<div class="col-md-1">
-					<button type="button" id="btnComment"
-						class="btn btn-sm btn-primary" style="width: 60px; height:50px; padding: 1% 0">완료</button>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<hr>
+			<div class="col" style="margin-top: 20px;">
+				<div>	
+					<textarea onkeyup="adjustHeight();" rows="4"
+					id="re_comment" style="width: 100%; resize: none;" placeholder="댓글 입력"></textarea>
+					<button type="button" id="btnComment" class="btn btn-primary"
+						style="width: 80px; height: 50px; padding: 1% 0; float: right; margin-top: 5px;">댓글달기</button>
 				</div>
 			</div>
 
-			<div class="row" style="margin-top: 30px;">
-				<!-- 			<div class="col-md-8"> -->
-				<table style="display: none;" id="table_clone">
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>
-							<button type="button"
-								class="btn btn-sm btn-warning btnCommentModify">수정</button>
-							<button type="button"
-								class="btn btn-sm btn-outline-success btnModifyRunComment"
-								style="display: none;">수정완료</button>
-						</td>
-						<td>
-							<button type="button"
-								class="btn btn-sm btn-danger btnCommentDelete">삭제</button>
-						</td>
-					</tr>
-				</table>
-				<table class="table" id="table_comment_list">
-					<tr>
-						<td>#</td>
-						<td>내용</td>
-						<td>날짜</td>
-						<td>수정</td>
-						<td>삭제</td>
-					</tr>
-				</table>
+			<div class="row" style="margin-top: 55px; margin-left: 3px;" id="comment">
 			</div>
+			<br>
+			<br>
 		</div>
 		<div class="col-md-2"></div>
 	</div>

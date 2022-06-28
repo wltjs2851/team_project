@@ -45,6 +45,25 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  
+  <script>
+  $(function() {
+	 $("#warning").click(function() {
+		var userid = "${loginVo.userid}";
+		var url = "/reportBoard/warningMessageList";
+		$("#warningList").empty();
+		$.get(url, {"userid" : userid}, function(rData) {
+			$("#count").text("경고 " + rData.warningCount + "회 입니다.");
+			console.log(rData.warningList);
+			$.each(rData.warningList, function() {
+				console.log(this.message);
+				$("#warningList").append("<div class='dropdown-divider'></div><a href='/reportBoard/warningList?userid=${loginVo.userid}' class='dropdown-item warningList' style='padding-left: 0;'>" 
+					+ this.message + "</a>");
+			});
+		});
+	 });
+  });
+  </script>
 
 </head>
 <body class="body-wrapper">
@@ -88,12 +107,23 @@
 									<a class="dropdown-item" href="/free/freeList">자유게시판</a>
 								</div>
 							</li>
+							<c:if test="${loginVo.userid != 'admin01'}">
 							<li class="nav-item">
 								<a class="nav-link" href="/calendar/cal">나의 일정</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="/group/myGroupList">그룹</a>
 							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link" data-toggle="dropdown" href="#"> 
+									<i class="far fa-bell" id="warning"></i> 
+									<span class="badge badge-warning navbar-badge"></span>
+								</a>
+								<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right wargningDrop" style="width: 500px;">
+									<span class="dropdown-item dropdown-header" id="count"></span>
+									<div class="dropdown-item" id="warningList" style="padding: 0;"></div>
+								</div></li>
+								</c:if>
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
 						<c:choose>
@@ -109,9 +139,18 @@
 								<li class="nav-item">
 									<a class="nav-link btn-danger" href="/member/logout">로그아웃</a>
 								</li>
-								<li class="nav-item">
-									<a class="nav-link btn-success" href="/member/myPage">마이페이지</a>
-								</li>
+								<c:choose>
+									<c:when test="${loginVo.userid == 'admin01'}">
+										<li class="nav-item">
+											<a class="nav-link btn-success" href="/admin/main">관리자모드</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item">
+											<a class="nav-link btn-success" href="/member/myPage">마이페이지</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 						</ul>

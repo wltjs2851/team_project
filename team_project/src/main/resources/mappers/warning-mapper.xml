@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.team.mappers.warning">
+
+	<!-- 신고 목록 추가 -->
+	<insert id="insertWarningMessage">
+		insert into tbl_warning
+				(wno, sender, receiver, message)
+		values (seq_warning_wno.nextval, #{sender}, #{receiver}, #{message})
+	</insert>
+
+	<!-- 	신고 목록 -->
+	<select id="listWarningMessage" resultType="WarningMessageVo">
+		select * from tbl_warning 
+		where receiver = #{userid}
+		order by wno desc
+	</select>
+	
+	<!-- 	신고 개수 -->
+	<select id="warningMessageCount" resultType="int">
+		select count(*) from tbl_warning 
+		where receiver = #{userid}
+	</select>
+</mapper>

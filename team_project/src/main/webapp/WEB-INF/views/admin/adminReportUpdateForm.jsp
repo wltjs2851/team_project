@@ -65,21 +65,87 @@ $(function(){
 	
 	// 신고 처리
 	$("#btnReportUpdateRun").click(function(){
+		var userid = "${reportBoardVo.receiver}";
+		var rno = "${reportBoardVo.rno}";
+		var uno = "${reportBoardVo.uno}";
+		var fno = "${reportBoardVo.fno}";
+		var rcno = "${reportBoardVo.rcno}";
+		var urcno = "${reportBoardVo.urcno}";
+		var fcno = "${reportBoardVo.fcno}";
+		var recno = "${reportBoardVo.recno}";
+		var board = "";
+		
+		var rbno = "${reportBoardVo.rbno}";
 		console.log("신고 처리 버튼 누름");
 		var reportRun = $(":radio[name='reportRun']:checked").val();
 		console.log("reportRun:", reportRun);
 		if (reportRun == "boardDelete"){
-			console.log("해당 게시글 삭제");
+			var url = "/admin/removeArticle";
+			sendData = {
+					"rbno" : rbno,
+					"uno" : uno,
+					"rno" : rno,
+					"fno" : fno,
+					"rcno" : rcno,
+					"urcno" : urcno,
+					"fcno" : fcno,
+					"rcno" : rcno,
+					"recno" : recno
+			}
+			$.get(url, sendData, function(rData){
+				console.log("delete article:", rData);
+				if (rData == "true"){
+					alert("ㅎ");
+				}
+			});
 		} else if (reportRun == "userWarning"){
 			console.log("신고받은 회원 경고주기");
+			var sender = "admin01";
+			var receiver = "${reportBoardVo.receiver}";
+			var rep_cause = "${reportBoardVo.rep_cause}";
+			
+			if (rno > 0){
+				board = "식단 게시판";
+			} else if (uno > 0 ){
+				board = "루틴게시판";
+			} else if (fno > 0) {
+				board = "자유게시판";
+			} else if (rcno > 0) {
+				board = "식단게시판 댓글";
+			} else if (urcno > 0) {
+				board = "루틴게시판 댓글";
+			} else if (fcno > 0) {
+				board = "자유게시판 댓글";
+			} else if (recno > 0) {
+				board = "추천운동게시판 댓글";
+			}
+			
+			var message = userid +"님 "+ board +"\u00a0" + "[" + rep_cause;
+			if ("${reportBoardVo.rep_etc}" != null && "${reportBoardVo.rep_etc}" != "") {
+				message += "사유(${reportBoardVo.rep_etc})"; 
+			}
+			message += "]로 인해 신고접수 되었습니다.";
+			var url = "/admin/userWarning";
+			var sData = {
+					"rbno" : rbno,
+				"receiver" : receiver,
+				"sender" : sender,
+				"message": message
+			};
+			$.post(url, sData, function(rData){
+				console.log("userWarning:", rData);
+				if(rData == "true"){
+					alert("회원에게 경고주기 완료");
+				}
+			});
+			console.log(message);
 		} else {
 			console.log("신고받은 회원 추방");
-			var userid = "${reportBoardVo.receiver}";
 			var url = "/admin/userOutRun/" + userid;
 // 			var sData = {
 // 					"userid" : userid
 // 			};
-			$.get(url, function(rData){
+			$.get(url,{"rbno" : rbno}, function(rData){
 				console.log("userOutResult:", rData);
 				if (rData == "true"){
 					alert("회원 추방 완료");
@@ -102,18 +168,19 @@ $(function(){
 });
 </script>
 <%-- ${memberVo } --%>
-${reportBoardVo }
 <body>
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-2"></div>
+		<div class="col-md-8" style="margin-left: 20px;">
 			<form action="/action_page.php">
 			  <p>신고내역 처리하기</p>
 			  <div>
 				  <input type="radio" id="html" name="reportRun" value="boardDelete">
-				  <label for="boardDelete">해당 게시글 삭제하기</label><br>
+				  <label for="boardDelete">해당 글/댓글 규제하기</label><br>
+				
 				  <input type="radio" id="css" name="reportRun" value="userWarning">
 				  <label for="userWarning">${reportBoardVo.receiver } 회원 경고</label><br>
+				
 				  <input type="radio" id="javascript" name="reportRun" value="userOut">
 				  <label for="userOut">${reportBoardVo.receiver } 회원 강제 탈퇴</label>
 			</div>
@@ -123,7 +190,7 @@ ${reportBoardVo }
 			<button type="button" id="btnClose" class="btn btn-outline-success">닫기</button>
 			</form>
 		</div>
-		<div class="col-md-1"></div>
+		<div class="col-md-2"></div>
 	</div>
 </body>
 </html>

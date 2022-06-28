@@ -11,22 +11,20 @@ $(function(){
 		var rbno = $(this).attr("data-rbno");
 		console.log("신고번호:", rbno);
 		var url = "/admin/reportUpdateForm?rbno=" + rbno;
-		var option = "width = 800px, height=600px, scrollbars=yes";
+		var option = "width = 300px, height=300px, scrollbars=yes";
 		window.open(url, "신고내역 접수", option);
 	});
 });
 </script>
-${reportBoardVo }
 <h1>관리자 페이지</h1>
 <div class="row">
 	<div class="col-md-2">
 		<ul class="nav flex-column nav-pills">
-			<li class="nav-item"><a class="nav-link"
-				style="background-color: #fd9a9a;">메뉴</a></li>
+			<li class="nav-item"><a class="nav-link">메뉴</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/admin/memberList">회원</a></li>
-			<li class="nav-item"><a class="nav-link" href="myPoint">신고
-					내역</a></li>
+			<li class="nav-item" style="background-color: #fd9a9a;">
+			<a class="nav-link" href="/admin/reportBoard">신고내역</a></li>
 		</ul>
 	</div>
 	<div class="col-md-8">
@@ -51,6 +49,7 @@ ${reportBoardVo }
 										<th>receiver</th>
 										<th>신고 날짜</th>
 										<th>상태</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -62,14 +61,22 @@ ${reportBoardVo }
 												<c:when test="${report.rno > 0}">식단게시판</c:when>
 												<c:when test="${report.uno > 0}">루틴게시판</c:when>
 												<c:when test="${report.fno > 0}">자유게시판</c:when>
-												<c:when test="${report.recno > 0}">추천운동게시판</c:when>
-												<c:when test="${report.urcno > 0}">루틴게시판</c:when>
+												<c:when test="${report.fcno > 0}">자유게시판 댓글</c:when>
+												<c:when test="${report.rcno > 0}">식단게시판 댓글</c:when>
+												<c:when test="${report.recno > 0}">추천운동게시판 댓글</c:when>
+												<c:when test="${report.urcno > 0}">루틴게시판 댓글</c:when>
 											</c:choose>
 										</td>
 										<td>${report.rep_cause }</td>
 										<td>${report.sender }</td>
 										<td>${report.receiver }</td>
 										<td>${report.rep_regdate }</td>
+										<td>
+											<c:choose>
+												<c:when test="${report.rep_state == '0'}">처리 전</c:when>
+												<c:otherwise>처리 완료 </c:otherwise>
+											</c:choose>
+										</td>
 										<td>
 <%-- 											<a href="/admin/reportUpdateForm?rbno=${report.rbno }" class="btn btn-sm btn-warning">신고 접수</a> --%>
 											<a><button class="reportUpdate" data-rbno="${report.rbno }">신고 접수</button></a>

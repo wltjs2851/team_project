@@ -38,7 +38,6 @@ import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.ReportVo;
-import com.kh.team.vo.SearchDto;
 
 import net.sf.json.JSONArray;
 
@@ -212,18 +211,19 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "groupMain/{gno}", method = RequestMethod.GET)
-	public String main(HttpSession session, Model model, String gb_notice, @PathVariable("gno") int gno, SearchDto searchDto, PagingDto pagingDto) {
-		searchDto.setGno(gno);
+	public String main(HttpSession session, Model model, String gb_notice, @PathVariable("gno") int gno, PagingDto pagingDto) {
+		pagingDto.setGno(gno);
+
+		pagingDto.setCount(groupBoardService.getCountMain(pagingDto));
+		pagingDto.setPage(pagingDto.getPage());
+		System.out.println("main, searchDto:" + pagingDto);
+		model.addAttribute("searchDto", pagingDto);
+
 		List<GroupBoardVo> groupList = groupBoardService.list(pagingDto);
 		model.addAttribute("groupList", groupList);
-
-		pagingDto.setCount(groupBoardService.getCountMain(gno));
-		pagingDto.setPage(pagingDto.getPage());
-		System.out.println("main, pagingDto:" + pagingDto);
-		model.addAttribute("pagingDto", pagingDto);
 		
 		System.out.println("controller, groupList: " + groupList);
-		System.out.println("controller, searchDto: " + searchDto);
+		System.out.println("controller, searchDto: " + pagingDto);
 		
 		List<GroupBoardVo> noticeList = groupBoardService.notice(gb_notice);
 		model.addAttribute("noticeList", noticeList);
