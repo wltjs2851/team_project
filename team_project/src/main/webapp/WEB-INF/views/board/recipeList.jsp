@@ -86,7 +86,8 @@ $(function() {
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<button class="dropdown-item btnBoardReport" type='button' 
 										data-user='${ recipeVo.userid }'>신고하기</button>
-										<button class="dropdown-item" type='button'>회원정보보기</button>
+										<a class="dropdown-item btnMemberInfo" href='/member/memberInfo?userid=${ recipeVo.userid }'>
+										회원정보보기</a>
 									</div>
 								</c:otherwise>
 							</c:choose>
