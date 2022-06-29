@@ -142,12 +142,12 @@ $(function() {
 			
 			if(rData == 1){
 				$("i.fa-heart").css("color", "red");
-				$("#like").text("${groupBoardVo.gb_like + 1}");
-// 				span.text(parseInt(span.text().trim()) + 1);
+// 				$("#like").text("${groupBoardVo.gb_like + 1}");
+				span.text(parseInt(span.text().trim()) + 1);
 			} else {
 				$("i.fa-heart").css("color", "graytext");
-				$("#like").text("${groupBoardVo.gb_like}");
-// 				span.text(parseInt(span.text().trim()) - 1);
+// 				$("#like").text("${groupBoardVo.gb_like}");
+				span.text(parseInt(span.text().trim()) - 1);
 			}
 		});
 	});
