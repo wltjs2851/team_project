@@ -233,7 +233,7 @@ $(function() {
 		<div class="row">
 			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
 			
-			<c:forEach items="${ noticeList }" var="groupBoardVo" varStatus="status" begin="0" end="2">
+			<c:forEach items="${ noticeList }" var="groupBoardVo" varStatus="status" begin="0" end="3">
 				<h3 style="background-color: #2D5082;">
 				<c:if test="${ groupBoardVo.gno == groupVo.gno }">
 					<a style="color: #ffffff;" href="/groupboard/groupRead?gbno=${ groupBoardVo.gbno }&gno=${groupVo.gno}">[공지] ${ groupBoardVo.gb_title } (${ groupBoardVo.gb_regdate })</a>
@@ -273,12 +273,14 @@ $(function() {
 								 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }">삭제</a>
 <%-- 											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a> --%>
 							</c:if>
+							<c:if test="${ groupBoardVo.userid != loginVo.userid }">
 								 <a class="dropdown-item" href="/groupboard/memberInfo?userid=${ groupBoardVo.userid }">회원 정보 보기</a>
 								 
 								 <i id="report" class="report fa-solid fa-handcuffs"><a class="dropdows-item" href="#" 
 								 	data-user="${ groupBoardVo.userid }">신고하기</a></i>
 								 <input type="hidden" id="userid" name="userid" value="${ groupBoardVo.userid }">
 								 <input type="hidden" id="gno" name="gno" value="${ groupBoardVo.gno }">
+							</c:if>
 							</div>
 						</li>
 						<li class="list-inline-item">${ groupBoardVo.gb_regdate }</li>
@@ -400,7 +402,7 @@ $(function() {
 </section>
 
 <!-- 페이징 -->
-<div class="row" id="paging">
+<div class="row" id="paging" style="margin: 50px">
 	<div class="col-md-12">
 		<nav>
 			<ul class="pagination justify-content-center">
