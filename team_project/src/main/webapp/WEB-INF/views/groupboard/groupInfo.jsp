@@ -256,8 +256,10 @@ $(function() {
 							
 							
 										
-										<c:if test="${ groupVo.g_leader == loginVo.userid }">
+										<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
 											<button data-value="${ groupJoinVo.userid }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
+										</c:if>
+										<c:if test="${ groupVo.g_leader == loginVo.userid }">
 											<button data-value="${ groupJoinVo.userid }" class="btnUpdateGLeader btn btn-default" id="btnUpdateGLeader" style="width: 90px; height:30px; padding: 1% 0">권한 넘기기</button>
 										</c:if>
 										
@@ -275,7 +277,7 @@ $(function() {
 											
 											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 											
-											<c:if test="${ groupVo.g_leader == loginVo.userid }">
+											<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
 												 <a id="reportList" class="reportList dropdown-item" href="#">신고 목록</a>
 												 <input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
 												 <input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">

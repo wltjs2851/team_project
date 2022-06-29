@@ -269,7 +269,7 @@ $(function() {
 							
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							
-							<c:if test="${ groupVo.g_leader == loginVo.userid }">
+							<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
 								 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }">삭제</a>
 <%-- 											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a> --%>
 							</c:if>
