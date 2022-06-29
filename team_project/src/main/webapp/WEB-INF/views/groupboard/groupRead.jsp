@@ -168,6 +168,7 @@ $(function() {
 			if (rData == "true") {
 // 				$(".count").text("${count}");
 // 				$(".count").val(text(${groupBoardVo.gb_comment - 1}));
+				
 				getCommentList();
 			}
 		});
@@ -252,7 +253,6 @@ $(function() {
 					<span id="like" style="font-size: 30px;">${ groupBoardVo.gb_like }</span>
 				
 				<!-- 수정, 삭제 버튼 -->
-				<c:if test="${ loginVo.userid == groupVo.g_leader }">
 					<c:if test="${ loginVo.userid == groupBoardVo.userid }">
 					<table>
 						<tr>
@@ -261,7 +261,6 @@ $(function() {
 						</tr>
 					</table>
 					</c:if>
-				</c:if>
 				
 				<!-- 댓글 -->
 				<div class="comments">
