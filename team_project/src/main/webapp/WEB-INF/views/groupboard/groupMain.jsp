@@ -402,7 +402,7 @@ $(function() {
 </section>
 
 <!-- 페이징 -->
-<div class="row" id="paging">
+<div class="row" id="paging" style="margin: 50px">
 	<div class="col-md-12">
 		<nav>
 			<ul class="pagination justify-content-center">
