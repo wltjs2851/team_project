@@ -95,7 +95,8 @@ $(function(){
 			$.get(url, sendData, function(rData){
 				console.log("delete article:", rData);
 				if (rData == "true"){
-					alert("ㅎ");
+					alert("해당 게시글 규제 완료");
+				window.close();
 				}
 			});
 		} else if (reportRun == "userWarning"){
@@ -136,6 +137,7 @@ $(function(){
 				console.log("userWarning:", rData);
 				if(rData == "true"){
 					alert("회원에게 경고주기 완료");
+					window.close();
 				}
 			});
 			console.log(message);
@@ -149,6 +151,7 @@ $(function(){
 				console.log("userOutResult:", rData);
 				if (rData == "true"){
 					alert("회원 추방 완료");
+					window.close();
 				}
 			});
 			

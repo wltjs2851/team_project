@@ -102,9 +102,15 @@ public class AdminController {
 			rttr.addFlashAttribute("ifAdmin", "false");
 			return "/home";
 		}
+		
+		// 최근 가입한 회원 목록
 		List<MemberVo> lastestMember = memberSerive.getLatestMember();
 		System.out.println("최근 가입 회원 목록:" + lastestMember);
 		model.addAttribute("lastestMember", lastestMember);
+		
+		// 최근 신고 목록
+		List<ReportBoardVo> lastestReport = reportBoardService.getLatestReport();
+		model.addAttribute("lastestReport", lastestReport);
 		return "/admin/admin";
 	}
 	

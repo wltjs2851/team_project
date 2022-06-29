@@ -115,4 +115,10 @@ public class ReportBoardDaoImpl implements ReportBoardDao{
 		return false;
 	}
 
+	@Override
+	public List<ReportBoardVo> getLatestReport() {
+		List<ReportBoardVo> getLatestReport = sqlSession.selectList(NAMESPACE + "getLatestReport");
+		return getLatestReport;
+	}
+
 }

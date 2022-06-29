@@ -20,7 +20,7 @@ $(function(){
 <div class="row">
 	<div class="col-md-2">
 		<ul class="nav flex-column nav-pills">
-			<li class="nav-item"><a class="nav-link">메뉴</a></li>
+			<li class="nav-item"><a class="nav-link" href="/admin/main">메뉴</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/admin/memberList">회원</a></li>
 			<li class="nav-item" style="background-color: #fd9a9a;">
@@ -28,11 +28,10 @@ $(function(){
 		</ul>
 	</div>
 	<div class="col-md-8">
-		<div class="card">
+		<div class="card" style="margin-bottom: 20px;">
 			<div class="card-header border-0">
 				<div class="d-flex justify-content-between">
 					<h3 class="card-title">게시판 신고 목록</h3>
-					<a href="/admin/memberList"> 신고 목록 전체보기</a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -42,11 +41,11 @@ $(function(){
 							<table class="table">
 								<thead>
 									<tr>
-										<th>신고 번호</th>
+										<th>#</th>
 										<th>게시판</th>
 										<th>신고사유</th>
-										<th>sender</th>
-										<th>receiver</th>
+										<th>신고한 회원</th>
+										<th>신고받은 회원</th>
 										<th>신고 날짜</th>
 										<th>상태</th>
 										<th></th>
@@ -79,8 +78,19 @@ $(function(){
 										</td>
 										<td>
 <%-- 											<a href="/admin/reportUpdateForm?rbno=${report.rbno }" class="btn btn-sm btn-warning">신고 접수</a> --%>
-											<a><button class="reportUpdate" data-rbno="${report.rbno }">신고 접수</button></a>
-											<a><button style="display: none;">완료</button></a>
+											<c:choose>
+												<c:when test="${report.rep_state == '1'}">
+													<a><button class="btn btn-sm btn-secondary reportUpdate" data-rbno="${report.rbno }" 
+														style="width: 110px; height: 30px; padding: 1% 0"
+													disabled="disabled">신고 접수</button></a>
+												</c:when>
+												<c:otherwise>
+													<a><button class="btn btn-sm btn-danger reportUpdate" 
+														style="width: 110px; height: 30px; padding: 1% 0"
+													data-rbno="${report.rbno }">신고 접수</button></a>
+												</c:otherwise>
+											</c:choose>
+											
 										</td>
 									</tr>
 								</c:forEach>

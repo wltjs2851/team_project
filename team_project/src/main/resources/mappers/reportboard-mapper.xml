@@ -79,4 +79,12 @@
 		visible = 1
 	where recno = #{recno}
 </update>
+
+<!-- 최근 신고 목록 -->
+<select id="getLatestReport" resultType="ReportBoardVo">
+	select * from 
+		(select * from tbl_report_board
+		order by rep_regdate desc)
+	where rownum &lt;= 5
+</select>
  </mapper>

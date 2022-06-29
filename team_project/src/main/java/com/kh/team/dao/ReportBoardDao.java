@@ -25,4 +25,7 @@ public interface ReportBoardDao {
 	public boolean updateURCommentVisible(int urcno);
 	public boolean updateFCommentVisible(int fcno);
 	public boolean updateRECommentVisible(int recno);
+	
+	// 최근 신고 목록 
+	public List<ReportBoardVo> getLatestReport();
 }
