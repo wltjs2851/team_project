@@ -23,4 +23,6 @@ public interface ReportBoardService {
 		public boolean updateURCommentVisible(int urcno);
 		public boolean updateFCommentVisible(int fcno);
 		public boolean updateRECommentVisible(int recno);
+		
+		public List<ReportBoardVo> getLatestReport();
 }

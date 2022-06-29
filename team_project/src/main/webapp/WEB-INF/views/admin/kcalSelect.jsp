@@ -155,11 +155,11 @@ padding-left: 10px;
 							<c:choose>
 							<c:when test="${ empty kcalVo.k_pic }">
 								<img src="/resources/images/kcaldefault.png"
-									class="img-thumbnail" alt="kcal image" style="width : 400px; height :auto;">
+									alt="kcal image" style="width : 400px; height :auto;">
 							</c:when>
 							<c:otherwise>
 							<img src="/member/displayImage?filename=${ kcalVo.k_pic }"
-								class="img-thumbnail" alt="kcal image" style="width : 400px; height :auto; align-content: center;">
+								alt="kcal image" style="width : 400px; height :auto; align-content: center;">
 						</c:otherwise>
 					</c:choose>
 						</div>

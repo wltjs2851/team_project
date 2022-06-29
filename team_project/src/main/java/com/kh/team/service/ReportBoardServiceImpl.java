@@ -74,4 +74,9 @@ public class ReportBoardServiceImpl implements ReportBoardService{
 		return reportBoardDao.updateRECommentVisible(recno);
 	}
 
+	@Override
+	public List<ReportBoardVo> getLatestReport() {
+		return reportBoardDao.getLatestReport();
+	}
+
 }

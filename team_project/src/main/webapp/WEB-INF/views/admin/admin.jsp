@@ -14,6 +14,7 @@ $(function() {
 });
 </script>
 <%-- ${lastestMember } --%>
+<%-- ${lastestReport } --%>
 <h1>관리자 페이지</h1>
 <div class="row">
 	<div class="col-md-2">
@@ -61,6 +62,67 @@ $(function() {
 <!--                   <p class="ml-auto d-flex flex-column text-right"> -->
 <!--                   	<span>회원2</span> -->
 <!--                   </p> -->
+                </div>
+                <!-- /.d-flex -->
+
+                <div class="position-relative mb-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                  <canvas id="visitors-chart" height="0" style="display: block; width: 639px; height: 0px;" class="chartjs-render-monitor" width="639"></canvas>
+                </div>
+
+              </div>
+            </div>
+<!--             최근 신고목록 -->
+		<div class="card" style="margin-top: 30px;">
+              <div class="card-header border-0">
+                <div class="d-flex justify-content-between">
+                  <h3 class="card-title">최근 신고 목록</h3>
+                  <a href="/admin/reportBoard"> 신고 목록 전체보기</a>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="d-flex">
+<%--                 ${lastestReport } --%>
+                	<table class="table">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>게시판</th>
+										<th>신고사유</th>
+										<th>신고한 회원</th>
+										<th>신고받은 회원</th>
+										<th>신고 날짜</th>
+										<th>상태</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:forEach items="${lastestReport }" var="report">
+									<tr>
+										<td>${report.rbno }</td>
+										<td>
+											<c:choose>
+												<c:when test="${report.rno > 0}">식단게시판</c:when>
+												<c:when test="${report.uno > 0}">루틴게시판</c:when>
+												<c:when test="${report.fno > 0}">자유게시판</c:when>
+												<c:when test="${report.fcno > 0}">자유게시판 댓글</c:when>
+												<c:when test="${report.rcno > 0}">식단게시판 댓글</c:when>
+												<c:when test="${report.recno > 0}">추천운동게시판 댓글</c:when>
+												<c:when test="${report.urcno > 0}">루틴게시판 댓글</c:when>
+											</c:choose>
+										</td>
+										<td>${report.rep_cause }</td>
+										<td>${report.sender }</td>
+										<td>${report.receiver }</td>
+										<td>${report.rep_regdate }</td>
+										<td>
+											<c:choose>
+												<c:when test="${report.rep_state == '0'}">처리 전</c:when>
+												<c:otherwise>처리 완료 </c:otherwise>
+											</c:choose>
+										</td>
+									</tr>
+								</c:forEach>
+								</tbody>
+							</table>
                 </div>
                 <!-- /.d-flex -->
 

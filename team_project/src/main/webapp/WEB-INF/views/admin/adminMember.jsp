@@ -67,7 +67,7 @@ $(function(){
 		<ul class="nav flex-column nav-pills">
 			<li class="nav-item"><a class="nav-link" href="/admin/main">메뉴</a>
 			</li>
-			<li class="nav-item"><a class="nav-link" href="modifyForm"
+			<li class="nav-item"><a class="nav-link" href="#"
 				style="background-color: #fd9a9a;">회원</a></li>
 			<li class="nav-item"><a class="nav-link" href="/admin/reportBoard">
 				신고내역</a></li>
