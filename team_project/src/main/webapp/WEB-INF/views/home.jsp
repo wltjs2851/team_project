@@ -71,6 +71,9 @@
 				$("#frmSearchLocation").submit();
 			}
 		});
+		setInterval(function() {
+			$(".carousel-control-next").click();
+		}, 3000);
 	});
 </script>
 <section class="hero-area bg-1 text-center overly" style="padding-top: 0px; background-color: #F5F5F5">
