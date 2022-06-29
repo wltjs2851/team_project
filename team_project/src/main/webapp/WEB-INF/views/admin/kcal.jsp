@@ -153,7 +153,7 @@ $(document).ready(function(){
 					<c:forEach var="v" begin="${pagingDto.startPage}" end="${pagingDto.endPage}">
 						<li 
 						<c:choose>
-								<c:when test="${v == param.page}">
+								<c:when test="${v == pagingDto.page}">
 									class="page-item active"
 								</c:when>
 								<c:otherwise>
@@ -174,12 +174,16 @@ $(document).ready(function(){
 		</div>
 	</div>
 <!-- 	글 작성 버튼  -->
-	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
-			<a class="btn btn-primary btn-sm" href="/kcal/insertKcalForm" style="float: right;">글 쓰기</a>
+	<c:if test="${loginVo.userid == 'admin01'}">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<a class="btn btn-primary btn-sm" href="/kcal/insertKcalForm" style="float: right;">글 쓰기</a>
+			</div>
+			<div class="col-md-2"></div>
 		</div>
-		<div class="col-md-2"></div>
-	</div>
+	</c:if>
+		<br>
+		<br>
 </div>
 <%@include file="/WEB-INF/views/include/footer.jsp"%>

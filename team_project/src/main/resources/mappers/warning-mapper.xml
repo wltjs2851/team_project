@@ -5,36 +5,23 @@
 
 <mapper namespace="com.kh.team.mappers.warning">
 
-	<!-- 쪽지 추가 -->
+	<!-- 신고 목록 추가 -->
 	<insert id="insertWarningMessage">
 		insert into tbl_warning
 				(wno, sender, receiver, message)
 		values (seq_warning_wno.nextval, #{sender}, #{receiver}, #{message})
 	</insert>
 
-	<!-- 쪽지 조회 (해당 메시지 하나)-->
-<!-- 	<select id="readMessage" resultType="MessageVo"> -->
-<!-- 		select * from tbl_message -->
-<!-- 		where mid = #{mid} -->
-<!-- 	</select> -->
-
-	<!-- 쪽지 열람시간 수정 -->
-<!-- 	<update id="updateOpendate"> -->
-<!-- 		update tbl_message set -->
-<!-- 			opendate = sysdate -->
-<!-- 		where mid = #{mid} -->
-<!-- 	</update> -->
-
-	<!-- 쪽지 삭제 -->
-<!-- 	<delete id="deleteMessage"> -->
-<!-- 		delete from tbl_message -->
-<!-- 		where mid = #{mid} -->
-<!-- 	</delete> -->
-
-<!-- 	쪽지 목록 -->
+	<!-- 	신고 목록 -->
 	<select id="listWarningMessage" resultType="WarningMessageVo">
 		select * from tbl_warning 
-		where ${mType} = #{userid}
+		where receiver = #{userid}
 		order by wno desc
+	</select>
+	
+	<!-- 	신고 개수 -->
+	<select id="warningMessageCount" resultType="int">
+		select count(*) from tbl_warning 
+		where receiver = #{userid}
 	</select>
 </mapper>

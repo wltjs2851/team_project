@@ -11,6 +11,7 @@ import com.kh.team.dao.AdminDao;
 import com.kh.team.dao.GroupBoardDao;
 import com.kh.team.dao.GroupDao;
 import com.kh.team.dao.MemberDao;
+import com.kh.team.dao.ReportBoardDao;
 import com.kh.team.vo.AdminVo;
 import com.kh.team.vo.testVo;
 
@@ -26,6 +27,8 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private ReportBoardDao reportBoardDao;
 	
 	@Override
 	public List<AdminVo> adminList(String userid) {

@@ -2,6 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<style>
+#searchKcal {
+	position: absolute;
+	width: 25px;
+	top: 5px;
+	right: 45px;
+	margin: 0;
+}
+</style>
+
 <script>
 $(function(){
 	$(".selectId").click(function(e){
@@ -50,7 +61,6 @@ $(function(){
 </form>
 <h1>회원전체목록</h1>
 <%-- ${memberList } --%>
-${pagingDto }
 
 <div class="row">
 	<div class="col-md-2">
@@ -59,26 +69,25 @@ ${pagingDto }
 			</li>
 			<li class="nav-item"><a class="nav-link" href="modifyForm"
 				style="background-color: #fd9a9a;">회원</a></li>
-			<li class="nav-item"><a class="nav-link" href="myPoint">신고
-					내역</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">나의 그룹</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">나의 일정</a></li>
-			<li class="nav-item"><a class="nav-link" href="deleteForm">회원탈퇴</a>
-			</li>
-			<li class="nav-item"><a class="nav-link" id="chatRoom"
-				style="cursor: pointer;">채팅방</a></li>
+			<li class="nav-item"><a class="nav-link" href="/admin/reportBoard">
+				신고내역</a></li>
 		</ul>
 	</div>
 	<div class="col-md-8">
-	<div class="search">
-				<input class="form-control" type="text" placeholder="회원 정보 검색"
-					id="keyword"
-					<c:if test="${ pagingDto.keyword != null }">
-						value="${ pagingDto.keyword }"
-					</c:if>
-				>
-				<input type="image" src="/resources/images/magnifier.png" id="searchKcal"><br>
-	</div>
+		<div class="search" style="display: inline-block; width: 1145px; margin-bottom: 15px;">
+			<div style="display: inline-block; width: 100%;" class="col-md-11">
+			<input class="form-control" type="text" placeholder="회원 정보 검색"
+				id="keyword" style=""
+				<c:if test="${ pagingDto.keyword != null }">
+					value="${ pagingDto.keyword }"
+				</c:if>
+			>
+			</div>
+			<div style="display: inline-block;">
+			<input type="image" src="/resources/images/magnifier.png" id="searchKcal"
+				style="width: 40px; float: right;"><br>
+			</div>
+		</div>
 		<table class="table">
 			<thead>
 				<tr align="center">

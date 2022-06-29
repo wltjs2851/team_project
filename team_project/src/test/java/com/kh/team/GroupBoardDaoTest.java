@@ -13,7 +13,6 @@ import com.kh.team.dao.ReportDao;
 import com.kh.team.vo.GroupBoardVo;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.ReportVo;
-import com.kh.team.vo.SearchDto;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/**/*.xml")

@@ -12,6 +12,7 @@ public class RecipeVo {
 	private int r_viewcnt;
 	private int r_like;
 	private String r_product;
+	private int visible;
 	
 	public RecipeVo() {
 		super();
@@ -75,6 +76,21 @@ public class RecipeVo {
 		this.r_viewcnt = r_viewcnt;
 		this.r_like = r_like;
 		this.r_product = r_product;
+	}
+
+	public RecipeVo(int rno, String r_title, String r_content, String userid, Date r_regdate, String r_pic,
+			int r_viewcnt, int r_like, String r_product, int visible) {
+		super();
+		this.rno = rno;
+		this.r_title = r_title;
+		this.r_content = r_content;
+		this.userid = userid;
+		this.r_regdate = r_regdate;
+		this.r_pic = r_pic;
+		this.r_viewcnt = r_viewcnt;
+		this.r_like = r_like;
+		this.r_product = r_product;
+		this.visible = visible;
 	}
 
 	public int getRno() {
@@ -149,10 +165,18 @@ public class RecipeVo {
 		this.r_product = r_product;
 	}
 
+	public int getVisible() {
+		return visible;
+	}
+
+	public void setVisible(int visible) {
+		this.visible = visible;
+	}
+
 	@Override
 	public String toString() {
 		return "RecipeVo [rno=" + rno + ", r_title=" + r_title + ", r_content=" + r_content + ", userid=" + userid
 				+ ", r_regdate=" + r_regdate + ", r_pic=" + r_pic + ", r_viewcnt=" + r_viewcnt + ", r_like=" + r_like
-				+ ", r_product=" + r_product + "]";
+				+ ", r_product=" + r_product + ", visible=" + visible + "]";
 	}
 }

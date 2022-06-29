@@ -1,5 +1,24 @@
 /*=== MEDIA QUERY ===*/
 @import url("https://fonts.googleapis.com/css?family=Muli:300,400,600,700,800,900");
+@font-face {
+	src: url("/resources/css/fonts/Blacksword.otf") format("opentype");
+	font-family: blacksword;
+}
+
+.main_word {
+	font-family: "blacksword";
+	font-size: 200px;
+	color: white;
+}
+
+.w-100 {
+	height: 600px;
+}
+
+.carousel-caption {
+	top: 230px;
+}
+
 body {
   line-height: 1.5;
   font-family: "Muli", sans-serif;
@@ -403,15 +422,15 @@ button {
   position: relative;
 }
 
-.overly:before {
-  content: '';
-  background: rgba(0, 0, 0, 0.51);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
+/* .overly:before { */
+/*   content: ''; */
+/*   background: rgba(0, 0, 0, 0.51); */
+/*   position: absolute; */
+/*   top: 0; */
+/*   left: 0; */
+/*   right: 0; */
+/*   bottom: 0; */
+/* } */
 
 .page-wrapper {
   padding: 70px 0;
@@ -461,6 +480,14 @@ button {
   display: inline-block;
   padding: 15px 30px;
   border-radius: 4px;
+}
+
+.btn-myContent {
+	font-size: 12px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 10px 10px;
+    border-radius: 4px;
 }
 
 .btn-main, .btn-main-sm {
@@ -667,9 +694,9 @@ ul.pagination .active a {
 }
 
 .bg-1 {
-  background: url("../images/home/hero.jpg");
+/*   background: url("../images/home/hero.jpg"); */
   background-size: cover;
-  background-repeat: no-repeat;
+/*   background-repeat: no-repeat; */
 }
 
 .bg-2 {

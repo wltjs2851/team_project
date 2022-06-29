@@ -2,6 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script>
+$(function() {
+	var adminCheck = "${ifAdmin}";
+	if (adminCheck == "false") {
+		alert("권한이 없습니다.");
+	} else if (adminCheck == "notLogin") {
+		console.log(adminCheck);
+		alert("관리자로 로그인해주세요.");
+	}
+});
+</script>
 <%-- ${lastestMember } --%>
 <h1>관리자 페이지</h1>
 <div class="row">
@@ -14,7 +25,7 @@
 				<a class="nav-link" href="/admin/memberList">회원</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="myPoint">신고 내역</a>
+				<a class="nav-link" href="/admin/reportBoard">신고 내역</a>
 			</li>
 		</ul>
 	</div>

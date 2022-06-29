@@ -98,8 +98,7 @@ $(function(){
 				$tr.eq(i).show();
 			}
 		});
-		if ($tr.length == 1) {
-			console.log("$tr == 1");
+		if (num_pages == 1) {
 			$('.pagination li:last-child').addClass("disabled");
 		}
 
@@ -155,7 +154,7 @@ $(function(){
 	<div class="col-md-2">
 		<ul class="nav flex-column nav-pills">
 			<li class="nav-item">
-				<a class="nav-link" href="myPage">메뉴</a>
+				<a class="nav-link" href="myPage">내 정보</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="modifyForm">회원정보 수정</a>
@@ -175,9 +174,9 @@ $(function(){
 		</ul>
 	</div>
 	<div class="col-md-8">
-		<button type="button" class="btn btn-outline-danger" id="btnWrite">내가 쓴 글</button>
-		<button type="button" class="btn btn-outline-danger" id="btnComment">내가 쓴 댓글</button>
-		<button type="button" class="btn btn-outline-danger" id="btnLike">내가 좋아요 한 글</button>
+		<button type="button" class="btn btn-myContent" id="btnWrite">내가 쓴 글</button>
+		<button type="button" class="btn btn-myContent" id="btnComment">내가 쓴 댓글</button>
+		<button type="button" class="btn btn-myContent" id="btnLike">내가 좋아요 한 글</button>
 		<div class="tabbable" id="tabs-341613">
 			<br><h2 id="myTitle"></h2>
 			<ul class="nav nav-tabs" id="tab">

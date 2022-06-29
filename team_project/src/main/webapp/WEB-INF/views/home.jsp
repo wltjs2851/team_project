@@ -73,20 +73,57 @@
 		});
 	});
 </script>
-<section class="hero-area bg-1 text-center overly">
+<section class="hero-area bg-1 text-center overly" style="padding-top: 0px; background-color: #F5F5F5">
 	<!-- Container Start -->
+	<div class="carousel slide" id="carousel-785097">
+				<ol class="carousel-indicators">
+					<li data-slide-to="0" data-target="#carousel-785097" class="active">
+					</li>
+					<li data-slide-to="1" data-target="#carousel-785097">
+					</li>
+					<li data-slide-to="2" data-target="#carousel-785097">
+					</li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img class="d-block w-100" alt="Carousel Bootstrap First" src="/resources/images/americaFootball.jpg" />
+						<div class="carousel-caption">
+							<h1 class="main_word">
+								Just do it!!
+							</h1>
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img class="d-block w-100" alt="Carousel Bootstrap Second" src="/resources/images/swim.jpg" />
+						<div class="carousel-caption">
+							<h1 class="main_word">
+								Go Workout
+							</h1>
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img class="d-block w-100" alt="Carousel Bootstrap Third" src="/resources/images/basketball.jpg" />
+						<div class="carousel-caption">
+							<h1 class="main_word">
+								Don't give up
+							</h1>
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+						</div>
+					</div>
+				</div> <a class="carousel-control-prev" href="#carousel-785097" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-785097" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
+			</div>
 	<div class="container">
 		<div class="row">
+		
 			<div class="col-md-12">
-				<!-- Header Contetnt -->
-				<div class="content-block">
-					<h1>운동메인</h1>
-					<p>
-						운동운동운동운동운동운동운동운동운동 <br> 운동운동운동운동운동운동운동운동운동 <br>
-						운동운동운동운동운동운동운동운동운동 <br> 운동운동운동운동운동운동운동운동운동
-					</p>
-				</div>
-				<!-- Advance Search -->
 				<div class="advance-search">
 					<form action="/group/searchLocation" method="get" id="frmSearchLocation">
 						<div class="row">
@@ -162,7 +199,7 @@
 											alt="식단이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/recipe/recipeForm?rno=${recipeVo.rno}">${fn:substring(recipeVo.r_title, 0, 7)}...</a>
+								<a href="/recipe/recipeForm?rno=${recipeVo.rno}&page=1">${fn:substring(recipeVo.r_title, 0, 7)}...</a>
 								<br>
 								<br>
 							</c:forEach>
@@ -193,7 +230,7 @@
 											alt="루틴이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/routine/routineContent?uno=${routineVo.uno}">${fn:substring(routineVo.ur_title, 0, 7)}...</a>
+								<a href="/routine/routineContent?uno=${routineVo.uno}&page=1">${fn:substring(routineVo.ur_title, 0, 7)}...</a>
 								<br>
 								<br>
 							</c:forEach>
@@ -224,7 +261,7 @@
 											alt="루틴이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/free/freeContent?fno=${freeVo.fno}">${fn:substring(freeVo.f_title, 0, 7)}...</a>
+								<a href="/free/freeContent?fno=${freeVo.fno}&page=1">${fn:substring(freeVo.f_title, 0, 7)}...</a>
 								<br>
 								<br>
 							</c:forEach>
@@ -255,7 +292,7 @@
 											alt="운동이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/admin/selectByReno?reno=${ReVo.reno}">${fn:substring(ReVo.re_title, 0, 7)}...</a>
+								<a href="/recommend/selectByReno?reno=${ReVo.reno}&page=1">${fn:substring(ReVo.re_title, 0, 7)}...</a>
 								<br>
 								<br>
 							</c:forEach>
@@ -278,8 +315,8 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/seoul.png" class="rounded-circle">
-						<h4>서울특별시</h4>
+						<a href="/group/searchLocation?dno=1"><img src="/resources/images/seoul.png" class="rounded-circle">
+						<h4>서울특별시</h4></a>
 					</div>
 					<c:forEach items="${seoulGroup}" var="seoulVo">
 						<ul class="category-list">
@@ -291,8 +328,8 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/busan.png" class="rounded-circle">
-						<h4>부산광역시</h4>
+						<a href="/group/searchLocation?dno=6"><img src="/resources/images/busan.png" class="rounded-circle">
+						<h4>부산광역시</h4></a>
 					</div>
 					<c:forEach items="${busanGroup}" var="busanVo">
 						<ul class="category-list">
@@ -304,8 +341,8 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/incheon.png" class="rounded-circle">
-						<h4>인천광역시</h4>
+						<a href="/group/searchLocation?dno=2"><img src="/resources/images/incheon.png" class="rounded-circle">
+						<h4>인천광역시</h4></a>
 					</div>
 					<c:forEach items="${incheonGroup}" var="incheonVo">
 						<ul class="category-list">
@@ -317,8 +354,8 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/daegu.png" class="rounded-circle">
-						<h4>대구광역시</h4>
+						<a href="/group/searchLocation?dno=4"><img src="/resources/images/daegu.png" class="rounded-circle">
+						<h4>대구광역시</h4></a>
 					</div>
 					<c:forEach items="${daeguGroup}" var="daeguVo">
 						<ul class="category-list">
@@ -330,8 +367,8 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/daejeon.png" class="rounded-circle">
-						<h4>대전광역시</h4>
+						<a href="/group/searchLocation?dno=3"><img src="/resources/images/daejeon.png" class="rounded-circle">
+						<h4>대전광역시</h4></a>
 					</div>
 					<c:forEach items="${daejeonGroup}" var="daejeonVo">
 						<ul class="category-list">
@@ -343,8 +380,8 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/gwangju.png" class="rounded-circle">
-						<h4>광주광역시</h4>
+						<a href="/group/searchLocation?dno=7"><img src="/resources/images/gwangju.png" class="rounded-circle">
+						<h4>광주광역시</h4></a>
 					</div>
 					<c:forEach items="${gwangjuGroup}" var="gwangjuVo">
 						<ul class="category-list">
@@ -356,8 +393,8 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/ulsan.png" class="rounded-circle">
-						<h4>울산광역시</h4>
+						<a href="/group/searchLocation?dno=5"><img src="/resources/images/ulsan.png" class="rounded-circle">
+						<h4>울산광역시</h4></a>
 					</div>
 					<c:forEach items="${ulsanGroup}" var="ulsanVo">
 						<ul class="category-list">
@@ -369,8 +406,8 @@
 			<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 				<div class="category-block">
 					<div class="header">
-						<img src="/resources/images/gyeonggi.png" class="rounded-circle">
-						<h4>경기도</h4>
+						<a href="/group/searchLocation?dno=9"><img src="/resources/images/gyeonggi.png" class="rounded-circle">
+						<h4>경기도</h4></a>
 					</div>
 					<c:forEach items="${gyeonggiGroup}" var="gyeonggiVo">
 						<ul class="category-list">

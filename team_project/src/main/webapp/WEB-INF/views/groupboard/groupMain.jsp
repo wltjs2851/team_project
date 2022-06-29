@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/WEB-INF/views/include/header2.jsp" %>
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 <style>
 
@@ -20,10 +20,10 @@
 /*      z-index: 100; */
 /*  } */
 
-.main-sidebar {
+#sidebar {
 	width: 450px;
 	margin-top: 0;
-	position:fixed;
+/* 	position:fixed; */
 	float: left;
 	top:7%;
 	right:30px;
@@ -71,7 +71,7 @@ $(function() {
 		frmPaging.find("input[name=searchType]").val(searchType);
 		frmPaging.find("input[name=keyword]").val(keyword);
 		frmPaging.find("input[name=page]").val(1);
-		frmPaging.attr("action", "/groupboard/groupMain/${gno}");
+		frmPaging.attr("action", "/groupboard/groupMain/${groupVo.gno}");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -94,6 +94,7 @@ $(function() {
 			if(rData == "true") {
 				alert("탈퇴 완료");
 				$("#btnModalClose").trigger("click");
+				$("#leaveGroup").fadeOut("slow");
 			}
 		});
 	});
@@ -124,7 +125,7 @@ $(function() {
 		e.preventDefault();
 		var page = $(this).attr("href");
 		frmPaging.find("input[name=page]").val(page);
-		frmPaging.attr("action", "/groupboard/groupMain");
+		frmPaging.attr("action", "/groupboard/groupMain/${groupVo.gno}");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -132,15 +133,22 @@ $(function() {
 	$(".readMore").click(function() {
 		var gbno = $(this).attr("data-gbno");
 		console.log(gbno);
-		frmPaging.find("input[name=gbno]").val(gbno);
-		frmPaging.attr("action", "/groupboard/groupRead");
-		frmPaging.attr("method", "get");
-		frmPaging.submit();
+		$(this).attr("href", "/groupboard/groupRead?gbno=" + gbno + "&gno=${groupVo.gno}&page=${pagingDto.page}&searchType=${param.searchType}" +
+		"&keyword=${param.keyword}");
+	});
+	
+
+	window.addEventListener("scroll", function() {
+		console.log(window.scrollX, window.scrollY);
+		if(window.scrollY > 4599) {
+			console.log("4599 초과");
+		}
+	});
+	
+	$(window).scroll(function(){
+		$("#sidebar").css("margin-top",Math.max(-85,0-$(this).scrollTop()));
 	});
 });
-
-// var userid = window.open.document.getElementById("userid").value;
-// var gno = window.open.document.getElementById("gno").value;
 </script>
 
 <%-- <%@ include file="/WEB-INF/views/groupboard/frmPaging.jsp" %> --%>
@@ -160,7 +168,7 @@ $(function() {
 <!-- <hr> -->
 <%-- ${ groupJoinMember } --%>
 <%-- ${ groupList } --%>
-${ pagingDto.totalPage }
+<%-- ${ pagingDto.totalPage } --%>
 <%-- ${ param.page } --%>
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
@@ -292,47 +300,17 @@ ${ pagingDto.totalPage }
 			</div>
 			
 			
-			<!-- 페이징 -->
-				<div class="row">
-					<div class="col-md-12">
-						<nav>
-							<ul class="pagination justify-content-center">
-							<c:if test="${pagingDto.startPage != 1}">
-								<li class="page-item">
-									<a class="page-link" href="${pagingDto.startPage - 1}">&laquo</a>
-								</li>
-							</c:if>
-								<li class="page-item">
-									<a class="page-link" href="#">1</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">2</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">3</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">4</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">5</a>
-								</li>
-								
-								<c:if test="${ pagingDto.endPage != pagingDto.totalPage }">
-								<li class="page-item">
-									<a class="page-link" href="${pagingDto.endPage + 1}">&raquo;</a>
-								</li>
-								</c:if>
-							</ul>
-						</nav>
-					</div>
-				</div>
 			
 			
-			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0" id="sidebar">
+			
+			<div
+				<c:if test="${ groupList != null }">
+			 style="position: fixed; top: 30px bottom: 270px;"
+			 </c:if>
+			 class="col-md-10 offset-md-1 col-lg-3 offset-lg-0" id="sidebar">
 				<div class="sidebar">
 				
-				<aside class="main-sidebar sidebar-dark-primary elevation-4" style="position: fixed; top: 30px bottom: 270px;">
+				<aside class="main-sidebar sidebar-dark-primary elevation-4">
 				<div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-transition os-host-scrollbar-horizontal-hidden">
 				<div class="list-group" style="border-color: #2D5082;">
 						 <a style="background-color: #2D5082; color: #ffffff;" href="#" class="list-group-item">Home</a>
@@ -349,24 +327,24 @@ ${ pagingDto.totalPage }
 						<div class="list-group-item justify-content-between">
 						
 							<div>
-							<select id="searchType">
+							<a href="/groupboard/groupMain/${ groupVo.gno }" class="btn-outline-primary" style="width: 50px; height:50px; padding: 1% 0">검색 초기화</a>
+							<select id="searchType" class="form-control">
 								<option value="t"
-									<c:if test="${ searchDto.searchType == 't' }">
+									<c:if test="${ pagingDto.searchType == 't' }">
 										selected
 									</c:if>
 								>제목</option>
 								<option value="c"
-									<c:if test="${ searchDto.searchType == 'c' }">
+									<c:if test="${ pagingDto.searchType == 'c' }">
 										selected
 									</c:if>
 								>내용</option>
 								<option value="w"
-									<c:if test="${ searchDto.searchType == 'w' }">
+									<c:if test="${ pagingDto.searchType == 'w' }">
 										selected
 									</c:if>
 								>작성자</option>
 							</select>
-							<a href="/groupboard/groupMain/${ groupVo.gno }" class="btn-outline-primary" style="width: 50px; height:50px; padding: 2% 0">검색 초기화</a>
 							</div>
 							
 							<div class="widget search p-0">
@@ -393,20 +371,22 @@ ${ pagingDto.totalPage }
 							</a>
 					</div>
 					<nav>
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item">
-								<a href="/groupboard/groupWriteForm?gno=${ groupVo.gno }">글쓰기</a>
-							</li>
-							<li class="breadcrumb-item">
-								<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
-								<a href="/groupboard/activityInfo/${ groupVo.gno }">활동 정보</a>
-							</li>
-							<c:if test="${ loginVo.userid != groupVo.g_leader }">
+<%-- 						<c:if test="${ groupJoinVo.userid == loginVo.userid }"> --%>
+							<ol class="breadcrumb">
 								<li class="breadcrumb-item">
-									<a href="#" id="leaveGroup">그룹 탈퇴</a>
+									<a href="/groupboard/groupWriteForm?gno=${ groupVo.gno }">글쓰기</a>
 								</li>
-							</c:if>
-						</ol>
+								<li class="breadcrumb-item">
+									<!-- 차후 그룹의 일정을 확인할 수 있도록 -->
+									<a href="/groupboard/activityInfo/${ groupVo.gno }">활동 정보</a>
+								</li>
+								<c:if test="${ loginVo.userid != groupVo.g_leader }">
+									<li class="breadcrumb-item">
+										<a href="#" id="leaveGroup">그룹 탈퇴</a>
+									</li>
+								</c:if>
+							</ol>
+<%-- 						</c:if> --%>
 					</nav>
 					
 					</div>
@@ -418,6 +398,41 @@ ${ pagingDto.totalPage }
 		</div>
 	</div>
 </section>
+
+<!-- 페이징 -->
+<div class="row" id="paging">
+	<div class="col-md-12">
+		<nav>
+			<ul class="pagination justify-content-center">
+			<c:if test="${pagingDto.startPage != 1}">
+				<li class="page-item">
+					<a class="page-link" href="${pagingDto.startPage - 1}">&laquo</a>
+				</li>
+			</c:if>
+				<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="i">
+				<li 
+					<c:choose>	
+						<c:when test="${i == param.page}">
+							class="page-item active"
+						</c:when>
+						<c:otherwise>
+							class="page-item"
+						</c:otherwise>
+					</c:choose>
+				>
+					<a href="${i}" class="page-link">${i}</a>
+				</li>
+			</c:forEach>
+				
+				<c:if test="${ pagingDto.endPage != pagingDto.totalPage }">
+				<li class="page-item">
+					<a class="page-link" href="${pagingDto.endPage + 1}">&raquo;</a>
+				</li>
+				</c:if>
+			</ul>
+		</nav>
+	</div>
+</div>
 
 </div>
 

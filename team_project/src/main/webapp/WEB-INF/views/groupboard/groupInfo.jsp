@@ -82,6 +82,7 @@ $(function() {
 			if(rData == "true") {
 				alert("탈퇴 완료");
 				$("#btnModalClose").trigger("click");
+				$("#leaveGroup").fadeOut("slow");
 			}
 		});
 	});
