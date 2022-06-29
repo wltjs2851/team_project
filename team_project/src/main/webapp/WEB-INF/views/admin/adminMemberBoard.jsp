@@ -62,6 +62,7 @@ $(function(){
 	});
 	
 	function pagination() {
+		var page = 1;
 		var req_num_row = 5;  //화면에 표시할 목록 개수
 		var $tr = jQuery('tbody tr');  // paging 대상 class 명
 		var total_num_row = $tr.length;
@@ -75,9 +76,9 @@ $(function(){
 			num_pages = Math.floor(num_pages++);
 		}
 
-		jQuery('.pagination').append('<li class="page-item">'
+		jQuery('.pagination').append('<li class="page-item disabled prev">'
 						+ '<a class="page-link" href="#" aria-label="Previous">'
-						+ '<span aria-hidden="true" class="mdi mdi-chevron-left">Previous</span>'
+						+ '<span aria-hidden="true" class="mdi mdi-chevron-left">&lt;</span>'
 						+ '<span class="sr-only">Previous</span></a></li>');
 
 		for (var i = 1; i <= num_pages; i++) {
@@ -86,9 +87,9 @@ $(function(){
 			jQuery('.pagination a').addClass("pagination-link");
 		}
 
-		jQuery('.pagination').append('<li class="page-item">'
+		jQuery('.pagination').append('<li class="page-item next">'
 						+ '<a class="page-link" href="#" aria-label="Next">'
-						+ '<span aria-hidden="true" class="mdi mdi-chevron-right"></span>'
+						+ '<span aria-hidden="true" class="mdi mdi-chevron-right">&gt;</span>'
 						+ '<span class="sr-only">Next</span></a></li>');
 
 		$tr.each(function(i) {
@@ -101,7 +102,9 @@ $(function(){
 		jQuery('.pagination a').click('.pagination-link', function(e) {
 			e.preventDefault();
 			$tr.hide();
-			var page = jQuery(this).text();
+			if (!isNaN($(this).text())) {
+				page = parseInt(jQuery(this).text());
+			}
 			var temp = page - 1;
 			var start = temp * req_num_row;
 			var current_link = temp;
@@ -113,21 +116,32 @@ $(function(){
 				$tr.eq(start + i).show();
 			}
 
-			if (temp >= 1) {
-				jQuery('.pagination li:first-child').removeClass("disabled");
-			} else {
+			if (page == 1) {
 				jQuery('.pagination li:first-child').addClass("disabled");
+			} else {
+				jQuery('.pagination li:first-child').removeClass("disabled");
+			}
+			if (page == num_pages) {
+				jQuery('.pagination li:last-child').addClass("disabled");
+			} else {
+				jQuery('.pagination li:last-child').removeClass("disabled");
 			}
 
 		});
 
-		jQuery('.prev').click(function(e) {
+		$('.prev').on("click", function(e) {
 			e.preventDefault();
+			if (page > parseInt(1)) {
+				$("li.page-item").find("a:contains(" + page + ")").parent().prev().find("a").click();
+			} 
 			jQuery('.pagination li:first-child').removeClass("active");
 		});
 
-		jQuery('.next').click(function(e) {
+		$('.next').on("click", function(e) {
 			e.preventDefault();
+			if (page < parseInt(num_pages)) {
+				$("li.page-item").find("a:contains(" + page + ")").parent().next().find("a").click();
+			}
 			jQuery('.pagination li:last-child').removeClass("active");
 		});
 
@@ -155,7 +169,7 @@ $(function(){
 						data-toggle="tab">작성댓글</a></li>
 				</ul>
 			</div>
-			<table class="table">
+			<table class="table" style="text-align: center;">
 				<thead>
 					<tr align="center">
 						<th>글번호</th>

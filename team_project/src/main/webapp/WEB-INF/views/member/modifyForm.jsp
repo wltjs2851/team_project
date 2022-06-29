@@ -17,6 +17,10 @@ $(function() {
 		var age = $("#age").val();
 		var email = $("#email").val();
 		var address = $("#address").val();
+		console.log(username);
+		console.log(age);
+		console.log(email);
+		console.log(address);
 // 		비밀번호를 수정하려고 입력한다면 유효값 검사를 실행 아니라면 이전 비밀번호 그대로 저장
 		var pw = $("#userpw").val();
 		var pw2 = $("#userpw2").val();
@@ -117,7 +121,7 @@ $(function() {
 		<table class="table">
 			<tr>
 				<th>이름</th>
-				<td><input class="form-control" type="text" name="username" value="${loginVo.username}"></td>
+				<td><input class="form-control" type="text" id="username" name="username" value="${loginVo.username}"></td>
 			</tr>
 			<tr>
 				<th>성별</th>
@@ -136,15 +140,15 @@ $(function() {
 			</tr>
 			<tr>
 				<th>나이</th>
-				<td><input class="form-control" type="text" name="age" value="${loginVo.age}"></td>
+				<td><input class="form-control" type="text" id="age" name="age" value="${loginVo.age}"></td>
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><input class="form-control" type="email" name="email" value="${loginVo.email}"></td>
+				<td><input class="form-control" type="email" id="email" name="email" value="${loginVo.email}"></td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td><input class="form-control" type="text" name="address" value="${loginVo.address}"></td>
+				<td><input class="form-control" type="text" id="address" name="address" value="${loginVo.address}"></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>

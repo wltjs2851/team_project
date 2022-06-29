@@ -8,7 +8,8 @@
 .main_word {
 	font-family: "blacksword";
 	font-size: 200px;
-	color: white;
+	color: orange;
+	text-shadow: 5px 5px 5px bisque;
 }
 
 .w-100 {

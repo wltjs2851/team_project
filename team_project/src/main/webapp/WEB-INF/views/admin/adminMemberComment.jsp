@@ -28,34 +28,35 @@ $(function(){
 	$(".td_free").click(function(){
 		console.log("자유게시판 작성글 클릭");
 		var fno = $(this).attr("data-fno");
-		location.href = "/free/freeContent?fno=" + fno;
+		window.opener.location.href = "/free/freeContent?fno=" + fno;
 	});
 	
 	$(".td_recipe").click(function(){
 		console.log("식단 게시판 작성글 클릭");
 		var rno = $(this).attr("data-rno");
-		location.href = "/recipe/recipeForm?rno=" + rno;
+		window.opener.location.href = "/recipe/recipeForm?rno=" + rno;
 	});
 	
 	$(".td_groupBoard").click(function(){
 		console.log("그룹게시판 작성글 클릭");
 		var gbno = $(this).attr("data-gbno");
-		location.href = "/groupboard/groupRead?gbno=" + gbno;
+		window.opener.location.href = "/groupboard/groupRead?gbno=" + gbno;
 	});
 	
 	$(".td_routine").click(function(){
 		console.log("루틴게시판 작성글 클릭");
 		var uno = $(this).attr("data-uno");
-		location.href = "/routine/routineContent?uno=" + uno;
+		window.opener.location.href = "/routine/routineContent?uno=" + uno;
 	});
 	
 	$(".td_recommend").click(function(){
 		console.log("루틴게시판 작성글 클릭");
 		var reno = $(this).attr("data-reno");
-		location.href = "/recommend/selectByReno?reno=" + reno;
+		window.opener.location.href = "/recommend/selectByReno?reno=" + reno;
 	});
 	
 	function pagination() {
+		var page = 1; 
 		var req_num_row = 5;  //화면에 표시할 목록 개수
 		var $tr = jQuery('tbody tr');  // paging 대상 class 명
 		var total_num_row = $tr.length;
@@ -69,9 +70,9 @@ $(function(){
 			num_pages = Math.floor(num_pages++);
 		}
 
-		jQuery('.pagination').append('<li class="page-item">'
+		jQuery('.pagination').append('<li class="page-item disabled prev">'
 						+ '<a class="page-link" href="#" aria-label="Previous">'
-						+ '<span aria-hidden="true" class="mdi mdi-chevron-left"></span>'
+						+ '<span aria-hidden="true" class="mdi mdi-chevron-left">&lt;</span>'
 						+ '<span class="sr-only">Previous</span></a></li>');
 
 		for (var i = 1; i <= num_pages; i++) {
@@ -80,9 +81,9 @@ $(function(){
 			jQuery('.pagination a').addClass("pagination-link");
 		}
 
-		jQuery('.pagination').append('<li class="page-item">'
+		jQuery('.pagination').append('<li class="page-item next">'
 						+ '<a class="page-link" href="#" aria-label="Next">'
-						+ '<span aria-hidden="true" class="mdi mdi-chevron-right"></span>'
+						+ '<span aria-hidden="true" class="mdi mdi-chevron-right">&gt;</span>'
 						+ '<span class="sr-only">Next</span></a></li>');
 
 		$tr.each(function(i) {
@@ -95,7 +96,9 @@ $(function(){
 		jQuery('.pagination a').click('.pagination-link', function(e) {
 			e.preventDefault();
 			$tr.hide();
-			var page = jQuery(this).text();
+			if (!isNaN($(this).text())) {
+				page = parseInt(jQuery(this).text());
+			}
 			var temp = page - 1;
 			var start = temp * req_num_row;
 			var current_link = temp;
@@ -107,21 +110,32 @@ $(function(){
 				$tr.eq(start + i).show();
 			}
 
-			if (temp >= 1) {
-				jQuery('.pagination li:first-child').removeClass("disabled");
-			} else {
+			if (page == 1) {
 				jQuery('.pagination li:first-child').addClass("disabled");
+			} else {
+				jQuery('.pagination li:first-child').removeClass("disabled");
+			}
+			if (page == num_pages) {
+				jQuery('.pagination li:last-child').addClass("disabled");
+			} else {
+				jQuery('.pagination li:last-child').removeClass("disabled");
 			}
 
 		});
 
-		jQuery('.prev').click(function(e) {
+		$('.prev').on("click", function(e) {
 			e.preventDefault();
+			if (page > parseInt(1)) {
+				$("li.page-item").find("a:contains(" + page + ")").parent().prev().find("a").click();
+			} 
 			jQuery('.pagination li:first-child').removeClass("active");
 		});
 
-		jQuery('.next').click(function(e) {
+		$('.next').on("click", function(e) {
 			e.preventDefault();
+			if (page < parseInt(num_pages)) {
+				$("li.page-item").find("a:contains(" + page + ")").parent().next().find("a").click();
+			}
 			jQuery('.pagination li:last-child').removeClass("active");
 		});
 
@@ -137,8 +151,8 @@ $(function(){
 </script>
 <body>
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
 			<div class="tabbable" id="tabs-834783">
 				<ul class="nav nav-tabs">
 					<li class="nav-item"><a class="nav-link" href="/admin/board?userid=${userid }"
@@ -147,7 +161,7 @@ $(function(){
 						data-toggle="tab">작성댓글</a></li>
 				</ul>
 			</div>
-			<table class="table">
+			<table class="table" style="text-align: center;">
 				<thead>
 					<tr align="center">
 						<th>댓글번호</th>
@@ -197,7 +211,7 @@ $(function(){
 				<ul class="pagination pagination-seperated "></ul>
 			</nav>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
 	</div>
 </body>
 </html>
