@@ -98,4 +98,9 @@ public class MyContentServiceImpl implements MyContentService {
 		return dao.getRecommendComment(userid);
 	}
 
+	@Override
+	public int gnoByGroupComment(int gbno) {
+		return dao.gnoByGroupComment(gbno);
+	}
+
 }

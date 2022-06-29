@@ -183,6 +183,13 @@ public class MemberController {
 		return "/member/myActivity";
 	}
 	
+	@RequestMapping(value = "/gnoByGroupComment", method = RequestMethod.GET)
+	@ResponseBody
+	public int gnoByGroupComment(int gbno) {
+		System.out.println(gbno);
+		return myContentService.gnoByGroupComment(gbno);
+	}
+	
 	// 프로필사진 출력
 	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)
 	@ResponseBody

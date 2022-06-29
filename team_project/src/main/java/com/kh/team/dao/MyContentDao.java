@@ -35,5 +35,6 @@ public interface MyContentDao {
 	public List<RecipeCommentVo> getRecipeComment(String userid);
 	public List<RoutineCommentVo> getRoutineComment(String userid);
 	public List<RecommendCommentVo> getRecommendComment(String userid);
+	public int gnoByGroupComment(int gbno);
 	
 }

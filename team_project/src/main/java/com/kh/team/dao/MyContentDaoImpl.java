@@ -100,4 +100,9 @@ public class MyContentDaoImpl implements MyContentDao {
 		return sqlSession.selectList(NAMESPACE + "getRecommendComment", userid);
 	}
 
+	@Override
+	public int gnoByGroupComment(int gbno) {
+		return sqlSession.selectOne(NAMESPACE + "gnoByGroupComment", gbno);
+	}
+
 }

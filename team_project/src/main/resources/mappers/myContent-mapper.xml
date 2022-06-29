@@ -85,4 +85,9 @@
 		where userid = #{userid}
 	</select>
 	
+	<select id="gnoByGroupComment" resultType="int">
+		select gno from tbl_group_board
+		where gbno = #{gbno}
+	</select>
+	
 </mapper>

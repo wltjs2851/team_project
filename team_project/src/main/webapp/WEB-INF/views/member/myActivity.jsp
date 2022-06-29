@@ -31,11 +31,24 @@ $(function(){
 	$(".like_tr").click(function() {
 		var post = $("#tab").find("a.active").data("post");
 		var no = $(this).find("td").eq(0).html();
+		var that = $(this);
 		if (post == "fno") {
 			url = "/free/freeContent?" + post + "=" + no;
 		} else if (post == "gbno") {
 			var gno = $(this).prev().val();
-			url = "/groupboard/groupRead?" + post + "=" + no + "&gno=" + gno;
+			if (gno != null && gno != "") {
+				url = "/groupboard/groupRead?" + post + "=" + no + "&gno=" + gno;
+			} else {
+				var gbno = that.find("td").eq(0).html();
+				var sData = {
+					"gbno" : gbno	
+				};
+				$.get("/member/gnoByGroupComment", sData, function(rData) {
+					gno = rData;
+					url = "/groupboard/groupRead?" + post + "=" + no + "&gno=" + gno;
+					location.href = url;
+				});
+			}
 		} else if (post == "rno") {
 			url = "/recipe/recipeForm?" + post + "=" + no;
 		} else if (post == "uno") {
