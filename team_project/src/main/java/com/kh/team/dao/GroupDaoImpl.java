@@ -31,8 +31,8 @@ public class GroupDaoImpl implements GroupDao{
 	}
 
 	@Override
-	public List<GroupVo> selectGroup(PagingDto pagingDto) {
-		List<GroupVo> list = sqlSession.selectList(NAMESPACE + "selectGroup", pagingDto);
+	public List<GroupVo> selectGroup() {
+		List<GroupVo> list = sqlSession.selectList(NAMESPACE + "selectGroup");
 		return list;
 	}
 
@@ -176,6 +176,12 @@ public class GroupDaoImpl implements GroupDao{
 	public List<GroupVo> getGroupByUserId(String userid) {
 		List<GroupVo> groupList = sqlSession.selectList(NAMESPACE + "getGroupByUserId", userid);
 		return groupList;
+	}
+
+	@Override
+	public List<GroupVo> adminGroupList(PagingDto pagingDto) {
+		List<GroupVo> adminGroupList = sqlSession.selectList(NAMESPACE + "adminGroupList", pagingDto);
+		return adminGroupList;
 	}
 
 }

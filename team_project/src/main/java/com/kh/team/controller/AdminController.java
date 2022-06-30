@@ -274,7 +274,7 @@ public class AdminController {
 		
 		pagingDto.setPage(pagingDto.getPage());
 		
-		List<GroupVo> groupList = groupService.groupList(pagingDto);
+		List<GroupVo> groupList = groupService.adminGroupList(pagingDto);
 		model.addAttribute("groupList", groupList);
 		model.addAttribute("pagingDto", pagingDto);
 		return "/admin/adminGroupList";

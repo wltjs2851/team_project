@@ -9,7 +9,8 @@ import com.kh.team.vo.PagingDto;
 
 public interface GroupDao {
 	public boolean insertGroup(GroupVo groupVo);
-	public List<GroupVo> selectGroup(PagingDto pagingDto);
+	public List<GroupVo> selectGroup();
+	public List<GroupVo> adminGroupList(PagingDto pagingDto);
 	public List<GroupVo> selectGroupList(int startRow, int endRow);
 	public int getCount(PagingDto pagingDto);
 	public boolean updateGroup(GroupVo groupVo);

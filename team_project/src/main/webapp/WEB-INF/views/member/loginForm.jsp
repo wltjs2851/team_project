@@ -60,7 +60,7 @@ $(function() {
 	</div>
 		<div class="col-md-4">
 		<span style="font-size: 40px; color: gray; text-align: center;">LOGIN</span><br>
-		<span style="color: gray;">회원가입 후 ??의 다양한 혜택과 서비스를 받아보세요.</span>
+		<span style="color: gray;">회원가입 후 <strong>우리 GYM으로 가자</strong>의 다양한 혜택과 서비스를 받아보세요.</span>
 		<br><br>
 			<form role="form" action="/member/loginRun" method="post" id="frmLogin">
 				<div class="form-group">

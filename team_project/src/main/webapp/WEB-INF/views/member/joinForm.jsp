@@ -99,9 +99,9 @@ $(function() {
 <div class="row">
 	<div class="col-md-4">
 	</div>
-		<div class="col-md-4">
+		<div class="col-md-4" style="padding-bottom: 20px;">
 		<span style="font-size: 40px; color: gray; text-align: center;">회원가입</span><br>
-		<span style="color: gray;">회원가입은 무료이며, 가입하시면 ???에서 제공하는 다양한 서비스를 이용하실 수 있습니다.</span>
+		<span style="color: gray;">회원가입은 무료이며, 가입하시면 <strong>우리 GYM으로 가자</strong>에서 제공하는 다양한 서비스를 이용하실 수 있습니다.</span>
 		<br><br>
 		<hr style="background-color: red;">
 			<form role="form" action="/member/joinRun" method="post" id="frmJoin" enctype="multipart/form-data">

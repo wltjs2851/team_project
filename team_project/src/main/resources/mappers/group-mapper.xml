@@ -17,6 +17,11 @@
 <!-- 그룹 리스트	 -->
 <!-- 전체 그룹 리스트  -->
 	<select id="selectGroup" resultType="GroupVo">
+		 select * from tbl_group order by gno desc
+	</select>
+	
+<!-- 	관리자가 보는 그룹리스트 -->
+	<select id="adminGroupList" resultType="GroupVo">
 		select * from (select rownum rnum, a.* from
 			(select * from tbl_group 
 				where (gno || g_name || excercise_type || g_leader || dno) like '%' || #{keyword, jdbcType=VARCHAR} || '%'

@@ -16,7 +16,7 @@ $(function(){
 	});
 });
 </script>
-<h1>관리자 페이지</h1>
+<h1>신고내역</h1>
 <div class="row">
 	<div class="col-md-2">
 		<ul class="nav flex-column nav-pills">
