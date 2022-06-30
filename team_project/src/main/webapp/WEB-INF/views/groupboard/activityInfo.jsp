@@ -219,6 +219,11 @@
 			}
 			var url = "/groupcal/deleteCal";
 			
+			$(this).prev().remove();
+			$(this).prev().remove();
+			$(this).prev().remove();
+			$(this).remove();
+			
 			$.post(url, sData, function(rData) {
 				console.log(rData);
 				
