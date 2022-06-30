@@ -82,7 +82,7 @@
 <%-- 	<c:choose> --%>
 <%-- 	<c:when test="${ not empty group }"> --%>
 <!-- 		<div class="popular__product" style="padding: 3% 10%"> -->
-<%-- 		<%-- <a href="/groupboard/groupMain/${ group }">${ groupVo.g_name }</a> --%> --%>
+		<%-- <a href="/groupboard/groupMain/${ group }">${ groupVo.g_name }</a> --%>
 <%-- 		<div class="col-lg-3 col-md-6 col-sm-6 group" onclick="location.href ='/groupboard/groupMain/${groupVo.gno}'" data-toggle="modal" --%>
 <!-- 					style="cursor:pointer;"> -->
 <!-- 				<div class="product__item"> -->
