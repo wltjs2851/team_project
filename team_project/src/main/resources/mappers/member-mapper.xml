@@ -90,5 +90,6 @@
 <!-- 	전체 회원 수 구하기 -->
 	<select id="getCountMember" resultType="int">
 		select count(*) from tbl_user
+		where (userid || username || email || address || nickname || age) like '%' || #{keyword, jdbcType=VARCHAR} || '%'
 	</select>
 </mapper>

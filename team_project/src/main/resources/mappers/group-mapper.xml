@@ -43,8 +43,10 @@
 		select * from tbl_group_location where sgno is not null and dno = #{dno} and sno = #{sno}
 	</select>
 	
+<!-- 	전체 그룹 갯수 -->
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_group
+		where (gno || g_name || excercise_type || g_leader || dno) like '%' || #{keyword, jdbcType=VARCHAR} || '%'
 	</select>
 	
 <!-- 그룹 상세보기 -->
