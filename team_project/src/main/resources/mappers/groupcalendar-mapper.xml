@@ -31,8 +31,9 @@
 </update>
 
 <!-- 달력 일정 삭제 -->
-<!-- <delete id="deleteGroupCal"> -->
-
-<!-- </delete> -->
+<delete id="deleteGroupCal">
+	delete from tbl_group_calendar
+	where gcno = #{gcno}
+</delete>
 
 </mapper>

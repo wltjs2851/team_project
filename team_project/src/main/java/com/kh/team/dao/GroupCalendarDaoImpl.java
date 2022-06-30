@@ -55,4 +55,13 @@ public class GroupCalendarDaoImpl implements GroupCalendarDao{
 		return false;
 	}
 
+	@Override
+	public boolean deleteGroupCal(int gcno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteGroupCal", gcno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

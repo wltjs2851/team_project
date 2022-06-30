@@ -68,4 +68,12 @@ public class GroupCalendarController {
 		
 		return String.valueOf(result);
 	}
+	
+	@RequestMapping(value = "/deleteCal", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteGroupCal(int gcno) {
+		boolean result = gcService.deleteGroupCal(gcno);
+		
+		return String.valueOf(result);
+	}
 }

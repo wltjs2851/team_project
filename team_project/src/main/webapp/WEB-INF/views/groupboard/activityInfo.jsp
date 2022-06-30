@@ -42,15 +42,35 @@
 				if (this.gc_date == that.attr("data-today")) {
 					if (this.checklist == 'true') {
 						if (thatSpan == "false") {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'><button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button><button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
+									"<c:if test='${loginVo.userid == groupVo.g_leader}'>" +
+									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
+									"<button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button>" + 
+									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button>" + 
+									"</c:if><br>");
 						} else {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'><button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button><button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
+									"<c:if test='${loginVo.userid == groupVo.g_leader}'>" +
+									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
+									"<button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button>" + 
+									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button>" + 
+									"</c:if><br>");
 						}
 					} else {
 						if (thatSpan == "true") {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'><button type='button' data-gcno='" + this.gcno + "' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button><button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
+									"<c:if test='${loginVo.userid == groupVo.g_leader}'>" +
+									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
+									"<button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button>" + 
+									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button>" + 
+									"</c:if><br>");
 						} else {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'><button type='button' data-gcno='" + this.gcno + "' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button><button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
+									"<c:if test='${loginVo.userid == groupVo.g_leader}'>" +
+									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
+									"<button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button>" + 
+									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button>" + 
+									"</c:if><br>");
 						}
 					}
 				}
@@ -146,6 +166,7 @@
 			}
 		});
 		
+		// 일정 수정
 		$(".todo-content").on("click", ".update", function() {
 			console.log("click");
 
@@ -187,6 +208,25 @@
 			});
 		});
 		
+		// 일정 삭제
+		$(".todo-content").on("click", ".delete", function() {
+			console.log("click");
+			
+			var gcno = $(this).attr("data-gcno");
+			console.log("gcno: ", gcno);
+			var sData = {
+					"gcno" : gcno
+			}
+			var url = "/groupcal/deleteCal";
+			
+			$.post(url, sData, function(rData) {
+				console.log(rData);
+				
+				if(rData == "true") {
+					getCalendarList();
+				}
+			});
+		});
 	});
 </script>
 <body>
