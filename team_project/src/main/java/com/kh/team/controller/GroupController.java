@@ -26,7 +26,6 @@ import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.LocationVo;
 import com.kh.team.vo.MemberVo;
-import com.kh.team.vo.RecipeCommentVo;
 
 @Controller
 @RequestMapping("/group")

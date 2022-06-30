@@ -143,11 +143,13 @@ public class GroupBoardController {
 	public int heart(HttpServletRequest httpRequest) {
 		int heart = Integer.parseInt(httpRequest.getParameter("heart"));
 		int gbno = Integer.parseInt(httpRequest.getParameter("gbno"));
+		int gno = Integer.parseInt(httpRequest.getParameter("gno"));
 		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
 		
 		GroupBoardLikeVo groupBoardLikeVo = new GroupBoardLikeVo();
 		groupBoardLikeVo.setGbno(gbno);
 		groupBoardLikeVo.setUserid(userid);
+		groupBoardLikeVo.setGno(gno);
 		
 		if(heart >= 1) {
 			groupboardLikeService.deleteLike(groupBoardLikeVo);

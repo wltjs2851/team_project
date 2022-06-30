@@ -45,13 +45,16 @@ public class GroupServiceImpl implements GroupService{
 	public GroupVo groupByGno(int gno) {
 		return groupDao.groupByGno(gno);
 	}
-	
+
 	@Override
 	@Transactional
 	public boolean removeGroup(int gno, String userid) {
+		boolean deleteLike = groupDao.deleteGroupLike(gno);
+		boolean deleteComment = groupDao.deleteGroupComment(gno);
+		boolean deleteBoard = groupDao.deleteGroupBoard(gno);
 		boolean deleteMember = groupDao.deleteJoinGroup(gno, userid);
 		boolean deleteGroup = groupDao.deleteGroup(gno);
-		if(deleteMember && deleteGroup) {
+		if(deleteMember && deleteGroup && deleteBoard && deleteComment && deleteLike) {
 			return true;
 		}
 		return false;

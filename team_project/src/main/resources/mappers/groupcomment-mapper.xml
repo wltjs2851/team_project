@@ -8,9 +8,9 @@
  
  <!-- 댓글 등록 -->
  <insert id="insertGroupComment">
- 	insert into tbl_group_board_comment(gbcno, gbc_content, gbno, userid, u_pic)
+ 	insert into tbl_group_board_comment(gbcno, gbc_content, gbno, userid, u_pic, gno)
  	values(seq_group_board_comment_gbcno.nextval, #{gbc_content}, #{gbno},
- 		   #{userid}, #{u_pic, jdbcType=VARCHAR})
+ 		   #{userid}, #{u_pic, jdbcType=VARCHAR}, #{gno})
  </insert>
  
  <!-- 댓글 목록 -->

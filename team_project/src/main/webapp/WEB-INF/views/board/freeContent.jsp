@@ -207,8 +207,9 @@ function adjustHeight() {
 				${ freeVo.f_content }
 				<hr>
 			</div>
-			<div>
-				<i class="fa-solid fa-heart" style="color: red; font-size: 25px;" ></i><span id="span_like">${ freeVo.f_like }</span>
+			<div class="row" style="margin-left: 10px; height: 40px;">
+				<i class="fa-solid fa-heart" style="font-size: 25px; margin-top: 5px; margin-left: 5px;" ></i><p style="font-size: 25px; margin-right: 10px;"><span id="span_like">${ freeVo.f_like }</span></p>
+<%-- 				<i class="fa-solid fa-heart" style="color: red; font-size: 25px;" ></i><span id="span_like">${ freeVo.f_like }</span> --%>
 				<c:if test="${ freeVo.userid == loginVo.userid }">
 					<a href="/free/modifyFreeForm?fno=${ freeVo.fno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-warning"
 						style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
