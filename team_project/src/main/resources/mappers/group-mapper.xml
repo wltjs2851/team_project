@@ -102,6 +102,13 @@
 		delete from tbl_group_board_like where gno = #{gno}
 	</delete>
 	
+	<delete id="deleteGroupReport">
+		delete from tbl_report where gno = #{gno}
+	</delete>
+	<delete id="deleteGroupCalendar">
+		delete from tbl_group_calendar where gno = #{gno}
+	</delete>
+	
 	<!-- 그룹별 멤버 가져오기 -->
 	<select id="getGroupMember" resultType="GroupJoinVo">
 		select userid from tbl_group_join

@@ -52,9 +52,11 @@ public class GroupServiceImpl implements GroupService{
 		boolean deleteLike = groupDao.deleteGroupLike(gno);
 		boolean deleteComment = groupDao.deleteGroupComment(gno);
 		boolean deleteBoard = groupDao.deleteGroupBoard(gno);
+		boolean deleteReport = groupDao.deleteGroupReport(gno);
+		boolean deleteCalendar = groupDao.deleteGroupCalendar(gno);
 		boolean deleteMember = groupDao.deleteJoinGroup(gno, userid);
 		boolean deleteGroup = groupDao.deleteGroup(gno);
-		if(deleteMember && deleteGroup && deleteBoard && deleteComment && deleteLike) {
+		if(deleteMember && deleteGroup && deleteBoard && deleteComment && deleteLike && deleteReport && deleteCalendar) {
 			return true;
 		}
 		return false;

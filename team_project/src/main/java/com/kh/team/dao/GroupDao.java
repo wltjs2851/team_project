@@ -32,6 +32,8 @@ public interface GroupDao {
 	public boolean deleteGroupBoard(int gno);
 	public boolean deleteGroupComment(int gno);
 	public boolean deleteGroupLike(int gno);
+	public boolean deleteGroupReport(int gno);
+	public boolean deleteGroupCalendar(int gno);
 	
 	// 가입한 그룹 닉네임 가져오기 
 	public List<String> getNickname(int gno);

@@ -134,7 +134,7 @@ $(document).ready(function() {
 	
 	//댓글 수정
 	$("#comment").on("click", ".btnModify", function() {
-		var urcno = $(this).attr("data-recno");
+		var recno = $(this).attr("data-recno");
 		var btnModifyRun = $(this).parent().parent().parent().parent().find(".btnModifyRun");
 		console.log(btnModifyRun);
 		var comment = btnModifyRun.prev();
@@ -142,11 +142,11 @@ $(document).ready(function() {
 		console.log(comment);
 		comment.removeAttr("disabled");
 		btnModifyRun.click(function() {
-			var rcno = btnModifyRun.attr("data-urcno");
-			var urc_comment = comment.val();
+			var recno = btnModifyRun.attr("data-recno");
+			var re_comment = comment.val();
 			var sendData = {
 					"recno" : recno,
-					"urc_comment" : comment
+					"re_comment" : re_comment
 			};
 			var url = "/reccomment/updateComment"
 			$.post(url, sendData, function(receivedData) {
