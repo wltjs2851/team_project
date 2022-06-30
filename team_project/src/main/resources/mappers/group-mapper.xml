@@ -32,7 +32,7 @@
 	<select id="selectGroupList" resultType="GroupVo">
 		select * from (select rownum rnum, a.* from 
 			(select * from tbl_group
-			order by g_regdate desc) a) 
+			order by g_regdate desc, gno desc) a) 
 		where rnum between #{startRow} and #{endRow}
 	</select>
 	
