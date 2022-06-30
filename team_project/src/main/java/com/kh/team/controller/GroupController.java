@@ -41,12 +41,12 @@ public class GroupController {
 	@Autowired
 	private ReportService reportService;
 
-	@RequestMapping(value = "/groupList", method = RequestMethod.GET)
-	public String getGroupList(Model model) {
-		List<GroupVo> list = groupService.groupList();
-		model.addAttribute("groupList", list);
-		return "board/groupList";
-	}
+//	@RequestMapping(value = "/groupList", method = RequestMethod.GET)
+//	public String getGroupList(Model model) {
+//		List<GroupVo> list = groupService.groupList();
+//		model.addAttribute("groupList", list);
+//		return "board/groupList";
+//	}
 	
 	@RequestMapping(value = "/groupList2", method = RequestMethod.GET)
 	@ResponseBody

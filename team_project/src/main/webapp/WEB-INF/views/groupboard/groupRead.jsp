@@ -264,7 +264,7 @@ $(function() {
 				
 				<!-- 댓글 -->
 				<div class="comments">
-				댓글[<span class="count">${ groupBoardVo.gb_comment }</span>]
+<%-- 				댓글[<span class="count">${ groupBoardVo.gb_comment }</span>] --%>
 				</div>
 				<div class="row">
 					<div class="col-md-9">

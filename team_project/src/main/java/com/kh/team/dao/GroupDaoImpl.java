@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.LocationVo;
+import com.kh.team.vo.PagingDto;
 
 @Repository
 public class GroupDaoImpl implements GroupDao{
@@ -30,8 +31,8 @@ public class GroupDaoImpl implements GroupDao{
 	}
 
 	@Override
-	public List<GroupVo> selectGroup() {
-		List<GroupVo> list = sqlSession.selectList(NAMESPACE + "selectGroup");
+	public List<GroupVo> selectGroup(PagingDto pagingDto) {
+		List<GroupVo> list = sqlSession.selectList(NAMESPACE + "selectGroup", pagingDto);
 		return list;
 	}
 
@@ -166,8 +167,8 @@ public class GroupDaoImpl implements GroupDao{
 	}
 
 	@Override
-	public int getCount() {
-		int count = sqlSession.selectOne(NAMESPACE + "getCount");
+	public int getCount(PagingDto pagingDto) {
+		int count = sqlSession.selectOne(NAMESPACE + "getCount", pagingDto);
 		return count;
 	}
 

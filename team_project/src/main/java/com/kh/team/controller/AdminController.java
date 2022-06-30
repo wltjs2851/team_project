@@ -88,6 +88,7 @@ public class AdminController {
 	@Autowired
 	private WarningMessageService warningMessageService;
 	
+	// 관리자 모드 메인 대쉬보드
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public String adminMain(HttpSession session, Model model, RedirectAttributes rttr) {
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
@@ -262,6 +263,21 @@ public class AdminController {
 		boolean result = warningMessageService.insertWarningMessage(warningMessageVo);
 		System.out.println("adminController, userWarning, result:" + result);
 		return String.valueOf(result);
+	}
+	
+	// 관리자모드 - 그룹 관리 페이지 
+	@RequestMapping(value = "/group", method = RequestMethod.GET)
+	public String adminGroupList(Model model, PagingDto pagingDto) {
+		System.out.println("adminController, group, pagingDto:" + pagingDto);
+		
+		pagingDto.setCount(groupService.getCount(pagingDto));
+		
+		pagingDto.setPage(pagingDto.getPage());
+		
+		List<GroupVo> groupList = groupService.groupList(pagingDto);
+		model.addAttribute("groupList", groupList);
+		model.addAttribute("pagingDto", pagingDto);
+		return "/admin/adminGroupList";
 	}
 	
 }

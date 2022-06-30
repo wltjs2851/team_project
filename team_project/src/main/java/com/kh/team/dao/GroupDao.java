@@ -5,12 +5,13 @@ import java.util.List;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.LocationVo;
+import com.kh.team.vo.PagingDto;
 
 public interface GroupDao {
 	public boolean insertGroup(GroupVo groupVo);
-	public List<GroupVo> selectGroup();
+	public List<GroupVo> selectGroup(PagingDto pagingDto);
 	public List<GroupVo> selectGroupList(int startRow, int endRow);
-	public int getCount();
+	public int getCount(PagingDto pagingDto);
 	public boolean updateGroup(GroupVo groupVo);
 	public boolean deleteGroup(int gno);
 	public GroupVo groupByGno(int gno);

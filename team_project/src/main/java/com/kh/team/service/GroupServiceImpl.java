@@ -10,6 +10,7 @@ import com.kh.team.dao.GroupDao;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.LocationVo;
+import com.kh.team.vo.PagingDto;
 
 @Service
 public class GroupServiceImpl implements GroupService{
@@ -31,8 +32,8 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	public List<GroupVo> groupList() {
-		return groupDao.selectGroup();
+	public List<GroupVo> groupList(PagingDto pagingDto) {
+		return groupDao.selectGroup(pagingDto);
 	}
 
 	@Override
@@ -132,8 +133,8 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	public int getCount() {
-		return groupDao.getCount();
+	public int getCount(PagingDto pagingDto) {
+		return groupDao.getCount(pagingDto);
 	}
 
 	@Override
