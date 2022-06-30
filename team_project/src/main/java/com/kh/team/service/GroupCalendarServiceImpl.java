@@ -32,4 +32,10 @@ public class GroupCalendarServiceImpl implements GroupCalendarService {
 		return scheduleCnt;
 	}
 
+	@Override
+	public boolean updateGroupCal(GroupCalendarVo groupCalendarVo) {
+		boolean result = groupCalendarDao.updateGroupCal(groupCalendarVo);
+		return result;
+	}
+
 }

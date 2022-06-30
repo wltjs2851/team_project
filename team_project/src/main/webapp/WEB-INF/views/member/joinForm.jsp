@@ -164,17 +164,15 @@ $(function() {
 					<span id="noAddress"></span>
 				</div>
 				<div class="form-group">
-					<div style="display: inline-block; width: 49.6%;">
 					<label for="age">나이</label>
 					<input type="text" class="form-control" id="age" name="age"/>
 					<span id="noAge"></span>
-					</div>
-					<div style="display: inline-block; width: 49.6%;">
+				</div>
+				<div class="form-group">
 					<label for="gender" style="display: block;">성별</label>
 					<label for="M"> <input type="radio" name="gender" id="M" value="M"/> 남</label>
 					<label for="F"> <input type="radio" name="gender" id="F" value="F"/> 여</label>
 					<span id="noGender"></span>
-					</div>
 				</div>
 				<div class="form-group">
 					<label for="file">프로필 사진</label>

@@ -46,4 +46,13 @@ public class GroupCalendarDaoImpl implements GroupCalendarDao{
 		return sqlSession.selectOne(NAMESPACE + "getScheduleCnt", map);
 	}
 
+	@Override
+	public boolean updateGroupCal(GroupCalendarVo groupCalendarVo) {
+		int count = sqlSession.update(NAMESPACE + "updateGroupCal", groupCalendarVo);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }
