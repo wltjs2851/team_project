@@ -15,7 +15,7 @@
 }
 
 #logo{
-	width: 330px;
+	width: 300px;
 	height: auto;
 	
 }
@@ -757,7 +757,7 @@ ul.pagination .active a {
 }
 
 .main-nav .nav-item .nav-link {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 43px;
   padding: 0 20px;
 }
