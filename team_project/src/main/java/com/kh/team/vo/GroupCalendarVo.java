@@ -4,23 +4,31 @@ import java.sql.Date;
 
 public class GroupCalendarVo {
 	
+	private int gcno;
 	private int gno;
 	private String userid;
 	private String gc_content;
 	private String gc_date;
-	private int gc_todo_cnt;
 	
 	public GroupCalendarVo() {
 		super();
 	}
 
-	public GroupCalendarVo(int gno, String userid, String gc_content, String gc_date, int gc_todo_cnt) {
+	public GroupCalendarVo(int gcno, int gno, String userid, String gc_content, String gc_date) {
 		super();
+		this.gcno = gcno;
 		this.gno = gno;
 		this.userid = userid;
 		this.gc_content = gc_content;
 		this.gc_date = gc_date;
-		this.gc_todo_cnt = gc_todo_cnt;
+	}
+
+	public int getGcno() {
+		return gcno;
+	}
+
+	public void setGcno(int gcno) {
+		this.gcno = gcno;
 	}
 
 	public int getGno() {
@@ -55,18 +63,10 @@ public class GroupCalendarVo {
 		this.gc_date = gc_date;
 	}
 
-	public int getGc_todo_cnt() {
-		return gc_todo_cnt;
-	}
-
-	public void setGc_todo_cnt(int gc_todo_cnt) {
-		this.gc_todo_cnt = gc_todo_cnt;
-	}
-
 	@Override
 	public String toString() {
-		return "GroupCalendarVo [gno=" + gno + ", userid=" + userid + ", gc_content=" + gc_content + ", gc_date="
-				+ gc_date + ", gc_todo_cnt=" + gc_todo_cnt + "]";
+		return "GroupCalendarVo [gcno=" + gcno + ", gno=" + gno + ", userid=" + userid + ", gc_content=" + gc_content
+				+ ", gc_date=" + gc_date  + "]";
 	}
 
 }

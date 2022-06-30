@@ -9,5 +9,6 @@ public interface GroupCalendarDao {
 	public boolean insertGroupCal(GroupCalendarVo groupCalendarVo);
 	public List<GroupCalendarVo> getGroupCal(String month, int gno);
 	public int getScheduleCnt(int gno, String gc_date);
+	public boolean updateGroupCal(GroupCalendarVo groupCalendarVo);
 
 }

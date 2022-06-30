@@ -38,23 +38,26 @@
 			var thatSpan = that.find("span").eq(e).attr("data-check");
 // 			console.log(thatSpan);
 			console.log(this.gc_content);
+			
 				if (this.gc_date == that.attr("data-today")) {
 					if (this.checklist == 'true') {
 						if (thatSpan == "false") {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.gc_content + "</label><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'><button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button><button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button><br>");
 						} else {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.gc_content + "</label><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'><button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button><button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button><br>");
 						}
 					} else {
 						if (thatSpan == "true") {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.gc_content + "</label><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'><button type='button' data-gcno='" + this.gcno + "' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button><button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button><br>");
 						} else {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.gc_content + "</label><br>");
+							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'><button type='button' data-gcno='" + this.gcno + "' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button><button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button><br>");
 						}
 					}
 				}
 			});
+			
 		});
+		
 		function getCalendarList() {
 			var divDate = $(".dateBoard .divDate[data-today]");
 			divDate.find("span").remove();
@@ -65,21 +68,24 @@
 				'gno' : gno,
 				'gc_date' : selectDate
 			};
-			console.log(sData);
+// 			console.log(sData);
 			$.get(url, sData, function(rData) {
 				console.log(rData);
 				jsonCal = rData;
 				$.each(divDate, function() {
 					var data = this.dataset.today;
+// 					console.log("data: ", data);
 					var thisDiv = this;
 					$.each(jsonCal, function(e) {
 						if (this.gc_date == data) {
-							$(thisDiv).append("<span data-check='" + this.checklist + "' data-gc_todo_cnt='" + this.gc_todo_cnt + "' style='color: orange; margin-right: 10px;'><i class='fa-solid fa-flag'></i></span>");
+							console.log("gc_date: ", this.gc_date);
+							$(thisDiv).append("<span style='color: orange; margin-right: 10px;'><i class='fa-solid fa-flag'></i></span>");
 						}
 					});
 				});
 			});
 		}
+		
 		$("#prevMonth").click(function() {
 			var prevDay = new Date(date.setMonth(date.getMonth() - 1));
 			var prevYear = prevDay.getFullYear();
@@ -97,6 +103,7 @@
 			console.log("get after");
 			
 		});
+		
 		$("#nextMonth").click(function() {
 			var nextDay = new Date(date.setMonth(date.getMonth() + 1));
 			var nextYear = nextDay.getFullYear();
@@ -113,7 +120,9 @@
 			});
 			
 		});
+		
 		getCalendarList();
+		
 		$("#input-data").click(function() {
 			var insertContent = $("#input-box").val();
 			var url = "/groupcal/insertGroupCal";
@@ -136,33 +145,48 @@
 				});
 			}
 		});
-		$("#update-check").click(function() {
-			var url = "/calendar/update";
-			var userid = "${loginVo.userid}";
-			for (var i = 0; i < $(".todo-content").find("input").length; i++) {
-				var insertContent = $(".checkList").eq(i).next("label").text();
-				var checklist = $(".checkList").eq(i).prop("checked");
-				var sData = {
-					'userid' : userid,
-					'gc_content' : insertContent,
-					'gc_date' : selectDate,
-					'checklist' : checklist
-				};
-				if (insertContent != null && insertContent != "") {
-					$.post(url, sData, function(rData) {
-						if(rData == "true"){
-							$("#input-box").val("");
-							// 클릭했던 날짜부분의 check->true
-							that.children("span").attr("data-check", "true");
-						} else if (rData == "false") {
-							$("#input-box").val("");
-							that.children("span").attr("data-check", "false");
-						}
-					});
-				}
-			}
-			getCalendarList();
+		
+		$(".todo-content").on("click", ".update", function() {
+			console.log("click");
+
+// 			var gcno = $(this).attr("data-gcno");
+// 			$(this).prev().find(".inputContent").attr("readonly", false);
+			$(this).prev().attr("readonly", false);
+			
+			$(this).fadeOut("slow");
+			$(this).next().fadeIn("slow");
 		});
+		
+		$(".todo-content").on("click", ".upadateRun", function() {
+			console.log("Click");
+			var that = $(this);
+			
+			var url = "/groupcal/updateCal";
+			var gcno = $(this).attr("data-gcno");
+			var gc_content = $(this).parent().find(".inputContent").val();
+			var inputContent = $(this).parent().find(".inputContent");
+			
+			console.log("gcno: ", gcno);
+			console.log("gc_content: ", gc_content);
+			
+			var sData = {
+					"gcno" : gcno,
+					"gc_content" : gc_content
+			}
+			
+			console.log("updateFinish, sData: ", sData);
+			
+			$.post(url, sData, function(rData) {
+				console.log("updateFinish, rData: ", rData);
+				
+				if(rData == "true") {
+					inputContent.attr("readonly", true);
+					that.fadeOut("slow");
+					$(".update").fadeIn("slow");
+				}
+			});
+		});
+		
 	});
 </script>
 <body>
@@ -205,10 +229,11 @@
 				          <div class="todo-title">오늘의 일정</div>
 				          <div class="todo-content" id="todo-content"></div>
 				          <c:if test="${ loginVo.userid == groupVo.g_leader }">
-					          <div class="input-wrap">
+					          <div style="padding: 2%" class="input-wrap">
 					            <input type="text" placeholder="please write here!!" id="input-box" class="input-box form-control">
 					            <button type="button" id="input-data" class="btn btn-outline-primary"><span>INPUT</span></button>
-	<!-- 				            <button type="button" id="update-check" class="btn btn-outline-warning"><span>CHECK</span></button> -->
+<!-- 					            <button type="button" id="update" class="btn btn-outline-warning"><span>UPDATE</span></button> -->
+					            <button type="button" style="display: none;" id="updateFinish" class="btn btn-outline-warning"><span>FINISH</span></button>
 					            <div id="input-list" class="input-list"></div>
 					          </div>
 				          </c:if>

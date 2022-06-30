@@ -8,13 +8,13 @@
 <select id="getGroupCal" resultType="GroupCalendarVo">
 	select * from tbl_group_calendar
 	where gno = #{gno}
-	order by gc_date asc, gc_todo_cnt desc
+	order by gc_date asc
 </select>
 
 <!-- 달력에 일정 집어넣기 -->
 <insert id="insertGroupCal">
-	insert into tbl_group_calendar(gno, userid, gc_content, gc_date, gc_todo_cnt)
-	values(#{gno}, #{userid}, #{gc_content}, #{gc_date}, seq_group_calendar_gc_todo_cnt.nextval)
+	insert into tbl_group_calendar(gcno, gno, userid, gc_content, gc_date)
+	values(seq_group_calendar_gcno.nextval, #{gno}, #{userid}, #{gc_content}, #{gc_date})
 </insert>
 
 <!-- 달력에 집어넣을 수 있는 일정 수 제한하기 위한,, -->
@@ -22,5 +22,17 @@
 	select count(*) from tbl_group_calendar
 	where gno = #{gno} and gc_date = #{gc_date}
 </select>
+
+<!-- 달력 일정 수정 -->
+<update id="updateGroupCal">
+	update tbl_group_calendar set
+		gc_content = #{gc_content}
+	where gcno = #{gcno}
+</update>
+
+<!-- 달력 일정 삭제 -->
+<!-- <delete id="deleteGroupCal"> -->
+
+<!-- </delete> -->
 
 </mapper>
