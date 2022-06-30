@@ -38,4 +38,10 @@ public class GroupCalendarServiceImpl implements GroupCalendarService {
 		return result;
 	}
 
+	@Override
+	public boolean deleteGroupCal(int gcno) {
+		boolean result = groupCalendarDao.deleteGroupCal(gcno);
+		return result;
+	}
+
 }

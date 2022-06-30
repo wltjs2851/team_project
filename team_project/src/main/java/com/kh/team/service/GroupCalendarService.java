@@ -10,5 +10,6 @@ public interface GroupCalendarService {
 	public List<GroupCalendarVo> getGroupCal(String month, int gno);
 	public int getScheduleCnt(int gno, String gc_date);
 	public boolean updateGroupCal(GroupCalendarVo groupCalendarVo);
+	public boolean deleteGroupCal(int gcno);
 
 }
