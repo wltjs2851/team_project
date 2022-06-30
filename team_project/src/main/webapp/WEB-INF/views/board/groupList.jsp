@@ -15,6 +15,10 @@
 
 <script>
 $(function() {
+	var notIsExist = "${notIsExist}";
+	if (notIsExist == "false") {
+		alert("가입된 그룹이 없습니다.\n그룹에 가입해주세요.")
+	}
 	var joinResult = "${joinResult}";
 	if(joinResult == "true") {
 		alert("그룹에 가입하셨습니다.");

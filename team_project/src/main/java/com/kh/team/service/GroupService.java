@@ -29,4 +29,5 @@ public interface GroupService {
 	
 	public List<String> getNickname(int gno);
 	public List<GroupVo> getGroupByUserId(String userid);
+	public int isExistMyGroupList(String userid);
 }

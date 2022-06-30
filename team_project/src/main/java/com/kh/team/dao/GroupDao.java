@@ -39,4 +39,6 @@ public interface GroupDao {
 	public List<String> getNickname(int gno);
 	// 특정회원 가입한 그룹정보 가져오기
 	public List<GroupVo> getGroupByUserId(String userid);
+	
+	public int isExistMyGroupList(String userid);
 }

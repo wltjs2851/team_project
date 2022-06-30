@@ -158,4 +158,9 @@
 			where gno
 		in (select gno from tbl_group_join where userid = #{userid})
 	</select>
+	
+	<select id="isExistMyGroupList" resultType="int">
+		select count(*) from tbl_group_join
+		where userid = #{userid}
+	</select>
 </mapper>

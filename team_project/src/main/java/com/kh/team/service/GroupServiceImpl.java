@@ -151,4 +151,9 @@ public class GroupServiceImpl implements GroupService{
 	public List<GroupVo> adminGroupList(PagingDto pagingDto) {
 		return groupDao.adminGroupList(pagingDto);
 	}
+
+	@Override
+	public int isExistMyGroupList(String userid) {
+		return groupDao.isExistMyGroupList(userid);
+	}
 }

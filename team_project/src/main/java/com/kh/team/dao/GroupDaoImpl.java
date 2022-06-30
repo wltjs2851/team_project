@@ -228,4 +228,9 @@ public class GroupDaoImpl implements GroupDao{
 		}
 		return false;
 	}
+
+	@Override
+	public int isExistMyGroupList(String userid) {
+		return sqlSession.selectOne(NAMESPACE + "isExistMyGroupList", userid);
+	}
 }
