@@ -235,7 +235,7 @@
 	});
 </script>
 <body>
-	<div class="container-fluid">
+	<div style="margin: 50px;" class="container-fluid">
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
