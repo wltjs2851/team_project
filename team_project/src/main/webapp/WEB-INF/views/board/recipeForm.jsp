@@ -244,12 +244,22 @@ $(function() {
 			</div>
 			<div class="row" style="margin-left: 10px;">
 				<i class="fa-solid fa-heart" style="font-size: 25px;" ></i><p style="font-size: 25px"><span id="span_like">${ recipeVo.r_like }</span> &nbsp;
+				<c:if test="${recipeVo.userid == loginVo.userid}">
 				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" 
 					class="btn btn-warning" style="width: 60px; height:40px; padding: 3% 0">수정</a>
 				<a href="/recipe/recipeRemoveRun?rno=${ recipeVo.rno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}"
 					 class="btn btn-danger" style="width: 60px; height:40px; padding: 3% 0">삭제</a>
-				<a href="/recipe/recipeList?page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}"
+				</c:if>
+				<c:choose>
+					<c:when test="${param.page != null}">
+						<a href="/recipe/recipeList?page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}"
 				 class="btn btn-outline-primary" style="width: 60px; height:40px; padding: 3% 0">목록</a>
+					</c:when>
+					<c:otherwise>
+						<a href="/recipe/recipeList"
+				 class="btn btn-outline-primary" style="width: 60px; height:40px; padding: 3% 0">목록</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<hr>
 			<div class="col" style="margin-top: 20px;">
