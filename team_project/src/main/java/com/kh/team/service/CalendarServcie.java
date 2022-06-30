@@ -15,4 +15,6 @@ public interface CalendarServcie {
 	public boolean updateCheck(CalendarVo calendarVo);
 	
 	public int getCount(String userid, String start1);
+	
+	public boolean deleteCal(CalendarVo calendarVo);
 }

@@ -59,4 +59,13 @@ public class CalendarDaoImpl implements CalendarDao {
 		return sqlSession.selectOne(NAMESPACE + "getCount", map);
 	}
 
+	@Override
+	public boolean deleteCal(CalendarVo calendarVo) {
+		int count = sqlSession.delete(NAMESPACE + "deleteCal", calendarVo);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }
