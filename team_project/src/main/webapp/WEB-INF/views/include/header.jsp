@@ -120,7 +120,7 @@
 								</a>
 								<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right wargningDrop" style="width: 500px;">
 									<span class="dropdown-item dropdown-header" id="count"></span>
-									<div class="dropdown-item" id="warningList" style="padding: 0;"></div>
+									<div id="warningList" style="padding: 0;"></div>
 								</div></li>
 								</c:if>
 						</ul>
