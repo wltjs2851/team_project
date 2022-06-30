@@ -9,7 +9,8 @@ import com.kh.team.vo.PagingDto;
 
 public interface GroupService {
 	public boolean addGroup(GroupVo groupVo);
-	public List<GroupVo> groupList(PagingDto pagingDto);
+	public List<GroupVo> groupList();
+	public List<GroupVo> adminGroupList(PagingDto pagingDto);
 	public List<GroupVo> selectGroupList(int startRow, int endRow);
 	public boolean moidfyGroup(GroupVo groupVo);
 	public boolean removeGroup(int gno, String userid);

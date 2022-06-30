@@ -32,8 +32,8 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	public List<GroupVo> groupList(PagingDto pagingDto) {
-		return groupDao.selectGroup(pagingDto);
+	public List<GroupVo> groupList() {
+		return groupDao.selectGroup();
 	}
 
 	@Override
@@ -140,5 +140,10 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public List<GroupVo> getGroupByUserId(String userid) {
 		return groupDao.getGroupByUserId(userid);
+	}
+
+	@Override
+	public List<GroupVo> adminGroupList(PagingDto pagingDto) {
+		return groupDao.adminGroupList(pagingDto);
 	}
 }
