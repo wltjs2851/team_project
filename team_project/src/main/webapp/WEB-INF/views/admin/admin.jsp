@@ -23,7 +23,10 @@ $(function() {
 				<a class="nav-link" style="background-color: #fd9a9a;">메뉴</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/admin/memberList">회원</a>
+				<a class="nav-link" href="/admin/memberList">회원 관리</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/admin/group">그룹 관리</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="/admin/reportBoard">신고 내역</a>

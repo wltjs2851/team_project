@@ -69,8 +69,12 @@ $(function(){
 			</li>
 			<li class="nav-item"><a class="nav-link" href="#"
 				style="background-color: #fd9a9a;">회원</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/reportBoard">
-				신고내역</a></li>
+			<li class="nav-item">
+				<a class="nav-link" href="/admin/group">그룹 관리</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/admin/reportBoard">신고 내역</a>
+			</li>
 		</ul>
 	</div>
 	<div class="col-md-8">
