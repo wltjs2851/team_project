@@ -59,7 +59,7 @@ function uploadSummernoteImageFile(file) {
 				<input type="hidden" id="userid" name="userid" value="${ loginVo.userid }"/>
 				<div class="form-group row">
 					<div class="col-md-1">
-						<select name="fcode" class="form-control">
+						<select name="fcode" class="form-control" style="width: 90px;">
 						<c:forEach items="${ categoryList }" var="categoryList">					
 							<option value="${ categoryList.fcode }">${ categoryList.fname }</option>
 						</c:forEach>

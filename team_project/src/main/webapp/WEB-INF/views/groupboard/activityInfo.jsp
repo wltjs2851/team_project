@@ -219,6 +219,11 @@
 			}
 			var url = "/groupcal/deleteCal";
 			
+			$(this).prev().remove();
+			$(this).prev().remove();
+			$(this).prev().remove();
+			$(this).remove();
+			
 			$.post(url, sData, function(rData) {
 				console.log(rData);
 				
@@ -230,7 +235,7 @@
 	});
 </script>
 <body>
-	<div class="container-fluid">
+	<div style="margin: 50px;" class="container-fluid">
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
