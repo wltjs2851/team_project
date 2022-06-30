@@ -5,6 +5,15 @@
 	font-family: "bau";
 }
 
+@font-face {
+	src: url("/resources/css/fonts/Cafe24Ohsquare.ttf");
+	font-family: "mone";
+}
+
+.nav-link {
+	font-family: "mone";	
+}
+
 * {
   margin: 0;
   padding: 0;

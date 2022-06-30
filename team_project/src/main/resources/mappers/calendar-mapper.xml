@@ -36,4 +36,12 @@
 		where start1 = #{start1}
 		and userid = #{userid}
 	</select>
+	
+	<delete id="deleteCal">
+		delete from calendar
+		where content = #{content}
+		and userid = #{userid}
+		and start1 = #{start1}
+	</delete>
+	
 </mapper>

@@ -73,7 +73,7 @@ public class CalendarController {
 	public String save(String userid, String content, String start1) {
 		int cno = calendarService.getCount(userid, start1);
 		System.out.println("cno: " + cno);
-		if (cno >= 5) {
+		if (cno >= 4) {
 			return "false";
 		}
 		CalendarVo vo = new CalendarVo(userid, content, start1, cno);
@@ -88,6 +88,14 @@ public class CalendarController {
 		System.out.println(vo);
 		calendarService.updateCheck(vo);
 		return checklist;
+	}
+	
+	@RequestMapping(value = "/deleteCal", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteCal(String userid, String content, String start1) {
+		CalendarVo vo = new CalendarVo(userid, content, start1);
+		boolean result = calendarService.deleteCal(vo);
+		return String.valueOf(result);
 	}
 	
 }
