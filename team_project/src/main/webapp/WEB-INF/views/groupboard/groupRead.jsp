@@ -20,11 +20,13 @@ $(function() {
 		var userid = $("#c_userid").val();
 		var gbno = "${groupBoardVo.gbno}";
 		var u_pic = "${loginVo.u_pic}";
+		var gno = "${groupBoardVo.gno}"
 		var sData = {
 				"gbc_content" : gbc_content,
 				"userid" : userid,
 				"gbno" : gbno,
-				"u_pic" : u_pic
+				"u_pic" : u_pic,
+				"gno" : gno
 		}
 		console.log("sData: ", sData);
 		
@@ -125,6 +127,7 @@ $(function() {
 		
 		var that = $("i.fa-heart");
 		var gbno = that.attr("data-gbno");
+		var gno = "${groupBoardVo.gno}"
 		console.log(gbno);
 		
 		var heart = that.prop("name");
@@ -133,7 +136,8 @@ $(function() {
 		var url = "/groupboard/heart";
 		var sData = {
 				"gbno" : gbno,
-				"heart" : heart
+				"heart" : heart,
+				"gno" : gno
 		};
 		
 		$.post(url, sData, function(rData){

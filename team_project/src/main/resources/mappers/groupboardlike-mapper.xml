@@ -8,8 +8,8 @@
  
  <!-- 좋아요 추가 -->
  <insert id="addLike">
- 	insert into tbl_group_board_like(gb_lno, userid, gbno)
- 	values(seq_group_board_like_gb_lno.nextval, #{userid}, #{gbno})
+ 	insert into tbl_group_board_like(gb_lno, userid, gbno, gno)
+ 	values(seq_group_board_like_gb_lno.nextval, #{userid}, #{gbno}, #{gno})
  </insert>
  
  <!-- 좋아요 삭제 -->

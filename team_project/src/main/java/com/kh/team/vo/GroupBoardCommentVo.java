@@ -10,21 +10,23 @@ public class GroupBoardCommentVo {
 	private String userid;
 	private Date gbc_regdate;
 	private String u_pic;
+	private int gno;
 	
 	public GroupBoardCommentVo() {
 		super();
 	}
 
-	public GroupBoardCommentVo(int gbcno, String gbc_content, int gbno, String userid, Date gbc_regdate) {
+	public GroupBoardCommentVo(int gbcno, String gbc_content, int gbno, String userid, Date gbc_regdate, int gno) {
 		super();
 		this.gbcno = gbcno;
 		this.gbc_content = gbc_content;
 		this.gbno = gbno;
 		this.userid = userid;
 		this.gbc_regdate = gbc_regdate;
+		this.gno = gno;
 	}
 
-	public GroupBoardCommentVo(int gbcno, String gbc_content, int gbno, String userid, Date gbc_regdate, String u_pic) {
+	public GroupBoardCommentVo(int gbcno, String gbc_content, int gbno, String userid, Date gbc_regdate, String u_pic, int gno) {
 		super();
 		this.gbcno = gbcno;
 		this.gbc_content = gbc_content;
@@ -32,6 +34,7 @@ public class GroupBoardCommentVo {
 		this.userid = userid;
 		this.gbc_regdate = gbc_regdate;
 		this.u_pic = u_pic;
+		this.gno = gno;
 	}
 
 	public int getGbcno() {
@@ -82,10 +85,18 @@ public class GroupBoardCommentVo {
 		this.u_pic = u_pic;
 	}
 
+	public int getGno() {
+		return gno;
+	}
+
+	public void setGno(int gno) {
+		this.gno = gno;
+	}
+
 	@Override
 	public String toString() {
 		return "GroupBoardCommentVo [gbcno=" + gbcno + ", gbc_content=" + gbc_content + ", gbno=" + gbno + ", userid="
-				+ userid + ", gbc_regdate=" + gbc_regdate + ", u_pic=" + u_pic + "]";
+				+ userid + ", gbc_regdate=" + gbc_regdate + ", u_pic=" + u_pic + ", gno=" + gno + "]";
 	}
 
 }

@@ -29,6 +29,10 @@ public interface GroupDao {
 	public List<GroupVo> groupByLocation(int dno);
 	public List<GroupVo> searchLocation(LocationVo locationVo);
 	
+	public boolean deleteGroupBoard(int gno);
+	public boolean deleteGroupComment(int gno);
+	public boolean deleteGroupLike(int gno);
+	
 	// 가입한 그룹 닉네임 가져오기 
 	public List<String> getNickname(int gno);
 	// 특정회원 가입한 그룹정보 가져오기

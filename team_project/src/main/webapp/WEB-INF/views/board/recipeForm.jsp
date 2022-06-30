@@ -242,14 +242,14 @@ $(function() {
 				${ recipeVo.r_content }
 			<hr>
 			</div>
-			<div class="row">
+			<div class="row" style="margin-left: 10px;">
 				<i class="fa-solid fa-heart" style="font-size: 25px;" ></i><p style="font-size: 25px"><span id="span_like">${ recipeVo.r_like }</span> &nbsp;
 				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" 
-					class="btn btn-warning" style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
+					class="btn btn-warning" style="width: 60px; height:40px; padding: 3% 0">수정</a>
 				<a href="/recipe/recipeRemoveRun?rno=${ recipeVo.rno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}"
-					 class="btn btn-danger" style="width: 60px; height:40px; padding: 0.7% 0">삭제</a>
+					 class="btn btn-danger" style="width: 60px; height:40px; padding: 3% 0">삭제</a>
 				<a href="/recipe/recipeList?page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}"
-				 class="btn btn-outline-primary" style="width: 60px; height:40px; padding: 0.7% 0">목록</a>
+				 class="btn btn-outline-primary" style="width: 60px; height:40px; padding: 3% 0">목록</a>
 			</div>
 			<hr>
 			<div class="col" style="margin-top: 20px;">

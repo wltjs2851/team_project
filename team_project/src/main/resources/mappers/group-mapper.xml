@@ -90,6 +90,18 @@
 		delete from tbl_group where gno = #{gno}
 	</delete>
 	
+	<delete id="deleteGroupBoard">
+		delete from tbl_group_board where gno = #{gno}
+	</delete>
+	
+	<delete id="deleteGroupComment">
+		delete from tbl_group_board_comment where gno = #{gno}
+	</delete>
+	
+	<delete id="deleteGroupLike">
+		delete from tbl_group_board_like where gno = #{gno}
+	</delete>
+	
 	<!-- 그룹별 멤버 가져오기 -->
 	<select id="getGroupMember" resultType="GroupJoinVo">
 		select userid from tbl_group_join

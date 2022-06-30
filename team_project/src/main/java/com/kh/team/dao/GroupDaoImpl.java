@@ -183,5 +183,31 @@ public class GroupDaoImpl implements GroupDao{
 		List<GroupVo> adminGroupList = sqlSession.selectList(NAMESPACE + "adminGroupList", pagingDto);
 		return adminGroupList;
 	}
+	
+	@Override
+	public boolean deleteGroupBoard(int gno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteGroupBoard", gno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
 
+	@Override
+	public boolean deleteGroupComment(int gno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteGroupComment", gno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteGroupLike(int gno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteGroupLike", gno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
 }
