@@ -76,7 +76,7 @@ $(function() {
 						<td><a class="content" data-rno="${ recipeVo.rno }"  href="#">${ recipeVo.r_title }</a></td>
 						<td>
 							<c:choose>
-								<c:when test="${loginVo.userid == recipeVo.userid}">
+								<c:when test="${loginVo.nickname == recipeVo.userid}">
 									${recipeVo.userid}
 								</c:when>
 								<c:otherwise>

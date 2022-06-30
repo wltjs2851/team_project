@@ -77,7 +77,7 @@ $(function() {
 							[${ freeVo.fname }] ${ freeVo.f_title }</a></td>
 						<td>
 							<c:choose>
-								<c:when test="${loginVo.userid == freeVo.userid}">
+								<c:when test="${loginVo.nickname == freeVo.userid}">
 									${freeVo.userid}
 								</c:when>
 								<c:otherwise>
