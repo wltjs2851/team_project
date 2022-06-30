@@ -99,7 +99,7 @@ $(function() {
 		<div class="col-md-2"></div>
 		<div class="col-md-10">
 			<div class="col-md-8" style='display:inline-block; vertical-align: top;'>
-					<input type="hidden" class="form-control" id="userid" name="userid" value="${ loginVo.userid }"/>
+					<input type="hidden" class="form-control" id="userid" name="userid" value="${ loginVo.nickname }"/>
 					<input type="hidden" class="form-control" id="r_product" name="r_product"/>
 					<div class="form-group">
 						<input type="text" class="form-control" id="r_title" name="r_title" required/>

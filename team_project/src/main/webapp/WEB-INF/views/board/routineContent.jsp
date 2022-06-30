@@ -28,7 +28,7 @@ $(function() {
 	
 	$("#btnComment").click(function() {
 		var urc_comment = $("#urc_comment").val();
-		var userid = "${loginVo.userid}";
+		var userid = "${loginVo.nickname}";
 		var uno = "${routineVo.uno}";
 		var u_pic = "${loginVo.u_pic}";
 		var url = "/routine/addRoutineComment";

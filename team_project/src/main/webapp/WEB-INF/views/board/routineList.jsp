@@ -76,7 +76,7 @@ $(function() {
 						<td><a class="content" data-uno="${ routineVo.uno }" href="#">${ routineVo.ur_title }</a></td>
 						<td>
 							<c:choose>
-								<c:when test="${loginVo.userid == routineVo.userid}">
+								<c:when test="${loginVo.nickname == routineVo.userid}">
 									${routineVo.userid}
 								</c:when>
 								<c:otherwise>

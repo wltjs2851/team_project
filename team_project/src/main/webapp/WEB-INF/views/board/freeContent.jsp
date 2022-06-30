@@ -28,7 +28,7 @@ $(function() {
 	
 	$("#btnComment").click(function() {
 		var fc_comment = $("#fc_comment").val();
-		var userid = "${loginVo.userid}";
+		var userid = "${loginVo.nickname}";
 		var fno = "${freeVo.fno}";
 		var u_pic = "${loginVo.u_pic}";
 		var url = "/free/addFreeComment";
