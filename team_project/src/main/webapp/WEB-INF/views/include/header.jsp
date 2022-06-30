@@ -82,9 +82,6 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ml-auto main-nav ">
-							<li class="nav-item active">
-								<a class="nav-link" href="/">메인</a>
-							</li>
 							<li class="nav-item dropdown dropdown-slide">
 								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									운동 꿀팁 <span><i class="fa fa-angle-down"></i></span>
@@ -101,13 +98,15 @@
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="/group/groupList">지역별 운동 모임</a>
 									<a class="dropdown-item" href="/recipe/recipeList">식단</a>
 									<a class="dropdown-item" href="/routine/routineList">나만의 루틴</a>
 									<a class="dropdown-item" href="/free/freeList">자유게시판</a>
 								</div>
 							</li>
 							<c:if test="${loginVo.userid != 'admin01'}">
+							<li class="nav-item">
+							<a class="dropdown-item" href="/group/groupList">지역별 운동 모임</a>
+							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="/calendar/cal">나의 일정</a>
 							</li>

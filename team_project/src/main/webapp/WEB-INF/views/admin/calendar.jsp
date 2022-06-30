@@ -84,7 +84,6 @@
 				'month' : prevYear + '_' + prevMonth,
 				'userid' : '${loginVo.userid}'
 			};
-			console.log(sData);
 			$.get('/calendar/cal3', sData, function(rdata) {
 				jsonCal = rdata;
 				makeCalendar(prevDay);
@@ -169,7 +168,6 @@
 			$(this).prev().remove();
 			$(this).remove();
 			$.post(url, sData, function(rData) {
-				console.log(rData);
 				if (rData == "true") {
 					alert("일정 삭제 완료");
 					getCalendarList();
