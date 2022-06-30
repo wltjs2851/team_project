@@ -43,26 +43,34 @@
 					if (this.checklist == 'true') {
 						if (thatSpan == "false") {
 							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
+									"<c:if test='${loginVo.userid == groupVo.g_leader}'>" +
 									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
 									"<button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button>" + 
-									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button><br>");
+									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button>" + 
+									"</c:if><br>");
 						} else {
 							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
+									"<c:if test='${loginVo.userid == groupVo.g_leader}'>" +
 									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
 									"<button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button>" + 
-									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button><br>");
+									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button>" + 
+									"</c:if><br>");
 						}
 					} else {
 						if (thatSpan == "true") {
 							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
-									"<button type='button' data-gcno='" + this.gcno + "' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
+									"<c:if test='${loginVo.userid == groupVo.g_leader}'>" +
+									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
 									"<button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button>" + 
-									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button><br>");
+									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button>" + 
+									"</c:if><br>");
 						} else {
 							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
-									"<button type='button' data-gcno='" + this.gcno + "' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
+									"<c:if test='${loginVo.userid == groupVo.g_leader}'>" +
+									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
 									"<button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button>" + 
-									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button><br>");
+									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button>" + 
+									"</c:if><br>");
 						}
 					}
 				}

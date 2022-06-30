@@ -25,7 +25,7 @@
 	margin-top: 0;
 /* 	position:fixed; */
 	float: left;
-	top:7%;
+	top:13%;
 	right:30px;
 	bottom:60%;
 	padding:30px;
