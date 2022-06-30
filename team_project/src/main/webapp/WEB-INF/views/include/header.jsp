@@ -82,20 +82,20 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ml-auto main-nav ">
-							<li class="nav-item active">
+							<li class="nav-item active main-menu">
 								<a class="nav-link" href="/">메인</a>
 							</li>
-							<li class="nav-item dropdown dropdown-slide">
+							<li class="nav-item dropdown dropdown-slide main-menu">
 								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									운동 꿀팁 <span><i class="fa fa-angle-down"></i></span>
 								</a>
 								<!-- Dropdown list -->
-								<div class="dropdown-menu dropdown-menu-right">
+								<div class="dropdown-menu dropdown-menu-right main-menu">
 									<a class="dropdown-item" href="/kcal/listKcal">운동 칼로리</a>
 									<a class="dropdown-item" href="/recommend/listRecommend ">추천 운동</a>
 								</div>
 							</li>
-							<li class="nav-item dropdown dropdown-slide">
+							<li class="nav-item dropdown dropdown-slide main-menu">
 								<a class="nav-link dropdown-toggle" href="/group/list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									커뮤니티 <span><i class="fa fa-angle-down"></i></span>
 								</a>
@@ -108,10 +108,10 @@
 								</div>
 							</li>
 							<c:if test="${loginVo.userid != 'admin01'}">
-							<li class="nav-item">
+							<li class="nav-item main-menu">
 								<a class="nav-link" href="/calendar/cal">나의 일정</a>
 							</li>
-							<li class="nav-item">
+							<li class="nav-item main-menu">
 								<a class="nav-link" href="/group/myGroupList">그룹</a>
 							</li>
 							<li class="nav-item dropdown">

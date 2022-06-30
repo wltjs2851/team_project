@@ -10,8 +10,8 @@
 	font-family: "mone";
 }
 
-.nav-item {
-	font-family: "mone";	
+.main-menu{
+	font-family: "mone";
 }
 
 #logo{
@@ -757,7 +757,7 @@ ul.pagination .active a {
 }
 
 .main-nav .nav-item .nav-link {
-  font-size: 16px;
+  font-size: 20px;
   line-height: 43px;
   padding: 0 20px;
 }
