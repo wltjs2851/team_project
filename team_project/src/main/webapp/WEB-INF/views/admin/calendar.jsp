@@ -10,6 +10,11 @@
 
 <link href='/resources/css/calendar.css' rel='stylesheet' />
 </head>
+<style>
+.deleteCal {
+	cursor: pointer;
+}
+</style>
 <script>
 	$(function() {
 		var jsonCal = ${jsonCal};
@@ -31,19 +36,18 @@
 			$(".todo-content").html("");
 			$.each(jsonCal, function(e) {
 			var thatSpan = that.find("span").eq(e).attr("data-check");
-			console.log(thatSpan);
 				if (this.start1 == that.attr("data-today")) {
 					if (this.checklist == 'true') {
 						if (thatSpan == "false") {
-							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><a class='deleteCal'>&times;</a><br>");
 						} else {
-							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><a class='deleteCal'>&times;</a><br>");
 						}
 					} else {
 						if (thatSpan == "true") {
-							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><br>");
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><a class='deleteCal'>&times;</a><br>");
 						} else {
-							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><br>");
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><a class='deleteCal'>&times;</a><br>");
 						}
 					}
 				}
@@ -80,13 +84,11 @@
 				'month' : prevYear + '_' + prevMonth,
 				'userid' : '${loginVo.userid}'
 			};
-			console.log(sData);
 			$.get('/calendar/cal3', sData, function(rdata) {
 				jsonCal = rdata;
 				makeCalendar(prevDay);
 				getCalendarList();
 			});
-			console.log("get after");
 			
 		});
 		$("#nextMonth").click(function() {
@@ -97,7 +99,6 @@
 				'month' : nextYear + '_' + nextMonth,
 				'userid' : '${loginVo.userid}'
 			};
-			console.log(sData);
 			$.get('/calendar/cal3', sData, function(rdata) {
 				jsonCal = rdata;
 				makeCalendar(nextDay);
@@ -117,12 +118,11 @@
 			};
 			if (insertContent != null && insertContent != "") {
 				$.post(url, sData, function(rData) {
-					console.log(rData);
 					if(rData == "true") {
 						$(".todo-content").append("<input class='checkList' data-today='" + selectDate + "' type='checkbox'><label>" + insertContent + "</label>");
 						$("#input-box").val("");
 					} else if (rData == "false") {
-						alert("이러다 다~ 죽어");
+						alert("일정은 4개까지 가능합니다.");
 					}
 					getCalendarList();
 				});
@@ -154,6 +154,25 @@
 				}
 			}
 			getCalendarList();
+		});
+		$(".right").on("click", ".deleteCal", function() {
+			var text = $(this).prev().html();
+			var userid = "${loginVo.userid}";
+			var url = "/calendar/deleteCal";
+			var sData = {
+				"content" : text,
+				"userid" : userid,
+				"start1" : selectDate
+			};
+			$(this).prev().remove();
+			$(this).prev().remove();
+			$(this).remove();
+			$.post(url, sData, function(rData) {
+				if (rData == "true") {
+					alert("일정 삭제 완료");
+					getCalendarList();
+				}
+			});
 		});
 	});
 </script>

@@ -75,43 +75,42 @@
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg  navigation col-md-12">
 					<a class="navbar-brand" href="/">
-						<img src="/resources/images/logo.png" alt="">
+						<img src="/resources/images/home/homelogo.png" alt="" id="logo">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ml-auto main-nav ">
-							<li class="nav-item active">
-								<a class="nav-link" href="/">메인</a>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
+							<li class="nav-item dropdown dropdown-slide main-menu">
 								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									관리자 게시판 <span><i class="fa fa-angle-down"></i></span>
+									운동 꿀팁 <span><i class="fa fa-angle-down"></i></span>
 								</a>
 								<!-- Dropdown list -->
-								<div class="dropdown-menu dropdown-menu-right">
+								<div class="dropdown-menu dropdown-menu-right main-menu">
 									<a class="dropdown-item" href="/kcal/listKcal">운동 칼로리</a>
 									<a class="dropdown-item" href="/recommend/listRecommend ">추천 운동</a>
 								</div>
 							</li>
-							<li class="nav-item dropdown dropdown-slide">
+							<li class="nav-item dropdown dropdown-slide main-menu">
 								<a class="nav-link dropdown-toggle" href="/group/list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									사용자 게시판 <span><i class="fa fa-angle-down"></i></span>
+									커뮤니티 <span><i class="fa fa-angle-down"></i></span>
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="/group/groupList">지역별 운동 모임</a>
 									<a class="dropdown-item" href="/recipe/recipeList">식단</a>
 									<a class="dropdown-item" href="/routine/routineList">나만의 루틴</a>
 									<a class="dropdown-item" href="/free/freeList">자유게시판</a>
 								</div>
 							</li>
 							<c:if test="${loginVo.userid != 'admin01'}">
-							<li class="nav-item">
+							<li class="nav-item main-menu">
+							<a class="nav-link" href="/group/groupList">지역별 운동 모임</a>
+							</li>
+							<li class="nav-item main-menu">
 								<a class="nav-link" href="/calendar/cal">나의 일정</a>
 							</li>
-							<li class="nav-item">
+							<li class="nav-item main-menu">
 								<a class="nav-link" href="/group/myGroupList">그룹</a>
 							</li>
 							<li class="nav-item dropdown">

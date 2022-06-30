@@ -5,10 +5,12 @@ import java.util.List;
 import com.kh.team.vo.GroupJoinVo;
 import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.LocationVo;
+import com.kh.team.vo.PagingDto;
 
 public interface GroupService {
 	public boolean addGroup(GroupVo groupVo);
 	public List<GroupVo> groupList();
+	public List<GroupVo> adminGroupList(PagingDto pagingDto);
 	public List<GroupVo> selectGroupList(int startRow, int endRow);
 	public boolean moidfyGroup(GroupVo groupVo);
 	public boolean removeGroup(int gno, String userid);
@@ -23,7 +25,7 @@ public interface GroupService {
 	public List<LocationVo> groupLocationSgno(int dno, int sno);
 	public List<GroupVo> groupByLocation(int dno);
 	public List<GroupVo> searchLocation(LocationVo locationVo);
-	public int getCount();
+	public int getCount(PagingDto pagingDto);
 	
 	public List<String> getNickname(int gno);
 	public List<GroupVo> getGroupByUserId(String userid);

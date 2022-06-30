@@ -40,5 +40,10 @@ public class CalendarServiceImpl implements CalendarServcie {
 		return calendarDao.getCount(userid, start1);
 	}
 
+	@Override
+	public boolean deleteCal(CalendarVo calendarVo) {
+		return calendarDao.deleteCal(calendarVo);
+	}
+
 	
 }

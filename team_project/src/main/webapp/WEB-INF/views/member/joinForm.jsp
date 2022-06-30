@@ -93,15 +93,36 @@ $(function() {
 			});
 		}
 	});
+	$("#userpw").on("input", function() {
+		var pw = $("#userpw").val();
+		if (!pattern1.test(pw) || !pattern2.test(pw) || !pattern3.test(pw)|| pw.length < 8) {
+			if (pw == "") {
+				$("#wrongPw").html("비밀번호를 입력해주세요.");
+			} else {
+				$("#wrongPw").html("비밀번호는 8자리 이상 문자, 숫자, 특수문자가 포함되어야 합니다.");
+			}
+		} else {
+			$("#wrongPw").html("사용가능한 비밀번호입니다.");
+		}
+	});
+	$("#userpw2").on("input", function() {
+		var pw = $("#userpw").val();
+		var pw2 = $("#userpw2").val();
+		if (pw == pw2) {
+			$("#notEqualsPw").html("비밀번호가 일치합니다.").css("color", "black");
+		} else {
+			$("#notEqualsPw").html("비밀번호가 일치하지 않습니다.").css("color", "red");
+		}
+	});
 });
 </script>
 <hr>
 <div class="row">
 	<div class="col-md-4">
 	</div>
-		<div class="col-md-4">
+		<div class="col-md-4" style="padding-bottom: 20px;">
 		<span style="font-size: 40px; color: gray; text-align: center;">회원가입</span><br>
-		<span style="color: gray;">회원가입은 무료이며, 가입하시면 ???에서 제공하는 다양한 서비스를 이용하실 수 있습니다.</span>
+		<span style="color: gray;">회원가입은 무료이며, 가입하시면 <strong>우리 GYM으로 가자</strong>에서 제공하는 다양한 서비스를 이용하실 수 있습니다.</span>
 		<br><br>
 		<hr style="background-color: red;">
 			<form role="form" action="/member/joinRun" method="post" id="frmJoin" enctype="multipart/form-data">
@@ -143,17 +164,15 @@ $(function() {
 					<span id="noAddress"></span>
 				</div>
 				<div class="form-group">
-					<div style="display: inline-block; width: 49.6%;">
 					<label for="age">나이</label>
 					<input type="text" class="form-control" id="age" name="age"/>
 					<span id="noAge"></span>
-					</div>
-					<div style="display: inline-block; width: 49.6%;">
+				</div>
+				<div class="form-group">
 					<label for="gender" style="display: block;">성별</label>
 					<label for="M"> <input type="radio" name="gender" id="M" value="M"/> 남</label>
 					<label for="F"> <input type="radio" name="gender" id="F" value="F"/> 여</label>
 					<span id="noGender"></span>
-					</div>
 				</div>
 				<div class="form-group">
 					<label for="file">프로필 사진</label>
