@@ -75,7 +75,7 @@
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg  navigation col-md-12">
 					<a class="navbar-brand" href="/">
-						<img src="/resources/images/logo.png" alt="">
+						<img src="/resources/images/home/homelogo.png" alt="" id="logo">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -87,7 +87,7 @@
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
 								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									관리자 게시판 <span><i class="fa fa-angle-down"></i></span>
+									운동 꿀팁 <span><i class="fa fa-angle-down"></i></span>
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
@@ -97,7 +97,7 @@
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
 								<a class="nav-link dropdown-toggle" href="/group/list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									사용자 게시판 <span><i class="fa fa-angle-down"></i></span>
+									커뮤니티 <span><i class="fa fa-angle-down"></i></span>
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
