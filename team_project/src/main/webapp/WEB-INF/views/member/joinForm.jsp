@@ -61,9 +61,9 @@ $(function() {
 		} else if ((gender == null || gender == "") || (gender == null || gender == "")) {
 			$("#noAge").html("");
 			$("#noGender").html("성별을 선택해주세요.");
-		} else if (nickname == null || nickname == "") {
+		} else if (nickname == null || nickname == "" || $("#noNickname").text() == "이미 존재하는 닉네임입니다.") {
 			$("#noGender").html("");
-			$("#noNickname").html("닉네임을 입력해주세요.");
+			$("#noNickname").html("다른 닉네임을 입력해주세요.");
 			$("#nickname").val("").focus();
 		} else {
 			$("#frmJoin").submit();
