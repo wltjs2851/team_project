@@ -61,12 +61,12 @@ $(document).ready(function() {
 		// 		e.preventDefault();
 		console.log("댓글 달기")
 		var content = $("#re_comment").val();
-		var userid = "${loginVo.userid}";
+		var nickname = "${loginVo.nickname}";
 		var reno = "${recommendVo.reno}";
 		var u_pic = "${loginVo.u_pic}";
 		var sData = {
 			"re_comment" : content,
-			"userid" : userid,
+			"nickname" : nickname,
 			"reno" : reno,
 			"u_pic" : u_pic
 		};
@@ -100,7 +100,7 @@ $(document).ready(function() {
 					cmt += "<img src='/recommend/displayImage?filename=" + this.u_pic + 
 							"' class='rounded-circle z-depth-2' width=40px style='margin-right: 10px;'>";
 				}
-				cmt +=this.userid + "</p>";
+				cmt +=this.nickname + "</p>";
 				if(this.visible == 1) {
 					cmt += "</div><div style='margin-bottom: 15px;'><h3>관리자에 의해 규제된 댓글입니다.<h3>";
 					cmt += "</div><hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
@@ -109,18 +109,18 @@ $(document).ready(function() {
 					cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
 					cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
 					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
-					if("${loginVo.userid}" == this.userid) {				
+					if("${loginVo.nickname}" == this.nickname) {				
 						cmt += "		<button class='dropdown-item btnModify' type='button' data-recno='" + this.recno +"'>수정</button>"
 						cmt += "		<button class='dropdown-item btnDelete' type='button' data-recno='" + this.recno +"'>삭제</button>"
 					} else {
 						cmt += "		<button class='dropdown-item btnReport' type='button' data-recno='" + this.recno +
-							"' data-user='" + this.userid + "'>신고</button>"
+							"' data-user='" + this.nickname + "'>신고</button>"
 					}
 					cmt += "</div></div>";
 					cmt += "</div>"
 					cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
 								+ this.re_comment + "</textarea>";
-					if("${loginVo.userid}" == this.userid) {	
+					if("${loginVo.nickname}" == this.nickname) {	
 						cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-recno='" + this.recno + 
 								 "' style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
 					}
@@ -164,7 +164,7 @@ $(document).ready(function() {
 	//댓글 삭제
 	$("#comment").on("click", ".btnDelete", function() {
 		var recno = $(this).attr("data-recno");
-		var url = "/routine/removeRoutineComment/" + recno;
+		var url = "/reccomment/deleteComment/" + recno;
 		$.get(url, function(receivedData) {
 			console.log(receivedData);
 			if(receivedData == "true") {
@@ -177,7 +177,7 @@ $(document).ready(function() {
 	$("#comment").on("click", ".btnReport", function() {
 		var recno = $(this).attr("data-recno");
 		var receiver = $(this).attr("data-user");
-		var sender = "${loginVo.userid}";
+		var sender = "${loginVo.nickname}";
 		var url = "/reportBoard/reportBoardPop?recno=" + recno + "&sender=" + sender + "&receiver=" + receiver;
 		var option = "width = 350px, height=400px, top=300px, left=300px, scrollbars=yes";
 		window.open(url,"신고",option);

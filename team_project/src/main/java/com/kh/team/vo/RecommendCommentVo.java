@@ -7,7 +7,7 @@ public class RecommendCommentVo {
 	private int recno;
 	private int reno;
 	private String re_comment;
-	private String userid;
+	private String nickname;
 	private Date re_regdate;
 	private int visible;
 
@@ -15,21 +15,21 @@ public class RecommendCommentVo {
 		super();
 	}
 
-	public RecommendCommentVo(int recno, int reno, String re_comment, String userid, Date re_regdate) {
+	public RecommendCommentVo(int recno, int reno, String re_comment, String nickname, Date re_regdate) {
 		super();
 		this.recno = recno;
 		this.reno = reno;
 		this.re_comment = re_comment;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.re_regdate = re_regdate;
 	}
 
-	public RecommendCommentVo(int recno, int reno, String re_comment, String userid, Date re_regdate, int visible) {
+	public RecommendCommentVo(int recno, int reno, String re_comment, String nickname, Date re_regdate, int visible) {
 		super();
 		this.recno = recno;
 		this.reno = reno;
 		this.re_comment = re_comment;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.re_regdate = re_regdate;
 		this.visible = visible;
 	}
@@ -58,12 +58,12 @@ public class RecommendCommentVo {
 		this.re_comment = re_comment;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getnickname() {
+		return nickname;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setnickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public Date getRe_regdate() {
@@ -84,8 +84,8 @@ public class RecommendCommentVo {
 
 	@Override
 	public String toString() {
-		return "RecommendCommentVo [recno=" + recno + ", reno=" + reno + ", re_comment=" + re_comment + ", userid="
-				+ userid + ", re_regdate=" + re_regdate + ", visible=" + visible + "]";
+		return "RecommendCommentVo [recno=" + recno + ", reno=" + reno + ", re_comment=" + re_comment + ", nickname="
+				+ nickname + ", re_regdate=" + re_regdate + ", visible=" + visible + "]";
 	}
 
 }
