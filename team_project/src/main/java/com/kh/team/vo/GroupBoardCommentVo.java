@@ -7,7 +7,7 @@ public class GroupBoardCommentVo {
 	private int gbcno;
 	private String gbc_content;
 	private int gbno;
-	private String userid;
+	private String nickname;
 	private Date gbc_regdate;
 	private String u_pic;
 	private int gno;
@@ -16,22 +16,22 @@ public class GroupBoardCommentVo {
 		super();
 	}
 
-	public GroupBoardCommentVo(int gbcno, String gbc_content, int gbno, String userid, Date gbc_regdate, int gno) {
+	public GroupBoardCommentVo(int gbcno, String gbc_content, int gbno, String nickname, Date gbc_regdate, int gno) {
 		super();
 		this.gbcno = gbcno;
 		this.gbc_content = gbc_content;
 		this.gbno = gbno;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.gbc_regdate = gbc_regdate;
 		this.gno = gno;
 	}
 
-	public GroupBoardCommentVo(int gbcno, String gbc_content, int gbno, String userid, Date gbc_regdate, String u_pic, int gno) {
+	public GroupBoardCommentVo(int gbcno, String gbc_content, int gbno, String nickname, Date gbc_regdate, String u_pic, int gno) {
 		super();
 		this.gbcno = gbcno;
 		this.gbc_content = gbc_content;
 		this.gbno = gbno;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.gbc_regdate = gbc_regdate;
 		this.u_pic = u_pic;
 		this.gno = gno;
@@ -61,12 +61,12 @@ public class GroupBoardCommentVo {
 		this.gbno = gbno;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public Date getGbc_regdate() {
@@ -95,8 +95,8 @@ public class GroupBoardCommentVo {
 
 	@Override
 	public String toString() {
-		return "GroupBoardCommentVo [gbcno=" + gbcno + ", gbc_content=" + gbc_content + ", gbno=" + gbno + ", userid="
-				+ userid + ", gbc_regdate=" + gbc_regdate + ", u_pic=" + u_pic + ", gno=" + gno + "]";
+		return "GroupBoardCommentVo [gbcno=" + gbcno + ", gbc_content=" + gbc_content + ", gbno=" + gbno + ", nickname="
+				+ nickname + ", gbc_regdate=" + gbc_regdate + ", u_pic=" + u_pic + ", gno=" + gno + "]";
 	}
 
 }
