@@ -146,7 +146,7 @@ $(function() {
 	});
 	
 	$(window).scroll(function(){
-		$("#sidebar").css("margin-top",Math.max(-85,0-$(this).scrollTop()));
+		$("#sidebar").css("margin-top",Math.max(-140,0-$(this).scrollTop()));
 	});
 });
 </script>
