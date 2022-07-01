@@ -88,9 +88,9 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public boolean deleteMember(String userid, int gno) {
+	public boolean deleteMember(String nickname, int gno) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userid", userid);
+		map.put("nickname", nickname);
 		map.put("gno", gno);
 		
 		int count = sqlSession.delete(NAMESPACE + "deleteMember", map);
@@ -121,8 +121,8 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public List<GroupBoardVo> adminGroupBoardList(String userid) {
-		List<GroupBoardVo> adminGroupBoardList = sqlSession.selectList(NAMESPACE + "adminGroupBoardList", userid);
+	public List<GroupBoardVo> adminGroupBoardList(String nickname) {
+		List<GroupBoardVo> adminGroupBoardList = sqlSession.selectList(NAMESPACE + "adminGroupBoardList", nickname);
 		return adminGroupBoardList;
 	}
 

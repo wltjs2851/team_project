@@ -4,18 +4,18 @@ public class GroupBoardLikeVo {
 	
 	private int gb_lno;
 	private int gbno;
-	private String userid;
+	private String nickname;
 	private int gno;
 	
 	public GroupBoardLikeVo() {
 		super();
 	}
 
-	public GroupBoardLikeVo(int gb_lno, int gbno, String userid, int gno) {
+	public GroupBoardLikeVo(int gb_lno, int gbno, String nickname, int gno) {
 		super();
 		this.gb_lno = gb_lno;
 		this.gbno = gbno;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.gno = gno;
 	}
 
@@ -35,12 +35,12 @@ public class GroupBoardLikeVo {
 		this.gbno = gbno;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public int getGno() {
@@ -53,7 +53,7 @@ public class GroupBoardLikeVo {
 
 	@Override
 	public String toString() {
-		return "GroupBoardLikeVo [gb_lno=" + gb_lno + ", gbno=" + gbno + ", userid=" + userid + ", gno=" + gno + "]";
+		return "GroupBoardLikeVo [gb_lno=" + gb_lno + ", gbno=" + gbno + ", nickname=" + nickname + ", gno=" + gno + "]";
 	}
 
 }

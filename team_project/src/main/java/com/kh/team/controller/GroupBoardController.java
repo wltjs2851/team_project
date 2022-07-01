@@ -123,12 +123,12 @@ public class GroupBoardController {
 
 		// 로그인 한 경우에만 접근 가능
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
-		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
+		String nickname = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getNickname();
 		
 		// 좋아요
 		GroupBoardLikeVo groupBoardLikeVo = new GroupBoardLikeVo();
 		groupBoardLikeVo.setGbno(gbno);
-		groupBoardLikeVo.setUserid(userid);
+		groupBoardLikeVo.setNickname(nickname);
 		
 		int groupBoardLike = groupboardLikeService.countLike(groupBoardLikeVo);
 		System.out.println("groupBoardLike: " + groupBoardLike);
@@ -144,11 +144,11 @@ public class GroupBoardController {
 		int heart = Integer.parseInt(httpRequest.getParameter("heart"));
 		int gbno = Integer.parseInt(httpRequest.getParameter("gbno"));
 		int gno = Integer.parseInt(httpRequest.getParameter("gno"));
-		String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
+		String nickname = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getNickname();
 		
 		GroupBoardLikeVo groupBoardLikeVo = new GroupBoardLikeVo();
 		groupBoardLikeVo.setGbno(gbno);
-		groupBoardLikeVo.setUserid(userid);
+		groupBoardLikeVo.setNickname(nickname);
 		groupBoardLikeVo.setGno(gno);
 		
 		if(heart >= 1) {
@@ -311,9 +311,9 @@ public class GroupBoardController {
 		return String.valueOf(result);
 	}
 	
-	@RequestMapping(value = "leave/{userid}", method = RequestMethod.GET)
-	public String leaveGroup(@PathVariable("userid") String userid, int gno, RedirectAttributes rttr) {
-		boolean result = groupBoardService.deleteMember(userid, gno);
+	@RequestMapping(value = "leave/{nickname}", method = RequestMethod.GET)
+	public String leaveGroup(@PathVariable("nickname") String nickname, int gno, RedirectAttributes rttr) {
+		boolean result = groupBoardService.deleteMember(nickname, gno);
 		rttr.addFlashAttribute("leave_group", result);
 		
 		groupBoardService.updateCtnMember(gno);
@@ -353,29 +353,29 @@ public class GroupBoardController {
 		return String.valueOf(result);
 	}
 	
-	@RequestMapping(value = "/reportForm/{userid}/{gno}", method = RequestMethod.GET)
-	public String insertReportForm(@PathVariable("userid") String userid, 
+	@RequestMapping(value = "/reportForm/{nickname}/{gno}", method = RequestMethod.GET)
+	public String insertReportForm(@PathVariable("nickname") String nickname, 
 			@PathVariable("gno") int gno, Model model) {
 		model.addAttribute("gno", gno);
-		model.addAttribute("userid", userid);
+		model.addAttribute("nickname", nickname);
 		
 		return "groupboard/reportForm";
 	}
 	
 	@RequestMapping(value = "/report", method = RequestMethod.GET)
 	@ResponseBody
-	public String report(int gno, String userid, String rep_cause) {
-		boolean result = reportServcie.insertReport(gno, userid, rep_cause);
+	public String report(int gno, String nickname, String rep_cause) {
+		boolean result = reportServcie.insertReport(gno, nickname, rep_cause);
 		
 		System.out.println("rep_cause: " + rep_cause);
 		
 		return String.valueOf(result);
 	}
 	
-	@RequestMapping(value = "/reportList/{userid}/{gno}", method = RequestMethod.GET)
-	public String reportList(@PathVariable("userid") String userid, 
+	@RequestMapping(value = "/reportList/{nickname}/{gno}", method = RequestMethod.GET)
+	public String reportList(@PathVariable("nickname") String nickname, 
 			@PathVariable("gno") int gno, Model model) {
-		List<ReportVo> reportList = reportServcie.reportList(gno, userid);
+		List<ReportVo> reportList = reportServcie.reportList(gno, nickname);
 		System.out.println("reportList: " + reportList);
 		
 		model.addAttribute("reportList", reportList);

@@ -70,8 +70,8 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	}
 
 	@Override
-	public boolean deleteMember(String userid, int gno) {
-		boolean result = groupBoardDao.deleteMember(userid, gno);
+	public boolean deleteMember(String nickname, int gno) {
+		boolean result = groupBoardDao.deleteMember(nickname, gno);
 		groupBoardDao.updateCtnMember(gno);
 		return result;
 	}
@@ -94,8 +94,8 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	}
 
 	@Override
-	public List<GroupBoardVo> adminGroupBoardList(String userid) {
-		return groupBoardDao.adminGroupBoardList(userid);
+	public List<GroupBoardVo> adminGroupBoardList(String nickname) {
+		return groupBoardDao.adminGroupBoardList(nickname);
 	}
 
 	@Override

@@ -71,9 +71,9 @@ public class GroupBoardCommentDaoImpl implements GroupBoardCommentDao {
 	}
 
 	@Override
-	public List<GroupBoardCommentVo> adminGroupBoardComment(String userid) {
+	public List<GroupBoardCommentVo> adminGroupBoardComment(String nickname) {
 		List<GroupBoardCommentVo> adminGroupBoardComment = 
-				sqlSession.selectList(NAMESPACE + "adminGroupBoardComment", userid);
+				sqlSession.selectList(NAMESPACE + "adminGroupBoardComment", nickname);
 		return adminGroupBoardComment;
 	}
 

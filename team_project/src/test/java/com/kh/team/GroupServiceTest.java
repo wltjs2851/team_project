@@ -14,16 +14,16 @@ public class GroupServiceTest {
 	@Autowired
 	GroupService groupService;
 	
-	@Test
-	public void testInsertGroupJoin() {
-		String[] users = {"gogo11",
-				"user01",
-				"tuna11",
-				"jm1004",
-				"domidgirl33"};
-		for (String user : users) {
-			groupService.joinGroup(11, user);
-		}
-		
-	}
+//	@Test
+//	public void testInsertGroupJoin() {
+//		String[] users = {"gogo11",
+//				"user01",
+//				"tuna11",
+//				"jm1004",
+//				"domidgirl33"};
+//		for (String user : users) {
+//			groupService.joinGroup(11, user);
+//		}
+//		
+//	}
 }

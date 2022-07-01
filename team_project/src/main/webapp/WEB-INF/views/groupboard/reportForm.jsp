@@ -21,13 +21,13 @@
 // var gno = window.opener.document.getElementById("gno").value;
 
 $(function() {
-	var userid = "${userid}";
+	var nickname = "${nickname}";
 	var gno = "${gno}";
 	
-	console.log(userid);
+	console.log(nickname);
 	console.log(gno);
 	
-	$("#reportUser").text(userid);
+	$("#reportUser").text(nickname);
 // 	$("#reportGno").text(gno);
 	
 	$("#btnReport").click(function() {
@@ -39,7 +39,7 @@ $(function() {
 		var url = "/groupboard/report";
 		
 		var sData = {
-				"userid" : userid,
+				"nickname" : nickname,
 				"gno" : gno,
 				"rep_cause" : rep_cause
 		}

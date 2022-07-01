@@ -112,12 +112,13 @@ $(function() {
 	$(".report").click(function(e) {
 		e.preventDefault();
 		console.log("신고 클릭");
-		var userid = $(this).next().val();
+		var nickname = $(this).next().val();
+		console.log(nickname);
 		var gno = $("#gno").val();
 		console.log(gno);
-		var url = "/groupboard/reportForm/" + userid + "/" + gno;
+		var url = "/groupboard/reportForm/" + nickname + "/" + gno;
 		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
-		window.open(url, "신고 페이지", option);
+// 		window.open(url, "신고 페이지", option);
 	});
 
 	
@@ -196,7 +197,7 @@ $(function() {
 <!-- 						<button id="leave" type="button" class="btn btn-primary"> -->
 <!-- 							탈퇴 -->
 <!-- 						</button>  -->
-						<a href="/group/deleteMember/${ loginVo.userid }/${ groupVo.gno}" class="btn btn-primary">탈퇴</a>
+						<a href="/group/deleteMember/${ loginVo.nickname }/${ groupVo.gno}" class="btn btn-primary">탈퇴</a>
 						<button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">
 							취소
 						</button>
@@ -263,7 +264,7 @@ $(function() {
 					<ul class="list-inline">
 						<li class="list-inline-item">
 						
-							by ${ groupBoardVo.userid }
+							by ${ groupBoardVo.nickname }
 						
 							<button class="btn dropdown-toggle" style="background-color: #ffffff; width: 20px; height:50px; padding: 1% 0" type="button" id="dropdownMenuButton" data-toggle="dropdown">
 							
@@ -273,16 +274,16 @@ $(function() {
 							
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							
-							<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' || groupBoardVo.userid == loginVo.nickname }">
+							<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' || groupBoardVo.nickname == loginVo.nickname }">
 								 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }">삭제</a>
 <%-- 											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a> --%>
 							</c:if>
-							<c:if test="${ groupBoardVo.userid != loginVo.nickname }">
-								 <a class="dropdown-item" href="/groupboard/memberInfo?nickname=${ groupBoardVo.userid }">회원 정보 보기</a>
+							<c:if test="${ groupBoardVo.nickname != loginVo.nickname }">
+								 <a class="dropdown-item" href="/groupboard/memberInfo?nickname=${ groupBoardVo.nickname }">회원 정보 보기</a>
 								 
 								 <i id="report" class="report fa-solid fa-handcuffs"><a class="dropdows-item" href="#" 
-								 	data-user="${ groupBoardVo.userid }">신고하기</a></i>
-								 <input type="hidden" id="userid" name="userid" value="${ groupBoardVo.userid }">
+								 	data-user="${ groupBoardVo.nickname }">신고하기</a></i>
+								 <input type="hidden" id="nickname" name="nickname" value="${ groupBoardVo.nickname }">
 								 <input type="hidden" id="gno" name="gno" value="${ groupBoardVo.gno }">
 							</c:if>
 							</div>
