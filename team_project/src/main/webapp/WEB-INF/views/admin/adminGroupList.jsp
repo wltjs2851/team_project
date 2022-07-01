@@ -7,7 +7,7 @@
 #searchKcal {
 	position: absolute;
 	width: 25px;
-	top: 5px;
+	top: 28px;
 	right: 45px;
 	margin: 0;
 }
@@ -79,8 +79,8 @@ ${pagingDto }
 	</div>
 	<div class="col-md-8">
 		<div class="search"
-			style="display: inline-block; width: 1145px; margin-bottom: 15px;">
-			<div style="display: inline-block; width: 100%;" class="col-md-11">
+			style="display: inline; width: 1145px; margin-bottom: 15px;">
+			<div style="display: inline; width: 100%;" class="col-md-11">
 				<input class="form-control" type="text" placeholder="그룹 검색"
 					id="keyword" style=""
 					<c:if test="${ pagingDto.keyword != null }">

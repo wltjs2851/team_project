@@ -58,7 +58,7 @@ $(function() {
 		
 			<form role="form" name="frmWrite" action="/groupboard/groupWriteRun" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="gno" value="${ groupVo.gno }">
-				<input type="hidden" name="userid" value="${ loginVo.userid }">
+				<input type="hidden" name="userid" value="${ loginVo.nickname }">
 				
 				<div class="form-group">
 					 
