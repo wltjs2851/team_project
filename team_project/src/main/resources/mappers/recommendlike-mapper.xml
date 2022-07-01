@@ -6,14 +6,14 @@
 <mapper namespace="com.kh.team.mappers.recommendlike">
 <!-- 	좋아요 -->
 	<insert id="insertRecommendLike">
-		insert into tbl_recommend_like (re_lno, userid, reno)
-		values (seq_reclike_re_lno.nextval, #{userid}, #{reno})
+		insert into tbl_recommend_like (re_lno, nickname, reno)
+		values (seq_reclike_re_lno.nextval, #{nickname}, #{reno})
 	</insert>
 	
 <!-- 	좋아요 취소 -->
 	<delete id="deleteRecommendLike">
 		delete from tbl_recommend_like
-		where userid = #{userid} and reno = #{reno}
+		where nickname = #{nickname} and reno = #{reno}
 	</delete>
 	
 <!-- 	좋아요 업데이트  -->
@@ -28,6 +28,6 @@
 <!-- 	좋아요 조회 -->
 	<select id="getRecommendLike" resultType="int">
 		select count(re_lno) from tbl_recommend_like
-		where userid = #{userid} and reno = #{reno}
+		where nickname = #{nickname} and reno = #{reno}
 	</select>
 </mapper>

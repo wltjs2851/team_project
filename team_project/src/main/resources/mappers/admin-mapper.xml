@@ -13,6 +13,9 @@
 		select rno as "number", r_title as "title", r_regdate as "regdate" from tbl_recipe
 		where nickname= #{nickname}
 			union
+		select gbno as "number", gb_title as "title", gb_regdate as "regdate" from tbl_group_board
+		where nickname= #{nickname}
+			union
 		select uno as "number", ur_title as "title", ur_regdate as "regdate" from tbl_userroutine
 		where nickname= #{nickname}
 		order by "regdate" desc)
