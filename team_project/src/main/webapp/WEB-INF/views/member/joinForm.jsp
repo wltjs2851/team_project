@@ -114,6 +114,21 @@ $(function() {
 			$("#notEqualsPw").html("비밀번호가 일치하지 않습니다.").css("color", "red");
 		}
 	});
+	$("#nickname").on("input", function() {
+		var nickname = $("#nickname").val();
+		var url = "/member/isExistNickname";
+		console.log(nickname);
+		var sData = {
+			"nickname" : nickname
+		};
+		$.post(url, sData, function(rData) {
+			if (rData == "true") {
+				$("#noNickname").html("이미 존재하는 닉네임입니다.").css("color", "red");
+			} else {
+				$("#noNickname").html("사용할 수 있는 닉네임입니다.").css("color", "black");
+			}
+		});
+	});
 });
 </script>
 <hr>
@@ -132,16 +147,14 @@ $(function() {
 					<span id="wrongId"></span>
 				</div>
 				<div class="form-group">
-					<div style="display: inline-block; width: 49.6%;">
-						<label for="username">이름</label>
-						<input type="text" class="form-control" id="username" name="username"/>
-						<span id="noName"></span>
-					</div>
-					<div style="display: inline-block; width: 49.6%;">
-						<label for="nickname">닉네임</label>
-						<input type="text" class="form-control" id="nickname" name="nickname"/>
-						<span id="noNickname"></span>
-					</div>
+					<label for="username">이름</label>
+					<input type="text" class="form-control" id="username" name="username"/>
+					<span id="noName"></span>
+				</div>
+				<div class="form-group">
+					<label for="nickname">닉네임</label>
+					<input type="text" class="form-control" id="nickname" name="nickname"/>
+					<span id="noNickname"></span>
 				</div>
 				<div class="form-group">
 					<label for="userpw">비밀번호</label>

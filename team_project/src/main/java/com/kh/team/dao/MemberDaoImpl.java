@@ -125,4 +125,9 @@ public class MemberDaoImpl implements MemberDao {
 		return count;
 	}
 
+	@Override
+	public MemberVo isExistNickname(String nickname) {
+		return sqlSession.selectOne(NS + "isExistNickname", nickname);
+	}
+
 }

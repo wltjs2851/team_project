@@ -92,4 +92,10 @@
 		select count(*) from tbl_user
 		where (userid || username || email || address || nickname || age) like '%' || #{keyword, jdbcType=VARCHAR} || '%'
 	</select>
+	
+	<select id="isExistNickname" resultType="MemberVo">
+		select * from tbl_user
+		where nickname = #{nickname}
+	</select>
+	
 </mapper>

@@ -67,6 +67,21 @@ $(function() {
 			}
 		});
 	});
+	$("#nickname").on("input", function() {
+		var nickname = $("#nickname").val();
+		var url = "/member/isExistNickname";
+		console.log(nickname);
+		var sData = {
+			"nickname" : nickname
+		};
+		$.post(url, sData, function(rData) {
+			if (rData == "true") {
+				$("#noNickname").html("이미 존재하는 닉네임입니다.").css("color", "red");
+			} else {
+				$("#noNickname").html("사용할 수 있는 닉네임입니다.").css("color", "black");
+			}
+		});
+	});
 });
 </script>
 <div class="container-fluid">
@@ -144,11 +159,11 @@ $(function() {
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><input class="form-control" type="email" id="email" name="email" value="${loginVo.email}"></td>
+				<td><input class="form-control" type="em="email" email" name="email" value="${loginVo.email}"></td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td><input class="form-control" type="text" id="address" name="address" value="${loginVo.address}"></td>
+				<td><input class="form-control" type id="address"ddress" name="address" value="${loginVo.address}"></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>

@@ -98,24 +98,24 @@ padding-left: 10px;
 /* /* 	border-left: none; */ */
 /* } */
 
-.search {
-	position: relative;
-	width: 600px;
-}
+/* .search { */
+/* 	position: relative; */
+/* 	width: 600px; */
+/* } */
 
-#keyword {
-	width: 80%;
-	border: 1px solid #bbb;
-	border-radius: 8px;
-	padding: 10px 12px;
-	font-size: 14px;
-}
+/* #keyword { */
+/* 	width: 80%; */
+/* 	border: 1px solid #bbb; */
+/* 	border-radius: 8px; */
+/* 	padding: 10px 12px; */
+/* 	font-size: 14px; */
+/* } */
 
 #searchKcal {
 	position: absolute;
 	width: 25px;
-	top: 105px;
-	right: 270px;
+	top: 50px;
+	right: 45px;
 	margin: 0;
 }
 </style>
@@ -135,23 +135,28 @@ padding-left: 10px;
 		<div class="col-md-8">
 			<form role="form" action="/kcal/updateKcal" method="post">
 				<input type="hidden" name="kno" value="${kcalVo.kno}" />
-				<div style="width: 850px;">
+				<div>
 					<h2><a href="/kcal/listKcal">운동칼로리 사전</a></h2>
 					<hr>
 					<article class="single-post" style="padding-left: 80px;">
 						<!-- 				<form> -->
-						<div class="search">
+						<div class="search" style="display: inline; width: 1145px; margin-bottom: 15px;">
+						<div style="display: inline;" class="col-md-11">
 							<input class="form-control" type="text" placeholder="검색어 입력"
 								id="keyword"
 								<c:if test="${ pagingDto.keyword != null }">
 									value="${ pagingDto.keyword }"
 								</c:if>
 							>
-							<input type="image" src="/resources/images/magnifier.png" id="searchKcal">
-						</div>
-						<br>
+							</div>
+							<div style="display: inline;">
+								<input type="image" src="/resources/images/magnifier.png"
+									 style="width: 40px; float: right;" id="searchKcal">
+							</div>
+					</div>
+					<br>
 						<!-- 					</form> -->
-						<div style="padding-left: 90px;">
+						<div align="center">
 							<c:choose>
 							<c:when test="${ empty kcalVo.k_pic }">
 								<img src="/resources/images/kcaldefault.png"
@@ -159,7 +164,7 @@ padding-left: 10px;
 							</c:when>
 							<c:otherwise>
 							<img src="/member/displayImage?filename=${ kcalVo.k_pic }"
-								alt="kcal image" style="width : 400px; height :auto; align-content: center;">
+								alt="kcal image">
 						</c:otherwise>
 					</c:choose>
 						</div>
