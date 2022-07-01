@@ -84,7 +84,7 @@ $(function() {
 					 
 					<c:if test="${ loginVo.userid == groupVo.g_leader }">
 					<label for="gb_notice">
-						<input type="checkbox" name="gb_notice" id="gb_notice"/> 공지(그룹장만 보이게)
+						<input type="checkbox" name="gb_notice" id="gb_notice"/> 공지
 					</label>
 					</c:if>
 				</div> 

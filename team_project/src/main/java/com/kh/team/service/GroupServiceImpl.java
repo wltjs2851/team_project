@@ -24,7 +24,7 @@ public class GroupServiceImpl implements GroupService{
 		int gno = groupDao.getNextGno();
 		groupVo.setGno(gno);
 		boolean groupResult = groupDao.insertGroup(groupVo);
-		boolean memberResult = groupDao.insertJoinGroup(groupVo.getGno(), groupVo.getG_leader(), nickname );
+		boolean memberResult = groupDao.insertJoinGroup(groupVo.getGno(), groupVo.getG_leader(), nickname);
 		if(groupResult && memberResult) {
 			return true;
 		}
