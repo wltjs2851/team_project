@@ -204,11 +204,11 @@ public class GroupController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value = "/banMember/{userid}/{gno}", method = RequestMethod.GET)
+	@RequestMapping(value = "/banMember/{nickname}/{gno}", method = RequestMethod.GET)
 	@ResponseBody
-	public String banMember(@PathVariable("userid") String userid, @PathVariable("gno") int gno) {
+	public String banMember(@PathVariable("nickname") String nickname, @PathVariable("gno") int gno) {
 		System.out.println("banMember, gno: " + gno);
-		boolean result = groupService.banGroup(gno, userid);
+		boolean result = groupService.banGroup(gno, nickname);
 		
 		return String.valueOf(result);
 	}

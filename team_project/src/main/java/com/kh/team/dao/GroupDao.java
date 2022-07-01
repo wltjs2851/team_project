@@ -19,7 +19,7 @@ public interface GroupDao {
 	public boolean updateGroupMember(int gno, int cnt);
 	public int getNextGno();
 	public boolean insertJoinGroup(int gno, String userid, String nickname);
-	public boolean deleteJoinGroup(int gno, String userid);
+	public boolean deleteJoinGroup(int gno, String nickname);
 	public List<GroupJoinVo> list(int gno);
 	public List<GroupJoinVo> list(String userid);
 	public List<GroupVo> groupListOrder();

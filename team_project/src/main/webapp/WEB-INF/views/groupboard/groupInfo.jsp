@@ -117,7 +117,7 @@ $(function() {
 
 <%-- ${ groupVo } --%>
 <!-- <hr> -->
-${ groupJoinMember }
+<%-- ${ groupJoinMember } --%>
 <!-- <hr> -->
 <%-- ${ count } --%>
 
