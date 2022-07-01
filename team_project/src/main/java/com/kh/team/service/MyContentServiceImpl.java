@@ -24,78 +24,78 @@ public class MyContentServiceImpl implements MyContentService {
 	private MyContentDao dao;
 
 	@Override
-	public List<FreeVo> getFreeByLike(String userid) {
-		return dao.getFreeByLike(userid);
+	public List<FreeVo> getFreeByLike(String nickname) {
+		return dao.getFreeByLike(nickname);
 	}
 
 	@Override
-	public List<GroupBoardVo> getGroupBoardByLike(String userid) {
-		return dao.getGroupBoardByLike(userid);
+	public List<GroupBoardVo> getGroupBoardByLike(String nickname) {
+		return dao.getGroupBoardByLike(nickname);
 	}
 
 	@Override
-	public List<RecipeVo> getRecipeByLike(String userid) {
-		return dao.getRecipeByLike(userid);
+	public List<RecipeVo> getRecipeByLike(String nickname) {
+		return dao.getRecipeByLike(nickname);
 	}
 
 	@Override
-	public List<RoutineVo> getRoutineByLike(String userid) {
-		return dao.getRoutineByLike(userid);
+	public List<RoutineVo> getRoutineByLike(String nickname) {
+		return dao.getRoutineByLike(nickname);
 	}
 
 	@Override
-	public List<RecommendVo> getRecommendByLike(String userid) {
-		return dao.getRecommendByLike(userid);
+	public List<RecommendVo> getRecommendByLike(String nickname) {
+		return dao.getRecommendByLike(nickname);
 	}
 
 	@Override
-	public List<FreeVo> getWriteFree(String userid) {
-		return dao.getWriteFree(userid);
+	public List<FreeVo> getWriteFree(String nickname) {
+		return dao.getWriteFree(nickname);
 	}
 
 	@Override
-	public List<GroupBoardVo> getWriteGroupBoard(String userid) {
-		return dao.getWriteGroupBoard(userid);
+	public List<GroupBoardVo> getWriteGroupBoard(String nickname) {
+		return dao.getWriteGroupBoard(nickname);
 	}
 
 	@Override
-	public List<RecipeVo> getWriteRecipe(String userid) {
-		return dao.getWriteRecipe(userid);
+	public List<RecipeVo> getWriteRecipe(String nickname) {
+		return dao.getWriteRecipe(nickname);
 	}
 
 	@Override
-	public List<RoutineVo> getWriteRoutine(String userid) {
-		return dao.getWriteRoutine(userid);
+	public List<RoutineVo> getWriteRoutine(String nickname) {
+		return dao.getWriteRoutine(nickname);
 	}
 
 	@Override
-	public List<RecommendVo> getWriteRecommend(String userid) {
-		return dao.getWriteRecommend(userid);
+	public List<RecommendVo> getWriteRecommend(String nickname) {
+		return dao.getWriteRecommend(nickname);
 	}
 
 	@Override
-	public List<FreeCommentVo> getFreeComment(String userid) {
-		return dao.getFreeComment(userid);
+	public List<FreeCommentVo> getFreeComment(String nickname) {
+		return dao.getFreeComment(nickname);
 	}
 
 	@Override
-	public List<GroupBoardCommentVo> getGroupBoardComment(String userid) {
-		return dao.getGroupBoardComment(userid);
+	public List<GroupBoardCommentVo> getGroupBoardComment(String nickname) {
+		return dao.getGroupBoardComment(nickname);
 	}
 
 	@Override
-	public List<RecipeCommentVo> getRecipeComment(String userid) {
-		return dao.getRecipeComment(userid);
+	public List<RecipeCommentVo> getRecipeComment(String nickname) {
+		return dao.getRecipeComment(nickname);
 	}
 
 	@Override
-	public List<RoutineCommentVo> getRoutineComment(String userid) {
-		return dao.getRoutineComment(userid);
+	public List<RoutineCommentVo> getRoutineComment(String nickname) {
+		return dao.getRoutineComment(nickname);
 	}
 
 	@Override
-	public List<RecommendCommentVo> getRecommendComment(String userid) {
-		return dao.getRecommendComment(userid);
+	public List<RecommendCommentVo> getRecommendComment(String nickname) {
+		return dao.getRecommendComment(nickname);
 	}
 
 	@Override

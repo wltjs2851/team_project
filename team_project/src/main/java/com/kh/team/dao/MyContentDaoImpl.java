@@ -26,78 +26,78 @@ public class MyContentDaoImpl implements MyContentDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<FreeVo> getFreeByLike(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getFreeByLike", userid);
+	public List<FreeVo> getFreeByLike(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getFreeByLike", nickname);
 	}
 
 	@Override
-	public List<GroupBoardVo> getGroupBoardByLike(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getGroupBoardByLike", userid);
+	public List<GroupBoardVo> getGroupBoardByLike(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getGroupBoardByLike", nickname);
 	}
 
 	@Override
-	public List<RecipeVo> getRecipeByLike(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getRecipeByLike", userid);
+	public List<RecipeVo> getRecipeByLike(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getRecipeByLike", nickname);
 	}
 
 	@Override
-	public List<RoutineVo> getRoutineByLike(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getRoutineByLike", userid);
+	public List<RoutineVo> getRoutineByLike(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getRoutineByLike", nickname);
 	}
 
 	@Override
-	public List<RecommendVo> getRecommendByLike(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getRecommendByLike", userid);
+	public List<RecommendVo> getRecommendByLike(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getRecommendByLike", nickname);
 	}
 
 	@Override
-	public List<FreeVo> getWriteFree(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getWriteFree", userid);
+	public List<FreeVo> getWriteFree(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getWriteFree", nickname);
 	}
 
 	@Override
-	public List<GroupBoardVo> getWriteGroupBoard(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getWriteGroupBoard", userid);
+	public List<GroupBoardVo> getWriteGroupBoard(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getWriteGroupBoard", nickname);
 	}
 
 	@Override
-	public List<RecipeVo> getWriteRecipe(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getWriteRecipe", userid);
+	public List<RecipeVo> getWriteRecipe(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getWriteRecipe", nickname);
 	}
 
 	@Override
-	public List<RoutineVo> getWriteRoutine(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getWriteRoutine", userid);
+	public List<RoutineVo> getWriteRoutine(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getWriteRoutine", nickname);
 	}
 
 	@Override
-	public List<RecommendVo> getWriteRecommend(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getWriteRecommend", userid);
+	public List<RecommendVo> getWriteRecommend(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getWriteRecommend", nickname);
 	}
 
 	@Override
-	public List<FreeCommentVo> getFreeComment(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getFreeComment", userid);
+	public List<FreeCommentVo> getFreeComment(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getFreeComment", nickname);
 	}
 
 	@Override
-	public List<GroupBoardCommentVo> getGroupBoardComment(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getGroupBoardComment", userid);
+	public List<GroupBoardCommentVo> getGroupBoardComment(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getGroupBoardComment", nickname);
 	}
 
 	@Override
-	public List<RecipeCommentVo> getRecipeComment(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getRecipeComment", userid);
+	public List<RecipeCommentVo> getRecipeComment(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getRecipeComment", nickname);
 	}
 
 	@Override
-	public List<RoutineCommentVo> getRoutineComment(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getRoutineComment", userid);
+	public List<RoutineCommentVo> getRoutineComment(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getRoutineComment", nickname);
 	}
 
 	@Override
-	public List<RecommendCommentVo> getRecommendComment(String userid) {
-		return sqlSession.selectList(NAMESPACE + "getRecommendComment", userid);
+	public List<RecommendCommentVo> getRecommendComment(String nickname) {
+		return sqlSession.selectList(NAMESPACE + "getRecommendComment", nickname);
 	}
 
 	@Override

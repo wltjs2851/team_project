@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kh.team.service.GroupService;
+import com.kh.team.vo.GroupVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/**/*.xml")
@@ -26,4 +27,9 @@ public class GroupServiceTest {
 //		}
 //		
 //	}
+	
+	@Test
+	public void testJoinGroup() {
+		
+	}
 }
