@@ -34,4 +34,6 @@ public interface MemberService {
 	public List<MemberVo> getMemberList(PagingDto pagingDto);
 	
 	public MemberVo isExistNickname(String nickname);
+	
+	public MemberVo memberByNickname(String nickname);
 }

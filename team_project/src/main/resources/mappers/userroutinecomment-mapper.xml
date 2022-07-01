@@ -8,8 +8,8 @@
  
  <!-- 댓글 등록 -->
  <insert id="insertRoutineComment">
- 	insert into tbl_ucomment (urcno, uno, urc_comment, userid, u_pic)
- 	values(seq_ucomment_urcno.nextval, #{uno}, #{urc_comment}, #{userid}, #{u_pic, jdbcType=VARCHAR})
+ 	insert into tbl_ucomment (urcno, uno, urc_comment, nickname, u_pic)
+ 	values(seq_ucomment_urcno.nextval, #{uno}, #{urc_comment}, #{nickname}, #{u_pic, jdbcType=VARCHAR})
  </insert>
  
  <!-- 댓글 목록 -->
@@ -41,6 +41,6 @@
  <!--  유저 작성 댓글 조회 -->
 	<select id="adminRoutineComment" resultType="RoutineCommentVo">
 		select urcno, uno, urc_comment, urc_regdate from tbl_ucomment
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
  </mapper>

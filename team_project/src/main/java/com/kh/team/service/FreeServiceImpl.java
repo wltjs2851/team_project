@@ -68,14 +68,14 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
-	public int countLike(int fno, String userid) {
-		return freeDao.countLike(fno, userid);
+	public int countLike(int fno, String nickname) {
+		return freeDao.countLike(fno, nickname);
 	}
 
 	@Override
 	@Transactional
-	public boolean decreaseLike(int fno, int f_like, String userid) {
-		boolean resultDelete = freeDao.deleteLike(fno, userid);
+	public boolean decreaseLike(int fno, int f_like, String nickname) {
+		boolean resultDelete = freeDao.deleteLike(fno, nickname);
 		boolean resultUpdate = freeDao.updateLikecnt(fno, f_like - 1);
 		if(resultDelete && resultUpdate) {
 			return true;
@@ -85,8 +85,8 @@ public class FreeServiceImpl implements FreeService{
 
 	@Override
 	@Transactional
-	public boolean increaseLike(int fno, int f_like, String userid) {
-		boolean resultInsert = freeDao.insertLike(fno, userid);
+	public boolean increaseLike(int fno, int f_like, String nickname) {
+		boolean resultInsert = freeDao.insertLike(fno, nickname);
 		boolean resultUpdate = freeDao.updateLikecnt(fno, f_like + 1);
 		if(resultInsert && resultUpdate) {
 			return false;
@@ -100,8 +100,8 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
-	public List<FreeVo> adminFreeList(String userid) {
-		return freeDao.adminFreeList(userid);
+	public List<FreeVo> adminFreeList(String nickname) {
+		return freeDao.adminFreeList(nickname);
 	}
 	
 }

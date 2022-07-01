@@ -80,10 +80,10 @@ public class FreeDaoImpl implements FreeDao{
 	}
 
 	@Override
-	public boolean insertLike(int fno, String userid) {
+	public boolean insertLike(int fno, String nickname) {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("fno", fno);
-		parameter.put("userid", userid);
+		parameter.put("nickname", nickname);
 		int count = sqlSession.insert(NAMESPACE + "insertLike", parameter);
 		if(count > 0) {
 			return true;
@@ -92,10 +92,10 @@ public class FreeDaoImpl implements FreeDao{
 	}
 
 	@Override
-	public boolean deleteLike(int fno, String userid) {
+	public boolean deleteLike(int fno, String nickname) {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("fno", fno);
-		parameter.put("userid", userid);
+		parameter.put("nickname", nickname);
 		int count = sqlSession.delete(NAMESPACE + "deleteLike", parameter);
 		if(count > 0) {
 			return true;
@@ -104,10 +104,10 @@ public class FreeDaoImpl implements FreeDao{
 	}
 
 	@Override
-	public int countLike(int fno, String userid) {
+	public int countLike(int fno, String nickname) {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("fno", fno);
-		parameter.put("userid", userid);
+		parameter.put("nickname", nickname);
 		int count = sqlSession.selectOne(NAMESPACE + "countLike", parameter);
 		return count;
 	}
@@ -140,8 +140,8 @@ public class FreeDaoImpl implements FreeDao{
 	}
 
 	@Override
-	public List<FreeVo> adminFreeList(String userid) {
-		List<FreeVo> adminFreeList = sqlSession.selectList(NAMESPACE + "adminFreeList", userid);
+	public List<FreeVo> adminFreeList(String nickname) {
+		List<FreeVo> adminFreeList = sqlSession.selectList(NAMESPACE + "adminFreeList", nickname);
 		return adminFreeList;
 	}
 

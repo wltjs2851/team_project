@@ -8,8 +8,8 @@
  
  <!-- 댓글 등록 -->
  <insert id="insertRecipeComment">
- 	insert into tbl_rcomment (rcno, rno, rc_comment, userid, u_pic)
- 	values(seq_rcomment_rcno.nextval, #{rno}, #{rc_comment}, #{userid}, #{u_pic, jdbcType=VARCHAR})
+ 	insert into tbl_rcomment (rcno, rno, rc_comment, nickname, u_pic)
+ 	values(seq_rcomment_rcno.nextval, #{rno}, #{rc_comment}, #{nickname}, #{u_pic, jdbcType=VARCHAR})
  </insert>
  
  <!-- 댓글 목록 -->
@@ -40,6 +40,6 @@
  <!--  유저 작성 댓글 조회 -->
 	<select id="adminRecipeComment" resultType="RecipeCommentVo">
 		select rcno, rno, rc_comment, rc_regdate from tbl_rcomment
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
  </mapper>

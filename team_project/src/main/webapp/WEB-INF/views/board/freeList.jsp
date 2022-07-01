@@ -37,7 +37,7 @@ $(function() {
 	
 	$(".btnBoardReport").click(function() {
 		var fno = $(this).parent().parent().parent().find(".content").attr("data-fno");
-		var sender = "${loginVo.userid}";
+		var sender = "${loginVo.nickname}";
 		var receiver = $(this).attr("data-user");
 		var url = "/reportBoard/reportBoardPop?fno=" + fno + "&sender=" + sender + "&receiver=" + receiver;
 		var option = "width = 350px, height=400px, top=300px, left=300px, scrollbars=yes";
@@ -77,17 +77,17 @@ $(function() {
 							[${ freeVo.fname }] ${ freeVo.f_title }</a></td>
 						<td>
 							<c:choose>
-								<c:when test="${loginVo.nickname == freeVo.userid}">
-									${freeVo.userid}
+								<c:when test="${loginVo.nickname == freeVo.nickname}">
+									${freeVo.nickname}
 								</c:when>
 								<c:otherwise>
 									<button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown'
 										style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0;'>
-										${ freeVo.userid }<i class='fas fa-ellipsis-v' style='margin-left:10px'></i></button>
+										${ freeVo.nickname }<i class='fas fa-ellipsis-v' style='margin-left:10px'></i></button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<button class="dropdown-item btnBoardReport" type='button' 
-										data-user='${ freeVo.userid }'>신고하기</button>
-										<a class="dropdown-item btnMemberInfo" href='/member/memberInfo?userid=${ freeVo.userid }'>
+										data-user='${ freeVo.nickname }'>신고하기</button>
+										<a class="dropdown-item btnMemberInfo" href='/member/memberInfo?nickname=${ freeVo.nickname }'>
 										회원정보보기</a>
 									</div>
 								</c:otherwise>

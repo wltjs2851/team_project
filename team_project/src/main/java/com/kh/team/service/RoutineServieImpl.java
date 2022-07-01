@@ -63,14 +63,14 @@ public class RoutineServieImpl implements RoutineService{
 	}
 
 	@Override
-	public int isLike(int uno, String userid) {
-		return routineDao.countLike(uno, userid);
+	public int isLike(int uno, String nickname) {
+		return routineDao.countLike(uno, nickname);
 	}
 
 	@Override
 	@Transactional
-	public boolean decreaseLike(int uno, int ur_like, String userid) {
-		boolean resultDelete = routineDao.deleteLike(uno, userid);
+	public boolean decreaseLike(int uno, int ur_like, String nickname) {
+		boolean resultDelete = routineDao.deleteLike(uno, nickname);
 		boolean resultUpdate = routineDao.updateLikecnt(uno, ur_like - 1);
 		if(resultDelete && resultUpdate) {
 			return true;
@@ -80,8 +80,8 @@ public class RoutineServieImpl implements RoutineService{
 
 	@Override
 	@Transactional
-	public boolean increaseLike(int uno, int ur_like, String userid) {
-		boolean resultInsert = routineDao.insertLike(uno, userid);
+	public boolean increaseLike(int uno, int ur_like, String nickname) {
+		boolean resultInsert = routineDao.insertLike(uno, nickname);
 		boolean resultUpdate = routineDao.updateLikecnt(uno, ur_like + 1);
 		if(resultInsert && resultUpdate) {
 			return false;
@@ -95,8 +95,8 @@ public class RoutineServieImpl implements RoutineService{
 	}
 
 	@Override
-	public List<RoutineVo> adminRoutineList(String userid) {
-		return routineDao.adminRoutineList(userid);
+	public List<RoutineVo> adminRoutineList(String nickname) {
+		return routineDao.adminRoutineList(nickname);
 	}
 
 }

@@ -56,7 +56,7 @@ function uploadSummernoteImageFile(file) {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form role="form" action="/routine/addRoutineRun" method="post" enctype="multipart/form-data">
-				<input type="hidden" id="userid" name="userid" value="${ loginVo.nickname }"/>
+				<input type="hidden" id="nickname" name="nickname" value="${ loginVo.nickname }"/>
 				<div class="form-group">
 					<input type="text" class="form-control" id="ur_title" name="ur_title" required/>
 				</div>

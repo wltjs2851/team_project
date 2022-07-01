@@ -56,10 +56,10 @@ function uploadSummernoteImageFile(file) {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form role="form" action="/free/addFreeRun" method="post" enctype="multipart/form-data">
-				<input type="hidden" id="userid" name="userid" value="${ loginVo.nickname }"/>
+				<input type="hidden" id="nickname" name="nickname" value="${ loginVo.nickname }"/>
 				<div class="form-group row">
 					<div class="col-md-1">
-						<select name="fcode" class="form-control" style="width: 90px;">
+						<select name="fcode" class="form-control" style="width: 90px; height: 50px;">
 						<c:forEach items="${ categoryList }" var="categoryList">					
 							<option value="${ categoryList.fcode }">${ categoryList.fname }</option>
 						</c:forEach>

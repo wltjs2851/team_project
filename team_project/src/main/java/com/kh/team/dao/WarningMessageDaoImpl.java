@@ -28,14 +28,14 @@ public class WarningMessageDaoImpl implements WarningMessageDao{
 	}
 
 	@Override
-	public List<WarningMessageVo> listWarningMessage(String userid) {
-		List<WarningMessageVo> listWarningMessage = sqlSession.selectList(NAMESPACE + "listWarningMessage", userid);
+	public List<WarningMessageVo> listWarningMessage(String nickname) {
+		List<WarningMessageVo> listWarningMessage = sqlSession.selectList(NAMESPACE + "listWarningMessage", nickname);
 		return listWarningMessage;
 	}
 
 	@Override
-	public int warningCount(String userid) {
-		int count = sqlSession.selectOne(NAMESPACE + "warningMessageCount", userid);
+	public int warningCount(String nickname) {
+		int count = sqlSession.selectOne(NAMESPACE + "warningMessageCount", nickname);
 		return count;
 	}
 

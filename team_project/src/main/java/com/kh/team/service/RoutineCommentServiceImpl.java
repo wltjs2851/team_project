@@ -36,8 +36,8 @@ public class RoutineCommentServiceImpl implements RoutineCommentService{
 	}
 
 	@Override
-	public List<RoutineCommentVo> adminRoutineComment(String userid) {
-		return routineCommentDao.adminRoutineComment(userid);
+	public List<RoutineCommentVo> adminRoutineComment(String nickname) {
+		return routineCommentDao.adminRoutineComment(nickname);
 	}
 
 }

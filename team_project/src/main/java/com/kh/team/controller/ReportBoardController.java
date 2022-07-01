@@ -39,9 +39,9 @@ public class ReportBoardController {
 	
 	@RequestMapping(value = "/warningMessageList", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> warningMessageList(String userid, Model model) {
-		int count = warningService.warningCount(userid);
-		List<WarningMessageVo> list = warningService.listWarningMessage(userid);
+	public Map<String, Object> warningMessageList(String nickname, Model model) {
+		int count = warningService.warningCount(nickname);
+		List<WarningMessageVo> list = warningService.listWarningMessage(nickname);
 		Map<String, Object> map = new HashMap<>();
 		map.put("warningList", list);
 		map.put("warningCount", count);
@@ -51,8 +51,8 @@ public class ReportBoardController {
 	}
 	
 	@RequestMapping(value = "/warningList", method = RequestMethod.GET)
-	public String warningList(String userid, Model model) {
-		List<WarningMessageVo> list = warningService.listWarningMessage(userid);
+	public String warningList(String nickname, Model model) {
+		List<WarningMessageVo> list = warningService.listWarningMessage(nickname);
 		model.addAttribute("warningList", list);
 		return "/board/warningMessage";
 	}

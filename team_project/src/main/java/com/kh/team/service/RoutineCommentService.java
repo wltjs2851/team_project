@@ -11,6 +11,6 @@ public interface RoutineCommentService {
 	public boolean modifyRoutineComment(RoutineCommentVo routineCommentVo);
 	public boolean removeRoutineComment(int urcno);
 	
-	public List<RoutineCommentVo> adminRoutineComment(String userid);
+	public List<RoutineCommentVo> adminRoutineComment(String nickname);
 
 }

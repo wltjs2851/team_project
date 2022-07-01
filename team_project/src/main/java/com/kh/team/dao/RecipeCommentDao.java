@@ -13,5 +13,5 @@ public interface RecipeCommentDao {
 	public boolean deleteRecipeComment(int rcno);
 	public boolean deleteRecipeCommentAll(int rno);
 	
-	public List<RecipeCommentVo> adminRecipeComment(String userid);
+	public List<RecipeCommentVo> adminRecipeComment(String nickname);
 }
