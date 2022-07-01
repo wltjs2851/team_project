@@ -92,4 +92,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.isExistNickname(nickname);
 	}
 
+	@Override
+	public MemberVo memberByNickname(String nickname) {
+		MemberVo memberVo = memberDao.memberByNickname(nickname);
+		return memberVo;
+	}
+
 }

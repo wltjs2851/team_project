@@ -146,7 +146,7 @@ $(function() {
 	});
 	
 	$(window).scroll(function(){
-		$("#sidebar").css("margin-top",Math.max(-85,0-$(this).scrollTop()));
+		$("#sidebar").css("margin-top",Math.max(-140,0-$(this).scrollTop()));
 	});
 });
 </script>
@@ -262,9 +262,9 @@ $(function() {
 					<h3>${ groupBoardVo.gb_title }</h3>
 					<ul class="list-inline">
 						<li class="list-inline-item">
-						<c:if test="${ loginVo.nickname == groupBoardVo.userid }">
+						
 							by ${ groupBoardVo.userid }
-						</c:if>
+						
 							<button class="btn dropdown-toggle" style="background-color: #ffffff; width: 20px; height:50px; padding: 1% 0" type="button" id="dropdownMenuButton" data-toggle="dropdown">
 							
 								<i class='fas fa-ellipsis-v'></i>
@@ -273,11 +273,11 @@ $(function() {
 							
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							
-							<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
+							<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' || groupBoardVo.userid == loginVo.nickname }">
 								 <a class="dropdown-item disabled" href="/groupboard/groupDelete?gbno=${ groupBoardVo.gbno }&gno=${ groupBoardVo.gno }">삭제</a>
 <%-- 											 <a class="dropdown-item" href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }">수정</a> --%>
 							</c:if>
-							<c:if test="${ groupBoardVo.userid != loginVo.userid }">
+							<c:if test="${ groupBoardVo.userid != loginVo.nickname }">
 								 <a class="dropdown-item" href="/groupboard/memberInfo?userid=${ groupBoardVo.userid }">회원 정보 보기</a>
 								 
 								 <i id="report" class="report fa-solid fa-handcuffs"><a class="dropdows-item" href="#" 

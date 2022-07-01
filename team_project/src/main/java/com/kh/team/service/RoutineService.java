@@ -13,10 +13,10 @@ public interface RoutineService {
 	public RoutineVo contentByUno(int uno);
 	public void updateViewcnt(int uno, int ur_viewcnt);
 	public List<RoutineVo> selectByViewCnt();
-	public int isLike(int uno, String userid);
-	public boolean decreaseLike(int uno, int ur_like, String userid);
-	public boolean increaseLike(int uno, int ur_like, String userid);
+	public int isLike(int uno, String nickname);
+	public boolean decreaseLike(int uno, int ur_like, String nickname);
+	public boolean increaseLike(int uno, int ur_like, String nickname);
 	public int getCount(PagingDto pagingDto);
 	
-	public List<RoutineVo> adminRoutineList(String userid);
+	public List<RoutineVo> adminRoutineList(String nickname);
 }

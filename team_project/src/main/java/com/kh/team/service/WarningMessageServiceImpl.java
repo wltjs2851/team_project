@@ -20,13 +20,13 @@ public class WarningMessageServiceImpl implements WarningMessageService{
 	}
 
 	@Override
-	public List<WarningMessageVo> listWarningMessage(String userid) {
-		return warningMessageDao.listWarningMessage(userid);
+	public List<WarningMessageVo> listWarningMessage(String nickname) {
+		return warningMessageDao.listWarningMessage(nickname);
 	}
 
 	@Override
-	public int warningCount(String userid) {
-		return warningMessageDao.warningCount(userid);
+	public int warningCount(String nickname) {
+		return warningMessageDao.warningCount(nickname);
 	}
 	
 	

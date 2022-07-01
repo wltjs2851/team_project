@@ -6,7 +6,7 @@ public class RoutineCommentVo {
 	private int urcno;
 	private int uno;
 	private String urc_comment;
-	private String userid;
+	private String nickname;
 	private Date u_regdate;
 	private String u_pic;
 	private int visible;
@@ -22,31 +22,31 @@ public class RoutineCommentVo {
 		this.urc_comment = urc_comment;
 	}
 
-	public RoutineCommentVo(int uno, String urc_comment, String userid, String u_pic) {
+	public RoutineCommentVo(int uno, String urc_comment, String nickname, String u_pic) {
 		super();
 		this.uno = uno;
 		this.urc_comment = urc_comment;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.u_pic = u_pic;
 	}
 
-	public RoutineCommentVo(int urcno, int uno, String urc_comment, String userid, Date u_regdate, String u_pic) {
+	public RoutineCommentVo(int urcno, int uno, String urc_comment, String nickname, Date u_regdate, String u_pic) {
 		super();
 		this.urcno = urcno;
 		this.uno = uno;
 		this.urc_comment = urc_comment;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.u_regdate = u_regdate;
 		this.u_pic = u_pic;
 	}
 
-	public RoutineCommentVo(int urcno, int uno, String urc_comment, String userid, Date u_regdate, String u_pic,
+	public RoutineCommentVo(int urcno, int uno, String urc_comment, String nickname, Date u_regdate, String u_pic,
 			int visible) {
 		super();
 		this.urcno = urcno;
 		this.uno = uno;
 		this.urc_comment = urc_comment;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.u_regdate = u_regdate;
 		this.u_pic = u_pic;
 		this.visible = visible;
@@ -76,12 +76,12 @@ public class RoutineCommentVo {
 		this.urc_comment = urc_comment;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public Date getU_regdate() {
@@ -110,7 +110,7 @@ public class RoutineCommentVo {
 
 	@Override
 	public String toString() {
-		return "RoutineCommentVo [urcno=" + urcno + ", uno=" + uno + ", urc_comment=" + urc_comment + ", userid="
-				+ userid + ", u_regdate=" + u_regdate + ", u_pic=" + u_pic + ", visible=" + visible + "]";
+		return "RoutineCommentVo [urcno=" + urcno + ", uno=" + uno + ", urc_comment=" + urc_comment + ", nickname="
+				+ nickname + ", u_regdate=" + u_regdate + ", u_pic=" + u_pic + ", visible=" + visible + "]";
 	}
 }

@@ -200,6 +200,15 @@ public class GroupController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value = "/banMember/{userid}/{gno}", method = RequestMethod.GET)
+	@ResponseBody
+	public String banMember(@PathVariable("userid") String userid, @PathVariable("gno") int gno) {
+		System.out.println("banMember, gno: " + gno);
+		boolean result = groupService.banGroup(gno, userid);
+		
+		return String.valueOf(result);
+	}
+	
 	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)
 	@ResponseBody
 	public byte[] displayImage(String filename) throws Exception {

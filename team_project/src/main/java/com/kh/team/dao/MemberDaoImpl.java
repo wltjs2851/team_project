@@ -130,4 +130,10 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne(NS + "isExistNickname", nickname);
 	}
 
+	@Override
+	public MemberVo memberByNickname(String nickname) {
+		MemberVo memberVo = sqlSession.selectOne(NS + "memberByNickname", nickname);
+		return memberVo;
+	}
+
 }

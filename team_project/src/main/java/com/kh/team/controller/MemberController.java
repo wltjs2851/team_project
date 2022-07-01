@@ -358,9 +358,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/memberInfo", method = RequestMethod.GET)
-	public String findIdRun(String userid, Model model) {
+	public String findIdRun(String nickname, Model model) {
 		
-		MemberVo memberVo = memberService.memberByUserid(userid);
+		MemberVo memberVo = memberService.memberByNickname(nickname);
 		model.addAttribute("memberVo", memberVo);
 		return "/board/memberInfo";
 	}

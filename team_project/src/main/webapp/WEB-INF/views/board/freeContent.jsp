@@ -28,13 +28,13 @@ $(function() {
 	
 	$("#btnComment").click(function() {
 		var fc_comment = $("#fc_comment").val();
-		var userid = "${loginVo.nickname}";
+		var nickname = "${loginVo.nickname}";
 		var fno = "${freeVo.fno}";
 		var u_pic = "${loginVo.u_pic}";
 		var url = "/free/addFreeComment";
 		sendData = {
 				"fc_comment" : fc_comment,
-				"userid" : userid,
+				"nickname" : nickname,
 				"fno" : fno,
 				"u_pic" : u_pic
 		};
@@ -64,7 +64,7 @@ $(function() {
 					cmt += "<img src='/free/displayImage?filename=" + this.u_pic + 
 							"' class='rounded-circle z-depth-2' width=40px style='margin-right: 10px;'>";
 				}
-				cmt +=this.userid + "</p>";
+				cmt +=this.nickname + "</p>";
 				if(this.visible == 1) {
 					cmt += "</div><div style='margin-bottom: 15px;'><h3>관리자에 의해 규제된 댓글입니다.<h3>";
 					cmt += "</div><hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
@@ -73,18 +73,18 @@ $(function() {
 						cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
 						cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
 						cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
-						if("${loginVo.userid}" == this.userid) {				
+						if("${loginVo.nickname}" == this.nickname) {				
 							cmt += "		<button class='dropdown-item btnModify' type='button' data-fcno='" + this.fcno +"'>수정</button>"
 							cmt += "		<button class='dropdown-item btnDelete' type='button' data-fcno='" + this.fcno +"'>삭제</button>"
 						} else {
 							cmt += "		<button class='dropdown-item btnReport' type='button' data-fcno='" + this.fcno +
-								"' data-user='" + this.userid + "'>신고</button>"
+								"' data-user='" + this.nickname + "'>신고</button>"
 						}
 						cmt += "</div></div>";
 						cmt += "</div>"
 					cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
 								+ this.fc_comment + "</textarea>";
-					if("${loginVo.userid}" == this.userid) {	
+					if("${loginVo.nickname}" == this.nickname) {	
 						cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-fcno=" + this.fcno + 
 								 " style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
 					}
@@ -139,7 +139,7 @@ $(function() {
 	$("#comment").on("click", ".btnReport", function() {
 		var fcno = $(this).attr("data-fcno");
 		var receiver = $(this).attr("data-user");
-		var sender = "${loginVo.userid}";
+		var sender = "${loginVo.nickname}";
 		var url = "/reportBoard/reportBoardPop?fcno=" + fcno + "&sender=" + sender + "&receiver=" + receiver;
 		var option = "width = 350px, height=400px, top=300px, left=300px, scrollbars=yes";
 		window.open(url,"신고",option);
@@ -163,7 +163,7 @@ $(function() {
 		var url = "/free/updateLike";
 		var sendData = {
 				"fno" : "${ freeVo.fno }",
-				"userid" : "${ loginVo.userid }",
+				"nickname" : "${ loginVo.nickname }",
 				"f_like" : parseInt(span.text()),
 				"like_cnt" : like_cnt
 		}
@@ -200,7 +200,7 @@ function adjustHeight() {
 		<div class="col-md-8">
 			<div>
 				<h2>[${ freeVo.fname }] ${ freeVo.f_title }</h2>
-				<p style="color: #888;">${ freeVo.userid } &nbsp; ${ freeVo.f_regdate }</p>
+				<p style="color: #888;">${ freeVo.nickname } &nbsp; ${ freeVo.f_regdate }</p>
 				<hr>
 			</div>
 			<div>
@@ -210,7 +210,7 @@ function adjustHeight() {
 			<div class="row" style="margin-left: 10px; height: 40px;">
 				<i class="fa-solid fa-heart" style="font-size: 25px; margin-top: 5px; margin-left: 5px;" ></i><p style="font-size: 25px; margin-right: 10px;"><span id="span_like">${ freeVo.f_like }</span></p>
 <%-- 				<i class="fa-solid fa-heart" style="color: red; font-size: 25px;" ></i><span id="span_like">${ freeVo.f_like }</span> --%>
-				<c:if test="${ freeVo.userid == loginVo.userid }">
+				<c:if test="${ freeVo.nickname == loginVo.nickname }">
 					<a href="/free/modifyFreeForm?fno=${ freeVo.fno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-warning"
 						style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
 					<a href="/free/removeFreeRun?fno=${ freeVo.fno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-danger"
@@ -228,7 +228,6 @@ function adjustHeight() {
 			<hr>
 			<div class="col" style="margin-top: 20px;">
 				<div>
-					<input type="hidden" id="userid" class="form-control">
 					<textarea onkeyup="adjustHeight();" rows="4" id="fc_comment"
 						style="width: 100%; resize: none;" placeholder="댓글 입력"></textarea>
 					<button type="button" id="btnComment" class="btn btn-primary"
@@ -250,7 +249,7 @@ function adjustHeight() {
 		<div class="col-md-8">
 			<div>
 				<h2>${ freeVo.f_title }</h2>
-				<p style="color: #888;">${ freeVo.userid } &nbsp; ${ freeVo.f_regdate }</p>
+				<p style="color: #888;">${ freeVo.nickname } &nbsp; ${ freeVo.f_regdate }</p>
 				<hr>
 				<div style="text-align: center; margin-bottom: 100px; margin-top: 100px;">
 					<h1>관리자에 의해 규제된 글입니다.</h1>

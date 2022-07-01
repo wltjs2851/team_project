@@ -49,15 +49,15 @@
   <script>
   $(function() {
 	 $("#warning").click(function() {
-		var userid = "${loginVo.userid}";
+		var nickname = "${loginVo.nickname}";
 		var url = "/reportBoard/warningMessageList";
 		$("#warningList").empty();
-		$.get(url, {"userid" : userid}, function(rData) {
+		$.get(url, {"nickname" : nickname}, function(rData) {
 			$("#count").text("경고 " + rData.warningCount + "회 입니다.");
 			console.log(rData.warningList);
 			$.each(rData.warningList, function() {
 				console.log(this.message);
-				$("#warningList").append("<div class='dropdown-divider'></div><a href='/reportBoard/warningList?userid=${loginVo.userid}' class='dropdown-item warningList' style='padding-left: 0;'>" 
+				$("#warningList").append("<div class='dropdown-divider'></div><a href='/reportBoard/warningList?nickname=${loginVo.nickname}' class='dropdown-item warningList' style='padding-left: 0;'>" 
 					+ this.message + "</a>");
 			});
 		});

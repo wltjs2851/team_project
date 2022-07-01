@@ -62,14 +62,14 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public int isLike(int rno, String userid) {
-		return recipeDao.countLike(rno, userid);
+	public int isLike(int rno, String nickname) {
+		return recipeDao.countLike(rno, nickname);
 	}
 
 	@Override
 	@Transactional
-	public boolean decreaseLike(int rno, int r_like, String userid) {
-		boolean resultDelete = recipeDao.deleteLike(rno, userid);
+	public boolean decreaseLike(int rno, int r_like, String nickname) {
+		boolean resultDelete = recipeDao.deleteLike(rno, nickname);
 		boolean resultUpdate = recipeDao.updateLikecnt(rno, r_like - 1);
 		if(resultDelete && resultUpdate) {
 			return true;
@@ -79,8 +79,8 @@ public class RecipeServiceImpl implements RecipeService{
 
 	@Override
 	@Transactional
-	public boolean increaseLike(int rno, int r_like, String userid) {
-		boolean resultInsert = recipeDao.insertLike(rno, userid);
+	public boolean increaseLike(int rno, int r_like, String nickname) {
+		boolean resultInsert = recipeDao.insertLike(rno, nickname);
 		boolean resultUpdate = recipeDao.updateLikecnt(rno, r_like + 1);
 		if(resultInsert && resultUpdate) {
 			return false;
@@ -94,8 +94,8 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public List<RecipeVo> adminRecipeList(String userid) {
-		return recipeDao.adminRecipeList(userid);
+	public List<RecipeVo> adminRecipeList(String nickname) {
+		return recipeDao.adminRecipeList(nickname);
 	}
 
 }

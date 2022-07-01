@@ -37,7 +37,7 @@ $(function() {
 	
 	$(".btnBoardReport").click(function() {
 		var rno = $(this).parent().parent().parent().find(".content").attr("data-rno");
-		var sender = "${loginVo.userid}";
+		var sender = "${loginVo.nickname}";
 		var receiver = $(this).attr("data-user");
 		var url = "/reportBoard/reportBoardPop?rno=" + rno + "&sender=" + sender + "&receiver=" + receiver;
 		var option = "width = 350px, height=400px, top=300px, left=300px, scrollbars=yes";
@@ -76,17 +76,17 @@ $(function() {
 						<td><a class="content" data-rno="${ recipeVo.rno }"  href="#">${ recipeVo.r_title }</a></td>
 						<td>
 							<c:choose>
-								<c:when test="${loginVo.nickname == recipeVo.userid}">
-									${recipeVo.userid}
+								<c:when test="${loginVo.nickname == recipeVo.nickname}">
+									${recipeVo.nickname}
 								</c:when>
 								<c:otherwise>
 									<button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown'
 										style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0;'>
-										${ recipeVo.userid }<i class='fas fa-ellipsis-v' style='margin-left:10px'></i></button>
+										${ recipeVo.nickname }<i class='fas fa-ellipsis-v' style='margin-left:10px'></i></button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<button class="dropdown-item btnBoardReport" type='button' 
-										data-user='${ recipeVo.userid }'>신고하기</button>
-										<a class="dropdown-item btnMemberInfo" href='/member/memberInfo?userid=${ recipeVo.userid }'>
+										data-user='${ recipeVo.nickname }'>신고하기</button>
+										<a class="dropdown-item btnMemberInfo" href='/member/memberInfo?nickname=${ recipeVo.nickname }'>
 										회원정보보기</a>
 									</div>
 								</c:otherwise>

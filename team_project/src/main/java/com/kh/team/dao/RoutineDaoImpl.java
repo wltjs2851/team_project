@@ -74,10 +74,10 @@ public class RoutineDaoImpl implements RoutineDao{
 	}
 
 	@Override
-	public boolean insertLike(int uno, String userid) {
+	public boolean insertLike(int uno, String nickname) {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("uno", uno);
-		parameter.put("userid", userid);
+		parameter.put("nickname", nickname);
 		int count = sqlSession.insert(NAMESPACE + "insertLike", parameter);
 		if(count > 0) {
 			return true;
@@ -86,10 +86,10 @@ public class RoutineDaoImpl implements RoutineDao{
 	}
 
 	@Override
-	public boolean deleteLike(int uno, String userid) {
+	public boolean deleteLike(int uno, String nickname) {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("uno", uno);
-		parameter.put("userid", userid);
+		parameter.put("nickname", nickname);
 		int count = sqlSession.delete(NAMESPACE + "deleteLike", parameter);
 		if(count > 0) {
 			return true;
@@ -98,10 +98,10 @@ public class RoutineDaoImpl implements RoutineDao{
 	}
 
 	@Override
-	public int countLike(int uno, String userid) {
+	public int countLike(int uno, String nickname) {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("uno", uno);
-		parameter.put("userid", userid);
+		parameter.put("nickname", nickname);
 		int count = sqlSession.selectOne(NAMESPACE + "countLike", parameter);
 		return count;
 	}
@@ -134,8 +134,8 @@ public class RoutineDaoImpl implements RoutineDao{
 	}
 
 	@Override
-	public List<RoutineVo> adminRoutineList(String userid) {
-		List<RoutineVo> adminRoutineList = sqlSession.selectList(NAMESPACE + "adminRoutineList", userid);
+	public List<RoutineVo> adminRoutineList(String nickname) {
+		List<RoutineVo> adminRoutineList = sqlSession.selectList(NAMESPACE + "adminRoutineList", nickname);
 		return adminRoutineList;
 	}
 }

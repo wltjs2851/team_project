@@ -6,7 +6,7 @@ public class FreeVo {
 	private int fno;
 	private String f_title;
 	private String f_content;
-	private String userid;
+	private String nickname;
 	private Date f_regdate;
 	private String f_pic;
 	private int f_viewcnt;
@@ -20,32 +20,32 @@ public class FreeVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FreeVo(String f_title, String f_content, String userid, String f_pic, int fcode) {
+	public FreeVo(String f_title, String f_content, String nickname, String f_pic, int fcode) {
 		super();
 		this.f_title = f_title;
 		this.f_content = f_content;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.f_pic = f_pic;
 		this.fcode = fcode;
 	}
 
-	public FreeVo(int fno, String f_title, String f_content, String userid, String f_pic, int fcode) {
+	public FreeVo(int fno, String f_title, String f_content, String nickname, String f_pic, int fcode) {
 		super();
 		this.fno = fno;
 		this.f_title = f_title;
 		this.f_content = f_content;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.f_pic = f_pic;
 		this.fcode = fcode;
 	}
 
-	public FreeVo(int fno, String f_title, String f_content, String userid, Date f_regdate, String f_pic, int f_viewcnt,
+	public FreeVo(int fno, String f_title, String f_content, String nickname, Date f_regdate, String f_pic, int f_viewcnt,
 			int f_like, int fcode, String fname) {
 		super();
 		this.fno = fno;
 		this.f_title = f_title;
 		this.f_content = f_content;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.f_regdate = f_regdate;
 		this.f_pic = f_pic;
 		this.f_viewcnt = f_viewcnt;
@@ -54,13 +54,13 @@ public class FreeVo {
 		this.fname = fname;
 	}
 
-	public FreeVo(int fno, String f_title, String f_content, String userid, Date f_regdate, String f_pic, int f_viewcnt,
+	public FreeVo(int fno, String f_title, String f_content, String nickname, Date f_regdate, String f_pic, int f_viewcnt,
 			int f_like, int fcode, String fname, int visible) {
 		super();
 		this.fno = fno;
 		this.f_title = f_title;
 		this.f_content = f_content;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.f_regdate = f_regdate;
 		this.f_pic = f_pic;
 		this.f_viewcnt = f_viewcnt;
@@ -94,12 +94,12 @@ public class FreeVo {
 		this.f_content = f_content;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public Date getF_regdate() {
@@ -160,7 +160,7 @@ public class FreeVo {
 
 	@Override
 	public String toString() {
-		return "FreeVo [fno=" + fno + ", f_title=" + f_title + ", f_content=" + f_content + ", userid=" + userid
+		return "FreeVo [fno=" + fno + ", f_title=" + f_title + ", f_content=" + f_content + ", nickname=" + nickname
 				+ ", f_regdate=" + f_regdate + ", f_pic=" + f_pic + ", f_viewcnt=" + f_viewcnt + ", f_like=" + f_like
 				+ ", fcode=" + fcode + ", fname=" + fname + ", visible=" + visible + "]";
 	}

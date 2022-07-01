@@ -15,13 +15,13 @@
 	<!-- 	신고 목록 -->
 	<select id="listWarningMessage" resultType="WarningMessageVo">
 		select * from tbl_warning 
-		where receiver = #{userid}
+		where receiver = #{nickname}
 		order by wno desc
 	</select>
 	
 	<!-- 	신고 개수 -->
 	<select id="warningMessageCount" resultType="int">
 		select count(*) from tbl_warning 
-		where receiver = #{userid}
+		where receiver = #{nickname}
 	</select>
 </mapper>

@@ -83,7 +83,7 @@ public class RecipeController {
 	public String recipeForm(Model model, int rno, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		RecipeVo recipeVo = recipeService.contentByRno(rno);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
-		int like_cnt = recipeService.isLike(rno, memberVo.getUserid());
+		int like_cnt = recipeService.isLike(rno, memberVo.getNickname());
 		model.addAttribute("recipeVo", recipeVo);
 		model.addAttribute("like_cnt", like_cnt);
 		
@@ -152,14 +152,14 @@ public class RecipeController {
 	public int updateLike(RecipeVo recipeVo, @RequestParam("like_cnt") int like_cnt, Model model) {
 		System.out.println(recipeVo);
 		int rno = recipeVo.getRno();
-		String userid = recipeVo.getUserid();
+		String nickname = recipeVo.getNickname();
 		int r_like = recipeVo.getR_like();
 		
 		if(like_cnt > 0) {
-			recipeService.decreaseLike(rno, r_like, userid);
+			recipeService.decreaseLike(rno, r_like, nickname);
 			like_cnt = 0;
 		} else {
-			recipeService.increaseLike(rno, r_like, userid);
+			recipeService.increaseLike(rno, r_like, nickname);
 			like_cnt = 1;
 		}
 		return like_cnt;

@@ -4,8 +4,8 @@
   
 <mapper namespace="com.kh.team.mappers.userroutine">
 	<insert id="insertRoutine">
-		insert into tbl_userroutine(uno, ur_title, ur_content, userid, ur_pic)
-			values(seq_routine_uno.nextval, #{ur_title}, #{ur_content}, #{userid}, #{ur_pic, jdbcType=VARCHAR})
+		insert into tbl_userroutine(uno, ur_title, ur_content, nickname, ur_pic)
+			values(seq_routine_uno.nextval, #{ur_title}, #{ur_content}, #{nickname}, #{ur_pic, jdbcType=VARCHAR})
 	</insert>
 	
 	<select id="selectRoutine" resultType="RoutineVo">
@@ -42,12 +42,12 @@
 	</update>
 	
 	<insert id="insertLike">
-		insert into tbl_routine_like(urlno, uno, userid)
-			values(seq_routine_urlno.nextval, #{uno}, #{userid})
+		insert into tbl_routine_like(urlno, uno, nickname)
+			values(seq_routine_urlno.nextval, #{uno}, #{nickname})
 	</insert>
 	
 	<delete id="deleteLike">
-		delete from tbl_routine_like where uno = #{uno} and userid = #{userid}
+		delete from tbl_routine_like where uno = #{uno} and nickname = #{nickname}
 	</delete>
 	
 	<delete id="deleteLikeAll">
@@ -55,7 +55,7 @@
 	</delete>
 	
 	<select id="countLike" resultType="int">
-		select count(*) from tbl_routine_like where uno = #{uno} and userid = #{userid}
+		select count(*) from tbl_routine_like where uno = #{uno} and nickname = #{nickname}
 	</select>
 	
 	<update id="updateLikecnt">
@@ -71,14 +71,14 @@
 				<choose>
 					<when test='searchType == "t"'>where ur_title like '%' || #{keyword} || '%'</when>
 					<when test='searchType == "c"'>where ur_content like '%' || #{keyword} || '%'</when>
-					<when test='searchType == "w"'>where userid like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "w"'>where nickname like '%' || #{keyword} || '%'</when>
 					<when test='searchType == "tc"'>
 					where ur_title like '%' || #{keyword} || '%'
 					or ur_content like '%' || #{keyword} || '%'</when>
 					<when test='searchType == "tcw"'>
 					where ur_title like '%' || #{keyword} || '%'
 					or ur_content like '%' || #{keyword} || '%'
-					or userid like '%' || #{keyword} || '%'
+					or nickname like '%' || #{keyword} || '%'
 					</when>
 					
 				</choose>
@@ -87,6 +87,6 @@
 	 <!-- 	회원 작성글 찾기  -->
 	<select id="adminRoutineList" resultType="RoutineVo">
 		select uno, ur_title, ur_regdate from tbl_userroutine
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 </mapper>

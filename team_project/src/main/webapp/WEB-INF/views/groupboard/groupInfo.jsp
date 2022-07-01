@@ -21,7 +21,7 @@ $(function() {
 		var userid = that.attr("data-value");
 		console.log(userid);
 		var gno = "${groupVo.gno}";
-		var url = "/group/deleteMember/" + userid + "/" + gno;
+		var url = "/group/banMember/" + userid + "/" + gno;
 // 		var sData = {
 // 				"gno" : gno
 // 		}

@@ -9,9 +9,9 @@ public interface WarningMessageService {
 	public boolean insertWarningMessage(WarningMessageVo warningMessageVo);
 		
 	// 경고 목록 
-	public List<WarningMessageVo> listWarningMessage(String userid);
+	public List<WarningMessageVo> listWarningMessage(String nickname);
 	
 	//경고 개수
-	public int warningCount(String userid);
+	public int warningCount(String nickname);
 
 }
