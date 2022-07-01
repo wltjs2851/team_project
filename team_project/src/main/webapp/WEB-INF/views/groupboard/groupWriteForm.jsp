@@ -54,7 +54,9 @@ $(function() {
 <%-- ${ groupVo } --%>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
+	<div class="col-md-2"></div>
+	
+		<div class="col-md-8">
 		
 			<form role="form" name="frmWrite" action="/groupboard/groupWriteRun" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="gno" value="${ groupVo.gno }">
@@ -94,6 +96,7 @@ $(function() {
 				</button>
 			</form>
 		</div>
+		<div class="col-md-2"></div>
 	</div>
 </div>
 
