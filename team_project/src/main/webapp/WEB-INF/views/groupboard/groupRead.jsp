@@ -17,13 +17,13 @@ $(function() {
 		var count = $(".count").val();
 		console.log("count: ", count);
 		var gbc_content = $("#c_content").val(); // c_content: 댓글 입력하는 곳
-		var userid = $("#c_userid").val();
+		var nickname = $("#c_nickname").val();
 		var gbno = "${groupBoardVo.gbno}";
 		var u_pic = "${loginVo.u_pic}";
 		var gno = "${groupBoardVo.gno}"
 		var sData = {
 				"gbc_content" : gbc_content,
-				"userid" : userid,
+				"nickname" : nickname,
 				"gbno" : gbno,
 				"u_pic" : u_pic,
 				"gno" : gno
@@ -45,10 +45,10 @@ $(function() {
 	// 신고 팝업
 	$("#comment").on("click", ".report", function() {
 // 		var gbcno = $(this).attr("data-gbcno");
-		var userid = $(this).next().val();
-		console.log(userid);
+		var nickname = $(this).next().val();
+		console.log(nickname);
 		var gno = $("#gno").val();
-		var url = "/groupboard/reportForm/" + userid + "/" + gno;
+		var url = "/groupboard/reportForm/" + nickname + "/" + gno;
 		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
 		window.open(url,"신고",option);
 	});
@@ -70,12 +70,12 @@ $(function() {
 					cmt += "<img src='/groupboard/displayImage?filename=" + this.u_pic + 
 							"' class='rounded-circle z-depth-2' width=40px style='margin-right: 10px;'>";
 				}
-				cmt += this.userid + "</p>";
+				cmt += this.nickname + "</p>";
 				
 				cmt += "<div class='dropdown' style='float:right'>"
 				cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
 				cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
-				if("${loginVo.nickname}" == this.userid) {
+				if("${loginVo.nickname}" == this.nickname) {
 					
 					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
 					cmt += "		<button class='dropdown-item btnModify' type='button' data-gbcno=" + this.gbcno +">수정</button>"
@@ -83,18 +83,16 @@ $(function() {
 					cmt += "</div></div>";
 				} else {
 					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
-// 					cmt += "<i id='report' class='report fa-solid fa-handcuffs'><a class='dropdows-item' href='#' 
-// 				 	data-user='${ groupBoardVo.userid }''>신고하기</a></i>"
-					cmt += "		<a class='dropdown-item' href='/groupboard/memberInfo?nickname=" + this.userid + "'>회원 정보 보기</a>";
-					cmt += "		<i id='report' class='report fa-solid fa-handcuffs'><a class='dropdows-item' href='#' data-user='" + this.userid + "'>신고하기</a></button></i>";
-					cmt += " <input type='hidden' id='userid' name='userid' value='" + this.userid + "'>";
+					cmt += "		<a class='dropdown-item' href='/groupboard/memberInfo?nickname=" + this.nickname + "'>회원 정보 보기</a>";
+					cmt += "		<i id='report' class='report fa-solid fa-handcuffs'><a class='dropdows-item' href='#' data-user='" + this.nickname + "'>신고하기</a></button></i>";
+					cmt += " <input type='hidden' id='nickname' name='nickname' value='" + this.nickname + "'>";
 					cmt += " <input type='hidden' id='gno' name='gno' value='${ groupBoardVo.gno }'>";
 					cmt += "</div></div>";
 				}
 				cmt += "</div>"
 				cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
 					+ this.gbc_content + "</textarea>";
-				if("${loginVo.userid}" == this.userid) {	
+				if("${loginVo.nickname}" == this.nickname) {	
 					cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-gbcno=" + this.gbcno + 
 							 " style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
 				}	
@@ -235,7 +233,7 @@ $(function() {
 					</h2>
 					<hr style="margin: 20px;">
 					<p style="margin: 20px;">
-						작성자: ${ groupBoardVo.userid }, 작성일: ${ groupBoardVo.gb_regdate }
+						작성자: ${ groupBoardVo.nickname }, 작성일: ${ groupBoardVo.gb_regdate }
 					</p>
 					<div style="margin: 20px;">
 						${ groupBoardVo.gb_content }
@@ -258,7 +256,7 @@ $(function() {
 					<span id="like" style="font-size: 30px;">${ groupBoardVo.gb_like }</span>
 				
 				<!-- 수정, 삭제 버튼 -->
-					<c:if test="${ loginVo.nickname == groupBoardVo.userid }">
+					<c:if test="${ loginVo.nickname == groupBoardVo.nickname }">
 					<table>
 						<tr>
 							<td><a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn btn-outline-warning">수정</a></td>
@@ -274,7 +272,7 @@ $(function() {
 				<div class="row">
 					<div class="col-md-9">
 						<input type="text" id="c_content" class="form-control" placeholder="댓글을 입력해주세요">
-						<input type="hidden" value="${ loginVo.nickname }" id="c_userid" class="form-control">
+						<input type="hidden" value="${ loginVo.nickname }" id="c_nickname" class="form-control">
 					</div>
 					<div>
 						<button type="button" id="btnCommentInsert" class="btn btn-sm btn-outline-primary">완료</button>

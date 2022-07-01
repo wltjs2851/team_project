@@ -36,7 +36,7 @@
  <!-- 좋아요 갯수 -->
  <select id="countLike" resultType="int">
  	select count(gb_lno) from tbl_group_board_like
- 	where userid = #{userid} and gbno = #{gbno}
+ 	where nickname = #{nickname} and gbno = #{gbno}
  </select>
  
  </mapper>
