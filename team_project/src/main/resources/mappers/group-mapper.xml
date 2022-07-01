@@ -32,7 +32,7 @@
 	<select id="selectGroupList" resultType="GroupVo">
 		select * from (select rownum rnum, a.* from 
 			(select * from tbl_group
-			order by g_regdate desc) a) 
+			order by g_regdate desc, gno desc) a) 
 		where rnum between #{startRow} and #{endRow}
 	</select>
 	
@@ -102,6 +102,13 @@
 		delete from tbl_group_board_like where gno = #{gno}
 	</delete>
 	
+	<delete id="deleteGroupReport">
+		delete from tbl_report where gno = #{gno}
+	</delete>
+	<delete id="deleteGroupCalendar">
+		delete from tbl_group_calendar where gno = #{gno}
+	</delete>
+	
 	<!-- 그룹별 멤버 가져오기 -->
 	<select id="getGroupMember" resultType="GroupJoinVo">
 		select userid from tbl_group_join
@@ -150,5 +157,10 @@
 		select * from tbl_group
 			where gno
 		in (select gno from tbl_group_join where userid = #{userid})
+	</select>
+	
+	<select id="isExistMyGroupList" resultType="int">
+		select count(*) from tbl_group_join
+		where userid = #{userid}
 	</select>
 </mapper>

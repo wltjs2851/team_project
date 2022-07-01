@@ -84,19 +84,19 @@ $(function() {
 	
 	// 모달, 탈퇴 버튼(일반 그룹원)
 	$("#leave").click(function() {
-		console.log("Click");
-		var userid = "${loginVo.userid}";
-		var gno = ${groupVo.gno};
-		var url = "/group/deleteMember/" + userid + "/" + gno;
+// 		console.log("Click");
+// 		var userid = "${loginVo.userid}";
+// 		var gno = ${groupVo.gno};
+// 		var url = "/group/deleteMember/" + userid + "/" + gno;
 		
-		$.get(url, function(rData) {
-			console.log(rData);
-			if(rData == "true") {
-				alert("탈퇴 완료");
+// 		$.get(url, function(rData) {
+// 			console.log(rData);
+// 			if(rData == "true") {
+// 				alert("탈퇴 완료");
 				$("#btnModalClose").trigger("click");
-				$("#leaveGroup").fadeOut("slow");
-			}
-		});
+// 				$("#leaveGroup").fadeOut("slow");
+// 			}
+// 		});
 	});
 	
 	// 그룹 채팅방 팝업
@@ -170,6 +170,7 @@ $(function() {
 <%-- ${ groupList } --%>
 <%-- ${ pagingDto.totalPage } --%>
 <%-- ${ param.page } --%>
+<%-- ${ nickname } --%>
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
 <div class="row">
@@ -192,9 +193,10 @@ $(function() {
 					</div>
 					<div class="modal-footer">
 						 
-						<button id="leave" type="button" class="btn btn-primary">
-							탈퇴
-						</button> 
+<!-- 						<button id="leave" type="button" class="btn btn-primary"> -->
+<!-- 							탈퇴 -->
+<!-- 						</button>  -->
+						<a href="/group/deleteMember/${ loginVo.userid }/${ groupVo.gno}" class="btn btn-primary">탈퇴</a>
 						<button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">
 							취소
 						</button>
@@ -260,7 +262,9 @@ $(function() {
 					<h3>${ groupBoardVo.gb_title }</h3>
 					<ul class="list-inline">
 						<li class="list-inline-item">
+						<c:if test="${ loginVo.nickname == groupBoardVo.userid }">
 							by ${ groupBoardVo.userid }
+						</c:if>
 							<button class="btn dropdown-toggle" style="background-color: #ffffff; width: 20px; height:50px; padding: 1% 0" type="button" id="dropdownMenuButton" data-toggle="dropdown">
 							
 								<i class='fas fa-ellipsis-v'></i>

@@ -42,35 +42,35 @@
 				if (this.gc_date == that.attr("data-today")) {
 					if (this.checklist == 'true') {
 						if (thatSpan == "false") {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
+							$(".todo-content").append("<div style='padding: 2% class='input-wrap'><span class='checkList' data-today='" + selectDate +  "' type='checkbox'><input type='text' style='width: 430px; margin: 5px;' class='inputContent input-box form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
 									"<c:if test='${loginVo.userid == groupVo.g_leader}'>" +
-									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
+									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='margin: 5px; width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
 									"<button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button>" + 
 									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button>" + 
-									"</c:if><br>");
+									"</c:if></div><br>");
 						} else {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
+							$(".todo-content").append("<div style='padding: 2% class='input-wrap'><span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><input type='text' style='width: 430px; margin: 5px;' class='inputContent input-box form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
 									"<c:if test='${loginVo.userid == groupVo.g_leader}'>" +
-									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
+									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='margin: 5px; width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
 									"<button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button>" + 
 									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button>" + 
-									"</c:if><br>");
+									"</c:if></div><br>");
 						}
 					} else {
 						if (thatSpan == "true") {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
+							$(".todo-content").append("<div style='padding: 2% class='input-wrap'><span class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><input type='text' style='width: 430px; margin: 5px;' class='inputContent input-box form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
 									"<c:if test='${loginVo.userid == groupVo.g_leader}'>" +
-									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
+									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='margin: 5px; width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
 									"<button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button>" + 
 									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button>" + 
-									"</c:if><br>");
+									"</c:if></div><br>");
 						} else {
-							$(".todo-content").append("<span class='checkList' data-today='" + selectDate +  "' type='checkbox'><input type='text' class='inputContent form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
+							$(".todo-content").append("<div style='padding: 2% class='input-wrap'><span class='checkList' data-today='" + selectDate +  "' type='checkbox'><input type='text' style='width: 430px; margin: 5px;' class='inputContent input-box form-control' readonly id='inputContent' value='" + this.gc_content + "'>" + 
 									"<c:if test='${loginVo.userid == groupVo.g_leader}'>" +
-									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
+									"<button type='button' data-gcno='" + this.gcno + "' id='update' style='margin: 5px; width: 70px; height:40px; padding: 2% 0' class='update btn btn-outline-warning'>UPDATE</button>" + 
 									"<button type='button'style='display: none; width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='upadateRun btn btn-outline-warning'>DONE</button>" + 
 									"<button type='button' style='width: 70px; height:40px; padding: 2% 0' data-gcno='" + this.gcno + "' class='delete btn btn-outline-danger'>DELETE</button>" + 
-									"</c:if><br>");
+									"</c:if></div><br>");
 						}
 					}
 				}
@@ -174,8 +174,8 @@
 // 			$(this).prev().find(".inputContent").attr("readonly", false);
 			$(this).prev().attr("readonly", false);
 			
-			$(this).fadeOut("slow");
-			$(this).next().fadeIn("slow");
+			$(this).hide();
+			$(this).next().show();
 		});
 		
 		$(".todo-content").on("click", ".upadateRun", function() {
@@ -202,7 +202,7 @@
 				
 				if(rData == "true") {
 					inputContent.attr("readonly", true);
-					that.fadeOut("slow");
+					that.hide();
 					$(".update").fadeIn("slow");
 				}
 			});
@@ -219,6 +219,11 @@
 			}
 			var url = "/groupcal/deleteCal";
 			
+			$(this).prev().remove();
+			$(this).prev().remove();
+			$(this).prev().remove();
+			$(this).remove();
+			
 			$.post(url, sData, function(rData) {
 				console.log(rData);
 				
@@ -230,7 +235,7 @@
 	});
 </script>
 <body>
-	<div class="container-fluid">
+	<div style="margin: 50px;" class="container-fluid">
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
@@ -271,9 +276,7 @@
 				          <c:if test="${ loginVo.userid == groupVo.g_leader }">
 					          <div style="padding: 2%" class="input-wrap">
 					            <input type="text" placeholder="please write here!!" id="input-box" class="input-box form-control">
-					            <button type="button" id="input-data" class="btn btn-outline-primary"><span>INPUT</span></button>
-<!-- 					            <button type="button" id="update" class="btn btn-outline-warning"><span>UPDATE</span></button> -->
-					            <button type="button" style="display: none;" id="updateFinish" class="btn btn-outline-warning"><span>FINISH</span></button>
+					            <button type="button" id="input-data" style="margin-top: 5px" class="btn btn-outline-primary"><span>INPUT</span></button>
 					            <div id="input-list" class="input-list"></div>
 					          </div>
 				          </c:if>

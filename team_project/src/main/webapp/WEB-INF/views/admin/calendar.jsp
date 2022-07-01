@@ -178,7 +178,7 @@
 </script>
 <body>
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row" style="margin-bottom: 50px;">
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
 				<div class='rap left'>

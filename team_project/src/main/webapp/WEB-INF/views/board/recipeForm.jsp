@@ -68,7 +68,7 @@ $(function() {
 	
 	$("#btnComment").click(function() {
 		var rc_comment = $("#rc_comment").val();
-		var userid = "${loginVo.userid}";
+		var userid = "${loginVo.nickname}";
 		var rno = "${recipeVo.rno}";
 		var u_pic = "${loginVo.u_pic}";
 		var url = "/recipe/addRecipeComment";

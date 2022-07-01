@@ -15,6 +15,10 @@
 
 <script>
 $(function() {
+	var notIsExist = "${notIsExist}";
+	if (notIsExist == "false") {
+		alert("가입된 그룹이 없습니다.\n그룹에 가입해주세요.")
+	}
 	var joinResult = "${joinResult}";
 	if(joinResult == "true") {
 		alert("그룹에 가입하셨습니다.");
@@ -23,7 +27,7 @@ $(function() {
 	getGroupList();
 
 	window.onscroll = function(e) {
-	      console.log(window.innerHeight , window.scrollY,document.body.offsetHeight)
+// 	      console.log(window.innerHeight , window.scrollY,document.body.offsetHeight)
 	      if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { 
 	      $("#loading").show();
 	        setTimeout(function(){
@@ -90,8 +94,8 @@ $(function() {
 			         console.log("ajax", rData);
 			         $.each(rData, function() {
 	 		  			var div = "";
-	 		  			div += "<div class='col-lg-3 col-md-6 col-sm-6 group' onclick='location.href ='/group/groupForm?gno=" + this.gno +
-			  						"'' style=cursor:pointer; display: none;' id='groupList'>";
+	 		  			div += "<div class='col-lg-3 col-md-6 col-sm-6 group' onclick=location.href='/group/groupForm?gno=" + this.gno +
+			  						"' style=cursor:pointer; display: none;' id='groupList'>";
 	 		  			div += "<div class='product_item'><div style='text-align: center;'>"; 		  			if(this.g_pic == null) {
 	 		  				div += "<img src='/resources/images/board/groupDefault.png'" +
 			  				"class='img-thumbnail' alt='group image' style='height: 280px'>";

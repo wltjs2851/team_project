@@ -28,7 +28,7 @@ $(function() {
 	
 	$("#btnComment").click(function() {
 		var urc_comment = $("#urc_comment").val();
-		var userid = "${loginVo.userid}";
+		var userid = "${loginVo.nickname}";
 		var uno = "${routineVo.uno}";
 		var u_pic = "${loginVo.u_pic}";
 		var url = "/routine/addRoutineComment";
@@ -108,7 +108,7 @@ $(function() {
 			var urc_comment = comment.val();
 			var sendData = {
 					"urcno" : urcno,
-					"urc_comment" : comment
+					"urc_comment" : urc_comment
 			};
 			var url = "/routine/modifyRoutineComment"
 			$.post(url, sendData, function(receivedData) {

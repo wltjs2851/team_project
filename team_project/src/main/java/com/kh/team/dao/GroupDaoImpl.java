@@ -210,4 +210,27 @@ public class GroupDaoImpl implements GroupDao{
 		}
 		return false;
 	}
+
+	@Override
+	public boolean deleteGroupReport(int gno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteGroupReport", gno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteGroupCalendar(int gno) {
+		int count = sqlSession.delete(NAMESPACE + "deleteGroupCalendar", gno);
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int isExistMyGroupList(String userid) {
+		return sqlSession.selectOne(NAMESPACE + "isExistMyGroupList", userid);
+	}
 }

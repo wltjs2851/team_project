@@ -222,6 +222,7 @@ public class GroupBoardController {
 		model.addAttribute("searchDto", pagingDto);
 
 		List<GroupBoardVo> groupList = groupBoardService.list(pagingDto);
+		System.out.println("groupBoardController, groupMain, groupList:" + groupList);
 		model.addAttribute("groupList", groupList);
 		
 		System.out.println("controller, groupList: " + groupList);
@@ -235,6 +236,11 @@ public class GroupBoardController {
 		
 		List<GroupJoinVo> groupJoinMember = groupService.list(gno);
 		model.addAttribute("groupJoinMember", groupJoinMember);
+		
+		List<String> nickname = groupService.getNickname(gno);
+		model.addAttribute("nickname", nickname);
+		
+		
 		
 		// 시영 테스트
 		session.setAttribute("groupVo", groupVo);

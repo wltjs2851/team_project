@@ -188,7 +188,6 @@ public class GroupController {
 	}
 
 	@RequestMapping(value = "/deleteMember/{userid}/{gno}", method = RequestMethod.GET)
-	@ResponseBody
 	public String deleteMember( 
 			@PathVariable("userid") String userid, 
 			@PathVariable("gno") int gno) {
@@ -198,7 +197,7 @@ public class GroupController {
 		boolean result = groupService.banGroup(gno, userid);
 //		rttr.addFlashAttribute("delete_member", result);
 		
-		return String.valueOf(result);
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/displayImage", method = RequestMethod.GET)
@@ -240,5 +239,17 @@ public class GroupController {
 //		session.setAttribute("g_joinVo", group);
 		
 		return "groupboard/myGroupList";
+	}
+	
+	@RequestMapping(value = "/isExistMyGroupList", method = RequestMethod.GET)
+	public String myGroupList(String userid, RedirectAttributes rttr, HttpSession session) {
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		userid = loginVo.getUserid();
+		int count = groupService.isExistMyGroupList(userid);
+		if (count < 1) {
+			rttr.addFlashAttribute("notIsExist", "false");
+			return "redirect:/group/groupList";
+		}
+		return "redirect:/group/myGroupList";
 	}
 }
