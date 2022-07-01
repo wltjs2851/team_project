@@ -75,7 +75,7 @@ $(function() {
               </div>
             </div>
 <!--             최근 신고목록 -->
-		<div class="card" style="margin-top: 30px;">
+		<div class="card" style="margin-top: 30px; margin-bottom: 30px;">
               <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
                   <h3 class="card-title">최근 신고 목록</h3>

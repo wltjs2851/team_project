@@ -51,7 +51,6 @@ public class RecommendController {
 				rttr.addFlashAttribute("notAdmin", "false");
 				return "redirect:/recommend/listRecommend";
 			}
-			System.out.println("insertRecommend, content:" + content);
 			
 			recommendVo.setRe_content(content.replaceAll("\"", "\'"));
 			if(content.indexOf("filename") != -1) {
@@ -59,7 +58,7 @@ public class RecommendController {
 				re_pic = re_pic.substring(9, re_pic.indexOf("\""));
 				recommendVo.setRe_pic(re_pic);
 			}
-//			recommendService.insertRecommend(recommendVo);
+			recommendService.insertRecommend(recommendVo);
 			return "redirect:/recommend/listRecommend";
 		}
 		

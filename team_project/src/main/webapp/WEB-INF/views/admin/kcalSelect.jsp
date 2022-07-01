@@ -158,7 +158,7 @@ padding-left: 10px;
 					</div>
 					<br>
 						<!-- 					</form> -->
-						<div align="center">
+						<div align="left">
 							<c:choose>
 							<c:when test="${ empty kcalVo.k_pic }">
 								<img src="/resources/images/kcaldefault.png"
@@ -166,7 +166,7 @@ padding-left: 10px;
 							</c:when>
 							<c:otherwise>
 							<img src="/member/displayImage?filename=${ kcalVo.k_pic }"
-								alt="kcal image">
+								alt="kcal image" style="width: 750px; height: auto;">
 						</c:otherwise>
 					</c:choose>
 						</div>

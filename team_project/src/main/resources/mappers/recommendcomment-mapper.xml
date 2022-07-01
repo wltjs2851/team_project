@@ -8,8 +8,8 @@
  
  <!-- 댓글 등록 -->
  <insert id="insertRecommendComment">
- 	insert into tbl_reccomment (recno, reno, re_comment, userid)
- 	values(seq_reccomment_recno.nextval, #{reno}, #{re_comment}, #{userid})
+ 	insert into tbl_reccomment (recno, reno, re_comment, nickname)
+ 	values(seq_reccomment_recno.nextval, #{reno}, #{re_comment}, #{nickname})
  </insert>
  
  <!-- 댓글 목록 -->
