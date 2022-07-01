@@ -219,7 +219,7 @@ $(document).ready(function() {
 				</div>
 <!-- 			게시글 수정 -->
 			<c:choose>
-				<c:when test="${loginVo.userid == 'admin01'}">
+				<c:when test="${loginVo.nickname == '관리자'}">
 					<a type="button" class="btn btn-primary" id="btnUpdateRecommend"
 						href="/recommend/updateRecommendForm?reno=${recommendVo.reno }">수정</a>
 					<a type="button" class="btn btn-danger"
