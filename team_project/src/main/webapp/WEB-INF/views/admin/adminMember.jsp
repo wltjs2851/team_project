@@ -18,9 +18,10 @@ $(function(){
 	$(".selectId").click(function(e){
 		e.preventDefault();
 		console.log("회원상세조회");	
+		var nickname = $(this).attr("data-nick");
 		var userid = $(this).attr("data-id");
-		console.log("userid:", userid);
-		var url = "/admin/info?userid=" + userid;
+		console.log("nickname:", nickname);
+		var url = "/admin/info?nickname=" + nickname + "&userid=" + userid;
 		var option = "width = 800px, height=800px, top=300px, left=300px, scrollbars=yes";
 		window.open(url, "그룹 채팅방 입장", option);
 	});
@@ -108,7 +109,7 @@ $(function(){
 			<tbody>
 			<c:forEach items="${memberList }" var="memberVo">
 				<tr>
-					<td><a class="selectId" data-id="${memberVo.userid }">${memberVo.userid }</a></td>
+					<td><a class="selectId" data-nick="${memberVo.nickname }" data-id="${ memberVo.userid }">${memberVo.userid }</a></td>
 					<td>${memberVo.username }</td>
 					<td>${memberVo.nickname }</td>
 					<td>${memberVo.age }세(

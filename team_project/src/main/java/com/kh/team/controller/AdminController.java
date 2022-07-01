@@ -131,9 +131,10 @@ public class AdminController {
 	
 	// 관리자가 본 회원 정보
 	@RequestMapping(value="/info", method = RequestMethod.GET)
-	public String adminSelectMember(String userid, Model model) {
-		System.out.println("adminSelectMember:" + userid);
-		MemberVo memberVo = memberSerive.memberByUserid(userid);
+	public String adminSelectMember(String nickname, Model model, String userid) {
+		System.out.println("adminSelectMember:" + nickname);
+//		MemberVo memberVo = memberSerive.memberByUserid(userid);
+		MemberVo memberVo = memberSerive.memberByNickname(nickname);
 		model.addAttribute("memberVo", memberVo);
 		
 		List<AdminVo> adminList = adminService.adminList(userid);

@@ -113,13 +113,15 @@ padding-left: 10px;
 
 #searchKcal {
 	position: absolute;
-	width: 25px;
 	top: 50px;
-	right: 45px;
-	margin: 0;
+	float: right;
+	margin-right: 20px;
+	margin-top: 5px;
 }
 </style>
 <link href="/resources/css/kcal.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <form id="frmPaging">
 	<input type="hidden" name="kno" value="">
 	<input type="hidden" name="page" value="${ pagingDto.page }">
@@ -140,18 +142,18 @@ padding-left: 10px;
 					<hr>
 					<article class="single-post" style="padding-left: 80px;">
 						<!-- 				<form> -->
-						<div class="search" style="display: inline; width: 1145px; margin-bottom: 15px;">
-						<div style="display: inline;" class="col-md-11">
+						<div class="search row">
+						<div class="col-md-11">
 							<input class="form-control" type="text" placeholder="검색어 입력"
-								id="keyword"
+								id="keyword" style="float: left;"
 								<c:if test="${ pagingDto.keyword != null }">
 									value="${ pagingDto.keyword }"
 								</c:if>
 							>
 							</div>
-							<div style="display: inline;">
+							<div class="col-md-1" style="right: 25px; top: 3px;">
 								<input type="image" src="/resources/images/magnifier.png"
-									 style="width: 40px; float: right;" id="searchKcal">
+									 style="width: 40px;" id="searchKcal">
 							</div>
 					</div>
 					<br>
