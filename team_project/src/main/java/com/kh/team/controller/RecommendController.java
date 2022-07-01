@@ -46,8 +46,8 @@ public class RecommendController {
 		public String insertRecommend(RecommendVo recommendVo, RedirectAttributes rttr) {
 			System.out.println("AdminController, insertRecommend, recommendVo:" + recommendVo);
 			String content = recommendVo.getRe_content();
-			String userid = recommendVo.getUserid();
-			if (!userid.equals("admin01")) {
+			String nickname = recommendVo.getNickname();
+			if (!nickname.equals("관리자")) {
 				rttr.addFlashAttribute("notAdmin", "false");
 				return "redirect:/recommend/listRecommend";
 			}
@@ -85,11 +85,11 @@ public class RecommendController {
 			model.addAttribute("recommendVo", recommendVo);
 			
 			// 좋아요
-			String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
-		
+			String nickname = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getNickname();
+			System.out.println("select, nickname:" + nickname);
 			RecommendLikeVo reLikeVo = new RecommendLikeVo();
 			reLikeVo.setReno(reno);
-			reLikeVo.setUserid(userid);
+			reLikeVo.setNickname(nickname);
 			
 			int recommendLike = recommendLikeService.getRecommendLike(reLikeVo);
 			System.out.println("recommendBoard, recommendLike:" + recommendLike);
@@ -106,11 +106,12 @@ public class RecommendController {
 			
 			int heart = Integer.parseInt(httpRequest.getParameter("heart"));
 			int reno = Integer.parseInt(httpRequest.getParameter("reno"));
-			String userid = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getUserid();
+			String nickname = ((MemberVo)httpRequest.getSession().getAttribute("loginVo")).getNickname();
 			
+			System.out.println("/heart, nickname:" + nickname);
 			RecommendLikeVo reLikeVo = new RecommendLikeVo();
 			reLikeVo.setReno(reno);
-			reLikeVo.setUserid(userid);
+			reLikeVo.setNickname(nickname);
 			
 			System.out.println("heart:" + heart);
 			

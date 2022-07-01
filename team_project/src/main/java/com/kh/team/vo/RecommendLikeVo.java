@@ -2,7 +2,7 @@ package com.kh.team.vo;
 
 public class RecommendLikeVo {
 	private int re_lno;
-	private String userid;
+	private String nickname;
 	private int reno;
 
 	public RecommendLikeVo() {
@@ -10,10 +10,10 @@ public class RecommendLikeVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RecommendLikeVo(int re_lno, String userid, int reno) {
+	public RecommendLikeVo(int re_lno, String nickname, int reno) {
 		super();
 		this.re_lno = re_lno;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.reno = reno;
 	}
 
@@ -25,12 +25,12 @@ public class RecommendLikeVo {
 		this.re_lno = re_lno;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public int getReno() {
@@ -43,7 +43,7 @@ public class RecommendLikeVo {
 
 	@Override
 	public String toString() {
-		return "RecommendLikeVo [re_lno=" + re_lno + ", userid=" + userid + ", reno=" + reno + "]";
+		return "RecommendLikeVo [re_lno=" + re_lno + ", nickname=" + nickname + ", reno=" + reno + "]";
 	}
 
 }
