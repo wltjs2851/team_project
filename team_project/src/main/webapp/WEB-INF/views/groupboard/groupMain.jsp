@@ -170,6 +170,7 @@ $(function() {
 <%-- ${ groupList } --%>
 <%-- ${ pagingDto.totalPage } --%>
 <%-- ${ param.page } --%>
+<%-- ${ nickname } --%>
 
 <!-- 그룹 탈퇴 누르면 뜨는 모달창 -->
 <div class="row">
@@ -261,7 +262,9 @@ $(function() {
 					<h3>${ groupBoardVo.gb_title }</h3>
 					<ul class="list-inline">
 						<li class="list-inline-item">
+						<c:if test="${ loginVo.nickname == groupBoardVo.userid }">
 							by ${ groupBoardVo.userid }
+						</c:if>
 							<button class="btn dropdown-toggle" style="background-color: #ffffff; width: 20px; height:50px; padding: 1% 0" type="button" id="dropdownMenuButton" data-toggle="dropdown">
 							
 								<i class='fas fa-ellipsis-v'></i>
