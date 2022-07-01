@@ -22,7 +22,7 @@
  
  <select id="getReportBoardList" resultType="ReportBoardVo">
  	select * from tbl_report_board
- 	order by rbno desc
+ 	order by rep_state asc, rbno desc 
  </select>
  
 <!--  신고내역 조회 -->

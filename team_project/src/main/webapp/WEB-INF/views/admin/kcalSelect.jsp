@@ -143,7 +143,7 @@ padding-left: 10px;
 						<div class="search" style="display: inline; width: 1145px; margin-bottom: 15px;">
 						<div style="display: inline;" class="col-md-11">
 							<input class="form-control" type="text" placeholder="검색어 입력"
-								id="keyword"
+								id="keyword" style="float: left;"
 								<c:if test="${ pagingDto.keyword != null }">
 									value="${ pagingDto.keyword }"
 								</c:if>
@@ -151,7 +151,7 @@ padding-left: 10px;
 							</div>
 							<div style="display: inline;">
 								<input type="image" src="/resources/images/magnifier.png"
-									 style="width: 40px; float: right;" id="searchKcal">
+									 style="width: 40px;" id="searchKcal">
 							</div>
 					</div>
 					<br>
