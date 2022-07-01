@@ -193,6 +193,7 @@ public class FreeController {
 		byte[] data = IOUtils.toByteArray(fis);
 		fis.close();
 		return data;
+	
 	}
 	
 	@RequestMapping(value = "/uploadSummernoteImageFile", method = RequestMethod.POST)

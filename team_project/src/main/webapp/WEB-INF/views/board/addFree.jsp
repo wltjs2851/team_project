@@ -55,7 +55,7 @@ function uploadSummernoteImageFile(file) {
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form role="form" action="/free/addFreeRun" method="post" enctype="multipart/form-data">
+			<form role="form" action="/free/addFreeRun" method="post" enctype="multipart/form-data" accept-charset="utf-8">
 				<input type="hidden" id="nickname" name="nickname" value="${ loginVo.nickname }"/>
 				<div class="form-group row">
 					<div class="col-md-1">

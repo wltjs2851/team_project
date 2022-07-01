@@ -54,6 +54,7 @@ $(function() {
 });
 
 function setProduct(obj){
+	console.log(obj);
 	var div = "";
 	div += "<div style='display: inline-block;'>"
 	div += "<div class='row'>";
@@ -75,7 +76,7 @@ $(function() {
 		e.preventDefault();
 		console.log("click");
 		var shpDiv = $(this).parent().parent().parent();
-		shpDiv.remove();
+		shpDiv.empty();
 		$("#r_product").val("");
 	});
 	
