@@ -100,7 +100,7 @@
 <!-- 그룹원 정보 보기 -->
 <select id="pickGroupMember" resultType="MemberVo">
 	select * from tbl_user
-	where userid = #{userid}
+	where nickname = #{nickname}
 </select>
 
 <!-- 글 갯수 -->

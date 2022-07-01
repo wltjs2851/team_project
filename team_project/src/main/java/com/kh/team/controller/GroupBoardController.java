@@ -384,8 +384,8 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "/memberInfo", method = RequestMethod.GET)
-	public String pickGroupMember(String userid, Model model) {
-		MemberVo memberVo = groupBoardService.pickGroupMember(userid);
+	public String pickGroupMember(String nickname, Model model) {
+		MemberVo memberVo = groupBoardService.pickGroupMember(nickname);
 		System.out.println("pickGroupMember, memberVo: " + memberVo);
 		model.addAttribute("memberVo", memberVo);
 		

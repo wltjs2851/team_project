@@ -31,6 +31,7 @@ public class GroupBoardCommentController {
 	public String insertGroupComment(GroupBoardCommentVo groupBoardCommentVo, int gbno, HttpSession session) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = loginVo.getUserid();
+		String nickname = loginVo.getNickname();
 		
 		boolean result = groupBoardCommentService.insertGroupComment(groupBoardCommentVo);
 		groupBoardCommentService.updateComment(gbno);

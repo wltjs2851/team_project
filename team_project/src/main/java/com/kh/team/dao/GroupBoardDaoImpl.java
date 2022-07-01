@@ -115,8 +115,8 @@ public class GroupBoardDaoImpl implements GroupBoardDao {
 	}
 
 	@Override
-	public MemberVo pickGroupMember(String userid) {
-		MemberVo memberVo = sqlSession.selectOne(NAMESPACE + "pickGroupMember", userid);
+	public MemberVo pickGroupMember(String nickname) {
+		MemberVo memberVo = sqlSession.selectOne(NAMESPACE + "pickGroupMember", nickname);
 		return memberVo;
 	}
 

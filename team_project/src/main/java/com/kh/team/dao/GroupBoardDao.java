@@ -24,7 +24,7 @@ public interface GroupBoardDao {
 	public String getGb_picdById(int gbno);
 //	public String getGroupById(String userid);
 	public boolean updateGLeader(GroupVo groupVo);
-	public MemberVo pickGroupMember(String userid);
+	public MemberVo pickGroupMember(String nickname);
 	public int getCount(PagingDto pagingDto);
 	public int getCountMain(PagingDto pagingDto);
 	

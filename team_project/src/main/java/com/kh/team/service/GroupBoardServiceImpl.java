@@ -88,8 +88,8 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	}
 
 	@Override
-	public MemberVo pickGroupMember(String userid) {
-		MemberVo memberVo = groupBoardDao.pickGroupMember(userid);
+	public MemberVo pickGroupMember(String nickname) {
+		MemberVo memberVo = groupBoardDao.pickGroupMember(nickname);
 		return memberVo;
 	}
 
