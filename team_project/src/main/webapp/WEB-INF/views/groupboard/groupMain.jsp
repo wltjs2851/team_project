@@ -118,7 +118,7 @@ $(function() {
 		console.log(gno);
 		var url = "/groupboard/reportForm/" + nickname + "/" + gno;
 		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
-// 		window.open(url, "신고 페이지", option);
+		window.open(url, "신고 페이지", option);
 	});
 
 	

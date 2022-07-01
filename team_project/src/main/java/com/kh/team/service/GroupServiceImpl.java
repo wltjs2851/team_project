@@ -75,9 +75,9 @@ public class GroupServiceImpl implements GroupService{
 	
 	@Override
 	@Transactional
-	public boolean banGroup(int gno, String userid) {
+	public boolean banGroup(int gno, String nickname) {
 		boolean groupResult = groupDao.updateGroupMember(gno, -1);
-		boolean joinGroupResult = groupDao.deleteJoinGroup(gno, userid);
+		boolean joinGroupResult = groupDao.deleteJoinGroup(gno, nickname);
 		if (groupResult && joinGroupResult) {
 			return true;
 		}
