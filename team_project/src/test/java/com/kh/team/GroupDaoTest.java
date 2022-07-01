@@ -59,11 +59,11 @@ public class GroupDaoTest {
 		}
 	}
 	
-	@Test
-	public void testGroupJoinService() {
-		boolean result = groupService.joinGroup(1, "hong1234");
-		System.out.println("result: " + result);
-	}
+//	@Test
+//	public void testGroupJoinService() {
+//		boolean result = groupService.joinGroup(1, "hong1234");
+//		System.out.println("result: " + result);
+//	}
 	
 	
 }

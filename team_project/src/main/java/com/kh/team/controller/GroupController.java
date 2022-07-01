@@ -94,24 +94,24 @@ public class GroupController {
 		System.out.println("GroupController, addGroupRun, file: " + file);
 		String originalFilename = file.getOriginalFilename();
 		System.out.println("originalFilename: " + originalFilename);
-		
+		MemberVo memberVo = (MemberVo) session.getAttribute("loginVo");
+		String nickname = memberVo.getNickname();
 		String g_pic;
 		if (originalFilename != null && !originalFilename.equals("")) {
 			try {
 				g_pic = FileUtil.uploadFile("C:/gpic", originalFilename, file.getBytes());
 				groupVo.setG_pic(g_pic);
-				groupService.addGroup(groupVo);
+				groupService.addGroup(groupVo, nickname);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
 			groupVo.setG_pic(null);
-			groupService.addGroup(groupVo);
+			groupService.addGroup(groupVo, nickname);
 		}
 		session.removeAttribute("loginVo");
-		MemberVo memberVo = memberService.memberByUserid(groupVo.getG_leader());
-		session.setAttribute("loginVo", memberVo);
+		MemberVo memberVo2 = memberService.memberByUserid(groupVo.getG_leader());
+		session.setAttribute("loginVo", memberVo2);
 		return "redirect:/group/groupList";
 	}
 
@@ -180,9 +180,13 @@ public class GroupController {
 	public String joinGroup(GroupVo groupVo, HttpSession session, RedirectAttributes rttr) {
 		MemberVo memberVo = (MemberVo) session.getAttribute("loginVo");
 		String userid = memberVo.getUserid();
+		String nickname = memberVo.getNickname();
+		
 		System.out.println("userid: " + userid);
+		System.out.println("nickname: " + nickname);
 		System.out.println("groupVo: " + groupVo);
-		boolean result = groupService.joinGroup(groupVo.getGno(), userid);
+		
+		boolean result = groupService.joinGroup(groupVo.getGno(), userid, nickname);
 		rttr.addFlashAttribute("joinResult", result);
 		return "redirect:/group/groupList";
 	}

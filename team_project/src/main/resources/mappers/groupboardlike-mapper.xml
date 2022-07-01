@@ -8,14 +8,14 @@
  
  <!-- 좋아요 추가 -->
  <insert id="addLike">
- 	insert into tbl_group_board_like(gb_lno, userid, gbno, gno)
- 	values(seq_group_board_like_gb_lno.nextval, #{userid}, #{gbno}, #{gno})
+ 	insert into tbl_group_board_like(gb_lno, nickname, gbno, gno)
+ 	values(seq_group_board_like_gb_lno.nextval, #{nickname}, #{gbno}, #{gno})
  </insert>
  
  <!-- 좋아요 삭제 -->
  <delete id="deleteLike">
  	delete from tbl_group_board_like
- 	where userid = #{userid} and gbno = #{gbno}
+ 	where nickname = #{nickname} and gbno = #{gbno}
  </delete>
  
  <!-- 좋아요 전체 삭제 -->

@@ -79,10 +79,11 @@ public class GroupDaoImpl implements GroupDao{
 	}
 
 	@Override
-	public boolean insertJoinGroup(int gno, String userid) {
+	public boolean insertJoinGroup(int gno, String userid, String nickname) {
 		Map<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("gno", gno);
 		parameter.put("userid", userid);
+		parameter.put("nickname", nickname);
 		System.out.println(parameter);
 		int count = sqlSession.insert(NAMESPACE + "insertJoinGroup", parameter);
 		if(count > 0) {

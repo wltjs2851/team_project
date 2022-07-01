@@ -16,6 +16,6 @@ public interface GroupBoardCommentDao {
 	
 	public boolean deleteAllGComment(int gbno);
 	
-	public List<GroupBoardCommentVo> adminGroupBoardComment(String userid);
+	public List<GroupBoardCommentVo> adminGroupBoardComment(String nickname);
 
 }

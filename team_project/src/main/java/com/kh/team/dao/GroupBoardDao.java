@@ -24,13 +24,13 @@ public interface GroupBoardDao {
 	public String getGb_picdById(int gbno);
 //	public String getGroupById(String userid);
 	public boolean updateGLeader(GroupVo groupVo);
-	public MemberVo pickGroupMember(String userid);
+	public MemberVo pickGroupMember(String nickname);
 	public int getCount(PagingDto pagingDto);
 	public int getCountMain(PagingDto pagingDto);
 	
-	public boolean deleteMember(String userid, int gno);
+	public boolean deleteMember(String nickname, int gno);
 	public void updateCtnMember(int gno);
 	
-	public List<GroupBoardVo> adminGroupBoardList(String userid);
+	public List<GroupBoardVo> adminGroupBoardList(String nickname);
 
 }

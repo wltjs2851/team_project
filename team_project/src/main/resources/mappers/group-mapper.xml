@@ -69,8 +69,8 @@
 
 <!-- 그룹 가입	 -->
 	<insert id="insertJoinGroup">
-		insert into tbl_group_join(jno, gno, userid)
-			values(seq_group_jno.nextval, #{gno}, #{userid})
+		insert into tbl_group_join(jno, gno, userid, nickname)
+			values(seq_group_jno.nextval, #{gno}, #{userid}, #{nickname})
 	</insert>
 	
 	
@@ -111,7 +111,7 @@
 	
 	<!-- 그룹별 멤버 가져오기 -->
 	<select id="getGroupMember" resultType="GroupJoinVo">
-		select userid from tbl_group_join
+		select * from tbl_group_join
 		where gno = #{gno}
 	</select>
 	

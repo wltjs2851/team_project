@@ -4,6 +4,7 @@ public class GroupJoinVo {
 	private int jno;
 	private int gno;
 	private String userid;
+	private String nickname;
 	
 	public GroupJoinVo() {
 		super();
@@ -14,6 +15,14 @@ public class GroupJoinVo {
 		this.jno = jno;
 		this.gno = gno;
 		this.userid = userid;
+	}
+
+	public GroupJoinVo(int jno, int gno, String userid, String nickname) {
+		super();
+		this.jno = jno;
+		this.gno = gno;
+		this.userid = userid;
+		this.nickname = nickname;
 	}
 
 	public int getJno() {
@@ -40,9 +49,17 @@ public class GroupJoinVo {
 		this.userid = userid;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	@Override
 	public String toString() {
-		return "GroupJoinVo [jno=" + jno + ", gno=" + gno + ", userid=" + userid + "]";
+		return "GroupJoinVo [jno=" + jno + ", gno=" + gno + ", userid=" + userid + ", nickname=" + nickname + "]";
 	}
-	
+
 }

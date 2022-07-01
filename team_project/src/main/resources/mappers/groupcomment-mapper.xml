@@ -8,9 +8,9 @@
  
  <!-- 댓글 등록 -->
  <insert id="insertGroupComment">
- 	insert into tbl_group_board_comment(gbcno, gbc_content, gbno, userid, u_pic, gno)
+ 	insert into tbl_group_board_comment(gbcno, gbc_content, gbno, nickname, u_pic, gno)
  	values(seq_group_board_comment_gbcno.nextval, #{gbc_content}, #{gbno},
- 		   #{userid}, #{u_pic, jdbcType=VARCHAR}, #{gno})
+ 		   #{nickname}, #{u_pic, jdbcType=VARCHAR}, #{gno})
  </insert>
  
  <!-- 댓글 목록 -->
@@ -62,6 +62,6 @@
  <!--  유저 작성 댓글 조회 -->
 	<select id="adminGroupBoardComment" resultType="GroupBoardCommentVo">
 		select gbcno, gbno, gbc_content, gbc_regdate from tbl_group_board_comment
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
  </mapper>

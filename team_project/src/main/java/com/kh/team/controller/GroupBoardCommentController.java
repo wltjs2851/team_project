@@ -30,7 +30,8 @@ public class GroupBoardCommentController {
 	@RequestMapping(value = "/insertGroupComment", method = RequestMethod.POST)
 	public String insertGroupComment(GroupBoardCommentVo groupBoardCommentVo, int gbno, HttpSession session) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
-		String userid = loginVo.getUserid();
+//		String userid = loginVo.getUserid();
+		String nickname = loginVo.getNickname();
 		
 		boolean result = groupBoardCommentService.insertGroupComment(groupBoardCommentVo);
 		groupBoardCommentService.updateComment(gbno);

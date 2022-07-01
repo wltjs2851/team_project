@@ -18,10 +18,10 @@ $(function() {
 	$(".btnBan").click(function() {
 		console.log("click");
 		var that = $(this);
-		var userid = that.attr("data-value");
-		console.log(userid);
+		var nickname = that.attr("data-value");
+		console.log(nickname);
 		var gno = "${groupVo.gno}";
-		var url = "/group/banMember/" + userid + "/" + gno;
+		var url = "/group/banMember/" + nickname + "/" + gno;
 // 		var sData = {
 // 				"gno" : gno
 // 		}
@@ -70,9 +70,9 @@ $(function() {
 	// 모달, 탈퇴 버튼(일반 그룹원)
 	$("#leave").click(function() {
 		console.log("Click");
-		var userid = "${loginVo.userid}";
+		var nickname = "${loginVo.nickname}";
 		var gno = ${groupVo.gno};
-		var url = "/group/deleteMember/" + userid + "/" + gno;
+		var url = "/group/deleteMember/" + nickname + "/" + gno;
 // 		var sData = {
 // 				"gno" : gno
 // 		}
@@ -91,10 +91,10 @@ $(function() {
 	$(".report").click(function(e) {
 		e.preventDefault();
 		console.log("신고 클릭");
-		var userid = $(this).next().val();
+		var nickname = $(this).next().val();
 		var gno = $("#gno").val();
 		console.log(gno);
-		var url = "/groupboard/reportForm/" + userid + "/" + gno;
+		var url = "/groupboard/reportForm/" + nickname + "/" + gno;
 		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
 		window.open(url, "신고 페이지", option);
 	});
@@ -103,12 +103,12 @@ $(function() {
 	$(".reportList").click(function(e) {
 		e.preventDefault();
 		console.log("click");
-		var userid = $(this).next().val();
-		console.log(userid);
+		var nickname = $(this).next().val();
+		console.log(nickname);
 		var gno = $("#gno").val();
 		console.log(gno);
 		
-		var url = "/groupboard/reportList/" + userid + "/" + gno;
+		var url = "/groupboard/reportList/" + nickname + "/" + gno;
 		var option = "width = 650px, height=600px, top=300px, left=300px, scrollbars=yes";
 		window.open(url, "회원 신고 목록", option);
 	});
@@ -117,7 +117,7 @@ $(function() {
 
 <%-- ${ groupVo } --%>
 <!-- <hr> -->
-<%-- ${ groupJoinMember } --%>
+${ groupJoinMember }
 <!-- <hr> -->
 <%-- ${ count } --%>
 
@@ -250,18 +250,18 @@ $(function() {
 									
 									<c:forEach items="${groupJoinMember}" var="groupJoinVo">
 										<div style="margin: 10px;">
-										<span>${ groupJoinVo.userid }</span>
+										<span>${ groupJoinVo.nickname }</span>
 										
 										
 										<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
 											
-											<button data-value="${ groupJoinVo.userid }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
+											<button data-value="${ groupJoinVo.nickname }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
 											<button data-value="${ groupJoinVo.userid }" class="btnUpdateGLeader btn btn-default" id="btnUpdateGLeader" style="width: 90px; height:30px; padding: 1% 0">권한 넘기기</button>
 										</c:if>
 										
 											<i id="report" class="report fa-solid fa-handcuffs"><a class="btn btn-outline-danger" style="width: 40px; height:30px; padding: 1% 0" href="#" 
-											 	data-user="${ groupBoardVo.userid }">신고</a></i>
-											<input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
+											 	data-user="${ groupBoardVo.nickname }">신고</a></i>
+											<input type="hidden" id="nickname" name="nickname" value="${ groupJoinVo.nickname }">
 											<input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">
 											
 											<!-- 신고 관련 -->
@@ -275,10 +275,10 @@ $(function() {
 											
 											<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
 												 <a id="reportList" class="reportList dropdown-item" href="#">신고 목록</a>
-												 <input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
+												 <input type="hidden" id="nickname" name="nickname" value="${ groupJoinVo.nickname }">
 												 <input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">
 											</c:if>
-												 <a class="dropdown-item" href="/groupboard/memberInfo?userid=${ groupJoinVo.userid }">회원 정보 보기</a>
+												 <a class="dropdown-item" href="/groupboard/memberInfo?nickname=${ groupJoinVo.nickname }">회원 정보 보기</a>
 											</div>
 										
 										</div>

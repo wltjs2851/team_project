@@ -7,7 +7,7 @@ public class GroupBoardVo {
 	private int gbno;
 	private String gb_title;
 	private String gb_content;
-	private String userid;
+	private String nickname;
 	private String gb_notice;
 	private Date gb_regdate;
 	private int gb_like;
@@ -24,35 +24,35 @@ public class GroupBoardVo {
 		this.gno = gno;
 	}
 
-	public GroupBoardVo(String gb_title, String gb_content, String userid, String gb_notice, String gb_pic) {
+	public GroupBoardVo(String gb_title, String gb_content, String nickname, String gb_notice, String gb_pic) {
 		super();
 		this.gb_title = gb_title;
 		this.gb_content = gb_content;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.gb_notice = gb_notice;
 		this.gb_pic = gb_pic;
 	}
 
-	public GroupBoardVo(int gbno, String gb_title, String gb_content, String userid, String gb_notice, Date gb_regdate,
+	public GroupBoardVo(int gbno, String gb_title, String gb_content, String nickname, String gb_notice, Date gb_regdate,
 			int gb_like, String gb_pic) {
 		super();
 		this.gbno = gbno;
 		this.gb_title = gb_title;
 		this.gb_content = gb_content;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.gb_notice = gb_notice;
 		this.gb_regdate = gb_regdate;
 		this.gb_like = gb_like;
 		this.gb_pic = gb_pic;
 	}
 
-	public GroupBoardVo(int gbno, String gb_title, String gb_content, String userid, String gb_notice, Date gb_regdate,
+	public GroupBoardVo(int gbno, String gb_title, String gb_content, String nickname, String gb_notice, Date gb_regdate,
 			int gb_like, String gb_pic, int gb_comment) {
 		super();
 		this.gbno = gbno;
 		this.gb_title = gb_title;
 		this.gb_content = gb_content;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.gb_notice = gb_notice;
 		this.gb_regdate = gb_regdate;
 		this.gb_like = gb_like;
@@ -60,13 +60,13 @@ public class GroupBoardVo {
 		this.gb_comment = gb_comment;
 	}
 
-	public GroupBoardVo(int gbno, String gb_title, String gb_content, String userid, String gb_notice, Date gb_regdate,
+	public GroupBoardVo(int gbno, String gb_title, String gb_content, String nickname, String gb_notice, Date gb_regdate,
 			int gb_like, String gb_pic, int gb_comment, int gno) {
 		super();
 		this.gbno = gbno;
 		this.gb_title = gb_title;
 		this.gb_content = gb_content;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.gb_notice = gb_notice;
 		this.gb_regdate = gb_regdate;
 		this.gb_like = gb_like;
@@ -99,12 +99,12 @@ public class GroupBoardVo {
 		this.gb_content = gb_content;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getGb_notice() {
@@ -157,8 +157,8 @@ public class GroupBoardVo {
 
 	@Override
 	public String toString() {
-		return "GroupBoardVo [gbno=" + gbno + ", gb_title=" + gb_title + ", gb_content=" + gb_content + ", userid="
-				+ userid + ", gb_notice=" + gb_notice + ", gb_regdate=" + gb_regdate + ", gb_like=" + gb_like
+		return "GroupBoardVo [gbno=" + gbno + ", gb_title=" + gb_title + ", gb_content=" + gb_content + ", nickname="
+				+ nickname + ", gb_notice=" + gb_notice + ", gb_regdate=" + gb_regdate + ", gb_like=" + gb_like
 				+ ", gb_pic=" + gb_pic + ", gb_comment=" + gb_comment + ", gno=" + gno + "]";
 	}
 
