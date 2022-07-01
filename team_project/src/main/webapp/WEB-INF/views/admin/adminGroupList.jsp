@@ -51,7 +51,6 @@ tr.tr_list:hover{
 	});
 </script>
 <%-- ${lastestMember } --%>
-${pagingDto }
 <!-- 페이지, 검색 값 -->
 <form id="frmPaging">
 	<input

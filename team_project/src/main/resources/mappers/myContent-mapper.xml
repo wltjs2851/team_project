@@ -8,81 +8,81 @@
 	<select id="getFreeByLike" resultType="FreeVo">
 		select * from tbl_free
 		where fno in (select distinct fno from tbl_free_like
-						where userid = #{userid})
+						where nickname = #{nickname})
 	</select>
 	
 	<select id="getGroupBoardByLike" resultType="GroupBoardVo">
 		select * from tbl_group_board
 		where gbno in (select distinct gbno from tbl_group_board_like
-						where userid = #{userid})
+						where nickname = #{nickname})
 	</select>
 	
 	<select id="getRecipeByLike" resultType="RecipeVo">
 		select * from tbl_recipe
 		where rno in (select distinct rno from tbl_recipe_like
-						where userid = #{userid})
+						where nickname = #{nickname})
 	</select>
 	
 	<select id="getRoutineByLike" resultType="RoutineVo">
 		select * from tbl_userroutine
 		where uno in (select distinct uno from tbl_routine_like
-						where userid = #{userid})
+						where nickname = #{nickname})
 	</select>
 	
 	<select id="getRecommendByLike" resultType="RecommendVo">
 		select * from tbl_recommend
 		where reno = (select distinct reno from tbl_recommend_like
-						where userid = #{userid})
+						where nickname = #{nickname})
 	</select>
 	
 	<select id="getWriteFree" resultType="FreeVo">
 		select * from tbl_free
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 	
 	<select id="getWriteGroupBoard" resultType="GroupBoardVo">
 		select * from tbl_group_board
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 	
 	<select id="getWriteRecipe" resultType="RecipeVo">
 		select * from tbl_recipe
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 	
 	<select id="getWriteRoutine" resultType="RoutineVo">
 		select * from tbl_userroutine
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 	
 	<select id="getWriteRecommend" resultType="RecommendVo">
 		select * from tbl_recommend
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 	
 	<select id="getFreeComment" resultType="FreeCommentVo">
 		select * from tbl_fcomment
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 	
 	<select id="getGroupBoardComment" resultType="GroupBoardCommentVo">
 		select * from tbl_group_board_comment
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 	
 	<select id="getRecipeComment" resultType="RecipeCommentVo">
 		select * from tbl_rcomment		
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 	
 	<select id="getRoutineComment" resultType="RoutineCommentVo">
 		select * from tbl_ucomment
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 	
 	<select id="getRecommendComment" resultType="RecommendCommentVo">
 		select * from tbl_reccomment
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 	
 	<select id="gnoByGroupComment" resultType="int">

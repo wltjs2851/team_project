@@ -135,7 +135,7 @@ public class MemberController {
 	@Transactional
 	public String myActivityLike(HttpSession session, Model model, String type) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
-		String userid = loginVo.getUserid();
+		String nickname = loginVo.getNickname();
 		List<FreeVo> free = new ArrayList<>();
 		List<GroupBoardVo> groupBoard = new ArrayList<>();
 		List<RecipeVo> recipe = new ArrayList<>();
@@ -152,23 +152,23 @@ public class MemberController {
 		List<RoutineCommentVo> routineComment = null;
 		List<RecommendCommentVo> recommendComment = null;
 		if (type.equals("like")) {
-			free = myContentService.getFreeByLike(userid);
-			groupBoard = myContentService.getGroupBoardByLike(userid);
-			recipe = myContentService.getRecipeByLike(userid);
-			routine = myContentService.getRoutineByLike(userid);
-			recommend = myContentService.getRecommendByLike(userid);
+			free = myContentService.getFreeByLike(nickname);
+			groupBoard = myContentService.getGroupBoardByLike(nickname);
+			recipe = myContentService.getRecipeByLike(nickname);
+			routine = myContentService.getRoutineByLike(nickname);
+			recommend = myContentService.getRecommendByLike(nickname);
 		} else if (type.equals("write")) {
-			free = myContentService.getWriteFree(userid);
-			groupBoard = myContentService.getWriteGroupBoard(userid);
-			recipe = myContentService.getWriteRecipe(userid);
-			routine = myContentService.getWriteRoutine(userid);
-			recommend = myContentService.getWriteRecommend(userid);
+			free = myContentService.getWriteFree(nickname);
+			groupBoard = myContentService.getWriteGroupBoard(nickname);
+			recipe = myContentService.getWriteRecipe(nickname);
+			routine = myContentService.getWriteRoutine(nickname);
+			recommend = myContentService.getWriteRecommend(nickname);
 		} else if (type.equals("comment")) {
-			freeComment = myContentService.getFreeComment(userid);
-			groupBoardComment = myContentService.getGroupBoardComment(userid);
-			recipeComment = myContentService.getRecipeComment(userid);
-			routineComment = myContentService.getRoutineComment(userid);
-			recommendComment = myContentService.getRecommendComment(userid);
+			freeComment = myContentService.getFreeComment(nickname);
+			groupBoardComment = myContentService.getGroupBoardComment(nickname);
+			recipeComment = myContentService.getRecipeComment(nickname);
+			routineComment = myContentService.getRoutineComment(nickname);
+			recommendComment = myContentService.getRecommendComment(nickname);
 		}
 		model.addAttribute("free", free);
 		model.addAttribute("groupBoard", groupBoard);
