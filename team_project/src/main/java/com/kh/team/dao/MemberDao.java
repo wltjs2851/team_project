@@ -37,4 +37,6 @@ public interface MemberDao  {
 	// 전체 회원 조회
 	public List<MemberVo> getMemberList(PagingDto pagingDto);
 	
+	public MemberVo isExistNickname(String nickname);
+	
 }

@@ -87,4 +87,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.getCountMember(pagingDto);
 	}
 
+	@Override
+	public MemberVo isExistNickname(String nickname) {
+		return memberDao.isExistNickname(nickname);
+	}
+
 }

@@ -32,4 +32,6 @@ public interface MemberService {
 	public int getCountMember(PagingDto pagingDto);
 	
 	public List<MemberVo> getMemberList(PagingDto pagingDto);
+	
+	public MemberVo isExistNickname(String nickname);
 }

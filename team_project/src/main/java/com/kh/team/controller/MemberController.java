@@ -365,4 +365,15 @@ public class MemberController {
 		return "/board/memberInfo";
 	}
 	
+	@RequestMapping(value = "/isExistNickname", method = RequestMethod.POST)
+	@ResponseBody
+	public String isExistNickname(String nickname) {
+		MemberVo memberVo = memberService.isExistNickname(nickname);
+		boolean result = false;
+		if (memberVo != null && !memberVo.equals("")) {
+			result = true;
+		}
+		return String.valueOf(result);
+	}
+	
 }
