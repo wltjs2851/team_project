@@ -98,4 +98,9 @@
 		where nickname = #{nickname}
 	</select>
 	
+	<select id="memberByNickname" resultType="MemberVo">
+		select * from tbl_user
+		where nickname = #{nickname}
+	</select>
+	
 </mapper>

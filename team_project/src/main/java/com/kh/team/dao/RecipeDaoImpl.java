@@ -73,19 +73,19 @@ public class RecipeDaoImpl implements RecipeDao{
 	}
 
 	@Override
-	public int countComment(int rno, String userid) {
+	public int countComment(int rno, String nickname) {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("rno", rno);
-		parameter.put("userid", userid);
+		parameter.put("nickname", nickname);
 		int count = sqlSession.selectOne(NAMESPACE + "countComment", parameter);
 		return count;
 	}
 
 	@Override
-	public boolean insertLike(int rno, String userid) {
+	public boolean insertLike(int rno, String nickname) {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("rno", rno);
-		parameter.put("userid", userid);
+		parameter.put("nickname", nickname);
 		int count = sqlSession.insert(NAMESPACE + "insertLike", parameter);
 		if(count > 0) {
 			return true;
@@ -94,10 +94,10 @@ public class RecipeDaoImpl implements RecipeDao{
 	}
 
 	@Override
-	public boolean deleteLike(int rno, String userid) {
+	public boolean deleteLike(int rno, String nickname) {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("rno", rno);
-		parameter.put("userid", userid);
+		parameter.put("nickname", nickname);
 		int count = sqlSession.delete(NAMESPACE + "deleteLike", parameter);
 		if(count > 0) {
 			return true;
@@ -108,10 +108,10 @@ public class RecipeDaoImpl implements RecipeDao{
 	// 키보드가 정말 별로인데요!
 
 	@Override
-	public int countLike(int rno, String userid) {
+	public int countLike(int rno, String nickname) {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("rno", rno);
-		parameter.put("userid", userid);
+		parameter.put("nickname", nickname);
 		int count = sqlSession.selectOne(NAMESPACE + "countLike", parameter);
 		return count;
 	}
@@ -135,8 +135,8 @@ public class RecipeDaoImpl implements RecipeDao{
 	}
 
 	@Override
-	public List<RecipeVo> adminRecipeList(String userid) {
-		List<RecipeVo> adminRecipeList = sqlSession.selectList(NAMESPACE + "adminRecipeList", userid);
+	public List<RecipeVo> adminRecipeList(String nickname) {
+		List<RecipeVo> adminRecipeList = sqlSession.selectList(NAMESPACE + "adminRecipeList", nickname);
 		return adminRecipeList;
 	}
 

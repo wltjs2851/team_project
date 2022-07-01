@@ -6,7 +6,7 @@ public class RecipeCommentVo {
 	private int rcno;
 	private int rno;
 	private String rc_comment;
-	private String userid;
+	private String nickname;
 	private Date rc_regdate;
 	private String u_pic;
 	private int visible;
@@ -22,31 +22,31 @@ public class RecipeCommentVo {
 		this.rc_comment = rc_comment;
 	}
 
-	public RecipeCommentVo(int rno, String rc_comment, String userid, String u_pic) {
+	public RecipeCommentVo(int rno, String rc_comment, String nickname, String u_pic) {
 		super();
 		this.rno = rno;
 		this.rc_comment = rc_comment;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.u_pic = u_pic;
 	}
 
-	public RecipeCommentVo(int rcno, int rno, String rc_comment, String userid, Date rc_regdate, String u_pic) {
+	public RecipeCommentVo(int rcno, int rno, String rc_comment, String nickname, Date rc_regdate, String u_pic) {
 		super();
 		this.rcno = rcno;
 		this.rno = rno;
 		this.rc_comment = rc_comment;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.rc_regdate = rc_regdate;
 		this.u_pic = u_pic;
 	}
 
-	public RecipeCommentVo(int rcno, int rno, String rc_comment, String userid, Date rc_regdate, String u_pic,
+	public RecipeCommentVo(int rcno, int rno, String rc_comment, String nickname, Date rc_regdate, String u_pic,
 			int visible) {
 		super();
 		this.rcno = rcno;
 		this.rno = rno;
 		this.rc_comment = rc_comment;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.rc_regdate = rc_regdate;
 		this.u_pic = u_pic;
 		this.visible = visible;
@@ -76,12 +76,12 @@ public class RecipeCommentVo {
 		this.rc_comment = rc_comment;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public Date getRc_regdate() {
@@ -110,7 +110,7 @@ public class RecipeCommentVo {
 
 	@Override
 	public String toString() {
-		return "RecipeCommentVo [rcno=" + rcno + ", rno=" + rno + ", rc_comment=" + rc_comment + ", userid=" + userid
+		return "RecipeCommentVo [rcno=" + rcno + ", rno=" + rno + ", rc_comment=" + rc_comment + ", nickname=" + nickname
 				+ ", rc_regdate=" + rc_regdate + ", u_pic=" + u_pic + ", visible=" + visible + "]";
 	}
 }

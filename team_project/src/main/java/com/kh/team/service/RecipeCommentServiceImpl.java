@@ -35,8 +35,8 @@ public class RecipeCommentServiceImpl implements RecipeCommentService{
 	}
 
 	@Override
-	public List<RecipeCommentVo> adminRecipeComment(String userid) {
-		return recipeCommentDao.adminRecipeComment(userid);
+	public List<RecipeCommentVo> adminRecipeComment(String nickname) {
+		return recipeCommentDao.adminRecipeComment(nickname);
 	}
 
 }

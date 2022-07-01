@@ -103,7 +103,7 @@ $(function() {
 		<div class="col-md-2"></div>
 		<div class="col-md-7" style='display:inline-block; vertical-align: top;'>
 				<input type="hidden" name="rno" value="${ recipeVo.rno }">
-				<input type="hidden" id="userid" name="userid" value="${ loginVo.userid }"/>
+				<input type="hidden" id="nickname" name="nickname" value="${ loginVo.nickname }"/>
 				<input type="hidden" id="r_product" name="r_product"/>
 				<input type="hidden" name="page" value="${ param.page }">
 				<input type="hidden" name="perPage" value="${ param.perPage }">

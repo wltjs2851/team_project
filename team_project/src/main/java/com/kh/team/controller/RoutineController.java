@@ -74,7 +74,7 @@ public class RoutineController {
 	public String routineContent(Model model, int uno, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		RoutineVo routineVo = routineService.contentByUno(uno);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
-		int like_cnt = routineService.isLike(uno, memberVo.getUserid());
+		int like_cnt = routineService.isLike(uno, memberVo.getNickname());
 		model.addAttribute("routineVo", routineVo);
 		model.addAttribute("like_cnt", like_cnt);
 		
@@ -171,14 +171,14 @@ public class RoutineController {
 	public int updateLike(RoutineVo routineVo, @RequestParam("like_cnt") int like_cnt, Model model) {
 		System.out.println(routineVo);
 		int uno = routineVo.getUno();
-		String userid = routineVo.getUserid();
+		String nickname = routineVo.getNickname();
 		int ur_like = routineVo.getUr_like();
 		
 		if(like_cnt > 0) {
-			routineService.decreaseLike(uno, ur_like, userid);
+			routineService.decreaseLike(uno, ur_like, nickname);
 			like_cnt = 0;
 		} else {
-			routineService.increaseLike(uno, ur_like, userid);
+			routineService.increaseLike(uno, ur_like, nickname);
 			like_cnt = 1;
 		}
 		return like_cnt;

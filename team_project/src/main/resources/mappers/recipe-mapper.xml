@@ -4,8 +4,8 @@
   
 <mapper namespace="com.kh.team.mappers.recipe">
 	<insert id="insertRecipe">
-		insert into tbl_recipe(rno, r_title, r_content, userid, r_pic, r_product)
-			values(seq_recipe_rno.nextval, #{r_title}, #{r_content}, #{userid},
+		insert into tbl_recipe(rno, r_title, r_content, nickname, r_pic, r_product)
+			values(seq_recipe_rno.nextval, #{r_title}, #{r_content}, #{nickname},
 				#{r_pic, jdbcType=VARCHAR}, #{r_product, jdbcType=VARCHAR})
 	</insert>
 	
@@ -48,16 +48,16 @@
 	</select>
 	
  	<select id="countComment" resultType="int">
- 		select count(rlno) from tbl_rcomment where userid = #{userid} and rno = #{rno}
+ 		select count(rlno) from tbl_rcomment where nickname = #{nickname} and rno = #{rno}
 	</select>
 	
 	<insert id="insertLike">
-		insert into tbl_recipe_like(rlno, rno, userid)
-			values(seq_recipe_rlno.nextval, #{rno}, #{userid})
+		insert into tbl_recipe_like(rlno, rno, nickname)
+			values(seq_recipe_rlno.nextval, #{rno}, #{nickname})
 	</insert>
 	
 	<delete id="deleteLike">
-		delete from tbl_recipe_like where rno = #{rno} and userid = #{userid}
+		delete from tbl_recipe_like where rno = #{rno} and nickname = #{nickname}
 	</delete>
 	
 	<delete id="deleteLikeAll">
@@ -65,7 +65,7 @@
 	</delete>
 	
 	<select id="countLike" resultType="int">
-		select count(*) from tbl_recipe_like where rno = #{rno} and userid = #{userid}
+		select count(*) from tbl_recipe_like where rno = #{rno} and nickname = #{nickname}
 	</select>
 	
 	<update id="updateLikecnt">
@@ -77,14 +77,14 @@
 				<choose>
 					<when test='searchType == "t"'>where r_title like '%' || #{keyword} || '%'</when>
 					<when test='searchType == "c"'>where r_content like '%' || #{keyword} || '%'</when>
-					<when test='searchType == "w"'>where userid like '%' || #{keyword} || '%'</when>
+					<when test='searchType == "w"'>where nickname like '%' || #{keyword} || '%'</when>
 					<when test='searchType == "tc"'>
 					where r_title like '%' || #{keyword} || '%'
 					or r_content like '%' || #{keyword} || '%'</when>
 					<when test='searchType == "tcw"'>
 					where r_title like '%' || #{keyword} || '%'
 					or r_content like '%' || #{keyword} || '%'
-					or userid like '%' || #{keyword} || '%'
+					or nickname like '%' || #{keyword} || '%'
 					</when>
 				</choose>
 			</if>
@@ -93,6 +93,6 @@
 <!-- 	회원 작성글 찾기  -->
 	<select id="adminRecipeList" resultType="RecipeVo">
 		select rno, r_title, r_regdate from tbl_recipe
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 </mapper>

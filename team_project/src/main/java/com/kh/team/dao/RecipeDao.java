@@ -19,12 +19,12 @@ public interface RecipeDao {
 	
 	public List<RecipeVo> selectByViewCnt();
 	
-	public int countComment(int rno, String userid);
-	public boolean insertLike(int rno, String userid);
-	public boolean deleteLike(int rno, String userid);
+	public int countComment(int rno, String nickname);
+	public boolean insertLike(int rno, String nickname);
+	public boolean deleteLike(int rno, String nickname);
 	public boolean deleteLikeAll(int rno);
-	public int countLike(int rno, String userid);
+	public int countLike(int rno, String nickname);
 	public boolean updateLikecnt(int rno, int r_like);
 	
-	public List<RecipeVo> adminRecipeList(String userid);
+	public List<RecipeVo> adminRecipeList(String nickname);
 }

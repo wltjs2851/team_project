@@ -10,5 +10,5 @@ public interface RecipeCommentService {
 	public boolean modifyRecipeComment(RecipeCommentVo commentVo);
 	public boolean removeRecipeComment(int rcno);
 	
-	public List<RecipeCommentVo> adminRecipeComment(String userid);
+	public List<RecipeCommentVo> adminRecipeComment(String nickname);
 }

@@ -39,4 +39,6 @@ public interface MemberDao  {
 	
 	public MemberVo isExistNickname(String nickname);
 	
+	public MemberVo memberByNickname(String nickname);
+	
 }

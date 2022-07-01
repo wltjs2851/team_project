@@ -28,13 +28,13 @@ $(function() {
 	
 	$("#btnComment").click(function() {
 		var urc_comment = $("#urc_comment").val();
-		var userid = "${loginVo.nickname}";
+		var nickname = "${loginVo.nickname}";
 		var uno = "${routineVo.uno}";
 		var u_pic = "${loginVo.u_pic}";
 		var url = "/routine/addRoutineComment";
 		sendData = {
 				"urc_comment" : urc_comment,
-				"userid" : userid,
+				"nickname" : nickname,
 				"uno" : uno,
 				"u_pic" : u_pic
 		};
@@ -63,7 +63,7 @@ $(function() {
 					cmt += "<img src='/free/displayImage?filename=" + this.u_pic + 
 							"' class='rounded-circle z-depth-2' width=40px style='margin-right: 10px;'>";
 				}
-				cmt +=this.userid + "</p>";
+				cmt +=this.nickname + "</p>";
 				if(this.visible == 1) {
 					cmt += "</div><div style='margin-bottom: 15px;'><h3>관리자에 의해 규제된 댓글입니다.<h3>";
 					cmt += "</div><hr style='width:98%; margin-left: 0px; padding-left: 0;'>"; 
@@ -72,18 +72,18 @@ $(function() {
 					cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
 					cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
 					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
-					if("${loginVo.userid}" == this.userid) {				
+					if("${loginVo.nickname}" == this.nickname) {				
 						cmt += "		<button class='dropdown-item btnModify' type='button' data-urcno='" + this.urcno +"'>수정</button>"
 						cmt += "		<button class='dropdown-item btnDelete' type='button' data-urcno='" + this.urcno +"'>삭제</button>"
 					} else {
 						cmt += "		<button class='dropdown-item btnReport' type='button' data-urcno='" + this.urcno +
-							"' data-user='" + this.userid + "'>신고</button>"
+							"' data-user='" + this.nickname + "'>신고</button>"
 					}
 					cmt += "</div></div>";
 					cmt += "</div>"
 					cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
 								+ this.urc_comment + "</textarea>";
-					if("${loginVo.userid}" == this.userid) {	
+					if("${loginVo.nickname}" == this.nickname) {	
 						cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-urcno='" + this.urcno + 
 								 "' style='display: none; width: 80px; height:40px; padding: 0.7% 0'>수정완료</button>";
 					}
@@ -137,7 +137,7 @@ $(function() {
 	$("#comment").on("click", ".btnReport", function() {
 		var urcno = $(this).attr("data-urcno");
 		var receiver = $(this).attr("data-user");
-		var sender = "${loginVo.userid}";
+		var sender = "${loginVo.nickname}";
 		var url = "/reportBoard/reportBoardPop?urcno=" + urcno + "&sender=" + sender + "&receiver=" + receiver;
 		var option = "width = 350px, height=400px, top=300px, left=300px, scrollbars=yes";
 		window.open(url,"신고",option);
@@ -161,7 +161,7 @@ $(function() {
 		var url = "/routine/updateLike";
 		var sendData = {
 				"uno" : "${ routineVo.uno }",
-				"userid" : "${ loginVo.userid }",
+				"nickname" : "${ loginVo.nickname }",
 				"ur_like" : parseInt(span.text()),
 				"like_cnt" : like_cnt
 		}
@@ -196,7 +196,7 @@ $(function() {
 		<div class="col-md-8">
 			<div>
 				<h2>${ routineVo.ur_title }</h2>
-				<p style="color: #888;">${ routineVo.userid } &nbsp; ${ routineVo.ur_regdate }</p>
+				<p style="color: #888;">${ routineVo.nickname } &nbsp; ${ routineVo.ur_regdate }</p>
 				<hr>
 			</div>
 			<div>
@@ -205,7 +205,7 @@ $(function() {
 			</div>
 			<div class="row" style="margin-left: 10px; height: 40px;">
 				<i class="fa-solid fa-heart" style="font-size: 25px; margin-top: 5px; margin-left: 5px;" ></i><p style="font-size: 25px; margin-right: 10px;"><span id="span_like">${ routineVo.ur_like }</span></p> &nbsp;
-				<c:if test="${ routineVo.userid == loginVo.userid }">
+				<c:if test="${ routineVo.nickname == loginVo.nickname }">
 				<a href="/routine/modifyRoutineForm?uno=${ routineVo.uno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-warning"
 					style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
 				<a href="/routine/removeRoutineRun?uno=${ routineVo.uno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-danger"
@@ -244,7 +244,7 @@ $(function() {
 		<div class="col-md-8">
 			<div>
 				<h2>${ routineVo.ur_title }</h2>
-				<p style="color: #888;">${ routineVo.userid } &nbsp; ${ routineVo.ur_regdate }</p>
+				<p style="color: #888;">${ routineVo.nickname } &nbsp; ${ routineVo.ur_regdate }</p>
 				<hr>
 				<div style="text-align: center; margin-bottom: 100px; margin-top: 100px;">
 					<h1>관리자에 의해 규제된 글입니다.</h1>
