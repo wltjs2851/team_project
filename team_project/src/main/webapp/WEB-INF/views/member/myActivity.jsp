@@ -33,7 +33,7 @@ $(function(){
 		var no = $(this).find("td").eq(0).html();
 		var that = $(this);
 		if (post == "fno") {
-			url = "/free/freeContent?" + post + "=" + no;
+			url = "/free/freeContent?page=1&" + post + "=" + no;
 		} else if (post == "gbno") {
 			var gno = $(this).prev().val();
 			if (gno != null && gno != "") {
@@ -52,7 +52,7 @@ $(function(){
 		} else if (post == "rno") {
 			url = "/recipe/recipeForm?" + post + "=" + no;
 		} else if (post == "uno") {
-			url = "/routine/routineContent?" + post + "=" + no;
+			url = "/routine/routineContent?page=1&" + post + "=" + no;
 		} else if (post == "reno") {
 			url = "/recommend/selectByReno?" + post + "=" + no;
 		}
@@ -205,9 +205,11 @@ $(function(){
 				<li class="nav-item">
 					<a class="nav-link" href="#tab4" data-toggle="tab" data-post="uno">루틴</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#tab5" data-toggle="tab" data-post="reno">추천운동</a>
-				</li>
+				<c:if test="${!empty recommend || !empty recommendComment}">
+					<li class="nav-item">
+						<a class="nav-link" href="#tab5" data-toggle="tab" data-post="reno">추천운동</a>
+					</li>
+				</c:if>
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab1">
@@ -229,7 +231,7 @@ $(function(){
 								<tr class="like_tr">
 									<td>${freeVo.fno}</td>
 									<td>${freeVo.f_title}</td>
-									<td>${freeVo.userid}</td>
+									<td>${freeVo.nickname}</td>
 									<td>${freeVo.f_like}</td>
 									<td>${freeVo.f_regdate}</td>
 								</tr>
@@ -250,7 +252,7 @@ $(function(){
 								<tr class="like_tr comment_tr">
 									<td>${fcVo.fno}</td>
 									<td>${fcVo.fc_comment}</td>
-									<td>${fcVo.userid}</td>
+									<td>${fcVo.nickname}</td>
 									<td>${fcVo.f_regdate}</td>
 								</tr>
 							</c:forEach>
@@ -280,7 +282,7 @@ $(function(){
 								<tr class="like_tr">
 									<td>${groupBoardVo.gbno}</td>
 									<td>${groupBoardVo.gb_title}</td>
-									<td>${groupBoardVo.userid}</td>
+									<td>${groupBoardVo.nickname}</td>
 									<td>${groupBoardVo.gb_like}</td>
 									<td>${groupBoardVo.gb_regdate}</td>
 								</tr>
@@ -301,7 +303,7 @@ $(function(){
 								<tr class="like_tr comment_tr">
 									<td>${gbcVo.gbno}</td>
 									<td>${gbcVo.gbc_content}</td>
-									<td>${gbcVo.userid}</td>
+									<td>${gbcVo.nickname}</td>
 									<td>${gbcVo.gbc_regdate}</td>
 								</tr>
 							</c:forEach>
@@ -330,7 +332,7 @@ $(function(){
 								<tr class="like_tr">
 									<td>${recipeVo.rno}</td>
 									<td>${recipeVo.r_title}</td>
-									<td>${recipeVo.userid}</td>
+									<td>${recipeVo.nickname}</td>
 									<td>${recipeVo.r_like}</td>
 									<td>${recipeVo.r_regdate}</td>
 								</tr>
@@ -351,7 +353,7 @@ $(function(){
 								<tr class="like_tr comment_tr">
 									<td>${reVo.rno}</td>
 									<td>${reVo.rc_comment}</td>
-									<td>${reVo.userid}</td>
+									<td>${reVo.nickname}</td>
 									<td>${reVo.rc_regdate}</td>
 								</tr>
 							</c:forEach>
@@ -380,7 +382,7 @@ $(function(){
 								<tr class="like_tr">
 									<td>${routineVo.uno}</td>
 									<td>${routineVo.ur_title}</td>
-									<td>${routineVo.userid}</td>
+									<td>${routineVo.nickname}</td>
 									<td>${routineVo.ur_like}</td>
 									<td>${routineVo.ur_regdate}</td>
 								</tr>
@@ -401,7 +403,7 @@ $(function(){
 								<tr class="like_tr comment_tr">
 									<td>${roVo.uno}</td>
 									<td>${roVo.urc_comment}</td>
-									<td>${roVo.userid}</td>
+									<td>${roVo.nickname}</td>
 									<td>${roVo.u_regdate}</td>
 								</tr>
 							</c:forEach>
@@ -430,7 +432,7 @@ $(function(){
 								<tr class="like_tr">
 									<td>${recommendVo.reno}</td>
 									<td>${recommendVo.re_title}</td>
-									<td>${recommendVo.userid}</td>
+									<td>${recommendVo.nickname}</td>
 									<td>${recommendVo.re_like}</td>
 									<td>${recommendVo.re_regdate}</td>
 								</tr>
@@ -451,7 +453,7 @@ $(function(){
 								<tr class="like_tr comment_tr">
 									<td>${recVo.reno}</td>
 									<td>${recVo.re_comment}</td>
-									<td>${recVo.userid}</td>
+									<td>${recVo.nickname}</td>
 									<td>${recVo.re_regdate}</td>
 								</tr>
 							</c:forEach>

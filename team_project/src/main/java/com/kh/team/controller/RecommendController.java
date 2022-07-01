@@ -46,8 +46,8 @@ public class RecommendController {
 		public String insertRecommend(RecommendVo recommendVo, RedirectAttributes rttr) {
 			System.out.println("AdminController, insertRecommend, recommendVo:" + recommendVo);
 			String content = recommendVo.getRe_content();
-			String userid = recommendVo.getUserid();
-			if (!userid.equals("admin01")) {
+			String nickname = recommendVo.getNickname();
+			if (!nickname.equals("관리자")) {
 				rttr.addFlashAttribute("notAdmin", "false");
 				return "redirect:/recommend/listRecommend";
 			}

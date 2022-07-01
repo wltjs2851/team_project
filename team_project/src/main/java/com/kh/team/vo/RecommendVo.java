@@ -8,24 +8,24 @@ public class RecommendVo {
 	private String re_content;
 	private String re_title;
 	private Date re_regdate;
-	private String userid;
+	private String nickname;
 
-	public String getUserid() {
-		return userid;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
-	public RecommendVo(int reno, String re_content, String re_title, Date re_regdate, String userid, int re_like,
+	public RecommendVo(int reno, String re_content, String re_title, Date re_regdate, String nickname, int re_like,
 			int re_viewcnt, String re_pic) {
 		super();
 		this.reno = reno;
 		this.re_content = re_content;
 		this.re_title = re_title;
 		this.re_regdate = re_regdate;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.re_like = re_like;
 		this.re_viewcnt = re_viewcnt;
 		this.re_pic = re_pic;
@@ -150,7 +150,7 @@ public class RecommendVo {
 	@Override
 	public String toString() {
 		return "RecommendVo [reno=" + reno + ", re_content=" + re_content + ", re_title=" + re_title + ", re_regdate="
-				+ re_regdate + ", userid=" + userid + ", re_like=" + re_like + ", re_viewcnt=" + re_viewcnt
+				+ re_regdate + ", nickname=" + nickname + ", re_like=" + re_like + ", re_viewcnt=" + re_viewcnt
 				+ ", re_pic=" + re_pic + "]";
 	}
 

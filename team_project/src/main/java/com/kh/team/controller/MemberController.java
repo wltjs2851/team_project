@@ -141,11 +141,6 @@ public class MemberController {
 		List<RecipeVo> recipe = new ArrayList<>();
 		List<RoutineVo> routine = new ArrayList<>();
 		List<RecommendVo> recommend = new ArrayList<>();
-//		List<FreeCommentVo> freeComment = new ArrayList<>();
-//		List<GroupBoardCommentVo> groupBoardComment = new ArrayList<>();
-//		List<RecipeCommentVo> recipeComment = new ArrayList<>();
-//		List<RoutineCommentVo> routineComment = new ArrayList<>();
-//		List<RecommendCommentVo> recommendComment = new ArrayList<>();
 		List<FreeCommentVo> freeComment = null;
 		List<GroupBoardCommentVo> groupBoardComment = null;
 		List<RecipeCommentVo> recipeComment = null;
