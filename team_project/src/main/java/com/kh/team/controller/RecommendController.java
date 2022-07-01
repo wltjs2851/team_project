@@ -58,6 +58,7 @@ public class RecommendController {
 				re_pic = re_pic.substring(9, re_pic.indexOf("\""));
 				recommendVo.setRe_pic(re_pic);
 			}
+			
 			recommendService.insertRecommend(recommendVo);
 			return "redirect:/recommend/listRecommend";
 		}

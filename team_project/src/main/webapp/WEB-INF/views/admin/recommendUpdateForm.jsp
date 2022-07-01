@@ -70,8 +70,8 @@ function uploadSummernoteImageFile(file) {
 					<textarea id="summernote" name="re_content"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="userid"> 사용자 </label>  
-					<input type="text" class="form-control" id="userid" name="userid" value="${recommendVo.userid }"required/>
+					<label for="nickname"> 사용자 </label>  
+					<input type="text" class="form-control" id="nickname" name="nickname" value="${recommendVo.nickname }"required/>
 				</div>
 				<button type="submit" class="btn btn-primary" 
 					style='width: 80px; height:50px; padding: 1% 0'>수정완료</button>
