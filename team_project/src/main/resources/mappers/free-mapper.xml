@@ -8,8 +8,8 @@
 	</select>
 
 	<insert id="insertFreeArticle">
-		insert into tbl_free(fno, f_title, f_content, userid, f_pic, fcode)
-			values(seq_free_fno.nextval, #{f_title}, #{f_content}, #{userid}, 
+		insert into tbl_free(fno, f_title, f_content, nickname, f_pic, fcode)
+			values(seq_free_fno.nextval, #{f_title}, #{f_content}, #{nickname}, 
 				#{f_pic, jdbcType=VARCHAR}, #{fcode})
 	</insert>
 	
@@ -57,12 +57,12 @@
 	</update>
 	
 	<insert id="insertLike">
-		insert into tbl_free_like(flno, fno, userid)
-			values(seq_free_flno.nextval, #{fno}, #{userid})
+		insert into tbl_free_like(flno, fno, nickname)
+			values(seq_free_flno.nextval, #{fno}, #{nickname})
 	</insert>
 	
 	<delete id="deleteLike">
-		delete from tbl_free_like where fno = #{fno} and userid = #{userid}
+		delete from tbl_free_like where fno = #{fno} and nickname = #{nickname}
 	</delete>
 	
 	<delete id="deleteLikeAll">
@@ -70,7 +70,7 @@
 	</delete>
 	
 	<select id="countLike" resultType="int">
-		select count(*) from tbl_free_like where fno = #{fno} and userid = #{userid}
+		select count(*) from tbl_free_like where fno = #{fno} and nickname = #{nickname}
 	</select>
 	
 	<update id="updateLikecnt">
@@ -87,7 +87,7 @@
 					<choose>
 						<when test='searchType == "t"'>and f_title like '%' || #{keyword} || '%'</when>
 						<when test='searchType == "c"'>and f_content like '%' || #{keyword} || '%'</when>
-						<when test='searchType == "w"'>and userid like '%' || #{keyword} || '%'</when>
+						<when test='searchType == "w"'>and nickname like '%' || #{keyword} || '%'</when>
 						<when test='searchType == "tc"'>
 						and (f_title like '%' || #{keyword} || '%'
 						or f_content like '%' || #{keyword} || '%')
@@ -95,7 +95,7 @@
 						<when test='searchType == "tcw"'>
 						and (f_title like '%' || #{keyword} || '%'
 						or f_content like '%' || #{keyword} || '%'
-						or userid like '%' || #{keyword} || '%' )
+						or nickname like '%' || #{keyword} || '%' )
 						</when>
 						
 					</choose>
@@ -107,6 +107,6 @@
 <!-- 	회원 작성글 찾기  -->
 	<select id="adminFreeList" resultType="FreeVo">
 		select fno, f_title, f_regdate from tbl_free
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 </mapper>

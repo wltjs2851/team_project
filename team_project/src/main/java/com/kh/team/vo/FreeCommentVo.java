@@ -6,7 +6,7 @@ public class FreeCommentVo {
 	private int fcno;
 	private int fno;
 	private String fc_comment;
-	private String userid;
+	private String nickname;
 	private Date f_regdate;
 	private String u_pic;
 	private int visible;
@@ -22,31 +22,31 @@ public class FreeCommentVo {
 		this.fc_comment = fc_comment;
 	}
 
-	public FreeCommentVo(int fno, String fc_comment, String userid, String u_pic) {
+	public FreeCommentVo(int fno, String fc_comment, String nickname, String u_pic) {
 		super();
 		this.fno = fno;
 		this.fc_comment = fc_comment;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.u_pic = u_pic;
 	}
 
-	public FreeCommentVo(int fcno, int fno, String fc_comment, String userid, Date f_regdate, String u_pic) {
+	public FreeCommentVo(int fcno, int fno, String fc_comment, String nickname, Date f_regdate, String u_pic) {
 		super();
 		this.fcno = fcno;
 		this.fno = fno;
 		this.fc_comment = fc_comment;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.f_regdate = f_regdate;
 		this.u_pic = u_pic;
 	}
 
-	public FreeCommentVo(int fcno, int fno, String fc_comment, String userid, Date f_regdate, String u_pic,
+	public FreeCommentVo(int fcno, int fno, String fc_comment, String nickname, Date f_regdate, String u_pic,
 			int visible) {
 		super();
 		this.fcno = fcno;
 		this.fno = fno;
 		this.fc_comment = fc_comment;
-		this.userid = userid;
+		this.nickname = nickname;
 		this.f_regdate = f_regdate;
 		this.u_pic = u_pic;
 		this.visible = visible;
@@ -76,12 +76,12 @@ public class FreeCommentVo {
 		this.fc_comment = fc_comment;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public Date getF_regdate() {
@@ -110,7 +110,7 @@ public class FreeCommentVo {
 
 	@Override
 	public String toString() {
-		return "FreeCommentVo [fcno=" + fcno + ", fno=" + fno + ", fc_comment=" + fc_comment + ", userid=" + userid
+		return "FreeCommentVo [fcno=" + fcno + ", fno=" + fno + ", fc_comment=" + fc_comment + ", nickname=" + nickname
 				+ ", f_regdate=" + f_regdate + ", u_pic=" + u_pic + ", visible=" + visible + "]";
 	}
 }

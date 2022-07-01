@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,20 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.team.dao.FreeCommentDao;
 import com.kh.team.service.FreeCommentService;
 import com.kh.team.service.FreeService;
-import com.kh.team.service.RoutineCommentService;
-import com.kh.team.service.RoutineService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.FreeCommentVo;
 import com.kh.team.vo.FreeVo;
 import com.kh.team.vo.MemberVo;
 import com.kh.team.vo.PagingDto;
-import com.kh.team.vo.RecipeCommentVo;
-import com.kh.team.vo.RecipeVo;
-import com.kh.team.vo.RoutineCommentVo;
-import com.kh.team.vo.RoutineVo;
 
 @Controller
 @RequestMapping("/free")
@@ -81,7 +73,7 @@ public class FreeController {
 	public String freeContent(Model model, int fno, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		FreeVo freeVo = freeService.contentByFno(fno);
 		MemberVo memberVo = (MemberVo)session.getAttribute("loginVo");
-		int like_cnt = freeService.countLike(fno, memberVo.getUserid());
+		int like_cnt = freeService.countLike(fno, memberVo.getNickname());
 		model.addAttribute("like_cnt", like_cnt);
 		model.addAttribute("freeVo", freeVo);
 		
@@ -141,14 +133,14 @@ public class FreeController {
 	public int updateLike(FreeVo freeVo, @RequestParam("like_cnt") int like_cnt, Model model) {
 		System.out.println(freeVo);
 		int fno = freeVo.getFno();
-		String userid = freeVo.getUserid();
+		String nickname = freeVo.getNickname();
 		int f_like = freeVo.getF_like();
 		
 		if(like_cnt > 0) {
-			freeService.decreaseLike(fno, f_like, userid);
+			freeService.decreaseLike(fno, f_like, nickname);
 			like_cnt = 0;
 		} else {
-			freeService.increaseLike(fno, f_like, userid);
+			freeService.increaseLike(fno, f_like, nickname);
 			like_cnt = 1;
 		}
 		return like_cnt;
