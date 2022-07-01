@@ -11,8 +11,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.kh.team.dao.AdminDao;
 import com.kh.team.dao.KcalDao;
 import com.kh.team.service.AdminService;
+import com.kh.team.service.MemberService;
 import com.kh.team.vo.AdminVo;
 import com.kh.team.vo.KcalVo;
+import com.kh.team.vo.MemberVo;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,6 +26,9 @@ public class AdminDaoTest {
 	
 	@Autowired
 	private AdminService service;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	
 	// 글 목록 조회
@@ -49,5 +54,11 @@ public class AdminDaoTest {
 		System.out.println("result: " + result);
 	}
 	
-	
+	@Test
+	public void testMemberJoin() {
+		for (int i = 1; i <= 50; i++) {
+			MemberVo memberVo = new MemberVo("userTest" + i, "userTest1!", "테스트" + i, "userTest" + i + "@gmail.com", "테스트시 테스트구", "M", "테스트" + i, 22);
+			memberService.joinMember(memberVo);
+		}
+	}
 }

@@ -182,27 +182,27 @@
 			<div class="col-sm-12 col-lg-3">
 				<!-- product card -->
 				<div class="product-item bg-light">
-					<div class="card">
+					<div class="card" style="height: 225px;">
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
 							<h4 class="card-title">
-								<a href="">횐님들의 식단</a>
+								<a href="">회원님들의 식단</a>
 							</h4>
 						</div>
 						<div class="card-body">
 							<c:forEach items="${listRecipe}" var="recipeVo">
 								<c:choose>
 									<c:when test="${empty recipeVo.r_pic}">
-										<img class="rounded-circle" width="30px" height="30px" style="align-items: center; overflow: hidden;"
+										<img class="rounded-circle" width="35px" height="35px" style="align-items: center; overflow: hidden;"
 											src="/resources/images/recipe.png" alt="식단이미지">
 									</c:when>
 									<c:otherwise>
-										<img class="rounded-circle" width="30px" height="30px"
+										<img class="rounded-circle" width="35px" height="35px"
 											src="/member/displayImage?filename=${recipeVo.r_pic}"
 											alt="식단이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/recipe/recipeForm?rno=${recipeVo.rno}&page=1">${fn:substring(recipeVo.r_title, 0, 7)}...</a>
+								<a style="margin-left: 10px;" href="/recipe/recipeForm?rno=${recipeVo.rno}&page=1">${fn:substring(recipeVo.r_title, 0, 10)}...</a>
 								<br>
 								<br>
 							</c:forEach>
@@ -213,27 +213,27 @@
 			<div class="col-sm-12 col-lg-3">
 				<!-- product card -->
 				<div class="product-item bg-light">
-					<div class="card">
+					<div class="card" style="height: 225px;">
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
 							<h4 class="card-title">
-								<a href="">횐님들의 루틴</a>
+								<a href="">회원님들의 루틴</a>
 							</h4>
 						</div>
 						<div class="card-body">
 							<c:forEach items="${listRoutine}" var="routineVo">
 								<c:choose>
 									<c:when test="${empty routineVo.ur_pic}">
-										<img class="rounded-circle" width="30px" height="30px" style="align-items: center; overflow: hidden;"
+										<img class="rounded-circle" width="35px" height="35px" style="align-items: center; overflow: hidden;"
 											src="/resources/images/routine.png" alt="루틴이미지">
 									</c:when>
 									<c:otherwise>
-										<img class="rounded-circle" width="30px" height="30px"
+										<img class="rounded-circle" width="35px" height="35px"
 											src="/member/displayImage?filename=${routineVo.ur_pic}"
 											alt="루틴이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/routine/routineContent?uno=${routineVo.uno}&page=1">${fn:substring(routineVo.ur_title, 0, 7)}...</a>
+								<a style="margin-left: 10px;" href="/routine/routineContent?uno=${routineVo.uno}&page=1">${fn:substring(routineVo.ur_title, 0, 10)}...</a>
 								<br>
 								<br>
 							</c:forEach>
@@ -244,7 +244,7 @@
 			<div class="col-sm-12 col-lg-3">
 				<!-- product card -->
 				<div class="product-item bg-light">
-					<div class="card">
+					<div class="card" style="height: 225px;">
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
 							<h4 class="card-title">
@@ -255,16 +255,16 @@
 							<c:forEach items="${listFree}" var="freeVo">
 								<c:choose>
 									<c:when test="${empty freeVo.f_pic}">
-										<img class="rounded-circle" width="30px" height="30px" style="align-items: center; overflow: hidden;"
+										<img class="rounded-circle" width="35px" height="35px" style="align-items: center; overflow: hidden;"
 											src="/resources/images/routine.png" alt="루틴이미지">
 									</c:when>
 									<c:otherwise>
-										<img class="rounded-circle" width="30px" height="30px"
+										<img class="rounded-circle" width="35px" height="35px"
 											src="/member/displayImage?filename=${freeVo.f_pic}"
 											alt="루틴이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/free/freeContent?fno=${freeVo.fno}&page=1">${fn:substring(freeVo.f_title, 0, 7)}...</a>
+								<a style="margin-left: 10px;" href="/free/freeContent?fno=${freeVo.fno}&page=1">${fn:substring(freeVo.f_title, 0, 10)}...</a>
 								<br>
 								<br>
 							</c:forEach>
@@ -275,7 +275,7 @@
 			<div class="col-sm-12 col-lg-3">
 				<!-- product card -->
 				<div class="product-item bg-light">
-					<div class="card">
+					<div class="card" style="height: 225px;">
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
 							<h4 class="card-title">
@@ -286,16 +286,16 @@
 							<c:forEach items="${listRecommend}" var="ReVo">
 								<c:choose>
 									<c:when test="${empty ReVo.re_pic}">
-										<img class="rounded-circle" width="30px" height="30px" style="align-items: center; overflow: hidden;"
+										<img class="rounded-circle" width="35px" height="35px" style="align-items: center; overflow: hidden;"
 											src="/resources/images/exercise.png" alt="운동이미지">
 									</c:when>
 									<c:otherwise>
-										<img class="rounded-circle" width="30px" height="30px"
+										<img class="rounded-circle" width="35px" height="35px"
 											src="/member/displayImage?filename=${ReVo.re_pic}"
 											alt="운동이미지" style="overflow: hidden;">
 									</c:otherwise>
 								</c:choose>
-								<a href="/recommend/selectByReno?reno=${ReVo.reno}&page=1">${fn:substring(ReVo.re_title, 0, 7)}...</a>
+								<a style="margin-left: 10px;" href="/recommend/selectByReno?reno=${ReVo.reno}&page=1">${fn:substring(ReVo.re_title, 0, 10)}...</a>
 								<br>
 								<br>
 							</c:forEach>

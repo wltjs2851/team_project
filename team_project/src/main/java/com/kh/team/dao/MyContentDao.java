@@ -16,25 +16,25 @@ import com.kh.team.vo.RoutineVo;
 public interface MyContentDao {
 
 //	좋아요 단 글
-	public List<FreeVo> getFreeByLike(String userid);
-	public List<GroupBoardVo> getGroupBoardByLike(String userid);
-	public List<RecipeVo> getRecipeByLike(String userid);
-	public List<RoutineVo> getRoutineByLike(String userid);
-	public List<RecommendVo> getRecommendByLike(String userid);
+	public List<FreeVo> getFreeByLike(String nickname);
+	public List<GroupBoardVo> getGroupBoardByLike(String nickname);
+	public List<RecipeVo> getRecipeByLike(String nickname);
+	public List<RoutineVo> getRoutineByLike(String nickname);
+	public List<RecommendVo> getRecommendByLike(String nickname);
 	
 //	내가 쓴 글
-	public List<FreeVo> getWriteFree(String userid);
-	public List<GroupBoardVo> getWriteGroupBoard(String userid);
-	public List<RecipeVo> getWriteRecipe(String userid);
-	public List<RoutineVo> getWriteRoutine(String userid);
-	public List<RecommendVo> getWriteRecommend(String userid);
+	public List<FreeVo> getWriteFree(String nickname);
+	public List<GroupBoardVo> getWriteGroupBoard(String nickname);
+	public List<RecipeVo> getWriteRecipe(String nickname);
+	public List<RoutineVo> getWriteRoutine(String nickname);
+	public List<RecommendVo> getWriteRecommend(String nickname);
 	
 // 내가 쓴 댓글
-	public List<FreeCommentVo> getFreeComment(String userid);
-	public List<GroupBoardCommentVo> getGroupBoardComment(String userid);
-	public List<RecipeCommentVo> getRecipeComment(String userid);
-	public List<RoutineCommentVo> getRoutineComment(String userid);
-	public List<RecommendCommentVo> getRecommendComment(String userid);
+	public List<FreeCommentVo> getFreeComment(String nickname);
+	public List<GroupBoardCommentVo> getGroupBoardComment(String nickname);
+	public List<RecipeCommentVo> getRecipeComment(String nickname);
+	public List<RoutineCommentVo> getRoutineComment(String nickname);
+	public List<RecommendCommentVo> getRecommendComment(String nickname);
 	public int gnoByGroupComment(int gbno);
 	
 }

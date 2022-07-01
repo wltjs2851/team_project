@@ -13,7 +13,7 @@
         <!-- About -->
         <div class="block about">
           <!-- footer logo -->
-          <img src="/resources/images/home/homelogo.png" alt="">
+          <img src="/resources/images/home/homelogo.png" alt="" width="250px;">
           <!-- description -->
           <p class="alt-color">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
@@ -46,14 +46,6 @@
       </div>
       <!-- Promotion -->
       <div class="col-lg-4 col-md-7">
-        <!-- App promotion -->
-        <div class="block-2 app-promotion">
-          <a href="">
-            <!-- Icon -->
-            <img src="/resources/images/footer/phone-icon.png" alt="mobile-icon">
-          </a>
-          <p>Get the Dealsy Mobile App and Save more</p>
-        </div>
       </div>
     </div>
   </div>
