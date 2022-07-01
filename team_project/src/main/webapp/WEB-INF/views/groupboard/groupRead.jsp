@@ -75,7 +75,7 @@ $(function() {
 				cmt += "<div class='dropdown' style='float:right'>"
 				cmt += "	<button class='btn dropdown-toggle' style='background-color: #ffffff; width: 20px; height:36px; padding: 1% 0; margin-left: 10px' type='button' id='dropdownMenuButton' data-toggle='dropdown'>";
 				cmt += "		<i class='fas fa-ellipsis-v'></i></button>";
-				if("${loginVo.userid}" == this.userid) {
+				if("${loginVo.nickname}" == this.userid) {
 					
 					cmt += "	<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
 					cmt += "		<button class='dropdown-item btnModify' type='button' data-gbcno=" + this.gbcno +">수정</button>"
@@ -257,7 +257,7 @@ $(function() {
 					<span id="like" style="font-size: 30px;">${ groupBoardVo.gb_like }</span>
 				
 				<!-- 수정, 삭제 버튼 -->
-					<c:if test="${ loginVo.userid == groupBoardVo.userid }">
+					<c:if test="${ loginVo.nickname == groupBoardVo.userid }">
 					<table>
 						<tr>
 							<td><a href="/groupboard/groupUpdateForm?gbno=${ groupBoardVo.gbno }" class="btn btn-sm btn btn-outline-warning">수정</a></td>
@@ -273,7 +273,7 @@ $(function() {
 				<div class="row">
 					<div class="col-md-9">
 						<input type="text" id="c_content" class="form-control" placeholder="댓글을 입력해주세요">
-						<input type="hidden" value="${ loginVo.userid }" id="c_userid" class="form-control">
+						<input type="hidden" value="${ loginVo.nickname }" id="c_userid" class="form-control">
 					</div>
 					<div>
 						<button type="button" id="btnCommentInsert" class="btn btn-sm btn-outline-primary">완료</button>
