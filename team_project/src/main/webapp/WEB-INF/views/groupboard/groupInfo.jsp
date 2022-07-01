@@ -117,7 +117,7 @@ $(function() {
 
 <%-- ${ groupVo } --%>
 <!-- <hr> -->
-<%-- ${ groupJoinMember } --%>
+${ groupJoinMember }
 <!-- <hr> -->
 <%-- ${ count } --%>
 
@@ -250,7 +250,7 @@ $(function() {
 									
 									<c:forEach items="${groupJoinMember}" var="groupJoinVo">
 										<div style="margin: 10px;">
-										<span>${ groupJoinVo.userid }</span>
+										<span>${ groupJoinVo.nickname }</span>
 										
 										
 										<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
@@ -261,7 +261,7 @@ $(function() {
 										
 											<i id="report" class="report fa-solid fa-handcuffs"><a class="btn btn-outline-danger" style="width: 40px; height:30px; padding: 1% 0" href="#" 
 											 	data-user="${ groupBoardVo.userid }">신고</a></i>
-											<input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
+											<input type="hidden" id="userid" name="nickname" value="${ groupJoinVo.nickname }">
 											<input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">
 											
 											<!-- 신고 관련 -->
@@ -275,10 +275,10 @@ $(function() {
 											
 											<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
 												 <a id="reportList" class="reportList dropdown-item" href="#">신고 목록</a>
-												 <input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
+												 <input type="hidden" id="userid" name="nickname" value="${ groupJoinVo.nickname }">
 												 <input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">
 											</c:if>
-												 <a class="dropdown-item" href="/groupboard/memberInfo?userid=${ groupJoinVo.userid }">회원 정보 보기</a>
+												 <a class="dropdown-item" href="/groupboard/memberInfo?nickname=${ groupJoinVo.userid }">회원 정보 보기</a>
 											</div>
 										
 										</div>

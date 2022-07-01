@@ -9,9 +9,9 @@
  <!-- 글 등록 -->
  <insert id="create"> <!-- (String일 경우)null을 허용할 경우 다음과 같이 해야 함(sql 작성 시 널값을 허용한다고 했어도) -->
  	insert into tbl_group_board
- 		(gbno, gb_title, gb_content, userid, gb_notice, gb_pic, gno)
+ 		(gbno, gb_title, gb_content, nickname, gb_notice, gb_pic, gno)
  	values
- 		(seq_group_board_gbno.nextval, #{gb_title}, #{gb_content}, #{userid},
+ 		(seq_group_board_gbno.nextval, #{gb_title}, #{gb_content}, #{nickname},
  		 #{gb_notice, jdbcType=VARCHAR}, #{gb_pic, jdbcType=VARCHAR}, #{gno})
  </insert>
  
@@ -122,7 +122,7 @@
     	<choose>
     		<when test='searchType == "t"'>and gb_title like '%' || #{keyword} || '%'</when>
     		<when test='searchType == "c"'>and gb_content like '%' || #{keyword} || '%'</when>
-    		<when test='searchType == "w"'>and userid like '%' || #{keyword} || '%'</when>
+    		<when test='searchType == "w"'>and nickname like '%' || #{keyword} || '%'</when>
     	</choose>
     </if>
  </sql>
@@ -130,7 +130,7 @@
  <!-- 	회원 작성글 찾기  -->
 	<select id="adminGroupBoardList" resultType="GroupBoardVo">
 		select gbno, gb_title, gb_regdate from tbl_group_board
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 	
  </mapper>

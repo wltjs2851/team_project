@@ -166,6 +166,7 @@ $(function() {
 				<form role="form" action="/group/joinGroup" method="post" style="display: inline;">
 					<input type="hidden" name="gno" value="${ groupVo.gno }">
 					<input type="hidden" name="g_present" value="${ groupVo.g_present }">
+					<input type="hidden" name="userid" value="${ loginVo.nickname }">
 						<button type="submit" class="btn btn-primary" id="btnJoin"
 							style="width: 80px; height:50px; padding: 1% 0;
 							<c:if test="${ groupVo.g_present == groupVo.g_attend }">

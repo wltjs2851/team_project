@@ -8,14 +8,14 @@ import com.kh.team.vo.LocationVo;
 import com.kh.team.vo.PagingDto;
 
 public interface GroupService {
-	public boolean addGroup(GroupVo groupVo);
+	public boolean addGroup(GroupVo groupVo, String nickname);
 	public List<GroupVo> groupList();
 	public List<GroupVo> adminGroupList(PagingDto pagingDto);
 	public List<GroupVo> selectGroupList(int startRow, int endRow);
 	public boolean moidfyGroup(GroupVo groupVo);
 	public boolean removeGroup(int gno, String userid);
 	public GroupVo groupByGno(int gno);
-	public boolean joinGroup(int gno, String userid);
+	public boolean joinGroup(int gno, String userid, String nickname);
 	public boolean banGroup(int gno, String userid);
 	public List<GroupJoinVo> list(int gno);
 	public List<GroupJoinVo> list(String userid);

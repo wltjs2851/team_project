@@ -28,9 +28,9 @@ public interface GroupBoardDao {
 	public int getCount(PagingDto pagingDto);
 	public int getCountMain(PagingDto pagingDto);
 	
-	public boolean deleteMember(String userid, int gno);
+	public boolean deleteMember(String nickname, int gno);
 	public void updateCtnMember(int gno);
 	
-	public List<GroupBoardVo> adminGroupBoardList(String userid);
+	public List<GroupBoardVo> adminGroupBoardList(String nickname);
 
 }
