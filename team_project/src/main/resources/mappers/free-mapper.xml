@@ -14,20 +14,12 @@
 	</insert>
 	
 	<select id="selectFreeArticle" resultType="FreeVo">
-<!-- 		select * from (select rownum rnum, a.* from  -->
-<!-- 			(select * from tbl_free -->
-<!-- 			<include refid="search"/> -->
-<!-- 			order by fno desc) a)  -->
-<!-- 		where rnum between #{startRow} and #{endRow} -->
-		
 		select * from (select rownum rnum, a.* from 
 			(select f.*, c.fname from tbl_free f, tbl_fcategory_code c
 			where f.fcode = c.fcode
 			<include refid="search"/>
 			order by fno desc) a) 
 		where rnum between #{startRow} and #{endRow}
-		
-<!-- 		select f.*, c.fname from tbl_free f, tbl_fcategory_code c where fno = #{fno} and f.fcode = c.fcode -->
 	</select>
 	
 	<select id="selectByViewCnt" resultType="FreeVo">
@@ -78,26 +70,34 @@
 	</update>
 	
 	<select id="getCount" resultType="int">
-		select count(*) from tbl_free f, tbl_fcategory_code c<include refid="search"/>
+		select count(*) from tbl_free f, tbl_fcategory_code c
+			where f.fcode = c.fcode<include refid="search"/>
 	</select>
 
 	<sql id="search">
 		<choose>
 			<when test="searchType != null and keyword != null">
 					<choose>
-						<when test='searchType == "t"'>and f_title like '%' || #{keyword} || '%'</when>
-						<when test='searchType == "c"'>and f_content like '%' || #{keyword} || '%'</when>
-						<when test='searchType == "w"'>and nickname like '%' || #{keyword} || '%'</when>
-						<when test='searchType == "tc"'>
-						and (f_title like '%' || #{keyword} || '%'
-						or f_content like '%' || #{keyword} || '%')
-						</when>
-						<when test='searchType == "tcw"'>
-						and (f_title like '%' || #{keyword} || '%'
+						<when test='searchType == "0"'>and (f_title like '%' || #{keyword} || '%'
 						or f_content like '%' || #{keyword} || '%'
 						or nickname like '%' || #{keyword} || '%' )
 						</when>
-						
+						<when test='searchType == "1"'>and f.fcode = 1 and 
+						(f_title like '%' || #{keyword} || '%'
+						or f_content like '%' || #{keyword} || '%'
+						or nickname like '%' || #{keyword} || '%' )
+						</when>
+						<when test='searchType == "2"'>and f.fcode = 2 and 
+						(f_title like '%' || #{keyword} || '%'
+						or f_content like '%' || #{keyword} || '%'
+						or nickname like '%' || #{keyword} || '%' )
+						</when>
+						<when test='searchType == "3"'>
+						and f.fcode = 3 and 
+						(f_title like '%' || #{keyword} || '%'
+						or f_content like '%' || #{keyword} || '%'
+						or nickname like '%' || #{keyword} || '%' )
+						</when>
 					</choose>
 			</when>
 			

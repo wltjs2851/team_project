@@ -24,7 +24,7 @@ $(function() {
 		e.preventDefault();
 		var page = $(this).attr("href");
 		frmPaging.find("input[name=page]").val(page);
-		frmPaging.attr("action", "/free/addFreeForm");
+		frmPaging.attr("action", "/free/freeList");
 		frmPaging.attr("method", "get");
 		frmPaging.submit();
 	});
@@ -106,31 +106,26 @@ $(function() {
 					<div style='display: inline-block;'>
 						<select id="searchType" class="form-control" 
 						style="height:50px;">
-							<option value="t"
-								<c:if test="${ pagingDto.searchType == 't' }">
+							<option value="0"
+								<c:if test="${ pagingDto.searchType == '0' }">
 									selected
 								</c:if> 
-							>제목</option>
-							<option value="c"
-								<c:if test="${ pagingDto.searchType == 'c' }">
+							>전체</option>
+							<option value="1"
+								<c:if test="${ pagingDto.searchType == '1' }">
 									selected
 								</c:if>
-							>내용</option>
-							<option value="w"
-								<c:if test="${ pagingDto.searchType == 'w' }">
+							>잡담</option>
+							<option value="2"
+								<c:if test="${ pagingDto.searchType == '2' }">
 									selected
 								</c:if>
-							>작성자</option>
-							<option value="tc"
-								<c:if test="${ pagingDto.searchType == 'tc' }">
+							>고민</option>
+							<option value="3"
+								<c:if test="${ pagingDto.searchType == '3' }">
 									selected
 								</c:if>
-							>제목 + 내용</option>
-							<option value="tcw"
-								<c:if test="${ pagingDto.searchType == 'tcw' }">
-									selected
-								</c:if>
-							>제목 + 내용 + 작성자</option>
+							>질문</option>
 						</select>
 					</div>
 					<div style='display: inline-block;'>
@@ -142,7 +137,7 @@ $(function() {
 					</div>
 					<div style='display: inline-block;'>
 						<a class="btn btn-sm btn-success" id="btnSearch"
-						 style="margin-left: 15px; width: 80px; height:50px; padding: 1% 0; line-height: 40px;">검색</a>
+						 style="margin-left: 15px; width: 80px; height:50px; padding: 4% 0; line-height: 40px;">검색</a>
 					</div>
 				</div>
 				<br><br>

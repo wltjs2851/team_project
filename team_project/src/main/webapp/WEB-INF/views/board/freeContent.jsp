@@ -214,10 +214,10 @@ function adjustHeight() {
 					<a href="/free/modifyFreeForm?fno=${ freeVo.fno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-warning"
 						style="width: 60px; height:40px; padding: 0.7% 0">수정</a>
 					<a href="/free/removeFreeRun?fno=${ freeVo.fno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-danger"
-						style="width: 60px; height:40px; padding: 0.7% 0">삭제</a>
+						style="width: 60px; height:40px; padding: 0.7% 0; margin-left: 8px;">삭제</a>
 				</c:if>
 				<a href="/free/freeList?page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-outline-primary"
-					style="width: 60px; height:40px; padding: 0.7% 0">목록</a>
+					style="width: 60px; height:40px; padding: 0.7% 0; margin-left: 8px;">목록</a>
 			</div>
 		</div>
 		<div class="col-md-2"></div>

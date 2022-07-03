@@ -99,7 +99,8 @@ $(function() {
 				</tbody>
 			</table>
 			<div>
-				<a class="btn btn-primary" href="/routine/addRoutineForm">글쓰기</a>
+				<a class="btn btn-primary" href="/routine/addRoutineForm"
+					style='width: 80px; height:50px; padding: 1% 0'>글쓰기</a>
 				<div class="row" style="float: right;">
 					<div style='display: inline-block;'>
 						<select id="searchType" class="form-control" 

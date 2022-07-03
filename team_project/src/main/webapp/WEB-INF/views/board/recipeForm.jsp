@@ -243,21 +243,22 @@ $(function() {
 			<hr>
 			</div>
 			<div class="row" style="margin-left: 10px;">
-				<i class="fa-solid fa-heart" style="font-size: 25px;" ></i><p style="font-size: 25px"><span id="span_like">${ recipeVo.r_like }</span> &nbsp;
+<%-- 				<i class="fa-solid fa-heart" style="font-size: 25px;" ></i><p style="font-size: 25px"><span id="span_like">${ recipeVo.r_like }</span> &nbsp; --%>
+				<i class="fa-solid fa-heart" style="font-size: 25px; margin-top: 5px; margin-left: 5px;" ></i><p style="font-size: 25px; margin-right: 10px;"><span id="span_like">${ recipeVo.r_like }</span></p> &nbsp;
 				<c:if test="${recipeVo.nickname == loginVo.nickname}">
 				<a href="/recipe/modifyRecipeForm?rno=${ recipeVo.rno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}" 
-					class="btn btn-warning" style="width: 60px; height:40px; padding: 3% 0">수정</a>
+					class="btn btn-warning" style="width: 60px; height:40px; padding: 0.7% 0;">수정</a>
 				<a href="/recipe/recipeRemoveRun?rno=${ recipeVo.rno }&page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}"
-					 class="btn btn-danger" style="width: 60px; height:40px; padding: 3% 0">삭제</a>
+					 class="btn btn-danger" style="width: 60px; height:40px; padding: 0.7% 0; margin-left: 8px;">삭제</a>
 				</c:if>
 				<c:choose>
 					<c:when test="${param.page != null}">
 						<a href="/recipe/recipeList?page=${param.page}&perPage=10&searchType=${param.searchType}&keyword=${param.keyword}"
-				 class="btn btn-outline-primary" style="width: 60px; height:40px; padding: 3% 0">목록</a>
+				 class="btn btn-outline-primary" style="width: 60px; height:40px; padding: 0.7% 0; margin-left: 8px;">목록</a>
 					</c:when>
 					<c:otherwise>
 						<a href="/recipe/recipeList"
-				 class="btn btn-outline-primary" style="width: 60px; height:40px; padding: 3% 0">목록</a>
+				 class="btn btn-outline-primary" style="width: 60px; height:40px; padding: 0.7% 0; margin-left: 8px;">목록</a>
 					</c:otherwise>
 				</c:choose>
 			</div>
