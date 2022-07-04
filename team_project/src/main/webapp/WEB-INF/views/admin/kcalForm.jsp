@@ -15,7 +15,7 @@
 					운동칼로리 사전
 				</h2>
 				<p>
-					<a class="btn btn-primary btn-large" href="#">목록으로</a>
+					<a class="btn btn-primary btn-large" href="/kcal/listKcal">목록으로</a>
 				</p>
 			</div>
 			<form role="form" action="/kcal/insertKcal" method="post" enctype="multipart/form-data">
