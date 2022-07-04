@@ -257,7 +257,7 @@ $(function() {
 										
 										<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
 											
-											<button data-value="${ groupJoinVo.userid }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
+											<button data-value="${ groupJoinVo.userid }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:20px; padding: 1.5% 0">강퇴</button>
 											<button data-value="${ groupJoinVo.userid }" class="btnUpdateGLeader btn btn-default" id="btnUpdateGLeader" style="width: 90px; height:30px; padding: 1% 0">권한 넘기기</button>
 										</c:if>
 										
