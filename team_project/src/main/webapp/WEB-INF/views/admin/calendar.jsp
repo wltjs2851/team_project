@@ -28,12 +28,14 @@
 		divToday.attr("style", "background: aliceblue;");
 		$("#main-day").html(thisToday.substring(0, 4) + "년 " + thisToday.substring(5, 6) + "월 " + thisToday.substring(7) + "일");
 		$(".dateBoard").on("click", ".divDate", function() {
-			that = $(this);
+			that.removeAttr("style", "background: aliceblue;");
 			selectDate = $(this).attr("data-today");
 			var myDate = selectDate.split("_")[0] + "년 " + selectDate.split("_")[1] + "월 " + selectDate.split("_")[2] + "일";
 			var userid = "${loginVo.userid}";
 			$("#main-day").html(myDate);
 			$(".todo-content").html("");
+			that = $(this);
+			that.attr("style", "background: aliceblue;");
 			$.each(jsonCal, function(e) {
 			var thatSpan = that.find("span").eq(e).attr("data-check");
 				if (this.start1 == that.attr("data-today")) {
@@ -119,7 +121,7 @@
 			if (insertContent != null && insertContent != "") {
 				$.post(url, sData, function(rData) {
 					if(rData == "true") {
-						$(".todo-content").append("<input class='checkList' data-today='" + selectDate + "' type='checkbox'><label>" + insertContent + "</label>");
+						$(".todo-content").append("<input class='checkList' data-today='" + selectDate + "' type='checkbox'><label>" + insertContent + "</label><a class='deleteCal'>&times;</a><br>");
 						$("#input-box").val("");
 					} else if (rData == "false") {
 						alert("일정은 4개까지 가능합니다.");
@@ -174,6 +176,7 @@
 				}
 			});
 		});
+		divToday.click();
 	});
 </script>
 <body>
@@ -214,7 +217,7 @@
 				          <div class="todo-title">오늘의 일정</div>
 				          <div class="todo-content"></div>
 				          <div class="input-wrap">
-				            <input type="text" placeholder="please write here!!" id="input-box" class="input-box form-control">
+				            <input type="text" placeholder="please write here!!" id="input-box" class="input-box form-control" style="margin-bottom: 10px;">
 				            <button type="button" id="input-data" class="btn btn-outline-primary"><span>INPUT</span></button>
 				            <button type="button" id="update-check" class="btn btn-outline-warning"><span>CHECK</span></button>
 				            <div id="input-list" class="input-list"></div>
