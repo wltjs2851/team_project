@@ -92,10 +92,10 @@ public class GroupDaoImpl implements GroupDao{
 		return false;
 	}
 	
-	public boolean deleteJoinGroup(int gno, String nickname) {
+	public boolean deleteJoinGroup(int gno, String userid) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("gno", gno);
-		map.put("nickname", nickname);
+		map.put("userid", userid);
 		int count = sqlSession.insert(NAMESPACE + "deleteJoinGroup", map);
 		if (count > 0) { 
 			return true;

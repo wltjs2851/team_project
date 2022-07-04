@@ -18,13 +18,15 @@ $(function() {
 	$(".btnBan").click(function() {
 		console.log("click");
 		var that = $(this);
-		var nickname = that.attr("data-value");
-		console.log(nickname);
+// 		var nickname = that.attr("data-value");
+// 		console.log(nickname);
+		var userid = that.attr("data-value");
+		console.log(userid);
 		var gno = "${groupVo.gno}";
-		var url = "/group/banMember/" + nickname + "/" + gno;
-// 		var sData = {
-// 				"gno" : gno
-// 		}
+		var url = "/group/banMember/" + userid + "/" + gno;
+		var sData = {
+				"gno" : gno
+		}
 		
 		$.get(url,function(rData) {
 			console.log(rData);
@@ -255,13 +257,14 @@ $(function() {
 										
 										<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
 											
-											<button data-value="${ groupJoinVo.nickname }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
+											<button data-value="${ groupJoinVo.userid }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:20px; padding: 1.5% 0">강퇴</button>
 											<button data-value="${ groupJoinVo.userid }" class="btnUpdateGLeader btn btn-default" id="btnUpdateGLeader" style="width: 90px; height:30px; padding: 1% 0">권한 넘기기</button>
 										</c:if>
 										
 											<i id="report" class="report fa-solid fa-handcuffs"><a class="btn btn-outline-danger" style="width: 40px; height:30px; padding: 1% 0" href="#" 
 											 	data-user="${ groupBoardVo.nickname }">신고</a></i>
-											<input type="hidden" id="nickname" name="nickname" value="${ groupJoinVo.nickname }">
+											<input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
+<%-- 											<input type="hidden" id="nickname" name="nickname" value="${ groupJoinVo.nickname }"> --%>
 											<input type="hidden" id="gno" name="gno" value="${ groupVo.gno }">
 											
 											<!-- 신고 관련 -->
@@ -315,7 +318,7 @@ $(function() {
 								</p>
 							</div>
 							<div class="list-group-item justify-content-between">
-									<c:if test="${ groupVo.g_leader == loginVo.userid }">
+									<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
 										<a href="/group/groupForm?gno=${ groupVo.gno }" id="updateGroupInfo">그룹 정보 수정</a>
 									</c:if>
 							</div>

@@ -197,6 +197,7 @@ public class GroupController {
 			@PathVariable("gno") int gno) {
 //		System.out.println("deleteMember, gno: " + gno);
 		System.out.println("deleteMember, gno: " + gno);
+		System.out.println("groupController, userid: " + userid);
 		
 		boolean result = groupService.banGroup(gno, userid);
 //		rttr.addFlashAttribute("delete_member", result);
