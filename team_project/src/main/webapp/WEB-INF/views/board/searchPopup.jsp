@@ -44,6 +44,34 @@ $(function() {
 		
 	});
 	
+	  $("#query").on("keyup",function(key){
+		  if(key.keyCode==13) {             
+			  var query = $("#query").val();
+				var url = "/recipe/shoppingRun";
+				sendData = {
+						"query" : query
+				};
+				$.get(url, sendData, function(receiveData) {
+					var json = receiveData;
+					var array = json.items;
+					$("#shopping > tbody").empty();
+					$.each(json.items, function() {
+						var list = "";
+						list += "<tr><td id='category'>" + this.category2 + "</td>";
+						var title = this.title.replace('<b>', '');
+						title = title.replace('</b>', '');
+						console.log(title);
+						list += "<td id='title'><a class='select'>" + title + "</td>";
+						list += "<td id='lprice'>" + this.lprice + "원</td>";
+						list += "<td id='maker'>" + this.maker + "</td>";
+						list += "<td><a id='link' href='" + this.link + "'>상품 보기 </a><input type='hidden' id='image' value='" + 
+							this.image + "'></td></tr>";
+						$("#shopping > tbody").append(list);
+					});
+				});        
+		  }    
+	  });
+	
 	$("#shopping").on("click", ".select", function() {
 		var tr = $(this).parent().parent();
 		var obj = new Object();
@@ -66,8 +94,8 @@ $(function() {
 			<div style="display:inline-block; width: 80%">
 				<input class="form-control" type="text" id="query" name="query">
 			</div>
-			<div style="display:inline-block">
-				<button class="btn btn-primary" id="btnSearch">검색</button>
+			<div style="display:inline-block; margin-bottom: 10px;">
+				<button class="btn btn-primary" id="btnSearch" style="margin-bottom: 5px;">검색</button>
 			</div>
 		</div>
 
