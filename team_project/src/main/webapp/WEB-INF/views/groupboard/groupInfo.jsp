@@ -169,18 +169,16 @@ $(function() {
 			
 				<div class="col-md-8">
 				
-				<div style="margin: 20px;"><img src="/groupboard/displayImage?filename=${groupVo.g_pic}" alt="그룹 사진"></div>
+				<c:choose>
 				
-<!-- 					<h2> -->
-<%-- 						그룹 이름: ${ groupVo.g_name } --%>
-<!-- 					</h2> -->
-					
-<!-- 					<h3> -->
-<!-- 						그룹 소개 -->
-<!-- 					</h3> -->
-<!-- 					<p> -->
-<%-- 						${ groupVo.g_intro } --%>
-<!-- 					</p> -->
+					<c:when test="${ groupVo.g_pic == null }">
+						<div style="margin: 20px;"><img src="/resources/images/board/groupDefault.png" alt="그룹 사진"></div>
+					</c:when>
+					<c:otherwise>
+						<div style="margin: 20px;"><img src="/groupboard/displayImage?filename=${groupVo.g_pic}" alt="그룹 사진"></div>
+					</c:otherwise>
+				</c:choose>
+				
 					<div class="tabbable" id="tabs-367776">
 						<ul class="nav nav-tabs">
 							<li class="nav-item">
@@ -240,27 +238,30 @@ $(function() {
 								</p>
 							</div>
 							<div class="tab-pane" id="tab2">
-								<p>
+<!-- 								<p> -->
 <!-- 									그룹원 목록(그룹장일 경우 강퇴 버튼 보이게) -->
 									<div>
 									
 									<div>
-										그룹장: <span id="leader">${ groupVo.g_leader }</span>
+<%-- 										그룹장: <span id="leader">${ groupVo.g_leader }</span> --%>
 <%-- 										<p style="border-radius: 5em; padding: 0.5em; background: #E7B7B7;">그룹장: <span id="leader">${ groupVo.g_leader }</span></p> --%>
 <%-- 										<p style="border-left: 10px solid #688FF4; padding: 0.5em; border-bottom: 2px solid #688FF4; ">그룹장: <span id="leader">${ groupVo.g_leader }</span></p> --%>
 									</div>
 									
+									<div>
 									<c:forEach items="${groupJoinMember}" var="groupJoinVo">
-										<div style="margin: 10px;">
-										<span>${ groupJoinVo.nickname }</span>
+										<dir class="row">
+										<div class="col-md-3">
+											<span>${ groupJoinVo.nickname }</span>
+										</div>
 										
-										
+										<div class="col-md-3">
 										<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
-											
-											<button data-value="${ groupJoinVo.userid }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:20px; padding: 1.5% 0">강퇴</button>
+											<button data-value="${ groupJoinVo.userid }" class="btnBan btn btn-danger" id="btnBan" style="width: 40px; height:30px; padding: 1% 0">강퇴</button>
 											<button data-value="${ groupJoinVo.userid }" class="btnUpdateGLeader btn btn-default" id="btnUpdateGLeader" style="width: 90px; height:30px; padding: 1% 0">권한 넘기기</button>
 										</c:if>
-										
+										</div>
+										<div class="col-md-3">
 											<i id="report" class="report fa-solid fa-handcuffs"><a class="btn btn-outline-danger" style="width: 40px; height:30px; padding: 1% 0" href="#" 
 											 	data-user="${ groupBoardVo.nickname }">신고</a></i>
 											<input type="hidden" id="userid" name="userid" value="${ groupJoinVo.userid }">
@@ -273,7 +274,8 @@ $(function() {
 												<i class='fas fa-ellipsis-v'></i>
 											
 											</button>
-											
+										</div>
+										<div class="col-md-3">	
 											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 											
 											<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
@@ -285,11 +287,13 @@ $(function() {
 											</div>
 										
 										</div>
+										</dir>
 									</c:forEach>
+									</div>
 									
 									</div>
 
-								</p>
+<!-- 								</p> -->
 							</div>
 						</div>
 					</div>
