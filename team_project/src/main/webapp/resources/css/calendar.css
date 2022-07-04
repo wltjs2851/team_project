@@ -6,6 +6,11 @@
 }
 
 @font-face {
+	src: url("/resources/css/fonts/UhBeeZZIBA-Regular.ttf");
+	font-family: "zziba";
+}
+
+@font-face {
 	src: url("/resources/css/fonts/Cafe24Ohsquare.ttf");
 	font-family: "mone";
 }
@@ -20,6 +25,11 @@
   list-style: none;
   box-sizing: border-box;  
   font-family: Pretendard;
+}
+
+
+label, #main-day {
+	font-family: "zziba";
 }
 
 /* 달력 */
@@ -110,8 +120,9 @@
 .checkList {
 	position: relative;
 	top: 6px;
-	width: 30px;
-	height: 30px;
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
 }
 
 .todo-content label {

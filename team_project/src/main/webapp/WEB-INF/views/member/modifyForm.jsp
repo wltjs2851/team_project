@@ -159,11 +159,11 @@ $(function() {
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><input class="form-control" type="em="email" email" name="email" value="${loginVo.email}"></td>
+				<td><input class="form-control" type="email" id="email" name="email" value="${loginVo.email}"></td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td><input class="form-control" type id="address"ddress" name="address" value="${loginVo.address}"></td>
+				<td><input class="form-control" type="text" id="address" name="address" value="${loginVo.address}"></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
