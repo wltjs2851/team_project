@@ -176,6 +176,7 @@
 				}
 			});
 		});
+		divToday.click();
 	});
 </script>
 <body>
