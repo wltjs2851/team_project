@@ -234,4 +234,16 @@ public class GroupDaoImpl implements GroupDao{
 	public int isExistMyGroupList(String userid) {
 		return sqlSession.selectOne(NAMESPACE + "isExistMyGroupList", userid);
 	}
+
+	@Override
+	public boolean deleteJoinGroupNickname(int gno, String nickname) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("gno", gno);
+		map.put("nickname", nickname);
+		int count = sqlSession.insert(NAMESPACE + "deleteJoinGroupNickname", map);
+		if (count > 0) { 
+			return true;
+		} 
+		return false;
+	}
 }

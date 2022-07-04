@@ -41,8 +41,8 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	@Transactional
-	public boolean userOut(String userid) {
-		List<Integer> gnoList = adminDao.getGno(userid);
+	public boolean userOut(String nickname) {
+		List<Integer> gnoList = adminDao.getGno(nickname);
 		System.out.println("gnoList:" + gnoList);
 		List<String> memberList = new ArrayList<String>();
 		if(gnoList.size() > 0) {
@@ -50,16 +50,16 @@ public class AdminServiceImpl implements AdminService{
 				System.out.println("1");
 				memberList = adminDao.getGmember(gnoList.get(i));
 				for(int j = 0; j < memberList.size(); j++) {
-					if(memberList.size() > 1 && !memberList.get(j).equals(userid)) {
+					if(memberList.size() > 1 && !memberList.get(j).equals(nickname)) {
 						System.out.println("2");
 						System.out.println(memberList.get(j));
 						adminDao.updateGLeader(gnoList.get(i), memberList.get(j));
 						groupDao.updateGroupMember(gnoList.get(i), -1);
-						groupDao.deleteJoinGroup(gnoList.get(i), userid);
-						memberDao.deleteMember(userid);
+						groupDao.deleteJoinGroupNickname(gnoList.get(i), nickname);
+						memberDao.deleteMember(nickname);
 						break;
 					}
-					if(memberList.size() == 1 && memberList.get(j).equals(userid)) {
+					if(memberList.size() == 1 && memberList.get(j).equals(nickname)) {
 						// 그룹에 본인만 있는 경우 
 						System.out.println("3");
 						System.out.println(memberList.get(j));
@@ -72,7 +72,8 @@ public class AdminServiceImpl implements AdminService{
 			}
 			return true;
 		} else {
-			return false;
+			memberDao.deleteMemberNickname(nickname);
+			return true;
 		}
 	}
 

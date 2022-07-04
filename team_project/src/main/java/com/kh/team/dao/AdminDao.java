@@ -13,7 +13,7 @@ public interface AdminDao {
 	
 	// userid, userid - join table => gno, gno - group userid(member), update gleader
 	// 강퇴시킬 회원의 gno 얻기 
-	public List<Integer> getGno(String userid);
+	public List<Integer> getGno(String nickname);
 	
 	// 그 gno 의 멤버 찾기 
 	public List<String> getGmember(int gno);

@@ -136,4 +136,13 @@ public class MemberDaoImpl implements MemberDao {
 		return memberVo;
 	}
 
+	@Override
+	public boolean deleteMemberNickname(String nickname) {
+		int count = sqlSession.update(NS + "deleteMemberNickname", nickname);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

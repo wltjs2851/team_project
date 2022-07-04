@@ -16,6 +16,8 @@ public interface MemberDao  {
 	
 	public boolean deleteMember(String userid);
 	
+	public boolean deleteMemberNickname(String nickname);
+	
 	public String getU_picById(String userid);
 	
 	public MemberVo memberByUserid(String userid);

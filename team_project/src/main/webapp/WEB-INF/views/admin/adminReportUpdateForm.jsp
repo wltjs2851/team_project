@@ -65,7 +65,7 @@ $(function(){
 	
 	// 신고 처리
 	$("#btnReportUpdateRun").click(function(){
-		var userid = "${reportBoardVo.receiver}";
+		var nickname = "${reportBoardVo.receiver}";
 		var rno = "${reportBoardVo.rno}";
 		var uno = "${reportBoardVo.uno}";
 		var fno = "${reportBoardVo.fno}";
@@ -121,7 +121,7 @@ $(function(){
 				board = "추천운동게시판 댓글";
 			}
 			
-			var message = userid +"님 "+ board +"\u00a0" + "[" + rep_cause;
+			var message = nickname +"님 "+ board +"\u00a0" + "[" + rep_cause;
 			if ("${reportBoardVo.rep_etc}" != null && "${reportBoardVo.rep_etc}" != "") {
 				message += "사유(${reportBoardVo.rep_etc})"; 
 			}
@@ -143,7 +143,7 @@ $(function(){
 			console.log(message);
 		} else {
 			console.log("신고받은 회원 추방");
-			var url = "/admin/userOutRun/" + userid;
+			var url = "/admin/userOutRun/" + nickname;
 // 			var sData = {
 // 					"userid" : userid
 // 			};
@@ -170,7 +170,7 @@ $(function(){
 	
 });
 </script>
-<%-- ${memberVo } --%>
+${reportBoardVo }
 <body>
 	<div class="row" style="margin-top: 20px;">
 		<div class="col-md-2"></div>

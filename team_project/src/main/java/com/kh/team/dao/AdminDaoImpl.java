@@ -32,8 +32,8 @@ private final String NAMESPACE = "com.kh.team.mappers.admin.";
 	}
 
 	@Override
-	public List<Integer> getGno(String userid) {
-		List<Integer> gnoList = sqlSession.selectList(NAMESPACE + "getGno", userid);
+	public List<Integer> getGno(String nickname) {
+		List<Integer> gnoList = sqlSession.selectList(NAMESPACE + "getGno", nickname);
 		return gnoList;
 	}
 

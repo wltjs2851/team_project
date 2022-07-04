@@ -84,6 +84,12 @@
 		and userid = #{userid}
 	</delete>
 	
+	
+	<delete id="deleteJoinGroupNickname">
+		delete from tbl_group_join
+		where gno = #{gno}
+		and nickname = #{nickname}
+	</delete>
 <!-- 그룹 삭제 -->
 	<delete id="deleteGroup">
 		delete from tbl_group where gno = #{gno}

@@ -70,6 +70,11 @@
 		where userid = #{userid}
 	</delete>
 	
+	<delete id="deleteMemberNickname">
+		delete from tbl_user
+		where nickname = #{nickname}
+	</delete>
+	
 <!-- 	최근 가입한 회원 리스트 -->
 	<select id="getLatestMember" resultType="MemberVo">
 		select * from

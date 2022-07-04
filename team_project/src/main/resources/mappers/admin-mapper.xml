@@ -33,11 +33,11 @@
 	
 	<select id="getGno" resultType="int">
 		select gno from tbl_group_join
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
 	
 	<select id="getGmember" resultType="String">
-		select userid from tbl_group_join
+		select nickname from tbl_group_join
 		where gno = #{gno}
 	</select>
 	

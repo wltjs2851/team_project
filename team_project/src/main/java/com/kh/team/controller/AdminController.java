@@ -215,11 +215,11 @@ public class AdminController {
 	}
 	
 	// 신고받은 회원 탈퇴 처리
-	@RequestMapping(value="/userOutRun/{userid}", method = RequestMethod.GET)
+	@RequestMapping(value="/userOutRun/{nickname}", method = RequestMethod.GET)
 	@ResponseBody
-	public String adminUserOutRun(@PathVariable("userid") String userid, int rbno) {
+	public String adminUserOutRun(@PathVariable("nickname") String nickname, int rbno) {
 		reportBoardService.updateRepState(rbno);
-		boolean result = adminService.userOut(userid);
+		boolean result = adminService.userOut(nickname);
 		System.out.println("adminController, userOutRun2, result :" + result);
 		System.out.println("rbno:" + rbno);
 		return String.valueOf(result);
