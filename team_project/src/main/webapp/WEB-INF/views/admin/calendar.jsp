@@ -59,6 +59,7 @@
 			var divDate = $(".dateBoard .divDate[data-today]");
 			divDate.find("span").remove();
 			divDate.find("br").remove();
+			divDate.find("img").remove();
 			var url = "/calendar/newCalendar";
 			var userid = "${loginVo.userid}";
 			var sData = {
@@ -76,9 +77,9 @@
 							$(thisDiv).append("<span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: orange; margin-right: 8px;'><i class='fas fa-circle'></i></span>");
 						} else {
 // 							$(thisDiv).append("<span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: green; margin-right: 8px;'><img src='/resources/images/stamp.png'/></span>");
-							$(thisDiv).attr("style", "padding-right: 0px;");
-							$(thisDiv).attr("style", "padding-left: 0px;");
-							$(thisDiv).html("<img src='/resources/images/stamp.png' style='width:95px;'/>");
+// 							$(thisDiv).attr("style", "padding-right: 0px;");
+// 							$(thisDiv).attr("style", "padding-left: 0px;");
+							$(thisDiv).append("<img src='/resources/images/stamp.png' style='width:77px;'/>");
 						}
 						return false;
 					}
