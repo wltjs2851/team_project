@@ -42,7 +42,7 @@ $(function() {
 		if("${groupVo.g_present}" > 1) {
 			alert("그룹원이 남아있습니다.");
 		} else {
-			$(this).attr("href","/group/removeGroup?gno=${groupVo.gno}&userid=${loginVo.userid}");
+			$(this).attr("href","/group/removeGroup?gno=${groupVo.gno}&userid=${groupVo.g_leader}");
 		}
 	});
 	
@@ -155,14 +155,15 @@ $(function() {
 					<br>
 					<br>
 				</div>
-				<c:if test="${ groupVo.g_leader == loginVo.userid }">
+				<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01'}">
 					<button type="button" class="btn btn-warning" id="btnModify" style="width: 80px; height:50px; padding: 1% 0">수정</button>
 					<button type="submit" class="btn btn-success" id="btnModifyRun" style="display: none;width: 80px; height:50px; padding: 1% 0;">수정완료</button>
 					<a id="btnDelete" class="btn btn-danger" id="btnDelete" style="width: 80px; height:50px; padding: 1% 0">삭제</a>
 				</c:if>
 				<a href="/group/groupList" class="btn btn-outline-primary" style="width: 80px; height:50px; padding: 1% 0;">목록</a>
 			</form>
-			<c:if test="${ groupVo.g_leader != loginVo.userid }">
+			
+			<c:if test="${ groupVo.g_leader != loginVo.userid && loginVo.userid != 'admin01'  }">
 				<form role="form" action="/group/joinGroup" method="post" style="display: inline;">
 					<input type="hidden" name="gno" value="${ groupVo.gno }">
 					<input type="hidden" name="g_present" value="${ groupVo.g_present }">

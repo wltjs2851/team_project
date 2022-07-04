@@ -79,7 +79,7 @@ $(function() {
 	$("#shopping").on("click", ".a_delete", function(e) {
 		e.preventDefault();
 		console.log("click");
-		var shpDiv = $(this).parent().parent().parent();
+		var shpDiv = $(this).parent().parent();
 		shpDiv.remove();
 		$("#r_product").val("");
 	});
