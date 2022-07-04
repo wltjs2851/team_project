@@ -121,7 +121,7 @@ $(function() {
 						}
 						cmt += "</div></div>";
 						cmt += "</div>"
-					cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:58px; margin-bottom: 10px;'>"
+					cmt += "<textarea disabled class='txtComment form-control' style='resize: none; overflow:hidden; width : 97%; height:100px; margin-bottom: 10px;'>"
 								+ this.rc_comment + "</textarea>";
 					if("${loginVo.nickname}" == this.nickname) {	
 						cmt +=	"<button type='button' class='btnModifyRun btn btn-outline-success' data-rcno=" + this.rcno + 

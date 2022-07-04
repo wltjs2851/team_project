@@ -62,8 +62,7 @@
 <!-- 그룹 수정 -->
 	<update id="updateGroup">
 		update tbl_group set g_name = #{g_name}, excercise_type = #{excercise_type}, g_attend = #{g_attend},
-				g_intro = #{g_intro}, g_pic = #{g_pic, jdbcType=VARCHAR}, dno = #{dno}, sno = #{sno, jdbcType=VARCHAR}, 
-					sgno = #{sgno, jdbcType=VARCHAR}
+				g_intro = #{g_intro}, g_pic = #{g_pic, jdbcType=VARCHAR}
 			where gno = #{gno}
 	</update>
 

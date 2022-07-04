@@ -62,16 +62,13 @@ function uploadSummernoteImageFile(file) {
 				<input type="hidden" name="page" value="${ param.page }">
 				<input type="hidden" name="perPage" value="${ param.perPage }">
 				<input type="hidden" name="keyword" value="${ param.keyword }">
-				<input type="hidden" name="searchType" value="${ param.searchType }">
+				<input type="hidden" name="searchType" value="${ param.searchType }"> 
+				<input type="hidden" class="form-control" id="nickname" name="nickname" value="${ routineVo.nickname }"/>
 				<div class="form-group">
 					<input type="text" class="form-control" value="${ routineVo.ur_title }" name="ur_title" required/>
 				</div>
 				<div class="form-group">
 					<textarea id="summernote" name="ur_content"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="nickname"> 사용자 </label>  
-					<input type="text" class="form-control" id="nickname" name="nickname" value="${ routineVo.nickname }" required/>
 				</div>
 				<button type="submit" class="btn btn-success" 
 					style='width: 80px; height:50px; padding: 1% 0'>수정완료</button>
