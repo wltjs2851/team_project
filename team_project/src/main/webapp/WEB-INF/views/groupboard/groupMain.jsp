@@ -197,7 +197,7 @@ $(function() {
 <!-- 						<button id="leave" type="button" class="btn btn-primary"> -->
 <!-- 							탈퇴 -->
 <!-- 						</button>  -->
-						<a href="/group/deleteMember/${ loginVo.nickname }/${ groupVo.gno}" class="btn btn-primary">탈퇴</a>
+						<a href="/group/deleteMember/${ loginVo.userid }/${ groupVo.gno}" class="btn btn-primary">탈퇴</a>
 						<button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">
 							취소
 						</button>

@@ -82,7 +82,7 @@
 	<delete id="deleteJoinGroup">
 		delete from tbl_group_join
 		where gno = #{gno}
-		and nickname = #{nickname}
+		and userid = #{userid}
 	</delete>
 	
 <!-- 그룹 삭제 -->
