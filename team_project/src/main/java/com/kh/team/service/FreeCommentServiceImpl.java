@@ -35,8 +35,8 @@ public class FreeCommentServiceImpl implements FreeCommentService{
 	}
 
 	@Override
-	public List<FreeCommentVo> adminFreeComment(String userid) {
-		return freeCommentDao.adminFreeComment(userid);
+	public List<FreeCommentVo> adminFreeComment(String nickname) {
+		return freeCommentDao.adminFreeComment(nickname);
 	}
 
 }

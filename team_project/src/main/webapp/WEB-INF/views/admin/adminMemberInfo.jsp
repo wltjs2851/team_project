@@ -141,7 +141,7 @@ $(function(){
 				<div class="card-header border-0">
 					<div class="d-flex justify-content-between" style="width: 100%;">
 						<h3 class="card-title">회원 정보</h3>
-						<a href="/admin/board?userid=${memberVo.userid }"> 작성글/댓글 보기</a>
+						<a href="/admin/board?nickname=${param.nickname}"> 작성글/댓글 보기</a>
 					</div>
 				</div>
 				<div class="card-body">

@@ -11,5 +11,5 @@ public interface RoutineCommentDao {
 	public boolean deleteRoutineComment(int urcno);
 	public boolean deleteRoutineCommentAll(int uno);
 	
-	public List<RoutineCommentVo> adminRoutineComment(String userid);
+	public List<RoutineCommentVo> adminRoutineComment(String nickname);
 }

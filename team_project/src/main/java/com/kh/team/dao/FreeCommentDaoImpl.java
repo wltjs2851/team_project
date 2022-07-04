@@ -58,8 +58,8 @@ public class FreeCommentDaoImpl implements FreeCommentDao{
 	}
 
 	@Override
-	public List<FreeCommentVo> adminFreeComment(String userid) {
-		List<FreeCommentVo> adminFreeComment = sqlSession.selectList(NAMESPACE + "adminFreeComment", userid);
+	public List<FreeCommentVo> adminFreeComment(String nickname) {
+		List<FreeCommentVo> adminFreeComment = sqlSession.selectList(NAMESPACE + "adminFreeComment", nickname);
 		return adminFreeComment;
 	}
 

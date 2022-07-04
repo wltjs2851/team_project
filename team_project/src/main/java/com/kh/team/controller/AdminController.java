@@ -158,17 +158,16 @@ public class AdminController {
 	
 	// 회원이 작성한 글 
 	@RequestMapping(value="/board", method = RequestMethod.GET)
-	public String adminMemberBoard(String userid, Model model) {
-		System.out.println("userid:" + userid);
+	public String adminMemberBoard(String nickname, Model model) {
 //		List<AdminVo> adminList = adminService.adminList(userid);
 //		model.addAttribute("adminList", adminList);
 		
-		List<FreeVo> freeList = freeService.adminFreeList(userid);
-		List<RecipeVo> recipeList = recipeService.adminRecipeList(userid);
-		List<GroupBoardVo> groupBoardList = groupBoardService.adminGroupBoardList(userid);
-		List<RoutineVo> routineList = routineService.adminRoutineList(userid);
+		List<FreeVo> freeList = freeService.adminFreeList(nickname);
+		List<RecipeVo> recipeList = recipeService.adminRecipeList(nickname);
+		List<GroupBoardVo> groupBoardList = groupBoardService.adminGroupBoardList(nickname);
+		List<RoutineVo> routineList = routineService.adminRoutineList(nickname);
 		
-		model.addAttribute("userid", userid);
+		model.addAttribute("nickname", nickname);
 		model.addAttribute("freeList", freeList);
 		model.addAttribute("recipeList", recipeList);
 		model.addAttribute("groupBoardList", groupBoardList);
@@ -179,18 +178,16 @@ public class AdminController {
 	
 	// 회원이 작성한 댓글
 	@RequestMapping(value="/comment", method = RequestMethod.GET)
-	public String adminMemberComment(String userid, Model model) {
+	public String adminMemberComment(String nickname, Model model) {
 		
-		System.out.println("AdminController, memberComment, userid:" + userid);
-		
-		List<FreeCommentVo> freeList = freeCommentService.adminFreeComment(userid);
-		List<RecipeCommentVo> recipeList = recipeCommentService.adminRecipeComment(userid);
-		List<GroupBoardCommentVo> groupBoardList = groupBoardCommentService.adminGroupBoardComment(userid);
-		List<RoutineCommentVo> routineList = routineCommentService.adminRoutineComment(userid);
-		List<RecommendCommentVo> recommendList = recommendCommentService.adminRecommendComment(userid);
+		List<FreeCommentVo> freeList = freeCommentService.adminFreeComment(nickname);
+		List<RecipeCommentVo> recipeList = recipeCommentService.adminRecipeComment(nickname);
+		List<GroupBoardCommentVo> groupBoardList = groupBoardCommentService.adminGroupBoardComment(nickname);
+		List<RoutineCommentVo> routineList = routineCommentService.adminRoutineComment(nickname);
+		List<RecommendCommentVo> recommendList = recommendCommentService.adminRecommendComment(nickname);
 		
 		
-		model.addAttribute("userid", userid);
+		model.addAttribute("nickname", nickname);
 		model.addAttribute("freeList", freeList);
 		model.addAttribute("recipeList", recipeList);
 		model.addAttribute("groupBoardList", groupBoardList);

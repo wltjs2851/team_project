@@ -35,8 +35,8 @@ public class RecommendCommentServiceImpl implements RecommendCommentService{
 	}
 
 	@Override
-	public List<RecommendCommentVo> adminRecommendComment(String userid) {
-		return recommendCommentDao.adminRecommendComment(userid);
+	public List<RecommendCommentVo> adminRecommendComment(String nickname) {
+		return recommendCommentDao.adminRecommendComment(nickname);
 	}
 
 }
