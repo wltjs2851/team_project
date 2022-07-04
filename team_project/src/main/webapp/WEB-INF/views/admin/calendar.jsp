@@ -72,7 +72,7 @@
 				var thisDiv = this;
 				$.each(jsonCal, function(e) {
 					if (this.start1 == data) {
-						$(thisDiv).append("<span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: orange; margin-right: 10px;'><i class='fa-solid fa-flag'></i></span>");
+						$(thisDiv).append("<span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: orange; margin-right: 8px;'><i class='fa-solid fa-flag'></i></span>");
 					}
 				});
 			});
@@ -166,6 +166,7 @@
 				"userid" : userid,
 				"start1" : selectDate
 			};
+			$(this).next().remove();
 			$(this).prev().remove();
 			$(this).prev().remove();
 			$(this).remove();

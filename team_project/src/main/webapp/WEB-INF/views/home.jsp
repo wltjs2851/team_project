@@ -323,7 +323,7 @@
 					</div>
 					<c:forEach items="${seoulGroup}" var="seoulVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${seoulVo.gno}">${seoulVo.g_name}<span>${seoulVo.g_present} / ${seoulVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${seoulVo.gno}">${seoulVo.g_intro}<span>${seoulVo.g_present} / ${seoulVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -336,7 +336,7 @@
 					</div>
 					<c:forEach items="${busanGroup}" var="busanVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${busanVo.gno}">${busanVo.g_name}<span>${busanVo.g_present} / ${busanVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${busanVo.gno}">${busanVo.g_intro}<span>${busanVo.g_present} / ${busanVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -349,7 +349,7 @@
 					</div>
 					<c:forEach items="${incheonGroup}" var="incheonVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${incheonVo.gno}">${incheonVo.g_name}<span>${incheonVo.g_present} / ${incheonVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${incheonVo.gno}">${incheonVo.g_intro}<span>${incheonVo.g_present} / ${incheonVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -362,7 +362,7 @@
 					</div>
 					<c:forEach items="${daeguGroup}" var="daeguVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${daeguVo.gno}">${daeguVo.g_name}<span>${daeguVo.g_present} / ${daeguVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${daeguVo.gno}">${daeguVo.g_intro}<span>${daeguVo.g_present} / ${daeguVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -375,7 +375,7 @@
 					</div>
 					<c:forEach items="${daejeonGroup}" var="daejeonVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${daejeonVo.gno}">${daejeonVo.g_name}<span>${daejeonVo.g_present} / ${daejeonVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${daejeonVo.gno}">${daejeonVo.g_intro}<span>${daejeonVo.g_present} / ${daejeonVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -388,7 +388,7 @@
 					</div>
 					<c:forEach items="${gwangjuGroup}" var="gwangjuVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${gwangjuVo.gno}">${gwangjuVo.g_name}<span>${gwangjuVo.g_present} / ${gwangjuVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${gwangjuVo.gno}">${gwangjuVo.g_intro}<span>${gwangjuVo.g_present} / ${gwangjuVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -401,7 +401,7 @@
 					</div>
 					<c:forEach items="${ulsanGroup}" var="ulsanVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${ulsanVo.gno}">${ulsanVo.g_name}<span>${ulsanVo.g_present} / ${ulsanVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${ulsanVo.gno}">${ulsanVo.g_intro}<span>${ulsanVo.g_present} / ${ulsanVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -414,7 +414,7 @@
 					</div>
 					<c:forEach items="${gyeonggiGroup}" var="gyeonggiVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${gyeonggiVo.gno}">${gyeonggiVo.g_name}<span>${gyeonggiVo.g_present} / ${gyeonggiVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${gyeonggiVo.gno}">${gyeonggiVo.g_intro}<span>${gyeonggiVo.g_present} / ${gyeonggiVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>

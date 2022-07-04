@@ -10,44 +10,55 @@ $(function() {
 		var dno = $("#location").val();
 		var url = "/group/getSno/" + dno;
 		$("#s_location").empty();
-		$.get(url, function(receivedData) {
-			if(receivedData != null && receivedData != "") {	
-				$("#s_location").show();
-				$("#sg_location").hide();
-				$("#s_location").append("<option>선택해주세요.</option>");
-				$.each(receivedData, function() {
-					var sgg = "";
-					sgg += "<option value=" + this.sno + ">" + this.lname + "</option>";
-					console.log("sgg: " + sgg);
-					$("#s_location").append(sgg);	
-				});
-			} else {
-				$("#s_location").hide();
-			}
-		});
+		if ($(this).val() != "select") {
+			$.get(url, function(receivedData) {
+				if(receivedData != null && receivedData != "") {	
+					$("#s_location").show();
+					$("#sg_location").hide();
+					$("#s_location").append("<option value='select'>선택해주세요.</option>");
+					$.each(receivedData, function() {
+						var sgg = "";
+						sgg += "<option value=" + this.sno + ">" + this.lname + "</option>";
+						console.log("sgg: " + sgg);
+						$("#s_location").append(sgg);	
+					});
+				} else {
+					$("#s_location").hide();
+					$("#sg_location").hide();
+				}
+			});
+		} else {
+			$("#s_location").hide();
+			$("#sg_location").hide();
+		}
 	});
 	
 	$("#s_location").on("change", function() {
 		var dno = $("#location").val();
 		var sno = $("#s_location").val();
 		var url = "/group/getSgno/" + dno + "/" + sno;
-		$.get(url, function(receivedData) {
-			console.log(receivedData);
-			if(receivedData != null && receivedData != "") {				
-				$("#sg_location").removeAttr('style');
-				$("#sg_location").empty();
-				$("#sg_location").show();
-				$("#sg_location").append("<option>선택해주세요.</option>");
-				$.each(receivedData, function() {
-					var sgg = "";
-					sgg += "<option value=" + this.sgno + ">" + this.lname + "</option>";
-					console.log("sgg: " + sgg);
-					$("#sg_location").append(sgg);	
-				});
-			} else {
-				$("#sg_location").hide();
-			}
-		});
+		if ($(this).val() != "select") {
+			$.get(url, function(receivedData) {
+				console.log(receivedData);
+				if(receivedData != null && receivedData != "") {				
+					$("#sg_location").removeAttr('style');
+					$("#sg_location").empty();
+					$("#sg_location").show();
+					$("#sg_location").append("<option value='select'>선택해주세요.</option>");
+					$.each(receivedData, function() {
+						var sgg = "";
+						sgg += "<option value=" + this.sgno + ">" + this.lname + "</option>";
+						console.log("sgg: " + sgg);
+						$("#sg_location").append(sgg);	
+					});		
+				} else {
+					$("#sg_location").hide();
+				}
+			});
+		} else {
+			$("#sg_location").hide();
+			console.log("else");
+		}
 	});
 });
 </script>
@@ -58,7 +69,6 @@ $(function() {
 		</div>
 		<div class="col-md-8">
 			<form role="form" action="/group/addGroupRun" method="post" enctype="multipart/form-data">
-			${ loginVo }
 			<input type="hidden" name="g_leader" id="g_leader" value="${ loginVo.userid }">
 				<div class="form-group">
 					<label for="g_location">
@@ -68,7 +78,7 @@ $(function() {
 					<div style="margin-left: 2px;">
 						<div class="col-md-3" style="display: inline-block; padding-left: 0px;">
 							<select id="location" name="dno" class="form-control">
-								<option value="">도시를 선택해주세요.</option>
+								<option value="select">도시를 선택해주세요.</option>
 								<c:forEach items="${ locationVo }" var="locationVo">
 									<option value="${ locationVo.dno }">${ locationVo.lname }</option>
 								</c:forEach>
@@ -76,7 +86,7 @@ $(function() {
 						</div>
 						<div class="col-md-2" style="display: inline-block;">
 							<select id="s_location" name="sno" class="form-control" style="display: none;">
-								<option selected>선택해주세요.</option>
+								<option selected value="select">선택해주세요.</option>
 							</select>
 						</div>
 						<div class="col-md-2" style="display: inline-block;">
