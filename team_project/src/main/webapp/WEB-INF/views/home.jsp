@@ -186,7 +186,7 @@
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
 							<h4 class="card-title">
-								<a href="">회원님들의 식단</a>
+								<a href="/recipe/recipeList">회원님들의 식단</a>
 							</h4>
 						</div>
 						<div class="card-body">
@@ -217,7 +217,7 @@
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
 							<h4 class="card-title">
-								<a href="">회원님들의 루틴</a>
+								<a href="/routine/routineList">회원님들의 루틴</a>
 							</h4>
 						</div>
 						<div class="card-body">
@@ -248,7 +248,7 @@
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
 							<h4 class="card-title">
-								<a href=""> 자유게시판 </a>
+								<a href="/free/freeList"> 자유게시판 </a>
 							</h4>
 						</div>
 						<div class="card-body">
@@ -279,7 +279,7 @@
 						<div class="thumb-content">
 							<!-- <div class="price">$200</div> -->
 							<h4 class="card-title">
-								<a href=""> 추천 운동 </a>
+								<a href="/recommend/listRecommend"> 추천 운동 </a>
 							</h4>
 						</div>
 						<div class="card-body">
