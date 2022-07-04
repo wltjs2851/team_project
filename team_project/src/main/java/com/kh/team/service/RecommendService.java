@@ -2,6 +2,7 @@ package com.kh.team.service;
 
 import java.util.List;
 
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecommendVo;
 
 public interface RecommendService {
@@ -20,7 +21,10 @@ public interface RecommendService {
 		public RecommendVo selectByReno(int reno);
 		
 		// 글 목록
-		public List<RecommendVo> listRecommend();
+		public List<RecommendVo> listRecommend(PagingDto pagingDto);
 		
 		public List<RecommendVo> selectByViewCnt();
+		
+		// 총 글 갯수
+		public int getCountRecommend(PagingDto pagingDto);
 }

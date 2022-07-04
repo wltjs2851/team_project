@@ -41,8 +41,17 @@
 	
 	<!-- 글 목록조회 -->
 	<select id="listRecommend" resultType="RecommendVo">
-		select * from tbl_recommend
-		order by reno desc
+		select * from (select rownum rnum, a.* from
+			(select * from tbl_recommend 
+				where (re_title || re_content) like '%' || #{keyword, jdbcType=VARCHAR} || '%'
+			order by reno desc) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	
+<!-- 	전체 글 갯수 -->
+	<select id="getCountRecommend" resultType="int">
+		select count(*)	from tbl_recommend
+		where (re_title || re_content) like '%' || #{keyword, jdbcType=VARCHAR} || '%'
 	</select>
 	
 	<!-- 조회수 증가 -->	

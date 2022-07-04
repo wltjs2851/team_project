@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecommendVo;
 
 @Repository
@@ -50,8 +51,8 @@ public class RecommendDaoImpl implements RecommendDao{
 	}
 
 	@Override
-	public List<RecommendVo> listRecommend() {
-		List<RecommendVo> listRecommend = sqlSession.selectList(NAMESPACE + "listRecommend");
+	public List<RecommendVo> listRecommend(PagingDto pagingDto) {
+		List<RecommendVo> listRecommend = sqlSession.selectList(NAMESPACE + "listRecommend", pagingDto);
 		return listRecommend;
 	}
 
@@ -65,6 +66,12 @@ public class RecommendDaoImpl implements RecommendDao{
 	public void updateViewCnt(int reno) {
 		sqlSession.update(NAMESPACE + "updateViewCnt", reno);
 		
+	}
+
+	@Override
+	public int getCountRecommend(PagingDto pagingDto) {
+		int count = sqlSession.selectOne(NAMESPACE + "getCountRecommend", pagingDto);
+		return count;
 	}
 	
 }

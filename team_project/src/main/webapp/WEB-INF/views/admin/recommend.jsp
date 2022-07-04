@@ -43,13 +43,46 @@ $(document).ready(function() {
 		location.href = "/recommend/selectByReno?reno=" + reno;
 	});
 	
+	// 목록에서 본문 말줄임
 	$(".revo_re_content").each(function() {
 		var t = $(this).text();
 		var t2 = t.substring(0, 100);
 		$(this).text(t2 + "...");
 	});     
+	
+	// 페이지 이동
+	var frmPaging = $("#frmPaging");
+	$("a.page-link").click(function(e) {
+		e.preventDefault();
+		console.log("클릭");
+		var page = $(this).attr("href");
+		console.log(page);
+		frmPaging.find("input[name=page]").val(page);
+		frmPaging.attr("action", "/recommend/listRecommend");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
+
+	// 검색하기
+	$("#searchKcal").on("click", function(e) {
+		e.preventDefault();
+		console.log("검색하기 버튼");
+		var keyword = $("#keyword").val();
+		console.log(keyword);
+		frmPaging.find("input[name=keyword]").val(keyword);
+		frmPaging.find("input[name=page]").val(1);
+		frmPaging.attr("action", "/recommend/listRecommend");
+		frmPaging.attr("method", "get");
+		frmPaging.submit();
+	});
 });
 </script>
+<form id="frmPaging">
+	<input
+		type="hidden" name="page" value="${ pagingDto.page }"> <input
+		type="hidden" name="perPage" value="${ pagingDto.perPage }"> <input
+		type="hidden" name="keyword" value="${ pagingDto.keyword }">
+</form>
 <%-- ${listRecommend} --%>
 <div class="container-fluid">
 	<div class="row">
@@ -105,7 +138,47 @@ $(document).ready(function() {
 				</c:forEach>
 				</tbody>
 			</table>
-
+<!-- 	페이징		 -->
+		<div>
+			<nav>
+				<ul class="pagination justify-content-center">
+					<c:if test="${pagingDto.startPage != 1}">
+						<li class="page-item"><a class="page-link"
+							href="${pagingDto.startPage - 1}">이전</a></li>
+					</c:if>
+					<c:forEach var="v" begin="${pagingDto.startPage}"
+						end="${pagingDto.endPage}">
+						<li
+							<c:choose>
+								<c:when test="${v == param.page}">
+									class="page-item active"
+								</c:when>
+								<c:otherwise>
+									class="page-item"
+								</c:otherwise>
+							</c:choose>>
+							<a class="page-link" href="${v}">${v}</a>
+						</li>
+					</c:forEach>
+					<c:if test="${pagingDto.endPage != pagingDto.totalPage}">
+						<li class="page-item"><a class="page-link"
+							href="${pagingDto.endPage + 1}">다음</a></li>
+					</c:if>
+				</ul>
+			</nav>
+		</div>
+<!-- 	검색 -->
+		<div class="search" style="float:right;">
+			<div>
+				<input type="text" placeholder="검색어를 입력하시오"
+					id="keyword" style="margin-right: 8px;"
+					<c:if test="${ pagingDto.keyword != null }">
+					value="${ pagingDto.keyword }"
+				</c:if>>
+				<input type="image" src="/resources/images/magnifier.png"
+					id="searchKcal" style="width: 20px; float: right;">
+			</div>
+		</div>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
