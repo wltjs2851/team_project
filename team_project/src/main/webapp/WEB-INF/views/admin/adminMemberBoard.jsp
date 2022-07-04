@@ -165,7 +165,7 @@ $(function(){
 				<ul class="nav nav-tabs">
 					<li class="nav-item"><a class="nav-link active" href="#tab1"
 						data-toggle="tab">작성글</a></li>
-					<li class="nav-item"><a class="nav-link" href="/admin/comment?userid=${userid}"
+					<li class="nav-item"><a class="nav-link" href="/admin/comment?nickname=${param.nickname}"
 						data-toggle="tab">작성댓글</a></li>
 				</ul>
 			</div>

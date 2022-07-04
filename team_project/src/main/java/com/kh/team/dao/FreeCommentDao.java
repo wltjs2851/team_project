@@ -11,5 +11,5 @@ public interface FreeCommentDao {
 	public boolean deleteFreeComment(int fcno);
 	public boolean deleteFreeCommentAll(int fno);
 	
-	public List<FreeCommentVo> adminFreeComment(String userid);
+	public List<FreeCommentVo> adminFreeComment(String nickname);
 }

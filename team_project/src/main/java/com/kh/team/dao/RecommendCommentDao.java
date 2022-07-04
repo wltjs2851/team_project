@@ -13,6 +13,6 @@ public interface RecommendCommentDao {
 	public boolean deleteRecommendCommnet(int recno);
 	public List<RecommendCommentVo> recommendCommentList(int reno);
 	
-	public List<RecommendCommentVo> adminRecommendComment(String userid);
+	public List<RecommendCommentVo> adminRecommendComment(String nickname);
 
 }

@@ -32,7 +32,7 @@ $(function() {
 			console.log(rData);
 			if (rData == "true") {
 				alert("그룹원 강퇴 성공");
-				that.parent().fadeOut("slow");
+				that.parent().parent().fadeOut("slow");
 			}
 		});
 	});
@@ -250,7 +250,7 @@ $(function() {
 									
 									<div>
 									<c:forEach items="${groupJoinMember}" var="groupJoinVo">
-										<dir class="row">
+										<dir class="ban row">
 										<div class="col-md-3">
 											<span>${ groupJoinVo.nickname }</span>
 										</div>

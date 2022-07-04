@@ -35,6 +35,6 @@
  <!--  유저 작성 댓글 조회 -->
 	<select id="adminRecommendComment" resultType="RecommendCommentVo">
 		select recno, reno, re_comment, re_regdate from tbl_reccomment
-		where userid = #{userid}
+		where nickname = #{nickname}
 	</select>
  </mapper>

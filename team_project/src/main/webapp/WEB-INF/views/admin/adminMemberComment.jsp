@@ -155,7 +155,7 @@ $(function(){
 		<div class="col-md-10">
 			<div class="tabbable" id="tabs-834783">
 				<ul class="nav nav-tabs">
-					<li class="nav-item"><a class="nav-link" href="/admin/board?userid=${userid }"
+					<li class="nav-item"><a class="nav-link" href="/admin/board?nickname=${param.nickname}"
 						data-toggle="tab">작성글</a></li>
 					<li class="nav-item"><a class="nav-link active" href="#tab2"
 						data-toggle="tab">작성댓글</a></li>
