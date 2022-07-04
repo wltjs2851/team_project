@@ -27,10 +27,9 @@
 /*   font-family: Pretendard; */
 }
 
-/* .dateBoard .divDate { */
-/* 	padding-left: 0px; */
-/* 	padding-right: 0px; */
-/* } */
+.divDate p {
+	margin-bottom: 0px;
+}
 
 label, #main-day, .rap, .dateTitle, .divDate p, .todo-title, #input-box {
 	font-family: "zziba";
@@ -93,7 +92,7 @@ label, #main-day, .rap, .dateTitle, .divDate p, .todo-title, #input-box {
   border-radius: .6rem;
   border: 1px solid #eee;
   width: 100px;
-  height: 100px;
+  height: 120px;
 }
 
 .noColor {
