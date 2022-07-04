@@ -35,7 +35,7 @@
 			$("#main-day").html(myDate);
 			$(".todo-content").html("");
 			that = $(this);
-			that.attr("style", "background: aliceblue;");
+			that.css("style", "background: aliceblue;");
 			$.each(jsonCal, function(e) {
 			var thatSpan = that.find("span").eq(e).attr("data-check");
 				if (this.start1 == that.attr("data-today")) {
@@ -72,7 +72,15 @@
 				var thisDiv = this;
 				$.each(jsonCal, function(e) {
 					if (this.start1 == data) {
-						$(thisDiv).append("<span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: orange; margin-right: 8px;'><i class='fa-solid fa-flag'></i></span>");
+						if (this.checklist == "false") {
+							$(thisDiv).append("<span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: orange; margin-right: 8px;'><i class='fas fa-circle'></i></span>");
+						} else {
+// 							$(thisDiv).append("<span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: green; margin-right: 8px;'><img src='/resources/images/stamp.png'/></span>");
+							$(thisDiv).attr("style", "padding-right: 0px;");
+							$(thisDiv).attr("style", "padding-left: 0px;");
+							$(thisDiv).html("<img src='/resources/images/stamp.png' style='width:95px;'/>");
+						}
+						return false;
 					}
 				});
 			});

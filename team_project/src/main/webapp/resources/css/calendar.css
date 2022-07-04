@@ -27,6 +27,10 @@
 /*   font-family: Pretendard; */
 }
 
+/* .dateBoard .divDate { */
+/* 	padding-left: 0px; */
+/* 	padding-right: 0px; */
+/* } */
 
 label, #main-day, .rap, .dateTitle, .divDate p, .todo-title, #input-box {
 	font-family: "zziba";
