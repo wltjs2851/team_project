@@ -21,6 +21,7 @@ import com.kh.team.service.RecommendLikeService;
 import com.kh.team.service.RecommendService;
 import com.kh.team.util.FileUtil;
 import com.kh.team.vo.MemberVo;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecommendLikeVo;
 import com.kh.team.vo.RecommendVo;
 
@@ -65,9 +66,12 @@ public class RecommendController {
 		
 		// 추천 운동 글 목록
 		@RequestMapping(value = "/listRecommend", method = RequestMethod.GET)
-		public String listRecommend(RecommendVo recommendVo, Model model) {
-			List<RecommendVo> listRecommend = recommendService.listRecommend();
+		public String listRecommend(RecommendVo recommendVo, Model model, PagingDto pagingDto) {
+			pagingDto.setCount(recommendService.getCountRecommend(pagingDto));
+			pagingDto.setPage(pagingDto.getPage());
+			List<RecommendVo> listRecommend = recommendService.listRecommend(pagingDto);
 			model.addAttribute("listRecommend", listRecommend);
+			model.addAttribute("pagingDto", pagingDto);
 			String content = recommendVo.getRe_content();
 			System.out.println("listRecommend, content:" + content);
 			return "admin/recommend";
