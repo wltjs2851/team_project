@@ -179,18 +179,6 @@ $(function() {
 					</c:otherwise>
 				</c:choose>
 				
-				
-				
-<!-- 					<h2> -->
-<%-- 						그룹 이름: ${ groupVo.g_name } --%>
-<!-- 					</h2> -->
-					
-<!-- 					<h3> -->
-<!-- 						그룹 소개 -->
-<!-- 					</h3> -->
-<!-- 					<p> -->
-<%-- 						${ groupVo.g_intro } --%>
-<!-- 					</p> -->
 					<div class="tabbable" id="tabs-367776">
 						<ul class="nav nav-tabs">
 							<li class="nav-item">
