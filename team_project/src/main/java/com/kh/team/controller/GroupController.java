@@ -99,7 +99,7 @@ public class GroupController {
 		String g_pic;
 		if (originalFilename != null && !originalFilename.equals("")) {
 			try {
-				g_pic = FileUtil.uploadFile("C:/gpic", originalFilename, file.getBytes());
+				g_pic = FileUtil.uploadFile("//192.168.0.90/gpic", originalFilename, file.getBytes());
 				groupVo.setG_pic(g_pic);
 				groupService.addGroup(groupVo, nickname);
 			} catch (IOException e) {
