@@ -146,9 +146,20 @@
 	<select id="searchLocation" resultType="GroupVo">
 		select * from (select rownum rnum, a.* from 
 			(select * from tbl_group
-			where dno = #{dno, jdbcType=VARCHAR}
-			or (dno = #{dno, jdbcType=VARCHAR} and sno = #{sno, jdbcType=VARCHAR})
-			or (dno = #{dno, jdbcType=VARCHAR} and sno = #{sno, jdbcType=VARCHAR} and sgno = #{sgno, jdbcType=VARCHAR})) a) 
+			<choose>
+				<when test="dno != 0 and sno == 0 and sgno == 0">
+					where dno = #{dno, jdbcType=VARCHAR}
+				</when>
+				<when test="dno != 0 and sno != 0 and sgno == 0">
+					where dno = #{dno, jdbcType=VARCHAR} and sno = #{sno, jdbcType=VARCHAR}	
+				</when>
+				<when test="dno != 0 and sno != 0 and sgno != 0">
+					where dno = #{dno, jdbcType=VARCHAR} and sno = #{sno, jdbcType=VARCHAR} and sgno = #{sgno, jdbcType=VARCHAR}	
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
+			) a) 
 		where rnum between #{startRow} and #{endRow}
 	</select>
 	

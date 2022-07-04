@@ -15,8 +15,8 @@
 	font-family: "mone";
 }
 
-.nav-link {
-	font-family: "mone";	
+.main-menu {
+	font-family: "mone";
 }
 
 * {
@@ -24,11 +24,11 @@
   padding: 0;
   list-style: none;
   box-sizing: border-box;  
-  font-family: Pretendard;
+/*   font-family: Pretendard; */
 }
 
 
-label, #main-day {
+label, #main-day, .rap, .dateTitle, .divDate p, .todo-title, #input-box {
 	font-family: "zziba";
 }
 
@@ -44,6 +44,7 @@ label, #main-day {
 
 .todo-title {
 	padding-top: 50px;
+	font-size: 25px;
 }
 
 .colRight {

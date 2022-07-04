@@ -2,6 +2,7 @@ package com.kh.team.dao;
 
 import java.util.List;
 
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecommendVo;
 
 
@@ -21,12 +22,15 @@ public interface RecommendDao {
 	public RecommendVo selectByReno(int reno);
 	
 	// 글 목록
-	public List<RecommendVo> listRecommend();
+	public List<RecommendVo> listRecommend(PagingDto pagingDto);
 	
 	// 글 하나에 대한 조회수
 	public void updateViewCnt(int reno);
 	
 	// 조회수 3개조회
 	public List<RecommendVo> selectByViewCnt();
+	
+	// 총 글 갯수
+	public int getCountRecommend(PagingDto pagingDto);
 	
 }

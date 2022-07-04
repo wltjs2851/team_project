@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.dao.RecommendDao;
+import com.kh.team.vo.PagingDto;
 import com.kh.team.vo.RecommendVo;
 
 @Service
@@ -48,8 +49,8 @@ public class RecommendServiceImpl implements RecommendService{
 	
 	// 글 목록
 	@Override
-	public List<RecommendVo> listRecommend() {
-		List<RecommendVo> listRecommend = recommendDao.listRecommend();
+	public List<RecommendVo> listRecommend(PagingDto pagingDto) {
+		List<RecommendVo> listRecommend = recommendDao.listRecommend(pagingDto);
 		return listRecommend;
 	}
 
@@ -57,6 +58,11 @@ public class RecommendServiceImpl implements RecommendService{
 	public List<RecommendVo> selectByViewCnt() {
 		List<RecommendVo> listRecommend = recommendDao.selectByViewCnt();
 		return listRecommend;
+	}
+
+	@Override
+	public int getCountRecommend(PagingDto pagingDto) {
+		return recommendDao.getCountRecommend(pagingDto);
 	}
 
 }
