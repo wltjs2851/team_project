@@ -315,7 +315,7 @@ $(function() {
 								</p>
 							</div>
 							<div class="list-group-item justify-content-between">
-									<c:if test="${ groupVo.g_leader == loginVo.userid }">
+									<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
 										<a href="/group/groupForm?gno=${ groupVo.gno }" id="updateGroupInfo">그룹 정보 수정</a>
 									</c:if>
 							</div>
