@@ -137,7 +137,7 @@ public class AdminController {
 		MemberVo memberVo = memberSerive.memberByNickname(nickname);
 		model.addAttribute("memberVo", memberVo);
 		
-		List<AdminVo> adminList = adminService.adminList(userid);
+		List<AdminVo> adminList = adminService.adminList(nickname);
 		model.addAttribute("adminList", adminList);
 		
 //		가입한 그룹 정보

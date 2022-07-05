@@ -31,8 +31,8 @@ public class AdminServiceImpl implements AdminService{
 	private ReportBoardDao reportBoardDao;
 	
 	@Override
-	public List<AdminVo> adminList(String userid) {
-		return adminDao.adminList(userid);
+	public List<AdminVo> adminList(String nickname) {
+		return adminDao.adminList(nickname);
 	}
 	@Override
 	public List<testVo> getGroupInfo() {

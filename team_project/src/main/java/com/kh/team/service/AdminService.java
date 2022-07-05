@@ -6,7 +6,7 @@ import com.kh.team.vo.AdminVo;
 import com.kh.team.vo.testVo;
 
 public interface AdminService {
-	public List<AdminVo> adminList(String userid);
+	public List<AdminVo> adminList(String nickname);
 	
 	public List<testVo> getGroupInfo();
 	
