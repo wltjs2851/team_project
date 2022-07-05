@@ -7,7 +7,7 @@ import com.kh.team.vo.GroupVo;
 import com.kh.team.vo.testVo;
 
 public interface AdminDao {
-	public List<AdminVo> adminList(String userid);
+	public List<AdminVo> adminList(String nickname);
 	
 	public List<testVo> getGroupInfo();
 	

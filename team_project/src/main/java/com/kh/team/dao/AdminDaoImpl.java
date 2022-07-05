@@ -20,8 +20,8 @@ private final String NAMESPACE = "com.kh.team.mappers.admin.";
 	SqlSession sqlSession;
 
 	@Override
-	public List<AdminVo> adminList(String userid) {
-		List<AdminVo> adminList = sqlSession.selectList(NAMESPACE + "adminList", userid);
+	public List<AdminVo> adminList(String nickname) {
+		List<AdminVo> adminList = sqlSession.selectList(NAMESPACE + "adminList", nickname);
 		return adminList;
 	}
 

@@ -137,7 +137,7 @@ public class AdminController {
 		MemberVo memberVo = memberSerive.memberByNickname(nickname);
 		model.addAttribute("memberVo", memberVo);
 		
-		List<AdminVo> adminList = adminService.adminList(userid);
+		List<AdminVo> adminList = adminService.adminList(nickname);
 		model.addAttribute("adminList", adminList);
 		
 //		가입한 그룹 정보
@@ -219,6 +219,7 @@ public class AdminController {
 	@ResponseBody
 	public String adminUserOutRun(@PathVariable("nickname") String nickname, int rbno) {
 		reportBoardService.updateRepState(rbno);
+		System.out.println("userOutRun, nickname:" + nickname);
 		boolean result = adminService.userOut(nickname);
 		System.out.println("adminController, userOutRun2, result :" + result);
 		System.out.println("rbno:" + rbno);

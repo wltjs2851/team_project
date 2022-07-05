@@ -31,8 +31,8 @@ public class AdminServiceImpl implements AdminService{
 	private ReportBoardDao reportBoardDao;
 	
 	@Override
-	public List<AdminVo> adminList(String userid) {
-		return adminDao.adminList(userid);
+	public List<AdminVo> adminList(String nickname) {
+		return adminDao.adminList(nickname);
 	}
 	@Override
 	public List<testVo> getGroupInfo() {
@@ -63,13 +63,14 @@ public class AdminServiceImpl implements AdminService{
 						// 그룹에 본인만 있는 경우 
 						System.out.println("3");
 						System.out.println(memberList.get(j));
-						groupDao.deleteJoinGroup(gnoList.get(i), memberList.get(j));
+						groupDao.deleteJoinGroupNickname(gnoList.get(i), nickname);
 						groupDao.deleteGroup(gnoList.get(i));
 						memberDao.deleteMember(memberList.get(j));
 						break;
 					}
 				}
 			}
+			memberDao.deleteMember(nickname);
 			return true;
 		} else {
 			memberDao.deleteMemberNickname(nickname);
