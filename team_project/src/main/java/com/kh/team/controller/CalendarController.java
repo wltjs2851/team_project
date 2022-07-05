@@ -1,7 +1,11 @@
 package com.kh.team.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import net.sf.json.JSONArray;
-
 import com.kh.team.service.CalendarServcie;
 import com.kh.team.vo.CalendarVo;
 import com.kh.team.vo.MemberVo;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+
 
 @Controller
 @RequestMapping("/calendar")
@@ -35,26 +42,74 @@ public class CalendarController {
 		String thisYear = String.valueOf(LocalDate.now().getYear());
 		String thisMonth = String.valueOf(LocalDate.now().getMonthValue());
 		String month = thisYear + "_" + thisMonth;
+		Map<String, List<CalendarVo>> calMap = new HashMap<>();
 		List<CalendarVo> calList = calendarService.getCal(month, userid);
-		JSONArray jsonArray = new JSONArray();
-		model.addAttribute("jsonCal", jsonArray.fromObject(calList));
-		model.addAttribute("calList", calList);
+		
+		
+		for (CalendarVo vo : calList) {
+			
+			List<CalendarVo> tempList = calMap.get(vo.getStart1());
+			if (tempList == null) {
+				tempList = new ArrayList<>();
+			}
+			tempList.add(vo);
+			calMap.put(vo.getStart1(), tempList);
+			
+		}
+		JSONArray mapArray = new JSONArray();
+		
+		Set<String> keys = calMap.keySet();
+		for (String key:keys) {
+			JSONObject mapObject = new JSONObject();
+//			JSONArray jsonArray = new JSONArray();
+			List<CalendarVo> tempList = calMap.get(key);
+			mapObject.put(key, tempList);
+			mapArray.add(mapObject);
+		}
+//		JSONArray jsonArray = new JSONArray();
+//		System.out.println("calMap:" + calMap);
+//		
+//		
+//		model.addAttribute("jsonCal", jsonArray.fromObject(calList));
+//		model.addAttribute("calList", calList);
+		model.addAttribute("jsonCal", mapArray.toString());
 		return "admin/calendar";
 	}
 	
 //	비동기로 캘린더 리스트 불러오기
 	@RequestMapping(value = "/newCalendar", method = RequestMethod.GET)
 	@ResponseBody
-	public JSONArray newCalendar(Model model, HttpSession session) {
+	public Map<String, List<CalendarVo>> newCalendar(Model model, HttpSession session) {
 		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		String userid = loginVo.getUserid();
 		String thisYear = String.valueOf(LocalDate.now().getYear());
 		String thisMonth = String.valueOf(LocalDate.now().getMonthValue());
 		String month = thisYear + "_" + thisMonth;
+		Map<String, List<CalendarVo>> calMap = new HashMap<>();
 		List<CalendarVo> calList = calendarService.getCal(month, userid);
-		model.addAttribute("jsonCal", JSONArray.fromObject(calList));
-		model.addAttribute("calList", calList);
-		return JSONArray.fromObject(calList);
+//		model.addAttribute("jsonCal", JSONArray.fromObject(calList));
+//		model.addAttribute("calList", calList);
+		for (CalendarVo vo : calList) {
+			List<CalendarVo> tempList = calMap.get(vo.getStart1());
+			if (tempList == null) {
+				tempList = new ArrayList<>();
+			}
+			tempList.add(vo);
+			calMap.put(vo.getStart1(), tempList);
+		}
+//		JSONArray mapArray = new JSONArray();
+//		Set<String> keys = calMap.keySet();
+//		System.out.println("keys" + keys);
+//		for (String key:keys) {
+//			JSONObject mapObject = new JSONObject();
+//			JSONArray jsonArray = new JSONArray();
+//			List<CalendarVo> tempList = calMap.get(key);
+//			mapObject.put(key, tempList);
+//			mapArray.add(mapObject);
+//		}
+//		model.addAttribute("jsonCal", mapArray.toString());
+		System.out.println("calMap:" + calMap);
+		return calMap;
 	}
 	
 //	월 이동시 해당 월 데이터 가져오기

@@ -36,24 +36,40 @@
 			$(".todo-content").html("");
 			that = $(this);
 			that.css("style", "background: aliceblue;");
-			$.each(jsonCal, function(e) {
-			var thatSpan = that.find("span").eq(e).attr("data-check");
-				if (this.start1 == that.attr("data-today")) {
-					if (this.checklist == 'true') {
-						if (thatSpan == "false") {
-							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><a class='deleteCal'>&times;</a><br>");
-						} else {
-							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><a class='deleteCal'>&times;</a><br>");
-						}
+			var obj = jsonCal[selectDate];
+			if (obj != null) {
+				var isClear = false;
+				for (var v = 0; v < obj.length; v++) {
+					isClear = JSON.parse(obj[v].checklist);
+					console.log("isClear:", isClear);
+					if (isClear == false) {
+// 						if (obj[v].start1 == selectDate) {
+							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + obj[v].content + "</label><a class='deleteCal'>&times;</a><br>");
+// 						}
 					} else {
-						if (thatSpan == "true") {
-							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><a class='deleteCal'>&times;</a><br>");
-						} else {
-							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><a class='deleteCal'>&times;</a><br>");
-						}
+						$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + obj[v].content + "</label><a class='deleteCal'>&times;</a><br>");
 					}
+					
 				}
-			});
+			}
+// 			$.each(jsonCal, function(e) {
+// 			var thatSpan = that.find("span").eq(e).attr("data-check");
+// 				if (this.start1 == that.attr("data-today")) {
+// 					if (this.checklist == 'true') {
+// 						if (thatSpan == "false") {
+// 							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><a class='deleteCal'>&times;</a><br>");
+// 						} else {
+// 							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><a class='deleteCal'>&times;</a><br>");
+// 						}
+// 					} else {
+// 						if (thatSpan == "true") {
+// 							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox' checked><label>" + this.content + "</label><a class='deleteCal'>&times;</a><br>");
+// 						} else {
+// 							$(".todo-content").append("<input class='checkList' data-today='" + selectDate +  "' type='checkbox'><label>" + this.content + "</label><a class='deleteCal'>&times;</a><br>");
+// 						}
+// 					}
+// 				}
+// 			});
 		});
 		function getCalendarList() {
 			var divDate = $(".dateBoard .divDate[data-today]");
@@ -68,23 +84,33 @@
 			};
 			$.get(url, sData, function(rData) {
 				jsonCal = rData;
-			$.each(divDate, function() {
-				var data = this.dataset.today;
-				var thisDiv = this;
-				$.each(jsonCal, function(e) {
-					if (this.start1 == data) {
-						if (this.checklist == "false") {
-							$(thisDiv).append("<span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: orange; margin-right: 8px;'><i class='fas fa-circle'></i></span>");
-						} else {
-// 							$(thisDiv).append("<span data-check='" + this.checklist + "' data-cno='" + this.cno + "' style='color: green; margin-right: 8px;'><img src='/resources/images/stamp.png'/></span>");
-// 							$(thisDiv).attr("style", "padding-right: 0px;");
-// 							$(thisDiv).attr("style", "padding-left: 0px;");
-							$(thisDiv).append("<img src='/resources/images/stamp.png' style='width:77px;'/>");
+					$.each(divDate, function() {
+						var that = $(this);
+						var today = this.dataset.today;
+						var obj = jsonCal[today];
+						if (obj != null) {
+// 							console.log("obj:", obj);
+							var isClear = true;
+							for (var v = 0; v < obj.length; v++) {
+								isClear = isClear && JSON.parse(obj[v].checklist);
+// 								console.log("isClear:", isClear);
+								if (isClear == false) {
+									break;
+								}
+								
+							}
+// 							console.log(isClear);
+							
+							if (isClear == false) {
+								console.log("checklist:", "false");
+								that.append("<span style='color: orange; margin-right: 8px;'><i class='fas fa-circle'></i></span>");
+							} else {
+								console.log("checklist:", "true");
+								that.append("<img src='/resources/images/stamp.png' style='width:77px;'/>");
+							}
+							
 						}
-						return false;
-					}
-				});
-			});
+					});
 			});
 		}
 		$("#prevMonth").click(function() {

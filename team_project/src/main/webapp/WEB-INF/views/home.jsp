@@ -323,7 +323,16 @@
 					</div>
 					<c:forEach items="${seoulGroup}" var="seoulVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${seoulVo.gno}">${seoulVo.g_intro}<span>${seoulVo.g_present} / ${seoulVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${seoulVo.gno}">
+							<c:choose>
+								<c:when test="${seoulVo.g_intro.length() > 10}">
+									${fn:substring(seoulVo.g_intro, 0, 10)}...
+								</c:when>
+								<c:otherwise>
+									${seoulVo.g_intro}
+								</c:otherwise>
+							</c:choose>
+							<span>${seoulVo.g_present} / ${seoulVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -336,7 +345,16 @@
 					</div>
 					<c:forEach items="${busanGroup}" var="busanVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${busanVo.gno}">${busanVo.g_intro}<span>${busanVo.g_present} / ${busanVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${busanVo.gno}">
+							<c:choose>
+								<c:when test="${busanVo.g_intro.length() > 10}">
+									${fn:substring(busanVo.g_intro, 0, 10)}...
+								</c:when>
+								<c:otherwise>
+									${busanVo.g_intro}
+								</c:otherwise>
+							</c:choose>
+							<span>${busanVo.g_present} / ${busanVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -349,7 +367,16 @@
 					</div>
 					<c:forEach items="${incheonGroup}" var="incheonVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${incheonVo.gno}">${incheonVo.g_intro}<span>${incheonVo.g_present} / ${incheonVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${incheonVo.gno}">
+							<c:choose>
+								<c:when test="${incheonVo.g_intro.length() > 10}">
+									${fn:substring(incheonVo.g_intro, 0, 10)}...
+								</c:when>
+								<c:otherwise>
+									${incheonVo.g_intro}
+								</c:otherwise>
+							</c:choose>
+							<span>${incheonVo.g_present} / ${incheonVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -362,7 +389,16 @@
 					</div>
 					<c:forEach items="${daeguGroup}" var="daeguVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${daeguVo.gno}">${daeguVo.g_intro}<span>${daeguVo.g_present} / ${daeguVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${daeguVo.gno}">
+							<c:choose>
+								<c:when test="${daeguVo.g_intro.length() > 10}">
+									${fn:substring(daeguVo.g_intro, 0, 10)}...
+								</c:when>
+								<c:otherwise>
+									${daeguVo.g_intro}
+								</c:otherwise>
+							</c:choose>
+							<span>${daeguVo.g_present} / ${daeguVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -375,7 +411,16 @@
 					</div>
 					<c:forEach items="${daejeonGroup}" var="daejeonVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${daejeonVo.gno}">${daejeonVo.g_intro}<span>${daejeonVo.g_present} / ${daejeonVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${daejeonVo.gno}">
+							<c:choose>
+								<c:when test="${daejeonVo.g_intro.length() > 10}">
+									${fn:substring(daejeonVo.g_intro, 0, 10)}...
+								</c:when>
+								<c:otherwise>
+									${daejeonVo.g_intro}
+								</c:otherwise>
+							</c:choose>
+							<span>${daejeonVo.g_present} / ${daejeonVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -388,7 +433,16 @@
 					</div>
 					<c:forEach items="${gwangjuGroup}" var="gwangjuVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${gwangjuVo.gno}">${gwangjuVo.g_intro}<span>${gwangjuVo.g_present} / ${gwangjuVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${gwangjuVo.gno}">
+							<c:choose>
+								<c:when test="${gwangjuVo.g_intro.length() > 10}">
+									${fn:substring(gwangjuVo.g_intro, 0, 10)}...
+								</c:when>
+								<c:otherwise>
+									${gwangjuVo.g_intro}
+								</c:otherwise>
+							</c:choose>
+							<span>${gwangjuVo.g_present} / ${gwangjuVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -401,7 +455,16 @@
 					</div>
 					<c:forEach items="${ulsanGroup}" var="ulsanVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${ulsanVo.gno}">${ulsanVo.g_intro}<span>${ulsanVo.g_present} / ${ulsanVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${ulsanVo.gno}">
+							<c:choose>
+								<c:when test="${ulsanVo.g_intro.length() > 10}">
+									${fn:substring(ulsanVo.g_intro, 0, 10)}...
+								</c:when>
+								<c:otherwise>
+									${ulsanVo.g_intro}
+								</c:otherwise>
+							</c:choose>
+							<span>${ulsanVo.g_present} / ${ulsanVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
@@ -414,7 +477,16 @@
 					</div>
 					<c:forEach items="${gyeonggiGroup}" var="gyeonggiVo">
 						<ul class="category-list">
-							<li><a href="/group/groupForm?gno=${gyeonggiVo.gno}">${gyeonggiVo.g_intro}<span>${gyeonggiVo.g_present} / ${gyeonggiVo.g_attend}</span></a></li>
+							<li><a href="/group/groupForm?gno=${gyeonggiVo.gno}">
+							<c:choose>
+								<c:when test="${gyeonggiVo.g_intro.length() > 10}">
+									${fn:substring(gyeonggiVo.g_intro, 0, 10)}...
+								</c:when>
+								<c:otherwise>
+									${gyeonggiVo.g_intro}
+								</c:otherwise>
+							</c:choose>
+							<span>${gyeonggiVo.g_present} / ${gyeonggiVo.g_attend}</span></a></li>
 						</ul>
 					</c:forEach>
 				</div>
