@@ -286,7 +286,7 @@ public class MemberController {
 			}
 			System.out.println(randNum);
 			EmailVo emailVo = new EmailVo();
-			emailVo.setSubject("??에서 보낸 인증번호입니다.");
+			emailVo.setSubject("우리 GYM으로 가자에서 보낸 인증번호입니다.");
 			emailVo.setMessage("인증번호는 " + randNum +  " 입니다.");
 			emailVo.setReceiveMail(email);
 			emailService.sendMailById(emailVo);
@@ -312,7 +312,7 @@ public class MemberController {
 			}
 			System.out.println(randNum);
 			EmailVo emailVo = new EmailVo();
-			emailVo.setSubject("??에서 보낸 인증번호입니다.");
+			emailVo.setSubject("우리 GYM으로 가자에서 보낸 인증번호입니다.");
 			emailVo.setMessage("인증번호는 " + randNum +  " 입니다.");
 			emailVo.setReceiveMail(email);
 			emailService.sendMailById(emailVo);
