@@ -274,8 +274,6 @@ $(function() {
 												<i class='fas fa-ellipsis-v'></i>
 											
 											</button>
-										</div>
-										<div class="col-md-3">	
 											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 											
 											<c:if test="${ groupVo.g_leader == loginVo.userid || loginVo.userid == 'admin01' }">
@@ -285,6 +283,11 @@ $(function() {
 											</c:if>
 												 <a class="dropdown-item" href="/groupboard/memberInfo?nickname=${ groupJoinVo.nickname }">회원 정보 보기</a>
 											</div>
+											
+											
+										</div>
+										<div class="col-md-3">	
+											
 										
 										</div>
 										</dir>
