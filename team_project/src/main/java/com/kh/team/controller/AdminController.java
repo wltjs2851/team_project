@@ -219,6 +219,7 @@ public class AdminController {
 	@ResponseBody
 	public String adminUserOutRun(@PathVariable("nickname") String nickname, int rbno) {
 		reportBoardService.updateRepState(rbno);
+		System.out.println("userOutRun, nickname:" + nickname);
 		boolean result = adminService.userOut(nickname);
 		System.out.println("adminController, userOutRun2, result :" + result);
 		System.out.println("rbno:" + rbno);

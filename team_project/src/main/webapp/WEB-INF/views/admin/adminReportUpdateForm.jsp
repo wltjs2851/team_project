@@ -170,7 +170,7 @@ $(function(){
 	
 });
 </script>
-${reportBoardVo }
+<%-- ${reportBoardVo } --%>
 <body>
 	<div class="row" style="margin-top: 20px;">
 		<div class="col-md-2"></div>
