@@ -17,35 +17,9 @@ $(function() {
 		var age = $("#age").val();
 		var email = $("#email").val();
 		var address = $("#address").val();
-		console.log(username);
-		console.log(age);
-		console.log(email);
-		console.log(address);
-// 		비밀번호를 수정하려고 입력한다면 유효값 검사를 실행 아니라면 이전 비밀번호 그대로 저장
-		var pw = $("#userpw").val();
-		var pw2 = $("#userpw2").val();
-		var userpw = "${loginVo.userpw}";
-		var pattern1 = /[0-9]/; // 숫자
-		var pattern2 = /[a-zA-Z]/; // 문자
-		var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
 		if ((username != null && username != "") && (age != null && age != "") && (email != null && email != "") && (address != null && address != "")) {
-			if (pw == null || pw == "") {
-				$("#userpw").val(userpw);
-				$("#userpw2").val(userpw);
 				$("#frmModify").submit();
-			} else if (pw != null || pw != "") {
-				if (!pattern1.test(pw) || !pattern2.test(pw) || !pattern3.test(pw)|| pw.length < 8) {
-					$("#wrongpw").html("비밀번호는 8자리 이상 문자, 숫자, 특수문자가 포함됩니다.");
-					$("#userpw").val("").focus();
-				} else if (pw != pw2) {
-					$("#wrongpw").html("");
-					$("#notMatch").html("비밀번호가 일치하지 않습니다.");
-					$("#userpw2").val("").focus();
-				} else {
-					$("#frmModify").submit();
-				}
-			}
-		} else {
+			} else {
 			alert("정보를 올바르게 기입해주세요");
 		}
 		
@@ -109,6 +83,7 @@ $(function() {
 		<form method="post" action="/member/modifyRun" id="frmModify" enctype="multipart/form-data">
 		<input type="hidden" name="userid" value="${loginVo.userid}">
 		<input type="hidden" name="regdate" value="${loginVo.regdate}">
+		<input type="hidden" name="userpw" value="${loginVo.userpw}">
 		<input type="hidden" id="prevImg" name="prevImg">
 		<c:if test="${not empty loginVo}">
 			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -165,16 +140,16 @@ $(function() {
 				<th>주소</th>
 				<td><input class="form-control" type="text" id="address" name="address" value="${loginVo.address}"></td>
 			</tr>
-			<tr>
-				<th>비밀번호</th>
-				<td><input class="form-control" type="password" name="userpw" id="userpw"><br>
-					<span id="wrongpw" style="color: red;"></span></td>
-			</tr>
-			<tr>
-				<th>비밀번호 확인</th>
-				<td><input class="form-control" type="password" id="userpw2">
-					<span id="notMatch" style="color: red;"></span></td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<th>비밀번호</th> -->
+<!-- 				<td><input class="form-control" type="password" name="userpw" id="userpw"><br> -->
+<!-- 					<span id="wrongpw" style="color: red;"></span></td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<th>비밀번호 확인</th> -->
+<!-- 				<td><input class="form-control" type="password" id="userpw2"> -->
+<!-- 					<span id="notMatch" style="color: red;"></span></td> -->
+<!-- 			</tr> -->
 			<tr>
 				<td colspan="2"><button type="button" id="btnModify" class="btn btn-warning">수정완료</button></td>
 			</tr>
@@ -184,4 +159,3 @@ $(function() {
 	<div class="col-md-2"></div>
 </div>
 </div>
-<%@include file="/WEB-INF/views/include/footer.jsp" %>

@@ -10,14 +10,10 @@ $(function(){
 	if (modifyResult == "true") {
 		alert("회원정보 수정 완료");
 	}
-	
-	$("#chatRoom").click(function(e){
-		e.preventDefault();
-		console.log("채팅방 입장");	
-		var url = "/chat/chat";
-		var option = "width = 650px, height=800px, top=300px, left=300px, scrollbars=yes";
-		window.open(url, "그룹 채팅방 입장", option);
-	});
+	var pwUpdate = "${pwUpdate}";
+	if (pwUpdate == "true") {
+		alert("비밀번호 변경 완료");
+	}
 	$(".like_tr").click(function() {
 		var post = $("#tab").find("a.active").data("post");
 		var no = $(this).find("td").eq(0).html();
@@ -46,6 +42,9 @@ $(function(){
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="modifyForm">회원정보 수정</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="myPwUpdate">비밀번호 변경</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="/member/myActivity?type=write">활동내용</a>
