@@ -41,6 +41,11 @@
 		where gno = #{gno}
 	</select>
 	
+	<select id="getGuser" resultType="String">
+		select userid from tbl_group_join
+		where gno = #{gno}
+	</select>
+	
 	<!-- 그룹장 변경 -->
 	<update id="updateGLeader">
 		update tbl_group set

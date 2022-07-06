@@ -61,7 +61,7 @@
  
  <!--  유저 작성 댓글 조회 -->
 	<select id="adminGroupBoardComment" resultType="GroupBoardCommentVo">
-		select gbcno, gbno, gbc_content, gbc_regdate from tbl_group_board_comment
+		select gbcno, gbno, gbc_content, gno, gbc_regdate from tbl_group_board_comment
 		where nickname = #{nickname}
 	</select>
  </mapper>

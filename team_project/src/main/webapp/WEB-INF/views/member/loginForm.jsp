@@ -70,6 +70,7 @@ $(function() {
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control" id="userpw" name="userpw" placeholder="비밀번호 입력"/>
+				<span id="none" style="color: red;"></span>
 				</div>
 				<div class="checkbox">
 					<label><input type="checkbox" name="saveid"
@@ -77,7 +78,6 @@ $(function() {
 					/>아이디 저장</label>
 				</div>
 				<label><a href="#" id="findId">아이디찾기</a></label> / <label><a href="#" id="findPw">비밀번호 찾기</a></label>
-				<span id="none" style="color: red;"></span>
 				<button id="btnLogin" type="submit" class="btn btn-block btn-primary">로그인</button>
 				<a href="/member/joinForm" class="btn btn-block btn-success">회원가입</a>
 			</form>

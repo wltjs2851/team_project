@@ -31,7 +31,7 @@
 	
 	<select id="getRecommendByLike" resultType="RecommendVo">
 		select * from tbl_recommend
-		where reno = (select distinct reno from tbl_recommend_like
+		where reno in (select distinct reno from tbl_recommend_like
 						where nickname = #{nickname})
 	</select>
 	

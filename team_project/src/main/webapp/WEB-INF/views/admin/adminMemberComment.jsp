@@ -20,7 +20,7 @@
 <!-- Bootstrap -->
 <link href="/resources/plugins/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<link href="/resources/css/fonts.css" rel="stylesheet" />
+<link href="/resources/css/admin.css" rel="stylesheet" />
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -40,7 +40,8 @@ $(function(){
 	$(".td_groupBoard").click(function(){
 		console.log("그룹게시판 작성글 클릭");
 		var gbno = $(this).attr("data-gbno");
-		window.opener.location.href = "/groupboard/groupRead?gbno=" + gbno;
+		var gno = $(this).attr("data-gno");
+		window.opener.location.href = "/groupboard/groupRead?gbno=" + gbno + "&gno=" + gno;
 	});
 	
 	$(".td_routine").click(function(){
@@ -152,7 +153,8 @@ $(function(){
 <body>
 	<div class="row">
 		<div class="col-md-1"></div>
-		<div class="col-md-10">
+		<div class="col-md-10" style="
+    margin-top: 50px;">
 			<div class="tabbable" id="tabs-834783">
 				<ul class="nav nav-tabs">
 					<li class="nav-item"><a class="nav-link" href="/admin/board?nickname=${param.nickname}"
@@ -187,7 +189,7 @@ $(function(){
 					<c:forEach items="${groupBoardList }" var="groupBoard">
 						<tr>
 							<td>${groupBoard.gbcno }</td>
-							<td class="td_groupBoard" data-gbno=${groupBoard.gbno }>${groupBoard.gbc_content }</td>
+							<td class="td_groupBoard" data-gbno=${groupBoard.gbno } data-gno=${groupBoard.gno }>${groupBoard.gbc_content }</td>
 							<td>${groupBoard.gbc_regdate }</td>
 						</tr>
 					</c:forEach>

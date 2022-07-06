@@ -56,4 +56,10 @@ private final String NAMESPACE = "com.kh.team.mappers.admin.";
 		return false;
 	}
 
+	@Override
+	public List<String> getGuser(int gno) {
+		List<String> memberList = sqlSession.selectList(NAMESPACE + "getGuser", gno);
+		return memberList;
+	}
+
 }

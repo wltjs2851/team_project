@@ -18,6 +18,8 @@ public interface AdminDao {
 	// 그 gno 의 멤버 찾기 
 	public List<String> getGmember(int gno);
 	
+	public List<String> getGuser(int gno);
+	
 	//그룹장 바꾸기
 	public boolean updateGLeader(int gno, String userid);
 	

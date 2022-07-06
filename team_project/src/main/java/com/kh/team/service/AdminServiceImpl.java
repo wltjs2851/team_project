@@ -45,15 +45,18 @@ public class AdminServiceImpl implements AdminService{
 		List<Integer> gnoList = adminDao.getGno(nickname);
 		System.out.println("gnoList:" + gnoList);
 		List<String> memberList = new ArrayList<String>();
+		List<String> userList = new ArrayList<String>();
 		if(gnoList.size() > 0) {
 			for(int i = 0; i < gnoList.size(); i++) {
 				System.out.println("1");
 				memberList = adminDao.getGmember(gnoList.get(i));
+				userList = adminDao.getGuser(gnoList.get(i));
 				for(int j = 0; j < memberList.size(); j++) {
 					if(memberList.size() > 1 && !memberList.get(j).equals(nickname)) {
 						System.out.println("2");
-						System.out.println(memberList.get(j));
-						adminDao.updateGLeader(gnoList.get(i), memberList.get(j));
+						System.out.println("admin " + memberList.get(j));
+						System.out.println("admin " + userList.get(j));
+						adminDao.updateGLeader(gnoList.get(i), userList.get(j));
 						groupDao.updateGroupMember(gnoList.get(i), -1);
 						groupDao.deleteJoinGroupNickname(gnoList.get(i), nickname);
 						memberDao.deleteMember(nickname);
