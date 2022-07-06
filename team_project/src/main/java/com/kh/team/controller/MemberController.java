@@ -233,6 +233,12 @@ public class MemberController {
 		return "/member/deleteForm";
 	}
 	
+	// 회원탈퇴 폼으로 이동
+	@RequestMapping(value = "/myPwUpdate", method = RequestMethod.GET)
+	public String myPwUpdate() {
+		return "/member/myPwUpdate";
+	}
+	
 	// 회원탈퇴실행
 	@RequestMapping(value = "/deleteRun", method = RequestMethod.POST)
 	public String deleteRun(String userid, HttpSession session, HttpServletResponse response) {
@@ -351,6 +357,15 @@ public class MemberController {
 		boolean result = memberService.updatePw(userid, userpw);
 		return String.valueOf(result);
 	}
+	
+	// 비밀번호 변경 실행
+	@RequestMapping(value = "/MyPwUpdateRun", method = RequestMethod.POST)
+	public String MyPwUpdateRun(String userpw, String userid, RedirectAttributes rttr) {
+		boolean result = memberService.updatePw(userid, userpw);
+		rttr.addFlashAttribute("pwUpdate", result);
+		return "redirect:/member/myPage";
+	}
+	
 	
 	@RequestMapping(value = "/memberInfo", method = RequestMethod.GET)
 	public String findIdRun(String nickname, Model model) {

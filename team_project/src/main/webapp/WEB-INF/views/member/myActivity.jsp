@@ -173,6 +173,9 @@ $(function(){
 				<a class="nav-link" href="modifyForm">회원정보 수정</a>
 			</li>
 			<li class="nav-item">
+				<a class="nav-link" href="myPwUpdate">비밀번호 변경</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link" style="background-color: #fd9a9a;">활동내용</a>
 			</li>
 			<li class="nav-item">
