@@ -11,7 +11,7 @@ $(function(){
 		var rbno = $(this).attr("data-rbno");
 		console.log("신고번호:", rbno);
 		var url = "/admin/reportUpdateForm?rbno=" + rbno;
-		var option = "width = 300px, height=300px, scrollbars=yes";
+		var option = "width = 500px, height=300px, scrollbars=yes";
 		window.open(url, "신고내역 접수", option);
 	});
 });
