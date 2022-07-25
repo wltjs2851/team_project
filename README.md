@@ -48,7 +48,7 @@
 * 칼로리사전 게시판 (목록)
 <img width="80%" src="https://user-images.githubusercontent.com/106269514/180840382-a1bd1211-9f5f-4894-a306-622db86b69f4.png"/>
 * 칼로리사전 게시판 (상세)
-<img width="80%" src="https://user-images.githubusercontent.com/106269514/180840426-05b0ab69-cc14-401f-ac5e-3e8a8baadf10.png)"/>
+<img width="80%" src="https://user-images.githubusercontent.com/106269514/180840426-05b0ab69-cc14-401f-ac5e-3e8a8baadf10.png"/>
 * 추천 운동 게시판 (목록)
 <img width="80%" src="https://user-images.githubusercontent.com/106269514/180840473-50ff80ff-c689-494a-8fdb-ced904455d04.png"/>
 * 추천 운동 게시판 (상세)
