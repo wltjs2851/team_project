@@ -56,7 +56,7 @@
 * 그룹 목록
 <img width="80%" src="https://user-images.githubusercontent.com/106269514/180840599-17e1fbff-8397-4144-a248-f6f3f3a16fbe.png"/>
 * 가입한 그룹 내 게시판
-<img width="80%" src="https://user-images.githubusercontent.com/106269514/180840653-a911e086-1234-4fe8-91ae-359dd6a8c723.png)"/>
+<img width="80%" src="https://user-images.githubusercontent.com/106269514/180840653-a911e086-1234-4fe8-91ae-359dd6a8c723.png"/>
 * 그룹 일정
 <img width="80%" src="https://user-images.githubusercontent.com/106269514/180840702-3b1640d4-6a0f-4cff-a8f4-84a741e5ad63.png"/>
 
