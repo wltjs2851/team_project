@@ -29,3 +29,6 @@
 * 
 ---
 ### 페이지 화면
+* 메인페이지
+<img width="80%" src="https://user-images.githubusercontent.com/106269514/180839033-2284ded3-2a5f-4b6e-aef1-50cb13281b7f.png"/>
+
